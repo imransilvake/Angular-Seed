@@ -1,0 +1,8 @@
+<section class="ham-dialog-wrapper" *ngIf="data">
+	<div class="cd-row">
+		<div class="cd-col">
+			<!-- CONFIRMATION -->
+			<app-dialog-confirmation [data]="data" *ngIf="data.type === 0"></app-dialog-confirmation>
+		</div>
+	</div>
+</section>

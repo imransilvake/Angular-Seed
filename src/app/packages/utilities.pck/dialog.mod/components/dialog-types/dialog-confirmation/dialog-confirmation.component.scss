@@ -1,0 +1,45 @@
+@import 'main';
+
+.ham-dialog-confirmation {
+	.ham-header {
+		background-color: cd-palette($cd-background, 2003);
+		padding: 20px;
+		text-align: center;
+
+		h4 {
+			color: cd-palette($cd-color, 1001);
+		}
+	}
+
+	.ham-content {
+		padding: 15px;
+	}
+
+	.ham-footer {
+		padding: 10px 15px;
+		text-align: center;
+
+		button {
+			background-color: cd-palette($cd-background, 2003);
+			border-radius: 0;
+			color: cd-palette($cd-color, 1001);
+
+			&.ham-accept {
+				margin-right: 10px;
+			}
+		}
+	}
+
+	// media
+	@include cd-media(desktop, mini) {
+		.ham-footer {
+			button {
+				width: 100%;
+
+				&.ham-close {
+					margin-top: 5px;
+				}
+			}
+		}
+	}
+}

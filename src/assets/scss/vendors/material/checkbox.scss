@@ -1,0 +1,14 @@
+.mat-checkbox {
+	&.ham-type-1 {
+		.mat-checkbox-frame {
+			border: 2px solid cd-palette($cd-border, 3004, .3);
+		}
+
+		&.mat-checkbox-checked {
+			.mat-checkbox-background {
+				background-color: cd-palette($cd-background, 2003);
+				border: 1px solid cd-palette($cd-border, 3004, .1);
+			}
+		}
+	}
+}

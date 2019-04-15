@@ -1,0 +1,34 @@
+// select field
+.mat-select {
+	.mat-select-trigger {
+		height: 40px;
+		padding: 10px 12px;
+
+		.mat-select-value {
+			box-shadow: none;
+			cursor: pointer;
+
+			span {
+				color: cd-palette($cd-color, 1004);
+			}
+		}
+
+		.mat-select-arrow-wrapper {
+			.mat-select-arrow {
+				color: cd-palette($cd-color, 1004);
+			}
+		}
+	}
+}
+
+// dropdown
+.mat-select-panel-wrap {
+	.mat-select-panel {
+		border-radius: 2px;
+
+		// when info show in select-box
+		&.ham-select-panel-with-info {
+			margin-left: -19px;
+		}
+	}
+}

@@ -1,0 +1,12 @@
+<section class="ham-dialog-confirmation" *ngIf="data && data.payload">
+	<header class="ham-header">
+		<h4>{{ data.payload.title }}</h4>
+	</header>
+	<div class="ham-content">
+		<p>{{ data.payload.message }}</p>
+	</div>
+	<footer class="ham-footer">
+		<button mat-button (click)="onClickCloseDialog(true)" class="ham-accept">{{ data.payload.buttonTexts[0] }}</button>
+		<button mat-button (click)="onClickCloseDialog(false)" class="ham-close">{{ data.payload.buttonTexts[1] }}</button>
+	</footer>
+</section>

@@ -1,0 +1,87 @@
+<div class="ham-input-field" *ngIf="control">
+	<label *ngIf="showLabel" [htmlFor]="inputId">{{labelName}}</label>
+	<div
+		class="ham-input-wrapper"
+		[class.ham-invalid]="control.invalid && control.touched"
+		[class.ham-disabled]="inputDisabled"
+		[class.ham-focused]="inputFocused"
+		[class.ham-layout-flex]="layoutStyleType === 1"
+		[class.ham-direction]="layoutStyleData?.changeDirection">
+		<!-- Info -->
+		<div class="ham-info cd-hide" *ngIf="layoutStyleData">
+			<button
+				mat-button
+				type="submit" [disabled]="!layoutStyleData?.status || !layoutStyleData?.button"
+				class="ham-btn-icon"
+				[class.ham-simple]="!layoutStyleData?.button">
+				<ng-container *ngIf="layoutStyleData?.button">
+					<fa-icon *ngIf="layoutStyleData?.icon" [icon]="layoutStyleData.icon"></fa-icon>
+				</ng-container>
+				<ng-container *ngIf="!layoutStyleData?.button">
+					<p>{{layoutStyleData.title}}</p>
+				</ng-container>
+			</button>
+		</div>
+
+		<!-- Input -->
+		<div class="ham-input">
+			<input
+				matInput
+				[formControl]="control"
+				[id]="inputId"
+				[name]="inputName"
+				[type]="hidePassword ? 'password' : inputType"
+				[value]="control.value"
+				[placeholder]="inputPlaceHolder"
+				[attr.disabled]="inputDisabled"
+				[autocomplete]="autocomplete"
+				(focus)="inputFocused=true"
+				(focusout)="inputFocused=false">
+			<!-- Close Icon -->
+			<mat-icon
+				*ngIf="control.value"
+				class="ham-icon ham-close"
+				(click)="control.setValue('')">
+				close
+			</mat-icon>
+
+			<!-- Password Icon -->
+			<mat-icon
+				*ngIf="showHidePassword && control.value"
+				class="ham-icon ham-eye"
+				matSuffix
+				(click)="hidePassword = !hidePassword">
+				{{hidePassword ? 'visibility_off' : 'visibility'}}
+			</mat-icon>
+		</div>
+	</div>
+
+	<!-- Error -->
+	<mat-error *ngIf="control.invalid && control.touched">
+		<ng-container [ngSwitch]="control.errors | FirstKey">
+			<p *ngSwitchCase="'required'">
+				{{inputName}} is required
+			</p>
+			<p *ngSwitchCase="'minlength'">
+				must be at least {{control.errors.minlength.requiredLength}} characters long
+			</p>
+			<p *ngSwitchCase="'maxlength'">
+				must be max {{control.errors.maxlength.requiredLength}} characters long
+			</p>
+			<p *ngSwitchCase="'username'">
+				username validation error
+			</p>
+			<p *ngSwitchCase="'password'">
+				password validation error
+			</p>
+			<p *ngSwitchCase="'email'">
+				email validation error
+			</p>
+			<p *ngSwitchDefault>some error happened</p>
+		</ng-container>
+	</mat-error>
+
+
+	<!-- Hint -->
+	<mat-hint *ngIf="showHint && hintText">{{hintText}}</mat-hint>
+</div>

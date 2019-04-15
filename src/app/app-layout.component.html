@@ -1,0 +1,38 @@
+<div class="cd-container-fluid">
+	<div class="ham-top-head" #topHead (click)="onClickTopHead()">
+		<!-- Notification -->
+		<app-notification (notificationUpdate)="calculateTopHeadHeight()"></app-notification>
+
+		<!-- Header -->
+		<app-header [drawer]="drawer"></app-header>
+	</div>
+
+	<!-- Content -->
+	<div [ngStyle]="{'margin-top': topHeadHeight + 'px'}">
+		<mat-drawer-container class="ham-root-container">
+			<mat-drawer
+				#drawer
+				mode="side"
+				opened
+				class="ham-root-drawer"
+				[class.ham-drawer-closed]="!drawerState"
+				(openedStart)="drawerState=true"
+				(closedStart)="drawerState=false">
+				<!-- Sidebar -->
+				<app-sidebar-primary [drawerState]="drawerState"></app-sidebar-primary>
+			</mat-drawer>
+			<mat-drawer-content
+				class="ham-root-drawer-content"
+				[class.ham-drawer-content-closed]="!drawerState">
+				<!-- Router Outlet -->
+				<router-outlet></router-outlet>
+
+				<!-- Footer -->
+				<app-footer></app-footer>
+			</mat-drawer-content>
+		</mat-drawer-container>
+	</div>
+
+	<!-- Scroll Top -->
+	<app-scroll-top></app-scroll-top>
+</div>

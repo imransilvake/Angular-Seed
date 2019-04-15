@@ -1,0 +1,69 @@
+<div class="ham-select-field" *ngIf="control">
+	<label *ngIf="showLabel" [htmlFor]="selectId">{{labelName}}</label>
+	<div
+		class="ham-select-wrapper"
+		[class.ham-invalid]="control.invalid && control.touched"
+		[class.ham-disabled]="selectDisabled"
+		[class.ham-focused]="selectFocused"
+		[class.ham-layout-flex]="layoutStyleType === 1"
+		[class.ham-direction]="layoutStyleData?.changeDirection">
+		<!-- Info -->
+		<div class="ham-info cd-hide" *ngIf="layoutStyleData">
+			<button
+				mat-button
+				type="submit" [disabled]="!layoutStyleData?.status || !layoutStyleData?.button"
+				class="ham-btn-icon"
+				[class.ham-simple]="!layoutStyleData?.button">
+				<ng-container *ngIf="layoutStyleData?.button">
+					<fa-icon *ngIf="layoutStyleData?.icon" [icon]="layoutStyleData.icon"></fa-icon>
+				</ng-container>
+				<ng-container *ngIf="!layoutStyleData?.button">
+					<p>{{layoutStyleData.title}}</p>
+				</ng-container>
+			</button>
+		</div>
+
+		<!-- Select -->
+		<div class="ham-select">
+			<mat-select
+				[panelClass]="selectClassPanel"
+				[formControl]="control"
+				[id]="selectId"
+				[placeholder]="selectPlaceHolder"
+				(focus)="selectFocused=true"
+				(focusout)="selectFocused=false" [multiple]="multipleSelection">
+				<!-- Default -->
+				<ng-container *ngIf="selectType === 0">
+					<mat-option *ngFor="let item of dataDefault" [value]="item.value">
+						{{item.viewValue}}
+					</mat-option>
+				</ng-container>
+
+				<!-- Group -->
+				<ng-container *ngIf="selectType === 1">
+					<mat-optgroup
+						*ngFor="let group of dataGroups"
+						[label]="group.name"
+						[disabled]="group.disabled">
+						<mat-option *ngFor="let item of group.items" [value]="item.value">
+							{{item.viewValue}}
+						</mat-option>
+					</mat-optgroup>
+				</ng-container>
+			</mat-select>
+		</div>
+	</div>
+
+	<!-- Error -->
+	<mat-error *ngIf="control.invalid && control.touched">
+		<ng-container [ngSwitch]="control.errors | FirstKey">
+			<p *ngSwitchCase="'required'">
+				required field
+			</p>
+			<p *ngSwitchDefault>some error happened</p>
+		</ng-container>
+	</mat-error>
+
+	<!-- Hint -->
+	<mat-hint *ngIf="showHint && hintText">{{hintText}}</mat-hint>
+</div>

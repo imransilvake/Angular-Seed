@@ -1,0 +1,19 @@
+<div class="ham-notification-menu">
+	<button
+		class="ham-btn-icon"
+		mat-button
+		[matMenuTriggerFor]="menu">
+		<mat-icon>notifications_none</mat-icon>
+		<app-widget-badge [type]="2" [count]="50"></app-widget-badge>
+	</button>
+	<mat-menu #menu="matMenu">
+		<div class="ham-head-1" (click)="onClickStopPropagation($event)">
+			<h6 class="ham-title">Notifications</h6>
+			<app-widget-badge [type]="1" [count]="50"></app-widget-badge>
+		</div>
+		<app-widget-divider></app-widget-divider>
+		<button mat-menu-item>Item 1</button>
+		<button mat-menu-item>Item 2</button>
+		<button mat-menu-item>Item 3</button>
+	</mat-menu>
+</div>

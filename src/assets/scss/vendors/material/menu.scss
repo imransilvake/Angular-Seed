@@ -1,0 +1,35 @@
+.mat-menu-panel {
+	background-color: cd-palette($cd-background, 2003);
+	box-shadow: 1px 1px 15px cd-palette($cd-shadow, 4002, .4);
+	min-width: 250px !important;
+
+	.mat-menu-content {
+		border: none;
+		border-radius: 0;
+
+		button {
+			color: cd-palette($cd-color, 1004);
+		}
+
+		.ham-head-1 {
+			align-items: center;
+			color: cd-palette($cd-color, 1001);
+			display: flex;
+			justify-content: space-between;
+			padding: 5px 15px;
+		}
+
+		.ham-head-2 {
+			color: cd-palette($cd-color, 1001);
+			padding: 5px 15px;
+
+			.ham-title {
+				color: cd-palette($cd-color, 1004);
+			}
+
+			p {
+				margin-top: -3px;
+			}
+		}
+	}
+}

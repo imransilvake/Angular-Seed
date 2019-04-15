@@ -1,0 +1,94 @@
+@import 'main';
+
+.ham-auth-common {
+	background-color: cd-palette($cd-background, 2002);
+	color: cd-palette($cd-color, 1001);
+	padding: 30px 25px;
+
+	.ham-row {
+		max-width: 500px;
+		min-width: 500px;
+
+		.ham-col {
+			padding: 0;
+
+			.ham-profile {
+				text-align: center;
+
+				img {
+					border: 2px solid cd-palette($cd-border, 3001);
+					border-radius: 50%;
+					display: block;
+					height: 80px;
+					margin: 0 auto;
+					width: 80px;
+				}
+
+				h5 {
+					margin-top: 10px;
+				}
+			}
+
+			.ham-content {
+				.ham-block {
+					margin: 20px auto 0;
+					width: 260px;
+
+					&.ham-locked {
+						align-items: center;
+						color: cd-palette($cd-color, 1004);
+						display: flex;
+						justify-content: center;
+
+						.mat-icon {
+							font-size: cd-fontSize(s14);
+							height: 15px;
+							margin-right: 5px;
+							width: 15px;
+						}
+					}
+
+					&.ham-note {
+						text-align: center;
+					}
+				}
+			}
+		}
+	}
+
+	// media
+	@include cd-media(desktop, tablet) {
+		width: 65%;
+
+		.ham-row {
+			max-width: 100%;
+			min-width: auto;
+		}
+	}
+
+	@include cd-media(desktop, smartphone) {
+		width: 85%;
+	}
+
+	@include cd-media(desktop, mini) {
+		width: 90%;
+
+		.ham-row {
+			.ham-col {
+				.ham-content {
+					.ham-block {
+						width: auto;
+
+						.ham-input {
+							width: 100%;
+						}
+					}
+
+					.ham-note {
+						width: auto;
+					}
+				}
+			}
+		}
+	}
+}

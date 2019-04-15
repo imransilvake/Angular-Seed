@@ -1,0 +1,49 @@
+@import 'main';
+
+.ham-error-handler-wrapper {
+	.cd-row {
+		.cd-col {
+			padding: 0;
+
+			.ham-error-handler-common {
+				.ham-header {
+					background-color: cd-palette($cd-background, 2009);
+					padding: 20px;
+					text-align: center;
+
+					h4 {
+						color: cd-palette($cd-color, 1001);
+					}
+				}
+
+				.ham-content {
+					padding: 15px;
+
+					p {
+						word-break: break-word;
+					}
+				}
+
+				.ham-footer {
+					padding: 10px 15px;
+					text-align: center;
+
+					button {
+						background-color: cd-palette($cd-background, 2006, .7);
+						border-radius: 0;
+						color: cd-palette($cd-color, 1001);
+					}
+				}
+
+				// media
+				@include cd-media(desktop, mini) {
+					.ham-footer {
+						button {
+							width: 100%;
+						}
+					}
+				}
+			}
+		}
+	}
+}
