@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-// ngrx store
+// store
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { loadingAnimationReducer } from './packages/utilities.pck/loading-animation.mod/store/reducers/loading-animation.reducer';

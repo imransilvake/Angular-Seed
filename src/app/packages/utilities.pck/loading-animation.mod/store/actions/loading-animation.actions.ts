@@ -1,4 +1,4 @@
-// app
+// store
 import { Action } from '@ngrx/store';
 
 // actions

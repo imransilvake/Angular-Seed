@@ -2,6 +2,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+// store
+import { Store } from '@ngrx/store';
+
 // app
 import { ROUTING } from '../../../../../../environments/environment';
 import { ValidationService } from '../../../../core.pck/fields.mod/services/validation.service';
@@ -15,7 +18,6 @@ import { RegisterService } from '../../services/register.service';
 import { AuthRegisterInterface } from '../../interfaces/auth-register.interface';
 import { DialogService } from '../../../../utilities.pck/dialog.mod/services/dialog.service';
 import { DialogTypeEnum } from '../../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
-import { Store } from '@ngrx/store';
 import { ErrorHandlerInterface } from '../../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 import { ErrorHandlerTypeEnum } from '../../../../utilities.pck/error-handler.mod/enums/error-handler-type.enum';
 import * as ErrorHandlerActions from '../../../../utilities.pck/error-handler.mod/store/actions/error-handler.actions';
@@ -94,6 +96,16 @@ export class RegisterComponent implements OnInit {
 
 	get email() {
 		return this.formFields.get('email');
+	}
+
+	/**
+	 * form submit on press enter
+	 */
+	public onPressEnter(event) {
+		// submit form on press enter
+		if ((event.which === 13 || event.key === 13) && this.formFields.valid) {
+			this.onSubmitForm();
+		}
 	}
 
 	/**

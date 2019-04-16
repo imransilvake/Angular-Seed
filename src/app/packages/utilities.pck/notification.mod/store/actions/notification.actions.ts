@@ -1,5 +1,7 @@
-// app
+// store
 import { Action } from '@ngrx/store';
+
+// app
 import { NotificationPayloadInterface } from '../../interfaces/notification-payload.interface';
 
 // actions
