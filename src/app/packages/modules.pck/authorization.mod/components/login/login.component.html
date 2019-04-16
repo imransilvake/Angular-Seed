@@ -16,7 +16,7 @@
 		</div>
 		<div class="cd-col cd-col-pm-d-6 ham-col">
 			<!-- Form -->
-			<form class="ham-form" (ngSubmit)="onSubmitForm()">
+			<form class="ham-form" (ngSubmit)="onSubmitForm()" (keyup.enter)="validForm && onSubmitForm()">
 				<h3>Login</h3>
 				<div class="cd-row">
 					<div class="cd-col">
@@ -70,7 +70,7 @@
 
 					<!-- Button -->
 					<div class="cd-col">
-						<button mat-button type="submit" [disabled]="formFields.invalid">Login</button>
+						<button mat-button type="submit" [disabled]="!validForm">Login</button>
 					</div>
 
 					<!-- Note -->

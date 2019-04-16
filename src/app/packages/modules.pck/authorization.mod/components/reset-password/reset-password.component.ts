@@ -49,6 +49,10 @@ export class ResetPasswordComponent {
 		return this.formFields.get('email');
 	}
 
+	get validForm() {
+		return this.formFields.valid;
+	}
+
 	/**
 	 * on submit form
 	 */

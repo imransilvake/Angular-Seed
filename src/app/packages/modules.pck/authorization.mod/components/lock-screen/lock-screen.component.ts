@@ -38,6 +38,10 @@ export class LockScreenComponent {
 		return this.formFields.get('password');
 	}
 
+	get validForm() {
+		return this.formFields.valid;
+	}
+
 	/**
 	 * on submit form
 	 */

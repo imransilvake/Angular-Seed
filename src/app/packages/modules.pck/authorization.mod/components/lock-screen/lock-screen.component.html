@@ -16,14 +16,14 @@
 				</div>
 
 				<!-- Form -->
-				<form class="ham-block ham-form" (ngSubmit)="onSubmitForm()">
+				<form class="ham-block ham-form" (ngSubmit)="onSubmitForm()" (keyup.enter)="validForm && onSubmitForm()">
 					<app-input
 						[layoutStyleType]="lockPasswordStyleType"
 						[layoutStyleData]="{
-							status: formFields.valid,
+							status: validForm,
 							changeDirection: true,
 							button: true,
-							icon: !formFields.valid ? lockPasswordIcons[0] : lockPasswordIcons[1]
+							icon: !validForm ? lockPasswordIcons[0] : lockPasswordIcons[1]
 						}"
 						[inputId]="'lock-password-id'"
 						[inputType]="'password'"
