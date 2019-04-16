@@ -99,16 +99,6 @@ export class RegisterComponent implements OnInit {
 	}
 
 	/**
-	 * form submit on press enter
-	 */
-	public onPressEnter(event) {
-		// submit form on press enter
-		if ((event.which === 13 || event.key === 13) && this.formFields.valid) {
-			this.onSubmitForm();
-		}
-	}
-
-	/**
 	 * on submit form
 	 */
 	public onSubmitForm() {
