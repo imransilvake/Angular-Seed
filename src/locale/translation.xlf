@@ -2,15 +2,103 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en" datatype="plaintext" original="ng2.template">
     <body>
-      <trans-unit id="b6a8f893385c31e3e82e2a615beb3390950a575b" datatype="html">
-        <source>
-			Sidebar
-		</source>
+      <trans-unit id="AuthRegisterInfoTitle" datatype="html">
+        <source>Title</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="sourcefile">app/packages/modules.pck/authorization.mod/components/register/register.component.html</context>
+          <context context-type="linenumber">7</context>
         </context-group>
-        <note priority="1" from="description">Hello World</note>
+      </trans-unit>
+      <trans-unit id="AuthRegisterInfoDescription" datatype="html">
+        <source>Description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/packages/modules.pck/authorization.mod/components/register/register.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="AuthRegisterInfoVersion" datatype="html">
+        <source>Version: <x id="INTERPOLATION" equiv-text="{{version}}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/packages/modules.pck/authorization.mod/components/register/register.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="AuthRegisterFormTitle" datatype="html">
+        <source>Register</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/packages/modules.pck/authorization.mod/components/register/register.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="AuthRegisterFormHotelListPlaceHolder" datatype="html">
+        <source>Select Hotel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/packages/modules.pck/authorization.mod/components/register/register.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="AuthRegisterFormFirstNameLabel" datatype="html">
+        <source>First Name*</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/packages/modules.pck/authorization.mod/components/register/register.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="AuthRegisterFormFirstPlaceHolder" datatype="html">
+        <source>First Name*</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/packages/modules.pck/authorization.mod/components/register/register.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="AuthRegisterFormLastNameLabel" datatype="html">
+        <source>Last Name*</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/packages/modules.pck/authorization.mod/components/register/register.component.html</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="AuthRegisterFormLastPlaceHolder" datatype="html">
+        <source>Last Name*</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/packages/modules.pck/authorization.mod/components/register/register.component.html</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="AuthRegisterFormEmailLabel" datatype="html">
+        <source>Email*</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/packages/modules.pck/authorization.mod/components/register/register.component.html</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="AuthRegisterFormEmailPlaceHolder" datatype="html">
+        <source>Email*</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/packages/modules.pck/authorization.mod/components/register/register.component.html</context>
+          <context context-type="linenumber">81</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="AuthRegisterFormPasswordLabel" datatype="html">
+        <source>Password*</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/packages/modules.pck/authorization.mod/components/register/register.component.html</context>
+          <context context-type="linenumber">90</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="AuthRegisterFormPasswordPlaceHolder" datatype="html">
+        <source>Password*</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/packages/modules.pck/authorization.mod/components/register/register.component.html</context>
+          <context context-type="linenumber">97</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="AuthRegisterFormSubmitButton" datatype="html">
+        <source>Register</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/packages/modules.pck/authorization.mod/components/register/register.component.html</context>
+          <context context-type="linenumber">105</context>
+        </context-group>
       </trans-unit>
     </body>
   </file>

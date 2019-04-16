@@ -4,22 +4,19 @@
 			<!-- Info -->
 			<div class="ham-bg-wrapper">
 				<div class="ham-details ham-top">
-					<h1>Hello World</h1>
-					<p>
-						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
-						ut labore et dolore magna aliquyam erat, sed diam voluptua.
-					</p>
+					<h1 i18n="@@AuthRegisterInfoTitle">Title</h1>
+					<p i18n="@@AuthRegisterInfoDescription">Description</p>
 				</div>
 
 				<div class="ham-details ham-bottom">
-					<p>ver. 1.0.0</p>
+					<p i18n="@@AuthRegisterInfoVersion">Version: {{version}}</p>
 				</div>
 			</div>
 		</div>
 		<div class="cd-col cd-col-pm-d-6 ham-col">
 			<!-- Form -->
 			<form class="ham-form" (ngSubmit)="onSubmitForm()" (keyup.enter)="validForm && onSubmitForm()">
-				<h3>Register</h3>
+				<h3 i18n="@@AuthRegisterFormTitle">Register</h3>
 				<div class="cd-row" *ngIf="hotelList">
 					<div class="cd-col">
 						<app-select
@@ -32,7 +29,8 @@
 							}"
 							[selectId]="'select-hotel-list-id'"
 							[selectClassPanel]="'ham-select-panel-with-info'"
-							[selectPlaceHolder]="'Select Hotel'"
+							selectPlaceHolder="Select Hotel Placeholder"
+							i18n-selectPlaceHolder="@@AuthRegisterFormHotelListPlaceHolder"
 							[dataDefault]="hotelList"
 							[control]="hotelName">
 						</app-select>
@@ -44,22 +42,26 @@
 						<div class="ham-padding">
 							<app-input
 								[showLabel]="true"
-								[labelName]="'First Name*'"
+								labelName="First Name Label*"
+								i18n-labelName="@@AuthRegisterFormFirstNameLabel"
 								[inputId]="'register-first-name-id'"
 								[inputType]="'text'"
 								[inputName]="'firstname'"
-								[inputPlaceHolder]="'First Name*'"
+								inputPlaceHolder="First Name Placeholder*"
+								i18n-inputPlaceHolder="@@AuthRegisterFormFirstPlaceHolder"
 								[control]="firstName">
 							</app-input>
 						</div>
 						<div class="ham-padding">
 							<app-input
 								[showLabel]="true"
-								[labelName]="'Last Name*'"
+								labelName="Last Name Label*"
+								i18n-labelName="@@AuthRegisterFormLastNameLabel"
 								[inputId]="'register-last-name-id'"
 								[inputType]="'text'"
 								[inputName]="'lastname'"
-								[inputPlaceHolder]="'Last Name*'"
+								inputPlaceHolder="Last Name Placeholder*"
+								i18n-inputPlaceHolder="@@AuthRegisterFormLastPlaceHolder"
 								[control]="lastName">
 							</app-input>
 						</div>
@@ -70,11 +72,14 @@
 					<div class="cd-col">
 						<app-input
 							[showLabel]="true"
-							[labelName]="'Email*'"
+							labelName="Email Label*"
+							i18n-labelName="@@AuthRegisterFormEmailLabel"
 							[inputId]="'register-email-id'"
 							[inputType]="'email'"
 							[inputName]="'email'"
 							[inputPlaceHolder]="'Email*'"
+							inputPlaceHolder="Email Placeholder*"
+							i18n-inputPlaceHolder="@@AuthRegisterFormEmailPlaceHolder"
 							[control]="email">
 						</app-input>
 					</div>
@@ -82,20 +87,22 @@
 					<div class="cd-col">
 						<app-input
 							[showLabel]="true"
-							[labelName]="'Password*'"
+							labelName="Password Label*"
+							i18n-labelName="@@AuthRegisterFormPasswordLabel"
 							[inputId]="'register-password-id'"
 							[inputType]="'password'"
 							[inputName]="'password'"
 							[hidePassword]="true"
 							[showHidePassword]="true"
-							[inputPlaceHolder]="'Password'"
+							inputPlaceHolder="Password Placeholder*"
+							i18n-inputPlaceHolder="@@AuthRegisterFormPasswordPlaceHolder"
 							[control]="password">
 						</app-input>
 					</div>
 
 					<!-- Button -->
 					<div class="cd-col">
-						<button mat-button type="submit" [disabled]="!validForm">Register</button>
+						<button mat-button type="submit" [disabled]="!validForm" i18n="@@AuthRegisterFormSubmitButton">Register</button>
 					</div>
 
 					<!-- Note -->

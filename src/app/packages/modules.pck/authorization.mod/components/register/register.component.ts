@@ -35,6 +35,7 @@ export class RegisterComponent implements OnInit {
 	public registerHotelNameSelectStyleType = SelectStyleEnum.INFO;
 	public registerHotelNameIcons = [faHotel];
 	public hotelList: SelectDefaultInterface[] = [];
+	public version = '1.0.0';
 
 	constructor(
 		private _loadingAnimationService: LoadingAnimationService,
