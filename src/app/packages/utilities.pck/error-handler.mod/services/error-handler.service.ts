@@ -10,7 +10,7 @@ import { ErrorHandlerInterface } from '../interfaces/error-handler.interface';
 import { ErrorHandlerComponent } from '../components/error-handler.component';
 import { LoadingAnimationService } from '../../loading-animation.mod/services/loading-animation.service';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ErrorHandlerService {
 	constructor(
 		private _dialog: MatDialog,

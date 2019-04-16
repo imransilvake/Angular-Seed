@@ -8,7 +8,7 @@ import { Store } from '@ngrx/store';
 import * as LoadingAnimationActions from '../store/actions/loading-animation.actions';
 import { LoadingAnimationInterface } from '../interfaces/loading-animation.interface';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class LoadingAnimationService {
 	constructor(private _store: Store<LoadingAnimationInterface>) {
 	}

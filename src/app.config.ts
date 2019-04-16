@@ -8,7 +8,7 @@ export const AppOptions = {
 
 // services
 export const AppServices: { [name: string]: AppServicesInterface } = {
-	as: { serviceUrl: '' }
+	authRegister: { serviceUrl: '/signup' }
 };
 
 // local-storage items

@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { retry, timeout } from 'rxjs/operators';
 
 // app
-import { APP_URL, ENV_REST_SERVICE_URL } from '../../../../../environments/environment';
+import { ENV_SERVICE_URL } from '../../../../../environments/environment';
 import { AppServicesInterface } from '../interfaces/app-services.interface';
 import { RESTAPIConfig } from '../../../../../app.config';
 import { HttpOptionsService } from './http-options.service';
@@ -20,30 +20,34 @@ export class ProxyService {
 	/**
 	 * api: get
 	 *
-	 * @param {AppServicesInterface} service
-	 * @param {Object} params
-	 * @param {string} urlParts
-	 * @param {Object} matrixParams
-	 * @returns {Observable<any>}
+	 * @param service
+	 * @param params
 	 */
-	public getAPI(service: AppServicesInterface, params?: Object, urlParts?: string, matrixParams?: Object) {
+	public getAPI(service: AppServicesInterface, params?: any) {
 		// set url
-		let url = APP_URL + ENV_REST_SERVICE_URL + service.serviceUrl;
-		url = (urlParts) ? url + urlParts : url; // attach url part if exists
-		url = (matrixParams) ? this._httpOptionsService.addMatrixParamsToUrl(url, matrixParams) : url;
+		let url = ENV_SERVICE_URL + service.serviceUrl;
 
-		// get body params
-		const bodyParams = (params) ? this._httpOptionsService.getBodyParams(params) : {};
+		// add query params
+		url = (params.queryParams) ? this._httpOptionsService.addQueryParamsToUrl(url, params.queryParams) : url;
+
+		// add matrix params
+		url = (params.matrixParams) ? this._httpOptionsService.addMatrixParamsToUrl(url, params.matrixParams) : url;
+
+		// add path params
+		url = (params.pathParams) ? this._httpOptionsService.addPathParams(url, params.pathParams) : url;
+
+		// url encode
+		url = encodeURI(url);
 
 		// options
 		const options = {
 			headers: this._httpOptionsService.getHeaders(),
-			params: bodyParams
+			responseType: (params.responseContentType ? params.responseContentType : 'json')
 		};
 
 		// api: get
 		return this._http
-			.get<any>(encodeURI(url), options)
+			.get<any>(url, options)
 			.pipe(
 				retry(RESTAPIConfig.get.retry),
 				timeout(RESTAPIConfig.get.timeout)
@@ -53,25 +57,37 @@ export class ProxyService {
 	/**
 	 * api: post
 	 *
-	 * @param {AppServicesInterface} service
-	 * @param {Object} params
-	 * @returns {Observable<any>}
+	 * @param service
+	 * @param params
 	 */
-	public postAPI(service: AppServicesInterface, params?: Object) {
-		// set url
-		const url = APP_URL + ENV_REST_SERVICE_URL + service.serviceUrl;
+	public postAPI(service: AppServicesInterface, params?: any) {
+		// params
+		const bodyParams = (params.singleBodyParam) ? params.singleBodyParam : params.bodyParams;
 
-		// get body params
-		const bodyParams = this._httpOptionsService.getBodyParams(params);
+		// set url
+		let url = ENV_SERVICE_URL + service.serviceUrl;
+
+		// add query params
+		url = (params.queryParams) ? this._httpOptionsService.addQueryParamsToUrl(url, params.queryParams) : url;
+
+		// add matrix params
+		url = (params.matrixParams) ? this._httpOptionsService.addMatrixParamsToUrl(url, params.matrixParams) : url;
+
+		// add path params
+		url = (params.pathParams) ? this._httpOptionsService.addPathParams(url, params.pathParams) : url;
+
+		// url encode
+		url = encodeURI(url);
 
 		// options
 		const options = {
-			headers: this._httpOptionsService.getHeaders(params)
+			headers: this._httpOptionsService.getHeaders(params.singleBodyParam),
+			responseType: (params.responseContentType ? params.responseContentType : 'json')
 		};
 
 		// api: post
 		return this._http
-			.post<any>(encodeURI(url), bodyParams, options)
+			.post<any>(url, bodyParams, options)
 			.pipe(timeout(RESTAPIConfig.get.timeout));
 	}
 }

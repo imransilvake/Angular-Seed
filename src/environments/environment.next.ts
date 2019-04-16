@@ -4,7 +4,7 @@ export const environment = {
 };
 
 export const APP_URL = 'http://localhost:5000';
-export const ENV_REST_SERVICE_URL = '/cms/rest';
+export const ENV_SERVICE_URL = 'https://x83n6pnzlj.execute-api.eu-west-1.amazonaws.com/next';
 export const ENV_AUTH_TOKEN = 'f691733b04f0b0faf0df80a500542490fdf27c334e66d7f7c9e7980c960f6afc';
 
 // routing

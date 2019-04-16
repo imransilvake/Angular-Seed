@@ -1,8 +1,11 @@
 <section class="ham-dialog-wrapper" *ngIf="data">
 	<div class="cd-row">
 		<div class="cd-col">
-			<!-- CONFIRMATION -->
+			<!-- Confirmation -->
 			<app-dialog-confirmation [data]="data" *ngIf="data.type === 0"></app-dialog-confirmation>
+
+			<!-- Notice -->
+			<app-dialog-notice [data]="data" *ngIf="data.type === 1"></app-dialog-notice>
 		</div>
 	</div>
 </section>

@@ -1,20 +1,8 @@
-<section class="ham-error-handler-wrapper" *ngIf="data && data.payload">
+<section class="ham-error-handler-wrapper" *ngIf="data">
 	<div class="cd-row">
 		<div class="cd-col">
-			<!-- ERROR -->
-			<section class="ham-error-handler-common">
-				<header class="ham-header">
-					<h4>{{ data.payload.title }}</h4>
-				</header>
-				<div class="ham-content">
-					<p>{{ data.payload.message }}</p>
-				</div>
-				<footer class="ham-footer">
-					<button mat-button (click)="onClickCloseDialog(data.type)" class="ham-close">
-						{{ data.payload.buttonTexts[0] }}
-					</button>
-				</footer>
-			</section>
+			<!-- Common -->
+			<app-error-common [data]="data" *ngIf="data.type === 0"></app-error-common>
 		</div>
 	</div>
 </section>

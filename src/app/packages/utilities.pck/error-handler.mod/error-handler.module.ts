@@ -4,17 +4,15 @@ import { NgModule } from '@angular/core';
 // app
 import { SharedModule } from '../../../shared/shared.module';
 import { ErrorHandlerComponent } from './components/error-handler.component';
-import { ErrorHandlerService } from './services/error-handler.service';
+import { ErrorCommonComponent } from './components/error-types/error-common/error-common.component';
 
 @NgModule({
 	imports: [
 		SharedModule
 	],
 	declarations: [
-		ErrorHandlerComponent
-	],
-	providers: [
-		ErrorHandlerService
+		ErrorHandlerComponent,
+		ErrorCommonComponent
 	],
 	entryComponents: [
 		ErrorHandlerComponent

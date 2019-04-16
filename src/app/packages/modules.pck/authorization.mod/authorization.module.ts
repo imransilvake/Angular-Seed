@@ -12,6 +12,7 @@ import { LockScreenComponent } from './components/lock-screen/lock-screen.compon
 import { HotelListService } from './services/hotel-list.service';
 import { LanguageListService } from './services/language-list.service';
 import { AuthGuard } from './guards/auth.guard';
+import { RegisterService } from './services/register.service';
 
 @NgModule({
 	imports: [
@@ -26,9 +27,10 @@ import { AuthGuard } from './guards/auth.guard';
 		LockScreenComponent
 	],
 	providers: [
+		AuthGuard,
+		RegisterService,
 		HotelListService,
-		LanguageListService,
-		AuthGuard
+		LanguageListService
 	]
 })
 

@@ -6,7 +6,7 @@ import { DialogInterface } from '../interfaces/dialog.interface';
 import { DialogComponent } from '../components/dialog.component';
 import { MatDialog } from '@angular/material';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class DialogService {
 	constructor(private _dialog: MatDialog) {
 	}
