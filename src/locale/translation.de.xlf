@@ -65,7 +65,7 @@
 					characters long
 					<x id="CLOSE_TAG_NG-CONTAINER" ctype="x-ng-container" equiv-text="&lt;/ng-container&gt;"/>
 				</source>
-				<source>
+				<target>
 					<x id="START_TAG_NG-CONTAINER" ctype="x-ng-container" equiv-text="&lt;ng-container&gt;"/>
 					Es muss aus min.
 					<x id="INTERPOLATION" equiv-text="{{control.errors.usernameRequiredLength}}"/>
@@ -76,7 +76,7 @@
 					<x id="INTERPOLATION" equiv-text="{{control.errors.usernameRequiredLength}}"/>
 					alphabetischen Zeichen bestehen
 					<x id="CLOSE_TAG_NG-CONTAINER" ctype="x-ng-container" equiv-text="&lt;/ng-container&gt;"/>
-				</source>
+				</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/core.pck/fields.mod/components/input/input.component.html

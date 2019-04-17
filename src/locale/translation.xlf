@@ -171,7 +171,7 @@
 				</context-group>
 			</trans-unit>
 			<trans-unit id="AuthRegisterFormFirstPlaceHolder" datatype="html">
-				<source>First Name*</source>
+				<source>First Name</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/register/register.component.html
@@ -189,7 +189,7 @@
 				</context-group>
 			</trans-unit>
 			<trans-unit id="AuthRegisterFormLastPlaceHolder" datatype="html">
-				<source>Last Name*</source>
+				<source>Last Name</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/register/register.component.html
@@ -207,12 +207,12 @@
 				</context-group>
 			</trans-unit>
 			<trans-unit id="AuthRegisterFormEmailPlaceHolder" datatype="html">
-				<source>Email*</source>
+				<source>Email</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/register/register.component.html
 					</context>
-					<context context-type="linenumber">81</context>
+					<context context-type="linenumber">80</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="AuthRegisterFormPasswordLabel" datatype="html">
@@ -221,16 +221,16 @@
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/register/register.component.html
 					</context>
-					<context context-type="linenumber">90</context>
+					<context context-type="linenumber">89</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="AuthRegisterFormPasswordPlaceHolder" datatype="html">
-				<source>Password*</source>
+				<source>Password</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/register/register.component.html
 					</context>
-					<context context-type="linenumber">97</context>
+					<context context-type="linenumber">96</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="AuthRegisterFormSubmitButton" datatype="html">
@@ -239,7 +239,7 @@
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/register/register.component.html
 					</context>
-					<context context-type="linenumber">105</context>
+					<context context-type="linenumber">104</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="AuthRegisterFormNote" datatype="html">
@@ -250,7 +250,7 @@
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/register/register.component.html
 					</context>
-					<context context-type="linenumber">110</context>
+					<context context-type="linenumber">109</context>
 				</context-group>
 			</trans-unit>
 		</body>
