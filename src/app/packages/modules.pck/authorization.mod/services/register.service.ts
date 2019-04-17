@@ -13,6 +13,7 @@ export class RegisterService {
 
 	/**
 	 * perform user registration process
+	 *
 	 * @param registerPayload
 	 */
 	public authRegister(registerPayload: AuthRegisterInterface) {

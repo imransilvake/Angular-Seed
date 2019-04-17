@@ -51,13 +51,11 @@ export class RegisterComponent implements OnInit {
 			]),
 			firstName: new FormControl('', [
 				Validators.required,
-				Validators.minLength(2),
-				Validators.maxLength(256)
+				Validators.minLength(2)
 			]),
 			lastName: new FormControl('', [
 				Validators.required,
-				Validators.minLength(2),
-				Validators.maxLength(256)
+				Validators.minLength(2)
 			]),
 			password: new FormControl('', [
 				Validators.required,
@@ -120,6 +118,9 @@ export class RegisterComponent implements OnInit {
 		// start registration process
 		this._registerService.authRegister(registerPayload)
 			.subscribe((res) => {
+				// stop loading animation
+				this._loadingAnimationService.stopLoadingAnimation();
+
 				if (res && res.code === 'UsernameExistsException') {
 					// error payload
 					const data = {
@@ -150,9 +151,6 @@ export class RegisterComponent implements OnInit {
 					// dialog service
 					this._dialogService.showDialog(data);
 				}
-
-				// stop loading animation
-				this._loadingAnimationService.stopLoadingAnimation();
 			}, () => {
 				// stop loading animation
 				this._loadingAnimationService.stopLoadingAnimation();

@@ -13,6 +13,7 @@ import { HotelListService } from './services/hotel-list.service';
 import { LanguageListService } from './services/language-list.service';
 import { AuthGuard } from './guards/auth.guard';
 import { RegisterService } from './services/register.service';
+import { ForgotPasswordService } from './services/forgot-password.service';
 
 @NgModule({
 	imports: [
@@ -29,6 +30,7 @@ import { RegisterService } from './services/register.service';
 	providers: [
 		AuthGuard,
 		RegisterService,
+		ForgotPasswordService,
 		HotelListService,
 		LanguageListService
 	]
