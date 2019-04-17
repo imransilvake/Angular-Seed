@@ -222,7 +222,7 @@
 				</context-group>
 			</trans-unit>
 			<trans-unit id="AuthRegisterFormFirstPlaceHolder" datatype="html">
-				<source>First Name*</source>
+				<source>First Name</source>
 				<target>Enter first name</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -242,7 +242,7 @@
 				</context-group>
 			</trans-unit>
 			<trans-unit id="AuthRegisterFormLastPlaceHolder" datatype="html">
-				<source>Last Name*</source>
+				<source>Last Name</source>
 				<target>Enter last name</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -262,7 +262,7 @@
 				</context-group>
 			</trans-unit>
 			<trans-unit id="AuthRegisterFormEmailPlaceHolder" datatype="html">
-				<source>Email*</source>
+				<source>Email</source>
 				<target>Enter email address</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -282,7 +282,7 @@
 				</context-group>
 			</trans-unit>
 			<trans-unit id="AuthRegisterFormPasswordPlaceHolder" datatype="html">
-				<source>Password*</source>
+				<source>Password</source>
 				<target>Enter password</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
