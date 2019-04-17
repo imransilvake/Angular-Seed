@@ -7,14 +7,15 @@ import { ROUTING } from '../../../../../../environments/environment';
 import { ValidationService } from '../../../../core.pck/fields.mod/services/validation.service';
 
 @Component({
-	selector: 'app-reset-password',
-	templateUrl: './reset-password.component.html',
+	selector: 'app-forgot-password',
+	templateUrl: './forgot-password.component.html',
 	styleUrls: ['../auth.component.scss']
 })
 
-export class ResetPasswordComponent {
+export class ForgotPasswordComponent {
 	public routing = ROUTING;
 	public formFields;
+	public version = '1.0.0';
 
 	constructor() {
 		// form fields

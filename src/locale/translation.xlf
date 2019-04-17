@@ -253,6 +253,118 @@
 					<context context-type="linenumber">109</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="AuthForgotPasswordInfoTitle" datatype="html">
+				<source>Title</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.html
+					</context>
+					<context context-type="linenumber">7</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="AuthForgotPasswordInfoDescription" datatype="html">
+				<source>Description</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.html
+					</context>
+					<context context-type="linenumber">8</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="AuthForgotPasswordInfoVersion" datatype="html">
+				<source>Version:
+					<x id="INTERPOLATION" equiv-text="{{version}}"/>
+				</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.html
+					</context>
+					<context context-type="linenumber">12</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="AuthForgotPasswordFormTitle" datatype="html">
+				<source>Forgot Password</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.html
+					</context>
+					<context context-type="linenumber">19</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="AuthForgotPasswordFormFirstNameLabel" datatype="html">
+				<source>First Name*</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.html
+					</context>
+					<context context-type="linenumber">25</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="AuthForgotPasswordFormFirstNamePlaceHolder" datatype="html">
+				<source>First Name</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.html
+					</context>
+					<context context-type="linenumber">31</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="AuthForgotPasswordFormLastNameLabel" datatype="html">
+				<source>Last Name*</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.html
+					</context>
+					<context context-type="linenumber">39</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="AuthForgotPasswordFormLastNamePlaceHolder" datatype="html">
+				<source>Last Name</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.html
+					</context>
+					<context context-type="linenumber">44</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="AuthForgotPasswordFormEmailLabel" datatype="html">
+				<source>Email*</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.html
+					</context>
+					<context context-type="linenumber">56</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="AuthForgotPasswordFormEmailPlaceHolder" datatype="html">
+				<source>Email</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.html
+					</context>
+					<context context-type="linenumber">61</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="AuthForgotPasswordFormSubmitButton" datatype="html">
+				<source>Send</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.html
+					</context>
+					<context context-type="linenumber">69</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="AuthForgotPasswordFormNote" datatype="html">
+				<source>Don&apos;t have an account?<x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Register
+					<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
+				</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.html
+					</context>
+					<context context-type="linenumber">74</context>
+				</context-group>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
