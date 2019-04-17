@@ -461,6 +461,66 @@
 					<context context-type="linenumber">74</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="AuthRegisterForm_Success_Title" datatype="html">
+				<source>Title: Success</source>
+				<target>Registrierung war erfolgreich</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/components/register/register.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="AuthRegisterForm_Success_Description" datatype="html">
+				<source>Description: Success</source>
+				<target>Registrierung war erfolgreich und wurde an den Hotel-Manager zur Freischaltung gesendet.</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/components/register/register.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="AuthRegisterForm_Error_Generic_Title" datatype="html">
+				<source>Title: Error Generic</source>
+				<target>Ein Fehler ist aufgetreten</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/components/register/register.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="AuthRegisterForm_Error_Generic_Description" datatype="html">
+				<source>Description: Error Generic</source>
+				<target>Etwas ist schief gelaufen. Bitte wenden Sie sich an den Support!</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/components/register/register.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="AuthRegisterForm_Error_UsernameExistsException_Title" datatype="html">
+				<source>Title: User Exists Exception</source>
+				<target>Ausnahme: Benutzer existiert</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/components/register/register.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="AuthRegisterForm_Error_UsernameExistsException_Description" datatype="html">
+				<source>Title: User Exists Exception</source>
+				<target>Der Benutzer ist bereits mit der angegebenen E-Mail-Adresse in unserem System vorhanden. Bitte verwenden Sie eine andere E-Mail-Adresse.</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/components/register/register.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

@@ -1,6 +1,7 @@
 // angular
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { I18n } from '@ngx-translate/i18n-polyfill';
 
 // store
 import { Store } from '@ngrx/store';
@@ -42,7 +43,8 @@ export class RegisterComponent implements OnInit {
 		private _dialogService: DialogService,
 		private _store: Store<ErrorHandlerInterface>,
 		private _registerService: RegisterService,
-		private _hotelListService: HotelListService
+		private _hotelListService: HotelListService,
+		private _i18n: I18n,
 	) {
 		// form fields
 		this.formFields = new FormGroup({
@@ -126,8 +128,8 @@ export class RegisterComponent implements OnInit {
 					const data = {
 						type: ErrorHandlerTypeEnum.COMMON_ERROR,
 						payload: {
-							title: res.code,
-							message: res.message,
+							title: this._i18n({ value: 'Title: User Exists Exception', id: 'AuthRegisterForm_Error_UsernameExistsException_Title' }),
+							message: this._i18n({ value: 'Description: User Exists Exception', id: 'AuthRegisterForm_Error_UsernameExistsException_Description' }),
 							buttonTexts: ['Close']
 						}
 					};
@@ -142,8 +144,8 @@ export class RegisterComponent implements OnInit {
 					const data = {
 						type: DialogTypeEnum.NOTICE,
 						payload: {
-							title: 'Success',
-							message: 'Your account has been created successfully!',
+							title: this._i18n({ value: 'Title: Success', id: 'AuthRegisterForm_Success_Title' }),
+							message: this._i18n({ value: 'Description: Success', id: 'AuthRegisterForm_Success_Description' }),
 							buttonTexts: ['Close']
 						}
 					};
@@ -159,8 +161,8 @@ export class RegisterComponent implements OnInit {
 				const data = {
 					type: ErrorHandlerTypeEnum.COMMON_ERROR,
 					payload: {
-						title: 'Registration Error',
-						message: 'Registration process is failed due to some reason. Please contact the administration!',
+						title: this._i18n({ value: 'Title: Error Generic', id: 'AuthRegisterForm_Error_Generic_Title' }),
+						message: this._i18n({ value: 'Description: Error Generic', id: 'AuthRegisterForm_Error_Generic_Description' }),
 						buttonTexts: ['Close']
 					}
 				};

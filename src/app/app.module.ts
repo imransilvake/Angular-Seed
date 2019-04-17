@@ -1,5 +1,6 @@
 // angular
-import { NgModule } from '@angular/core';
+import { NgModule, TRANSLATIONS, TRANSLATIONS_FORMAT } from '@angular/core';
+import { I18n } from '@ngx-translate/i18n-polyfill';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
@@ -25,6 +26,10 @@ import { MaterialModule } from './packages/vendors.pck/material.mod/material.mod
 import { NotificationModule } from './packages/utilities.pck/notification.mod/notification.module';
 import { AuthorizationModule } from './packages/modules.pck/authorization.mod/authorization.module';
 import { AppLayoutComponent } from './app-layout.component';
+
+// i18n using polyfills
+declare const require; // provided by webpack
+const translations = require(`raw-loader!../locale/translation.de.xlf`);
 
 @NgModule({
 	imports: [
@@ -59,7 +64,12 @@ import { AppLayoutComponent } from './app-layout.component';
 		AuthorizationModule
 	],
 	declarations: [AppComponent, AppLayoutComponent],
-	providers: [HttpInterceptorProviders],
+	providers: [
+		I18n,
+		{ provide: TRANSLATIONS, useValue: translations },
+		{ provide: TRANSLATIONS_FORMAT, useValue: 'xlf' },
+		HttpInterceptorProviders
+	],
 	bootstrap: [AppComponent]
 })
 
