@@ -12,7 +12,7 @@ export const ROUTING = {
 	authorization: {
 		login: 'auth/login',
 		register: 'auth/register',
-		reset: 'auth/reset',
+		forgot: 'auth/forgot',
 		lock: 'auth/lock'
 	}
 };

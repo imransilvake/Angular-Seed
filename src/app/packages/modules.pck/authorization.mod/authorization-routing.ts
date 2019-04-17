@@ -19,7 +19,7 @@ export const AUTHORIZATION_ROUTES: Routes = [
 		component: LoginComponent
 	},
 	{
-		path: ROUTING.authorization.reset,
+		path: ROUTING.authorization.forgot,
 		component: ForgotPasswordComponent
 	},
 	{

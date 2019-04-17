@@ -193,7 +193,7 @@
 			</trans-unit>
 			<trans-unit id="AuthRegisterFormTitle" datatype="html">
 				<source>Register</source>
-				<target>Register</target>
+				<target>Registrieren</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/register/register.component.html
