@@ -15,7 +15,7 @@
 		</div>
 		<div class="cd-col cd-col-pm-d-6 ham-col">
 			<!-- Form -->
-			<form class="ham-form" (ngSubmit)="onSubmitForm()" (keyup.enter)="validForm && onSubmitForm()">
+			<form class="ham-form" (ngSubmit)="onSubmitForm()" (keyup.enter)="isFormValid && onSubmitForm()">
 				<h3 i18n="@@AuthRegisterFormTitle">Register</h3>
 				<div class="cd-row" *ngIf="hotelList">
 					<div class="cd-col">
@@ -102,7 +102,7 @@
 
 					<!-- Button -->
 					<div class="cd-col">
-						<button mat-button type="submit" [disabled]="!validForm" i18n="@@AuthRegisterFormSubmitButton">Register</button>
+						<button mat-button type="submit" [disabled]="!isFormValid" i18n="@@AuthRegisterFormSubmitButton">Register</button>
 					</div>
 
 					<!-- Note -->

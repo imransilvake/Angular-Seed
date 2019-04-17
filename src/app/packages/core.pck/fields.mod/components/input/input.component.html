@@ -59,28 +59,27 @@
 	<!-- Error -->
 	<mat-error *ngIf="control.invalid && control.touched">
 		<ng-container [ngSwitch]="control.errors | FirstKey">
-			<p *ngSwitchCase="'required'">
+			<p *ngSwitchCase="'required'" i18n="@@FieldsInputErrorRequired">
 				{{inputName}} is required
 			</p>
-			<p *ngSwitchCase="'minlength'">
+			<p *ngSwitchCase="'minlength'" i18n="@@FieldsInputErrorMinLength">
 				must be at least {{control.errors.minlength.requiredLength}} characters long
 			</p>
-			<p *ngSwitchCase="'maxlength'">
+			<p *ngSwitchCase="'maxlength'" i18n="@@FieldsInputErrorMaxLength">
 				must be max {{control.errors.maxlength.requiredLength}} characters long
 			</p>
-			<p *ngSwitchCase="'username'">
+			<p *ngSwitchCase="'username'" i18n="@@FieldsInputErrorUsername">
 				username validation error
 			</p>
-			<p *ngSwitchCase="'password'">
+			<p *ngSwitchCase="'password'" i18n="@@FieldsInputErrorPassword">
 				password validation error
 			</p>
-			<p *ngSwitchCase="'email'">
+			<p *ngSwitchCase="'email'" i18n="@@FieldsInputErrorEmail">
 				email validation error
 			</p>
-			<p *ngSwitchDefault>some error happened</p>
+			<p i18n="@@FieldsInputErrorDefaultCase" *ngSwitchDefault>some error happened</p>
 		</ng-container>
 	</mat-error>
-
 
 	<!-- Hint -->
 	<mat-hint *ngIf="showHint && hintText">{{hintText}}</mat-hint>

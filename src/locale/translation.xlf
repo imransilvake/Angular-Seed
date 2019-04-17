@@ -1,112 +1,246 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-  <file source-language="en" datatype="plaintext" original="ng2.template">
-    <body>
-      <trans-unit id="AuthRegisterInfoTitle" datatype="html">
-        <source>Title</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/packages/modules.pck/authorization.mod/components/register/register.component.html</context>
-          <context context-type="linenumber">7</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="AuthRegisterInfoDescription" datatype="html">
-        <source>Description</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/packages/modules.pck/authorization.mod/components/register/register.component.html</context>
-          <context context-type="linenumber">8</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="AuthRegisterInfoVersion" datatype="html">
-        <source>Version: <x id="INTERPOLATION" equiv-text="{{version}}"/></source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/packages/modules.pck/authorization.mod/components/register/register.component.html</context>
-          <context context-type="linenumber">12</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="AuthRegisterFormTitle" datatype="html">
-        <source>Register</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/packages/modules.pck/authorization.mod/components/register/register.component.html</context>
-          <context context-type="linenumber">19</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="AuthRegisterFormHotelListPlaceHolder" datatype="html">
-        <source>Select Hotel</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/packages/modules.pck/authorization.mod/components/register/register.component.html</context>
-          <context context-type="linenumber">32</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="AuthRegisterFormFirstNameLabel" datatype="html">
-        <source>First Name*</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/packages/modules.pck/authorization.mod/components/register/register.component.html</context>
-          <context context-type="linenumber">45</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="AuthRegisterFormFirstPlaceHolder" datatype="html">
-        <source>First Name*</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/packages/modules.pck/authorization.mod/components/register/register.component.html</context>
-          <context context-type="linenumber">50</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="AuthRegisterFormLastNameLabel" datatype="html">
-        <source>Last Name*</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/packages/modules.pck/authorization.mod/components/register/register.component.html</context>
-          <context context-type="linenumber">58</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="AuthRegisterFormLastPlaceHolder" datatype="html">
-        <source>Last Name*</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/packages/modules.pck/authorization.mod/components/register/register.component.html</context>
-          <context context-type="linenumber">63</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="AuthRegisterFormEmailLabel" datatype="html">
-        <source>Email*</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/packages/modules.pck/authorization.mod/components/register/register.component.html</context>
-          <context context-type="linenumber">75</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="AuthRegisterFormEmailPlaceHolder" datatype="html">
-        <source>Email*</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/packages/modules.pck/authorization.mod/components/register/register.component.html</context>
-          <context context-type="linenumber">81</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="AuthRegisterFormPasswordLabel" datatype="html">
-        <source>Password*</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/packages/modules.pck/authorization.mod/components/register/register.component.html</context>
-          <context context-type="linenumber">90</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="AuthRegisterFormPasswordPlaceHolder" datatype="html">
-        <source>Password*</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/packages/modules.pck/authorization.mod/components/register/register.component.html</context>
-          <context context-type="linenumber">97</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="AuthRegisterFormSubmitButton" datatype="html">
-        <source>Register</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/packages/modules.pck/authorization.mod/components/register/register.component.html</context>
-          <context context-type="linenumber">105</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="AuthRegisterFormNote" datatype="html">
-        <source>Already have an account? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Login<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/packages/modules.pck/authorization.mod/components/register/register.component.html</context>
-          <context context-type="linenumber">110</context>
-        </context-group>
-      </trans-unit>
-    </body>
-  </file>
+	<file source-language="en" datatype="plaintext" original="ng2.template">
+		<body>
+			<trans-unit id="FieldsInputErrorRequired" datatype="html">
+				<source>
+					<x id="INTERPOLATION" equiv-text="{{inputName}}"/>
+					is required
+				</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/core.pck/fields.mod/components/input/input.component.html
+					</context>
+					<context context-type="linenumber">62</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="FieldsInputErrorMinLength" datatype="html">
+				<source>
+					must be at least
+					<x id="INTERPOLATION" equiv-text="{{control.errors.minlength.requiredLength}}"/>
+					characters long
+				</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/core.pck/fields.mod/components/input/input.component.html
+					</context>
+					<context context-type="linenumber">65</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="FieldsInputErrorMaxLength" datatype="html">
+				<source>
+					must be max
+					<x id="INTERPOLATION" equiv-text="{{control.errors.maxlength.requiredLength}}"/>
+					characters long
+				</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/core.pck/fields.mod/components/input/input.component.html
+					</context>
+					<context context-type="linenumber">68</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="FieldsInputErrorUsername" datatype="html">
+				<source>
+					username validation error
+				</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/core.pck/fields.mod/components/input/input.component.html
+					</context>
+					<context context-type="linenumber">71</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="FieldsInputErrorPassword" datatype="html">
+				<source>
+					password validation error
+				</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/core.pck/fields.mod/components/input/input.component.html
+					</context>
+					<context context-type="linenumber">74</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="FieldsInputErrorEmail" datatype="html">
+				<source>
+					email validation error
+				</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/core.pck/fields.mod/components/input/input.component.html
+					</context>
+					<context context-type="linenumber">77</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="FieldsInputErrorDefaultCase" datatype="html">
+				<source>some error happened</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/core.pck/fields.mod/components/input/input.component.html
+					</context>
+					<context context-type="linenumber">80</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="FieldsSelectErrorRequired" datatype="html">
+				<source>
+					required field
+				</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/core.pck/fields.mod/components/select/select.component.html
+					</context>
+					<context context-type="linenumber">60</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="FieldsSelectErrorDefaultCase" datatype="html">
+				<source>some error happened</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/core.pck/fields.mod/components/select/select.component.html
+					</context>
+					<context context-type="linenumber">63</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="AuthRegisterInfoTitle" datatype="html">
+				<source>Title</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/register/register.component.html
+					</context>
+					<context context-type="linenumber">7</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="AuthRegisterInfoDescription" datatype="html">
+				<source>Description</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/register/register.component.html
+					</context>
+					<context context-type="linenumber">8</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="AuthRegisterInfoVersion" datatype="html">
+				<source>Version:
+					<x id="INTERPOLATION" equiv-text="{{version}}"/>
+				</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/register/register.component.html
+					</context>
+					<context context-type="linenumber">12</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="AuthRegisterFormTitle" datatype="html">
+				<source>Register</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/register/register.component.html
+					</context>
+					<context context-type="linenumber">19</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="AuthRegisterFormHotelListPlaceHolder" datatype="html">
+				<source>Select Hotel</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/register/register.component.html
+					</context>
+					<context context-type="linenumber">32</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="AuthRegisterFormFirstNameLabel" datatype="html">
+				<source>First Name*</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/register/register.component.html
+					</context>
+					<context context-type="linenumber">45</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="AuthRegisterFormFirstPlaceHolder" datatype="html">
+				<source>First Name*</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/register/register.component.html
+					</context>
+					<context context-type="linenumber">50</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="AuthRegisterFormLastNameLabel" datatype="html">
+				<source>Last Name*</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/register/register.component.html
+					</context>
+					<context context-type="linenumber">58</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="AuthRegisterFormLastPlaceHolder" datatype="html">
+				<source>Last Name*</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/register/register.component.html
+					</context>
+					<context context-type="linenumber">63</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="AuthRegisterFormEmailLabel" datatype="html">
+				<source>Email*</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/register/register.component.html
+					</context>
+					<context context-type="linenumber">75</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="AuthRegisterFormEmailPlaceHolder" datatype="html">
+				<source>Email*</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/register/register.component.html
+					</context>
+					<context context-type="linenumber">81</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="AuthRegisterFormPasswordLabel" datatype="html">
+				<source>Password*</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/register/register.component.html
+					</context>
+					<context context-type="linenumber">90</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="AuthRegisterFormPasswordPlaceHolder" datatype="html">
+				<source>Password*</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/register/register.component.html
+					</context>
+					<context context-type="linenumber">97</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="AuthRegisterFormSubmitButton" datatype="html">
+				<source>Register</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/register/register.component.html
+					</context>
+					<context context-type="linenumber">105</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="AuthRegisterFormNote" datatype="html">
+				<source>Already have an account?<x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Login
+					<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
+				</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/register/register.component.html
+					</context>
+					<context context-type="linenumber">110</context>
+				</context-group>
+			</trans-unit>
+		</body>
+	</file>
 </xliff>

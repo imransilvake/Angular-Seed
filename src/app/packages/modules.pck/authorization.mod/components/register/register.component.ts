@@ -99,7 +99,7 @@ export class RegisterComponent implements OnInit {
 		return this.formFields.get('email');
 	}
 
-	get validForm() {
+	get isFormValid() {
 		return this.formFields.valid;
 	}
 

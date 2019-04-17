@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
 		return this.formFields.get('password');
 	}
 
-	get validForm() {
+	get isFormValid() {
 		return this.formFields.valid;
 	}
 

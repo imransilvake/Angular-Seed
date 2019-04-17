@@ -57,10 +57,10 @@
 	<!-- Error -->
 	<mat-error *ngIf="control.invalid && control.touched">
 		<ng-container [ngSwitch]="control.errors | FirstKey">
-			<p *ngSwitchCase="'required'">
+			<p *ngSwitchCase="'required'" i18n="@@FieldsSelectErrorRequired">
 				required field
 			</p>
-			<p *ngSwitchDefault>some error happened</p>
+			<p i18n="@@FieldsSelectErrorDefaultCase" *ngSwitchDefault>some error happened</p>
 		</ng-container>
 	</mat-error>
 
