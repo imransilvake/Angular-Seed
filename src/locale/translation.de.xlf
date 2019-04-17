@@ -110,10 +110,18 @@
       </trans-unit>
       <trans-unit id="AuthRegisterFormSubmitButton" datatype="html">
         <source>Register</source>
-        <target>LOG IN</target>
+        <target>Registrieren</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/packages/modules.pck/authorization.mod/components/register/register.component.html</context>
           <context context-type="linenumber">105</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="AuthRegisterFormNote" datatype="html">
+        <source>Already have an account? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Login<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></source>
+        <target>Bereits einen Account vorhanden? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Login hier<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/packages/modules.pck/authorization.mod/components/register/register.component.html</context>
+          <context context-type="linenumber">110</context>
         </context-group>
       </trans-unit>
     </body>
