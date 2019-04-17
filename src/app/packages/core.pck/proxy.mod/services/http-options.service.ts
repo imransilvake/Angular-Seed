@@ -5,7 +5,7 @@ import { HttpHeaders, HttpParams } from '@angular/common/http';
 // app
 import { RequestHeaders } from '../../../../../app.config';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class HttpOptionsService {
 	/**
 	 * returns important headers for the request

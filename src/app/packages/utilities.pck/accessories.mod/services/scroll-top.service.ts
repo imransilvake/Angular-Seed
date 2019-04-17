@@ -5,7 +5,7 @@ import { debounceTime, map } from 'rxjs/operators';
 // app
 import { HelperService } from './helper.service';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ScrollTopService {
 	public scrollEvent: EventEmitter<any> = new EventEmitter();
 
@@ -13,9 +13,9 @@ export class ScrollTopService {
 	}
 
 	/**
-	 * scroll listener
+	 * scroll to top listener
 	 */
-	public scrollListener() {
+	public scrollTopListener() {
 		this._helperService.detectScroll()
 			.pipe(
 				// we are only interested in the scrollY value of these events

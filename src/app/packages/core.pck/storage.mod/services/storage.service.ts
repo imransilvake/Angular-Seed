@@ -5,7 +5,7 @@ import { AsyncSubject } from 'rxjs/internal/AsyncSubject';
 // app
 import { StorageTypeEnum } from '../enums/storage-type.enum';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class StorageService {
 	private memory: { [name: string]: AsyncSubject<any> } = {};
 

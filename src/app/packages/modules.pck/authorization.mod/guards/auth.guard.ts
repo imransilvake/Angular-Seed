@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate {
 	}
 
 	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-		const userStatus = false;
+		const userStatus = true;
 		const authRoutes = Object.values(ROUTING.authorization);
 		const currentPath = state.url.substring(1);
 

@@ -14,7 +14,7 @@ import { NotificationPayloadInterface } from '../../../utilities.pck/notificatio
 import { NotificationInterface } from '../../../utilities.pck/notification.mod/interfaces/notification.interface';
 import { ErrorHandlerPayloadInterface } from '../../../utilities.pck/error-handler.mod/interfaces/error-handler-payload.interface';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class HttpErrorHandlingService {
 	constructor(private _store: Store<NotificationInterface>) {
 	}

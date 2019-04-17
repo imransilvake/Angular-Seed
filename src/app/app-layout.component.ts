@@ -24,6 +24,9 @@ export class AppLayoutComponent implements AfterViewInit {
 	}
 
 	ngAfterViewInit() {
+		// listen scroll to top
+		this._scrollTopService.scrollTopListener();
+
 		// listen to scroll event
 		this._helperService.detectScroll().subscribe(() => {
 			// set top Head height

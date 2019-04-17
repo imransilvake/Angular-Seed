@@ -60,24 +60,31 @@
 	<mat-error *ngIf="control.invalid && control.touched">
 		<ng-container [ngSwitch]="control.errors | FirstKey">
 			<p *ngSwitchCase="'required'" i18n="@@FieldsInputErrorRequired">
-				{{inputName}} is required
+				Required field
 			</p>
 			<p *ngSwitchCase="'minlength'" i18n="@@FieldsInputErrorMinLength">
-				must be at least {{control.errors.minlength.requiredLength}} characters long
+				It must have at least {{control.errors.minlength.requiredLength}} characters long
 			</p>
 			<p *ngSwitchCase="'maxlength'" i18n="@@FieldsInputErrorMaxLength">
-				must be max {{control.errors.maxlength.requiredLength}} characters long
+				It must have at most {{control.errors.maxlength.requiredLength}} characters long
 			</p>
 			<p *ngSwitchCase="'username'" i18n="@@FieldsInputErrorUsername">
-				username validation error
+				<ng-container *ngIf="control.errors.usernameMinLength">
+					It must have at least {{control.errors.usernameRequiredLength}} characters long
+				</ng-container>
+				<ng-container *ngIf="!control.errors.usernameMinLength">
+					It must have at most {{control.errors.usernameRequiredLength}} characters long
+				</ng-container>
 			</p>
 			<p *ngSwitchCase="'password'" i18n="@@FieldsInputErrorPassword">
-				password validation error
+				Password min. 8 characters, 1 capital letter, 1 special character and 1 number
 			</p>
 			<p *ngSwitchCase="'email'" i18n="@@FieldsInputErrorEmail">
-				email validation error
+				Please enter a valid email address
 			</p>
-			<p i18n="@@FieldsInputErrorDefaultCase" *ngSwitchDefault>some error happened</p>
+			<p i18n="@@FieldsInputErrorDefaultCase" *ngSwitchDefault>
+				Unknown error occurred
+			</p>
 		</ng-container>
 	</mat-error>
 

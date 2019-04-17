@@ -2,6 +2,158 @@
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
 	<file source-language="en" datatype="plaintext" original="ng2.template">
 		<body>
+			<trans-unit id="FieldsInputErrorRequired" datatype="html">
+				<source>
+					Required field!
+				</source>
+				<target>
+					Eingabe erforderlich!
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/core.pck/fields.mod/components/input/input.component.html
+					</context>
+					<context context-type="linenumber">62</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="FieldsInputErrorMinLength" datatype="html">
+				<source>
+					It must have at least
+					<x id="INTERPOLATION" equiv-text="{{control.errors.minlength.requiredLength}}"/>
+					characters long
+				</source>
+				<target>
+					Es muss aus min.
+					<x id="INTERPOLATION" equiv-text="{{control.errors.minlength.requiredLength}}"/>
+					alphabetischen Zeichen bestehen
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/core.pck/fields.mod/components/input/input.component.html
+					</context>
+					<context context-type="linenumber">65</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="FieldsInputErrorMaxLength" datatype="html">
+				<source>
+					It must have at most
+					<x id="INTERPOLATION" equiv-text="{{control.errors.maxlength.requiredLength}}"/>
+					characters long
+				</source>
+				<target>
+					Es muss aus min.
+					<x id="INTERPOLATION" equiv-text="{{control.errors.maxlength.requiredLength}}"/>
+					alphabetischen Zeichen bestehen
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/core.pck/fields.mod/components/input/input.component.html
+					</context>
+					<context context-type="linenumber">68</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="FieldsInputErrorUsername" datatype="html">
+				<source>
+					<x id="START_TAG_NG-CONTAINER" ctype="x-ng-container" equiv-text="&lt;ng-container&gt;"/>
+					It must have at least
+					<x id="INTERPOLATION" equiv-text="{{control.errors.usernameRequiredLength}}"/>
+					characters long
+					<x id="CLOSE_TAG_NG-CONTAINER" ctype="x-ng-container" equiv-text="&lt;/ng-container&gt;"/>
+					<x id="START_TAG_NG-CONTAINER_1" ctype="x-ng-container" equiv-text="&lt;ng-container&gt;"/>
+					It must have at most
+					<x id="INTERPOLATION" equiv-text="{{control.errors.usernameRequiredLength}}"/>
+					characters long
+					<x id="CLOSE_TAG_NG-CONTAINER" ctype="x-ng-container" equiv-text="&lt;/ng-container&gt;"/>
+				</source>
+				<source>
+					<x id="START_TAG_NG-CONTAINER" ctype="x-ng-container" equiv-text="&lt;ng-container&gt;"/>
+					Es muss aus min.
+					<x id="INTERPOLATION" equiv-text="{{control.errors.usernameRequiredLength}}"/>
+					alphabetischen Zeichen bestehen
+					<x id="CLOSE_TAG_NG-CONTAINER" ctype="x-ng-container" equiv-text="&lt;/ng-container&gt;"/>
+					<x id="START_TAG_NG-CONTAINER_1" ctype="x-ng-container" equiv-text="&lt;ng-container&gt;"/>
+					Es muss aus max.
+					<x id="INTERPOLATION" equiv-text="{{control.errors.usernameRequiredLength}}"/>
+					alphabetischen Zeichen bestehen
+					<x id="CLOSE_TAG_NG-CONTAINER" ctype="x-ng-container" equiv-text="&lt;/ng-container&gt;"/>
+				</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/core.pck/fields.mod/components/input/input.component.html
+					</context>
+					<context context-type="linenumber">71</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="FieldsInputErrorPassword" datatype="html">
+				<source>
+					Password min. 8 characters, 1 capital letter, 1 special character and 1 number
+				</source>
+				<target>
+					Passwort min. 8 Zeichen, 1 Großbuchstabe, 1 Sonderzeichen und 1 Zahl
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/core.pck/fields.mod/components/input/input.component.html
+					</context>
+					<context context-type="linenumber">79</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="FieldsInputErrorEmail" datatype="html">
+				<source>
+					Please enter a valid email address
+				</source>
+				<target>
+					Bitte hinterlege eine gültige E-Mail
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/core.pck/fields.mod/components/input/input.component.html
+					</context>
+					<context context-type="linenumber">82</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="FieldsInputErrorDefaultCase" datatype="html">
+				<source>
+					Unknown error occurred
+				</source>
+				<target>
+					Unbekannter Fehler aufgetreten
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/core.pck/fields.mod/components/input/input.component.html
+					</context>
+					<context context-type="linenumber">85</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="FieldsSelectErrorRequired" datatype="html">
+				<source>
+					Required field
+				</source>
+				<target>
+					Eingabe erforderlich!
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/core.pck/fields.mod/components/select/select.component.html
+					</context>
+					<context context-type="linenumber">60</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="FieldsSelectErrorDefaultCase" datatype="html">
+				<source>
+					Unknown error occurred
+				</source>
+				<target>
+					Unbekannter Fehler aufgetreten
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/core.pck/fields.mod/components/select/select.component.html
+					</context>
+					<context context-type="linenumber">63</context>
+				</context-group>
+			</trans-unit>
 			<trans-unit id="AuthRegisterInfoTitle" datatype="html">
 				<source>Title</source>
 				<target>Willkommen</target>
@@ -71,7 +223,7 @@
 			</trans-unit>
 			<trans-unit id="AuthRegisterFormFirstPlaceHolder" datatype="html">
 				<source>First Name*</source>
-				<target>Bitte Vorname eingeben</target>
+				<target>Vorname eingeben</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/register/register.component.html
@@ -91,7 +243,7 @@
 			</trans-unit>
 			<trans-unit id="AuthRegisterFormLastPlaceHolder" datatype="html">
 				<source>Last Name*</source>
-				<target>Bitte Nachname eingeben</target>
+				<target>Nachname eingeben</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/register/register.component.html
@@ -111,7 +263,7 @@
 			</trans-unit>
 			<trans-unit id="AuthRegisterFormEmailPlaceHolder" datatype="html">
 				<source>Email*</source>
-				<target>Bitte E-Mail eingeben</target>
+				<target>E-Mail eingeben</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/register/register.component.html
@@ -131,7 +283,7 @@
 			</trans-unit>
 			<trans-unit id="AuthRegisterFormPasswordPlaceHolder" datatype="html">
 				<source>Password*</source>
-				<target>Bitte Passwort eingeben</target>
+				<target>Passwort eingeben</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/register/register.component.html
@@ -150,10 +302,10 @@
 				</context-group>
 			</trans-unit>
 			<trans-unit id="AuthRegisterFormNote" datatype="html">
-				<source>Already have an account?<x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Login
+				<source>Already have an account? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Login
 					<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
 				</source>
-				<target>Bereits einen Account vorhanden?<x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Login
+				<target>Bereits einen Account vorhanden? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Login
 					hier
 					<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
 				</target>

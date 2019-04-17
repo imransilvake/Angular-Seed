@@ -9,7 +9,7 @@ import { AppServicesInterface } from '../interfaces/app-services.interface';
 import { RESTAPIConfig } from '../../../../../app.config';
 import { HttpOptionsService } from './http-options.service';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ProxyService {
 	constructor(
 		private _http: HttpClient,

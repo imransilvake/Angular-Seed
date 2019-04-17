@@ -4,8 +4,7 @@
 		<body>
 			<trans-unit id="FieldsInputErrorRequired" datatype="html">
 				<source>
-					<x id="INTERPOLATION" equiv-text="{{inputName}}"/>
-					is required
+					Required field
 				</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -16,7 +15,7 @@
 			</trans-unit>
 			<trans-unit id="FieldsInputErrorMinLength" datatype="html">
 				<source>
-					must be at least
+					It must have at least
 					<x id="INTERPOLATION" equiv-text="{{control.errors.minlength.requiredLength}}"/>
 					characters long
 				</source>
@@ -29,7 +28,7 @@
 			</trans-unit>
 			<trans-unit id="FieldsInputErrorMaxLength" datatype="html">
 				<source>
-					must be max
+					It must have at most
 					<x id="INTERPOLATION" equiv-text="{{control.errors.maxlength.requiredLength}}"/>
 					characters long
 				</source>
@@ -42,7 +41,16 @@
 			</trans-unit>
 			<trans-unit id="FieldsInputErrorUsername" datatype="html">
 				<source>
-					username validation error
+					<x id="START_TAG_NG-CONTAINER" ctype="x-ng-container" equiv-text="&lt;ng-container&gt;"/>
+					It must have at least
+					<x id="INTERPOLATION" equiv-text="{{control.errors.usernameRequiredLength}}"/>
+					characters long
+					<x id="CLOSE_TAG_NG-CONTAINER" ctype="x-ng-container" equiv-text="&lt;/ng-container&gt;"/>
+					<x id="START_TAG_NG-CONTAINER_1" ctype="x-ng-container" equiv-text="&lt;ng-container&gt;"/>
+					It must have at most
+					<x id="INTERPOLATION" equiv-text="{{control.errors.usernameRequiredLength}}"/>
+					characters long
+					<x id="CLOSE_TAG_NG-CONTAINER" ctype="x-ng-container" equiv-text="&lt;/ng-container&gt;"/>
 				</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -53,38 +61,40 @@
 			</trans-unit>
 			<trans-unit id="FieldsInputErrorPassword" datatype="html">
 				<source>
-					password validation error
+					Password min. 8 characters, 1 capital letter, 1 special character and 1 number
 				</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/core.pck/fields.mod/components/input/input.component.html
 					</context>
-					<context context-type="linenumber">74</context>
+					<context context-type="linenumber">79</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="FieldsInputErrorEmail" datatype="html">
 				<source>
-					email validation error
+					Please enter a valid email address
 				</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/core.pck/fields.mod/components/input/input.component.html
 					</context>
-					<context context-type="linenumber">77</context>
+					<context context-type="linenumber">82</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="FieldsInputErrorDefaultCase" datatype="html">
-				<source>some error happened</source>
+				<source>
+					Unknown error occurred
+				</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/core.pck/fields.mod/components/input/input.component.html
 					</context>
-					<context context-type="linenumber">80</context>
+					<context context-type="linenumber">85</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="FieldsSelectErrorRequired" datatype="html">
 				<source>
-					required field
+					Required field
 				</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -94,7 +104,9 @@
 				</context-group>
 			</trans-unit>
 			<trans-unit id="FieldsSelectErrorDefaultCase" datatype="html">
-				<source>some error happened</source>
+				<source>
+					Unknown error occurred
+				</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/core.pck/fields.mod/components/select/select.component.html

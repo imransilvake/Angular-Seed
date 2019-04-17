@@ -10,7 +10,7 @@ import { AsyncSubject } from 'rxjs/internal/AsyncSubject';
 import { StorageService } from '../../storage.mod/services/storage.service';
 import { StorageTypeEnum } from '../../storage.mod/enums/storage-type.enum';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class HttpCachingInterceptor implements HttpInterceptor {
 	constructor(private _storageService: StorageService) {
 	}
