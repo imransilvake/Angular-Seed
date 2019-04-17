@@ -12,8 +12,8 @@ export class LanguageListService {
 	 */
 	public getLanguageList() {
 		const languageList: SelectDefaultInterface[] = [
-			{ value: `${APP_URL}/en`, viewValue: 'English' },
-			{ value: `${APP_URL}/de`, viewValue: 'Deutsch' }
+			{ value: `${ APP_URL }/en`, viewValue: 'English' },
+			{ value: `${ APP_URL }/de`, viewValue: 'Deutsch' }
 		];
 
 		return languageList;
