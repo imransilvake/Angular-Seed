@@ -63,9 +63,10 @@
 
 						.ham-side-by-side {
 							display: flex;
-							justify-content: space-between;
 
 							.ham-padding {
+								width: 50%;
+
 								&:first-child {
 									padding-right: 10px;
 								}
@@ -83,7 +84,7 @@
 								margin-top: 20px;
 							}
 
-							&.ham-side-by-side {
+							&.ham-sby-remember {
 								align-items: center;
 								display: flex;
 								justify-content: space-between;
