@@ -291,6 +291,18 @@
 					<context context-type="linenumber">97</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="AuthRegisterFormPasswordHint" datatype="html">
+				<source>Password Hint</source>
+				<target>
+					Das Passwort kann zwischen 8-256 Zeichen lang sein und muss min. 1 Sonderzeichen, 1 Großbuchstabe und 1 Zahl enthalten
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/register/register.component.html
+					</context>
+					<context context-type="linenumber">99</context>
+				</context-group>
+			</trans-unit>
 			<trans-unit id="AuthRegisterFormSubmitButton" datatype="html">
 				<source>Register</source>
 				<target>Registrieren</target>
