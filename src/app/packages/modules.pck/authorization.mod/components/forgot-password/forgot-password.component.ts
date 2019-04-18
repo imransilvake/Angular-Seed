@@ -53,6 +53,8 @@ export class ForgotPasswordComponent {
 				ValidationService.emailValidator
 			])
 		});
+
+		this.email.setValue('murali@tourismussuite.com');
 	}
 
 	/**

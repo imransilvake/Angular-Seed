@@ -4,7 +4,7 @@ export const environment = {
 };
 
 export const APP_URL = 'http://localhost:6000';
-export const ENV_SERVICE_URL = 'https://x83n6pnzlj.execute-api.eu-west-1.amazonaws.com/stag';
+export const ENV_SERVICE_URL = 'https://c7o8rvuk52.execute-api.eu-west-1.amazonaws.com/stag';
 
 // routing
 export const ROUTING = {
