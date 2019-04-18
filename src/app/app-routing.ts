@@ -8,7 +8,7 @@ import { AppLayoutComponent } from './app-layout.component';
 import { AuthOverviewComponent } from './packages/modules.pck/authorization.mod/components/auth-overview/auth-overview.component';
 import { ROUTING } from '../environments/environment';
 import { E404Component } from './packages/frame.pck/components/errors/e404/e404.component';
-import { AuthGuard } from './packages/modules.pck/authorization.mod/guards/auth.guard';
+import { AuthUserStatusGuard } from './packages/modules.pck/authorization.mod/guards/auth-user-status.guard';
 
 const ROUTES: Routes = [
 	{
@@ -22,7 +22,7 @@ const ROUTES: Routes = [
 		children: [
 			...AUTHORIZATION_ROUTES
 		],
-		canActivate: [AuthGuard]
+		canActivate: [AuthUserStatusGuard]
 	},
 	{
 		path: '',
@@ -30,7 +30,7 @@ const ROUTES: Routes = [
 		children: [
 			...FRAME_ROUTES
 		],
-		canActivate: [AuthGuard]
+		canActivate: [AuthUserStatusGuard]
 	},
 	{
 		path: '**',

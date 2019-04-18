@@ -6,10 +6,16 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from
 import { ROUTING } from '../../../../../environments/environment';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class AuthUserStatusGuard implements CanActivate {
 	constructor(private _router: Router) {
 	}
 
+	/**
+	 * validate user status
+	 *
+	 * @param route
+	 * @param state
+	 */
 	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
 		const userStatus = false;
 		const authRoutes = Object.values(ROUTING.authorization);

@@ -8,6 +8,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { LockScreenComponent } from './components/lock-screen/lock-screen.component';
 import { ConfirmPasswordComponent } from './components/confirm-password/confirm-password.component';
+import { AuthConfirmPasswordGuard } from './guards/auth-confirm-password.guard';
 
 // app routes
 export const AUTHORIZATION_ROUTES: Routes = [
@@ -25,7 +26,8 @@ export const AUTHORIZATION_ROUTES: Routes = [
 	},
 	{
 		path: ROUTING.authorization.confirm,
-		component: ConfirmPasswordComponent
+		component: ConfirmPasswordComponent,
+		canActivate: [AuthConfirmPasswordGuard]
 	},
 	{
 		path: ROUTING.authorization.lock,

@@ -11,10 +11,11 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { LockScreenComponent } from './components/lock-screen/lock-screen.component';
 import { HotelListService } from './services/hotel-list.service';
 import { LanguageListService } from './services/language-list.service';
-import { AuthGuard } from './guards/auth.guard';
+import { AuthUserStatusGuard } from './guards/auth-user-status.guard';
 import { RegisterService } from './services/register.service';
 import { ForgotPasswordService } from './services/forgot-password.service';
 import { ConfirmPasswordComponent } from './components/confirm-password/confirm-password.component';
+import { AuthConfirmPasswordGuard } from './guards/auth-confirm-password.guard';
 
 @NgModule({
 	imports: [
@@ -30,7 +31,8 @@ import { ConfirmPasswordComponent } from './components/confirm-password/confirm-
 		LockScreenComponent
 	],
 	providers: [
-		AuthGuard,
+		AuthUserStatusGuard,
+		AuthConfirmPasswordGuard,
 		RegisterService,
 		ForgotPasswordService,
 		HotelListService,

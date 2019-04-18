@@ -16,7 +16,7 @@ import { DialogTypeEnum } from '../../../../utilities.pck/dialog.mod/enums/dialo
 import { DialogService } from '../../../../utilities.pck/dialog.mod/services/dialog.service';
 import { ErrorHandlerInterface } from '../../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 import { ForgotPasswordService } from '../../services/forgot-password.service';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import * as ErrorHandlerActions from '../../../../utilities.pck/error-handler.mod/store/actions/error-handler.actions';
 
 @Component({
@@ -131,8 +131,13 @@ export class ForgotPasswordComponent {
 					// dialog service
 					this._dialogService.showDialog(data)
 						.subscribe(() => {
-							// navigate to login route
-							this._router.navigate([ROUTING.authorization.login]).then();
+							// navigate to confirm route
+							let navigationExtras: NavigationExtras = {
+								state: {
+									secretId: 'ham-confirm-unlock'
+								}
+							};
+							this._router.navigate([ROUTING.authorization.confirm], navigationExtras).then();
 						});
 				}
 			}, () => {
