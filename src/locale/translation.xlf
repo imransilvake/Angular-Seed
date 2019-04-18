@@ -521,6 +521,129 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
+
+			<!-- Auth - Confirm Password -->
+			<trans-unit id="Auth_Confirm_Password_Info_Title" datatype="html">
+				<source>Title</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/confirm-password/confirm-password.component.html
+					</context>
+					<context context-type="linenumber">7</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Confirm_Password_Info_Description" datatype="html">
+				<source>Description</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/confirm-password/confirm-password.component.html
+					</context>
+					<context context-type="linenumber">8</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Confirm_Password_Info_Version" datatype="html">
+				<source>Version:
+					<x id="INTERPOLATION" equiv-text="{{version}}"/>
+				</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/confirm-password/confirm-password.component.html
+					</context>
+					<context context-type="linenumber">12</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Confirm_Password_Form_Title" datatype="html">
+				<source>Confirm Password</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/confirm-password/confirm-password.component.html
+					</context>
+					<context context-type="linenumber">19</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Confirm_Password_Form_VerificationCode_Label" datatype="html">
+				<source>Verification Code*</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/confirm-password/confirm-password.component.html
+					</context>
+					<context context-type="linenumber">24</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Confirm_Password_Form_VerificationCode_PlaceHolder" datatype="html">
+				<source>Verification Code</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/confirm-password/confirm-password.component.html
+					</context>
+					<context context-type="linenumber">29</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Confirm_Password_Form_New_Password_Label" datatype="html">
+				<source>New Password*</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/confirm-password/confirm-password.component.html
+					</context>
+					<context context-type="linenumber">38</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Confirm_Password_Form_New_Password_PlaceHolder" datatype="html">
+				<source>New Password</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/confirm-password/confirm-password.component.html
+					</context>
+					<context context-type="linenumber">45</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Confirm_Password_Form_Confirm_New_Password_Label" datatype="html">
+				<source>Confirm New Password*</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/confirm-password/confirm-password.component.html
+					</context>
+					<context context-type="linenumber">56</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Confirm_Password_Form_Confirm_New_Password_PlaceHolder" datatype="html">
+				<source>Confirm New Password</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/confirm-password/confirm-password.component.html
+					</context>
+					<context context-type="linenumber">63</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Confirm_Password_Form_Confirm_New_Password_Hint" datatype="html">
+				<source>Confirm Password Hint</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/confirm-password/confirm-password.component.html
+					</context>
+					<context context-type="linenumber">66</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Confirm_Password_Form_Submit_Button" datatype="html">
+				<source>Reset</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/confirm-password/confirm-password.component.html
+					</context>
+					<context context-type="linenumber">74</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Confirm_Password_Form_Note" datatype="html">
+				<source>Already have an account?<x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Login
+					<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
+				</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/confirm-password/confirm-password.component.html
+					</context>
+					<context context-type="linenumber">79</context>
+				</context-group>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
