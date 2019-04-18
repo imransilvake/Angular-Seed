@@ -4,19 +4,19 @@
 			<!-- Info -->
 			<div class="ham-bg-wrapper">
 				<div class="ham-details ham-top">
-					<h1 i18n="@@AuthRegisterInfoTitle">Title</h1>
-					<p i18n="@@AuthRegisterInfoDescription">Description</p>
+					<h1 i18n="@@Auth_Register_Info_Title">Title</h1>
+					<p i18n="@@Auth_Register_Info_Description">Description</p>
 				</div>
 
 				<div class="ham-details ham-bottom">
-					<p i18n="@@AuthRegisterInfoVersion">Version: {{version}}</p>
+					<p i18n="@@Auth_Register_Info_Version">Version: {{version}}</p>
 				</div>
 			</div>
 		</div>
 		<div class="cd-col cd-col-pm-d-6 ham-col">
 			<!-- Form -->
 			<form class="ham-form" (ngSubmit)="onSubmitForm()" (keyup.enter)="isFormValid && onSubmitForm()">
-				<h3 i18n="@@AuthRegisterFormTitle">Register</h3>
+				<h3 i18n="@@Auth_Register_Form_Title">Register</h3>
 				<div class="cd-row" *ngIf="hotelList">
 					<div class="cd-col">
 						<app-select
@@ -30,7 +30,7 @@
 							[selectId]="'select-hotel-list-id'"
 							[selectClassPanel]="'ham-select-panel-with-info'"
 							selectPlaceHolder="Select Hotel"
-							i18n-selectPlaceHolder="@@AuthRegisterFormHotelListPlaceHolder"
+							i18n-selectPlaceHolder="@@Auth_Register_Form_HotelList_PlaceHolder"
 							[dataDefault]="hotelList"
 							[control]="hotelName">
 						</app-select>
@@ -43,12 +43,12 @@
 							<app-input
 								[showLabel]="true"
 								labelName="First Name*"
-								i18n-labelName="@@AuthRegisterFormFirstNameLabel"
+								i18n-labelName="@@Auth_Register_Form_FirstName_Label"
 								[inputId]="'register-first-name-id'"
 								[inputType]="'text'"
 								[inputName]="'firstname'"
 								inputPlaceHolder="First Name"
-								i18n-inputPlaceHolder="@@AuthRegisterFormFirstPlaceHolder"
+								i18n-inputPlaceHolder="@@Auth_Register_Form_FirstName_PlaceHolder"
 								[control]="firstName">
 							</app-input>
 						</div>
@@ -56,12 +56,12 @@
 							<app-input
 								[showLabel]="true"
 								labelName="Last Name*"
-								i18n-labelName="@@AuthRegisterFormLastNameLabel"
+								i18n-labelName="@@Auth_Register_Form_LastName_Label"
 								[inputId]="'register-last-name-id'"
 								[inputType]="'text'"
 								[inputName]="'lastname'"
 								inputPlaceHolder="Last Name"
-								i18n-inputPlaceHolder="@@AuthRegisterFormLastPlaceHolder"
+								i18n-inputPlaceHolder="@@Auth_Register_Form_LastName_PlaceHolder"
 								[control]="lastName">
 							</app-input>
 						</div>
@@ -73,12 +73,12 @@
 						<app-input
 							[showLabel]="true"
 							labelName="Email*"
-							i18n-labelName="@@AuthRegisterFormEmailLabel"
+							i18n-labelName="@@Auth_Register_Form_Email_Label"
 							[inputId]="'register-email-id'"
 							[inputType]="'email'"
 							[inputName]="'email'"
 							inputPlaceHolder="Email"
-							i18n-inputPlaceHolder="@@AuthRegisterFormEmailPlaceHolder"
+							i18n-inputPlaceHolder="@@Auth_Register_Form_Email_PlaceHolder"
 							[control]="email">
 						</app-input>
 					</div>
@@ -87,29 +87,29 @@
 						<app-input
 							[showLabel]="true"
 							labelName="Password*"
-							i18n-labelName="@@AuthRegisterFormPasswordLabel"
+							i18n-labelName="@@Auth_Register_Form_Password_Label"
 							[inputId]="'register-password-id'"
 							[inputType]="'password'"
 							[inputName]="'password'"
 							[hidePassword]="true"
 							[showHidePassword]="true"
 							inputPlaceHolder="Password"
-							i18n-inputPlaceHolder="@@AuthRegisterFormPasswordPlaceHolder"
+							i18n-inputPlaceHolder="@@Auth_Register_Form_Password_PlaceHolder"
 							[showHint]="true"
 							hintText="Password Hint"
-							i18n-hintText="@@AuthRegisterFormPasswordHint"
+							i18n-hintText="@@Auth_Register_Form_Password_Hint"
 							[control]="password">
 						</app-input>
 					</div>
 
 					<!-- Button -->
 					<div class="cd-col">
-						<button mat-button type="submit" [disabled]="!isFormValid" i18n="@@AuthRegisterFormSubmitButton">Register</button>
+						<button mat-button type="submit" [disabled]="!isFormValid" i18n="@@Auth_Register_Form_Submit_Button">Register</button>
 					</div>
 
 					<!-- Note -->
 					<div class="cd-col">
-						<p i18n="@@AuthRegisterFormNote">Already have an account? <a [routerLink]="['/' + routing.authorization.login]">Login</a></p>
+						<p i18n="@@Auth_Register_Form_Note">Already have an account? <a [routerLink]="['/' + routing.authorization.login]">Login</a></p>
 					</div>
 				</div>
 			</form>

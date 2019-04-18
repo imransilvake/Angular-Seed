@@ -1,10 +1,35 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
 	<file source-language="en" datatype="plaintext" original="ng2.template">
 		<body>
-			<trans-unit id="FieldsInputErrorRequired" datatype="html">
+			<!-- Common -->
+			<trans-unit id="Common_Button_Close" datatype="html">
+				<source>Button - Close</source>
+				<target>Schließen</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/components/register/register.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/components/register/register.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/components/register/register.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+
+			<!-- Fields -->
+			<trans-unit id="Fields_Input_Error_Required" datatype="html">
 				<source>
-					Required field!
+					Required field
 				</source>
 				<target>
 					Eingabe erforderlich!
@@ -16,7 +41,7 @@
 					<context context-type="linenumber">62</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="FieldsInputErrorMinLength" datatype="html">
+			<trans-unit id="Fields_Input_Error_MinLength" datatype="html">
 				<source>
 					It must have at least
 					<x id="INTERPOLATION" equiv-text="{{control.errors.minlength.requiredLength}}"/>
@@ -34,14 +59,14 @@
 					<context context-type="linenumber">65</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="FieldsInputErrorMaxLength" datatype="html">
+			<trans-unit id="Fields_Input_Error_MaxLength" datatype="html">
 				<source>
 					It must have at most
 					<x id="INTERPOLATION" equiv-text="{{control.errors.maxlength.requiredLength}}"/>
 					characters long
 				</source>
 				<target>
-					Es muss aus min.
+					Es muss aus max.
 					<x id="INTERPOLATION" equiv-text="{{control.errors.maxlength.requiredLength}}"/>
 					alphabetischen Zeichen bestehen
 				</target>
@@ -52,7 +77,7 @@
 					<context context-type="linenumber">68</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="FieldsInputErrorUsername" datatype="html">
+			<trans-unit id="Fields_Input_Error_Username" datatype="html">
 				<source>
 					<x id="START_TAG_NG-CONTAINER" ctype="x-ng-container" equiv-text="&lt;ng-container&gt;"/>
 					It must have at least
@@ -84,7 +109,7 @@
 					<context context-type="linenumber">71</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="FieldsInputErrorPassword" datatype="html">
+			<trans-unit id="Fields_Input_Error_Password" datatype="html">
 				<source>
 					Password min. 8 characters, 1 capital letter, 1 special character and 1 number
 				</source>
@@ -98,7 +123,7 @@
 					<context context-type="linenumber">79</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="FieldsInputErrorEmail" datatype="html">
+			<trans-unit id="Fields_Input_Error_Email" datatype="html">
 				<source>
 					Please enter a valid email address
 				</source>
@@ -112,7 +137,7 @@
 					<context context-type="linenumber">82</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="FieldsInputErrorDefaultCase" datatype="html">
+			<trans-unit id="Fields_Input_Error_Default" datatype="html">
 				<source>
 					Unknown error occurred
 				</source>
@@ -126,7 +151,7 @@
 					<context context-type="linenumber">85</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="FieldsSelectErrorRequired" datatype="html">
+			<trans-unit id="Fields_Select_Error_Required" datatype="html">
 				<source>
 					Required field
 				</source>
@@ -140,7 +165,7 @@
 					<context context-type="linenumber">60</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="FieldsSelectErrorDefaultCase" datatype="html">
+			<trans-unit id="Fields_Select_Error_Default" datatype="html">
 				<source>
 					Unknown error occurred
 				</source>
@@ -154,7 +179,9 @@
 					<context context-type="linenumber">63</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="AuthRegisterInfoTitle" datatype="html">
+
+			<!-- Auth - Register -->
+			<trans-unit id="Auth_Register_Info_Title" datatype="html">
 				<source>Title</source>
 				<target>Willkommen</target>
 				<context-group purpose="location">
@@ -164,7 +191,7 @@
 					<context context-type="linenumber">7</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="AuthRegisterInfoDescription" datatype="html">
+			<trans-unit id="Auth_Register_Info_Description" datatype="html">
 				<source>Description</source>
 				<target>
 					Deine Registrierung wird an den entsprechenden Manager zur Aktivierung weitergeleitet. Du erhältst
@@ -177,7 +204,7 @@
 					<context context-type="linenumber">8</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="AuthRegisterInfoVersion" datatype="html">
+			<trans-unit id="Auth_Register_Info_Version" datatype="html">
 				<source>Version:
 					<x id="INTERPOLATION" equiv-text="{{version}}"/>
 				</source>
@@ -191,7 +218,7 @@
 					<context context-type="linenumber">12</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="AuthRegisterFormTitle" datatype="html">
+			<trans-unit id="Auth_Register_Form_Title" datatype="html">
 				<source>Register</source>
 				<target>Registrieren</target>
 				<context-group purpose="location">
@@ -201,7 +228,7 @@
 					<context context-type="linenumber">19</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="AuthRegisterFormHotelListPlaceHolder" datatype="html">
+			<trans-unit id="Auth_Register_Form_HotelList_PlaceHolder" datatype="html">
 				<source>Select Hotel</source>
 				<target>Bitte ein Hotel wählen</target>
 				<context-group purpose="location">
@@ -211,7 +238,7 @@
 					<context context-type="linenumber">32</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="AuthRegisterFormFirstNameLabel" datatype="html">
+			<trans-unit id="Auth_Register_Form_FirstName_Label" datatype="html">
 				<source>First Name*</source>
 				<target>Vorname*</target>
 				<context-group purpose="location">
@@ -221,7 +248,7 @@
 					<context context-type="linenumber">45</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="AuthRegisterFormFirstPlaceHolder" datatype="html">
+			<trans-unit id="Auth_Register_Form_FirstName_PlaceHolder" datatype="html">
 				<source>First Name</source>
 				<target>Vorname eingeben</target>
 				<context-group purpose="location">
@@ -231,7 +258,7 @@
 					<context context-type="linenumber">50</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="AuthRegisterFormLastNameLabel" datatype="html">
+			<trans-unit id="Auth_Register_Form_LastName_Label" datatype="html">
 				<source>Last Name*</source>
 				<target>Nachname*</target>
 				<context-group purpose="location">
@@ -241,7 +268,7 @@
 					<context context-type="linenumber">58</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="AuthRegisterFormLastPlaceHolder" datatype="html">
+			<trans-unit id="Auth_Register_Form_LastName_PlaceHolder" datatype="html">
 				<source>Last Name</source>
 				<target>Nachname eingeben</target>
 				<context-group purpose="location">
@@ -251,7 +278,7 @@
 					<context context-type="linenumber">63</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="AuthRegisterFormEmailLabel" datatype="html">
+			<trans-unit id="Auth_Register_Form_Email_Label" datatype="html">
 				<source>Email*</source>
 				<target>E-Mail*</target>
 				<context-group purpose="location">
@@ -261,37 +288,37 @@
 					<context context-type="linenumber">75</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="AuthRegisterFormEmailPlaceHolder" datatype="html">
+			<trans-unit id="Auth_Register_Form_Email_PlaceHolder" datatype="html">
 				<source>Email</source>
 				<target>E-Mail eingeben</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/register/register.component.html
 					</context>
-					<context context-type="linenumber">81</context>
+					<context context-type="linenumber">80</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="AuthRegisterFormPasswordLabel" datatype="html">
+			<trans-unit id="Auth_Register_Form_Password_Label" datatype="html">
 				<source>Password*</source>
 				<target>Passwort*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/register/register.component.html
 					</context>
-					<context context-type="linenumber">90</context>
+					<context context-type="linenumber">89</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="AuthRegisterFormPasswordPlaceHolder" datatype="html">
+			<trans-unit id="Auth_Register_Form_Password_PlaceHolder" datatype="html">
 				<source>Password</source>
 				<target>Passwort eingeben</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/register/register.component.html
 					</context>
-					<context context-type="linenumber">97</context>
+					<context context-type="linenumber">96</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="AuthRegisterFormPasswordHint" datatype="html">
+			<trans-unit id="Auth_Register_Form_Password_Hint" datatype="html">
 				<source>Password Hint</source>
 				<target>
 					Das Passwort kann zwischen 8-256 Zeichen lang sein und muss min. 1 Sonderzeichen, 1 Großbuchstabe und 1 Zahl enthalten
@@ -303,17 +330,17 @@
 					<context context-type="linenumber">99</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="AuthRegisterFormSubmitButton" datatype="html">
+			<trans-unit id="Auth_Register_Form_Submit_Button" datatype="html">
 				<source>Register</source>
 				<target>Registrieren</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/register/register.component.html
 					</context>
-					<context context-type="linenumber">105</context>
+					<context context-type="linenumber">107</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="AuthRegisterFormNote" datatype="html">
+			<trans-unit id="Auth_Register_Form_Note" datatype="html">
 				<source>Already have an account? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Login
 					<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
 				</source>
@@ -325,10 +352,73 @@
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/register/register.component.html
 					</context>
-					<context context-type="linenumber">110</context>
+					<context context-type="linenumber">112</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="AuthForgotPasswordInfoTitle" datatype="html">
+
+			<trans-unit id="Auth_Register_Form_Error_UsernameExistsException_Title" datatype="html">
+				<source>Title: User Exists Exception</source>
+				<target>Ausnahme: Benutzer existiert</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/components/register/register.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Register_Form_Error_UsernameExistsException_Description" datatype="html">
+				<source>Description: User Exists Exception</source>
+				<target>Der Benutzer ist bereits mit der angegebenen E-Mail-Adresse in unserem System vorhanden. Bitte verwenden Sie eine andere E-Mail-Adresse.</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/components/register/register.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Register_Form_Success_Title" datatype="html">
+				<source>Title: Success</source>
+				<target>Registrierung war erfolgreich</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/components/register/register.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Register_Form_Success_Description" datatype="html">
+				<source>Description: Success</source>
+				<target>Registrierung war erfolgreich und wurde an den Hotel-Manager zur Freischaltung gesendet.</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/components/register/register.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Register_Form_Error_Generic_Title" datatype="html">
+				<source>Title: Error Generic</source>
+				<target>Ein Fehler ist aufgetreten</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/components/register/register.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Register_Form_Error_Generic_Description" datatype="html">
+				<source>Description: Error Generic</source>
+				<target>Etwas ist schief gelaufen. Bitte wenden Sie sich an den Support!</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/components/register/register.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+
+			<!-- Auth - Forgot Password -->
+			<trans-unit id="Auth_Forgot_Password_Info_Title" datatype="html">
 				<source>Title</source>
 				<target>Willkommen</target>
 				<context-group purpose="location">
@@ -338,7 +428,7 @@
 					<context context-type="linenumber">7</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="AuthForgotPasswordInfoDescription" datatype="html">
+			<trans-unit id="Auth_Forgot_Password_Info_Description" datatype="html">
 				<source>Description</source>
 				<target>
 					Nach erfolgreichem Zurücksetzen deines Passwortes, senden wir dir eine Mail mit weiteren Instruktionen zu. Bitte beachte, dass das Passwort innerhalb 10 Minuten zurückgesetzt werden muss.
@@ -350,9 +440,8 @@
 					<context context-type="linenumber">8</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="AuthForgotPasswordInfoVersion" datatype="html">
-				<source>
-					Version:
+			<trans-unit id="Auth_Forgot_Password_Info_Version" datatype="html">
+				<source>Version:
 					<x id="INTERPOLATION" equiv-text="{{version}}"/>
 				</source>
 				<target>
@@ -366,7 +455,7 @@
 					<context context-type="linenumber">12</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="AuthForgotPasswordFormTitle" datatype="html">
+			<trans-unit id="Auth_Forgot_Password_Form_Title" datatype="html">
 				<source>Forgot Password</source>
 				<target>Passwort vergessen</target>
 				<context-group purpose="location">
@@ -376,7 +465,7 @@
 					<context context-type="linenumber">19</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="AuthForgotPasswordFormFirstNameLabel" datatype="html">
+			<trans-unit id="Auth_Forgot_Password_Form_FirstName_Label" datatype="html">
 				<source>First Name*</source>
 				<target>Vorname*</target>
 				<context-group purpose="location">
@@ -386,68 +475,68 @@
 					<context context-type="linenumber">25</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="AuthForgotPasswordFormFirstNamePlaceHolder" datatype="html">
+			<trans-unit id="Auth_Forgot_Password_Form_FirstName_PlaceHolder" datatype="html">
 				<source>First Name</source>
 				<target>Vorname eingeben</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.html
 					</context>
-					<context context-type="linenumber">31</context>
+					<context context-type="linenumber">30</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="AuthForgotPasswordFormLastNameLabel" datatype="html">
+			<trans-unit id="Auth_Forgot_Password_Form_LastName_Label" datatype="html">
 				<source>Last Name*</source>
 				<target>Nachname*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.html
 					</context>
-					<context context-type="linenumber">39</context>
+					<context context-type="linenumber">38</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="AuthForgotPasswordFormLastNamePlaceHolder" datatype="html">
+			<trans-unit id="Auth_Forgot_Password_Form_LastName_PlaceHolder" datatype="html">
 				<source>Last Name</source>
 				<target>Nachname eingeben</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.html
 					</context>
-					<context context-type="linenumber">44</context>
+					<context context-type="linenumber">43</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="AuthForgotPasswordFormEmailLabel" datatype="html">
+			<trans-unit id="Auth_Forgot_Password_Form_Email_Label" datatype="html">
 				<source>Email*</source>
 				<target>E-Mail*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.html
 					</context>
-					<context context-type="linenumber">56</context>
+					<context context-type="linenumber">55</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="AuthForgotPasswordFormEmailPlaceHolder" datatype="html">
+			<trans-unit id="Auth_Forgot_Password_Form_Email_PlaceHolder" datatype="html">
 				<source>Email</source>
 				<target>E-Mail eingeben</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.html
 					</context>
-					<context context-type="linenumber">61</context>
+					<context context-type="linenumber">60</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="AuthForgotPasswordFormSubmitButton" datatype="html">
+			<trans-unit id="Auth_Forgot_Password_Form_Submit_Button" datatype="html">
 				<source>Send</source>
 				<target>Senden</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.html
 					</context>
-					<context context-type="linenumber">69</context>
+					<context context-type="linenumber">68</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="AuthForgotPasswordFormNote" datatype="html">
-				<source>You already have an account? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Login here
+			<trans-unit id="Auth_Forgot_Password_Form_Note" datatype="html">
+				<source>Already have an account? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Login
 					<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
 				</source>
 				<target>
@@ -458,67 +547,7 @@
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.html
 					</context>
-					<context context-type="linenumber">74</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="AuthRegisterForm_Success_Title" datatype="html">
-				<source>Title: Success</source>
-				<target>Registrierung war erfolgreich</target>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/modules.pck/authorization.mod/components/register/register.component.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="AuthRegisterForm_Success_Description" datatype="html">
-				<source>Description: Success</source>
-				<target>Registrierung war erfolgreich und wurde an den Hotel-Manager zur Freischaltung gesendet.</target>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/modules.pck/authorization.mod/components/register/register.component.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="AuthRegisterForm_Error_Generic_Title" datatype="html">
-				<source>Title: Error Generic</source>
-				<target>Ein Fehler ist aufgetreten</target>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/modules.pck/authorization.mod/components/register/register.component.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="AuthRegisterForm_Error_Generic_Description" datatype="html">
-				<source>Description: Error Generic</source>
-				<target>Etwas ist schief gelaufen. Bitte wenden Sie sich an den Support!</target>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/modules.pck/authorization.mod/components/register/register.component.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="AuthRegisterForm_Error_UsernameExistsException_Title" datatype="html">
-				<source>Title: User Exists Exception</source>
-				<target>Ausnahme: Benutzer existiert</target>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/modules.pck/authorization.mod/components/register/register.component.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="AuthRegisterForm_Error_UsernameExistsException_Description" datatype="html">
-				<source>Title: User Exists Exception</source>
-				<target>Der Benutzer ist bereits mit der angegebenen E-Mail-Adresse in unserem System vorhanden. Bitte verwenden Sie eine andere E-Mail-Adresse.</target>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/modules.pck/authorization.mod/components/register/register.component.ts
-					</context>
-					<context context-type="linenumber">1</context>
+					<context context-type="linenumber">73</context>
 				</context-group>
 			</trans-unit>
 		</body>

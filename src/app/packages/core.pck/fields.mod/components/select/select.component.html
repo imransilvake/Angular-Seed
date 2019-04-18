@@ -57,10 +57,10 @@
 	<!-- Error -->
 	<mat-error *ngIf="control.invalid && control.touched">
 		<ng-container [ngSwitch]="control.errors | FirstKey">
-			<p *ngSwitchCase="'required'" i18n="@@FieldsSelectErrorRequired">
+			<p *ngSwitchCase="'required'" i18n="@@Fields_Select_Error_Required">
 				Required field
 			</p>
-			<p i18n="@@FieldsSelectErrorDefaultCase" *ngSwitchDefault>
+			<p i18n="@@Fields_Select_Error_Default" *ngSwitchDefault>
 				Unknown error occurred
 			</p>
 		</ng-container>

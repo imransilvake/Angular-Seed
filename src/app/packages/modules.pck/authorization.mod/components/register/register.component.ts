@@ -128,9 +128,9 @@ export class RegisterComponent implements OnInit {
 					const data = {
 						type: ErrorHandlerTypeEnum.COMMON_ERROR,
 						payload: {
-							title: this._i18n({ value: 'Title: User Exists Exception', id: 'AuthRegisterForm_Error_UsernameExistsException_Title' }),
-							message: this._i18n({ value: 'Description: User Exists Exception', id: 'AuthRegisterForm_Error_UsernameExistsException_Description' }),
-							buttonTexts: ['Close']
+							title: this._i18n({ value: 'Title: User Exists Exception', id: 'Auth_Register_Form_Error_UsernameExistsException_Title' }),
+							message: this._i18n({ value: 'Description: User Exists Exception', id: 'Auth_Register_Form_Error_UsernameExistsException_Description' }),
+							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 						}
 					};
 
@@ -144,9 +144,9 @@ export class RegisterComponent implements OnInit {
 					const data = {
 						type: DialogTypeEnum.NOTICE,
 						payload: {
-							title: this._i18n({ value: 'Title: Success', id: 'AuthRegisterForm_Success_Title' }),
-							message: this._i18n({ value: 'Description: Success', id: 'AuthRegisterForm_Success_Description' }),
-							buttonTexts: ['Close']
+							title: this._i18n({ value: 'Title: Success', id: 'Auth_Register_Form_Success_Title' }),
+							message: this._i18n({ value: 'Description: Success', id: 'Auth_Register_Form_Success_Description' }),
+							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 						}
 					};
 
@@ -161,9 +161,9 @@ export class RegisterComponent implements OnInit {
 				const data = {
 					type: ErrorHandlerTypeEnum.COMMON_ERROR,
 					payload: {
-						title: this._i18n({ value: 'Title: Error Generic', id: 'AuthRegisterForm_Error_Generic_Title' }),
-						message: this._i18n({ value: 'Description: Error Generic', id: 'AuthRegisterForm_Error_Generic_Description' }),
-						buttonTexts: ['Close']
+						title: this._i18n({ value: 'Title: Error Generic', id: 'Auth_Register_Form_Error_Generic_Title' }),
+						message: this._i18n({ value: 'Description: Error Generic', id: 'Auth_Register_Form_Error_Generic_Description' }),
+						buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 					}
 				};
 
