@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
 		private _store: Store<ErrorHandlerInterface>,
 		private _registerService: RegisterService,
 		private _hotelListService: HotelListService,
-		private _i18n: I18n,
+		private _i18n: I18n
 	) {
 		// form fields
 		this.formFields = new FormGroup({

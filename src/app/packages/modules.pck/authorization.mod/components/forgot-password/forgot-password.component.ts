@@ -1,6 +1,7 @@
 // angular
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { I18n } from '@ngx-translate/i18n-polyfill';
 
 // store
 import { Store } from '@ngrx/store';
@@ -32,7 +33,8 @@ export class ForgotPasswordComponent {
 		private _loadingAnimationService: LoadingAnimationService,
 		private _dialogService: DialogService,
 		private _store: Store<ErrorHandlerInterface>,
-		private _forgotPasswordService: ForgotPasswordService
+		private _forgotPasswordService: ForgotPasswordService,
+		private _i18n: I18n
 	) {
 		// form fields
 		this.formFields = new FormGroup({
@@ -93,9 +95,9 @@ export class ForgotPasswordComponent {
 					const data = {
 						type: ErrorHandlerTypeEnum.COMMON_ERROR,
 						payload: {
-							title: res.code,
-							message: res.message,
-							buttonTexts: ['Close']
+							title: this._i18n({ value: 'Title: User Not Found Exception', id: 'Auth_Forgot_Password_Form_Error_UserNotFoundException_Title' }),
+							message: this._i18n({ value: 'Description: User Not Found Exception', id: 'Auth_Forgot_Password_Form_Error_UserNotFoundException_Description' }),
+							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 						}
 					};
 
@@ -109,9 +111,9 @@ export class ForgotPasswordComponent {
 					const data = {
 						type: DialogTypeEnum.NOTICE,
 						payload: {
-							title: 'Password has been reset',
-							message: 'Please follow the instructions in the mail we sent you to reset your password.',
-							buttonTexts: ['OK']
+							title: this._i18n({ value: 'Title: Password Reset', id: 'Auth_Forgot_Password_Form_Success_Title' }),
+							message: this._i18n({ value: 'Description: Password Reset', id: 'Auth_Forgot_Password_Form_Success_Description' }),
+							buttonTexts: [this._i18n({ value: 'Button - OK', id: 'Common_Button_OK' })]
 						}
 					};
 
@@ -126,9 +128,9 @@ export class ForgotPasswordComponent {
 				const data = {
 					type: ErrorHandlerTypeEnum.COMMON_ERROR,
 					payload: {
-						title: 'Registration Error',
-						message: 'Registration process is failed due to some reason. Please contact the administration!',
-						buttonTexts: ['Close']
+						title: this._i18n({ value: 'Title: Error Generic', id: 'Auth_Forgot_Password_Form_Error_Generic_Title' }),
+						message: this._i18n({ value: 'Description: Error Generic', id: 'Auth_Forgot_Password_Form_Error_Generic_Description' }),
+						buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 					}
 				};
 
