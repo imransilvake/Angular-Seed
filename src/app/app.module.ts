@@ -1,5 +1,5 @@
 // angular
-import { NgModule, TRANSLATIONS, TRANSLATIONS_FORMAT } from '@angular/core';
+import { LOCALE_ID, NgModule, TRANSLATIONS, TRANSLATIONS_FORMAT } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
@@ -28,8 +28,8 @@ import { AuthorizationModule } from './packages/modules.pck/authorization.mod/au
 import { AppLayoutComponent } from './app-layout.component';
 
 // i18n using polyfills
-declare const require; // provided by webpack
-const translations = require(`raw-loader!../locale/translation.de.xlf`);
+// provided by webpack
+declare const require;
 
 @NgModule({
 	imports: [
@@ -66,7 +66,14 @@ const translations = require(`raw-loader!../locale/translation.de.xlf`);
 	declarations: [AppComponent, AppLayoutComponent],
 	providers: [
 		I18n,
-		{ provide: TRANSLATIONS, useValue: translations },
+		{
+			provide: TRANSLATIONS,
+			useFactory: (locale) => {
+				locale = locale || 'de';
+				return require(`raw-loader!../locale/translation.${locale}.xlf`);
+			},
+			deps: [LOCALE_ID]
+		},
 		{ provide: TRANSLATIONS_FORMAT, useValue: 'xlf' },
 		HttpInterceptorProviders
 	],
