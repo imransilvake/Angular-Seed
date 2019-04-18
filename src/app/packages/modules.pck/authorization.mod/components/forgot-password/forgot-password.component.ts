@@ -16,6 +16,7 @@ import { DialogTypeEnum } from '../../../../utilities.pck/dialog.mod/enums/dialo
 import { DialogService } from '../../../../utilities.pck/dialog.mod/services/dialog.service';
 import { ErrorHandlerInterface } from '../../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 import { ForgotPasswordService } from '../../services/forgot-password.service';
+import { Router } from '@angular/router';
 import * as ErrorHandlerActions from '../../../../utilities.pck/error-handler.mod/store/actions/error-handler.actions';
 
 @Component({
@@ -34,6 +35,7 @@ export class ForgotPasswordComponent {
 		private _dialogService: DialogService,
 		private _store: Store<ErrorHandlerInterface>,
 		private _forgotPasswordService: ForgotPasswordService,
+		private _router: Router,
 		private _i18n: I18n
 	) {
 		// form fields
@@ -95,8 +97,14 @@ export class ForgotPasswordComponent {
 					const data = {
 						type: ErrorHandlerTypeEnum.COMMON_ERROR,
 						payload: {
-							title: this._i18n({ value: 'Title: User Not Found Exception', id: 'Auth_Forgot_Password_Form_Error_UserNotFoundException_Title' }),
-							message: this._i18n({ value: 'Description: User Not Found Exception', id: 'Auth_Forgot_Password_Form_Error_UserNotFoundException_Description' }),
+							title: this._i18n({
+								value: 'Title: User Not Found Exception',
+								id: 'Auth_Forgot_Password_Form_Error_UserNotFoundException_Title'
+							}),
+							message: this._i18n({
+								value: 'Description: User Not Found Exception',
+								id: 'Auth_Forgot_Password_Form_Error_UserNotFoundException_Description'
+							}),
 							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 						}
 					};
@@ -112,13 +120,20 @@ export class ForgotPasswordComponent {
 						type: DialogTypeEnum.NOTICE,
 						payload: {
 							title: this._i18n({ value: 'Title: Password Reset', id: 'Auth_Forgot_Password_Form_Success_Title' }),
-							message: this._i18n({ value: 'Description: Password Reset', id: 'Auth_Forgot_Password_Form_Success_Description' }),
+							message: this._i18n({
+								value: 'Description: Password Reset',
+								id: 'Auth_Forgot_Password_Form_Success_Description'
+							}),
 							buttonTexts: [this._i18n({ value: 'Button - OK', id: 'Common_Button_OK' })]
 						}
 					};
 
 					// dialog service
-					this._dialogService.showDialog(data);
+					this._dialogService.showDialog(data)
+						.subscribe(() => {
+							// navigate to login route
+							this._router.navigate([ROUTING.authorization.login]).then();
+						});
 				}
 			}, () => {
 				// stop loading animation
@@ -129,7 +144,10 @@ export class ForgotPasswordComponent {
 					type: ErrorHandlerTypeEnum.COMMON_ERROR,
 					payload: {
 						title: this._i18n({ value: 'Title: Error Generic', id: 'Auth_Forgot_Password_Form_Error_Generic_Title' }),
-						message: this._i18n({ value: 'Description: Error Generic', id: 'Auth_Forgot_Password_Form_Error_Generic_Description' }),
+						message: this._i18n({
+							value: 'Description: Error Generic',
+							id: 'Auth_Forgot_Password_Form_Error_Generic_Description'
+						}),
 						buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 					}
 				};

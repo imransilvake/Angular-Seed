@@ -13,6 +13,7 @@ export const ROUTING = {
 		login: 'auth/login',
 		register: 'auth/register',
 		forgot: 'auth/forgot',
+		confirm: 'auth/confirm',
 		lock: 'auth/lock'
 	}
 };

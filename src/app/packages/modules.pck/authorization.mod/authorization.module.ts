@@ -14,6 +14,7 @@ import { LanguageListService } from './services/language-list.service';
 import { AuthGuard } from './guards/auth.guard';
 import { RegisterService } from './services/register.service';
 import { ForgotPasswordService } from './services/forgot-password.service';
+import { ConfirmPasswordComponent } from './components/confirm-password/confirm-password.component';
 
 @NgModule({
 	imports: [
@@ -25,6 +26,7 @@ import { ForgotPasswordService } from './services/forgot-password.service';
 		AuthOverviewComponent,
 		LoginComponent,
 		ForgotPasswordComponent,
+		ConfirmPasswordComponent,
 		LockScreenComponent
 	],
 	providers: [

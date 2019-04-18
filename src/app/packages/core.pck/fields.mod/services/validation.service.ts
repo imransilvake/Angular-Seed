@@ -40,6 +40,22 @@ export class ValidationService {
 	}
 
 	/**
+	 * confirm password validator
+	 *
+	 * @param control
+	 */
+	static confirmPasswordValidator(control: FormControl) {
+		const password = control.parent && control.parent.controls['password'].value;
+		const confirmPassword = control.parent && control.parent.controls['confirmPassword'].value;
+
+		if (confirmPassword && password === confirmPassword) {
+			return null;
+		}
+
+		return { confirmPassword: true };
+	}
+
+	/**
 	 * email validator
 	 *
 	 * @param control

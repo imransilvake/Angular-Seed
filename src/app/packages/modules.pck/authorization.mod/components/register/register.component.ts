@@ -21,6 +21,7 @@ import { DialogService } from '../../../../utilities.pck/dialog.mod/services/dia
 import { DialogTypeEnum } from '../../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { ErrorHandlerInterface } from '../../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 import { ErrorHandlerTypeEnum } from '../../../../utilities.pck/error-handler.mod/enums/error-handler-type.enum';
+import { Router } from '@angular/router';
 import * as ErrorHandlerActions from '../../../../utilities.pck/error-handler.mod/store/actions/error-handler.actions';
 
 @Component({
@@ -44,6 +45,7 @@ export class RegisterComponent implements OnInit {
 		private _store: Store<ErrorHandlerInterface>,
 		private _registerService: RegisterService,
 		private _hotelListService: HotelListService,
+		private _router: Router,
 		private _i18n: I18n
 	) {
 		// form fields
@@ -151,7 +153,11 @@ export class RegisterComponent implements OnInit {
 					};
 
 					// dialog service
-					this._dialogService.showDialog(data);
+					this._dialogService.showDialog(data)
+						.subscribe(() => {
+							// navigate to login route
+							this._router.navigate([ROUTING.authorization.login]).then();
+						});
 				}
 			}, () => {
 				// stop loading animation
