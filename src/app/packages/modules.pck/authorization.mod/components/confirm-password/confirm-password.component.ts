@@ -35,7 +35,7 @@ export class ConfirmPasswordComponent {
 			])
 		});
 
-		// listen to password change
+		// listen to password change: update confirm password
 		this.password.valueChanges.subscribe(() => this.confirmPassword.updateValueAndValidity());
 	}
 
