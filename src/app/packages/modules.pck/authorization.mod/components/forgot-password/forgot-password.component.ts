@@ -132,12 +132,12 @@ export class ForgotPasswordComponent {
 					this._dialogService.showDialog(data)
 						.subscribe(() => {
 							// navigate to confirm route
-							let navigationExtras: NavigationExtras = {
+							const state: NavigationExtras = {
 								state: {
 									secretId: 'ham-confirm-unlock'
 								}
 							};
-							this._router.navigate([ROUTING.authorization.confirm], navigationExtras).then();
+							this._router.navigate([ROUTING.authorization.confirm], state).then();
 						});
 				}
 			}, () => {

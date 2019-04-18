@@ -8,9 +8,9 @@ export const AppOptions = {
 
 // services
 export const AppServices: { [name: string]: AppServicesInterface } = {
-	authRegister: { serviceUrl: '/signup' },
-	authForgotPassword: { serviceUrl: '/forgotpassword' },
-	authResetPassword: { serviceUrl: '/resetpassword' }
+	authRegister: { serviceUrl: '/ham/auth/signup' },
+	authForgotPassword: { serviceUrl: '/ham/auth/forgotpassword' },
+	authConfirmPassword: { serviceUrl: '/ham/auth/confirmpassword' }
 };
 
 // local-storage items
