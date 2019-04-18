@@ -70,7 +70,6 @@ declare const require;
 			provide: TRANSLATIONS,
 			useFactory: (locale) => {
 				locale = locale || 'de';
-				locale = (locale === 'en-US') ? 'en' : locale;
 				return require(`raw-loader!../locale/translation.${locale}.xlf`);
 			},
 			deps: [LOCALE_ID]
