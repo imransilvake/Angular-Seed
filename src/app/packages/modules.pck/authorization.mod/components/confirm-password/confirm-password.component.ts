@@ -1,6 +1,8 @@
 // angular
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 // app
 import { ROUTING } from '../../../../../../environments/environment';
@@ -12,10 +14,12 @@ import { ValidationService } from '../../../../core.pck/fields.mod/services/vali
 	styleUrls: ['../auth.component.scss']
 })
 
-export class ConfirmPasswordComponent {
+export class ConfirmPasswordComponent implements OnDestroy {
 	public routing = ROUTING;
 	public formFields;
 	public version = '1.0.0';
+
+	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor() {
 		// form fields
@@ -36,11 +40,19 @@ export class ConfirmPasswordComponent {
 		});
 
 		// listen to password change: update confirm password
-		this.password.valueChanges.subscribe(() => this.confirmPassword.updateValueAndValidity());
+		this.password.valueChanges
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(() => this.confirmPassword.updateValueAndValidity());
+	}
+
+	ngOnDestroy() {
+		// remove subscriptions
+		this._ngUnSubscribe.next();
+		this._ngUnSubscribe.complete();
 	}
 
 	/**
-	 * setters
+	 * getters
 	 */
 	get verificationCode() {
 		return this.formFields.get('verificationCode');

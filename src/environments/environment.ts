@@ -3,7 +3,7 @@ export const environment = {
 	production: false
 };
 
-export const APP_URL = 'http://localhost:4200';
+export const APP_URL = 'http://localhost:1500';
 export const ENV_SERVICE_URL = 'https://c7o8rvuk52.execute-api.eu-west-1.amazonaws.com/dev';
 
 // routing

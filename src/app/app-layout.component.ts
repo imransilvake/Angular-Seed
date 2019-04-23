@@ -1,5 +1,7 @@
 // angular
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 // app
 import { ScrollTopService } from './packages/utilities.pck/accessories.mod/services/scroll-top.service';
@@ -11,16 +13,21 @@ import { HelperService } from './packages/utilities.pck/accessories.mod/services
 	styleUrls: ['./app-layout.component.scss']
 })
 
-export class AppLayoutComponent implements AfterViewInit {
+export class AppLayoutComponent implements AfterViewInit, OnDestroy {
 	@ViewChild('topHead') topHead: ElementRef;
 
 	public drawerState = false;
+	public isViewDesktop = false;
 	public topHeadHeight = 67;
+
+	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
 		private _scrollTopService: ScrollTopService,
-		private _helperService: HelperService
+		public _helperService: HelperService
 	) {
+		// detect current view
+		this.isViewDesktop = this._helperService.isDesktopView;
 	}
 
 	ngAfterViewInit() {
@@ -28,16 +35,26 @@ export class AppLayoutComponent implements AfterViewInit {
 		this._scrollTopService.scrollTopListener();
 
 		// listen to scroll event
-		this._helperService.detectScroll().subscribe(() => {
-			// set top Head height
-			this.calculateTopHeadHeight();
-		});
+		this._helperService.detectScroll()
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(() => {
+				// set top Head height
+				this.calculateTopHeadHeight();
+			});
 
 		// listen to resize event
-		this._helperService.detectWindowResize().subscribe(() => {
-			// set top Head height
-			this.calculateTopHeadHeight();
-		});
+		this._helperService.detectWindowResize()
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(() => {
+				// set top Head height
+				this.calculateTopHeadHeight();
+			});
+	}
+
+	ngOnDestroy() {
+		// remove subscriptions
+		this._ngUnSubscribe.next();
+		this._ngUnSubscribe.complete();
 	}
 
 	/**

@@ -1,9 +1,9 @@
 // angular
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-
-// app
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+
+// app
 import { HelperService } from '../../../utilities.pck/accessories.mod/services/helper.service';
 
 declare const document: any;
@@ -45,6 +45,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 			});
 	}
 
+	ngOnDestroy() {
+		// remove subscriptions
+		this._ngUnSubscribe.next();
+		this._ngUnSubscribe.complete();
+	}
+
 	/**
 	 * open document in full-screen
 	 */
@@ -54,11 +60,5 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 		// show full screen
 		this._helperService.showFullScreen();
-	}
-
-	ngOnDestroy() {
-		// remove subscriptions
-		this._ngUnSubscribe.next();
-		this._ngUnSubscribe.complete();
 	}
 }

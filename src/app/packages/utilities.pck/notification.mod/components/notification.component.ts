@@ -25,7 +25,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
 
 	public messages: NotificationInterface[] = [];
 
-	private unSubscribe: Subject<void> = new Subject<void>();
+	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 	private keepAfterNavigationChange = [];
 
 	constructor(
@@ -35,7 +35,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
 		// subscribe: router setting
 		// clear notification message on route change
 		this._router.events
-			.pipe(takeUntil(this.unSubscribe))
+			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(event => {
 				if (event instanceof NavigationStart) {
 					if (this.messages) {
@@ -50,7 +50,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
 	ngOnInit() {
 		// subscribe: notification
 		this._store.select('notification')
-			.pipe(takeUntil(this.unSubscribe))
+			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe((res) => {
 				// validate res
 				if (res && res.type !== null) {
@@ -71,9 +71,20 @@ export class NotificationComponent implements OnInit, OnDestroy {
 					}
 
 					// broadcast change in notification
-					of(null).pipe(delay(10)).subscribe(() => this.notificationUpdate.emit(true));
+					of(null)
+						.pipe(
+							takeUntil(this._ngUnSubscribe),
+							delay(10)
+						)
+						.subscribe(() => this.notificationUpdate.emit(true));
 				}
 			});
+	}
+
+	ngOnDestroy() {
+		// remove subscriptions
+		this._ngUnSubscribe.next();
+		this._ngUnSubscribe.complete();
 	}
 
 	/**
@@ -103,11 +114,5 @@ export class NotificationComponent implements OnInit, OnDestroy {
 			default:
 				return 'ham-info';
 		}
-	}
-
-	ngOnDestroy() {
-		// remove subscriptions
-		this.unSubscribe.next();
-		this.unSubscribe.complete();
 	}
 }

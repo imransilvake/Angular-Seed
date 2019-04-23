@@ -11,10 +11,10 @@
 	<div [ngStyle]="{'margin-top': topHeadHeight + 'px'}">
 		<mat-drawer-container class="ham-root-container">
 			<mat-drawer
+				class="ham-root-drawer"
 				#drawer
 				mode="side"
-				opened
-				class="ham-root-drawer"
+				[opened]="isViewDesktop"
 				[class.ham-drawer-closed]="!drawerState"
 				(openedStart)="drawerState=true"
 				(closedStart)="drawerState=false">

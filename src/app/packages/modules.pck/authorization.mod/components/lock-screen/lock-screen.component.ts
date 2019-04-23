@@ -32,7 +32,7 @@ export class LockScreenComponent {
 	}
 
 	/**
-	 * setters
+	 * getters
 	 */
 	get password() {
 		return this.formFields.get('password');

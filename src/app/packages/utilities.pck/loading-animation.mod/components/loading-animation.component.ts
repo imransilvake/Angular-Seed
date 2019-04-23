@@ -29,7 +29,7 @@ export class LoadingAnimationComponent implements OnInit, OnDestroy {
 
 	public isShowLoadingAnimation = false;
 
-	private unSubscribe: Subject<void> = new Subject<void>();
+	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
 		private _helperService: HelperService,
@@ -40,7 +40,7 @@ export class LoadingAnimationComponent implements OnInit, OnDestroy {
 	ngOnInit() {
 		// subscribe: loading animation
 		this._store.select('loadingAnimation')
-			.pipe(takeUntil(this.unSubscribe))
+			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe((res) => {
 				if (res !== undefined) {
 					const status = res.status;
@@ -59,7 +59,7 @@ export class LoadingAnimationComponent implements OnInit, OnDestroy {
 
 	ngOnDestroy() {
 		// remove subscriptions
-		this.unSubscribe.next();
-		this.unSubscribe.complete();
+		this._ngUnSubscribe.next();
+		this._ngUnSubscribe.complete();
 	}
 }

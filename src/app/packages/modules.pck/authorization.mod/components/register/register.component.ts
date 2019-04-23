@@ -1,7 +1,9 @@
 // angular
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { I18n } from '@ngx-translate/i18n-polyfill';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 // store
 import { Store } from '@ngrx/store';
@@ -30,7 +32,7 @@ import * as ErrorHandlerActions from '../../../../utilities.pck/error-handler.mo
 	styleUrls: ['../auth.component.scss']
 })
 
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
 	public routing = ROUTING;
 	public formFields;
 	public registerHotelNameSelectType = SelectTypeEnum.DEFAULT;
@@ -38,6 +40,8 @@ export class RegisterComponent implements OnInit {
 	public registerHotelNameIcons = [faHotel];
 	public hotelList: SelectDefaultInterface[] = [];
 	public version = '1.0.0';
+
+	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
 		private _loadingAnimationService: LoadingAnimationService,
@@ -77,8 +81,14 @@ export class RegisterComponent implements OnInit {
 		this.hotelList = this._hotelListService.getHotelList();
 	}
 
+	ngOnDestroy() {
+		// remove subscriptions
+		this._ngUnSubscribe.next();
+		this._ngUnSubscribe.complete();
+	}
+
 	/**
-	 * setters
+	 * getters
 	 */
 	get hotelName() {
 		return this.formFields.get('hotelName');
@@ -121,6 +131,7 @@ export class RegisterComponent implements OnInit {
 
 		// start registration process
 		this._registerService.authRegister(registerPayload)
+			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe((res) => {
 				// stop loading animation
 				this._loadingAnimationService.stopLoadingAnimation();
@@ -154,6 +165,7 @@ export class RegisterComponent implements OnInit {
 
 					// dialog service
 					this._dialogService.showDialog(data)
+						.pipe(takeUntil(this._ngUnSubscribe))
 						.subscribe(() => {
 							// navigate to login route
 							this._router.navigate([ROUTING.authorization.login]).then();

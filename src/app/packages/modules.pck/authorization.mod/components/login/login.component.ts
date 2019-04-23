@@ -1,6 +1,8 @@
 // angular
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 // app
 import { ROUTING } from '../../../../../../environments/environment';
@@ -17,13 +19,15 @@ import { SelectStyleEnum } from '../../../../core.pck/fields.mod/enums/select-st
 	styleUrls: ['../auth.component.scss']
 })
 
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 	public routing = ROUTING;
 	public formFields;
 	public loginHotelNameSelectType = SelectTypeEnum.DEFAULT;
 	public loginHotelNameSelectStyleType = SelectStyleEnum.INFO;
 	public loginHotelNameIcons = [faGlobeEurope];
 	public languageList: SelectDefaultInterface[] = [];
+
+	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(private _languageListService: LanguageListService) {
 		// form fields
@@ -45,13 +49,21 @@ export class LoginComponent implements OnInit {
 		this.languageList = this._languageListService.getLanguageList();
 
 		// check for language
-		this.languageName.valueChanges.subscribe(url => {
-			location.href = url;
-		});
+		this.languageName.valueChanges
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(url => {
+				location.href = url;
+			});
+	}
+
+	ngOnDestroy() {
+		// remove subscriptions
+		this._ngUnSubscribe.next();
+		this._ngUnSubscribe.complete();
 	}
 
 	/**
-	 * setters
+	 * getters
 	 */
 	get languageName() {
 		return this.formFields.get('languageName');

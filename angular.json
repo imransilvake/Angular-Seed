@@ -123,9 +123,9 @@
 							"buildOptimizer": true,
 							"outputPath": "dist/ham-en/",
 							"baseHref": "/en/",
-							"i18nFile": "src/locale/translation.en.xlf",
+							"i18nFile": "src/locale/translation.en-US.xlf",
 							"i18nFormat": "xlf",
-							"i18nLocale": "en",
+							"i18nLocale": "en-US",
 							"i18nMissingTranslation": "error"
 						},
 						"prod-de": {

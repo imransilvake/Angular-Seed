@@ -1,9 +1,11 @@
 <header class="ham-header">
 	<div class="cd-row">
-		<div class="cd-col cd-col-pm-m-4 cd-col-pm-s-6">
+		<div class="cd-col cd-col-pm-m-7 cd-col-pm-s-6">
 			<div class="ham-logo">
 				<a [routerLink]="['/']">
-					<h4>HAM</h4>
+					<h4>
+						<img [src]="'assets/svg/logo.svg'" alt="ham-log" />
+					</h4>
 				</a>
 			</div>
 			<div class="ham-icons">
@@ -14,7 +16,7 @@
 				</button>
 			</div>
 		</div>
-		<div class="cd-col cd-col-pm-m-8 cd-col-pm-s-6">
+		<div class="cd-col cd-col-pm-m-5 cd-col-pm-s-6">
 			<!-- Fullscreen Button -->
 			<div class="ham-full-screen cd-tooltip">
 				<button mat-button class="ham-btn-icon" (click)="onClickShowFullScreen()" *ngIf="!appFullScreen">

@@ -1,7 +1,9 @@
 // angular
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { I18n } from '@ngx-translate/i18n-polyfill';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 // store
 import { Store } from '@ngrx/store';
@@ -25,10 +27,12 @@ import * as ErrorHandlerActions from '../../../../utilities.pck/error-handler.mo
 	styleUrls: ['../auth.component.scss']
 })
 
-export class ForgotPasswordComponent {
+export class ForgotPasswordComponent implements OnDestroy {
 	public routing = ROUTING;
 	public formFields;
 	public version = '1.0.0';
+
+	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
 		private _loadingAnimationService: LoadingAnimationService,
@@ -53,12 +57,16 @@ export class ForgotPasswordComponent {
 				ValidationService.emailValidator
 			])
 		});
+	}
 
-		this.email.setValue('murali@tourismussuite.com');
+	ngOnDestroy() {
+		// remove subscriptions
+		this._ngUnSubscribe.next();
+		this._ngUnSubscribe.complete();
 	}
 
 	/**
-	 * setters
+	 * getters
 	 */
 	get firstName() {
 		return this.formFields.get('firstName');
@@ -90,6 +98,7 @@ export class ForgotPasswordComponent {
 
 		// start forgot password process
 		this._forgotPasswordService.authForgotPassword(forgotPayload)
+			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe((res) => {
 				// stop loading animation
 				this._loadingAnimationService.stopLoadingAnimation();
@@ -132,6 +141,7 @@ export class ForgotPasswordComponent {
 
 					// dialog service
 					this._dialogService.showDialog(data)
+						.pipe(takeUntil(this._ngUnSubscribe))
 						.subscribe(() => {
 							// navigate to confirm route
 							const state: NavigationExtras = {

@@ -1,7 +1,7 @@
 // angular
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 // app
 import { ScrollTopService } from '../../../utilities.pck/accessories.mod/services/scroll-top.service';
@@ -16,17 +16,23 @@ export class ScrollTopComponent implements OnInit, OnDestroy {
 	public showScroll = false;
 	public scrollDuration = 300;
 
-	private unSubscribe: Subject<void> = new Subject<void>();
+	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(private _scrollService: ScrollTopService) {
 	}
 
 	ngOnInit() {
 		this._scrollService.scrollEvent
-			.pipe(takeUntil(this.unSubscribe))
+			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe((status) => {
 				this.showScroll = status === true;
 			});
+	}
+
+	ngOnDestroy() {
+		// remove subscriptions
+		this._ngUnSubscribe.next();
+		this._ngUnSubscribe.complete();
 	}
 
 	/**
@@ -41,11 +47,5 @@ export class ScrollTopComponent implements OnInit, OnDestroy {
 					clearInterval(scrollInterval);
 				}
 			}, 15);
-	}
-
-	ngOnDestroy() {
-		// remove subscriptions
-		this.unSubscribe.next();
-		this.unSubscribe.complete();
 	}
 }

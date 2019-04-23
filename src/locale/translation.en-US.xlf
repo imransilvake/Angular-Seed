@@ -746,7 +746,7 @@
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Auth_Confirm_Password_Form_Note" datatype="html">
-				<source>Already have an account?<x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Login
+				<source>Already have an account? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Login
 					<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
 				</source>
 				<target>Already have an account? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Login
