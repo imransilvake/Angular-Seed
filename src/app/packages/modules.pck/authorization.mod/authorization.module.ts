@@ -16,6 +16,7 @@ import { RegisterService } from './services/register.service';
 import { ForgotPasswordService } from './services/forgot-password.service';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { AuthResetPasswordGuard } from './guards/auth-reset-password.guard';
+import { ResetPasswordService } from './services/reset-password.service';
 
 @NgModule({
 	imports: [
@@ -35,6 +36,7 @@ import { AuthResetPasswordGuard } from './guards/auth-reset-password.guard';
 		AuthResetPasswordGuard,
 		RegisterService,
 		ForgotPasswordService,
+		ResetPasswordService,
 		HotelListService,
 		LanguageListService
 	]

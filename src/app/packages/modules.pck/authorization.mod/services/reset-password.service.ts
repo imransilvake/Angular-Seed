@@ -4,20 +4,20 @@ import { Injectable } from '@angular/core';
 // app
 import { AppServices } from '../../../../../app.config';
 import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service';
-import { AuthForgotInterface } from '../interfaces/auth-forgot.interface';
+import { AuthResetInterface } from '../interfaces/auth-reset.interface';
 
 @Injectable()
-export class ForgotPasswordService {
+export class ResetPasswordService {
 	constructor(private _proxyService: ProxyService) {
 	}
 
 	/**
-	 * perform forgot password process
+	 * perform reset password process
 	 *
-	 * @param forgotPayload
+	 * @param resetPayload
 	 */
-	public authForgotPassword(forgotPayload: AuthForgotInterface) {
+	public authResetPassword(resetPayload: AuthResetInterface) {
 		return this._proxyService
-			.postAPI(AppServices['authForgotPassword'], { bodyParams: forgotPayload });
+			.postAPI(AppServices['authResetPassword'], { bodyParams: resetPayload });
 	}
 }

@@ -132,7 +132,7 @@ export class ForgotPasswordComponent implements OnDestroy {
 						payload: {
 							title: this._i18n({ value: 'Title: Password Reset', id: 'Auth_Forgot_Password_Form_Success_Title' }),
 							message: this._i18n({
-								value: 'Description: Password Reset',
+								value: 'Description: Forgot Password',
 								id: 'Auth_Forgot_Password_Form_Success_Description'
 							}),
 							buttonTexts: [this._i18n({ value: 'Button - OK', id: 'Common_Button_OK' })]
@@ -146,7 +146,8 @@ export class ForgotPasswordComponent implements OnDestroy {
 							// navigate to reset route
 							const state: NavigationExtras = {
 								state: {
-									secretId: 'ham-reset-unlock'
+									secretId: 'ham-reset-unlock',
+									email: forgotPayload.email
 								}
 							};
 							this._router.navigate([ROUTING.authorization.reset], state).then();
