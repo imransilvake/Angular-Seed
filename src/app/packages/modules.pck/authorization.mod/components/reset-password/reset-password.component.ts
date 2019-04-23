@@ -115,6 +115,9 @@ export class ResetPasswordComponent implements OnDestroy {
 		this._resetPasswordService.authResetPassword(resetPayload)
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe((res) => {
+				// stop loading animation
+				this._loadingAnimationService.stopLoadingAnimation();
+
 				if (res && res.code === 'CodeMismatchException') {
 					// error payload
 					const data = {
