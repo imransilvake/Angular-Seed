@@ -147,6 +147,20 @@
 					<context context-type="linenumber">82</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="Fields_Input_Error_Password_Mismatch" datatype="html">
+				<source>
+					The two passwords are not identical.
+				</source>
+				<target>
+					The two passwords are not identical.
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/core.pck/fields.mod/components/input/input.component.html
+					</context>
+					<context context-type="linenumber">85</context>
+				</context-group>
+			</trans-unit>
 			<trans-unit id="Fields_Input_Error_Default" datatype="html">
 				<source>
 					Unknown error occurred
