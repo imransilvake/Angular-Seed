@@ -9,6 +9,7 @@ export const AppOptions = {
 // services
 export const AppServices: { [name: string]: AppServicesInterface } = {
 	authRegister: { serviceUrl: '/ham/auth/signup' },
+	authLogin: { serviceUrl: '/ham/auth/authenticate' },
 	authForgotPassword: { serviceUrl: '/ham/auth/forgotpassword' },
 	authResetPassword: { serviceUrl: '/ham/auth/confirmpassword' }
 };
