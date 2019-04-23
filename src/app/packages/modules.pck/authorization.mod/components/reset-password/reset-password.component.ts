@@ -121,11 +121,11 @@ export class ResetPasswordComponent implements OnDestroy {
 						type: ErrorHandlerTypeEnum.COMMON_ERROR,
 						payload: {
 							title: this._i18n({
-								value: 'Title: User Not Found Exception',
+								value: 'Title: Verification Code Exception',
 								id: 'Auth_Reset_Password_Form_Error_CodeMismatchException_Title'
 							}),
 							message: this._i18n({
-								value: 'Description: User Not Found Exception',
+								value: 'Description: Verification Code Exception',
 								id: 'Auth_Reset_Password_Form_Error_CodeMismatchException_Description'
 							}),
 							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
@@ -142,7 +142,7 @@ export class ResetPasswordComponent implements OnDestroy {
 					const data = {
 						type: DialogTypeEnum.NOTICE,
 						payload: {
-							title: this._i18n({ value: 'Title: Password Reset', id: 'Auth_Reset_Password_Form_Success_Title' }),
+							title: this._i18n({ value: 'Title: Reset Password', id: 'Auth_Reset_Password_Form_Success_Title' }),
 							message: this._i18n({
 								value: 'Description: Reset Password',
 								id: 'Auth_Reset_Password_Form_Success_Description'

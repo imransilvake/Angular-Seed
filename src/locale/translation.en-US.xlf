@@ -8,7 +8,13 @@
 				<target>Close</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
-						src/app/packages/modules.pck/authorization.mod/components/register/register.component.ts
+						src/app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.ts
 					</context>
 					<context context-type="linenumber">1</context>
 				</context-group>
@@ -21,6 +27,24 @@
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/modules.pck/authorization.mod/components/register/register.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/components/register/register.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/components/reset-password/reset-password.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/components/reset-password/reset-password.component.ts
 					</context>
 					<context context-type="linenumber">1</context>
 				</context-group>
@@ -31,6 +55,12 @@
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/components/reset-password/reset-password.component.ts
 					</context>
 					<context context-type="linenumber">1</context>
 				</context-group>
@@ -771,6 +801,67 @@
 						app/packages/modules.pck/authorization.mod/components/confirm-password/confirm-password.component.html
 					</context>
 					<context context-type="linenumber">79</context>
+				</context-group>
+			</trans-unit>
+
+			<trans-unit id="Auth_Reset_Password_Form_Error_CodeMismatchException_Title" datatype="html">
+				<source>Title: Verification Code Exception</source>
+				<target>Wrong Verification Code</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/components/reset-password/reset-password.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Reset_Password_Form_Error_CodeMismatchException_Description" datatype="html">
+				<source>Description: Verification Code Exception</source>
+				<target>The entered verification code is not correct. Please try another one!</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/components/reset-password/reset-password.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Reset_Password_Form_Success_Title" datatype="html">
+				<source>Title: Reset Password</source>
+				<target>Password successfully changed</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/components/reset-password/reset-password.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Reset_Password_Form_Success_Description" datatype="html">
+				<source>Description: Reset Password</source>
+				<target>Please try to login to check your changes.</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/components/reset-password/reset-password.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Reset_Password_Form_Error_Generic_Title" datatype="html">
+				<source>Title: Error Generic</source>
+				<target>Error Occurred</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/components/reset-password/reset-password.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Reset_Password_Form_Error_Generic_Description" datatype="html">
+				<source>Description: Error Generic</source>
+				<target>Something went wrong. Please contact the support!</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/components/reset-password/reset-password.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
 		</body>
