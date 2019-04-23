@@ -636,8 +636,8 @@
 				</context-group>
 			</trans-unit>
 
-			<!-- Auth - Confirm Password -->
-			<trans-unit id="Auth_Confirm_Password_Info_Title" datatype="html">
+			<!-- Auth - Reset Password -->
+			<trans-unit id="Auth_Reset_Password_Info_Title" datatype="html">
 				<source>Title</source>
 				<target>Willkommen</target>
 				<context-group purpose="location">
@@ -647,7 +647,7 @@
 					<context context-type="linenumber">7</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Confirm_Password_Info_Description" datatype="html">
+			<trans-unit id="Auth_Reset_Password_Info_Description" datatype="html">
 				<source>Description</source>
 				<target>Willkommen im HotelAppManager. Hier können Sie Ihr Passwort bestätigen.</target>
 				<context-group purpose="location">
@@ -657,7 +657,7 @@
 					<context context-type="linenumber">8</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Confirm_Password_Info_Version" datatype="html">
+			<trans-unit id="Auth_Reset_Password_Info_Version" datatype="html">
 				<source>Version:
 					<x id="INTERPOLATION" equiv-text="{{version}}"/>
 				</source>
@@ -671,8 +671,8 @@
 					<context context-type="linenumber">12</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Confirm_Password_Form_Title" datatype="html">
-				<source>Confirm Password</source>
+			<trans-unit id="Auth_Reset_Password_Form_Title" datatype="html">
+				<source>Reset Password</source>
 				<target>Passwort Bestätigen</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -681,7 +681,7 @@
 					<context context-type="linenumber">19</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Confirm_Password_Form_VerificationCode_Label" datatype="html">
+			<trans-unit id="Auth_Reset_Password_Form_VerificationCode_Label" datatype="html">
 				<source>Verification Code*</source>
 				<target>Verifizierungs-Schlüssel*</target>
 				<context-group purpose="location">
@@ -691,7 +691,7 @@
 					<context context-type="linenumber">24</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Confirm_Password_Form_VerificationCode_PlaceHolder" datatype="html">
+			<trans-unit id="Auth_Reset_Password_Form_VerificationCode_PlaceHolder" datatype="html">
 				<source>Verification Code</source>
 				<target>Bestätigungscode eingeben</target>
 				<context-group purpose="location">
@@ -701,7 +701,7 @@
 					<context context-type="linenumber">29</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Confirm_Password_Form_New_Password_Label" datatype="html">
+			<trans-unit id="Auth_Reset_Password_Form_New_Password_Label" datatype="html">
 				<source>New Password*</source>
 				<target>Neues Kennwort*</target>
 				<context-group purpose="location">
@@ -711,7 +711,7 @@
 					<context context-type="linenumber">38</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Confirm_Password_Form_New_Password_PlaceHolder" datatype="html">
+			<trans-unit id="Auth_Reset_Password_Form_New_Password_PlaceHolder" datatype="html">
 				<source>New Password</source>
 				<target>Neues Passwort eingeben</target>
 				<context-group purpose="location">
@@ -721,7 +721,7 @@
 					<context context-type="linenumber">45</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Confirm_Password_Form_Confirm_New_Password_Label" datatype="html">
+			<trans-unit id="Auth_Reset_Password_Form_Confirm_New_Password_Label" datatype="html">
 				<source>Confirm New Password*</source>
 				<target>Bestätige neues Passwort*</target>
 				<context-group purpose="location">
@@ -731,7 +731,7 @@
 					<context context-type="linenumber">56</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Confirm_Password_Form_Confirm_New_Password_PlaceHolder" datatype="html">
+			<trans-unit id="Auth_Reset_Password_Form_Confirm_New_Password_PlaceHolder" datatype="html">
 				<source>Confirm New Password</source>
 				<target>Neues Passwort eingeben</target>
 				<context-group purpose="location">
@@ -741,7 +741,7 @@
 					<context context-type="linenumber">63</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Confirm_Password_Form_Confirm_New_Password_Hint" datatype="html">
+			<trans-unit id="Auth_Reset_Password_Form_Confirm_New_Password_Hint" datatype="html">
 				<source>Confirm Password Hint</source>
 				<target>
 					Das Passwort kann zwischen 8-256 Zeichen lang sein und muss min. 1 Sonderzeichen, 1 Großbuchstabe und 1 Zahl enthalten
@@ -753,7 +753,7 @@
 					<context context-type="linenumber">66</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Confirm_Password_Form_Submit_Button" datatype="html">
+			<trans-unit id="Auth_Reset_Password_Form_Submit_Button" datatype="html">
 				<source>Reset</source>
 				<target>Passwort Ändern</target>
 				<context-group purpose="location">
@@ -763,7 +763,7 @@
 					<context context-type="linenumber">74</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Confirm_Password_Form_Note" datatype="html">
+			<trans-unit id="Auth_Reset_Password_Form_Note" datatype="html">
 				<source>Already have an account? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Login
 					<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
 				</source>

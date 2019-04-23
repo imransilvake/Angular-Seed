@@ -9,12 +9,12 @@ import { ROUTING } from '../../../../../../environments/environment';
 import { ValidationService } from '../../../../core.pck/fields.mod/services/validation.service';
 
 @Component({
-	selector: 'app-confirm-password',
-	templateUrl: './confirm-password.component.html',
+	selector: 'app-reset-password',
+	templateUrl: './reset-password.component.html',
 	styleUrls: ['../auth.component.scss']
 })
 
-export class ConfirmPasswordComponent implements OnDestroy {
+export class ResetPasswordComponent implements OnDestroy {
 	public routing = ROUTING;
 	public formFields;
 	public version = '1.0.0';

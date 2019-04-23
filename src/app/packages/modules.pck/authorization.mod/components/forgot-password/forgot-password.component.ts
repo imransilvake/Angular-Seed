@@ -143,13 +143,13 @@ export class ForgotPasswordComponent implements OnDestroy {
 					this._dialogService.showDialog(data)
 						.pipe(takeUntil(this._ngUnSubscribe))
 						.subscribe(() => {
-							// navigate to confirm route
+							// navigate to reset route
 							const state: NavigationExtras = {
 								state: {
-									secretId: 'ham-confirm-unlock'
+									secretId: 'ham-reset-unlock'
 								}
 							};
-							this._router.navigate([ROUTING.authorization.confirm], state).then();
+							this._router.navigate([ROUTING.authorization.reset], state).then();
 						});
 				}
 			}, () => {

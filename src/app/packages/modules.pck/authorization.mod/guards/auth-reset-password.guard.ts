@@ -6,7 +6,7 @@ import { ActivatedRoute, ActivatedRouteSnapshot, CanActivate, Router, RouterStat
 import { ROUTING } from '../../../../../environments/environment';
 
 @Injectable()
-export class AuthConfirmPasswordGuard implements CanActivate {
+export class AuthResetPasswordGuard implements CanActivate {
 	constructor(
 		private _router: Router,
 		private _activatedRouter: ActivatedRoute
@@ -14,7 +14,7 @@ export class AuthConfirmPasswordGuard implements CanActivate {
 	}
 
 	/**
-	 * validate user for visiting confirmation page
+	 * validate user for visiting reset password page
 	 *
 	 * @param route
 	 * @param state

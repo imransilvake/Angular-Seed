@@ -14,8 +14,8 @@ import { LanguageListService } from './services/language-list.service';
 import { AuthUserStatusGuard } from './guards/auth-user-status.guard';
 import { RegisterService } from './services/register.service';
 import { ForgotPasswordService } from './services/forgot-password.service';
-import { ConfirmPasswordComponent } from './components/confirm-password/confirm-password.component';
-import { AuthConfirmPasswordGuard } from './guards/auth-confirm-password.guard';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { AuthResetPasswordGuard } from './guards/auth-reset-password.guard';
 
 @NgModule({
 	imports: [
@@ -27,12 +27,12 @@ import { AuthConfirmPasswordGuard } from './guards/auth-confirm-password.guard';
 		AuthOverviewComponent,
 		LoginComponent,
 		ForgotPasswordComponent,
-		ConfirmPasswordComponent,
+		ResetPasswordComponent,
 		LockScreenComponent
 	],
 	providers: [
 		AuthUserStatusGuard,
-		AuthConfirmPasswordGuard,
+		AuthResetPasswordGuard,
 		RegisterService,
 		ForgotPasswordService,
 		HotelListService,
