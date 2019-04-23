@@ -16,9 +16,9 @@ import { LoadingAnimationService } from '../../../../utilities.pck/loading-anima
 import { DialogService } from '../../../../utilities.pck/dialog.mod/services/dialog.service';
 import { ErrorHandlerInterface } from '../../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 import { AuthResetInterface } from '../../interfaces/auth-reset.interface';
-import { ResetPasswordService } from '../../services/reset-password.service';
 import { ErrorHandlerTypeEnum } from '../../../../utilities.pck/error-handler.mod/enums/error-handler-type.enum';
 import { DialogTypeEnum } from '../../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
+import { AuthService } from '../../services/auth.service';
 import * as ErrorHandlerActions from '../../../../utilities.pck/error-handler.mod/store/actions/error-handler.actions';
 
 @Component({
@@ -40,7 +40,7 @@ export class ResetPasswordComponent implements OnDestroy {
 		private _loadingAnimationService: LoadingAnimationService,
 		private _dialogService: DialogService,
 		private _store: Store<ErrorHandlerInterface>,
-		private _resetPasswordService: ResetPasswordService,
+		private _authService: AuthService,
 		private _router: Router,
 		private _i18n: I18n
 	) {
@@ -105,14 +105,15 @@ export class ResetPasswordComponent implements OnDestroy {
 		// start loading animation
 		this._loadingAnimationService.startLoadingAnimation();
 
-		// reset payload
-		const resetPayload: AuthResetInterface = {
+		// payload
+		const formPayload: AuthResetInterface = {
 			email: this.userState.email,
 			verificationCode: this.verificationCode.value,
 			password: this.password.value
 		};
 
-		this._resetPasswordService.authResetPassword(resetPayload)
+		// start reset password process
+		this._authService.authResetPassword(formPayload)
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe((res) => {
 				// stop loading animation

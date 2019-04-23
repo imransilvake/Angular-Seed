@@ -17,13 +17,13 @@ import { SelectTypeEnum } from '../../../../core.pck/fields.mod/enums/select-typ
 import { SelectDefaultInterface } from '../../../../core.pck/fields.mod/interfaces/select-default-interface';
 import { SelectStyleEnum } from '../../../../core.pck/fields.mod/enums/select-style.enum';
 import { LoadingAnimationService } from '../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
-import { RegisterService } from '../../services/register.service';
 import { AuthRegisterInterface } from '../../interfaces/auth-register.interface';
 import { DialogService } from '../../../../utilities.pck/dialog.mod/services/dialog.service';
 import { DialogTypeEnum } from '../../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { ErrorHandlerInterface } from '../../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 import { ErrorHandlerTypeEnum } from '../../../../utilities.pck/error-handler.mod/enums/error-handler-type.enum';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 import * as ErrorHandlerActions from '../../../../utilities.pck/error-handler.mod/store/actions/error-handler.actions';
 
 @Component({
@@ -47,7 +47,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 		private _loadingAnimationService: LoadingAnimationService,
 		private _dialogService: DialogService,
 		private _store: Store<ErrorHandlerInterface>,
-		private _registerService: RegisterService,
+		private _authService: AuthService,
 		private _hotelListService: HotelListService,
 		private _router: Router,
 		private _i18n: I18n
@@ -121,8 +121,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
 		// start loading animation
 		this._loadingAnimationService.startLoadingAnimation();
 
-		// register payload
-		const registerPayload: AuthRegisterInterface = {
+		// payload
+		const formPayload: AuthRegisterInterface = {
 			email: this.email.value,
 			firstName: this.firstName.value,
 			lastName: this.lastName.value,
@@ -130,7 +130,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 		};
 
 		// start registration process
-		this._registerService.authRegister(registerPayload)
+		this._authService.authRegister(formPayload)
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe((res) => {
 				// stop loading animation

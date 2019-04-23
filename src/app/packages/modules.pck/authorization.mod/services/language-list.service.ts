@@ -8,7 +8,7 @@ import { SelectDefaultInterface } from '../../../core.pck/fields.mod/interfaces/
 @Injectable()
 export class LanguageListService {
 	/**
-	 * fetch language list
+	 * set of app languages
 	 */
 	public getLanguageList() {
 		const languageList: SelectDefaultInterface[] = [

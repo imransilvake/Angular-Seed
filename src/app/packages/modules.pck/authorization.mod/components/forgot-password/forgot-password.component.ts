@@ -17,8 +17,8 @@ import { ErrorHandlerTypeEnum } from '../../../../utilities.pck/error-handler.mo
 import { DialogTypeEnum } from '../../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { DialogService } from '../../../../utilities.pck/dialog.mod/services/dialog.service';
 import { ErrorHandlerInterface } from '../../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
-import { ForgotPasswordService } from '../../services/forgot-password.service';
 import { NavigationExtras, Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 import * as ErrorHandlerActions from '../../../../utilities.pck/error-handler.mod/store/actions/error-handler.actions';
 
 @Component({
@@ -38,7 +38,7 @@ export class ForgotPasswordComponent implements OnDestroy {
 		private _loadingAnimationService: LoadingAnimationService,
 		private _dialogService: DialogService,
 		private _store: Store<ErrorHandlerInterface>,
-		private _forgotPasswordService: ForgotPasswordService,
+		private _authService: AuthService,
 		private _router: Router,
 		private _i18n: I18n
 	) {
@@ -91,13 +91,13 @@ export class ForgotPasswordComponent implements OnDestroy {
 		// start loading animation
 		this._loadingAnimationService.startLoadingAnimation();
 
-		// forgot payload
-		const forgotPayload: AuthForgotInterface = {
+		// payload
+		const formPayload: AuthForgotInterface = {
 			email: this.email.value
 		};
 
 		// start forgot password process
-		this._forgotPasswordService.authForgotPassword(forgotPayload)
+		this._authService.authForgotPassword(formPayload)
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe((res) => {
 				// stop loading animation
@@ -147,7 +147,7 @@ export class ForgotPasswordComponent implements OnDestroy {
 							const state: NavigationExtras = {
 								state: {
 									secretId: 'ham-reset-unlock',
-									email: forgotPayload.email
+									email: formPayload.email
 								}
 							};
 							this._router.navigate([ROUTING.authorization.reset], state).then();

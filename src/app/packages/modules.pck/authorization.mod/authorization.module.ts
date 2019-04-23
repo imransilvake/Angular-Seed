@@ -12,11 +12,9 @@ import { LockScreenComponent } from './components/lock-screen/lock-screen.compon
 import { HotelListService } from './services/hotel-list.service';
 import { LanguageListService } from './services/language-list.service';
 import { AuthUserStatusGuard } from './guards/auth-user-status.guard';
-import { RegisterService } from './services/register.service';
-import { ForgotPasswordService } from './services/forgot-password.service';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { AuthResetPasswordGuard } from './guards/auth-reset-password.guard';
-import { ResetPasswordService } from './services/reset-password.service';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
 	imports: [
@@ -24,8 +22,8 @@ import { ResetPasswordService } from './services/reset-password.service';
 		FieldsModule
 	],
 	declarations: [
-		RegisterComponent,
 		AuthOverviewComponent,
+		RegisterComponent,
 		LoginComponent,
 		ForgotPasswordComponent,
 		ResetPasswordComponent,
@@ -34,9 +32,7 @@ import { ResetPasswordService } from './services/reset-password.service';
 	providers: [
 		AuthUserStatusGuard,
 		AuthResetPasswordGuard,
-		RegisterService,
-		ForgotPasswordService,
-		ResetPasswordService,
+		AuthService,
 		HotelListService,
 		LanguageListService
 	]

@@ -7,7 +7,7 @@ import { SelectDefaultInterface } from '../../../core.pck/fields.mod/interfaces/
 @Injectable()
 export class HotelListService {
 	/**
-	 * fetch hotel list
+	 * set of all hotels
 	 */
 	public getHotelList() {
 		const hotelList: SelectDefaultInterface[] = [
