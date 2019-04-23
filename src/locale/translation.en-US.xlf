@@ -470,6 +470,146 @@
 				</context-group>
 			</trans-unit>
 
+			<!-- Auth - Login -->
+			<trans-unit id="Auth_Login_Info_Title" datatype="html">
+				<source>Title</source>
+				<target>Welcome</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/login/login.component.html
+					</context>
+					<context context-type="linenumber">7</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Login_Info_Description" datatype="html">
+				<source>Description</source>
+				<target>Welcome at the HotelAppManager. Here you can login with your credentials.</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/login/login.component.html
+					</context>
+					<context context-type="linenumber">8</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Login_Info_Version" datatype="html">
+				<source>Version:
+					<x id="INTERPOLATION" equiv-text="{{version}}"/>
+				</source>
+				<target>Version:
+					<x id="INTERPOLATION" equiv-text="{{version}}"/>
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/login/login.component.html
+					</context>
+					<context context-type="linenumber">12</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Login_Form_Title" datatype="html">
+				<source>Login</source>
+				<target>Sign In</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/login/login.component.html
+					</context>
+					<context context-type="linenumber">19</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Login_Form_Language_PlaceHolder" datatype="html">
+				<source>Language</source>
+				<target>Language</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/login/login.component.html
+					</context>
+					<context context-type="linenumber">32</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Login_Form_Username_Label" datatype="html">
+				<source>Username*</source>
+				<target>Username*</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/login/login.component.html
+					</context>
+					<context context-type="linenumber">42</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Login_Form_Username_PlaceHolder" datatype="html">
+				<source>Username</source>
+				<target>Enter username</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/login/login.component.html
+					</context>
+					<context context-type="linenumber">47</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Login_Form_Password_Label" datatype="html">
+				<source>Password*</source>
+				<target>Password*</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/login/login.component.html
+					</context>
+					<context context-type="linenumber">56</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Login_Form_Password_PlaceHolder" datatype="html">
+				<source>Password</source>
+				<target>Enter password</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/login/login.component.html
+					</context>
+					<context context-type="linenumber">63</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Login_Form_Remember_Text" datatype="html">
+				<source>Remember Me</source>
+				<target>Remember me</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/login/login.component.html
+					</context>
+					<context context-type="linenumber">71</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Login_Form_Forget_Password_Link_Text" datatype="html">
+				<source>Forget Password?</source>
+				<target>Forget Password?</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/login/login.component.html
+					</context>
+					<context context-type="linenumber">72</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Login_Form_Submit_Button" datatype="html">
+				<source>Login</source>
+				<target>Login</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/login/login.component.html
+					</context>
+					<context context-type="linenumber">77</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Login_Form_Note" datatype="html">
+				<source>Don&apos;t have an account? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Register
+					<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
+				</source>
+				<target>Don&apos;t have an account? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Register
+					<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/login/login.component.html
+					</context>
+					<context context-type="linenumber">82</context>
+				</context-group>
+			</trans-unit>
+
 			<!-- Auth - Forgot Password -->
 			<trans-unit id="Auth_Forgot_Password_Info_Title" datatype="html">
 				<source>Title</source>

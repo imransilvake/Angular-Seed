@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 	public loginHotelNameSelectStyleType = SelectStyleEnum.INFO;
 	public loginHotelNameIcons = [faGlobeEurope];
 	public languageList: SelectDefaultInterface[] = [];
+	public version = '1.0.0';
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
