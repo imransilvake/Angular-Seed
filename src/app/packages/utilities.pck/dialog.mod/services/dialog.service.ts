@@ -1,10 +1,10 @@
 // angular
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material';
 
 // app
 import { DialogInterface } from '../interfaces/dialog.interface';
 import { DialogComponent } from '../components/dialog.component';
-import { MatDialog } from '@angular/material';
 
 @Injectable({ providedIn: 'root' })
 export class DialogService {

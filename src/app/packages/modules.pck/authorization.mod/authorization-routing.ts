@@ -10,7 +10,7 @@ import { LockScreenComponent } from './components/lock-screen/lock-screen.compon
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { AuthResetPasswordGuard } from './guards/auth-reset-password.guard';
 
-// app routes
+// routes
 export const AUTHORIZATION_ROUTES: Routes = [
 	{
 		path: ROUTING.authorization.register,

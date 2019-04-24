@@ -5,13 +5,13 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { I18n } from '@ngx-translate/i18n-polyfill';
+import { MatCheckboxChange } from '@angular/material';
 
 // store
 import { Store } from '@ngrx/store';
 
 // app
 import { faGlobeEurope } from '@fortawesome/free-solid-svg-icons';
-import { MatCheckboxChange } from '@angular/material';
 import { ROUTING } from '../../../../../../environments/environment';
 import { ValidationService } from '../../../../core.pck/fields.mod/services/validation.service';
 import { LanguageListService } from '../../services/language-list.service';
@@ -209,7 +209,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 						payload = {
 							type: ErrorHandlerTypeEnum.COMMON_ERROR,
 							payload: {
-								title: this._i18n({ value: 'Title: Error Generic', id: 'Auth_Login_Form_Error_Generic_Title' }),
+								title: this._i18n({
+									value: 'Title: Error Generic',
+									id: 'Auth_Login_Form_Error_Generic_Title'
+								}),
 								message: this._i18n({
 									value: 'Description: Error Generic',
 									id: 'Auth_Login_Form_Error_Generic_Description'

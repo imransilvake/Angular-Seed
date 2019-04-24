@@ -38,5 +38,5 @@ const ROUTES: Routes = [
 	}
 ];
 
-// app routes
+// routes
 export const APP_ROUTES: Routes = ROUTES;

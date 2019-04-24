@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { NavigationExtras, Router } from '@angular/router';
 
 // store
 import { Store } from '@ngrx/store';
@@ -17,7 +18,6 @@ import { ErrorHandlerTypeEnum } from '../../../../utilities.pck/error-handler.mo
 import { DialogTypeEnum } from '../../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { DialogService } from '../../../../utilities.pck/dialog.mod/services/dialog.service';
 import { ErrorHandlerInterface } from '../../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
-import { NavigationExtras, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import * as ErrorHandlerActions from '../../../../utilities.pck/error-handler.mod/store/actions/error-handler.actions';
 
