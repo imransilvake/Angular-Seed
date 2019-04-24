@@ -99,7 +99,7 @@ export class ForgotPasswordComponent implements OnDestroy {
 		// start forgot password process
 		this._authService.authForgotPassword(formPayload)
 			.pipe(takeUntil(this._ngUnSubscribe))
-			.subscribe((res) => {
+			.subscribe(() => {
 				// stop loading animation
 				this._loadingAnimationService.stopLoadingAnimation();
 
@@ -140,7 +140,7 @@ export class ForgotPasswordComponent implements OnDestroy {
 				let payload = {};
 				switch (res.error.code) {
 					case 'UserNotFoundException':
-						// error payload
+						// payload
 						payload = {
 							type: ErrorHandlerTypeEnum.COMMON_ERROR,
 							payload: {
@@ -160,7 +160,7 @@ export class ForgotPasswordComponent implements OnDestroy {
 						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
 						break;
 					case 'InvalidParameterException':
-						// error payload
+						// payload
 						payload = {
 							type: ErrorHandlerTypeEnum.COMMON_ERROR,
 							payload: {
@@ -180,7 +180,7 @@ export class ForgotPasswordComponent implements OnDestroy {
 						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
 						break;
 					case 'NotAuthorizedException':
-						// error payload
+						// payload
 						payload = {
 							type: ErrorHandlerTypeEnum.COMMON_ERROR,
 							payload: {
@@ -200,7 +200,7 @@ export class ForgotPasswordComponent implements OnDestroy {
 						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
 						break;
 					default:
-						// error payload
+						// payload
 						payload = {
 							type: ErrorHandlerTypeEnum.COMMON_ERROR,
 							payload: {

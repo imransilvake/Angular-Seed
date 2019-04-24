@@ -145,7 +145,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 				let payload = {};
 				switch (res.error.code) {
 					case 'UserNotFoundException':
-						// error payload
+						// payload
 						payload = {
 							type: ErrorHandlerTypeEnum.COMMON_ERROR,
 							payload: {
@@ -165,7 +165,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
 						break;
 					case 'UserNotConfirmedException':
-						// error payload
+						// payload
 						payload = {
 							type: ErrorHandlerTypeEnum.COMMON_ERROR,
 							payload: {
@@ -185,7 +185,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
 						break;
 					case 'NotAuthorizedException':
-						// error payload
+						// payload
 						payload = {
 							type: ErrorHandlerTypeEnum.COMMON_ERROR,
 							payload: {
@@ -205,8 +205,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
 						break;
 					default:
-						// error payload
-						const data = {
+						// payload
+						payload = {
 							type: ErrorHandlerTypeEnum.COMMON_ERROR,
 							payload: {
 								title: this._i18n({ value: 'Title: Error Generic', id: 'Auth_Login_Form_Error_Generic_Title' }),
@@ -219,7 +219,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 						};
 
 						// error dispatch
-						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(data));
+						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
 				}
 			});
 	}
