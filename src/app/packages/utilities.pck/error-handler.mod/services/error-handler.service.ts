@@ -21,18 +21,14 @@ export class ErrorHandlerService {
 		this._store.select('errorHandler')
 			.subscribe((res) => {
 				if (res && res.type !== null) {
-					// show error
-					const dialogRef = this._dialog.open(ErrorHandlerComponent, {
-						width: '500px',
-						data: res.payload
-					});
+					// stop loading animation
+					this._loadingAnimationService.stopLoadingAnimation();
 
-					// after dialog closed
-					dialogRef.afterClosed()
-						.subscribe(() => {
-							// stop loading animation
-							this._loadingAnimationService.stopLoadingAnimation();
-						});
+					// show error
+					this._dialog.open(ErrorHandlerComponent, {
+						width: '500px',
+						data: res
+					});
 				}
 			});
 	}

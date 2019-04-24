@@ -2,10 +2,9 @@
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs/internal/observable/throwError';
-
+import { I18n } from '@ngx-translate/i18n-polyfill';
 // store
 import { Store } from '@ngrx/store';
-
 // app
 import * as NotificationActions from '../../../utilities.pck/notification.mod/store/actions/notification.actions';
 import * as ErrorHandlerActions from '../../../utilities.pck/error-handler.mod/store/actions/error-handler.actions';
@@ -16,7 +15,10 @@ import { ErrorHandlerPayloadInterface } from '../../../utilities.pck/error-handl
 
 @Injectable({ providedIn: 'root' })
 export class HttpErrorHandlingService {
-	constructor(private _store: Store<NotificationInterface>) {
+	constructor(
+		private _store: Store<NotificationInterface>,
+		private _i18n: I18n
+	) {
 	}
 
 	/**
@@ -24,7 +26,7 @@ export class HttpErrorHandlingService {
 	 *
 	 * @param {HttpErrorResponse} error
 	 * @param {string} apiType
-	 * @returns {any}
+	 * @returns {}
 	 */
 	public handleErrors(error: HttpErrorResponse, apiType: string) {
 		let returnError: any;
@@ -81,38 +83,119 @@ export class HttpErrorHandlingService {
 	 * @returns {Observable<never>}
 	 */
 	private handlePostErrors(response) {
-		const errorCode = response && response.status;
 		let payload: ErrorHandlerPayloadInterface;
+		switch (response.error.code) {
+			case 'InvalidParameterException':
+				payload = {
+					title: this._i18n({
+						value: 'Title: Invalid Parameter Exception',
+						id: 'Error_InvalidParameterException_Title'
+					}),
+					message: this._i18n({
+						value: 'Description: Invalid Parameter Exception',
+						id: 'Error_InvalidParameterException_Description'
+					}),
+					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
+				};
 
-		// if status code exists.
-		if (errorCode) {
-			// error codes
-			switch (errorCode) {
-				case 401:
-					payload = {
-						title: 'bo.forms.agentlogin.login',
-						message: response.error && response.error.errors[0] && response.error.errors[0].value,
-						buttonTexts: ['bo.forms.agentlogin.close']
-					};
-					break;
-				default:
-					if (response.statusText && response.message) {
-						payload = {
-							title: response.statusText,
-							message: response.message,
-							buttonTexts: ['bo.forms.agentlogin.close']
-						};
-					} else {
-						console.error(`undefined error case: ${ errorCode }`);
-					}
-			}
-
-			// dispatch action: error handler common
-			if (payload) {
+				// error dispatch
 				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
-			}
-		} else {
-			console.error('undefined status code!');
+				break;
+			case 'UserNotFoundException':
+				payload = {
+					title: this._i18n({
+						value: 'Title: User Not Found Exception',
+						id: 'Error_UserNotFoundException_Title'
+					}),
+					message: this._i18n({
+						value: 'Description: User Not Found Exception',
+						id: 'Error_UserNotFoundException_Description'
+					}),
+					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
+				};
+
+				// error dispatch
+				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
+				break;
+			case 'UsernameExistsException':
+				payload = {
+					title: this._i18n({
+						value: 'Title: User Exists Exception',
+						id: 'Error_UsernameExistsException_Title'
+					}),
+					message: this._i18n({
+						value: 'Description: User Exists Exception',
+						id: 'Error_UsernameExistsException_Description'
+					}),
+					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
+				};
+
+				// error dispatch
+				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
+				break;
+			case 'UserNotConfirmedException':
+				payload = {
+					title: this._i18n({
+						value: 'Title: User Not Confirmed Exception',
+						id: 'Error_UserNotConfirmedException_Title'
+					}),
+					message: this._i18n({
+						value: 'Description: User Not Confirmed Exception',
+						id: 'Error_UserNotConfirmedException_Description'
+					}),
+					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
+				};
+
+				// error dispatch
+				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
+				break;
+			case 'NotAuthorizedException':
+				payload = {
+					title: this._i18n({
+						value: 'Title: User Not Authorized Exception',
+						id: 'Error_NotAuthorizedException_Title'
+					}),
+					message: this._i18n({
+						value: 'Description: User Not Authorized Exception',
+						id: 'Error_NotAuthorizedException_Description'
+					}),
+					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
+				};
+
+				// error dispatch
+				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
+				break;
+			case 'CodeMismatchException':
+				payload = {
+					title: this._i18n({
+						value: 'Title: Verification Code Exception',
+						id: 'Error_CodeMismatchException_Title'
+					}),
+					message: this._i18n({
+						value: 'Description: Verification Code Exception',
+						id: 'Error_CodeMismatchException_Description'
+					}),
+					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
+				};
+
+				// error dispatch
+				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
+				break;
+			default:
+				payload = {
+					title: this._i18n({
+						value: 'Title: Error Generic',
+						id: 'Error_Generic_Title'
+					}),
+					message: this._i18n({
+						value: 'Description: Error Generic',
+						id: 'Error_Generic_Description'
+					}),
+					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
+				};
+
+				// error dispatch
+				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
 		}
 
 		// return an observable with a user-facing error message.

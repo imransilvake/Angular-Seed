@@ -4,7 +4,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { MatCheckboxChange } from '@angular/material';
 
 // store
@@ -20,14 +19,12 @@ import { SelectDefaultInterface } from '../../../../core.pck/fields.mod/interfac
 import { SelectStyleEnum } from '../../../../core.pck/fields.mod/enums/select-style.enum';
 import { LoadingAnimationService } from '../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { AuthLoginInterface } from '../../interfaces/auth-login.interface';
-import { ErrorHandlerTypeEnum } from '../../../../utilities.pck/error-handler.mod/enums/error-handler-type.enum';
 import { ErrorHandlerInterface } from '../../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 import { DialogService } from '../../../../utilities.pck/dialog.mod/services/dialog.service';
 import { AuthService } from '../../services/auth.service';
 import { StorageService } from '../../../../core.pck/storage.mod/services/storage.service';
 import { StorageTypeEnum } from '../../../../core.pck/storage.mod/enums/storage-type.enum';
 import { localStorageItems, sessionStorageItems } from '../../../../../../app.config';
-import * as ErrorHandlerActions from '../../../../utilities.pck/error-handler.mod/store/actions/error-handler.actions';
 
 @Component({
 	selector: 'app-login',
@@ -54,7 +51,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 		private _languageListService: LanguageListService,
 		private _authService: AuthService,
 		private _router: Router,
-		private _i18n: I18n,
 		private _storageService: StorageService
 	) {
 		// form fields
@@ -137,93 +133,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 				// stop loading animation
 				this._loadingAnimationService.stopLoadingAnimation();
-			}, (res) => {
-				// stop loading animation
-				this._loadingAnimationService.stopLoadingAnimation();
-
-				// handle errors
-				let payload = {};
-				switch (res.error.code) {
-					case 'UserNotFoundException':
-						// payload
-						payload = {
-							type: ErrorHandlerTypeEnum.COMMON_ERROR,
-							payload: {
-								title: this._i18n({
-									value: 'Title: User Not Found Exception',
-									id: 'Auth_Login_Form_Error_UserNotFoundException_Title'
-								}),
-								message: this._i18n({
-									value: 'Description: User Not Found Exception',
-									id: 'Auth_Login_Form_Error_UserNotFoundException_Description'
-								}),
-								buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-							}
-						};
-
-						// error dispatch
-						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
-						break;
-					case 'UserNotConfirmedException':
-						// payload
-						payload = {
-							type: ErrorHandlerTypeEnum.COMMON_ERROR,
-							payload: {
-								title: this._i18n({
-									value: 'Title: User Not Confirmed Exception',
-									id: 'Auth_Login_Form_Error_UserNotConfirmedException_Title'
-								}),
-								message: this._i18n({
-									value: 'Description: User Not Confirmed Exception',
-									id: 'Auth_Login_Form_Error_UserNotConfirmedException_Description'
-								}),
-								buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-							}
-						};
-
-						// error dispatch
-						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
-						break;
-					case 'NotAuthorizedException':
-						// payload
-						payload = {
-							type: ErrorHandlerTypeEnum.COMMON_ERROR,
-							payload: {
-								title: this._i18n({
-									value: 'Title: User Not Authorized Exception',
-									id: 'Auth_Login_Form_Error_NotAuthorizedException_Title'
-								}),
-								message: this._i18n({
-									value: 'Description: User Not Authorized Exception',
-									id: 'Auth_Login_Form_Error_NotAuthorizedException_Description'
-								}),
-								buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-							}
-						};
-
-						// error dispatch
-						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
-						break;
-					default:
-						// payload
-						payload = {
-							type: ErrorHandlerTypeEnum.COMMON_ERROR,
-							payload: {
-								title: this._i18n({
-									value: 'Title: Error Generic',
-									id: 'Auth_Login_Form_Error_Generic_Title'
-								}),
-								message: this._i18n({
-									value: 'Description: Error Generic',
-									id: 'Auth_Login_Form_Error_Generic_Description'
-								}),
-								buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-							}
-						};
-
-						// error dispatch
-						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
-				}
 			});
 	}
 }

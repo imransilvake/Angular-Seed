@@ -14,12 +14,10 @@ import { ROUTING } from '../../../../../../environments/environment';
 import { ValidationService } from '../../../../core.pck/fields.mod/services/validation.service';
 import { LoadingAnimationService } from '../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { AuthForgotInterface } from '../../interfaces/auth-forgot.interface';
-import { ErrorHandlerTypeEnum } from '../../../../utilities.pck/error-handler.mod/enums/error-handler-type.enum';
 import { DialogTypeEnum } from '../../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { DialogService } from '../../../../utilities.pck/dialog.mod/services/dialog.service';
 import { ErrorHandlerInterface } from '../../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 import { AuthService } from '../../services/auth.service';
-import * as ErrorHandlerActions from '../../../../utilities.pck/error-handler.mod/store/actions/error-handler.actions';
 
 @Component({
 	selector: 'app-forgot-password',
@@ -132,90 +130,6 @@ export class ForgotPasswordComponent implements OnDestroy {
 						};
 						this._router.navigate([ROUTING.authorization.reset], state).then();
 					});
-			}, (res) => {
-				// stop loading animation
-				this._loadingAnimationService.stopLoadingAnimation();
-
-				// handle errors
-				let payload = {};
-				switch (res.error.code) {
-					case 'UserNotFoundException':
-						// payload
-						payload = {
-							type: ErrorHandlerTypeEnum.COMMON_ERROR,
-							payload: {
-								title: this._i18n({
-									value: 'Title: User Not Found Exception',
-									id: 'Auth_Forgot_Password_Form_Error_UserNotFoundException_Title'
-								}),
-								message: this._i18n({
-									value: 'Description: User Not Found Exception',
-									id: 'Auth_Forgot_Password_Form_Error_UserNotFoundException_Description'
-								}),
-								buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-							}
-						};
-
-						// error dispatch
-						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
-						break;
-					case 'InvalidParameterException':
-						// payload
-						payload = {
-							type: ErrorHandlerTypeEnum.COMMON_ERROR,
-							payload: {
-								title: this._i18n({
-									value: 'Title: Invalid Parameter Exception',
-									id: 'Auth_Forgot_Password_Form_Error_InvalidParameterException_Title'
-								}),
-								message: this._i18n({
-									value: 'Description: Invalid Parameter Exception',
-									id: 'Auth_Forgot_Password_Form_Error_InvalidParameterException_Description'
-								}),
-								buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-							}
-						};
-
-						// error dispatch
-						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
-						break;
-					case 'NotAuthorizedException':
-						// payload
-						payload = {
-							type: ErrorHandlerTypeEnum.COMMON_ERROR,
-							payload: {
-								title: this._i18n({
-									value: 'Title: Not Authorized Exception',
-									id: 'Auth_Forgot_Password_Form_Error_NotAuthorizedException_Title'
-								}),
-								message: this._i18n({
-									value: 'Description: Not Authorized Exception',
-									id: 'Auth_Forgot_Password_Form_Error_NotAuthorizedException_Description'
-								}),
-								buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-							}
-						};
-
-						// error dispatch
-						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
-						break;
-					default:
-						// payload
-						payload = {
-							type: ErrorHandlerTypeEnum.COMMON_ERROR,
-							payload: {
-								title: this._i18n({ value: 'Title: Error Generic', id: 'Auth_Forgot_Password_Form_Error_Generic_Title' }),
-								message: this._i18n({
-									value: 'Description: Error Generic',
-									id: 'Auth_Forgot_Password_Form_Error_Generic_Description'
-								}),
-								buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-							}
-						};
-
-						// error dispatch
-						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
-				}
 			});
 	}
 }

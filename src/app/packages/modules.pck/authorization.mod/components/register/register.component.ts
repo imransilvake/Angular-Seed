@@ -22,9 +22,7 @@ import { AuthRegisterInterface } from '../../interfaces/auth-register.interface'
 import { DialogService } from '../../../../utilities.pck/dialog.mod/services/dialog.service';
 import { DialogTypeEnum } from '../../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { ErrorHandlerInterface } from '../../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
-import { ErrorHandlerTypeEnum } from '../../../../utilities.pck/error-handler.mod/enums/error-handler-type.enum';
 import { AuthService } from '../../services/auth.service';
-import * as ErrorHandlerActions from '../../../../utilities.pck/error-handler.mod/store/actions/error-handler.actions';
 
 @Component({
 	selector: 'app-register',
@@ -156,32 +154,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
 						// navigate to login route
 						this._router.navigate([ROUTING.authorization.login]).then();
 					});
-			}, (res) => {
-				// stop loading animation
-				this._loadingAnimationService.stopLoadingAnimation();
-
-				// handle errors
-				if (res.error.code === 'UsernameExistsException') {
-					const payload = {
-						type: ErrorHandlerTypeEnum.COMMON_ERROR,
-						payload: {
-							title: this._i18n({ value: 'Title: User Exists Exception', id: 'Auth_Register_Form_Error_UsernameExistsException_Title' }),
-							message: this._i18n({ value: 'Description: User Exists Exception', id: 'Auth_Register_Form_Error_UsernameExistsException_Description' }),
-							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-						}
-					};
-					this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
-				} else {
-					const payload = {
-						type: ErrorHandlerTypeEnum.COMMON_ERROR,
-						payload: {
-							title: this._i18n({ value: 'Title: Error Generic', id: 'Auth_Register_Form_Error_Generic_Title' }),
-							message: this._i18n({ value: 'Description: Error Generic', id: 'Auth_Register_Form_Error_Generic_Description' }),
-							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-						}
-					};
-					this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
-				}
 			});
 	}
 }
