@@ -162,7 +162,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 						};
 
 						// error dispatch
-						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
+						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
 						break;
 					case 'UserNotConfirmedException':
 						// payload
@@ -182,7 +182,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 						};
 
 						// error dispatch
-						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
+						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
 						break;
 					case 'NotAuthorizedException':
 						// payload
@@ -202,7 +202,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 						};
 
 						// error dispatch
-						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
+						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
 						break;
 					default:
 						// payload
@@ -219,7 +219,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 						};
 
 						// error dispatch
-						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
+						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
 				}
 			});
 	}

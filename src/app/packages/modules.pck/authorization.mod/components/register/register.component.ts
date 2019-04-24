@@ -170,7 +170,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 						}
 					};
-					this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
+					this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
 				} else {
 					const payload = {
 						type: ErrorHandlerTypeEnum.COMMON_ERROR,
@@ -180,7 +180,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 						}
 					};
-					this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
+					this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
 				}
 			});
 	}

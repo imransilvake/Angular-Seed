@@ -1,9 +1,6 @@
 // angular
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-
-// app
-import { ErrorHandlerTypeEnum } from '../enums/error-handler-type.enum';
+import { MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
 	selector: 'app-error-handler',
@@ -12,18 +9,6 @@ import { ErrorHandlerTypeEnum } from '../enums/error-handler-type.enum';
 })
 
 export class ErrorHandlerComponent {
-	constructor(
-		public dialogRef: MatDialogRef<ErrorHandlerComponent>,
-		@Inject(MAT_DIALOG_DATA) public data: any
-	) {
-	}
-
-	/**
-	 * close dialog window
-	 *
-	 * @param {ErrorHandlerTypeEnum} errorType
-	 */
-	public onClickCloseDialog(errorType: ErrorHandlerTypeEnum): void {
-		this.dialogRef.close(errorType); // close modal
+	constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
 	}
 }
