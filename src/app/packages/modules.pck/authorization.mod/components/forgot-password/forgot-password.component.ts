@@ -103,75 +103,119 @@ export class ForgotPasswordComponent implements OnDestroy {
 				// stop loading animation
 				this._loadingAnimationService.stopLoadingAnimation();
 
-				if (res && res.code === 'UserNotFoundException') {
-					// error payload
-					const data = {
-						type: ErrorHandlerTypeEnum.COMMON_ERROR,
-						payload: {
-							title: this._i18n({
-								value: 'Title: User Not Found Exception',
-								id: 'Auth_Forgot_Password_Form_Error_UserNotFoundException_Title'
-							}),
-							message: this._i18n({
-								value: 'Description: User Not Found Exception',
-								id: 'Auth_Forgot_Password_Form_Error_UserNotFoundException_Description'
-							}),
-							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-						}
-					};
+				// clear the form
+				this.formFields.reset();
 
-					// error dispatch
-					this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(data));
-				} else {
-					// clear the form
-					this.formFields.reset();
-
-					// dialog payload
-					const data = {
-						type: DialogTypeEnum.NOTICE,
-						payload: {
-							title: this._i18n({ value: 'Title: Password Reset', id: 'Auth_Forgot_Password_Form_Success_Title' }),
-							message: this._i18n({
-								value: 'Description: Forgot Password',
-								id: 'Auth_Forgot_Password_Form_Success_Description'
-							}),
-							buttonTexts: [this._i18n({ value: 'Button - OK', id: 'Common_Button_OK' })]
-						}
-					};
-
-					// dialog service
-					this._dialogService.showDialog(data)
-						.pipe(takeUntil(this._ngUnSubscribe))
-						.subscribe(() => {
-							// navigate to reset route
-							const state: NavigationExtras = {
-								state: {
-									secretId: 'ham-reset-unlock',
-									email: formPayload.email
-								}
-							};
-							this._router.navigate([ROUTING.authorization.reset], state).then();
-						});
-				}
-			}, () => {
-				// stop loading animation
-				this._loadingAnimationService.stopLoadingAnimation();
-
-				// error payload
+				// dialog payload
 				const data = {
-					type: ErrorHandlerTypeEnum.COMMON_ERROR,
+					type: DialogTypeEnum.NOTICE,
 					payload: {
-						title: this._i18n({ value: 'Title: Error Generic', id: 'Auth_Forgot_Password_Form_Error_Generic_Title' }),
+						title: this._i18n({ value: 'Title: Password Reset', id: 'Auth_Forgot_Password_Form_Success_Title' }),
 						message: this._i18n({
-							value: 'Description: Error Generic',
-							id: 'Auth_Forgot_Password_Form_Error_Generic_Description'
+							value: 'Description: Forgot Password',
+							id: 'Auth_Forgot_Password_Form_Success_Description'
 						}),
-						buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
+						buttonTexts: [this._i18n({ value: 'Button - OK', id: 'Common_Button_OK' })]
 					}
 				};
 
-				// error dispatch
-				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(data));
+				// dialog service
+				this._dialogService.showDialog(data)
+					.pipe(takeUntil(this._ngUnSubscribe))
+					.subscribe(() => {
+						// navigate to reset route
+						const state: NavigationExtras = {
+							state: {
+								secretId: 'ham-reset-unlock',
+								email: formPayload.email
+							}
+						};
+						this._router.navigate([ROUTING.authorization.reset], state).then();
+					});
+			}, (res) => {
+				// stop loading animation
+				this._loadingAnimationService.stopLoadingAnimation();
+
+				// handle errors
+				let payload = {};
+				switch (res.error.code) {
+					case 'UserNotFoundException':
+						// error payload
+						payload = {
+							type: ErrorHandlerTypeEnum.COMMON_ERROR,
+							payload: {
+								title: this._i18n({
+									value: 'Title: User Not Found Exception',
+									id: 'Auth_Forgot_Password_Form_Error_UserNotFoundException_Title'
+								}),
+								message: this._i18n({
+									value: 'Description: User Not Found Exception',
+									id: 'Auth_Forgot_Password_Form_Error_UserNotFoundException_Description'
+								}),
+								buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
+							}
+						};
+
+						// error dispatch
+						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
+						break;
+					case 'InvalidParameterException':
+						// error payload
+						payload = {
+							type: ErrorHandlerTypeEnum.COMMON_ERROR,
+							payload: {
+								title: this._i18n({
+									value: 'Title: Invalid Parameter Exception',
+									id: 'Auth_Forgot_Password_Form_Error_InvalidParameterException_Title'
+								}),
+								message: this._i18n({
+									value: 'Description: Invalid Parameter Exception',
+									id: 'Auth_Forgot_Password_Form_Error_InvalidParameterException_Description'
+								}),
+								buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
+							}
+						};
+
+						// error dispatch
+						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
+						break;
+					case 'NotAuthorizedException':
+						// error payload
+						payload = {
+							type: ErrorHandlerTypeEnum.COMMON_ERROR,
+							payload: {
+								title: this._i18n({
+									value: 'Title: Not Authorized Exception',
+									id: 'Auth_Forgot_Password_Form_Error_NotAuthorizedException_Title'
+								}),
+								message: this._i18n({
+									value: 'Description: Not Authorized Exception',
+									id: 'Auth_Forgot_Password_Form_Error_NotAuthorizedException_Description'
+								}),
+								buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
+							}
+						};
+
+						// error dispatch
+						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
+						break;
+					default:
+						// error payload
+						payload = {
+							type: ErrorHandlerTypeEnum.COMMON_ERROR,
+							payload: {
+								title: this._i18n({ value: 'Title: Error Generic', id: 'Auth_Forgot_Password_Form_Error_Generic_Title' }),
+								message: this._i18n({
+									value: 'Description: Error Generic',
+									id: 'Auth_Forgot_Password_Form_Error_Generic_Description'
+								}),
+								buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
+							}
+						};
+
+						// error dispatch
+						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
+				}
 			});
 	}
 }

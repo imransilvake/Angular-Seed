@@ -141,7 +141,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 				// stop loading animation
 				this._loadingAnimationService.stopLoadingAnimation();
 
-				// response
+				// handle errors
 				let payload = {};
 				switch (res.error.code) {
 					case 'UserNotFoundException':

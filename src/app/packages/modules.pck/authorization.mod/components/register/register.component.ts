@@ -132,13 +132,37 @@ export class RegisterComponent implements OnInit, OnDestroy {
 		// start registration process
 		this._authService.authRegister(formPayload)
 			.pipe(takeUntil(this._ngUnSubscribe))
-			.subscribe((res) => {
+			.subscribe(() => {
+				// clear the form
+				this.formFields.reset();
+
 				// stop loading animation
 				this._loadingAnimationService.stopLoadingAnimation();
 
-				if (res && res.code === 'UsernameExistsException') {
-					// error payload
-					const data = {
+				// dialog payload
+				const data = {
+					type: DialogTypeEnum.NOTICE,
+					payload: {
+						title: this._i18n({ value: 'Title: Success', id: 'Auth_Register_Form_Success_Title' }),
+						message: this._i18n({ value: 'Description: Success', id: 'Auth_Register_Form_Success_Description' }),
+						buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
+					}
+				};
+
+				// dialog service
+				this._dialogService.showDialog(data)
+					.pipe(takeUntil(this._ngUnSubscribe))
+					.subscribe(() => {
+						// navigate to login route
+						this._router.navigate([ROUTING.authorization.login]).then();
+					});
+			}, (res) => {
+				// stop loading animation
+				this._loadingAnimationService.stopLoadingAnimation();
+
+				// handle errors
+				if (res.error.code === 'UsernameExistsException') {
+					const payload = {
 						type: ErrorHandlerTypeEnum.COMMON_ERROR,
 						payload: {
 							title: this._i18n({ value: 'Title: User Exists Exception', id: 'Auth_Register_Form_Error_UsernameExistsException_Title' }),
@@ -146,47 +170,18 @@ export class RegisterComponent implements OnInit, OnDestroy {
 							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 						}
 					};
-
-					// error dispatch
-					this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(data));
+					this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
 				} else {
-					// clear the form
-					this.formFields.reset();
-
-					// dialog payload
-					const data = {
-						type: DialogTypeEnum.NOTICE,
+					const payload = {
+						type: ErrorHandlerTypeEnum.COMMON_ERROR,
 						payload: {
-							title: this._i18n({ value: 'Title: Success', id: 'Auth_Register_Form_Success_Title' }),
-							message: this._i18n({ value: 'Description: Success', id: 'Auth_Register_Form_Success_Description' }),
+							title: this._i18n({ value: 'Title: Error Generic', id: 'Auth_Register_Form_Error_Generic_Title' }),
+							message: this._i18n({ value: 'Description: Error Generic', id: 'Auth_Register_Form_Error_Generic_Description' }),
 							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 						}
 					};
-
-					// dialog service
-					this._dialogService.showDialog(data)
-						.pipe(takeUntil(this._ngUnSubscribe))
-						.subscribe(() => {
-							// navigate to login route
-							this._router.navigate([ROUTING.authorization.login]).then();
-						});
+					this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
 				}
-			}, () => {
-				// stop loading animation
-				this._loadingAnimationService.stopLoadingAnimation();
-
-				// error payload
-				const data = {
-					type: ErrorHandlerTypeEnum.COMMON_ERROR,
-					payload: {
-						title: this._i18n({ value: 'Title: Error Generic', id: 'Auth_Register_Form_Error_Generic_Title' }),
-						message: this._i18n({ value: 'Description: Error Generic', id: 'Auth_Register_Form_Error_Generic_Description' }),
-						buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-					}
-				};
-
-				// error dispatch
-				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(data));
 			});
 	}
 }
