@@ -16,7 +16,12 @@ export const AppServices: { [name: string]: AppServicesInterface } = {
 
 // local-storage items
 export const localStorageItems = {
-	language: 'ham-ls-01'
+	userState: 'ham-ls-us'
+};
+
+// session-storage items
+export const sessionStorageItems = {
+	userState: 'ham-ss-us'
 };
 
 // headers for a request to backend

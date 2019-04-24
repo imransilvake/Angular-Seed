@@ -1,18 +1,19 @@
 // angular
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Router } from '@angular/router';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 
 // store
 import { Store } from '@ngrx/store';
 
 // app
+import { faGlobeEurope } from '@fortawesome/free-solid-svg-icons';
+import { MatCheckboxChange } from '@angular/material';
 import { ROUTING } from '../../../../../../environments/environment';
 import { ValidationService } from '../../../../core.pck/fields.mod/services/validation.service';
-import { faGlobeEurope } from '@fortawesome/free-solid-svg-icons';
 import { LanguageListService } from '../../services/language-list.service';
 import { SelectTypeEnum } from '../../../../core.pck/fields.mod/enums/select-type.enum';
 import { SelectDefaultInterface } from '../../../../core.pck/fields.mod/interfaces/select-default-interface';
@@ -23,6 +24,9 @@ import { ErrorHandlerTypeEnum } from '../../../../utilities.pck/error-handler.mo
 import { ErrorHandlerInterface } from '../../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 import { DialogService } from '../../../../utilities.pck/dialog.mod/services/dialog.service';
 import { AuthService } from '../../services/auth.service';
+import { StorageService } from '../../../../core.pck/storage.mod/services/storage.service';
+import { StorageTypeEnum } from '../../../../core.pck/storage.mod/enums/storage-type.enum';
+import { localStorageItems, sessionStorageItems } from '../../../../../../app.config';
 import * as ErrorHandlerActions from '../../../../utilities.pck/error-handler.mod/store/actions/error-handler.actions';
 
 @Component({
@@ -38,6 +42,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 	public loginHotelNameSelectStyleType = SelectStyleEnum.INFO;
 	public loginHotelNameIcons = [faGlobeEurope];
 	public languageList: SelectDefaultInterface[] = [];
+	public rememberMe: MatCheckboxChange;
 	public version = '1.0.0';
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
@@ -49,7 +54,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 		private _languageListService: LanguageListService,
 		private _authService: AuthService,
 		private _router: Router,
-		private _i18n: I18n
+		private _i18n: I18n,
+		private _storageService: StorageService
 	) {
 		// form fields
 		this.formFields = new FormGroup({
@@ -119,13 +125,25 @@ export class LoginComponent implements OnInit, OnDestroy {
 		this._authService.authLogin(formPayload)
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe((res) => {
-				let payload = {};
+				// validate where to store user session based on remember me
+				if (this.rememberMe && this.rememberMe.checked) {
+					this._storageService.put(localStorageItems.userState, res, StorageTypeEnum.PERSISTANT);
+				} else {
+					this._storageService.put(sessionStorageItems.userState, res, StorageTypeEnum.SESSION);
+				}
 
+				// navigate to dashboard
+				this._router.navigate([ROUTING.dashboard]).then();
+
+				// stop loading animation
+				this._loadingAnimationService.stopLoadingAnimation();
+			}, (res) => {
 				// stop loading animation
 				this._loadingAnimationService.stopLoadingAnimation();
 
 				// response
-				switch (res.code) {
+				let payload = {};
+				switch (res.error.code) {
 					case 'UserNotFoundException':
 						// error payload
 						payload = {
@@ -186,9 +204,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 						// error dispatch
 						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
 						break;
-					case 'Ok':
-						// todo
-						break;
 					default:
 						// error payload
 						const data = {
@@ -206,25 +221,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 						// error dispatch
 						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(data));
 				}
-			}, () => {
-				// stop loading animation
-				this._loadingAnimationService.stopLoadingAnimation();
-
-				// error payload
-				const data = {
-					type: ErrorHandlerTypeEnum.COMMON_ERROR,
-					payload: {
-						title: this._i18n({ value: 'Title: Error Generic', id: 'Auth_Login_Form_Error_Generic_Title' }),
-						message: this._i18n({
-							value: 'Description: Error Generic',
-							id: 'Auth_Login_Form_Error_Generic_Description'
-						}),
-						buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-					}
-				};
-
-				// error dispatch
-				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(data));
 			});
 	}
 }

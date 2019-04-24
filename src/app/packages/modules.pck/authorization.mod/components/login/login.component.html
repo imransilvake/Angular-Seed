@@ -68,7 +68,7 @@
 
 					<!-- Remember Me -->
 					<div class="cd-col ham-sby-remember">
-						<mat-checkbox class="ham-type-1" i18n="@@Auth_Login_Form_Remember_Text">Remember Me</mat-checkbox>
+						<mat-checkbox class="ham-type-1" i18n="@@Auth_Login_Form_Remember_Text" (change)="rememberMe = $event">Remember Me</mat-checkbox>
 						<a [routerLink]="['/' + routing.authorization.forgot]" i18n="@@Auth_Login_Form_Forget_Password_Link_Text">Forget Password?</a>
 					</div>
 
