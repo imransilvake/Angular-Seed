@@ -17,8 +17,8 @@
 		"build.app.prod-de": "ng build -c prod-de",
 		"lint:ts": "ng lint",
 		"lint:scss": "stylelint \"src/**/*.scss\" --syntax scss",
-		"translate": "ng xi18n --output-path locale --out-file translation-new.xlf",
-		"translate:ts": "ngx-extractor --input=src/**/*.ts --format=xlf --out-file=src/locale/translation-new.xlf",
+		"translate": "ng xi18n --output-path locale --out-file translation-temp.xlf",
+		"translate:ts": "ngx-extractor --input=src/**/*.ts --format=xlf --out-file=src/locale/translation-temp.xlf",
 		"test": "ng test",
 		"e2e": "ng e2e"
 	},
