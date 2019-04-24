@@ -763,6 +763,46 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="Auth_Forgot_Password_Form_Error_InvalidParameterException_Title" datatype="html">
+				<source>Title: Invalid Parameter Exception</source>
+				<target>Invalid Parameter Exception</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Forgot_Password_Form_Error_InvalidParameterException_Description" datatype="html">
+				<source>Description: Invalid Parameter Exception</source>
+				<target>Please contact the support team to get further knowledge about issue.</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Forgot_Password_Form_Error_NotAuthorizedException_Title" datatype="html">
+				<source>Title: Not Authorized Exception</source>
+				<target>Not Authorized Exception</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Forgot_Password_Form_Error_NotAuthorizedException_Description" datatype="html">
+				<source>Description: Not Authorized Exception</source>
+				<target>You are not authorized to reset your password. Please contact support!</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
 			<trans-unit id="Auth_Forgot_Password_Form_Success_Title" datatype="html">
 				<source>Title: Password Reset</source>
 				<target>Password was reset</target>
