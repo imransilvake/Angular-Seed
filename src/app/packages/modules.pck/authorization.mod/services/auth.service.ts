@@ -76,17 +76,20 @@ export class AuthService {
 	public logoutUser() {
 		const userState = this.authenticateUser();
 		if (userState) {
+			// payload
 			const payload = { accessToken: userState.accessToken.jwtToken };
+
+			// call sign-out service
 			this._proxyService
 				.postAPI(AppServices['authLogout'], { bodyParams: payload })
-				.subscribe(() => {
-					// clear data
-					StorageService.clearAllLocalStorageItems();
-					StorageService.clearAllSessionStorageItems();
+				.subscribe();
 
-					// navigate to login
-					this._router.navigate([ROUTING.authorization.login]).then();
-				});
+			// clear data
+			StorageService.clearAllLocalStorageItems();
+			StorageService.clearAllSessionStorageItems();
+
+			// navigate to login
+			this._router.navigate([ROUTING.authorization.login]).then();
 		}
 	}
 }
