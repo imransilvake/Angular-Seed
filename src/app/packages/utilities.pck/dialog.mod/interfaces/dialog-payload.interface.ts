@@ -1,4 +1,3 @@
-// dialog payload interface
 export interface DialogPayloadInterface {
 	errorCode?: string;
 	icon?: string;

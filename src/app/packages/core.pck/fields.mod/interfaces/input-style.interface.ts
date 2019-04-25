@@ -1,4 +1,3 @@
-// input style interface
 export interface InputStyleInterface {
 	status?: boolean;
 	changeDirection?: boolean;
