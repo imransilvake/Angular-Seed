@@ -199,8 +199,5 @@ export class HttpErrorHandlingService {
 				// error dispatch
 				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
 		}
-
-		// return an observable with a user-facing error message.
-		return throwError('Something bad happened; please try again later or contact the developer.');
 	}
 }
