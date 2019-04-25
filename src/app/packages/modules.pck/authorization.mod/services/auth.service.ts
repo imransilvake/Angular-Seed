@@ -1,17 +1,20 @@
 // angular
 import { Injectable } from '@angular/core';
-
 // app
-import { AppServices } from '../../../../../app.config';
+import { AppServices, localStorageItems, sessionStorageItems } from '../../../../../app.config';
 import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service';
 import { AuthForgotInterface } from '../interfaces/auth-forgot.interface';
 import { AuthRegisterInterface } from '../interfaces/auth-register.interface';
 import { AuthLoginInterface } from '../interfaces/auth-login.interface';
 import { AuthResetInterface } from '../interfaces/auth-reset.interface';
+import { StorageTypeEnum } from '../../../core.pck/storage.mod/enums/storage-type.enum';
+import { StorageService } from '../../../core.pck/storage.mod/services/storage.service';
 
 @Injectable()
 export class AuthService {
-	constructor(private _proxyService: ProxyService) {
+	constructor(
+		private _proxyService: ProxyService,
+		private _storageService: StorageService) {
 	}
 
 	/**
@@ -52,5 +55,13 @@ export class AuthService {
 	public authResetPassword(payload: AuthResetInterface) {
 		return this._proxyService
 			.postAPI(AppServices['authResetPassword'], { bodyParams: payload });
+	}
+
+	/**
+	 * authenticate logged-in user
+	 */
+	public authAuthenticateUser() {
+		return this._storageService.get(localStorageItems.userState, StorageTypeEnum.PERSISTANT) ||
+			this._storageService.get(sessionStorageItems.userState, StorageTypeEnum.SESSION);
 	}
 }

@@ -4,15 +4,15 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from
 
 // app
 import { ROUTING } from '../../../../../environments/environment';
-import { StorageService } from '../../../core.pck/storage.mod/services/storage.service';
-import { localStorageItems, sessionStorageItems } from '../../../../../app.config';
-import { StorageTypeEnum } from '../../../core.pck/storage.mod/enums/storage-type.enum';
+import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class AuthUserStatusGuard implements CanActivate {
+	public isUserLoggedIn = false;
+
 	constructor(
 		private _router: Router,
-		private _storageService: StorageService
+		private _authService: AuthService
 	) {
 	}
 
@@ -23,14 +23,12 @@ export class AuthUserStatusGuard implements CanActivate {
 	 * @param state
 	 */
 	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-		const userStatus =
-			this._storageService.get(localStorageItems.userState, StorageTypeEnum.PERSISTANT) ||
-			this._storageService.get(sessionStorageItems.userState, StorageTypeEnum.SESSION);
+		this.isUserLoggedIn = this._authService.authAuthenticateUser();
 		const authRoutes = Object.values(ROUTING.authorization);
 		const currentPath = state.url.substring(1);
 
 		// user is authenticated
-		if (userStatus) {
+		if (this.isUserLoggedIn) {
 			if (authRoutes.includes(currentPath)) {
 				// navigate to dashboard
 				this._router.navigate([ROUTING.dashboard]).then();
