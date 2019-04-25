@@ -41,7 +41,6 @@ Please follow the link for the documentation: [GUIDE](./GUIDE.md)
 - [X] [Redux Devtools](https://github.com/ngrx/store-devtools)
 - [X] [Angular Material](https://material.angular.io/)
 - [X] [Moment](https://momentjs.com/)
-- [X] [CryptoJS](https://github.com/brix/crypto-js)
 - [X] [HammerJS](https://hammerjs.github.io/)
 - [X] [Fontawesome](https://fontawesome.com/)
 

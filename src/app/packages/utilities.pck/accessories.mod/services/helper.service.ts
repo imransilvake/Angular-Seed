@@ -5,10 +5,8 @@ import { debounceTime } from 'rxjs/operators';
 import { merge } from 'rxjs/internal/observable/merge';
 
 // app
-import * as CryptoJS from 'crypto-js';
-import { AppOptions } from '../../../../../app.config';
-
 declare const document: any;
+declare const event: Event;
 
 @Injectable({ providedIn: 'root' })
 export class HelperService {
@@ -17,7 +15,7 @@ export class HelperService {
 	 *
 	 * @param {boolean} status
 	 */
-	public overflowToggle(status: boolean) {
+	public static overflowToggle(status: boolean) {
 		if (status) {
 			const root = document.getElementsByTagName('html')[0];
 			const body = document.getElementsByTagName('body')[0];
@@ -46,43 +44,28 @@ export class HelperService {
 	 *
 	 * @returns {boolean}
 	 */
-	public get isDesktopView(): boolean {
+	public static get isDesktopView(): boolean {
 		return window && window.innerWidth >= 768;
 	}
 
 	/**
 	 * detect: window resize
-	 *
-	 * @returns {Observable<any>}
 	 */
-	public detectWindowResize() {
+	public static detectWindowResize() {
 		return fromEvent(window, 'resize');
 	}
 
 	/**
-	 * detect: key press
-	 *
-	 * @returns {Observable<any>}
-	 */
-	public detectKeyPress() {
-		return fromEvent(document, 'keyup').pipe(debounceTime(200));
-	}
-
-	/**
 	 * detect: scroll
-	 *
-	 * @returns {Observable<any>}
 	 */
-	public detectScroll() {
+	public static detectScroll() {
 		return fromEvent(window, 'scroll');
 	}
 
 	/**
 	 * detect: full-screen
-	 *
-	 * @returns {Observable<any>}
 	 */
-	public detectFullScreen() {
+	public static detectFullScreen() {
 		return merge(
 			fromEvent(document, 'fullscreenchange').pipe(debounceTime(200)),
 			fromEvent(document, 'webkitfullscreenchange').pipe(debounceTime(200)),
@@ -92,36 +75,9 @@ export class HelperService {
 	}
 
 	/**
-	 * encrypt data
-	 *
-	 * @param value
-	 * @returns {string}
-	 */
-	public encryptData(value: any): string {
-		return CryptoJS.AES.encrypt(value, AppOptions.secretKey).toString();
-	}
-
-	/**
-	 * decrypt data
-	 *
-	 * @param value
-	 * @returns {string}
-	 */
-	public decryptData(value: any): string {
-		return CryptoJS.AES.decrypt(value, AppOptions.secretKey).toString(CryptoJS.enc.Utf8);
-	}
-
-	/**
-	 * stop propagation
-	 */
-	public stopPropagation() {
-		event.stopPropagation();
-	}
-
-	/**
 	 * open document in full-screen
 	 */
-	public showFullScreen() {
+	public static showFullScreen() {
 		// request
 		const elem = document.documentElement;
 		const methodToBeInvoked =
@@ -134,5 +90,19 @@ export class HelperService {
 		if (methodToBeInvoked) {
 			methodToBeInvoked.call(elem);
 		}
+	}
+
+	/**
+	 * detect: key press
+	 */
+	public static detectKeyPress() {
+		return fromEvent(document, 'keyup').pipe(debounceTime(200));
+	}
+
+	/**
+	 * stop propagation
+	 */
+	public static stopPropagation() {
+		event.stopPropagation();
 	}
 }

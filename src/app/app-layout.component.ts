@@ -22,12 +22,9 @@ export class AppLayoutComponent implements AfterViewInit, OnDestroy {
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
-	constructor(
-		private _scrollTopService: ScrollTopService,
-		public _helperService: HelperService
-	) {
+	constructor(private _scrollTopService: ScrollTopService) {
 		// detect current view
-		this.isViewDesktop = this._helperService.isDesktopView;
+		this.isViewDesktop = HelperService.isDesktopView;
 	}
 
 	ngAfterViewInit() {
@@ -35,7 +32,7 @@ export class AppLayoutComponent implements AfterViewInit, OnDestroy {
 		this._scrollTopService.scrollTopListener();
 
 		// listen to scroll event
-		this._helperService.detectScroll()
+		HelperService.detectScroll()
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(() => {
 				// set top Head height
@@ -43,7 +40,7 @@ export class AppLayoutComponent implements AfterViewInit, OnDestroy {
 			});
 
 		// listen to resize event
-		this._helperService.detectWindowResize()
+		HelperService.detectWindowResize()
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(() => {
 				// set top Head height

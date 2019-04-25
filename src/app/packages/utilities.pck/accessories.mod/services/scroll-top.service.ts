@@ -9,14 +9,14 @@ import { HelperService } from './helper.service';
 export class ScrollTopService {
 	public scrollEvent: EventEmitter<any> = new EventEmitter();
 
-	constructor(private _helperService: HelperService) {
+	constructor() {
 	}
 
 	/**
 	 * scroll to top listener
 	 */
 	public scrollTopListener() {
-		this._helperService.detectScroll()
+		HelperService.detectScroll()
 			.pipe(
 				// we are only interested in the scrollY value of these events
 				// let's create a stream with only these values

@@ -11,7 +11,7 @@ import { HelperService } from '../../../../utilities.pck/accessories.mod/service
 })
 
 export class NotificationMenuComponent {
-	constructor(private _helperService: HelperService) {
+	constructor() {
 	}
 
 	/**
@@ -19,6 +19,6 @@ export class NotificationMenuComponent {
 	 * @param event
 	 */
 	public onClickStopPropagation(event) {
-		this._helperService.stopPropagation();
+		HelperService.stopPropagation();
 	}
 }

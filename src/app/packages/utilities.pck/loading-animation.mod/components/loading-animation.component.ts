@@ -31,10 +31,7 @@ export class LoadingAnimationComponent implements OnInit, OnDestroy {
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
-	constructor(
-		private _helperService: HelperService,
-		private _store: Store<LoadingAnimationInterface>
-	) {
+	constructor(private _store: Store<LoadingAnimationInterface>) {
 	}
 
 	ngOnInit() {
@@ -49,7 +46,7 @@ export class LoadingAnimationComponent implements OnInit, OnDestroy {
 					this.isShowLoadingAnimation = status;
 
 					// adjust body overflow
-					this._helperService.overflowToggle(status);
+					HelperService.overflowToggle(status);
 
 					// emit value
 					this.changedAnimationStatus.emit(status);

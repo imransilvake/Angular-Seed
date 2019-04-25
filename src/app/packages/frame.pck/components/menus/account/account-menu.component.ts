@@ -13,7 +13,7 @@ import { faAlignRight, faEnvelope, faPowerOff, faUser } from '@fortawesome/free-
 export class AccountMenuComponent {
 	public faIcons = [faEnvelope, faUser, faPowerOff, faAlignRight];
 
-	constructor(private _helperService: HelperService) {
+	constructor() {
 	}
 
 	/**
@@ -21,6 +21,6 @@ export class AccountMenuComponent {
 	 * @param event
 	 */
 	public onClickStopPropagation(event) {
-		this._helperService.stopPropagation();
+		HelperService.stopPropagation();
 	}
 }

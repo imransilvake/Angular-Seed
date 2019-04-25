@@ -20,12 +20,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	public appFullScreen = false;
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
-	constructor(private _helperService: HelperService) {
+	constructor() {
 	}
 
 	ngOnInit() {
 		// listen to full-screen event
-		this._helperService.detectFullScreen()
+		HelperService.detectFullScreen()
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(() => {
 				const fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
@@ -35,10 +35,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 			});
 
 		// listen to window resize event
-		this._helperService.detectWindowResize()
+		HelperService.detectWindowResize()
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(() => {
-				if (!this._helperService.isDesktopView && this.drawer.opened) {
+				if (!HelperService.isDesktopView && this.drawer.opened) {
 					// set icons menu
 					this.drawer.toggle();
 				}
@@ -59,6 +59,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 		this.appFullScreen = true;
 
 		// show full screen
-		this._helperService.showFullScreen();
+		HelperService.showFullScreen();
 	}
 }
