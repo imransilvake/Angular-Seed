@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 // app
-import { AppServices, localStorageItems, sessionStorageItems } from '../../../../../app.config';
+import { AppServices, LocalStorageItems, SessionStorageItems } from '../../../../../app.config';
 import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service';
 import { AuthForgotInterface } from '../interfaces/auth-forgot.interface';
 import { AuthRegisterInterface } from '../interfaces/auth-register.interface';
@@ -65,24 +65,24 @@ export class AuthService {
 	/**
 	 * authenticate logged-in user
 	 */
-	public authAuthenticateUser() {
-		return this._storageService.get(localStorageItems.userState, StorageTypeEnum.PERSISTANT) ||
-			this._storageService.get(sessionStorageItems.userState, StorageTypeEnum.SESSION);
+	public authenticateUser() {
+		return this._storageService.get(LocalStorageItems.userState, StorageTypeEnum.PERSISTANT) ||
+			this._storageService.get(SessionStorageItems.userState, StorageTypeEnum.SESSION);
 	}
 
 	/**
 	 * logout user
 	 */
 	public logoutUser() {
-		const userState = this.authAuthenticateUser();
+		const userState = this.authenticateUser();
 		if (userState) {
 			const payload = { accessToken: userState.accessToken.jwtToken };
 			this._proxyService
 				.postAPI(AppServices['authLogout'], { bodyParams: payload })
 				.subscribe(() => {
 					// clear data
-					this._storageService.clearAllLocalStorageItems();
-					this._storageService.clearAllSessionStorageItems();
+					StorageService.clearAllLocalStorageItems();
+					StorageService.clearAllSessionStorageItems();
 
 					// navigate to login
 					this._router.navigate([ROUTING.authorization.login]).then();

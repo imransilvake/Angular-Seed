@@ -1,9 +1,9 @@
 // angular
-import { EventEmitter, Injectable } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
+import { Injectable } from '@angular/core';
 import { interval } from 'rxjs/internal/observable/interval';
 import { startWith, switchMap } from 'rxjs/operators';
 import { Subject } from 'rxjs/internal/Subject';
+import { I18n } from '@ngx-translate/i18n-polyfill';
 
 // store
 import { Store } from '@ngrx/store';
@@ -11,29 +11,27 @@ import { Store } from '@ngrx/store';
 // app
 import * as SessionActions from '../store/actions/session.actions';
 import * as ErrorHandlerActions from '../../../utilities.pck/error-handler.mod/store/actions/error-handler.actions';
-import { AppServices, SessionStorageItems } from '../../../../../app.config';
-import { AuthenticationService } from '../../authentication.mod/services/authentication.service';
+import { AppOptions, SessionStorageItems } from '../../../../../app.config';
 import { StorageTypeEnum } from '../../storage.mod/enums/storage-type.enum';
 import { StorageService } from '../../storage.mod/services/storage.service';
-import { ProxyService } from '../../proxy.mod/services/proxy.service';
 import { SessionInterface } from '../interfaces/session.interface';
 import { SessionTypeEnum } from '../enums/session-type.enum';
 import { SessionPayloadInterface } from '../interfaces/session-payload.interface';
 import { ErrorHandlerInterface } from '../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 import { LoadingAnimationService } from '../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { ErrorHandlerPayloadInterface } from '../../../utilities.pck/error-handler.mod/interfaces/error-handler-payload.interface';
+import { AuthService } from '../../../modules.pck/authorization.mod/services/auth.service';
 
 @Injectable()
 export class SessionService {
-	public userInfo: EventEmitter<any> = new EventEmitter();
 	private sessionTimeout = new Subject();
 
 	constructor(
-		private _authService: AuthenticationService,
+		private _authService: AuthService,
 		private _storageService: StorageService,
-		private _proxyService: ProxyService,
 		private _store: Store<{ SessionInterface: SessionInterface, ErrorHandlerInterface: ErrorHandlerInterface }>,
-		private _loadingAnimationService: LoadingAnimationService
+		private _loadingAnimationService: LoadingAnimationService,
+		private _i18n: I18n
 	) {
 		// subscribe: session
 		this._store.select('session')
@@ -43,8 +41,8 @@ export class SessionService {
 						case SessionTypeEnum.SESSION_COUNTER_START:
 							this.handleSessionTimeout(res.payload);
 							break;
-						case SessionTypeEnum.SESSION_COUNTER_RESET:
-							this.resetSessionTimeout();
+						case SessionTypeEnum.SESSION_COUNTER_EXIT:
+							this.exitSessionTimeout();
 							break;
 					}
 				}
@@ -55,103 +53,20 @@ export class SessionService {
 	}
 
 	/**
-	 * start session
+	 * start session when user logs in
 	 */
 	public startSession() {
-		// if user is logged in
-		if (this._authService.isLoggedIn) {
-			const userSessionInfo = this._storageService.get(SessionStorageItems.userSessionInfo, StorageTypeEnum.SESSION);
-			if (!userSessionInfo) {
-				// init session
-				this.initSession();
-			} else {
-				if (userSessionInfo && userSessionInfo.data && userSessionInfo.data.sessionId) {
-					// dispatch action: start session counter
-					const payload: SessionPayloadInterface = {
-						sessionId: userSessionInfo.data.sessionId,
-						inactivityTime: userSessionInfo.data.maxInactiveSec
-					};
-					this._store.dispatch(new SessionActions.SessionCounterStart(payload));
-				} else {
-					// start loading animation
-					this._loadingAnimationService.startLoadingAnimation();
+		if (this._authService.authenticateUser()) {
+			const currentUserState = this._storageService.get(SessionStorageItems.userState, StorageTypeEnum.SESSION);
+			if (currentUserState) {
+				// payload
+				const payload: SessionPayloadInterface = {
+					inactivityTime: AppOptions.lockScreenSessionTime
+				};
 
-					// dispatch action: system error
-					const actionPayload: ErrorHandlerPayloadInterface = {
-						title: 'bo.78100.ti.errorCounts',
-						message: 'bo.providertypes.error.generic.exception',
-						buttonTexts: ['bo.forms.agentlogin.close']
-					};
-					this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(actionPayload));
-				}
+				// dispatch action
+				this._store.dispatch(new SessionActions.SessionCounterStart(payload));
 			}
-		}
-	}
-
-	/**
-	 * init session
-	 */
-	public initSession() {
-		// call session service
-		this.sessionService(this.getSessionId)
-			.subscribe((userInfo) => {
-				if (userInfo && userInfo.data && userInfo.data.sessionId) {
-					// user info (emit & set)
-					this.userInfo.emit(userInfo);
-					this._storageService.put(SessionStorageItems.userSessionInfo, userInfo, StorageTypeEnum.SESSION);
-
-					// dispatch action: start session counter
-					const payload: SessionPayloadInterface = {
-						sessionId: userInfo.data.sessionId,
-						inactivityTime: userInfo.data.maxInactiveSec
-					};
-					this._store.dispatch(new SessionActions.SessionCounterStart(payload));
-				} else {
-					// start loading animation
-					this._loadingAnimationService.startLoadingAnimation();
-
-					// dispatch action: system error
-					const actionPayload: ErrorHandlerPayloadInterface = {
-						title: 'bo.78100.ti.errorCounts',
-						message: 'bo.providertypes.error.generic.exception',
-						buttonTexts: ['bo.forms.agentlogin.close']
-					};
-					this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(actionPayload));
-				}
-			});
-	}
-
-	/**
-	 * service: sessionService
-	 *
-	 * @param {string} sessionId
-	 * @returns {Observable<any>}
-	 */
-	public sessionService(sessionId: string) {
-		// service: sessionService
-		const params = {'jsessionid': sessionId};
-		return this._proxyService.getAPI(AppServices['sessionService'], params);
-	}
-
-	/**
-	 * set session id
-	 *
-	 * @param {string} sessionId
-	 */
-	public setSessionId(sessionId: string) {
-		this._storageService.put(SessionStorageItems.sessionId, sessionId, StorageTypeEnum.SESSION);
-	}
-
-	/**
-	 * get session id
-	 *
-	 * @returns {any}
-	 */
-	public get getSessionId() {
-		if (this._authService.isLoggedIn) {
-			return this._storageService.get(SessionStorageItems.sessionId, StorageTypeEnum.SESSION);
-		} else {
-			return null;
 		}
 	}
 
@@ -163,34 +78,31 @@ export class SessionService {
 	public handleSessionTimeout(payload: SessionPayloadInterface) {
 		const sessionTimeout = this.sessionTimeout
 			.pipe(
-				startWith(void 0),
-				switchMap(() => interval(
-					Number(payload.inactivityTime) * 1000)
-				)
+				startWith(0),
+				switchMap(() => interval(payload.inactivityTime))
 			)
-			.subscribe(() => { // counter show here 0,1,2,3,4...
-				// check session id
-				if (this.getSessionId) {
-					// call session service
-					this.sessionService(this.getSessionId)
-						.subscribe((res) => {
-							if (!(res && res.data)) { // when no data comes
-								// start loading animation
-								this._loadingAnimationService.startLoadingAnimation();
+			.subscribe(() => {
+				// authenticate user
+				if (!this._authService.authenticateUser()) {
+					// start loading animation
+					this._loadingAnimationService.startLoadingAnimation();
 
-								// dispatch action: system error
-								const actionPayload: ErrorHandlerPayloadInterface = {
-									title: 'bo.msg.ti.timeLogout',
-									message: 'bo.msg.timeLogout',
-									buttonTexts: ['bo.forms.agentlogin.close']
-								};
-								this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(actionPayload));
+					// payload
+					const payload: ErrorHandlerPayloadInterface = {
+						title: this._i18n({
+							value: 'Title: User Not Authorized Exception',
+							id: 'Error_NotAuthorizedException_Title'
+						}),
+						message: this._i18n({
+							value: 'Description: User Not Authorized Exception',
+							id: 'Error_NotAuthorizedException_Description'
+						}),
+						buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
+					};
 
-								// unsubscribe sessionTimeout
-								sessionTimeout.unsubscribe();
-							}
-						});
-				} else {
+					// error dispatch
+					this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
+
 					// unsubscribe sessionTimeout
 					sessionTimeout.unsubscribe();
 				}
@@ -198,9 +110,9 @@ export class SessionService {
 	}
 
 	/**
-	 * reset session timeout
+	 * exit session timeout
 	 */
-	public resetSessionTimeout() {
-		this.sessionTimeout.next(void 0);
+	public exitSessionTimeout() {
+		this.sessionTimeout.unsubscribe();
 	}
 }

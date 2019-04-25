@@ -3,7 +3,8 @@ import { AppServicesInterface } from './app/packages/core.pck/proxy.mod/interfac
 
 // general
 export const AppOptions = {
-	secretKey: 'ham'
+	secretKey: 'ham',
+	lockScreenSessionTime: 7200
 };
 
 // services
@@ -16,12 +17,12 @@ export const AppServices: { [name: string]: AppServicesInterface } = {
 };
 
 // local-storage items
-export const localStorageItems = {
+export const LocalStorageItems = {
 	userState: 'ham-ls-us'
 };
 
 // session-storage items
-export const sessionStorageItems = {
+export const SessionStorageItems = {
 	userState: 'ham-ss-us'
 };
 

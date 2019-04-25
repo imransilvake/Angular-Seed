@@ -12,6 +12,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { loadingAnimationReducer } from './packages/utilities.pck/loading-animation.mod/store/reducers/loading-animation.reducer';
 import { notificationReducer } from './packages/utilities.pck/notification.mod/store/reducers/notification.reducer';
 import { errorHandlerReducer } from './packages/utilities.pck/error-handler.mod/store/reducers/error-handler.reducer';
+import { sessionReducer } from './packages/core.pck/session.mod/store/reducers/session.reducer';
 
 // app
 import { AppComponent } from './app.component';
@@ -44,6 +45,7 @@ declare const require;
 			loadingAnimation: loadingAnimationReducer,
 			notification: notificationReducer,
 			errorHandler: errorHandlerReducer,
+			sessionHandler: sessionReducer
 		}),
 		StoreDevtoolsModule.instrument({ maxAge: 10 }),
 

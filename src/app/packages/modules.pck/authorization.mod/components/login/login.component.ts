@@ -24,7 +24,7 @@ import { DialogService } from '../../../../utilities.pck/dialog.mod/services/dia
 import { AuthService } from '../../services/auth.service';
 import { StorageService } from '../../../../core.pck/storage.mod/services/storage.service';
 import { StorageTypeEnum } from '../../../../core.pck/storage.mod/enums/storage-type.enum';
-import { localStorageItems, sessionStorageItems } from '../../../../../../app.config';
+import { LocalStorageItems, SessionStorageItems } from '../../../../../../app.config';
 
 @Component({
 	selector: 'app-login',
@@ -123,9 +123,9 @@ export class LoginComponent implements OnInit, OnDestroy {
 			.subscribe((res) => {
 				// validate where to store user session based on remember me
 				if (this.rememberMe && this.rememberMe.checked) {
-					this._storageService.put(localStorageItems.userState, res, StorageTypeEnum.PERSISTANT);
+					this._storageService.put(LocalStorageItems.userState, res, StorageTypeEnum.PERSISTANT);
 				} else {
-					this._storageService.put(sessionStorageItems.userState, res, StorageTypeEnum.SESSION);
+					this._storageService.put(SessionStorageItems.userState, res, StorageTypeEnum.SESSION);
 				}
 
 				// navigate to dashboard

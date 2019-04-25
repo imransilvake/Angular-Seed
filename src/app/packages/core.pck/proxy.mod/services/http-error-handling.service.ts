@@ -14,10 +14,12 @@ import { HttpApiTypeEnum } from '../enums/http-api-type.enum';
 import { NotificationPayloadInterface } from '../../../utilities.pck/notification.mod/interfaces/notification-payload.interface';
 import { NotificationInterface } from '../../../utilities.pck/notification.mod/interfaces/notification.interface';
 import { ErrorHandlerPayloadInterface } from '../../../utilities.pck/error-handler.mod/interfaces/error-handler-payload.interface';
+import { AuthService } from '../../../modules.pck/authorization.mod/services/auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class HttpErrorHandlingService {
 	constructor(
+		private _authService: AuthService,
 		private _store: Store<NotificationInterface>,
 		private _i18n: I18n
 	) {
@@ -151,22 +153,6 @@ export class HttpErrorHandlingService {
 				// error dispatch
 				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
 				break;
-			case 'NotAuthorizedException':
-				payload = {
-					title: this._i18n({
-						value: 'Title: User Not Authorized Exception',
-						id: 'Error_NotAuthorizedException_Title'
-					}),
-					message: this._i18n({
-						value: 'Description: User Not Authorized Exception',
-						id: 'Error_NotAuthorizedException_Description'
-					}),
-					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-				};
-
-				// error dispatch
-				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
-				break;
 			case 'CodeMismatchException':
 				payload = {
 					title: this._i18n({
@@ -182,6 +168,22 @@ export class HttpErrorHandlingService {
 
 				// error dispatch
 				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
+				break;
+			case 'NotAuthorizedException':
+				payload = {
+					title: this._i18n({
+						value: 'Title: User Not Authorized Exception',
+						id: 'Error_NotAuthorizedException_Title'
+					}),
+					message: this._i18n({
+						value: 'Description: User Not Authorized Exception',
+						id: 'Error_NotAuthorizedException_Description'
+					}),
+					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
+				};
+
+				// error dispatch
+				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
 				break;
 			default:
 				payload = {

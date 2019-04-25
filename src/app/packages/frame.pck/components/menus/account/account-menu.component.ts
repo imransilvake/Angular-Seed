@@ -1,10 +1,12 @@
 // angular
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 // app
 import { HelperService } from '../../../../utilities.pck/accessories.mod/services/helper.service';
-import { faAlignRight, faEnvelope, faPowerOff, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faPowerOff, faUser, faUserLock } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../../../../modules.pck/authorization.mod/services/auth.service';
+import { ROUTING } from '../../../../../../environments/environment';
 
 @Component({
 	selector: 'app-menu-account',
@@ -12,9 +14,12 @@ import { AuthService } from '../../../../modules.pck/authorization.mod/services/
 })
 
 export class AccountMenuComponent {
-	public faIcons = [faEnvelope, faUser, faPowerOff, faAlignRight];
+	public faIcons = [faEnvelope, faUser, faUserLock, faPowerOff];
 
-	constructor(private _authService: AuthService) {
+	constructor(
+		private _authService: AuthService,
+		private _router: Router
+	) {
 	}
 
 	/**
@@ -23,6 +28,14 @@ export class AccountMenuComponent {
 	 */
 	public onClickStopPropagation(event) {
 		HelperService.stopPropagation();
+	}
+
+	/**
+	 * lock user screen
+	 */
+	public onClickLockScreen() {
+		// navigate to lock
+		this._router.navigate([ROUTING.authorization.lock]).then();
 	}
 
 	/**

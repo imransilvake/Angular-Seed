@@ -17,8 +17,12 @@
 			<span>Profile</span>
 		</button>
 		<app-widget-divider></app-widget-divider>
-		<button mat-menu-item class="ham-btn-icon" (click)="onClickLogout()">
+		<button mat-menu-item class="ham-btn-icon" (click)="onClickLockScreen()">
 			<fa-icon [icon]="faIcons[2]"></fa-icon>
+			<span>Lock</span>
+		</button>
+		<button mat-menu-item class="ham-btn-icon" (click)="onClickLogout()">
+			<fa-icon [icon]="faIcons[3]"></fa-icon>
 			<span>Logout</span>
 		</button>
 	</mat-menu>

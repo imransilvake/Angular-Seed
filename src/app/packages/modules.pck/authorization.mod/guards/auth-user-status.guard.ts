@@ -8,7 +8,7 @@ import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class AuthUserStatusGuard implements CanActivate {
-	public isUserLoggedIn = false;
+	public currentUserState;
 
 	constructor(
 		private _router: Router,
@@ -23,12 +23,17 @@ export class AuthUserStatusGuard implements CanActivate {
 	 * @param state
 	 */
 	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-		this.isUserLoggedIn = this._authService.authAuthenticateUser();
-		const authRoutes = Object.values(ROUTING.authorization);
+		this.currentUserState = this._authService.authenticateUser();
+		const authRoutes = [
+			ROUTING.authorization.login,
+			ROUTING.authorization.reset,
+			ROUTING.authorization.forgot,
+			ROUTING.authorization.reset
+		];
 		const currentPath = state.url.substring(1);
 
 		// user is authenticated
-		if (this.isUserLoggedIn) {
+		if (this.currentUserState) {
 			if (authRoutes.includes(currentPath)) {
 				// navigate to dashboard
 				this._router.navigate([ROUTING.dashboard]).then();

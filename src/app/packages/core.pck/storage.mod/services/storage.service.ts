@@ -136,14 +136,14 @@ export class StorageService {
 	/**
 	 * clear all localStorage items
 	 */
-	public clearAllLocalStorageItems() {
+	public static clearAllLocalStorageItems() {
 		localStorage.clear();
 	}
 
 	/**
 	 * clear all sessionStorage items
 	 */
-	public clearAllSessionStorageItems() {
+	public static clearAllSessionStorageItems() {
 		sessionStorage.clear();
 	}
 }

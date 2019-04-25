@@ -19,7 +19,6 @@ const newState = (state, newData) => {
  *
  * @param {SessionInterface} state
  * @param {All} action
- * @returns {any}
  */
 export function sessionReducer(state: SessionInterface = defaultState, action: SessionActions.All) {
 	switch (action.type) {
@@ -28,9 +27,9 @@ export function sessionReducer(state: SessionInterface = defaultState, action: S
 				type: SessionTypeEnum.SESSION_COUNTER_START,
 				payload: action.payload
 			});
-		case SessionActions.SESSION_COUNTER_RESET:
+		case SessionActions.SESSION_COUNTER_EXIT:
 			return newState(state, {
-				type: SessionTypeEnum.SESSION_COUNTER_RESET
+				type: SessionTypeEnum.SESSION_COUNTER_EXIT
 			});
 		default:
 			return state;
