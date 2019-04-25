@@ -27,25 +27,6 @@ export class HttpOptionsService {
 	}
 
 	/**
-	 * set HttpClient params
-	 *
-	 * @param {Object} bodyParams
-	 * @returns {HttpParams}
-	 */
-	public getBodyParams(bodyParams: Object): HttpParams {
-		let httpParams = new HttpParams();
-
-		if (Object.keys(bodyParams).length !== 0) {
-			// set params
-			Object.keys(bodyParams).forEach((key) => {
-				httpParams = httpParams.set(key, bodyParams[key]);
-			});
-		}
-
-		return httpParams;
-	}
-
-	/**
 	 * adds query parameter to the given url
 	 * example: http://www.example.com/example-page?field1=value1&field2=value2&field3=value3
 	 *
