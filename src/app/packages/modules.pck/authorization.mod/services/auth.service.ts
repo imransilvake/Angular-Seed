@@ -1,5 +1,7 @@
 // angular
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+
 // app
 import { AppServices, localStorageItems, sessionStorageItems } from '../../../../../app.config';
 import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service';
@@ -9,12 +11,15 @@ import { AuthLoginInterface } from '../interfaces/auth-login.interface';
 import { AuthResetInterface } from '../interfaces/auth-reset.interface';
 import { StorageTypeEnum } from '../../../core.pck/storage.mod/enums/storage-type.enum';
 import { StorageService } from '../../../core.pck/storage.mod/services/storage.service';
+import { ROUTING } from '../../../../../environments/environment';
 
 @Injectable()
 export class AuthService {
 	constructor(
 		private _proxyService: ProxyService,
-		private _storageService: StorageService) {
+		private _storageService: StorageService,
+		private _router: Router
+	) {
 	}
 
 	/**
@@ -63,5 +68,23 @@ export class AuthService {
 	public authAuthenticateUser() {
 		return this._storageService.get(localStorageItems.userState, StorageTypeEnum.PERSISTANT) ||
 			this._storageService.get(sessionStorageItems.userState, StorageTypeEnum.SESSION);
+	}
+
+	/**
+	 * logout user
+	 */
+	public logoutUser() {
+		const userState = this.authAuthenticateUser();
+		if (userState) {
+			this._proxyService
+				.postAPI(AppServices['authLogout'], { bodyParams: userState.accessToken.jwtToken });
+		}
+
+		// clear data
+		this._storageService.clearAllLocalStorageItems();
+		this._storageService.clearAllSessionStorageItems();
+
+		// navigate to login
+		this._router.navigate([ROUTING.authorization.login]).then();
 	}
 }

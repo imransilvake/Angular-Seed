@@ -11,7 +11,8 @@ export const AppServices: { [name: string]: AppServicesInterface } = {
 	authRegister: { serviceUrl: '/ham/auth/signup' },
 	authLogin: { serviceUrl: '/ham/auth/authenticate' },
 	authForgotPassword: { serviceUrl: '/ham/auth/forgotpassword' },
-	authResetPassword: { serviceUrl: '/ham/auth/confirmpassword' }
+	authResetPassword: { serviceUrl: '/ham/auth/confirmpassword' },
+	authLogout: { serviceUrl: '/ham/auth/signout' }
 };
 
 // local-storage items
