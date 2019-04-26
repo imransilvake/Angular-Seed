@@ -1,8 +1,6 @@
 // angular
 import { Injectable } from '@angular/core';
 import { interval } from 'rxjs/internal/observable/interval';
-import { startWith, switchMap } from 'rxjs/operators';
-import { Subject } from 'rxjs/internal/Subject';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 
 // store
@@ -23,7 +21,7 @@ import { AuthService } from '../../../modules.pck/authorization.mod/services/aut
 
 @Injectable({ providedIn: 'root' })
 export class SessionService {
-	private sessionTimeout = new Subject();
+	private sessionTimeout;
 
 	constructor(
 		private _authService: AuthService,
@@ -72,15 +70,8 @@ export class SessionService {
 	 * @param {SessionPayloadInterface} payload
 	 */
 	public handleSessionTimeout(payload: SessionPayloadInterface) {
-		console.log(payload.inactivityTime);
-		const sessionTimeout = this.sessionTimeout
-			.pipe(
-				startWith(0),
-				switchMap(() => interval(Number(payload.inactivityTime)))
-			)
+		this.sessionTimeout = interval(payload.inactivityTime)
 			.subscribe(() => {
-				console.log('aa');
-
 				// authenticate user
 				if (!this._authService.authenticateUser()) {
 					// start loading animation
@@ -103,7 +94,7 @@ export class SessionService {
 					this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
 
 					// unsubscribe sessionTimeout
-					sessionTimeout.unsubscribe();
+					this.sessionTimeout.unsubscribe();
 				}
 			});
 	}

@@ -23,7 +23,6 @@ const newState = (state, newData) => {
 export function sessionReducer(state: SessionInterface = defaultState, action: SessionActions.All) {
 	switch (action.type) {
 		case SessionActions.SESSION_COUNTER_START:
-			console.log('sss');
 			return newState(state, {
 				type: SessionTypeEnum.SESSION_COUNTER_START,
 				payload: action.payload
