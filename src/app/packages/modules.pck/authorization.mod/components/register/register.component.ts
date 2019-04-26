@@ -52,7 +52,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 	) {
 		// form fields
 		this.formFields = new FormGroup({
-			hotelName: new FormControl('', [
+			hotelId: new FormControl('', [
 				Validators.required
 			]),
 			firstName: new FormControl('', [
@@ -76,7 +76,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		// set hotel list
-		this.hotelList = this._hotelListService.getHotelList();
+		this._hotelListService.getHotelList().subscribe((res) => this.hotelList = res);
 	}
 
 	ngOnDestroy() {
@@ -88,8 +88,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
 	/**
 	 * getters
 	 */
-	get hotelName() {
-		return this.formFields.get('hotelName');
+	get hotelId() {
+		return this.formFields.get('hotelId');
 	}
 
 	get firstName() {
@@ -121,6 +121,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
 		// payload
 		const formPayload: AuthRegisterInterface = {
+			hotelId: this.hotelId.value,
 			email: this.email.value,
 			firstName: this.firstName.value,
 			lastName: this.lastName.value,

@@ -28,13 +28,13 @@ export class ProxyService {
 		let url = ENV_SERVICE_URL + service.serviceUrl;
 
 		// add query params
-		url = (params.queryParams) ? this._httpOptionsService.addQueryParamsToUrl(url, params.queryParams) : url;
+		url = (params && params.queryParams) ? this._httpOptionsService.addQueryParamsToUrl(url, params.queryParams) : url;
 
 		// add matrix params
-		url = (params.matrixParams) ? this._httpOptionsService.addMatrixParamsToUrl(url, params.matrixParams) : url;
+		url = (params && params.matrixParams) ? this._httpOptionsService.addMatrixParamsToUrl(url, params.matrixParams) : url;
 
 		// add path params
-		url = (params.pathParams) ? this._httpOptionsService.addPathParams(url, params.pathParams) : url;
+		url = (params && params.pathParams) ? this._httpOptionsService.addPathParams(url, params.pathParams) : url;
 
 		// url encode
 		url = encodeURI(url);
@@ -42,7 +42,7 @@ export class ProxyService {
 		// options
 		const options = {
 			headers: this._httpOptionsService.getHeaders(),
-			responseType: (params.responseContentType ? params.responseContentType : 'json')
+			responseType: (params && params.responseContentType ? params.responseContentType : 'json')
 		};
 
 		// api: get

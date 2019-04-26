@@ -2,21 +2,18 @@
 import { Injectable } from '@angular/core';
 
 // app
-import { SelectDefaultInterface } from '../../../core.pck/fields.mod/interfaces/select-default-interface';
+import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service';
+import { AppServices } from '../../../../../app.config';
 
 @Injectable()
 export class HotelListService {
+	constructor(private _proxyService: ProxyService) {
+	}
+
 	/**
 	 * set of all hotels
 	 */
 	public getHotelList() {
-		const hotelList: SelectDefaultInterface[] = [
-			{ value: `aachen`, viewValue: 'Hotel - Aachen' },
-			{ value: `bonn`, viewValue: 'Hotel - Bonn' },
-			{ value: `cologne`, viewValue: 'Hotel - Cologne' },
-			{ value: `düsseldorf`, viewValue: 'Hotel - Düsseldorf' }
-		];
-
-		return hotelList;
+		return this._proxyService.getAPI(AppServices['Utilities']['HotelList']);
 	}
 }

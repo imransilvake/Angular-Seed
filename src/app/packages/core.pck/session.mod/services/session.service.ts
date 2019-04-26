@@ -11,8 +11,7 @@ import { Store } from '@ngrx/store';
 // app
 import * as SessionActions from '../store/actions/session.actions';
 import * as ErrorHandlerActions from '../../../utilities.pck/error-handler.mod/store/actions/error-handler.actions';
-import { AppOptions, SessionStorageItems } from '../../../../../app.config';
-import { StorageTypeEnum } from '../../storage.mod/enums/storage-type.enum';
+import { AppOptions } from '../../../../../app.config';
 import { StorageService } from '../../storage.mod/services/storage.service';
 import { SessionInterface } from '../interfaces/session.interface';
 import { SessionTypeEnum } from '../enums/session-type.enum';
@@ -22,7 +21,7 @@ import { LoadingAnimationService } from '../../../utilities.pck/loading-animatio
 import { ErrorHandlerPayloadInterface } from '../../../utilities.pck/error-handler.mod/interfaces/error-handler-payload.interface';
 import { AuthService } from '../../../modules.pck/authorization.mod/services/auth.service';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class SessionService {
 	private sessionTimeout = new Subject();
 
@@ -57,16 +56,13 @@ export class SessionService {
 	 */
 	public startSession() {
 		if (this._authService.authenticateUser()) {
-			const currentUserState = this._storageService.get(SessionStorageItems.userState, StorageTypeEnum.SESSION);
-			if (currentUserState) {
-				// payload
-				const payload: SessionPayloadInterface = {
-					inactivityTime: AppOptions.lockScreenSessionTime
-				};
+			// payload
+			const payload: SessionPayloadInterface = {
+				inactivityTime: AppOptions.lockScreenSessionTime
+			};
 
-				// dispatch action
-				this._store.dispatch(new SessionActions.SessionCounterStart(payload));
-			}
+			// dispatch action
+			this._store.dispatch(new SessionActions.SessionCounterStart(payload));
 		}
 	}
 

@@ -19,7 +19,6 @@ const newState = (state, newData) => {
  *
  * @param {ErrorHandlerInterface} state
  * @param {All} action
- * @returns {any}
  */
 export function errorHandlerReducer(state: ErrorHandlerInterface = defaultState, action: ErrorHandlerActions.All) {
 	switch (action.type) {
