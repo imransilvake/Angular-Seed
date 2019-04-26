@@ -8,12 +8,14 @@ export const AppOptions = {
 };
 
 // services
-export const AppServices: { [name: string]: AppServicesInterface } = {
-	authRegister: { serviceUrl: '/ham/auth/signup' },
-	authLogin: { serviceUrl: '/ham/auth/authenticate' },
-	authForgotPassword: { serviceUrl: '/ham/auth/forgotpassword' },
-	authResetPassword: { serviceUrl: '/ham/auth/confirmpassword' },
-	authLogout: { serviceUrl: '/ham/auth/signout' }
+export const AppServices: { [moduleName: string]: { [name: string]: AppServicesInterface } } = {
+	Auth: {
+		Register: { serviceUrl: '/ham/auth/signup' },
+		Login: { serviceUrl: '/ham/auth/authenticate' },
+		Forgot_Password: { serviceUrl: '/ham/auth/forgotpassword' },
+		Reset_Password: { serviceUrl: '/ham/auth/confirmpassword' },
+		Logout: { serviceUrl: '/ham/auth/signout' }
+	}
 };
 
 // local-storage items

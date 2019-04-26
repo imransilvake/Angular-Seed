@@ -29,7 +29,7 @@ export class AuthService {
 	 */
 	public authRegister(payload: AuthRegisterInterface) {
 		return this._proxyService
-			.postAPI(AppServices['authRegister'], { bodyParams: payload });
+			.postAPI(AppServices['Auth']['Register'], { bodyParams: payload });
 	}
 
 	/**
@@ -39,7 +39,7 @@ export class AuthService {
 	 */
 	public authLogin(payload: AuthLoginInterface) {
 		return this._proxyService
-			.postAPI(AppServices['authLogin'], { bodyParams: payload });
+			.postAPI(AppServices['Auth']['Login'], { bodyParams: payload });
 	}
 
 	/**
@@ -49,7 +49,7 @@ export class AuthService {
 	 */
 	public authForgotPassword(payload: AuthForgotInterface) {
 		return this._proxyService
-			.postAPI(AppServices['authForgotPassword'], { bodyParams: payload });
+			.postAPI(AppServices['Auth']['Forgot_Password'], { bodyParams: payload });
 	}
 
 	/**
@@ -59,7 +59,7 @@ export class AuthService {
 	 */
 	public authResetPassword(payload: AuthResetInterface) {
 		return this._proxyService
-			.postAPI(AppServices['authResetPassword'], { bodyParams: payload });
+			.postAPI(AppServices['Auth']['Reset_Password'], { bodyParams: payload });
 	}
 
 	/**
@@ -81,7 +81,7 @@ export class AuthService {
 
 			// call sign-out service
 			this._proxyService
-				.postAPI(AppServices['authLogout'], { bodyParams: payload })
+				.postAPI(AppServices['Auth']['Logout'], { bodyParams: payload })
 				.subscribe();
 
 			// clear data
