@@ -23,6 +23,14 @@ export class AuthService {
 	}
 
 	/**
+	 * setters
+	 */
+	get currentUserState() {
+		return this._storageService.get(LocalStorageItems.userState, StorageTypeEnum.PERSISTANT) ||
+			this._storageService.get(SessionStorageItems.userState, StorageTypeEnum.SESSION);
+	}
+
+	/**
 	 * perform registration process
 	 *
 	 * @param payload
@@ -40,6 +48,23 @@ export class AuthService {
 	public authLogin(payload: AuthLoginInterface) {
 		return this._proxyService
 			.postAPI(AppServices['Auth']['Login'], { bodyParams: payload });
+	}
+
+	/**
+	 * authenticate logged-in user
+	 */
+	public authenticateUser() {
+		const userState = this.currentUserState;
+
+		// session validity payload
+		const payloadSessionValidate = {
+			accessToken: userState.details.accessToken.jwtToken,
+			refreshToken: userState.details.refreshToken.token,
+			username: userState.info.username
+		};
+
+		return this._proxyService
+			.postAPI(AppServices['Auth']['Session_Validity'], { bodyParams: payloadSessionValidate });
 	}
 
 	/**
@@ -63,31 +88,29 @@ export class AuthService {
 	}
 
 	/**
-	 * authenticate logged-in user
-	 */
-	public authenticateUser() {
-		return this._storageService.get(LocalStorageItems.userState, StorageTypeEnum.PERSISTANT) ||
-			this._storageService.get(SessionStorageItems.userState, StorageTypeEnum.SESSION);
-	}
-
-	/**
 	 * logout user
 	 */
 	public logoutUser() {
-		const userState = this.authenticateUser();
-		if (userState) {
-			// payload
-			const payload = { accessToken: userState.accessToken.jwtToken };
+		const currentUserState = this.currentUserState;
+		if (currentUserState) {
+			this.authenticateUser()
+				.subscribe(() => {
+					// logout payload
+					const payloadLogout = { accessToken: currentUserState.details.accessToken.jwtToken };
 
-			// call sign-out service
-			this._proxyService
-				.postAPI(AppServices['Auth']['Logout'], { bodyParams: payload })
-				.subscribe();
+					// call sign-out service
+					this._proxyService
+						.postAPI(AppServices['Auth']['Logout'], { bodyParams: payloadLogout })
+						.subscribe();
+				});
 
 			// clear data
 			StorageService.clearAllLocalStorageItems();
 			StorageService.clearAllSessionStorageItems();
 
+			// navigate to login
+			this._router.navigate([ROUTING.authorization.login]).then();
+		} else {
 			// navigate to login
 			this._router.navigate([ROUTING.authorization.login]).then();
 		}

@@ -56,9 +56,9 @@ export class LoginComponent implements OnInit, OnDestroy {
 		// form fields
 		this.formFields = new FormGroup({
 			languageName: new FormControl(''),
-			username: new FormControl('', [
+			email: new FormControl('', [
 				Validators.required,
-				ValidationService.usernameValidator
+				ValidationService.emailValidator
 			]),
 			password: new FormControl('', [
 				Validators.required,
@@ -92,8 +92,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 		return this.formFields.get('languageName');
 	}
 
-	get username() {
-		return this.formFields.get('username');
+	get email() {
+		return this.formFields.get('email');
 	}
 
 	get password() {
@@ -113,7 +113,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 		// payload
 		const formPayload: AuthLoginInterface = {
-			username: this.username.value,
+			username: this.email.value,
 			password: this.password.value
 		};
 
@@ -121,11 +121,16 @@ export class LoginComponent implements OnInit, OnDestroy {
 		this._authService.authLogin(formPayload)
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe((res) => {
+				const userPayload = {
+					info: formPayload,
+					details: res
+				};
+
 				// validate where to store user session based on remember me
 				if (this.rememberMe && this.rememberMe.checked) {
-					this._storageService.put(LocalStorageItems.userState, res, StorageTypeEnum.PERSISTANT);
+					this._storageService.put(LocalStorageItems.userState, userPayload, StorageTypeEnum.PERSISTANT);
 				} else {
-					this._storageService.put(SessionStorageItems.userState, res, StorageTypeEnum.SESSION);
+					this._storageService.put(SessionStorageItems.userState, userPayload, StorageTypeEnum.SESSION);
 				}
 
 				// navigate to dashboard

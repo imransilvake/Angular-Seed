@@ -15,13 +15,6 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 		private _router: Router,
 		private _authService: AuthService
 	) {
-		this.currentUserState = this._authService.authenticateUser();
-		this.authRoutes = [
-			ROUTING.authorization.register,
-			ROUTING.authorization.login,
-			ROUTING.authorization.reset,
-			ROUTING.authorization.forgot
-		];
 	}
 
 	/**
@@ -31,7 +24,14 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 	 * @param state
 	 */
 	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+		this.currentUserState = this._authService.currentUserState;
 		const currentPath = state.url.substring(1);
+		this.authRoutes = [
+			ROUTING.authorization.register,
+			ROUTING.authorization.login,
+			ROUTING.authorization.reset,
+			ROUTING.authorization.forgot
+		];
 
 		// user is authenticated
 		if (this.currentUserState) {
@@ -59,11 +59,6 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 	 * @param state
 	 */
 	canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-
-
-		console.log('aa');
-
-
 		return true;
 	}
 }
