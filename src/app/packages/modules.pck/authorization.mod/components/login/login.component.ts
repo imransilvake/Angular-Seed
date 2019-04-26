@@ -123,7 +123,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 			.subscribe((res) => {
 				const userPayload = {
 					info: formPayload,
-					details: res
+					details: res,
+					rememberMe: this.rememberMe && this.rememberMe.checked
 				};
 
 				// validate where to store user session based on remember me

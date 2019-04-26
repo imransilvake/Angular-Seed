@@ -9,6 +9,7 @@ import { ROUTING } from '../environments/environment';
 import { E404Component } from './packages/frame.pck/components/errors/e404/e404.component';
 import { AuthUserStatusGuard } from './packages/modules.pck/authorization.mod/guards/auth-user-status.guard';
 import { DashboardComponent } from './packages/modules.pck/dashboard.component';
+import { TestComponent } from './packages/modules.pck/test.component';
 
 const ROUTES: Routes = [
 	{
@@ -34,6 +35,10 @@ const ROUTES: Routes = [
 					{
 						path: ROUTING.dashboard,
 						component: DashboardComponent
+					},
+					{
+						path: 'test',
+						component: TestComponent
 					}
 				],
 				canActivateChild: [AuthUserStatusGuard]
