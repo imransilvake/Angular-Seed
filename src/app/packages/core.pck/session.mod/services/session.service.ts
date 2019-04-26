@@ -72,12 +72,15 @@ export class SessionService {
 	 * @param {SessionPayloadInterface} payload
 	 */
 	public handleSessionTimeout(payload: SessionPayloadInterface) {
+		console.log(payload.inactivityTime);
 		const sessionTimeout = this.sessionTimeout
 			.pipe(
 				startWith(0),
-				switchMap(() => interval(payload.inactivityTime))
+				switchMap(() => interval(Number(payload.inactivityTime)))
 			)
 			.subscribe(() => {
+				console.log('aa');
+
 				// authenticate user
 				if (!this._authService.authenticateUser()) {
 					// start loading animation

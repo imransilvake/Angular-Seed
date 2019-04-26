@@ -16,11 +16,12 @@
 				text-align: center;
 
 				img {
-					border: 2px solid cd-palette($cd-border, 3001);
 					border-radius: 50%;
+					border: 2px solid cd-palette($cd-border, 3001);
 					display: block;
 					height: 80px;
 					margin: 0 auto;
+					padding: 5px;
 					width: 80px;
 				}
 

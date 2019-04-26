@@ -45,7 +45,7 @@ declare const require;
 			loadingAnimation: loadingAnimationReducer,
 			notification: notificationReducer,
 			errorHandler: errorHandlerReducer,
-			sessionHandler: sessionReducer
+			session: sessionReducer
 		}),
 		StoreDevtoolsModule.instrument({ maxAge: 10 }),
 
