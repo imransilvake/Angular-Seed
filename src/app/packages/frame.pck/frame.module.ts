@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 // app
 import { SharedModule } from '../../shared/shared.module';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { E404Component } from './components/errors/e404/e404.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -21,7 +20,6 @@ import { SecondarySidebarComponent } from './components/sidebar/secondary/second
 		NotificationModule
 	],
 	declarations: [
-		DashboardComponent,
 		E404Component,
 		HeaderComponent,
 		FooterComponent,

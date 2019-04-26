@@ -27,6 +27,7 @@ import { MaterialModule } from './packages/vendors.pck/material.mod/material.mod
 import { NotificationModule } from './packages/utilities.pck/notification.mod/notification.module';
 import { AuthorizationModule } from './packages/modules.pck/authorization.mod/authorization.module';
 import { AppLayoutComponent } from './app-layout.component';
+import { DashboardComponent } from './packages/modules.pck/dashboard.component';
 
 // i18n using polyfills
 // provided by webpack
@@ -65,7 +66,11 @@ declare const require;
 		FrameModule,
 		AuthorizationModule
 	],
-	declarations: [AppComponent, AppLayoutComponent],
+	declarations: [
+		AppComponent,
+		AppLayoutComponent,
+		DashboardComponent
+	],
 	providers: [
 		I18n,
 		{
