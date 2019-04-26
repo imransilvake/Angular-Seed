@@ -21,6 +21,7 @@
 					display: block;
 					height: 80px;
 					margin: 0 auto;
+					padding: 5px;
 					width: 80px;
 				}
 
@@ -46,10 +47,6 @@
 							margin-right: 5px;
 							width: 15px;
 						}
-					}
-
-					&.ham-note {
-						text-align: center;
 					}
 				}
 			}
@@ -82,10 +79,6 @@
 						.ham-input {
 							width: 100%;
 						}
-					}
-
-					.ham-note {
-						width: auto;
 					}
 				}
 			}
