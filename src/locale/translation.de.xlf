@@ -181,8 +181,8 @@
 			<trans-unit id="Auth_Register_Info_Description" datatype="html">
 				<source>Description</source>
 				<target>
-					Deine Registrierung wird an den entsprechenden Manager zur Aktivierung weitergeleitet. Du erhältst
-					eine E-Mail wenn der Account freigeschaltet wurde.
+					beim HotelAppManager. Deine Registrierung wird an den entsprechenden Manager zur Aktivierung weitergeleitet. Du erhältst
+					eine E-Mail, wenn der Account freigeschaltet wurde.
 				</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -277,7 +277,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Register_Form_Email_PlaceHolder" datatype="html">
 				<source>Email</source>
-				<target>E-Mail eingeben</target>
+				<target>Bitte E-Mail eingeben</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/register/register.component.html
@@ -297,7 +297,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Register_Form_Password_PlaceHolder" datatype="html">
 				<source>Password</source>
-				<target>Passwort eingeben</target>
+				<target>Bitte Passwort eingeben</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/register/register.component.html
@@ -331,7 +331,7 @@
 				<source>Already have an account? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Login
 					<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
 				</source>
-				<target>Bereits einen Account vorhanden? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Login
+				<target>Bereits ein Account vorhanden? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Login
 					hier
 					<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
 				</target>
@@ -354,7 +354,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Login_Info_Description" datatype="html">
 				<source>Description</source>
-				<target>Interagiere mit deinen Gästen und erfahre mehr über das, was deine Gäste über dein Hotel denken.</target>
+				<target>beim HotelAppManager. Interagiere mit deinen Gästen und erfahre mehr über das, was deine Gäste über dein Hotel denken.</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/login/login.component.html
@@ -408,7 +408,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Login_Form_Username_PlaceHolder" datatype="html">
 				<source>Username</source>
-				<target>Benutzername eingeben</target>
+				<target>Bitte Benutzername eingeben</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/login/login.component.html
@@ -428,7 +428,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Login_Form_Password_PlaceHolder" datatype="html">
 				<source>Password</source>
-				<target>Passwort eingeben</target>
+				<target>Bitte Passwort eingeben</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/login/login.component.html
@@ -448,7 +448,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Login_Form_Forget_Password_Link_Text" datatype="html">
 				<source>Forget Password?</source>
-				<target>Passowrt vergessen?</target>
+				<target>Passwort vergessen?</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/login/login.component.html
@@ -458,7 +458,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Login_Form_Submit_Button" datatype="html">
 				<source>Login</source>
-				<target>Login</target>
+				<target>LOG IN</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/login/login.component.html
@@ -470,7 +470,7 @@
 				<source>Don&apos;t have an account? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Register
 					<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
 				</source>
-				<target>Bereits einen Account vorhanden? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Register
+				<target>Noch keinen Account? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Registriere dich hier
 					<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
 				</target>
 				<context-group purpose="location">
@@ -493,7 +493,7 @@
 			<trans-unit id="Auth_Forgot_Password_Info_Description" datatype="html">
 				<source>Description</source>
 				<target>
-					Nach erfolgreichem Zurücksetzen deines Passwortes, senden wir dir eine Mail mit weiteren Instruktionen zu. Bitte beachte, dass das Passwort innerhalb 10 Minuten zurückgesetzt werden muss.
+					beim HotelAppManager. Nach erfolgreichem Zurücksetzen deines Passwortes, senden wir dir eine Mail mit weiteren Instruktionen zu. Bitte beachte, dass das Passwort innerhalb 10 Minuten zurückgesetzt werden muss.
 				</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -569,7 +569,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Forgot_Password_Form_Email_Label" datatype="html">
 				<source>Email*</source>
-				<target>E-Mail*</target>
+				<target>Email*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.html
@@ -579,7 +579,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Forgot_Password_Form_Email_PlaceHolder" datatype="html">
 				<source>Email</source>
-				<target>E-Mail eingeben</target>
+				<target>Bitte hinterlege eine gültige E-Mail</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.html
@@ -601,7 +601,7 @@
 				<source>Already have an account? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Login
 					<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
 				</source>
-				<target>Bereits einen Account vorhanden? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Login hier
+				<target>Bereits ein Account vorhanden? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Login hier
 					<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
 				</target>
 				<context-group purpose="location">
@@ -623,7 +623,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Reset_Password_Info_Description" datatype="html">
 				<source>Description</source>
-				<target>Willkommen im HotelAppManager. Hier können Sie Ihr Passwort bestätigen.</target>
+				<target>beim HotelAppManager. Hier kannst du dein Passwort zurücksetzen.</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/reset-password/reset-password.component.html
@@ -647,7 +647,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Reset_Password_Form_Title" datatype="html">
 				<source>Reset Password</source>
-				<target>Passwort Bestätigen</target>
+				<target>Passwort anlegen / zurücksetzen</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/reset-password/reset-password.component.html
@@ -657,7 +657,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Reset_Password_Form_VerificationCode_Label" datatype="html">
 				<source>Verification Code*</source>
-				<target>Verifizierungs-Schlüssel*</target>
+				<target>Bestätigungscode*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/reset-password/reset-password.component.html
@@ -667,7 +667,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Reset_Password_Form_VerificationCode_PlaceHolder" datatype="html">
 				<source>Verification Code</source>
-				<target>Bestätigungscode eingeben</target>
+				<target>Bitte Bestätigungscode eingeben</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/reset-password/reset-password.component.html
@@ -677,7 +677,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Reset_Password_Form_New_Password_Label" datatype="html">
 				<source>New Password*</source>
-				<target>Neues Kennwort*</target>
+				<target>Neues Passwort*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/reset-password/reset-password.component.html
@@ -687,7 +687,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Reset_Password_Form_New_Password_PlaceHolder" datatype="html">
 				<source>New Password</source>
-				<target>Neues Passwort eingeben</target>
+				<target>Bitte neues Passwort eingeben</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/reset-password/reset-password.component.html
@@ -707,7 +707,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Reset_Password_Form_Confirm_New_Password_PlaceHolder" datatype="html">
 				<source>Confirm New Password</source>
-				<target>Neues Passwort eingeben</target>
+				<target>Bitte neues Passwort eingeben</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/reset-password/reset-password.component.html
