@@ -28,7 +28,13 @@ const ROUTES: Routes = [
 		path: '',
 		component: AppLayoutComponent,
 		children: [
-			...FRAME_ROUTES
+			{
+				path: '',
+				children: [
+					...FRAME_ROUTES
+				],
+				canActivateChild: [AuthUserStatusGuard]
+			}
 		],
 		canActivate: [AuthUserStatusGuard]
 	},

@@ -67,10 +67,10 @@ export class SessionService {
 	/**
 	 * handle session timeout
 	 *
-	 * @param {SessionPayloadInterface} payload
+	 * @param payloadData
 	 */
-	public handleSessionTimeout(payload: SessionPayloadInterface) {
-		this.sessionTimeout = interval(payload.inactivityTime)
+	public handleSessionTimeout(payloadData: SessionPayloadInterface) {
+		this.sessionTimeout = interval(payloadData.inactivityTime)
 			.subscribe(() => {
 				// authenticate user
 				if (!this._authService.authenticateUser()) {

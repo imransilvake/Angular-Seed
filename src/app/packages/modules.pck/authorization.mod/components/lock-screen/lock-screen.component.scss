@@ -16,8 +16,8 @@
 				text-align: center;
 
 				img {
-					border-radius: 50%;
 					border: 2px solid cd-palette($cd-border, 3001);
+					border-radius: 50%;
 					display: block;
 					height: 80px;
 					margin: 0 auto;
@@ -47,10 +47,6 @@
 							margin-right: 5px;
 							width: 15px;
 						}
-					}
-
-					&.ham-note {
-						text-align: center;
 					}
 				}
 			}
@@ -83,10 +79,6 @@
 						.ham-input {
 							width: 100%;
 						}
-					}
-
-					.ham-note {
-						width: auto;
 					}
 				}
 			}

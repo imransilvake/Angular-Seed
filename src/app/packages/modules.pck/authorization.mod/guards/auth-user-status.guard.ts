@@ -1,40 +1,41 @@
 // angular
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot } from '@angular/router';
 
 // app
 import { ROUTING } from '../../../../../environments/environment';
 import { AuthService } from '../services/auth.service';
 
 @Injectable()
-export class AuthUserStatusGuard implements CanActivate {
+export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 	public currentUserState;
+	public authRoutes = [];
 
 	constructor(
 		private _router: Router,
 		private _authService: AuthService
 	) {
+		this.currentUserState = this._authService.authenticateUser();
+		this.authRoutes = [
+			ROUTING.authorization.register,
+			ROUTING.authorization.login,
+			ROUTING.authorization.reset,
+			ROUTING.authorization.forgot
+		];
 	}
 
 	/**
-	 * validate user status
+	 * authenticate public/secure routes on interchange
 	 *
 	 * @param route
 	 * @param state
 	 */
 	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-		this.currentUserState = this._authService.authenticateUser();
-		const authRoutes = [
-			ROUTING.authorization.login,
-			ROUTING.authorization.reset,
-			ROUTING.authorization.forgot,
-			ROUTING.authorization.reset
-		];
 		const currentPath = state.url.substring(1);
 
 		// user is authenticated
 		if (this.currentUserState) {
-			if (authRoutes.includes(currentPath)) {
+			if (this.authRoutes.includes(currentPath)) {
 				// navigate to dashboard
 				this._router.navigate([ROUTING.dashboard]).then();
 			}
@@ -42,11 +43,26 @@ export class AuthUserStatusGuard implements CanActivate {
 			return true;
 		}
 
-		// user is not authenticated
-		if (!authRoutes.includes(currentPath)) {
+		// user is not logged-in
+		if (!this.authRoutes.includes(currentPath)) {
 			// navigate to login
 			this._router.navigate([ROUTING.authorization.login]).then();
 		}
+
+		return true;
+	}
+
+	/**
+	 * authenticate all secure routes
+	 *
+	 * @param route
+	 * @param state
+	 */
+	canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+
+
+		console.log('aa');
+
 
 		return true;
 	}

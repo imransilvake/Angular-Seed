@@ -14,7 +14,8 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 		Login: { serviceUrl: '/ham/auth/authenticate' },
 		Forgot_Password: { serviceUrl: '/ham/auth/forgotpassword' },
 		Reset_Password: { serviceUrl: '/ham/auth/confirmpassword' },
-		Logout: { serviceUrl: '/ham/auth/signout' }
+		Logout: { serviceUrl: '/ham/auth/signout' },
+		Session_Validity: { serviceUrl: '/ham/auth/sessionvalidity' }
 	},
 	Utilities: {
 		HotelList: { serviceUrl: '/hotels/list' }

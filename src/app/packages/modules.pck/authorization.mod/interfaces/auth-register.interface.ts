@@ -1,5 +1,5 @@
 export interface AuthRegisterInterface {
-	hotelId: string,
+	hotelId: string;
 	email: string;
 	firstName: string;
 	lastName: string;
