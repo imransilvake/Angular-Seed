@@ -122,13 +122,13 @@ export class AuthService {
 						.postAPI(AppServices['Auth']['Logout'], { bodyParams: payloadLogout })
 						.subscribe();
 				}
+
+				// clear data
+				StorageService.clearAllLocalStorageItems();
+				StorageService.clearAllSessionStorageItems();
+
+				// navigate to login
+				this._router.navigate([ROUTING.authorization.login]).then();
 			});
-
-		// clear data
-		StorageService.clearAllLocalStorageItems();
-		StorageService.clearAllSessionStorageItems();
-
-		// navigate to login
-		this._router.navigate([ROUTING.authorization.login]).then();
 	}
 }

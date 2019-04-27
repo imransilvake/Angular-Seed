@@ -7,9 +7,6 @@ import { Observable } from 'rxjs';
 // app
 import { ROUTING } from '../../../../../environments/environment';
 import { AuthService } from '../services/auth.service';
-import { LocalStorageItems, SessionStorageItems } from '../../../../../app.config';
-import { StorageTypeEnum } from '../../../core.pck/storage.mod/enums/storage-type.enum';
-import { StorageService } from '../../../core.pck/storage.mod/services/storage.service';
 
 @Injectable()
 export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
@@ -18,9 +15,15 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 
 	constructor(
 		private _router: Router,
-		private _authService: AuthService,
-		private _storageService: StorageService
+		private _authService: AuthService
 	) {
+		this.authRoutes = [
+			ROUTING.authorization.register,
+			ROUTING.authorization.login,
+			ROUTING.authorization.reset,
+			ROUTING.authorization.forgot
+		];
+
 	}
 
 	/**
@@ -31,35 +34,25 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 	 */
 	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
 		const currentPath = state.url.substring(1);
-		this.authRoutes = [
-			ROUTING.authorization.register,
-			ROUTING.authorization.login,
-			ROUTING.authorization.reset,
-			ROUTING.authorization.forgot
-		];
-
 		return this._authService.authenticateUser()
 			.pipe(
 				map(res => {
-					if (res) {
-						switch (res.status) {
-							case 'OK':
-								if (this.authRoutes.includes(currentPath)) {
-									// navigate to dashboard
-									this._router.navigate([ROUTING.dashboard]).then();
-								}
-								return true;
-							case 'FAIL':
-								if (!this.authRoutes.includes(currentPath)) {
-									// navigate to login
-									this._router.navigate([ROUTING.authorization.login]).then();
-								}
-								return true;
-						}
-					} else {
-						// navigate to login
-						this._router.navigate([ROUTING.authorization.login]).then();
+					switch (res.status) {
+						case 'OK':
+							if (this.authRoutes.includes(currentPath)) {
+								// navigate to dashboard
+								this._router.navigate([ROUTING.dashboard]).then();
+							}
+							break;
+						case 'FAIL':
+							if (!this.authRoutes.includes(currentPath)) {
+								// navigate to login
+								this._router.navigate([ROUTING.authorization.login]).then();
+							}
+							break;
 					}
+
+					return true;
 				})
 			);
 	}
@@ -70,31 +63,29 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 	 * @param route
 	 * @param state
 	 */
-	canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-		/**
-		this.currentUserState = this._authService.currentUserState;
-		if (this.currentUserState) {
-			this._authService.authenticateUser()
-				.subscribe((res) => {
-					if (res && res.status && res.status !== 'OK') {
-						const userPayload = {
-							info: this.currentUserState.info,
-							details: res,
+	canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+		const currentPath = state.url.substring(1);
+		return this._authService.authenticateUser()
+			.pipe(
+				map(res => {
+					if (res.status !== 'OK' && res.status !== 'FAIL') {
+						// set current user state
+						this._authService.currentUserState = {
+							profile: this.currentUserState.profile,
+							credentials: res,
 							rememberMe: this.currentUserState.rememberMe
 						};
+					}
 
-						if (this.currentUserState.rememberMe) {
-							this._storageService.put(LocalStorageItems.userState, userPayload, StorageTypeEnum.PERSISTANT);
-						} else {
-							this._storageService.put(SessionStorageItems.userState, userPayload, StorageTypeEnum.SESSION);
+					if (res.status === 'FAIL') {
+						if (!this.authRoutes.includes(currentPath)) {
+							// navigate to login
+							this._router.navigate([ROUTING.authorization.login]).then();
 						}
 					}
-				});
-		} else {
-			// navigate to login
-			this._router.navigate([ROUTING.authorization.login]).then();
-		}
-		**/
-		return true;
+
+					return true;
+				})
+			);
 	}
 }
