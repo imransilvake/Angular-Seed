@@ -28,23 +28,47 @@ export class HttpErrorHandlingService {
 	/**
 	 * http error handling
 	 *
-	 * @param {HttpErrorResponse} error
-	 * @param {string} apiType
-	 * @returns {}
+	 * @param error
+	 * @param apiType
 	 */
 	public handleErrors(error: HttpErrorResponse, apiType: string) {
-		let returnError: any;
+		if (this.handleGeneralErrors(error)) {
+			switch (apiType) {
+				case HttpApiTypeEnum.GET:
+					this.handleGetErrors(error);
+					break;
+				case HttpApiTypeEnum.POST:
+					this.handlePostErrors(error);
+					break;
+			}
+		}
+	}
 
-		switch (apiType) {
-			case HttpApiTypeEnum.GET:
-				returnError = this.handleGetErrors(error);
-				break;
-			case HttpApiTypeEnum.POST:
-				returnError = this.handlePostErrors(error);
-				break;
+	/**
+	 * handle general errors
+	 *
+	 * @param response
+	 */
+	private handleGeneralErrors(response) {
+		let payload: ErrorHandlerPayloadInterface;
+		if (!navigator.onLine) {
+			payload = {
+				title: this._i18n({
+					value: 'Title: Internet Connection Exception',
+					id: 'Error_Internet_Connection_Title'
+				}),
+				message: this._i18n({
+					value: 'Description: Internet Connection Exception',
+					id: 'Error_Internet_Connection_Description'
+				})
+			};
+
+			// error dispatch
+			this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
+			return false;
 		}
 
-		return returnError;
+		return true;
 	}
 
 	/**
@@ -180,6 +204,21 @@ export class HttpErrorHandlingService {
 						id: 'Error_NotAuthorizedException_Description'
 					}),
 					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
+				};
+
+				// error dispatch
+				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
+				break;
+			case 'SessionTimeoutException':
+				payload = {
+					title: this._i18n({
+						value: 'Title: Session Timeout Exception',
+						id: 'Error_SessionTimeoutException_Title'
+					}),
+					message: this._i18n({
+						value: 'Description: Session Timeout Exception',
+						id: 'Error_SessionTimeoutException_Description'
+					})
 				};
 
 				// error dispatch

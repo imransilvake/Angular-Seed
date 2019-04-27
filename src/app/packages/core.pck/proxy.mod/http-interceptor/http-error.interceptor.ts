@@ -16,9 +16,8 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 	/**
 	 * http error handling interceptor
 	 *
-	 * @param {HttpRequest<any>} req
-	 * @param {HttpHandler} next
-	 * @returns {Observable<HttpEvent<any>>}
+	 * @param req
+	 * @param next
 	 */
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 		const started = moment().valueOf();
@@ -38,7 +37,6 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 				finalize(() => {
 					const elapsed = moment().subtract(started, 'milliseconds');
 					const message = `${ req.method } "${ req.urlWithParams }" ${ status } in ${ elapsed } ms.`;
-					// console.info(message);
 				})
 			);
 	}

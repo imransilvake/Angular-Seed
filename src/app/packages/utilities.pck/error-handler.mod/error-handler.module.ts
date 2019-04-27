@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
 import { ErrorHandlerComponent } from './components/error-handler.component';
 import { ErrorCommonComponent } from './components/error-types/error-common/error-common.component';
+import { ErrorSystemComponent } from './components/error-types/error-system/error-system.component';
 
 @NgModule({
 	imports: [
@@ -12,7 +13,8 @@ import { ErrorCommonComponent } from './components/error-types/error-common/erro
 	],
 	declarations: [
 		ErrorHandlerComponent,
-		ErrorCommonComponent
+		ErrorCommonComponent,
+		ErrorSystemComponent
 	],
 	entryComponents: [
 		ErrorHandlerComponent
