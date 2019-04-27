@@ -75,7 +75,7 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 								this._router.navigate([ROUTING.authorization.login]).then();
 							}
 							break;
-						case !('OK' || 'FAIL'):
+						case !'OK':
 							// set current user state
 							this._authService.currentUserState = {
 								profile: this.currentUserState.profile,
