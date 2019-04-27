@@ -103,6 +103,7 @@ export class AuthService {
 				.postAPI(AppServices['Auth']['Session_Validity'], { bodyParams: payloadSessionValidate });
 		}
 
+		// authentication failed
 		return of({ status: 'FAIL' });
 	}
 
