@@ -68,20 +68,21 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 		return this._authService.authenticateUser()
 			.pipe(
 				map(res => {
-					if (res.status !== 'OK' && res.status !== 'FAIL') {
-						// set current user state
-						this._authService.currentUserState = {
-							profile: this.currentUserState.profile,
-							credentials: res,
-							rememberMe: this.currentUserState.rememberMe
-						};
-					}
-
-					if (res.status === 'FAIL') {
-						if (!this.authRoutes.includes(currentPath)) {
-							// navigate to login
-							this._router.navigate([ROUTING.authorization.login]).then();
-						}
+					switch (res.status) {
+						case 'FAIL':
+							if (!this.authRoutes.includes(currentPath)) {
+								// navigate to login
+								this._router.navigate([ROUTING.authorization.login]).then();
+							}
+							break;
+						case !('OK' || 'FAIL'):
+							// set current user state
+							this._authService.currentUserState = {
+								profile: this.currentUserState.profile,
+								credentials: res,
+								rememberMe: this.currentUserState.rememberMe
+							};
+							break;
 					}
 
 					return true;
