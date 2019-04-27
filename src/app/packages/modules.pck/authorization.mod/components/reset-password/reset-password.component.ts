@@ -43,10 +43,12 @@ export class ResetPasswordComponent implements OnDestroy {
 		private _i18n: I18n
 	) {
 		// user state
-		this._activatedRouter.queryParams.subscribe(() => {
-			const currentNavigation = this._router.getCurrentNavigation();
-			this.userState = currentNavigation && currentNavigation.extras && currentNavigation.extras.state;
-		});
+		this._activatedRouter.queryParams
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(() => {
+				const currentNavigation = this._router.getCurrentNavigation();
+				this.userState = currentNavigation && currentNavigation.extras && currentNavigation.extras.state;
+			});
 
 		// form fields
 		this.formFields = new FormGroup({
