@@ -1,6 +1,8 @@
 // angular
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot } from '@angular/router';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 // app
 import { ROUTING } from '../../../../../environments/environment';
@@ -27,8 +29,7 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 	 * @param route
 	 * @param state
 	 */
-	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-		this.currentUserState = this._authService.currentUserState;
+	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
 		const currentPath = state.url.substring(1);
 		this.authRoutes = [
 			ROUTING.authorization.register,
@@ -37,23 +38,30 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 			ROUTING.authorization.forgot
 		];
 
-		// user is authenticated
-		if (this.currentUserState) {
-			if (this.authRoutes.includes(currentPath)) {
-				// navigate to dashboard
-				this._router.navigate([ROUTING.dashboard]).then();
-			}
-
-			return true;
-		}
-
-		// user is not logged-in
-		if (!this.authRoutes.includes(currentPath)) {
-			// navigate to login
-			this._router.navigate([ROUTING.authorization.login]).then();
-		}
-
-		return true;
+		return this._authService.authenticateUser()
+			.pipe(
+				map(res => {
+					if (res) {
+						switch (res.status) {
+							case 'OK':
+								if (this.authRoutes.includes(currentPath)) {
+									// navigate to dashboard
+									this._router.navigate([ROUTING.dashboard]).then();
+								}
+								return true;
+							case 'FAIL':
+								if (!this.authRoutes.includes(currentPath)) {
+									// navigate to login
+									this._router.navigate([ROUTING.authorization.login]).then();
+								}
+								return true;
+						}
+					} else {
+						// navigate to login
+						this._router.navigate([ROUTING.authorization.login]).then();
+					}
+				})
+			);
 	}
 
 	/**
@@ -63,6 +71,7 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 	 * @param state
 	 */
 	canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+		/**
 		this.currentUserState = this._authService.currentUserState;
 		if (this.currentUserState) {
 			this._authService.authenticateUser()
@@ -85,7 +94,7 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 			// navigate to login
 			this._router.navigate([ROUTING.authorization.login]).then();
 		}
-
+		**/
 		return true;
 	}
 }

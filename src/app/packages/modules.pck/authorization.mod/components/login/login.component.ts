@@ -22,9 +22,6 @@ import { AuthLoginInterface } from '../../interfaces/auth-login.interface';
 import { ErrorHandlerInterface } from '../../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 import { DialogService } from '../../../../utilities.pck/dialog.mod/services/dialog.service';
 import { AuthService } from '../../services/auth.service';
-import { StorageService } from '../../../../core.pck/storage.mod/services/storage.service';
-import { StorageTypeEnum } from '../../../../core.pck/storage.mod/enums/storage-type.enum';
-import { LocalStorageItems, SessionStorageItems } from '../../../../../../app.config';
 
 @Component({
 	selector: 'app-login',
@@ -50,8 +47,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 		private _store: Store<ErrorHandlerInterface>,
 		private _languageListService: LanguageListService,
 		private _authService: AuthService,
-		private _router: Router,
-		private _storageService: StorageService
+		private _router: Router
 	) {
 		// form fields
 		this.formFields = new FormGroup({
@@ -121,24 +117,19 @@ export class LoginComponent implements OnInit, OnDestroy {
 		this._authService.authLogin(formPayload)
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe((res) => {
-				const userPayload = {
-					info: formPayload,
-					details: res,
+				// set current user state
+				this._authService.currentUserState = {
+					profile: formPayload,
+					credentials: res,
 					rememberMe: this.rememberMe && this.rememberMe.checked
 				};
 
-				// validate where to store user session based on remember me
-				if (this.rememberMe && this.rememberMe.checked) {
-					this._storageService.put(LocalStorageItems.userState, userPayload, StorageTypeEnum.PERSISTANT);
-				} else {
-					this._storageService.put(SessionStorageItems.userState, userPayload, StorageTypeEnum.SESSION);
-				}
-
 				// navigate to dashboard
-				this._router.navigate([ROUTING.dashboard]).then();
-
-				// stop loading animation
-				this._loadingAnimationService.stopLoadingAnimation();
+				this._router
+					.navigate([ROUTING.dashboard])
+					.then(() =>
+						this._loadingAnimationService.stopLoadingAnimation()
+					);
 			});
 	}
 }

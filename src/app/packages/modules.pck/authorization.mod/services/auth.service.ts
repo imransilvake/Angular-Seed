@@ -1,6 +1,7 @@
 // angular
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { of } from 'rxjs';
 
 // app
 import { AppServices, LocalStorageItems, SessionStorageItems } from '../../../../../app.config';
@@ -23,11 +24,25 @@ export class AuthService {
 	}
 
 	/**
-	 * setters
+	 * set current user state
+	 * @param data
+	 */
+	set currentUserState(data: any) {
+		if (data.rememberMe) {
+			this._storageService.put(LocalStorageItems.userState, data, StorageTypeEnum.PERSISTANT);
+		} else {
+			this._storageService.put(SessionStorageItems.userState, data, StorageTypeEnum.SESSION);
+		}
+	}
+
+	/**
+	 * get current user state
 	 */
 	get currentUserState() {
-		return this._storageService.get(LocalStorageItems.userState, StorageTypeEnum.PERSISTANT) ||
-			this._storageService.get(SessionStorageItems.userState, StorageTypeEnum.SESSION);
+		return (
+			this._storageService.get(LocalStorageItems.userState, StorageTypeEnum.PERSISTANT) ||
+			this._storageService.get(SessionStorageItems.userState, StorageTypeEnum.SESSION)
+		);
 	}
 
 	/**
@@ -51,23 +66,6 @@ export class AuthService {
 	}
 
 	/**
-	 * authenticate logged-in user
-	 */
-	public authenticateUser() {
-		const userState = this.currentUserState;
-
-		// session validity payload
-		const payloadSessionValidate = {
-			accessToken: userState.details.accessToken.jwtToken,
-			refreshToken: userState.details.refreshToken.token,
-			username: userState.info.username
-		};
-
-		return this._proxyService
-			.postAPI(AppServices['Auth']['Session_Validity'], { bodyParams: payloadSessionValidate });
-	}
-
-	/**
 	 * perform forgot password process
 	 *
 	 * @param payload
@@ -88,31 +86,48 @@ export class AuthService {
 	}
 
 	/**
+	 * authenticate logged-in user
+	 */
+	public authenticateUser() {
+		const userState = this.currentUserState;
+		if (userState) {
+			// payload
+			const payloadSessionValidate = {
+				accessToken: userState.credentials.accessToken.jwtToken,
+				refreshToken: userState.credentials.refreshToken.token,
+				username: userState.profile.username
+			};
+
+			// service: session validity
+			return this._proxyService
+				.postAPI(AppServices['Auth']['Session_Validity'], { bodyParams: payloadSessionValidate });
+		}
+
+		return of({ status: 'FAIL' });
+	}
+
+	/**
 	 * logout user
 	 */
 	public logoutUser() {
-		const currentUserState = this.currentUserState;
-		if (currentUserState) {
-			this.authenticateUser()
-				.subscribe(() => {
+		this.authenticateUser()
+			.subscribe(res => {
+				if (res && res.status === 'OK') {
 					// logout payload
-					const payloadLogout = { accessToken: currentUserState.details.accessToken.jwtToken };
+					const payloadLogout = { accessToken: this.currentUserState.credentials.accessToken.jwtToken };
 
 					// call sign-out service
 					this._proxyService
 						.postAPI(AppServices['Auth']['Logout'], { bodyParams: payloadLogout })
 						.subscribe();
-				});
+				}
+			});
 
-			// clear data
-			StorageService.clearAllLocalStorageItems();
-			StorageService.clearAllSessionStorageItems();
+		// clear data
+		StorageService.clearAllLocalStorageItems();
+		StorageService.clearAllSessionStorageItems();
 
-			// navigate to login
-			this._router.navigate([ROUTING.authorization.login]).then();
-		} else {
-			// navigate to login
-			this._router.navigate([ROUTING.authorization.login]).then();
-		}
+		// navigate to login
+		this._router.navigate([ROUTING.authorization.login]).then();
 	}
 }
