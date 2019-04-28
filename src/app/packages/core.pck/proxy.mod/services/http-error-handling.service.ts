@@ -218,7 +218,8 @@ export class HttpErrorHandlingService {
 					message: this._i18n({
 						value: 'Description: Session Timeout Exception',
 						id: 'Error_SessionTimeoutException_Description'
-					})
+					}),
+					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 				};
 
 				// error dispatch

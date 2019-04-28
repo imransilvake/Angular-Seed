@@ -3,10 +3,15 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@ang
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
+// store
+import { Store } from '@ngrx/store';
+
 // app
 import { ScrollTopService } from './packages/utilities.pck/accessories.mod/services/scroll-top.service';
 import { HelperService } from './packages/utilities.pck/accessories.mod/services/helper.service';
 import { SessionService } from './packages/core.pck/session.mod/services/session.service';
+import { SessionInterface } from './packages/core.pck/session.mod/interfaces/session.interface';
+import * as SessionActions from './packages/core.pck/session.mod/store/actions/session.actions';
 
 @Component({
 	selector: 'app-layout',
@@ -25,10 +30,14 @@ export class AppLayoutComponent implements AfterViewInit, OnDestroy {
 
 	constructor(
 		private _scrollTopService: ScrollTopService,
+		private _store: Store<{ SessionInterface: SessionInterface }>,
 		private _sessionService: SessionService // needed
 	) {
 		// detect current view
 		this.isViewDesktop = HelperService.isDesktopView;
+
+		// start all sessions
+		this._store.dispatch(new SessionActions.SessionCounterStart());
 	}
 
 	ngAfterViewInit() {
@@ -56,6 +65,9 @@ export class AppLayoutComponent implements AfterViewInit, OnDestroy {
 		// remove subscriptions
 		this._ngUnSubscribe.next();
 		this._ngUnSubscribe.complete();
+
+		// clear all sessions
+		this._store.dispatch(new SessionActions.SessionCounterExit());
 	}
 
 	/**

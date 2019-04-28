@@ -8,7 +8,7 @@ import { ErrorHandlerComponent } from '../../error-handler.component';
 @Component({
 	selector: 'app-error-common',
 	templateUrl: './error-common.component.html',
-	styleUrls: ['./error-common.component.scss']
+	styleUrls: ['../errors.component.scss']
 })
 
 export class ErrorCommonComponent {

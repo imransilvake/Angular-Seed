@@ -5,8 +5,7 @@ import { SessionTypeEnum } from '../../enums/session-type.enum';
 
 // default state
 const defaultState: SessionInterface = {
-	type: null,
-	payload: null
+	type: null
 };
 
 // new state
@@ -24,8 +23,7 @@ export function sessionReducer(state: SessionInterface = defaultState, action: S
 	switch (action.type) {
 		case SessionActions.SESSION_COUNTER_START:
 			return newState(state, {
-				type: SessionTypeEnum.SESSION_COUNTER_START,
-				payload: action.payload
+				type: SessionTypeEnum.SESSION_COUNTER_START
 			});
 		case SessionActions.SESSION_COUNTER_EXIT:
 			return newState(state, {

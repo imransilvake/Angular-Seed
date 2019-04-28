@@ -23,7 +23,6 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 			ROUTING.authorization.reset,
 			ROUTING.authorization.forgot
 		];
-
 	}
 
 	/**
