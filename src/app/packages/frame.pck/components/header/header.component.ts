@@ -5,6 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 
 // app
 import { HelperService } from '../../../utilities.pck/accessories.mod/services/helper.service';
+import { ROUTING } from '../../../../../environments/environment';
 
 declare const document: any;
 
@@ -17,6 +18,7 @@ declare const document: any;
 export class HeaderComponent implements OnInit, OnDestroy {
 	@Input() drawer;
 
+	public routing = ROUTING;
 	public appFullScreen = false;
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 

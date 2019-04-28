@@ -6,6 +6,7 @@ import { takeUntil } from 'rxjs/operators';
 // app
 import { ScrollTopService } from './packages/utilities.pck/accessories.mod/services/scroll-top.service';
 import { HelperService } from './packages/utilities.pck/accessories.mod/services/helper.service';
+import { SessionService } from './packages/core.pck/session.mod/services/session.service';
 
 @Component({
 	selector: 'app-layout',
@@ -22,7 +23,10 @@ export class AppLayoutComponent implements AfterViewInit, OnDestroy {
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
-	constructor(private _scrollTopService: ScrollTopService) {
+	constructor(
+		private _scrollTopService: ScrollTopService,
+		private _sessionService: SessionService // needed
+	) {
 		// detect current view
 		this.isViewDesktop = HelperService.isDesktopView;
 	}

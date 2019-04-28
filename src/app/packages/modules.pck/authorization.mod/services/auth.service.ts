@@ -93,8 +93,8 @@ export class AuthService {
 		if (userState) {
 			// payload
 			const payloadSessionValidate = {
-				accessToken: userState.credentials.accessToken.jwtToken,
-				refreshToken: userState.credentials.refreshToken.token,
+				accessToken: userState.credentials.accessToken,
+				refreshToken: userState.credentials.refreshToken,
 				username: userState.profile.username
 			};
 
@@ -115,7 +115,7 @@ export class AuthService {
 			.subscribe(res => {
 				if (res && res.status === 'OK') {
 					// logout payload
-					const payloadLogout = { accessToken: this.currentUserState.credentials.accessToken.jwtToken };
+					const payloadLogout = { accessToken: this.currentUserState.credentials.accessToken };
 
 					// call sign-out service
 					this._proxyService

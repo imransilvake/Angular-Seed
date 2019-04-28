@@ -37,19 +37,29 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 		return this._authService.authenticateUser()
 			.pipe(
 				map(res => {
-					switch (res.status) {
-						case 'OK':
-							if (this.authRoutes.includes(currentPath)) {
-								// navigate to dashboard
-								this._router.navigate([ROUTING.dashboard]).then();
-							}
-							break;
-						case 'FAIL':
-							if (!this.authRoutes.includes(currentPath)) {
-								// navigate to login
-								this._router.navigate([ROUTING.authorization.login]).then();
-							}
-							break;
+					if (res.status) {
+						switch (res.status) {
+							case 'OK':
+								if (this.authRoutes.includes(currentPath)) {
+									// navigate to dashboard
+									this._router.navigate([ROUTING.dashboard]).then();
+								}
+								break;
+							case 'FAIL':
+								if (!this.authRoutes.includes(currentPath)) {
+									// navigate to login
+									this._router.navigate([ROUTING.authorization.login]).then();
+								}
+								break;
+						}
+					} else {
+						// set current user state
+						const data = this._authService.currentUserState;
+						this._authService.currentUserState = {
+							profile: data.profile,
+							credentials: res,
+							rememberMe: data.rememberMe
+						};
 					}
 
 					return true;
@@ -64,25 +74,22 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 	 * @param state
 	 */
 	canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-		const currentPath = state.url.substring(1);
 		return this._authService.authenticateUser()
 			.pipe(
 				map(res => {
-					switch (res.status) {
-						case 'FAIL':
-							if (!this.authRoutes.includes(currentPath)) {
-								// navigate to login
-								this._router.navigate([ROUTING.authorization.login]).then();
-							}
-							break;
-						case !'OK':
-							// set current user state
-							this._authService.currentUserState = {
-								profile: this.currentUserState.profile,
-								credentials: res,
-								rememberMe: this.currentUserState.rememberMe
-							};
-							break;
+					if (res.status) {
+						if (res.status === 'FAIL') {
+							// navigate to login
+							this._router.navigate([ROUTING.authorization.login]).then();
+						}
+					} else {
+						// set current user state
+						const data = this._authService.currentUserState;
+						this._authService.currentUserState = {
+							profile: data.profile,
+							credentials: res,
+							rememberMe: data.rememberMe
+						};
 					}
 
 					return true;

@@ -120,7 +120,11 @@ export class LoginComponent implements OnInit, OnDestroy {
 				// set current user state
 				this._authService.currentUserState = {
 					profile: formPayload,
-					credentials: res,
+					credentials: {
+						accessToken: res.accessToken.jwtToken,
+						idToken: res.idToken.jwtToken,
+						refreshToken: res.refreshToken.token
+					},
 					rememberMe: this.rememberMe && this.rememberMe.checked
 				};
 

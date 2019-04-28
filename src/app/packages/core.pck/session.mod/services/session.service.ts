@@ -16,7 +16,6 @@ import { SessionTypeEnum } from '../enums/session-type.enum';
 import { SessionPayloadInterface } from '../interfaces/session-payload.interface';
 import { ErrorHandlerInterface } from '../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 import { LoadingAnimationService } from '../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
-import { ErrorHandlerPayloadInterface } from '../../../utilities.pck/error-handler.mod/interfaces/error-handler-payload.interface';
 import { AuthService } from '../../../modules.pck/authorization.mod/services/auth.service';
 
 @Injectable({ providedIn: 'root' })
@@ -39,7 +38,7 @@ export class SessionService {
 							this.handleSessionTimeout(res.payload);
 							break;
 						case SessionTypeEnum.SESSION_COUNTER_EXIT:
-							this.exitSessionTimeout();
+							this.exitSession();
 							break;
 					}
 				}
@@ -65,44 +64,57 @@ export class SessionService {
 	}
 
 	/**
+	 * exit session timeout
+	 */
+	public exitSession() {
+		this.sessionTimeout.unsubscribe();
+	}
+
+	/**
 	 * handle session timeout
 	 *
 	 * @param payloadData
 	 */
 	public handleSessionTimeout(payloadData: SessionPayloadInterface) {
-		this.sessionTimeout = interval(payloadData.inactivityTime)
-			.subscribe(() => {
-				// authenticate user
-				if (!this._authService.authenticateUser()) {
-					// start loading animation
-					this._loadingAnimationService.startLoadingAnimation();
-
-					// payload
-					const payload: ErrorHandlerPayloadInterface = {
-						title: this._i18n({
-							value: 'Title: User Not Authorized Exception',
-							id: 'Error_NotAuthorizedException_Title'
-						}),
-						message: this._i18n({
-							value: 'Description: User Not Authorized Exception',
-							id: 'Error_NotAuthorizedException_Description'
-						}),
-						buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-					};
-
-					// error dispatch
-					this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
-
-					// unsubscribe sessionTimeout
-					this.sessionTimeout.unsubscribe();
-				}
-			});
+		// handle lock screen session
+		this.handleLockScreenSession(payloadData.inactivityTime);
 	}
 
 	/**
-	 * exit session timeout
+	 * handle lock screen session
+	 *
+	 * @param seconds
 	 */
-	public exitSessionTimeout() {
-		this.sessionTimeout.unsubscribe();
+	public handleLockScreenSession(seconds: number) {
+		this.sessionTimeout = interval(seconds)
+			.subscribe(() => {
+				// authenticate user
+				this._authService.authenticateUser()
+					.subscribe(res => {
+						if (!res.status || res.status === 'FAIL') {
+							// start loading animation
+							this._loadingAnimationService.startLoadingAnimation();
+
+							// payload
+							const payload = {
+								title: this._i18n({
+									value: 'Title: Session Timeout Exception',
+									id: 'Error_SessionTimeoutException_Title'
+								}),
+								message: this._i18n({
+									value: 'Description: Session Timeout Exception',
+									id: 'Error_SessionTimeoutException_Description'
+								}),
+								buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
+							};
+
+							// error dispatch
+							this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
+
+							// unsubscribe session handler
+							this.sessionTimeout.unsubscribe();
+						}
+					});
+			});
 	}
 }
