@@ -7,6 +7,9 @@ import { Observable } from 'rxjs';
 // app
 import { ROUTING } from '../../../../../environments/environment';
 import { AuthService } from '../services/auth.service';
+import { StorageService } from '../../../core.pck/storage.mod/services/storage.service';
+import { LocalStorageItems } from '../../../../../app.config';
+import { StorageTypeEnum } from '../../../core.pck/storage.mod/enums/storage-type.enum';
 
 @Injectable()
 export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
@@ -15,7 +18,8 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 
 	constructor(
 		private _router: Router,
-		private _authService: AuthService
+		private _authService: AuthService,
+		private _storageService: StorageService
 	) {
 		this.authRoutes = [
 			ROUTING.authorization.register,
@@ -33,6 +37,15 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 	 */
 	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
 		const currentPath = state.url.substring(1);
+
+		// validate lock screen
+		if (this._storageService.get(LocalStorageItems.lockState, StorageTypeEnum.PERSISTANT)) {
+			if (currentPath !== ROUTING.authorization.lock) {
+				// navigate to lock
+				this._router.navigate([ROUTING.authorization.lock]).then();
+			}
+		}
+
 		return this._authService.authenticateUser()
 			.pipe(
 				map(res => {

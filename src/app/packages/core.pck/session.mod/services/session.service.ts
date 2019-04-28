@@ -47,10 +47,14 @@ export class SessionService {
 	private exitSessions(session) {
 		switch (session) {
 			case 'LOCK_SCREEN':
-				this.sessionLockScreen && this.sessionLockScreen.unsubscribe();
+				if (this.sessionLockScreen) {
+					this.sessionLockScreen.unsubscribe();
+				}
 				break;
 			case 'ALL':
-				this.sessionLockScreen && this.sessionLockScreen.unsubscribe();
+				if (this.sessionLockScreen) {
+					this.sessionLockScreen.unsubscribe();
+				}
 				break;
 			default:
 		}
@@ -82,7 +86,7 @@ export class SessionService {
 				this._authService.authenticateUser()
 					.subscribe(res => {
 						if (!res.status || res.status === 'FAIL') {
-							// payload
+							// common error
 							const payload = {
 								title: this._i18n({
 									value: 'Title: Session Timeout Exception',
@@ -94,8 +98,6 @@ export class SessionService {
 								}),
 								buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 							};
-
-							// error dispatch
 							this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
 
 							// unsubscribe session handler

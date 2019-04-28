@@ -52,6 +52,7 @@ export class HttpErrorHandlingService {
 	private handleGeneralErrors(response) {
 		let payload: ErrorHandlerPayloadInterface;
 		if (!navigator.onLine) {
+			// system error
 			payload = {
 				title: this._i18n({
 					value: 'Title: Internet Connection Exception',
@@ -62,8 +63,6 @@ export class HttpErrorHandlingService {
 					id: 'Error_Internet_Connection_Description'
 				})
 			};
-
-			// error dispatch
 			this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
 			return false;
 		}
@@ -125,8 +124,6 @@ export class HttpErrorHandlingService {
 					}),
 					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 				};
-
-				// error dispatch
 				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
 				break;
 			case 'UserNotFoundException':
@@ -141,8 +138,6 @@ export class HttpErrorHandlingService {
 					}),
 					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 				};
-
-				// error dispatch
 				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
 				break;
 			case 'UsernameExistsException':
@@ -157,8 +152,6 @@ export class HttpErrorHandlingService {
 					}),
 					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 				};
-
-				// error dispatch
 				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
 				break;
 			case 'UserNotConfirmedException':
@@ -173,8 +166,6 @@ export class HttpErrorHandlingService {
 					}),
 					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 				};
-
-				// error dispatch
 				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
 				break;
 			case 'CodeMismatchException':
@@ -189,8 +180,6 @@ export class HttpErrorHandlingService {
 					}),
 					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 				};
-
-				// error dispatch
 				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
 				break;
 			case 'NotAuthorizedException':
@@ -205,8 +194,6 @@ export class HttpErrorHandlingService {
 					}),
 					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 				};
-
-				// error dispatch
 				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
 				break;
 			case 'SessionTimeoutException':
@@ -221,8 +208,6 @@ export class HttpErrorHandlingService {
 					}),
 					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 				};
-
-				// error dispatch
 				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
 				break;
 			default:
@@ -237,8 +222,6 @@ export class HttpErrorHandlingService {
 					}),
 					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 				};
-
-				// error dispatch
 				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
 		}
 	}

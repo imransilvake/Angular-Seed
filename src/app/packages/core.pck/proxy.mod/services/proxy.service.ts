@@ -34,7 +34,7 @@ export class ProxyService {
 		url = (params && params.matrixParams) ? this._httpOptionsService.addMatrixParamsToUrl(url, params.matrixParams) : url;
 
 		// add path params
-		url = (params && params.pathParams) ? this._httpOptionsService.addPathParams(url, params.pathParams) : url;
+		url = (params && params.pathParams) ? HttpOptionsService.addPathParams(url, params.pathParams) : url;
 
 		// url encode
 		url = encodeURI(url);
@@ -74,7 +74,7 @@ export class ProxyService {
 		url = (params.matrixParams) ? this._httpOptionsService.addMatrixParamsToUrl(url, params.matrixParams) : url;
 
 		// add path params
-		url = (params.pathParams) ? this._httpOptionsService.addPathParams(url, params.pathParams) : url;
+		url = (params.pathParams) ? HttpOptionsService.addPathParams(url, params.pathParams) : url;
 
 		// url encode
 		url = encodeURI(url);

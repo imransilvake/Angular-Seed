@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 
 // app
 import { ErrorHandlerService } from './packages/utilities.pck/error-handler.mod/services/error-handler.service';
+import { SessionService } from './packages/core.pck/session.mod/services/session.service';
 
 @Component({
 	selector: 'app-root',
@@ -20,6 +21,9 @@ import { ErrorHandlerService } from './packages/utilities.pck/error-handler.mod/
 export class AppComponent {
 	public isShowLoadingAnimation = false;
 
-	constructor(private _errorHandlerService: ErrorHandlerService) {
+	constructor(
+		private _errorHandlerService: ErrorHandlerService,
+		private _sessionService: SessionService
+	) {
 	}
 }

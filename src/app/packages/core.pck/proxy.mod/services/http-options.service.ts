@@ -1,6 +1,6 @@
 // angular
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 
 // app
 import { RequestHeaders } from '../../../../../app.config';
@@ -109,7 +109,7 @@ export class HttpOptionsService {
 	 * @param pathParams
 	 * @param url
 	 */
-	public addPathParams(url: string, pathParams: Object): string {
+	public static addPathParams(url: string, pathParams: Object): string {
 		if (pathParams) {
 			for (const param in pathParams) {
 				if (pathParams.hasOwnProperty(param)) {

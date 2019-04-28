@@ -14,11 +14,11 @@ export class DialogService {
 	/**
 	 * show dialog
 	 *
-	 * @param {DialogInterface} data
-	 * @returns {Observable<any>}
+	 * @param data
 	 */
 	public showDialog(data: DialogInterface) {
 		const dialogRef = this._dialog.open(DialogComponent, {
+			disableClose: true,
 			width: '500px',
 			data: data
 		});

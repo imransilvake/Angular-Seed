@@ -26,6 +26,7 @@ export class ErrorHandlerService {
 
 					// show error
 					this._dialog.open(ErrorHandlerComponent, {
+						disableClose: true,
 						width: '500px',
 						data: res
 					});
