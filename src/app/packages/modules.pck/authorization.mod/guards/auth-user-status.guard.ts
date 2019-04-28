@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot } from '@angular/router';
 import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 // app
 import { ROUTING } from '../../../../../environments/environment';
@@ -43,6 +43,7 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 			if (currentPath !== ROUTING.authorization.lock) {
 				// navigate to lock
 				this._router.navigate([ROUTING.authorization.lock]).then();
+				return of(true);
 			}
 		}
 
