@@ -1,7 +1,7 @@
 // angular
 import { Injectable } from '@angular/core';
-import { interval } from 'rxjs/internal/observable/interval';
 import { I18n } from '@ngx-translate/i18n-polyfill';
+import { timer } from 'rxjs';
 
 // store
 import { Store } from '@ngrx/store';
@@ -31,10 +31,10 @@ export class SessionService {
 				if (res && res.type !== null) {
 					switch (res.type) {
 						case SessionTypeEnum.SESSION_COUNTER_START:
-							this.handleSessions();
+							this.handleSessions(res.payload);
 							break;
 						case SessionTypeEnum.SESSION_COUNTER_EXIT:
-							this.exitSessions();
+							this.exitSessions(res.payload);
 							break;
 					}
 				}
@@ -44,17 +44,30 @@ export class SessionService {
 	/**
 	 * exit all sessions
 	 */
-	private exitSessions() {
-		// lock screen
-		this.sessionLockScreen.unsubscribe();
+	private exitSessions(session) {
+		switch (session) {
+			case 'LOCK_SCREEN':
+				this.sessionLockScreen && this.sessionLockScreen.unsubscribe();
+				break;
+			case 'ALL':
+				this.sessionLockScreen && this.sessionLockScreen.unsubscribe();
+				break;
+			default:
+		}
 	}
 
 	/**
 	 * handle all sessions
+	 *
+	 * @param session
 	 */
-	private handleSessions() {
-		// handle lock screen session
-		this.handleLockScreenSession(AppOptions.lockScreenSessionTime);
+	private handleSessions(session) {
+		switch (session) {
+			case 'LOCK_SCREEN':
+				this.handleLockScreenSession(AppOptions.lockScreenSessionTime);
+				break;
+			default:
+		}
 	}
 
 	/**
@@ -63,7 +76,7 @@ export class SessionService {
 	 * @param seconds
 	 */
 	private handleLockScreenSession(seconds: number) {
-		const sessionHandler = interval(seconds)
+		const sessionHandler = this.sessionLockScreen = timer(0, seconds)
 			.subscribe(() => {
 				// authenticate user
 				this._authService.authenticateUser()
@@ -86,7 +99,6 @@ export class SessionService {
 							this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
 
 							// unsubscribe session handler
-							this.sessionLockScreen = sessionHandler;
 							sessionHandler.unsubscribe();
 						}
 					});

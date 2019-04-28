@@ -8,11 +8,13 @@ export const SESSION_COUNTER_EXIT	= '[Session] Counter Exit';
 // action: session counter start
 export class SessionCounterStart implements Action {
 	readonly type = SESSION_COUNTER_START;
+	constructor(public payload: any) { }
 }
 
 // action: session counter exit
 export class SessionCounterExit implements Action {
 	readonly type = SESSION_COUNTER_EXIT;
+	constructor(public payload: any) { }
 }
 
 // export all

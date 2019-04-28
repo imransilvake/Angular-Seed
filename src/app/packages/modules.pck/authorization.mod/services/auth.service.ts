@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 
+// store
+import { Store } from '@ngrx/store';
+
 // app
 import { AppServices, LocalStorageItems, SessionStorageItems } from '../../../../../app.config';
 import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service';
@@ -13,13 +16,17 @@ import { AuthResetInterface } from '../interfaces/auth-reset.interface';
 import { StorageTypeEnum } from '../../../core.pck/storage.mod/enums/storage-type.enum';
 import { StorageService } from '../../../core.pck/storage.mod/services/storage.service';
 import { ROUTING } from '../../../../../environments/environment';
+import { SessionInterface } from '../../../core.pck/session.mod/interfaces/session.interface';
+import { SessionsEnum } from '../../../core.pck/session.mod/enums/sessions.enum';
+import * as SessionActions from '../../../core.pck/session.mod/store/actions/session.actions';
 
 @Injectable()
 export class AuthService {
 	constructor(
 		private _proxyService: ProxyService,
 		private _storageService: StorageService,
-		private _router: Router
+		private _router: Router,
+		private _store: Store<{ SessionInterface: SessionInterface }>
 	) {
 	}
 
@@ -122,6 +129,9 @@ export class AuthService {
 						.postAPI(AppServices['Auth']['Logout'], { bodyParams: payloadLogout })
 						.subscribe();
 				}
+
+				// clear all sessions
+				this._store.dispatch(new SessionActions.SessionCounterExit(SessionsEnum.SESSION_ALL));
 
 				// clear data
 				StorageService.clearAllLocalStorageItems();
