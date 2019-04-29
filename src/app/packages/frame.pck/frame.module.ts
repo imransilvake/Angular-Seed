@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 // app
 import { SharedModule } from '../../shared/shared.module';
-import { E404Component } from './components/errors/e404/e404.component';
+import { E404Component } from './components/pages/e404.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NotificationModule } from '../utilities.pck/notification.mod/notification.module';
@@ -13,6 +13,7 @@ import { SidebarService } from './services/sidebar.service';
 import { NotificationMenuComponent } from './components/menus/notification/notification-menu.component';
 import { AccountMenuComponent } from './components/menus/account/account-menu.component';
 import { SecondarySidebarComponent } from './components/sidebar/secondary/secondary-sidebar.component';
+import { MaintenanceComponent } from './components/pages/maintenance.component';
 
 @NgModule({
 	imports: [
@@ -21,13 +22,14 @@ import { SecondarySidebarComponent } from './components/sidebar/secondary/second
 	],
 	declarations: [
 		E404Component,
+		MaintenanceComponent,
 		HeaderComponent,
 		FooterComponent,
 		ScrollTopComponent,
 		PrimarySidebarComponent,
+		SecondarySidebarComponent,
 		NotificationMenuComponent,
-		AccountMenuComponent,
-		SecondarySidebarComponent
+		AccountMenuComponent
 	],
 	exports: [
 		HeaderComponent,

@@ -28,7 +28,6 @@ import { NotificationModule } from './packages/utilities.pck/notification.mod/no
 import { AuthorizationModule } from './packages/modules.pck/authorization.mod/authorization.module';
 import { AppLayoutComponent } from './app-layout.component';
 import { DashboardComponent } from './packages/modules.pck/dashboard.component';
-import { TestComponent } from './packages/modules.pck/test.component';
 
 // i18n using polyfills
 // provided by webpack
@@ -70,8 +69,7 @@ declare const require;
 	declarations: [
 		AppComponent,
 		AppLayoutComponent,
-		DashboardComponent,
-		TestComponent
+		DashboardComponent
 	],
 	providers: [
 		I18n,

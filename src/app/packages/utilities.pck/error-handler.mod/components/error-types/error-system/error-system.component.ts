@@ -1,11 +1,10 @@
 // angular
 import { Component, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
-import { Router } from '@angular/router';
 
 // app
 import { ErrorHandlerComponent } from '../../error-handler.component';
-import { ROUTING } from '../../../../../../../environments/environment';
+import { AuthService } from '../../../../../modules.pck/authorization.mod/services/auth.service';
 
 @Component({
 	selector: 'app-error-system',
@@ -18,16 +17,16 @@ export class ErrorSystemComponent {
 
 	constructor(
 		public dialogRef: MatDialogRef<ErrorHandlerComponent>,
-		private _router: Router
+		private _authService: AuthService
 	) {
 	}
 
 	/**
 	 * close dialog window
 	 */
-	public onClickCloseDialog(): void {
-		// navigate to login
-		this._router.navigate([ROUTING.authorization.login]).then();
+	public onClickCloseDialog() {
+		// logout
+		this._authService.clearSessions();
 
 		// close dialog
 		this.dialogRef.close();

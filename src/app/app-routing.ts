@@ -6,10 +6,10 @@ import { AUTHORIZATION_ROUTES } from './packages/modules.pck/authorization.mod/a
 import { AppLayoutComponent } from './app-layout.component';
 import { AuthOverviewComponent } from './packages/modules.pck/authorization.mod/components/auth-overview/auth-overview.component';
 import { ROUTING } from '../environments/environment';
-import { E404Component } from './packages/frame.pck/components/errors/e404/e404.component';
+import { E404Component } from './packages/frame.pck/components/pages/e404.component';
 import { AuthUserStatusGuard } from './packages/modules.pck/authorization.mod/guards/auth-user-status.guard';
 import { DashboardComponent } from './packages/modules.pck/dashboard.component';
-import { TestComponent } from './packages/modules.pck/test.component';
+import { MaintenanceComponent } from './packages/frame.pck/components/pages/maintenance.component';
 
 const ROUTES: Routes = [
 	{
@@ -37,8 +37,8 @@ const ROUTES: Routes = [
 						component: DashboardComponent
 					},
 					{
-						path: 'test',
-						component: TestComponent
+						path: ROUTING.pages.maintenance,
+						component: MaintenanceComponent
 					}
 				],
 				canActivateChild: [AuthUserStatusGuard]

@@ -15,5 +15,8 @@ export const ROUTING = {
 		forgot: 'auth/forgot',
 		reset: 'auth/reset',
 		lock: 'auth/lock'
+	},
+	pages: {
+		maintenance: 'maintenance'
 	}
 };

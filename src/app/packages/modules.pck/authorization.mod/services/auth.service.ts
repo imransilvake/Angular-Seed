@@ -133,12 +133,20 @@ export class AuthService {
 				// clear all sessions
 				this._store.dispatch(new SessionActions.SessionCounterExit(SessionsEnum.SESSION_ALL));
 
-				// clear data
-				StorageService.clearAllLocalStorageItems();
-				StorageService.clearAllSessionStorageItems();
-
-				// navigate to login
-				this._router.navigate([ROUTING.authorization.login]).then();
+				// clear sessions
+				this.clearSessions();
 			});
+	}
+
+	/**
+	 * clear sessions
+	 */
+	public clearSessions() {
+		// clear data
+		StorageService.clearAllLocalStorageItems();
+		StorageService.clearAllSessionStorageItems();
+
+		// navigate to login
+		this._router.navigate([ROUTING.authorization.login]).then();
 	}
 }
