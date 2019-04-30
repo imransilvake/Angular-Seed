@@ -21,70 +21,6 @@
 					top: 0;
 					z-index: cd-zIndex(normal);
 				}
-
-				.ham-bg-wrapper {
-					background-image: url('/assets/images/auth/bg_inner.png');
-					background-repeat: no-repeat;
-					background-size: cover;
-					bottom: 0;
-					left: 0;
-					position: absolute;
-					right: 0;
-					top: 0;
-
-					.ham-details {
-						color: cd-palette($cd-color, 1012);
-						left: 0;
-						padding: 25px 25px 10px;
-						position: absolute;
-						right: 0;
-						z-index: cd-zIndex(normal);
-
-
-						&.ham-top {
-							top: 0;
-						}
-
-						&.ham-bottom {
-							bottom: 0;
-						}
-
-						.ham-logo {
-							margin-bottom: 50px;
-							margin-top: 10px;
-						}
-
-						h1 {
-							font-size: cd-fontSize(s28);
-							font-weight: cd-fontWeight(400);
-						}
-
-						p {
-							font-size: cd-fontSize(s13);
-						}
-
-						.cd-row {
-							align-items: flex-end;
-							display: flex;
-
-							.cd-col {
-								&:first-child {
-									padding-left: 0;
-								}
-
-								&:last-child {
-									padding-right: 0;
-									text-align: right;
-								}
-							}
-
-							.ts-logo-poweredby {
-								padding-bottom: 5px;
-								width: 130px;
-							}
-						}
-					}
-				}
 			}
 
 			&:last-child {
@@ -157,35 +93,6 @@
 			min-width: auto;
 
 			.ham-col {
-				&:first-child {
-					.ham-bg-wrapper {
-						background-size: auto;
-						position: static;
-
-						.ham-details {
-							position: relative;
-
-							&.ham-bottom {
-								margin-top: 80px;
-							}
-
-							.ham-logo {
-								margin-bottom: 50px;
-								margin-top: 0;
-								width: 550px;
-							}
-
-							h1 {
-								font-size: cd-fontSize(s30);
-							}
-
-							p {
-								font-size: cd-fontSize(s14);
-							}
-						}
-					}
-				}
-
 				&:last-child {
 					.ham-form {
 						.cd-row {
@@ -214,54 +121,5 @@
 	@include cd-media(desktop, smartphone) {
 		margin: 0 auto;
 		width: 100%;
-
-		.ham-row {
-			.ham-col {
-				&:first-child {
-					.ham-bg-wrapper {
-						.ham-details {
-							.ham-logo {
-								width: 480px;
-							}
-
-							h1 {
-								font-size: cd-fontSize(s28);
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-
-	@include cd-media(desktop, mini) {
-		.ham-row {
-			.ham-col {
-				&:first-child {
-					.ham-bg-wrapper {
-						background-position: 0 26%;
-
-						.ham-details {
-							&.ham-bottom {
-								margin-top: 20px;
-							}
-
-							.ham-logo {
-								margin-bottom: 25px;
-								width: 100%;
-							}
-
-							h1 {
-								font-size: cd-fontSize(s22);
-							}
-
-							p {
-								font-size: cd-fontSize(s13);
-							}
-						}
-					}
-				}
-			}
-		}
 	}
 }

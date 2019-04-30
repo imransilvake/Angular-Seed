@@ -3,7 +3,11 @@ import { Component } from '@angular/core';
 
 @Component({
 	selector: 'app-auth-overview',
-	templateUrl: './auth-overview.component.html',
+	template: `
+		<section class="ham-auth-wrapper" [ngStyle]="{'background-image': imageUrl}">
+			<router-outlet></router-outlet>
+		</section>
+	`,
 	styleUrls: ['./auth-overview.component.scss']
 })
 

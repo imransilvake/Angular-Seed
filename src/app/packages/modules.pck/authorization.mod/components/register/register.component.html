@@ -2,23 +2,15 @@
 	<div class="cd-row ham-row">
 		<!-- Info -->
 		<div class="cd-col cd-col-pm-d-6 ham-col">
-			<div class="ham-bg-wrapper">
-				<div class="ham-details ham-top">
-					<img class="ham-logo" src="/assets/svg/logo_black.svg" alt="bg-inner">
-					<h1 i18n="@@Auth_Register_Info_Title">Title</h1>
-					<p i18n="@@Auth_Register_Info_Description">Description</p>
-				</div>
-				<div class="ham-details ham-bottom">
-					<div class="cd-row">
-						<div class="cd-col cd-col-pd-m-6 cd-col-pd-s-6 cd-col-pd-d-6 cd-col-pd-w-6">
-							<p i18n="@@Auth_Register_Info_Version">Version: {{version}}</p>
-						</div>
-						<div class="cd-col cd-col-pd-m-6 cd-col-pd-s-6 cd-col-pd-d-6 cd-col-pd-w-6">
-							<img class="ts-logo-poweredby" src="/assets/svg/logo_powered_by.svg" alt="powered-by">
-						</div>
-					</div>
-				</div>
-			</div>
+			<app-auth-info
+				translateTitle="Title"
+				i18n-translateTitle="@@Auth_Register_Info_Title"
+				translateDescription="Description"
+				i18n-translateDescription="@@Auth_Register_Info_Description"
+				translateVersion="Version"
+				i18n-translateVersion="@@Auth_Register_Info_Version"
+				[version]="'1.0.0'">
+			</app-auth-info>
 		</div>
 
 		<!-- Form -->

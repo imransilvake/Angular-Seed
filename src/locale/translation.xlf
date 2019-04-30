@@ -131,7 +131,7 @@
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/register/register.component.html
 					</context>
-					<context context-type="linenumber">7</context>
+					<context context-type="linenumber">6</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Auth_Register_Info_Description" datatype="html">
@@ -144,14 +144,12 @@
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Auth_Register_Info_Version" datatype="html">
-				<source>Version:
-					<x id="INTERPOLATION" equiv-text="{{version}}"/>
-				</source>
+				<source>Version</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/register/register.component.html
 					</context>
-					<context context-type="linenumber">12</context>
+					<context context-type="linenumber">10</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Auth_Register_Form_Title" datatype="html">
@@ -279,7 +277,7 @@
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/login/login.component.html
 					</context>
-					<context context-type="linenumber">7</context>
+					<context context-type="linenumber">6</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Auth_Login_Info_Description" datatype="html">
@@ -292,14 +290,12 @@
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Auth_Login_Info_Version" datatype="html">
-				<source>Version:
-					<x id="INTERPOLATION" equiv-text="{{version}}"/>
-				</source>
+				<source>Version</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/login/login.component.html
 					</context>
-					<context context-type="linenumber">12</context>
+					<context context-type="linenumber">10</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Auth_Login_Form_Title" datatype="html">
@@ -400,7 +396,7 @@
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.html
 					</context>
-					<context context-type="linenumber">7</context>
+					<context context-type="linenumber">6</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Auth_Forgot_Password_Info_Description" datatype="html">
@@ -413,14 +409,12 @@
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Auth_Forgot_Password_Info_Version" datatype="html">
-				<source>Version:
-					<x id="INTERPOLATION" equiv-text="{{version}}"/>
-				</source>
+				<source>Version</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.html
 					</context>
-					<context context-type="linenumber">12</context>
+					<context context-type="linenumber">10</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Auth_Forgot_Password_Form_Title" datatype="html">
@@ -512,7 +506,7 @@
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/reset-password/reset-password.component.html
 					</context>
-					<context context-type="linenumber">7</context>
+					<context context-type="linenumber">6</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Auth_Reset_Password_Info_Description" datatype="html">
@@ -525,14 +519,12 @@
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Auth_Reset_Password_Info_Version" datatype="html">
-				<source>Version:
-					<x id="INTERPOLATION" equiv-text="{{version}}"/>
-				</source>
+				<source>Version</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/reset-password/reset-password.component.html
 					</context>
-					<context context-type="linenumber">12</context>
+					<context context-type="linenumber">10</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Auth_Reset_Password_Form_Title" datatype="html">
@@ -616,6 +608,24 @@
 					<context context-type="linenumber">74</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="Error_Internet_Connection_Title" datatype="html">
+				<source>Title: Internet Connection Exception</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Error_Internet_Connection_Description" datatype="html">
+				<source>Description: Internet Connection Exception</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
 			<trans-unit id="Error_InvalidParameterException_Title" datatype="html">
 				<source>Title: Invalid Parameter Exception</source>
 				<context-group purpose="location">
@@ -680,6 +690,24 @@
 				</context-group>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
+						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/core.pck/session.mod/services/session.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/components/lock-screen/lock-screen.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
 						src/app/packages/modules.pck/authorization.mod/components/register/register.component.ts
 					</context>
 					<context context-type="linenumber">1</context>
@@ -739,6 +767,24 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="Error_CodeMismatchException_Title" datatype="html">
+				<source>Title: Verification Code Exception</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Error_CodeMismatchException_Description" datatype="html">
+				<source>Description: Verification Code Exception</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
 			<trans-unit id="Error_NotAuthorizedException_Title" datatype="html">
 				<source>Title: User Not Authorized Exception</source>
 				<context-group purpose="location">
@@ -757,20 +803,32 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Error_CodeMismatchException_Title" datatype="html">
-				<source>Title: Verification Code Exception</source>
+			<trans-unit id="Error_SessionTimeoutException_Title" datatype="html">
+				<source>Title: Session Timeout Exception</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
 					</context>
 					<context context-type="linenumber">1</context>
 				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/core.pck/session.mod/services/session.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
 			</trans-unit>
-			<trans-unit id="Error_CodeMismatchException_Description" datatype="html">
-				<source>Description: Verification Code Exception</source>
+			<trans-unit id="Error_SessionTimeoutException_Description" datatype="html">
+				<source>Description: Session Timeout Exception</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/core.pck/session.mod/services/session.service.ts
 					</context>
 					<context context-type="linenumber">1</context>
 				</context-group>
@@ -822,6 +880,24 @@
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/modules.pck/authorization.mod/components/reset-password/reset-password.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Error_PasswordInvalid_Title" datatype="html">
+				<source>Title: Password Invalid Exception</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/components/lock-screen/lock-screen.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Error_PasswordInvalid_Description" datatype="html">
+				<source>Description: Password Invalid Exception</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/components/lock-screen/lock-screen.component.ts
 					</context>
 					<context context-type="linenumber">1</context>
 				</context-group>
