@@ -1,4 +1,4 @@
 export interface SelectDefaultInterface {
-	value: string;
-	viewValue: string;
+	id: string;
+	text: string;
 }

@@ -7,6 +7,6 @@ export interface SelectGroupInterface {
 
 // group items
 export interface SelectGroupItems {
-	value: string;
-	viewValue: string;
+	id: string;
+	text: string;
 }

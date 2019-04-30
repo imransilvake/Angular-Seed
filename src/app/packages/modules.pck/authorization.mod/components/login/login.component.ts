@@ -1,13 +1,10 @@
 // angular
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { MatCheckboxChange } from '@angular/material';
-
-// store
-import { Store } from '@ngrx/store';
+import { MatCheckboxChange } from '@angular/material'
 
 // app
 import { faGlobeEurope } from '@fortawesome/free-solid-svg-icons';
@@ -19,8 +16,6 @@ import { SelectDefaultInterface } from '../../../../core.pck/fields.mod/interfac
 import { SelectStyleEnum } from '../../../../core.pck/fields.mod/enums/select-style.enum';
 import { LoadingAnimationService } from '../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { AuthLoginInterface } from '../../interfaces/auth-login.interface';
-import { ErrorHandlerInterface } from '../../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
-import { DialogService } from '../../../../utilities.pck/dialog.mod/services/dialog.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -42,11 +37,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private _loadingAnimationService: LoadingAnimationService,
-		private _dialogService: DialogService,
-		private _store: Store<ErrorHandlerInterface>,
 		private _languageListService: LanguageListService,
 		private _authService: AuthService,
-		private _router: Router
+		private _router: Router,
+		private _route: ActivatedRoute
 	) {
 		// form fields
 		this.formFields = new FormGroup({
@@ -65,6 +59,15 @@ export class LoginComponent implements OnInit, OnDestroy {
 	ngOnInit() {
 		// set language list
 		this.languageList = this._languageListService.getLanguageList();
+
+		// default lang: english
+		this._route.url
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => {
+				if (res[0].path === 'en' || res[0].path === 'de') {
+					this.languageName.setValue(res[0].path);
+				}
+			});
 
 		// check for language
 		this.languageName.valueChanges

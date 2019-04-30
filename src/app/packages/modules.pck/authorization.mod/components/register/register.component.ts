@@ -78,7 +78,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 		this._hotelListService
 			.getHotelList()
 			.pipe(takeUntil(this._ngUnSubscribe))
-			.subscribe((res) => this.hotelList = res);
+			.subscribe(res => this.hotelList = res);
 	}
 
 	ngOnDestroy() {
