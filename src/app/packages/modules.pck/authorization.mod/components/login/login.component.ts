@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 		this._route.url
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
-				if (res[0].path === 'en' || res[0].path === 'de') {
+				if (res && (res[0].path === 'en' || res[0].path === 'de')) {
 					this.languageName.setValue(res[0].path);
 				}
 			});
