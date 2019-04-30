@@ -5,6 +5,7 @@ import { FormControl } from '@angular/forms';
 // app
 import { InputStyleEnum } from '../../enums/input-style.enum';
 import { InputStyleInterface } from '../../interfaces/input-style.interface';
+import * as zxcvbn from 'zxcvbn';
 
 @Component({
 	selector: 'app-input',

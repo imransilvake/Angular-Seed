@@ -43,6 +43,7 @@ Please follow the link for the documentation: [GUIDE](./GUIDE.md)
 - [X] [Moment](https://momentjs.com/)
 - [X] [HammerJS](https://hammerjs.github.io/)
 - [X] [Fontawesome](https://fontawesome.com/)
+- [X] [Password Strength (zxcvbn)](https://github.com/dropbox/zxcvbn)
 
 
 ## Environments
