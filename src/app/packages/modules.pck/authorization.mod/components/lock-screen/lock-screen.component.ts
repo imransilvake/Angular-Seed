@@ -1,5 +1,5 @@
 // angular
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -11,6 +11,7 @@ import { Store } from '@ngrx/store';
 
 // app
 import * as SessionActions from '../../../../core.pck/session.mod/store/actions/session.actions';
+import * as ErrorHandlerActions from '../../../../utilities.pck/error-handler.mod/store/actions/error-handler.actions';
 import { ROUTING } from '../../../../../../environments/environment';
 import { InputStyleEnum } from '../../../../core.pck/fields.mod/enums/input-style.enum';
 import { faLock, faLockOpen } from '@fortawesome/free-solid-svg-icons';
@@ -22,7 +23,6 @@ import { StorageTypeEnum } from '../../../../core.pck/storage.mod/enums/storage-
 import { LocalStorageItems } from '../../../../../../app.config';
 import { LoadingAnimationService } from '../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { AuthService } from '../../services/auth.service';
-import * as ErrorHandlerActions from '../../../../utilities.pck/error-handler.mod/store/actions/error-handler.actions';
 
 @Component({
 	selector: 'app-lock-screen',
@@ -30,11 +30,12 @@ import * as ErrorHandlerActions from '../../../../utilities.pck/error-handler.mo
 	styleUrls: ['./lock-screen.component.scss']
 })
 
-export class LockScreenComponent implements OnDestroy {
+export class LockScreenComponent implements OnInit, OnDestroy {
 	public routing = ROUTING;
 	public formFields;
 	public lockPasswordIcons = [faLock, faLockOpen];
 	public lockPasswordStyleType = InputStyleEnum.INFO;
+	public currentUser;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
@@ -60,6 +61,11 @@ export class LockScreenComponent implements OnDestroy {
 
 		// save state to local storage
 		this._storageService.put(LocalStorageItems.lockState, { status: 'true' }, StorageTypeEnum.PERSISTANT);
+	}
+
+	ngOnInit() {
+		// get current user info
+		this.currentUser = this._authService.currentUserState
 	}
 
 	ngOnDestroy() {
