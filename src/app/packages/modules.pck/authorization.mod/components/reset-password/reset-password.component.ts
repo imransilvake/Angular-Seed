@@ -29,7 +29,6 @@ export class ResetPasswordComponent implements OnDestroy {
 	public routing = ROUTING;
 	public formFields;
 	public userState;
-	public version = '1.0.0';
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 

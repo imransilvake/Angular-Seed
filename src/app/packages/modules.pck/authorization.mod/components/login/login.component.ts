@@ -37,7 +37,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 	public loginHotelNameIcons = [faGlobeEurope];
 	public languageList: SelectDefaultInterface[] = [];
 	public rememberMe: MatCheckboxChange;
-	public version = '1.0.0';
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 

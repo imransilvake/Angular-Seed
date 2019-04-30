@@ -1,6 +1,9 @@
 // angular
 import { Component, Input } from '@angular/core';
 
+// app
+import { AppVersionService } from '../../../utilities.pck/accessories.mod/services/app-version.service';
+
 @Component({
 	selector: 'app-auth-info',
 	template: `
@@ -13,7 +16,7 @@ import { Component, Input } from '@angular/core';
 			<div class="ham-details ham-bottom">
 				<div class="cd-row">
 					<div class="cd-col cd-col-pd-m-6 cd-col-pd-s-6 cd-col-pd-d-6 cd-col-pd-w-6">
-						<p>{{translateVersion}}: {{version}}</p>
+						<p>{{translateVersion}}: {{appVersion}}</p>
 					</div>
 					<div class="cd-col cd-col-pd-m-6 cd-col-pd-s-6 cd-col-pd-d-6 cd-col-pd-w-6">
 						<img class="ts-logo-poweredby" src="/assets/svg/logo_powered_by.svg" alt="powered-by">
@@ -26,11 +29,13 @@ import { Component, Input } from '@angular/core';
 })
 
 export class AuthInfoComponent {
+	public appVersion;
+
 	@Input() translateTitle;
 	@Input() translateDescription;
 	@Input() translateVersion;
-	@Input() version;
 
-	constructor() {
+	constructor(private _appVersionService: AppVersionService) {
+		this.appVersion = this._appVersionService.appVersion;
 	}
 }
