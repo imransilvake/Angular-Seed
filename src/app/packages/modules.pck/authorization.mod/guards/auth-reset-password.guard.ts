@@ -36,6 +36,6 @@ export class AuthResetPasswordGuard implements CanActivate {
 		// navigate to login
 		this._router.navigate([ROUTING.authorization.login]).then();
 
-		return true;
+		return false;
 	}
 }

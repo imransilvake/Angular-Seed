@@ -3,27 +3,11 @@ import { FormControl } from '@angular/forms';
 
 // patterns
 export const patterns: any = {
-	username: /^[a-zA-Z0-9@\-_.]{5,256}$/,
 	password: /^.{8,256}$/,
 	email: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 };
 
 export class ValidationService {
-	/**
-	 * username validator
-	 *
-	 * @param control
-	 */
-	static usernameValidator(control: FormControl) {
-		const value = control.value;
-
-		if (value && value.match(patterns.username)) {
-			return null;
-		}
-
-		return { username: true, usernameMinLength: value.length <= 256, usernameRequiredLength: value.length <= 256 ? 5 : 256 };
-	}
-
 	/**
 	 * password validator
 	 *
