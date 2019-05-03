@@ -2,6 +2,10 @@
 	&.ham-password-strength {
 		height: 8px;
 
+		.mat-progress-bar-background {
+			fill: cd-palette($cd-color, 1003);
+		}
+
 		.mat-progress-bar-buffer {
 			background-color: cd-palette($cd-background, 2003);
 		}
