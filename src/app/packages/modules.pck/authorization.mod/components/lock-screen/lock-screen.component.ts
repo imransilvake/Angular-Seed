@@ -51,7 +51,6 @@ export class LockScreenComponent implements OnInit, OnDestroy {
 		this.formFields = new FormGroup({
 			password: new FormControl('', [
 				Validators.required,
-				Validators.minLength(8),
 				ValidationService.passwordValidator
 			])
 		});
