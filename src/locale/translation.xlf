@@ -125,6 +125,51 @@
 					<context context-type="linenumber">63</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="Widget_Password_Strength_Title" datatype="html">
+				<source>Password Strength:</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/shared/widgets/password-strength/password-strength.component.html
+					</context>
+					<context context-type="linenumber">8</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Widget_Password_Strength_Weak" datatype="html">
+				<source>Weak</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/shared/widgets/password-strength/password-strength.component.html
+					</context>
+					<context context-type="linenumber">10</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Widget_Password_Strength_Fair" datatype="html">
+				<source>Fair</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/shared/widgets/password-strength/password-strength.component.html
+					</context>
+					<context context-type="linenumber">13</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Widget_Password_Strength_Good" datatype="html">
+				<source>Good</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/shared/widgets/password-strength/password-strength.component.html
+					</context>
+					<context context-type="linenumber">16</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Widget_Password_Strength_Strong" datatype="html">
+				<source>Strong</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/shared/widgets/password-strength/password-strength.component.html
+					</context>
+					<context context-type="linenumber">19</context>
+				</context-group>
+			</trans-unit>
 			<trans-unit id="Auth_Register_Info_Title" datatype="html">
 				<source>Title</source>
 				<context-group purpose="location">
