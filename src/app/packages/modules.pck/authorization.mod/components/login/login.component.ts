@@ -41,8 +41,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 		private _languageListService: LanguageListService,
 		private _authService: AuthService,
 		private _router: Router,
-		private _route: ActivatedRoute,
-		private _helperService: HelperService
+		private _route: ActivatedRoute
 	) {
 		// form fields
 		this.formFields = new FormGroup({
@@ -122,7 +121,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe((res) => {
 				// decode token
-				const userInfo = this._helperService.decodeJWTToken(res.idToken.jwtToken);
+				const userInfo = HelperService.decodeJWTToken(res.idToken.jwtToken);
 
 				// set current user state
 				this._authService.currentUserState = {

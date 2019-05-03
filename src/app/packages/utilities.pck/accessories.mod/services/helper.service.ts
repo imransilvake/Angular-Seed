@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { fromEvent } from 'rxjs/internal/observable/fromEvent';
 import { debounceTime } from 'rxjs/operators';
 import { merge } from 'rxjs/internal/observable/merge';
-
 // app
 import * as jwt_decode from 'jwt-decode';
+
 declare const document: any;
 declare const event: Event;
 
@@ -105,8 +105,12 @@ export class HelperService {
 	 *
 	 * @param token
 	 */
-	public decodeJWTToken(token) {
-		return jwt_decode(token);
+	public static decodeJWTToken(token) {
+		try {
+			return jwt_decode(token);
+		} catch (e) {
+			return null;
+		}
 	}
 
 	/**

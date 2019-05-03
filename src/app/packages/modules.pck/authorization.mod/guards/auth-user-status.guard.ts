@@ -20,8 +20,7 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 	constructor(
 		private _router: Router,
 		private _authService: AuthService,
-		private _storageService: StorageService,
-		private _helperService: HelperService
+		private _storageService: StorageService
 	) {
 		this.authRoutes = [
 			ROUTING.authorization.register,
@@ -70,7 +69,7 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 					} else {
 						// get current user state
 						const data = this._authService.currentUserState;
-						const userInfo = this._helperService.decodeJWTToken(res.idToken.jwtToken);
+						const userInfo = HelperService.decodeJWTToken(res.idToken);
 
 						// set current user state
 						this._authService.currentUserState = {
@@ -106,7 +105,7 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 					} else {
 						// get current user state
 						const data = this._authService.currentUserState;
-						const userInfo = this._helperService.decodeJWTToken(res.idToken.jwtToken);
+						const userInfo = HelperService.decodeJWTToken(res.idToken);
 
 						// set current user state
 						this._authService.currentUserState = {
