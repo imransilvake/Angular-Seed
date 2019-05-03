@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { MatCheckboxChange } from '@angular/material'
+import { MatCheckboxChange } from '@angular/material';
 
 // app
 import { faGlobeEurope } from '@fortawesome/free-solid-svg-icons';

@@ -16,10 +16,12 @@ import { AuthUserStatusGuard } from './guards/auth-user-status.guard';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { AuthResetPasswordGuard } from './guards/auth-reset-password.guard';
 import { AuthService } from './services/auth.service';
+import { WidgetsModule } from '../../../shared/widgets/widgets.module';
 
 @NgModule({
 	imports: [
 		SharedModule,
+		WidgetsModule,
 		FieldsModule
 	],
 	declarations: [

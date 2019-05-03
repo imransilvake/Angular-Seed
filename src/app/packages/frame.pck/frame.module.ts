@@ -14,10 +14,12 @@ import { NotificationMenuComponent } from './components/menus/notification/notif
 import { AccountMenuComponent } from './components/menus/account/account-menu.component';
 import { SecondarySidebarComponent } from './components/sidebar/secondary/secondary-sidebar.component';
 import { MaintenanceComponent } from './components/pages/maintenance.component';
+import { WidgetsModule } from '../../shared/widgets/widgets.module';
 
 @NgModule({
 	imports: [
 		SharedModule,
+		WidgetsModule,
 		NotificationModule
 	],
 	declarations: [

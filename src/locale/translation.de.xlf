@@ -86,10 +86,10 @@
 			</trans-unit>
 			<trans-unit id="Fields_Input_Error_Password" datatype="html">
 				<source>
-					Password min. 8 characters, 1 capital letter, 1 special character and 1 number
+					Password min. 8 characters required!
 				</source>
 				<target>
-					Passwort min. 8 Zeichen, 1 Großbuchstabe, 1 Sonderzeichen und 1 Zahl
+					Passwort min. 8 Zeichen erforderlich!
 				</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">

@@ -61,7 +61,7 @@
 			</trans-unit>
 			<trans-unit id="Fields_Input_Error_Password" datatype="html">
 				<source>
-					Password min. 8 characters, 1 capital letter, 1 special character and 1 number
+					Password min. 8 characters required!
 				</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">

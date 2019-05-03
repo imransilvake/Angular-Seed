@@ -65,7 +65,7 @@ export class LockScreenComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		// get current user info
-		this.currentUser = this._authService.currentUserState
+		this.currentUser = this._authService.currentUserState;
 	}
 
 	ngOnDestroy() {

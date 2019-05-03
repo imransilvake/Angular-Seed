@@ -7,7 +7,6 @@ import { RouterModule } from '@angular/router';
 // app
 import { AccessoriesModule } from '../packages/utilities.pck/accessories.mod/accessories.module';
 import { MaterialModule } from '../packages/vendors.pck/material.mod/material.module';
-import { WidgetsModule } from './widgets/widgets.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
@@ -18,7 +17,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 		RouterModule,
 		MaterialModule,
 		AccessoriesModule,
-		WidgetsModule,
 		FontAwesomeModule
 	]
 })

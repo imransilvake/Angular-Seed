@@ -20,22 +20,22 @@ export class AuthResetPasswordGuard implements CanActivate {
 	 * @param state
 	 */
 	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-		let userStatus: { [p: string]: any };
+		let userAuthenticated: { [p: string]: any };
 
 		// state
 		this._activatedRouter.queryParams.subscribe(() => {
 			const currentNavigation = this._router.getCurrentNavigation();
-			userStatus = currentNavigation && currentNavigation.extras && currentNavigation.extras.state;
+			userAuthenticated = currentNavigation && currentNavigation.extras && currentNavigation.extras.state;
 		});
 
 		// user is authenticated
-		if (userStatus) {
+		if (userAuthenticated) {
 			return true;
 		}
 
 		// navigate to login
 		this._router.navigate([ROUTING.authorization.login]).then();
 
-		return false;
+		return true;
 	}
 }
