@@ -17,6 +17,7 @@ import { SelectStyleEnum } from '../../../../core.pck/fields.mod/enums/select-st
 import { LoadingAnimationService } from '../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { AuthLoginInterface } from '../../interfaces/auth-login.interface';
 import { AuthService } from '../../services/auth.service';
+import { HelperService } from '../../../../utilities.pck/accessories.mod/services/helper.service';
 
 @Component({
 	selector: 'app-login',
@@ -40,7 +41,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 		private _languageListService: LanguageListService,
 		private _authService: AuthService,
 		private _router: Router,
-		private _route: ActivatedRoute
+		private _route: ActivatedRoute,
+		private _helperService: HelperService
 	) {
 		// form fields
 		this.formFields = new FormGroup({
@@ -119,9 +121,15 @@ export class LoginComponent implements OnInit, OnDestroy {
 		this._authService.authLogin(formPayload)
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe((res) => {
+				// decode token
+				const userInfo = this._helperService.decodeJWTToken(res.idToken.jwtToken);
+
 				// set current user state
 				this._authService.currentUserState = {
-					profile: formPayload,
+					profile: {
+						...userInfo,
+						password: this.password.value
+					},
 					credentials: {
 						accessToken: res.accessToken.jwtToken,
 						idToken: res.idToken.jwtToken,

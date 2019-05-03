@@ -4,8 +4,8 @@
 	</button>
 	<mat-menu #account="matMenu">
 		<div class="ham-head-2" (click)="onClickStopPropagation($event)">
-			<h5 class="ham-title">Imran Khan</h5>
-			<p>imransilvake@gmail.com</p>
+			<h5 class="ham-title">{{currentUser.profile.name}}</h5>
+			<p>{{currentUser.profile.email}}</p>
 		</div>
 		<app-widget-divider></app-widget-divider>
 		<button mat-menu-item class="ham-btn-icon">

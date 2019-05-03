@@ -10,6 +10,7 @@ import { AuthService } from '../services/auth.service';
 import { StorageService } from '../../../core.pck/storage.mod/services/storage.service';
 import { LocalStorageItems } from '../../../../../app.config';
 import { StorageTypeEnum } from '../../../core.pck/storage.mod/enums/storage-type.enum';
+import { HelperService } from '../../../utilities.pck/accessories.mod/services/helper.service';
 
 @Injectable()
 export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
@@ -19,7 +20,8 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 	constructor(
 		private _router: Router,
 		private _authService: AuthService,
-		private _storageService: StorageService
+		private _storageService: StorageService,
+		private _helperService: HelperService
 	) {
 		this.authRoutes = [
 			ROUTING.authorization.register,
@@ -66,10 +68,16 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 								break;
 						}
 					} else {
-						// set current user state
+						// get current user state
 						const data = this._authService.currentUserState;
+						const userInfo = this._helperService.decodeJWTToken(res.idToken.jwtToken);
+
+						// set current user state
 						this._authService.currentUserState = {
-							profile: data.profile,
+							profile: {
+								...userInfo,
+								password: data.profile.password
+							},
 							credentials: res,
 							rememberMe: data.rememberMe
 						};
@@ -96,10 +104,16 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 							this._router.navigate([ROUTING.authorization.login]).then();
 						}
 					} else {
-						// set current user state
+						// get current user state
 						const data = this._authService.currentUserState;
+						const userInfo = this._helperService.decodeJWTToken(res.idToken.jwtToken);
+
+						// set current user state
 						this._authService.currentUserState = {
-							profile: data.profile,
+							profile: {
+								...userInfo,
+								password: data.profile.password
+							},
 							credentials: res,
 							rememberMe: data.rememberMe
 						};

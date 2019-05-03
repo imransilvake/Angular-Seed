@@ -5,6 +5,7 @@ import { debounceTime } from 'rxjs/operators';
 import { merge } from 'rxjs/internal/observable/merge';
 
 // app
+import * as jwt_decode from 'jwt-decode';
 declare const document: any;
 declare const event: Event;
 
@@ -97,6 +98,15 @@ export class HelperService {
 	 */
 	public static detectKeyPress() {
 		return fromEvent(document, 'keyup').pipe(debounceTime(200));
+	}
+
+	/**
+	 * decode jwt token
+	 *
+	 * @param token
+	 */
+	public decodeJWTToken(token) {
+		return jwt_decode(token);
 	}
 
 	/**

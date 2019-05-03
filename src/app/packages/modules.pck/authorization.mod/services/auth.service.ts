@@ -7,6 +7,7 @@ import { of } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 // app
+import * as SessionActions from '../../../core.pck/session.mod/store/actions/session.actions';
 import { AppServices, LocalStorageItems, SessionStorageItems } from '../../../../../app.config';
 import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service';
 import { AuthForgotInterface } from '../interfaces/auth-forgot.interface';
@@ -18,7 +19,6 @@ import { StorageService } from '../../../core.pck/storage.mod/services/storage.s
 import { ROUTING } from '../../../../../environments/environment';
 import { SessionInterface } from '../../../core.pck/session.mod/interfaces/session.interface';
 import { SessionsEnum } from '../../../core.pck/session.mod/enums/sessions.enum';
-import * as SessionActions from '../../../core.pck/session.mod/store/actions/session.actions';
 
 @Injectable()
 export class AuthService {
@@ -32,6 +32,7 @@ export class AuthService {
 
 	/**
 	 * set current user state
+	 *
 	 * @param data
 	 */
 	set currentUserState(data: any) {
@@ -102,7 +103,7 @@ export class AuthService {
 			const payloadSessionValidate = {
 				accessToken: userState.credentials.accessToken,
 				refreshToken: userState.credentials.refreshToken,
-				username: userState.profile.username
+				username: userState.profile.email
 			};
 
 			// service: session validity

@@ -15,11 +15,14 @@ import { ROUTING } from '../../../../../../environments/environment';
 
 export class AccountMenuComponent {
 	public faIcons = [faEnvelope, faUser, faUserLock, faPowerOff];
+	public currentUser;
 
 	constructor(
 		private _authService: AuthService,
 		private _router: Router
 	) {
+		// get current user info
+		this.currentUser = _authService.currentUserState;
 	}
 
 	/**
