@@ -1,7 +1,6 @@
 // angular
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { throwError } from 'rxjs/internal/observable/throwError';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 
 // store
@@ -35,11 +34,9 @@ export class HttpErrorHandlingService {
 		if (this.handleGeneralErrors(error)) {
 			switch (apiType) {
 				case HttpApiTypeEnum.GET:
-					this.handleGetErrors(error);
-					break;
+					return this.handleGetErrors(error);
 				case HttpApiTypeEnum.POST:
-					this.handlePostErrors(error);
-					break;
+					return this.handlePostErrors(error);
 			}
 		}
 	}
@@ -74,7 +71,6 @@ export class HttpErrorHandlingService {
 	 * handle get api errors
 	 *
 	 * @param response
-	 * @returns {Observable<never>}
 	 */
 	private handleGetErrors(response) {
 		let backendError: string;
@@ -83,10 +79,8 @@ export class HttpErrorHandlingService {
 		if (response) {
 			if (response.error instanceof ErrorEvent) {
 				backendError = `An error occurred, <span>code:</span>${ response.status }, <span>Message:</span> ${ response.statusText }`;
-				console.error('An error occurred:', response.message);
 			} else {
 				backendError = `Backend Error, <span>code:</span> ${ response.status }, <span>Message:</span> ${ response.statusText }`;
-				console.error(`Backend returned code ${ response.status }, Message: ${ response.message }`);
 			}
 		}
 
@@ -99,15 +93,14 @@ export class HttpErrorHandlingService {
 			this._store.dispatch(new NotificationActions.NotificationError(payload));
 		}
 
-		// return an observable with a user-facing error message.
-		return throwError('Something bad happened; please try again later or contact the developer.');
+		// return response
+		return response;
 	}
 
 	/**
 	 * handle post api errors
 	 *
 	 * @param response
-	 * @returns {Observable<never>}
 	 */
 	private handlePostErrors(response) {
 		let payload: ErrorHandlerPayloadInterface;
@@ -224,5 +217,8 @@ export class HttpErrorHandlingService {
 				};
 				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
 		}
+
+		// return response
+		return response;
 	}
 }

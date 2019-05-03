@@ -60,7 +60,7 @@ export class ProxyService {
 	 * @param service
 	 * @param params
 	 */
-	public postAPI(service: AppServicesInterface, params?: any) {
+	public postAPI(service: AppServicesInterface, params: any) {
 		// params
 		const bodyParams = (params.singleBodyParam) ? params.singleBodyParam : params.bodyParams;
 

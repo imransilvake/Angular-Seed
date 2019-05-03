@@ -18,9 +18,8 @@ export class HttpCachingInterceptor implements HttpInterceptor {
 	/**
 	 * http caching interceptor (get requests)
 	 *
-	 * @param {HttpRequest<any>} req
-	 * @param {HttpHandler} next
-	 * @returns {Observable<any> | Observable<HttpEvent<any>>}
+	 * @param req
+	 * @param next
 	 */
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 		// before doing anything, it's important to only cache GET requests.
