@@ -23,6 +23,7 @@ import { DialogService } from '../../../../utilities.pck/dialog.mod/services/dia
 import { DialogTypeEnum } from '../../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { ErrorHandlerInterface } from '../../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 import { AuthService } from '../../services/auth.service';
+import { HelperService } from '../../../../utilities.pck/accessories.mod/services/helper.service';
 
 @Component({
 	selector: 'app-register',
@@ -127,7 +128,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 			email: this.email.value,
 			firstName: this.firstName.value,
 			lastName: this.lastName.value,
-			password: this.password.value
+			password: HelperService.hashPassword(this.password.value)
 		};
 
 		// start registration process

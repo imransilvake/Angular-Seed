@@ -581,24 +581,6 @@
 					<context context-type="linenumber">19</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Reset_Password_Form_VerificationCode_Label" datatype="html">
-				<source>Verification Code*</source>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						app/packages/modules.pck/authorization.mod/components/reset-password/reset-password.component.html
-					</context>
-					<context context-type="linenumber">24</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="Auth_Reset_Password_Form_VerificationCode_PlaceHolder" datatype="html">
-				<source>Verification Code</source>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						app/packages/modules.pck/authorization.mod/components/reset-password/reset-password.component.html
-					</context>
-					<context context-type="linenumber">29</context>
-				</context-group>
-			</trans-unit>
 			<trans-unit id="Auth_Reset_Password_Form_New_Password_Label" datatype="html">
 				<source>New Password*</source>
 				<context-group purpose="location">

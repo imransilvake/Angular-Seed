@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { NavigationExtras, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 // store
 import { Store } from '@ngrx/store';
@@ -120,14 +120,7 @@ export class ForgotPasswordComponent implements OnDestroy {
 				this._dialogService.showDialog(data)
 					.pipe(takeUntil(this._ngUnSubscribe))
 					.subscribe(() => {
-						// navigate to reset route
-						const state: NavigationExtras = {
-							state: {
-								secretId: 'ham-reset-unlock',
-								email: formPayload.email
-							}
-						};
-						this._router.navigate([ROUTING.authorization.reset], state).then();
+						this._router.navigate([ROUTING.authorization.login]).then();
 					});
 			});
 	}

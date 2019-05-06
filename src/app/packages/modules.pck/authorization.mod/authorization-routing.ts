@@ -8,7 +8,6 @@ import { LoginComponent } from './components/login/login.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { LockScreenComponent } from './components/lock-screen/lock-screen.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
-import { AuthResetPasswordGuard } from './guards/auth-reset-password.guard';
 
 // routes
 export const AUTHORIZATION_ROUTES: Routes = [
@@ -26,8 +25,7 @@ export const AUTHORIZATION_ROUTES: Routes = [
 	},
 	{
 		path: ROUTING.authorization.reset,
-		component: ResetPasswordComponent,
-		canActivate: [AuthResetPasswordGuard]
+		component: ResetPasswordComponent
 	},
 	{
 		path: ROUTING.authorization.lock,

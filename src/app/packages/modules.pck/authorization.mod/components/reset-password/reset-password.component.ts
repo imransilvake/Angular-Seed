@@ -6,18 +6,15 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-// store
-import { Store } from '@ngrx/store';
-
 // app
 import { ROUTING } from '../../../../../../environments/environment';
 import { ValidationService } from '../../../../core.pck/fields.mod/services/validation.service';
 import { LoadingAnimationService } from '../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { DialogService } from '../../../../utilities.pck/dialog.mod/services/dialog.service';
-import { ErrorHandlerInterface } from '../../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 import { AuthResetInterface } from '../../interfaces/auth-reset.interface';
 import { DialogTypeEnum } from '../../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { AuthService } from '../../services/auth.service';
+import { HelperService } from '../../../../utilities.pck/accessories.mod/services/helper.service';
 
 @Component({
 	selector: 'app-reset-password',
@@ -28,33 +25,26 @@ import { AuthService } from '../../services/auth.service';
 export class ResetPasswordComponent implements OnDestroy {
 	public routing = ROUTING;
 	public formFields;
-	public userState;
+	public queryParams;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
-		private _activatedRouter: ActivatedRoute,
+		private _route: ActivatedRoute,
 		private _loadingAnimationService: LoadingAnimationService,
 		private _dialogService: DialogService,
-		private _store: Store<ErrorHandlerInterface>,
 		private _authService: AuthService,
 		private _router: Router,
 		private _i18n: I18n
 	) {
-		// user state
-		this._activatedRouter.queryParams
+		this._route.queryParams
 			.pipe(takeUntil(this._ngUnSubscribe))
-			.subscribe(() => {
-				const currentNavigation = this._router.getCurrentNavigation();
-				this.userState = currentNavigation && currentNavigation.extras && currentNavigation.extras.state;
+			.subscribe((params) => {
+				this.queryParams = params;
 			});
 
 		// form fields
 		this.formFields = new FormGroup({
-			verificationCode: new FormControl('', [
-				Validators.required,
-				Validators.minLength(2)
-			]),
 			password: new FormControl('', [
 				Validators.required,
 				ValidationService.passwordValidator
@@ -81,10 +71,6 @@ export class ResetPasswordComponent implements OnDestroy {
 	/**
 	 * getters
 	 */
-	get verificationCode() {
-		return this.formFields.get('verificationCode');
-	}
-
 	get password() {
 		return this.formFields.get('password');
 	}
@@ -106,9 +92,9 @@ export class ResetPasswordComponent implements OnDestroy {
 
 		// payload
 		const formPayload: AuthResetInterface = {
-			email: this.userState.email,
-			verificationCode: this.verificationCode.value,
-			password: this.password.value
+			email: this.queryParams && this.queryParams.user,
+			verificationCode: this.queryParams && this.queryParams.verification,
+			password: HelperService.hashPassword(this.password.value)
 		};
 
 		// start reset password process

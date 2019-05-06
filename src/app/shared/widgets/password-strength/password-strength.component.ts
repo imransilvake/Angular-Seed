@@ -25,8 +25,10 @@ export class PasswordStrengthComponent implements OnInit, OnDestroy {
 		this.cPassword.valueChanges
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
-				const result = zxcvbn(res);
-				this.score = result.score;
+				if (res) {
+					const result = zxcvbn(res);
+					this.score = result.score;
+				}
 			});
 	}
 

@@ -60,7 +60,8 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 								}
 								break;
 							case 'FAIL':
-								if (!this.authRoutes.includes(currentPath)) {
+								const path = currentPath.split('?');
+								if (!this.authRoutes.includes(path[0]) || currentPath === ROUTING.authorization.reset && !path[1]) {
 									// navigate to login
 									this._router.navigate([ROUTING.authorization.login]).then();
 								}

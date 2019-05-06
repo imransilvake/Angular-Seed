@@ -113,7 +113,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 		// payload
 		const formPayload: AuthLoginInterface = {
 			username: this.email.value,
-			password: this.password.value
+			password: HelperService.hashPassword(this.password.value)
 		};
 
 		// start login process
@@ -127,7 +127,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 				this._authService.currentUserState = {
 					profile: {
 						...userInfo,
-						password: this.password.value
+						password: HelperService.hashPassword(this.password.value)
 					},
 					credentials: {
 						accessToken: res.accessToken.jwtToken,

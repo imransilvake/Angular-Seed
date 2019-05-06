@@ -5,6 +5,7 @@ import { debounceTime } from 'rxjs/operators';
 import { merge } from 'rxjs/internal/observable/merge';
 // app
 import * as jwt_decode from 'jwt-decode';
+import * as CryptoJS from 'crypto-js';
 
 declare const document: any;
 declare const event: Event;
@@ -111,6 +112,15 @@ export class HelperService {
 		} catch (e) {
 			return null;
 		}
+	}
+
+	/**
+	 * hash the password
+	 *
+	 * @param password
+	 */
+	public static hashPassword(password: string) {
+		return CryptoJS.SHA3(password).toString();
 	}
 
 	/**

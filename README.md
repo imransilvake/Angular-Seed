@@ -45,6 +45,7 @@ Please follow the link for the documentation: [GUIDE](./GUIDE.md)
 - [X] [Fontawesome](https://fontawesome.com/)
 - [X] [Password Strength (zxcvbn)](https://github.com/dropbox/zxcvbn)
 - [X] [JWT Decode](https://github.com/auth0/jwt-decode)
+- [X] [CryptoJS](https://github.com/brix/crypto-js)
 
 
 ## Environments
