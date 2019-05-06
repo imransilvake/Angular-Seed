@@ -5,8 +5,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MatCheckboxChange } from '@angular/material';
+import { I18n } from '@ngx-translate/i18n-polyfill';
+
+// store
+import { Store } from '@ngrx/store';
 
 // app
+import * as ErrorHandlerActions from '../../../../utilities.pck/error-handler.mod/store/actions/error-handler.actions';
 import { faGlobeEurope } from '@fortawesome/free-solid-svg-icons';
 import { ROUTING } from '../../../../../../environments/environment';
 import { ValidationService } from '../../../../core.pck/fields.mod/services/validation.service';
@@ -18,6 +23,8 @@ import { LoadingAnimationService } from '../../../../utilities.pck/loading-anima
 import { AuthLoginInterface } from '../../interfaces/auth-login.interface';
 import { AuthService } from '../../services/auth.service';
 import { HelperService } from '../../../../utilities.pck/accessories.mod/services/helper.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorHandlerInterface } from '../../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 
 @Component({
 	selector: 'app-login',
@@ -41,7 +48,9 @@ export class LoginComponent implements OnInit, OnDestroy {
 		private _languageListService: LanguageListService,
 		private _authService: AuthService,
 		private _router: Router,
-		private _route: ActivatedRoute
+		private _route: ActivatedRoute,
+		private _i18n: I18n,
+		private _store: Store<ErrorHandlerInterface>,
 	) {
 		// form fields
 		this.formFields = new FormGroup({
@@ -143,6 +152,21 @@ export class LoginComponent implements OnInit, OnDestroy {
 					.then(() =>
 						this._loadingAnimationService.stopLoadingAnimation()
 					);
+			}, (err: HttpErrorResponse) => {
+				if (err.error.code === 'UserLambdaValidationException') {
+					const payload = {
+						title: this._i18n({
+							value: 'Title: Block User Exception',
+							id: 'Error_BlockUserException_Title'
+						}),
+						message: this._i18n({
+							value: 'Description: Block User Exception',
+							id: 'Error_BlockUserException_Description'
+						}),
+						buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
+					};
+					this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
+				}
 			});
 	}
 }

@@ -14,12 +14,13 @@ import { NotificationPayloadInterface } from '../../../utilities.pck/notificatio
 import { NotificationInterface } from '../../../utilities.pck/notification.mod/interfaces/notification.interface';
 import { ErrorHandlerPayloadInterface } from '../../../utilities.pck/error-handler.mod/interfaces/error-handler-payload.interface';
 import { AuthService } from '../../../modules.pck/authorization.mod/services/auth.service';
+import { ErrorHandlerInterface } from '../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 
 @Injectable({ providedIn: 'root' })
 export class HttpErrorHandlingService {
 	constructor(
 		private _authService: AuthService,
-		private _store: Store<NotificationInterface>,
+		private _store: Store<{ NotificationInterface: NotificationInterface, ErrorHandlerInterface: ErrorHandlerInterface }>,
 		private _i18n: I18n
 	) {
 	}
