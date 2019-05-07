@@ -107,7 +107,7 @@ export class AuthService {
 				}
 			}, (err: HttpErrorResponse) => {
 				let payload: ErrorHandlerPayloadInterface;
-				switch (err.error.code) {
+				switch (err.error.detail.code) {
 					case 'UserLambdaValidationException':
 						payload = {
 							title: this._i18n({

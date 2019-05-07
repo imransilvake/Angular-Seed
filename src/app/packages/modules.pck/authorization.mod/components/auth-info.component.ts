@@ -9,7 +9,7 @@ import { AppVersionService } from '../../../utilities.pck/accessories.mod/servic
 	template: `
 		<div class="ham-auth-info">
 			<div class="ham-details ham-top">
-				<img class="ham-logo" src="/assets/svg/logo_black.svg" alt="bg-inner">
+				<img class="ham-logo" src="assets/svg/logo_black.svg" alt="bg-inner">
 				<h1>{{translateTitle}}</h1>
 				<p>{{translateDescription}}</p>
 			</div>
@@ -19,7 +19,7 @@ import { AppVersionService } from '../../../utilities.pck/accessories.mod/servic
 						<p>{{translateVersion}}: {{appVersion}}</p>
 					</div>
 					<div class="cd-col cd-col-pd-m-6 cd-col-pd-s-6 cd-col-pd-d-6 cd-col-pd-w-6">
-						<img class="ts-logo-poweredby" src="/assets/svg/logo_powered_by.svg" alt="powered-by">
+						<img class="ts-logo-poweredby" src="assets/svg/logo_powered_by.svg" alt="powered-by">
 					</div>
 				</div>
 			</div>

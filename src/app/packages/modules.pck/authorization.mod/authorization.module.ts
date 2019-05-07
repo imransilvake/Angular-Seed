@@ -16,6 +16,7 @@ import { AuthUserStatusGuard } from './guards/auth-user-status.guard';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { AuthService } from './services/auth.service';
 import { WidgetsModule } from '../../../shared/widgets/widgets.module';
+import { SalutationListService } from './services/salutation-list.service';
 
 @NgModule({
 	imports: [
@@ -36,7 +37,8 @@ import { WidgetsModule } from '../../../shared/widgets/widgets.module';
 		AuthUserStatusGuard,
 		AuthService,
 		HotelListService,
-		LanguageListService
+		LanguageListService,
+		SalutationListService
 	]
 })
 

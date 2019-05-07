@@ -59,6 +59,10 @@
 								justify-content: space-between;
 							}
 
+							&.cd-divider {
+								margin: 10px 0 -10px;
+							}
+
 							button {
 								background-color: cd-palette($cd-background, 2010);
 								border-radius: 2px;

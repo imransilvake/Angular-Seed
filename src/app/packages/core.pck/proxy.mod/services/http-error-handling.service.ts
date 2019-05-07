@@ -105,7 +105,7 @@ export class HttpErrorHandlingService {
 	 */
 	private handlePostErrors(response) {
 		let payload: ErrorHandlerPayloadInterface;
-		switch (response.error.code) {
+		switch (response.error.detail.code) {
 			case 'InvalidParameterException':
 				payload = {
 					title: this._i18n({

@@ -215,6 +215,15 @@
 					<context context-type="linenumber">32</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="Auth_Register_Form_Salutation_PlaceHolder" datatype="html">
+				<source>Select Salutation</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/register/register.component.html
+					</context>
+					<context context-type="linenumber">53</context>
+				</context-group>
+			</trans-unit>
 			<trans-unit id="Auth_Register_Form_FirstName_Label" datatype="html">
 				<source>First Name*</source>
 				<context-group purpose="location">
@@ -956,6 +965,33 @@
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/modules.pck/authorization.mod/components/lock-screen/lock-screen.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Error_Salutation_Mr" datatype="html">
+				<source>Salutation: Mr</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/services/salutation-list.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Error_Salutation_Mrs" datatype="html">
+				<source>Salutation: Mrs</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/services/salutation-list.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Error_Salutation_Individual" datatype="html">
+				<source>Salutation: Individual</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/services/salutation-list.service.ts
 					</context>
 					<context context-type="linenumber">1</context>
 				</context-group>

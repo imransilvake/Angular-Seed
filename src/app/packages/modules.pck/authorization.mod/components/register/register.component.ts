@@ -24,6 +24,7 @@ import { DialogTypeEnum } from '../../../../utilities.pck/dialog.mod/enums/dialo
 import { ErrorHandlerInterface } from '../../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 import { AuthService } from '../../services/auth.service';
 import { HelperService } from '../../../../utilities.pck/accessories.mod/services/helper.service';
+import { SalutationListService } from '../../services/salutation-list.service';
 
 @Component({
 	selector: 'app-register',
@@ -38,6 +39,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 	public registerHotelNameSelectStyleType = SelectStyleEnum.INFO;
 	public registerHotelNameIcons = [faHotel];
 	public hotelList: SelectDefaultInterface[] = [];
+	public salutationList: SelectDefaultInterface[] = [];
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
@@ -47,12 +49,16 @@ export class RegisterComponent implements OnInit, OnDestroy {
 		private _store: Store<ErrorHandlerInterface>,
 		private _authService: AuthService,
 		private _hotelListService: HotelListService,
+		private _salutationList: SalutationListService,
 		private _router: Router,
 		private _i18n: I18n
 	) {
 		// form fields
 		this.formFields = new FormGroup({
 			hotelId: new FormControl('', [
+				Validators.required
+			]),
+			salutation: new FormControl('', [
 				Validators.required
 			]),
 			firstName: new FormControl('', [
@@ -80,6 +86,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
 			.getHotelList()
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => this.hotelList = res);
+
+		// salutation
+		this.salutationList = this._salutationList.getSalutationList();
 	}
 
 	ngOnDestroy() {
@@ -93,6 +102,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
 	 */
 	get hotelId() {
 		return this.formFields.get('hotelId');
+	}
+
+	get salutation() {
+		return this.formFields.get('salutation');
 	}
 
 	get firstName() {
@@ -124,7 +137,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
 		// payload
 		const formPayload: AuthRegisterInterface = {
-			hotelId: this.hotelId.value.toString(),
+			hotelId: this.hotelId.value,
+			salutation: this.salutation.value,
 			email: this.email.value,
 			firstName: this.firstName.value,
 			lastName: this.lastName.value,
