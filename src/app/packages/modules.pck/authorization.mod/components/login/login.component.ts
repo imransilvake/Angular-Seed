@@ -18,6 +18,7 @@ import { LoadingAnimationService } from '../../../../utilities.pck/loading-anima
 import { AuthLoginInterface } from '../../interfaces/auth-login.interface';
 import { AuthService } from '../../services/auth.service';
 import { HelperService } from '../../../../utilities.pck/accessories.mod/services/helper.service';
+import { AppOptions } from '../../../../../../app.config';
 
 @Component({
 	selector: 'app-login',
@@ -64,19 +65,17 @@ export class LoginComponent implements OnInit, OnDestroy {
 		this._route.url
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
-				if (res && (res[0].path === 'en' || res[0].path === 'de')) {
+				if (res && (res[0].path === AppOptions.languages['en'] || res[0].path === AppOptions.languages['de'])) {
 					this.languageName.setValue(res[0].path);
 				} else {
-					this.languageName.setValue('en');
+					this.languageName.setValue(AppOptions.languages['en']);
 				}
 			});
 
 		// check for language
 		this.languageName.valueChanges
 			.pipe(takeUntil(this._ngUnSubscribe))
-			.subscribe(url => {
-				location.href = url;
-			});
+			.subscribe(url => location.href = url);
 	}
 
 	ngOnDestroy() {

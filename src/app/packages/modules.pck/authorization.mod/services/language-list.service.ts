@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 
 // app
 import { SelectDefaultInterface } from '../../../core.pck/fields.mod/interfaces/select-default-interface';
+import { AppOptions } from '../../../../../app.config';
 
 @Injectable()
 export class LanguageListService {
@@ -11,8 +12,8 @@ export class LanguageListService {
 	 */
 	public getLanguageList() {
 		const languageList: SelectDefaultInterface[] = [
-			{ id: 'en', text: 'English' },
-			{ id: 'de', text: 'Deutsch' }
+			{ id: AppOptions.languages['en'], text: 'English' },
+			{ id: AppOptions.languages['de'], text: 'Deutsch' }
 		];
 
 		return languageList;
