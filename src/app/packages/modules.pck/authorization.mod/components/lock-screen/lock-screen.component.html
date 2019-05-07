@@ -4,7 +4,7 @@
 			<!-- Profile -->
 			<div class="ham-profile">
 				<img [src]="'/assets/images/logo.png'" alt="lock-screen"/>
-				<h5>{{currentUser.profile.name}}</h5>
+				<h5 *ngIf="currentUser">{{currentUser.profile.name}}</h5>
 			</div>
 
 			<!-- Content -->

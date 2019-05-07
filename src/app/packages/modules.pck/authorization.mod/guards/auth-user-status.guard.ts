@@ -40,12 +40,12 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 		const currentPath = state.url.substring(1);
 
 		// validate lock screen
-		if (this._storageService.get(LocalStorageItems.lockState, StorageTypeEnum.PERSISTANT)) {
+		if (this._storageService.exist(LocalStorageItems.lockState, StorageTypeEnum.PERSISTANT) || currentPath === ROUTING.authorization.lock) {
 			if (currentPath !== ROUTING.authorization.lock) {
-				// navigate to lock
+				// navigate to lock screen
 				this._router.navigate([ROUTING.authorization.lock]).then();
-				return of(true);
 			}
+			return of(true);
 		}
 
 		return this._authService.authenticateUser()
@@ -82,7 +82,6 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 							rememberMe: data.rememberMe
 						};
 					}
-
 					return true;
 				})
 			);
@@ -118,7 +117,6 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 							rememberMe: data.rememberMe
 						};
 					}
-
 					return true;
 				})
 			);

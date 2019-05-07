@@ -1,9 +1,8 @@
 // angular
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { Router } from '@angular/router';
 
 // store
@@ -11,7 +10,6 @@ import { Store } from '@ngrx/store';
 
 // app
 import * as SessionActions from '../../../../core.pck/session.mod/store/actions/session.actions';
-import * as ErrorHandlerActions from '../../../../utilities.pck/error-handler.mod/store/actions/error-handler.actions';
 import { ROUTING } from '../../../../../../environments/environment';
 import { InputStyleEnum } from '../../../../core.pck/fields.mod/enums/input-style.enum';
 import { faLock, faLockOpen } from '@fortawesome/free-solid-svg-icons';
@@ -23,6 +21,9 @@ import { StorageTypeEnum } from '../../../../core.pck/storage.mod/enums/storage-
 import { LocalStorageItems } from '../../../../../../app.config';
 import { LoadingAnimationService } from '../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { AuthService } from '../../services/auth.service';
+import { HelperService } from '../../../../utilities.pck/accessories.mod/services/helper.service';
+import { AuthLoginInterface } from '../../interfaces/auth-login.interface';
+import { RouterService } from '../../../../utilities.pck/accessories.mod/services/router-service';
 
 @Component({
 	selector: 'app-lock-screen',
@@ -30,7 +31,7 @@ import { AuthService } from '../../services/auth.service';
 	styleUrls: ['./lock-screen.component.scss']
 })
 
-export class LockScreenComponent implements OnInit, OnDestroy {
+export class LockScreenComponent implements OnInit, AfterViewInit, OnDestroy {
 	public routing = ROUTING;
 	public formFields;
 	public lockPasswordIcons = [faLock, faLockOpen];
@@ -44,8 +45,8 @@ export class LockScreenComponent implements OnInit, OnDestroy {
 		private _storageService: StorageService,
 		private _loadingAnimationService: LoadingAnimationService,
 		private _authService: AuthService,
-		private _i18n: I18n,
-		private _router: Router
+		private _router: Router,
+		private _routerService: RouterService
 	) {
 		// form fields
 		this.formFields = new FormGroup({
@@ -57,14 +58,18 @@ export class LockScreenComponent implements OnInit, OnDestroy {
 
 		// start lock screen session
 		this._store.dispatch(new SessionActions.SessionCounterStart(SessionsEnum.SESSION_LOCK_SCREEN));
-
-		// save state to local storage
-		this._storageService.put(LocalStorageItems.lockState, { status: 'true' }, StorageTypeEnum.PERSISTANT);
 	}
 
 	ngOnInit() {
 		// get current user info
 		this.currentUser = this._authService.currentUserState;
+	}
+
+	ngAfterViewInit() {
+		// check previous url and save to local storage
+		if (!this._storageService.exist(LocalStorageItems.lockState, StorageTypeEnum.PERSISTANT)) {
+			this._storageService.put(LocalStorageItems.lockState, { url: this._routerService.getPreviousUrl() }, StorageTypeEnum.PERSISTANT);
+		}
 	}
 
 	ngOnDestroy() {
@@ -94,8 +99,17 @@ export class LockScreenComponent implements OnInit, OnDestroy {
 		// start loading animation
 		this._loadingAnimationService.startLoadingAnimation();
 
+		// current user
+		const currentUser = this._authService.currentUserState;
+
 		// validate password
-		if (this.password.value === this._authService.currentUserState.profile.password) {
+		if (!currentUser) {
+			// logout
+			this._authService.logoutUser();
+
+			// stop loading animation
+			this._loadingAnimationService.stopLoadingAnimation();
+		} else if (currentUser && (HelperService.hashPassword(this.password.value) === currentUser.profile.password)) {
 			// authenticate user
 			this._authService.authenticateUser()
 				.pipe(takeUntil(this._ngUnSubscribe))
@@ -105,9 +119,8 @@ export class LockScreenComponent implements OnInit, OnDestroy {
 						this._storageService.remove(LocalStorageItems.lockState);
 
 						// navigate to dashboard
-						this._router.navigate([ROUTING.dashboard]).then(
-							() => this._loadingAnimationService.stopLoadingAnimation()
-						);
+						this._router.navigate([this._routerService.getPreviousUrl()])
+							.then(() => this._loadingAnimationService.stopLoadingAnimation());
 					} else {
 						// logout
 						this._authService.logoutUser();
@@ -117,22 +130,14 @@ export class LockScreenComponent implements OnInit, OnDestroy {
 					}
 				});
 		} else {
-			// stop loading animation
-			this._loadingAnimationService.stopLoadingAnimation();
-
-			// common error
-			const payload = {
-				title: this._i18n({
-					value: 'Title: Password Invalid Exception',
-					id: 'Error_PasswordInvalid_Title'
-				}),
-				message: this._i18n({
-					value: 'Description: Password Invalid Exception',
-					id: 'Error_PasswordInvalid_Description'
-				}),
-				buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
+			// payload
+			const formPayload: AuthLoginInterface = {
+				username: currentUser.profile.email,
+				password: HelperService.hashPassword(this.password.value)
 			};
-			this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
+
+			// start login process
+			this._authService.authLogin(formPayload, currentUser.rememberMe);
 		}
 	}
 }
