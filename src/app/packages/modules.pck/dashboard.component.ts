@@ -14,6 +14,9 @@ export class DashboardComponent {
 	constructor(private _router: Router) {
 	}
 
+	/**
+	 * on click go to dashboard
+	 */
 	public onClickHome() {
 		this._router.navigate([ROUTING.pages.maintenance]);
 	}
