@@ -120,20 +120,6 @@ export class HttpErrorHandlingService {
 				};
 				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
 				break;
-			case 'UserNotFoundException':
-				payload = {
-					title: this._i18n({
-						value: 'Title: User Not Found Exception',
-						id: 'Error_UserNotFoundException_Title'
-					}),
-					message: this._i18n({
-						value: 'Description: User Not Found Exception',
-						id: 'Error_UserNotFoundException_Description'
-					}),
-					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-				};
-				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
-				break;
 			case 'UsernameExistsException':
 				payload = {
 					title: this._i18n({

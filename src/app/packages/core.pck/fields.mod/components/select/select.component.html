@@ -26,6 +26,7 @@
 		<!-- Select -->
 		<div class="ham-select">
 			<mat-select
+				[class.ham-selected]="control.valid"
 				[panelClass]="selectClassPanel"
 				[formControl]="control"
 				[id]="selectId"

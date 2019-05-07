@@ -1,13 +1,8 @@
 // angular
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Router } from '@angular/router';
-
-// store
-import { Store } from '@ngrx/store';
 
 // app
 import { ROUTING } from '../../../../../../environments/environment';
@@ -19,9 +14,6 @@ import { SelectDefaultInterface } from '../../../../core.pck/fields.mod/interfac
 import { SelectStyleEnum } from '../../../../core.pck/fields.mod/enums/select-style.enum';
 import { LoadingAnimationService } from '../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { AuthRegisterInterface } from '../../interfaces/auth-register.interface';
-import { DialogService } from '../../../../utilities.pck/dialog.mod/services/dialog.service';
-import { DialogTypeEnum } from '../../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
-import { ErrorHandlerInterface } from '../../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 import { AuthService } from '../../services/auth.service';
 import { HelperService } from '../../../../utilities.pck/accessories.mod/services/helper.service';
 import { SalutationListService } from '../../services/salutation-list.service';
@@ -45,13 +37,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private _loadingAnimationService: LoadingAnimationService,
-		private _dialogService: DialogService,
-		private _store: Store<ErrorHandlerInterface>,
 		private _authService: AuthService,
 		private _hotelListService: HotelListService,
-		private _salutationList: SalutationListService,
-		private _router: Router,
-		private _i18n: I18n
+		private _salutationList: SalutationListService
 	) {
 		// form fields
 		this.formFields = new FormGroup({
@@ -146,32 +134,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
 		};
 
 		// start registration process
-		this._authService.authRegister(formPayload)
-			.pipe(takeUntil(this._ngUnSubscribe))
-			.subscribe(() => {
-				// clear the form
-				this.formFields.reset();
-
-				// stop loading animation
-				this._loadingAnimationService.stopLoadingAnimation();
-
-				// dialog payload
-				const data = {
-					type: DialogTypeEnum.NOTICE,
-					payload: {
-						title: this._i18n({ value: 'Title: Success', id: 'Auth_Register_Form_Success_Title' }),
-						message: this._i18n({ value: 'Description: Success', id: 'Auth_Register_Form_Success_Description' }),
-						buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-					}
-				};
-
-				// dialog service
-				this._dialogService.showDialog(data)
-					.pipe(takeUntil(this._ngUnSubscribe))
-					.subscribe(() => {
-						// navigate to login route
-						this._router.navigate([ROUTING.authorization.login]).then();
-					});
-			});
+		this._authService.authRegister(formPayload, this.formFields);
 	}
 }

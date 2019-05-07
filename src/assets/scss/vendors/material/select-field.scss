@@ -1,5 +1,15 @@
 // select field
 .mat-select {
+	&.ham-selected {
+		.mat-select-trigger {
+			.mat-select-value {
+				span {
+					color: cd-palette($cd-color, 1001);
+				}
+			}
+		}
+	}
+
 	.mat-select-trigger {
 		height: 40px;
 		padding: 10px 12px;

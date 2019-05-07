@@ -66,6 +66,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 			.subscribe(res => {
 				if (res && (res[0].path === 'en' || res[0].path === 'de')) {
 					this.languageName.setValue(res[0].path);
+				} else {
+					this.languageName.setValue('en');
 				}
 			});
 

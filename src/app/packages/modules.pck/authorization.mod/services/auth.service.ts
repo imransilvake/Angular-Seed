@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { HttpErrorResponse } from '@angular/common/http';
+import { FormGroup } from '@angular/forms';
 
 // store
 import { Store } from '@ngrx/store';
@@ -25,6 +26,8 @@ import { SessionsEnum } from '../../../core.pck/session.mod/enums/sessions.enum'
 import { HelperService } from '../../../utilities.pck/accessories.mod/services/helper.service';
 import { ErrorHandlerPayloadInterface } from '../../../utilities.pck/error-handler.mod/interfaces/error-handler-payload.interface';
 import { LoadingAnimationService } from '../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
+import { DialogTypeEnum } from '../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
+import { DialogService } from '../../../utilities.pck/dialog.mod/services/dialog.service';
 
 @Injectable()
 export class AuthService {
@@ -34,7 +37,8 @@ export class AuthService {
 		private _storageService: StorageService,
 		private _router: Router,
 		private _store: Store<{ SessionInterface: SessionInterface }>,
-		private _i18n: I18n
+		private _i18n: I18n,
+		private _dialogService: DialogService,
 	) {
 	}
 
@@ -65,10 +69,52 @@ export class AuthService {
 	 * perform registration process
 	 *
 	 * @param payload
+	 * @param formFields
 	 */
-	public authRegister(payload: AuthRegisterInterface) {
-		return this._proxyService
-			.postAPI(AppServices['Auth']['Register'], { bodyParams: payload });
+	public authRegister(payload: AuthRegisterInterface, formFields: FormGroup) {
+		this._proxyService
+			.postAPI(AppServices['Auth']['Register'], { bodyParams: payload })
+			.subscribe(() => {
+				// clear the form
+				formFields.reset();
+
+				// stop loading animation
+				this._loadingAnimationService.stopLoadingAnimation();
+
+				// dialog payload
+				const data = {
+					type: DialogTypeEnum.NOTICE,
+					payload: {
+						title: this._i18n({ value: 'Title: Success', id: 'Auth_Register_Form_Success_Title' }),
+						message: this._i18n({ value: 'Description: Success', id: 'Auth_Register_Form_Success_Description' }),
+						buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
+					}
+				};
+
+				// dialog service
+				this._dialogService.showDialog(data)
+					.subscribe(() =>
+						this._router.navigate([ROUTING.authorization.login]).then()
+					);
+			}, err => {
+				let payload: ErrorHandlerPayloadInterface;
+				switch (err.error.detail.code) {
+					case 'UserNotFoundException':
+						payload = {
+							title: this._i18n({
+								value: 'Title: User Not Found Exception',
+								id: 'Error_UserNotFoundException_Title'
+							}),
+							message: this._i18n({
+								value: 'Description: User Not Found Exception',
+								id: 'Error_UserNotFoundException_Description'
+							}),
+							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
+						};
+						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
+						break;
+				}
+			});
 	}
 
 	/**
