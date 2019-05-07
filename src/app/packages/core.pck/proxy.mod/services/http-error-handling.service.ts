@@ -13,13 +13,11 @@ import { HttpApiTypeEnum } from '../enums/http-api-type.enum';
 import { NotificationPayloadInterface } from '../../../utilities.pck/notification.mod/interfaces/notification-payload.interface';
 import { NotificationInterface } from '../../../utilities.pck/notification.mod/interfaces/notification.interface';
 import { ErrorHandlerPayloadInterface } from '../../../utilities.pck/error-handler.mod/interfaces/error-handler-payload.interface';
-import { AuthService } from '../../../modules.pck/authorization.mod/services/auth.service';
 import { ErrorHandlerInterface } from '../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 
 @Injectable({ providedIn: 'root' })
 export class HttpErrorHandlingService {
 	constructor(
-		private _authService: AuthService,
 		private _store: Store<{ NotificationInterface: NotificationInterface, ErrorHandlerInterface: ErrorHandlerInterface }>,
 		private _i18n: I18n
 	) {
@@ -37,7 +35,7 @@ export class HttpErrorHandlingService {
 				case HttpApiTypeEnum.GET:
 					return this.handleGetErrors(error);
 				case HttpApiTypeEnum.POST:
-					return this.handlePostErrors(error);
+					return HttpErrorHandlingService.handlePostErrors(error);
 			}
 		}
 	}
@@ -103,108 +101,7 @@ export class HttpErrorHandlingService {
 	 *
 	 * @param response
 	 */
-	private handlePostErrors(response) {
-		let payload: ErrorHandlerPayloadInterface;
-		switch (response.error.detail.code) {
-			case 'InvalidParameterException':
-				payload = {
-					title: this._i18n({
-						value: 'Title: Invalid Parameter Exception',
-						id: 'Error_InvalidParameterException_Title'
-					}),
-					message: this._i18n({
-						value: 'Description: Invalid Parameter Exception',
-						id: 'Error_InvalidParameterException_Description'
-					}),
-					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-				};
-				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
-				break;
-			case 'UsernameExistsException':
-				payload = {
-					title: this._i18n({
-						value: 'Title: User Exists Exception',
-						id: 'Error_UsernameExistsException_Title'
-					}),
-					message: this._i18n({
-						value: 'Description: User Exists Exception',
-						id: 'Error_UsernameExistsException_Description'
-					}),
-					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-				};
-				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
-				break;
-			case 'UserNotConfirmedException':
-				payload = {
-					title: this._i18n({
-						value: 'Title: User Not Confirmed Exception',
-						id: 'Error_UserNotConfirmedException_Title'
-					}),
-					message: this._i18n({
-						value: 'Description: User Not Confirmed Exception',
-						id: 'Error_UserNotConfirmedException_Description'
-					}),
-					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-				};
-				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
-				break;
-			case 'CodeMismatchException':
-				payload = {
-					title: this._i18n({
-						value: 'Title: Verification Code Exception',
-						id: 'Error_CodeMismatchException_Title'
-					}),
-					message: this._i18n({
-						value: 'Description: Verification Code Exception',
-						id: 'Error_CodeMismatchException_Description'
-					}),
-					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-				};
-				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
-				break;
-			case 'NotAuthorizedException':
-				payload = {
-					title: this._i18n({
-						value: 'Title: User Not Authorized Exception',
-						id: 'Error_NotAuthorizedException_Title'
-					}),
-					message: this._i18n({
-						value: 'Description: User Not Authorized Exception',
-						id: 'Error_NotAuthorizedException_Description'
-					}),
-					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-				};
-				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
-				break;
-			case 'SessionTimeoutException':
-				payload = {
-					title: this._i18n({
-						value: 'Title: Session Timeout Exception',
-						id: 'Error_SessionTimeoutException_Title'
-					}),
-					message: this._i18n({
-						value: 'Description: Session Timeout Exception',
-						id: 'Error_SessionTimeoutException_Description'
-					}),
-					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-				};
-				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
-				break;
-			default:
-				payload = {
-					title: this._i18n({
-						value: 'Title: Error Generic',
-						id: 'Error_Generic_Title'
-					}),
-					message: this._i18n({
-						value: 'Description: Error Generic',
-						id: 'Error_Generic_Description'
-					}),
-					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-				};
-				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
-		}
-
+	private static handlePostErrors(response) {
 		// return response
 		return response;
 	}

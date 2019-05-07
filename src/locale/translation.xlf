@@ -909,15 +909,6 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Error_Generic_Description" datatype="html">
-				<source>Description: Error Generic</source>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
 			<trans-unit id="Auth_Forgot_Password_Form_Success_Title" datatype="html">
 				<source>Title: Password Reset</source>
 				<context-group purpose="location">

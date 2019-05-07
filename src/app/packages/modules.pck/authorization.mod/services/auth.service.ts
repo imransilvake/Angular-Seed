@@ -92,28 +92,29 @@ export class AuthService {
 				};
 
 				// dialog service
-				this._dialogService.showDialog(data)
+				this._dialogService
+					.showDialog(data)
 					.subscribe(() =>
 						this._router.navigate([ROUTING.authorization.login]).then()
 					);
-			}, err => {
-				let payload: ErrorHandlerPayloadInterface;
-				switch (err.error.detail.code) {
-					case 'UserNotFoundException':
-						payload = {
-							title: this._i18n({
-								value: 'Title: User Not Found Exception',
-								id: 'Error_UserNotFoundException_Title'
-							}),
-							message: this._i18n({
-								value: 'Description: User Not Found Exception',
-								id: 'Error_UserNotFoundException_Description'
-							}),
-							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-						};
-						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
-						break;
+			}, (err: HttpErrorResponse) => {
+				if (err.error.detail.code === 'UsernameExistsException') {
+					const payload: ErrorHandlerPayloadInterface = {
+						title: this._i18n({
+							value: 'Title: User Exists Exception',
+							id: 'Error_UsernameExistsException_Title'
+						}),
+						message: this._i18n({
+							value: 'Description: User Exists Exception',
+							id: 'Error_UsernameExistsException_Description'
+						}),
+						buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
+					};
+					this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
 				}
+
+				// stop loading animation
+				this._loadingAnimationService.stopLoadingAnimation();
 			});
 	}
 
@@ -168,6 +169,34 @@ export class AuthService {
 						};
 						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
 						break;
+					case 'UserNotFoundException':
+						payload = {
+							title: this._i18n({
+								value: 'Title: User Not Found Exception',
+								id: 'Error_UserNotFoundException_Title'
+							}),
+							message: this._i18n({
+								value: 'Description: User Not Found Exception',
+								id: 'Error_UserNotFoundException_Description'
+							}),
+							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
+						};
+						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
+						break;
+					case 'UserNotConfirmedException':
+						payload = {
+							title: this._i18n({
+								value: 'Title: User Not Confirmed Exception',
+								id: 'Error_UserNotConfirmedException_Title'
+							}),
+							message: this._i18n({
+								value: 'Description: User Not Confirmed Exception',
+								id: 'Error_UserNotConfirmedException_Description'
+							}),
+							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
+						};
+						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
+						break;
 					case 'NotAuthorizedException':
 						payload = {
 							title: this._i18n({
@@ -185,7 +214,7 @@ export class AuthService {
 				}
 
 				// stop loading animation
-				this._loadingAnimationService.stopLoadingAnimation()
+				this._loadingAnimationService.stopLoadingAnimation();
 			});
 	}
 
@@ -193,20 +222,129 @@ export class AuthService {
 	 * perform forgot password process
 	 *
 	 * @param payload
+	 * @param formFields
 	 */
-	public authForgotPassword(payload: AuthForgotInterface) {
-		return this._proxyService
-			.postAPI(AppServices['Auth']['Forgot_Password'], { bodyParams: payload });
+	public authForgotPassword(payload: AuthForgotInterface, formFields: FormGroup) {
+		this._proxyService
+			.postAPI(AppServices['Auth']['Forgot_Password'], { bodyParams: payload })
+			.subscribe(() => {
+				// clear the form
+				formFields.reset();
+
+				// stop loading animation
+				this._loadingAnimationService.stopLoadingAnimation();
+
+				// dialog payload
+				const data = {
+					type: DialogTypeEnum.NOTICE,
+					payload: {
+						title: this._i18n({ value: 'Title: Password Reset', id: 'Auth_Forgot_Password_Form_Success_Title' }),
+						message: this._i18n({
+							value: 'Description: Forgot Password',
+							id: 'Auth_Forgot_Password_Form_Success_Description'
+						}),
+						buttonTexts: [this._i18n({ value: 'Button - OK', id: 'Common_Button_OK' })]
+					}
+				};
+
+				// dialog service
+				this._dialogService
+					.showDialog(data)
+					.subscribe(() =>
+						this._router.navigate([ROUTING.authorization.login]).then()
+					);
+			}, (err: HttpErrorResponse) => {
+				let payload: ErrorHandlerPayloadInterface;
+				switch (err.error.detail.code) {
+					case 'InvalidParameterException':
+						payload = {
+							title: this._i18n({
+								value: 'Title: Invalid Parameter Exception',
+								id: 'Error_InvalidParameterException_Title'
+							}),
+							message: this._i18n({
+								value: 'Description: Invalid Parameter Exception',
+								id: 'Error_InvalidParameterException_Description'
+							}),
+							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
+						};
+						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
+						break;
+					case 'UserNotFoundException':
+						payload = {
+							title: this._i18n({
+								value: 'Title: User Not Found Exception',
+								id: 'Error_UserNotFoundException_Title'
+							}),
+							message: this._i18n({
+								value: 'Description: User Not Found Exception',
+								id: 'Error_UserNotFoundException_Description'
+							}),
+							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
+						};
+						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
+						break;
+				}
+
+				// stop loading animation
+				this._loadingAnimationService.stopLoadingAnimation();
+			});
 	}
 
 	/**
 	 * perform reset password process
 	 *
 	 * @param payload
+	 * @param formFields
 	 */
-	public authResetPassword(payload: AuthResetInterface) {
-		return this._proxyService
-			.postAPI(AppServices['Auth']['Reset_Password'], { bodyParams: payload });
+	public authResetPassword(payload: AuthResetInterface, formFields: FormGroup) {
+		this._proxyService
+			.postAPI(AppServices['Auth']['Reset_Password'], { bodyParams: payload })
+			.subscribe(() => {
+				// clear the form
+				formFields.reset();
+
+				// stop loading animation
+				this._loadingAnimationService.stopLoadingAnimation();
+
+				// dialog payload
+				const data = {
+					type: DialogTypeEnum.NOTICE,
+					payload: {
+						title: this._i18n({ value: 'Title: Reset Password', id: 'Auth_Reset_Password_Form_Success_Title' }),
+						message: this._i18n({
+							value: 'Description: Reset Password',
+							id: 'Auth_Reset_Password_Form_Success_Description'
+						}),
+						buttonTexts: [this._i18n({ value: 'Button - OK', id: 'Common_Button_OK' })]
+					}
+				};
+
+				// dialog service
+				this._dialogService
+					.showDialog(data)
+					.subscribe(() =>
+						this._router.navigate([ROUTING.authorization.login]).then()
+					);
+			}, (err: HttpErrorResponse) => {
+				if (err.error.detail.code === 'CodeMismatchException') {
+					const payload: ErrorHandlerPayloadInterface = {
+						title: this._i18n({
+							value: 'Title: Verification Code Exception',
+							id: 'Error_CodeMismatchException_Title'
+						}),
+						message: this._i18n({
+							value: 'Description: Verification Code Exception',
+							id: 'Error_CodeMismatchException_Description'
+						}),
+						buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
+					};
+					this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
+				}
+
+				// stop loading animation
+				this._loadingAnimationService.stopLoadingAnimation();
+			});
 	}
 
 	/**
