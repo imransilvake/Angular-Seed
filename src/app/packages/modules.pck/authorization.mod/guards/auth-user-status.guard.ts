@@ -62,8 +62,8 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 							case 'FAIL':
 								const path = currentPath.split('?');
 								if (!this.authRoutes.includes(path[0]) || currentPath === ROUTING.authorization.reset && !path[1]) {
-									// navigate to login
-									this._router.navigate([ROUTING.authorization.login]).then();
+									// logout user
+									this._authService.logoutUser();
 								}
 								break;
 						}
@@ -79,7 +79,8 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 								password: data.profile.password
 							},
 							credentials: res,
-							rememberMe: data.rememberMe
+							rememberMe: data.rememberMe,
+							timestamp: data.timestamp
 						};
 					}
 					return true;
@@ -99,8 +100,8 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 				map(res => {
 					if (res.status) {
 						if (res.status === 'FAIL') {
-							// navigate to login
-							this._router.navigate([ROUTING.authorization.login]).then();
+							// logout user
+							this._authService.logoutUser();
 						}
 					} else {
 						// get current user state
@@ -114,7 +115,8 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 								password: data.profile.password
 							},
 							credentials: res,
-							rememberMe: data.rememberMe
+							rememberMe: data.rememberMe,
+							timestamp: data.timestamp
 						};
 					}
 					return true;

@@ -12,7 +12,7 @@ import { Store } from '@ngrx/store';
 // app
 import * as ErrorHandlerActions from '../../../utilities.pck/error-handler.mod/store/actions/error-handler.actions';
 import * as SessionActions from '../../../core.pck/session.mod/store/actions/session.actions';
-import { AppServices, LocalStorageItems, SessionStorageItems } from '../../../../../app.config';
+import { AppOptions, AppServices, LocalStorageItems, SessionStorageItems } from '../../../../../app.config';
 import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service';
 import { AuthForgotInterface } from '../interfaces/auth-forgot.interface';
 import { AuthRegisterInterface } from '../interfaces/auth-register.interface';
@@ -28,6 +28,7 @@ import { ErrorHandlerPayloadInterface } from '../../../utilities.pck/error-handl
 import { LoadingAnimationService } from '../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { DialogTypeEnum } from '../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { DialogService } from '../../../utilities.pck/dialog.mod/services/dialog.service';
+import * as moment from 'moment';
 
 @Injectable()
 export class AuthService {
@@ -144,7 +145,8 @@ export class AuthService {
 							idToken: res.idToken.jwtToken,
 							refreshToken: res.refreshToken.token
 						},
-						rememberMe: rememberMe
+						rememberMe: rememberMe,
+						timestamp: moment()
 					};
 
 					// navigate to defined url
@@ -353,16 +355,19 @@ export class AuthService {
 	public authenticateUser() {
 		const userState = this.currentUserState;
 		if (userState) {
-			// payload
-			const payloadSessionValidate = {
-				accessToken: userState.credentials.accessToken,
-				refreshToken: userState.credentials.refreshToken,
-				username: userState.profile.email
-			};
+			const storageValidity = moment().diff(userState.timestamp, 'days');
+			if (storageValidity <= AppOptions.rememberMeValidityInDays) {
+				// payload
+				const payloadSessionValidate = {
+					accessToken: userState.credentials.accessToken,
+					refreshToken: userState.credentials.refreshToken,
+					username: userState.profile.email
+				};
 
-			// service: session validity
-			return this._proxyService
-				.postAPI(AppServices['Auth']['Session_Validity'], { bodyParams: payloadSessionValidate });
+				// service: session validity
+				return this._proxyService
+					.postAPI(AppServices['Auth']['Session_Validity'], { bodyParams: payloadSessionValidate });
+			}
 		}
 
 		// authentication failed
@@ -374,8 +379,8 @@ export class AuthService {
 	 */
 	public logoutUser() {
 		this.authenticateUser()
-			.subscribe(res => {
-				if (res && res.status === 'OK') {
+			.subscribe(() => {
+				if (this.currentUserState) {
 					// logout payload
 					const payloadLogout = {
 						email: this.currentUserState.profile.email,

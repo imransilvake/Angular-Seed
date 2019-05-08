@@ -26,7 +26,7 @@ export class ErrorSystemComponent {
 	 */
 	public onClickCloseDialog() {
 		// logout
-		this._authService.clearSessions();
+		this._authService.logoutUser();
 
 		// close dialog
 		this.dialogRef.close();
