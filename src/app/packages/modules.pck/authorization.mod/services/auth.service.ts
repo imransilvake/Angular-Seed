@@ -10,6 +10,7 @@ import { FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 // app
+import * as moment from 'moment';
 import * as ErrorHandlerActions from '../../../utilities.pck/error-handler.mod/store/actions/error-handler.actions';
 import * as SessionActions from '../../../core.pck/session.mod/store/actions/session.actions';
 import { AppOptions, AppServices, LocalStorageItems, SessionStorageItems } from '../../../../../app.config';
@@ -28,7 +29,6 @@ import { ErrorHandlerPayloadInterface } from '../../../utilities.pck/error-handl
 import { LoadingAnimationService } from '../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { DialogTypeEnum } from '../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { DialogService } from '../../../utilities.pck/dialog.mod/services/dialog.service';
-import * as moment from 'moment';
 
 @Injectable()
 export class AuthService {
@@ -69,12 +69,12 @@ export class AuthService {
 	/**
 	 * perform registration process
 	 *
-	 * @param payload
+	 * @param formPayload
 	 * @param formFields
 	 */
-	public authRegister(payload: AuthRegisterInterface, formFields: FormGroup) {
+	public authRegister(formPayload: AuthRegisterInterface, formFields: FormGroup) {
 		this._proxyService
-			.postAPI(AppServices['Auth']['Register'], { bodyParams: payload })
+			.postAPI(AppServices['Auth']['Register'], { bodyParams: formPayload })
 			.subscribe(() => {
 				// clear the form
 				formFields.reset();
@@ -100,7 +100,7 @@ export class AuthService {
 					);
 			}, (err: HttpErrorResponse) => {
 				if (err.error.detail.code === 'UsernameExistsException') {
-					const payload: ErrorHandlerPayloadInterface = {
+					const errorPayload: ErrorHandlerPayloadInterface = {
 						title: this._i18n({
 							value: 'Title: User Exists Exception',
 							id: 'Error_UsernameExistsException_Title'
@@ -111,7 +111,7 @@ export class AuthService {
 						}),
 						buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 					};
-					this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
+					this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(errorPayload));
 				}
 
 				// stop loading animation
@@ -122,13 +122,13 @@ export class AuthService {
 	/**
 	 * perform login process
 	 *
-	 * @param payload
+	 * @param formPayload
 	 * @param rememberMe
 	 * @param redirectUrl
 	 */
-	public authLogin(payload: AuthLoginInterface, rememberMe: boolean, redirectUrl?: string) {
+	public authLogin(formPayload: AuthLoginInterface, rememberMe: boolean, redirectUrl?: string) {
 		this._proxyService
-			.postAPI(AppServices['Auth']['Login'], { bodyParams: payload })
+			.postAPI(AppServices['Auth']['Login'], { bodyParams: formPayload })
 			.subscribe(res => {
 				if (res) {
 					// decode token
@@ -138,7 +138,7 @@ export class AuthService {
 					this.currentUserState = {
 						profile: {
 							...userInfo,
-							password: payload.password
+							password: formPayload.password
 						},
 						credentials: {
 							accessToken: res.accessToken.jwtToken,
@@ -155,10 +155,10 @@ export class AuthService {
 						.then(() => this._loadingAnimationService.stopLoadingAnimation());
 				}
 			}, (err: HttpErrorResponse) => {
-				let payload: ErrorHandlerPayloadInterface;
+				let errorPayload: ErrorHandlerPayloadInterface;
 				switch (err.error.detail.code) {
 					case 'UserLambdaValidationException':
-						payload = {
+						errorPayload = {
 							title: this._i18n({
 								value: 'Title: Block User Exception',
 								id: 'Error_BlockUserException_Title'
@@ -169,10 +169,10 @@ export class AuthService {
 							}),
 							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 						};
-						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
+						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(errorPayload));
 						break;
 					case 'UserNotFoundException':
-						payload = {
+						errorPayload = {
 							title: this._i18n({
 								value: 'Title: User Not Found Exception',
 								id: 'Error_UserNotFoundException_Title'
@@ -183,10 +183,10 @@ export class AuthService {
 							}),
 							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 						};
-						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
+						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(errorPayload));
 						break;
 					case 'UserNotConfirmedException':
-						payload = {
+						errorPayload = {
 							title: this._i18n({
 								value: 'Title: User Not Confirmed Exception',
 								id: 'Error_UserNotConfirmedException_Title'
@@ -197,10 +197,10 @@ export class AuthService {
 							}),
 							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 						};
-						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
+						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(errorPayload));
 						break;
 					case 'NotAuthorizedException':
-						payload = {
+						errorPayload = {
 							title: this._i18n({
 								value: 'Title: Password Invalid Exception',
 								id: 'Error_PasswordInvalid_Title'
@@ -211,7 +211,7 @@ export class AuthService {
 							}),
 							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 						};
-						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
+						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(errorPayload));
 						break;
 				}
 
@@ -223,12 +223,12 @@ export class AuthService {
 	/**
 	 * perform forgot password process
 	 *
-	 * @param payload
+	 * @param formPayload
 	 * @param formFields
 	 */
-	public authForgotPassword(payload: AuthForgotInterface, formFields: FormGroup) {
+	public authForgotPassword(formPayload: AuthForgotInterface, formFields: FormGroup) {
 		this._proxyService
-			.postAPI(AppServices['Auth']['Forgot_Password'], { bodyParams: payload })
+			.postAPI(AppServices['Auth']['Forgot_Password'], { bodyParams: formPayload })
 			.subscribe(() => {
 				// clear the form
 				formFields.reset();
@@ -236,8 +236,8 @@ export class AuthService {
 				// stop loading animation
 				this._loadingAnimationService.stopLoadingAnimation();
 
-				// dialog payload
-				const data = {
+				// payload
+				const dialogPayload = {
 					type: DialogTypeEnum.NOTICE,
 					payload: {
 						title: this._i18n({ value: 'Title: Password Reset', id: 'Auth_Forgot_Password_Form_Success_Title' }),
@@ -251,15 +251,15 @@ export class AuthService {
 
 				// dialog service
 				this._dialogService
-					.showDialog(data)
+					.showDialog(dialogPayload)
 					.subscribe(() =>
 						this._router.navigate([ROUTING.authorization.login]).then()
 					);
 			}, (err: HttpErrorResponse) => {
-				let payload: ErrorHandlerPayloadInterface;
+				let errorPayload: ErrorHandlerPayloadInterface;
 				switch (err.error.detail.code) {
 					case 'InvalidParameterException':
-						payload = {
+						errorPayload = {
 							title: this._i18n({
 								value: 'Title: Invalid Parameter Exception',
 								id: 'Error_InvalidParameterException_Title'
@@ -270,10 +270,10 @@ export class AuthService {
 							}),
 							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 						};
-						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
+						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(errorPayload));
 						break;
 					case 'UserNotFoundException':
-						payload = {
+						errorPayload = {
 							title: this._i18n({
 								value: 'Title: User Not Found Exception',
 								id: 'Error_UserNotFoundException_Title'
@@ -284,7 +284,7 @@ export class AuthService {
 							}),
 							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 						};
-						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
+						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(errorPayload));
 						break;
 				}
 
@@ -296,12 +296,12 @@ export class AuthService {
 	/**
 	 * perform reset password process
 	 *
-	 * @param payload
+	 * @param formPayload
 	 * @param formFields
 	 */
-	public authResetPassword(payload: AuthResetInterface, formFields: FormGroup) {
+	public authResetPassword(formPayload: AuthResetInterface, formFields: FormGroup) {
 		this._proxyService
-			.postAPI(AppServices['Auth']['Reset_Password'], { bodyParams: payload })
+			.postAPI(AppServices['Auth']['Reset_Password'], { bodyParams: formPayload })
 			.subscribe(() => {
 				// clear the form
 				formFields.reset();
@@ -309,8 +309,8 @@ export class AuthService {
 				// stop loading animation
 				this._loadingAnimationService.stopLoadingAnimation();
 
-				// dialog payload
-				const data = {
+				// payload
+				const dialogPayload = {
 					type: DialogTypeEnum.NOTICE,
 					payload: {
 						title: this._i18n({ value: 'Title: Reset Password', id: 'Auth_Reset_Password_Form_Success_Title' }),
@@ -324,13 +324,13 @@ export class AuthService {
 
 				// dialog service
 				this._dialogService
-					.showDialog(data)
+					.showDialog(dialogPayload)
 					.subscribe(() =>
 						this._router.navigate([ROUTING.authorization.login]).then()
 					);
 			}, (err: HttpErrorResponse) => {
 				if (err.error.detail.code === 'CodeMismatchException') {
-					const payload: ErrorHandlerPayloadInterface = {
+					const errorPayload: ErrorHandlerPayloadInterface = {
 						title: this._i18n({
 							value: 'Title: Verification Code Exception',
 							id: 'Error_CodeMismatchException_Title'
@@ -341,7 +341,7 @@ export class AuthService {
 						}),
 						buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 					};
-					this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
+					this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(errorPayload));
 				}
 
 				// stop loading animation
@@ -358,7 +358,7 @@ export class AuthService {
 			const storageValidity = moment().diff(userState.timestamp, 'days');
 			if (storageValidity <= AppOptions.rememberMeValidityInDays) {
 				// payload
-				const payloadSessionValidate = {
+				const sessionValidityPayload = {
 					accessToken: userState.credentials.accessToken,
 					refreshToken: userState.credentials.refreshToken,
 					username: userState.profile.email
@@ -366,7 +366,7 @@ export class AuthService {
 
 				// service: session validity
 				return this._proxyService
-					.postAPI(AppServices['Auth']['Session_Validity'], { bodyParams: payloadSessionValidate });
+					.postAPI(AppServices['Auth']['Session_Validity'], { bodyParams: sessionValidityPayload });
 			}
 		}
 
@@ -381,15 +381,15 @@ export class AuthService {
 		this.authenticateUser()
 			.subscribe(() => {
 				if (this.currentUserState) {
-					// logout payload
-					const payloadLogout = {
+					// payload
+					const logoutPayload = {
 						email: this.currentUserState.profile.email,
 						accessToken: this.currentUserState.credentials.accessToken
 					};
 
 					// call sign-out service
 					this._proxyService
-						.postAPI(AppServices['Auth']['Logout'], { bodyParams: payloadLogout })
+						.postAPI(AppServices['Auth']['Logout'], { bodyParams: logoutPayload })
 						.subscribe();
 				}
 
