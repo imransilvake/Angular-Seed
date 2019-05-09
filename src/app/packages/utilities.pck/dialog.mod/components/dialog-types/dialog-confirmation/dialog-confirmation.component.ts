@@ -26,7 +26,7 @@ export class DialogConfirmationComponent {
 	 *
 	 * @param {boolean} status
 	 */
-	public onClickCloseDialog(status?: boolean): void {
+	public onClickCloseDialog(status?: boolean) {
 		if (status) {
 			// start loading animation
 			this._loadingAnimationService.startLoadingAnimation();
