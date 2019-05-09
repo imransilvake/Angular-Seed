@@ -23,11 +23,11 @@ Please follow the link for the documentation: [GUIDE](./GUIDE.md)
 
 #### Development
 - [X] Loading Animation
-- [X] Notification: `success`, `error`, `info`, `warning`
-- [X] Dialog: `confirmation`
-- [X] Error Handler: `common`, `system`
-- [X] Storage: `local`, `session`, `memory`
-- [X] Proxy: `getAPI`, `postAPI`
+- [X] Notification: `success, error, info, warning`
+- [X] Dialog: `confirmation, notice`
+- [X] Error Handler: `common, system`
+- [X] Storage: `local, session, memory`
+- [X] Proxy: `getAPI, postAPI`
 
 
 ## Libraries and Frameworks
