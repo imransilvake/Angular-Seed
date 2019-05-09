@@ -35,7 +35,7 @@ export class HttpErrorHandlingService {
 				case HttpApiTypeEnum.GET:
 					return this.handleGetErrors(error);
 				case HttpApiTypeEnum.POST:
-					return HttpErrorHandlingService.handlePostErrors(error);
+					return this.handlePostErrors(error);
 			}
 		}
 	}
@@ -101,7 +101,25 @@ export class HttpErrorHandlingService {
 	 *
 	 * @param response
 	 */
-	private static handlePostErrors(response) {
+	private handlePostErrors(response) {
+		let payload: ErrorHandlerPayloadInterface;
+		switch (response.status) {
+			case 0:
+				payload = {
+					title: this._i18n({
+						value: 'Title: Unknown Error Exception',
+						id: 'Error_UnknownErrorException_Title'
+					}),
+					message: this._i18n({
+						value: 'Description: Unknown Error Exception',
+						id: 'Error_UnknownErrorException_Description'
+					}),
+					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
+				};
+				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
+				break;
+		}
+
 		// return response
 		return response;
 	}

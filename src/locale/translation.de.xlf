@@ -816,6 +816,26 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="Error_UnknownErrorException_Title" datatype="html">
+				<source>Title: Unknown Error Exception</source>
+				<target>Unbekannter Fehler Ausnahme</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Error_UnknownErrorException_Description" datatype="html">
+				<source>Description: Unknown Error Exception</source>
+				<target>Es ist etwas Schlimmes passiert. Bitte überprüfen Sie Ihre Internetverbindung. Andernfalls wenden Sie sich an das Support-Team.</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
 			<trans-unit id="Error_InvalidParameterException_Title" datatype="html">
 				<source>Title: Invalid Parameter Exception</source>
 				<target>Ungültige Parameterausnahme</target>
