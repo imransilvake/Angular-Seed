@@ -119,8 +119,11 @@ export class LockScreenComponent implements OnInit, AfterViewInit, OnDestroy {
 						this._storageService.remove(LocalStorageItems.lockState);
 
 						// navigate to dashboard
+						// stop loading animation
 						this._router.navigate([this._routerService.getPreviousUrl()])
-							.then(() => this._loadingAnimationService.stopLoadingAnimation());
+							.then(() =>
+								this._loadingAnimationService.stopLoadingAnimation()
+							);
 					} else {
 						// logout
 						this._authService.logoutUser();

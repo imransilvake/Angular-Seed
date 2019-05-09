@@ -150,6 +150,7 @@ export class AuthService {
 					};
 
 					// navigate to defined url
+					// stop loading animation
 					this._router
 						.navigate([ROUTING.dashboard])
 						.then(() => this._loadingAnimationService.stopLoadingAnimation());
