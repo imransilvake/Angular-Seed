@@ -7,10 +7,10 @@
 			<h6 class="ham-label" *ngIf="node.section">{{node.section}}</h6>
 			<button mat-menu-item matTreeNodeToggle>
 				<!-- name -->
-				<div class="ham-btn-icon">
+				<span class="ham-btn-icon">
 					<fa-icon *ngIf="node.icon" [icon]="node.icon"></fa-icon>
 					<span class="ham-title" [class.ham-hide]="!drawerState">{{node.name}}</span>
-				</div>
+				</span>
 
 				<!-- icon -->
 				<mat-icon class="mat-icon" [class.ham-hide]="!drawerState">{{treeControl.isExpanded(node) ? 'remove' : 'add'}}</mat-icon>
@@ -33,10 +33,10 @@
 				[routerLink]="node.url"
 				[routerLinkActive]="['ham-active']">
 				<!-- name -->
-				<div class="ham-btn-icon">
+				<span class="ham-btn-icon">
 					<fa-icon *ngIf="node.icon" [icon]="node.icon"></fa-icon>
 					<span class="ham-title" [class.ham-hide]="!drawerState">{{node.name}}</span>
-				</div>
+				</span>
 			</button>
 		</mat-tree-node>
 	</mat-tree>
