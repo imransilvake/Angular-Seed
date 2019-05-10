@@ -2,28 +2,41 @@
 	<button class="ham-btn-icon" mat-button [matMenuTriggerFor]="account">
 		<mat-icon>face</mat-icon>
 	</button>
-	<mat-menu #account="matMenu">
+	<mat-menu #account="matMenu" class="ham-account-mat-menu">
+		<!-- Head -->
 		<div class="ham-head-2" (click)="onClickStopPropagation($event)">
 			<h5 class="ham-title">{{currentUser.profile.name}}</h5>
 			<p>{{currentUser.profile.email}}</p>
 		</div>
-		<app-widget-divider></app-widget-divider>
-		<button mat-menu-item class="ham-btn-icon">
-			<fa-icon [icon]="faIcons[0]"></fa-icon>
-			<span>Messages</span>
-		</button>
-		<button mat-menu-item class="ham-btn-icon">
-			<fa-icon [icon]="faIcons[1]"></fa-icon>
-			<span>Profile</span>
-		</button>
-		<app-widget-divider></app-widget-divider>
-		<button mat-menu-item class="ham-btn-icon" (click)="onClickLockScreen()">
-			<fa-icon [icon]="faIcons[2]"></fa-icon>
-			<span>Lock</span>
-		</button>
-		<button mat-menu-item class="ham-btn-icon" (click)="onClickLogout()">
-			<fa-icon [icon]="faIcons[3]"></fa-icon>
-			<span>Logout</span>
-		</button>
+		<div (click)="onClickStopPropagationFromActiveElement($event)">
+			<!-- Divider -->
+			<app-widget-divider></app-widget-divider>
+
+			<!-- Items -->
+			<button mat-menu-item class="ham-btn-icon">
+				<fa-icon [icon]="faIcons[0]"></fa-icon>
+				<span>Messages</span>
+			</button>
+			<button
+				mat-menu-item class="ham-btn-icon"
+				[routerLink]="['/' + routing.member.profile]"
+				[routerLinkActive]="['ham-active']">
+				<fa-icon [icon]="faIcons[1]"></fa-icon>
+				<span>Profile</span>
+			</button>
+
+			<!-- Divider -->
+			<app-widget-divider></app-widget-divider>
+
+			<!-- Items -->
+			<button mat-menu-item class="ham-btn-icon" (click)="onClickLockScreen()">
+				<fa-icon [icon]="faIcons[2]"></fa-icon>
+				<span>Lock</span>
+			</button>
+			<button mat-menu-item class="ham-btn-icon" (click)="onClickLogout()">
+				<fa-icon [icon]="faIcons[3]"></fa-icon>
+				<span>Logout</span>
+			</button>
+		</div>
 	</mat-menu>
 </div>

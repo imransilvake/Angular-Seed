@@ -37,6 +37,10 @@ const ROUTES: Routes = [
 						component: DashboardComponent
 					},
 					{
+						path: ROUTING.member.profile,
+						loadChildren: './packages/modules.pck/member.mod/member.module#MemberModule'
+					},
+					{
 						path: ROUTING.pages.maintenance,
 						component: MaintenanceComponent
 					}

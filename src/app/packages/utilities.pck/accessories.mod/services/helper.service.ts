@@ -3,12 +3,12 @@ import { Injectable } from '@angular/core';
 import { fromEvent } from 'rxjs/internal/observable/fromEvent';
 import { debounceTime } from 'rxjs/operators';
 import { merge } from 'rxjs/internal/observable/merge';
+
 // app
 import * as jwt_decode from 'jwt-decode';
 import * as CryptoJS from 'crypto-js';
 
 declare const document: any;
-declare const event: Event;
 
 @Injectable({ providedIn: 'root' })
 export class HelperService {
@@ -128,5 +128,18 @@ export class HelperService {
 	 */
 	public static stopPropagation() {
 		event.stopPropagation();
+	}
+
+	/**
+	 * stop propagation from active element
+	 *
+	 * @param event
+	 */
+	public static stopPropagationFromActiveElement(event: any) {
+		event && event.target && event.target.childNodes.forEach(element => {
+			if (element.className && element.className.indexOf('ham-active') !== -1) {
+				HelperService.stopPropagation();
+			}
+		});
 	}
 }

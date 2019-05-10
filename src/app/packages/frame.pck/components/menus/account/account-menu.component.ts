@@ -18,6 +18,7 @@ import { LoadingAnimationService } from '../../../../utilities.pck/loading-anima
 })
 
 export class AccountMenuComponent {
+	public routing = ROUTING;
 	public faIcons = [faEnvelope, faUser, faUserLock, faPowerOff];
 	public currentUser;
 
@@ -33,7 +34,17 @@ export class AccountMenuComponent {
 	}
 
 	/**
+	 * stop propagation from active element
+	 *
+	 * @param event
+	 */
+	public onClickStopPropagationFromActiveElement(event) {
+		HelperService.stopPropagationFromActiveElement(event);
+	}
+
+	/**
 	 * stop propagation
+	 *
 	 * @param event
 	 */
 	public onClickStopPropagation(event) {
@@ -41,7 +52,7 @@ export class AccountMenuComponent {
 	}
 
 	/**
-	 * lock user screen
+	 * navigate: lock screen
 	 */
 	public onClickLockScreen() {
 		// navigate to lock
