@@ -28,7 +28,8 @@
 			padding: 5px 15px;
 
 			.ham-title {
-				font-weight: cd-fontWeight(600);
+				color: cd-palette($cd-color, 1004);
+				text-transform: capitalize;
 			}
 
 			p {

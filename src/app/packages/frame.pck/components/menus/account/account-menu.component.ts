@@ -14,7 +14,8 @@ import { LoadingAnimationService } from '../../../../utilities.pck/loading-anima
 
 @Component({
 	selector: 'app-menu-account',
-	templateUrl: './account-menu.component.html'
+	templateUrl: './account-menu.component.html',
+	styles: [`.ham-user-name { text-transform: capitalize }`]
 })
 
 export class AccountMenuComponent {

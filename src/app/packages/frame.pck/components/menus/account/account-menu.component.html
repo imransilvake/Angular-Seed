@@ -1,6 +1,10 @@
 <div class="ham-account-menu">
 	<button class="ham-btn-icon" mat-button [matMenuTriggerFor]="account">
-		<mat-icon>face</mat-icon>
+		<!-- No Image -->
+		<span class="ham-user-name">
+			<span>{{currentUser.profile.given_name.charAt(0)}}</span>
+			<span>{{currentUser.profile.family_name.charAt(0)}}</span>
+		</span>
 	</button>
 	<mat-menu #account="matMenu" class="ham-account-mat-menu">
 		<!-- Head -->
