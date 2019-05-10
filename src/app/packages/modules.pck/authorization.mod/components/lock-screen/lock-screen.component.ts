@@ -68,7 +68,7 @@ export class LockScreenComponent implements OnInit, AfterViewInit, OnDestroy {
 	ngAfterViewInit() {
 		// check previous url and save to local storage
 		if (!this._storageService.exist(LocalStorageItems.lockState, StorageTypeEnum.PERSISTANT)) {
-			this._storageService.put(LocalStorageItems.lockState, { url: this._routerService.getPreviousUrl() }, StorageTypeEnum.PERSISTANT);
+			this._storageService.put(LocalStorageItems.lockState, { url: this._routerService.previousUrl }, StorageTypeEnum.PERSISTANT);
 		}
 	}
 
@@ -120,7 +120,7 @@ export class LockScreenComponent implements OnInit, AfterViewInit, OnDestroy {
 
 						// navigate to dashboard
 						// stop loading animation
-						this._router.navigate([this._routerService.getPreviousUrl()])
+						this._router.navigate([this._routerService.previousUrl])
 							.then(() =>
 								this._loadingAnimationService.stopLoadingAnimation()
 							);
