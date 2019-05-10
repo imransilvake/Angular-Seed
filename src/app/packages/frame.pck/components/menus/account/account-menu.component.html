@@ -5,8 +5,8 @@
 	<mat-menu #account="matMenu" class="ham-account-mat-menu">
 		<!-- Head -->
 		<div class="ham-head-2" (click)="onClickStopPropagation($event)">
-			<h5 class="ham-title">{{currentUser.profile.name}}</h5>
-			<p>{{currentUser.profile.email}}</p>
+			<h5 class="ham-title ham-ellipses">{{currentUser.profile.name}}</h5>
+			<p class="ham-ellipses">{{currentUser.profile.email}}</p>
 		</div>
 		<div (click)="onClickStopPropagationFromActiveElement($event)">
 			<!-- Divider -->
