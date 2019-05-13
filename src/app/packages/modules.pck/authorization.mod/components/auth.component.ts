@@ -8,10 +8,10 @@ import { Component } from '@angular/core';
 			<router-outlet></router-outlet>
 		</section>
 	`,
-	styleUrls: ['./auth-overview.component.scss']
+	styleUrls: ['./auth.component.scss']
 })
 
-export class AuthOverviewComponent {
+export class AuthComponent {
 	public imageValue = Math.floor(Math.random() * 15) + 1 || 1;
 	public imageUrl = 'url(assets/images/auth/bg/bg_' + this.imageValue + '.jpg)';
 }

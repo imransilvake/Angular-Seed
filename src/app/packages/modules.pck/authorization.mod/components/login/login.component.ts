@@ -23,7 +23,7 @@ import { AppOptions } from '../../../../../../app.config';
 @Component({
 	selector: 'app-login',
 	templateUrl: './login.component.html',
-	styleUrls: ['../auth.component.scss']
+	styleUrls: ['../auth-common.component.scss']
 })
 
 export class LoginComponent implements OnInit, OnDestroy {

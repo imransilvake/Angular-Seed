@@ -21,7 +21,7 @@ import { SalutationListService } from '../../services/salutation-list.service';
 @Component({
 	selector: 'app-register',
 	templateUrl: './register.component.html',
-	styleUrls: ['../auth.component.scss']
+	styleUrls: ['../auth-common.component.scss']
 })
 
 export class RegisterComponent implements OnInit, OnDestroy {

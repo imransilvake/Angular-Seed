@@ -16,7 +16,7 @@ import { HelperService } from '../../../../utilities.pck/accessories.mod/service
 @Component({
 	selector: 'app-reset-password',
 	templateUrl: './reset-password.component.html',
-	styleUrls: ['../auth.component.scss']
+	styleUrls: ['../auth-common.component.scss']
 })
 
 export class ResetPasswordComponent implements OnDestroy {

@@ -2,8 +2,8 @@
 	<button class="ham-btn-icon" mat-button [matMenuTriggerFor]="account">
 		<!-- No Image -->
 		<span class="ham-user-name">
-			<span>{{currentUser.profile.given_name.charAt(0)}}</span>
-			<span>{{currentUser.profile.family_name.charAt(0)}}</span>
+			<span>{{currentUser.profile.given_name.charAt(0).toUpperCase()}}</span>
+			<span>{{currentUser.profile.family_name.charAt(0).toUpperCase()}}</span>
 		</span>
 	</button>
 	<mat-menu #account="matMenu" class="ham-account-mat-menu">

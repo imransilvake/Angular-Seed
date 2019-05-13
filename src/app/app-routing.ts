@@ -4,7 +4,7 @@ import { Routes } from '@angular/router';
 // app
 import { AUTHORIZATION_ROUTES } from './packages/modules.pck/authorization.mod/authorization-routing';
 import { AppLayoutComponent } from './app-layout.component';
-import { AuthOverviewComponent } from './packages/modules.pck/authorization.mod/components/auth-overview.component';
+import { AuthComponent } from './packages/modules.pck/authorization.mod/components/auth.component';
 import { ROUTING } from '../environments/environment';
 import { E404Component } from './packages/frame.pck/components/pages/e404.component';
 import { AuthUserStatusGuard } from './packages/modules.pck/authorization.mod/guards/auth-user-status.guard';
@@ -19,7 +19,7 @@ const ROUTES: Routes = [
 	},
 	{
 		path: '',
-		component: AuthOverviewComponent,
+		component: AuthComponent,
 		children: [
 			...AUTHORIZATION_ROUTES
 		],
