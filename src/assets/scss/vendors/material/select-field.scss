@@ -3,6 +3,8 @@
 	&.ham-selected {
 		.mat-select-trigger {
 			.mat-select-value {
+				color: cd-palette($cd-color, 1001);
+
 				span {
 					color: cd-palette($cd-color, 1001);
 				}
@@ -16,6 +18,7 @@
 
 		.mat-select-value {
 			box-shadow: none;
+			color: cd-palette($cd-color, 1004);
 			cursor: pointer;
 
 			span {

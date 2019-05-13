@@ -3,5 +3,22 @@
 .ham-update-profile {
 	.cd-row {
 		margin-top: 20px;
+
+		&.ham-button {
+			text-align: right;
+		}
+	}
+
+	// media
+	@include cd-media(desktop, tablet) {
+		.cd-row {
+			.cd-col {
+				padding: 0;
+
+				&.cd-col-m-top {
+					margin-top: 20px;
+				}
+			}
+		}
 	}
 }
