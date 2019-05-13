@@ -48,7 +48,7 @@ export class LockScreenComponent implements OnInit, AfterViewInit, OnDestroy {
 		private _router: Router,
 		private _routerService: RouterService
 	) {
-		// form fields
+		// form group
 		this.formFields = new FormGroup({
 			password: new FormControl('', [
 				Validators.required,

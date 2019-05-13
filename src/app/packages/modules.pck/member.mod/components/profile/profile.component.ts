@@ -1,16 +1,13 @@
 // angular
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
 	selector: 'app-profile',
 	templateUrl: './profile.component.html',
-	styleUrls: ['./profile.component.scss']
+	styles: [`.ham-head { margin-bottom: 30px; }`]
 })
 
-export class ProfileComponent implements OnInit {
+export class ProfileComponent {
 	constructor() {
-	}
-
-	ngOnInit() {
 	}
 }

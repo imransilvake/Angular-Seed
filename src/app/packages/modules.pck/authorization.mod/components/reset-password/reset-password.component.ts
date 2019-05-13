@@ -35,7 +35,7 @@ export class ResetPasswordComponent implements OnDestroy {
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe((params) => this.queryParams = params);
 
-		// form fields
+		// form group
 		this.formFields = new FormGroup({
 			password: new FormControl('', [
 				Validators.required,

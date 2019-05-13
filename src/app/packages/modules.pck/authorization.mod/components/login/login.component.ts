@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 	public formFields;
 	public loginHotelNameSelectType = SelectTypeEnum.DEFAULT;
 	public loginHotelNameSelectStyleType = SelectStyleEnum.INFO;
-	public loginHotelNameIcons = [faGlobeEurope];
+	public loginIcon = faGlobeEurope;
 	public languageList: SelectDefaultInterface[] = [];
 	public rememberMe: MatCheckboxChange;
 
@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 		private _authService: AuthService,
 		private _route: ActivatedRoute
 	) {
-		// form fields
+		// form group
 		this.formFields = new FormGroup({
 			languageName: new FormControl(''),
 			email: new FormControl('', [

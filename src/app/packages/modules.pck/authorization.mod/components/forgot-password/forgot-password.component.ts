@@ -26,7 +26,7 @@ export class ForgotPasswordComponent implements OnDestroy {
 		private _loadingAnimationService: LoadingAnimationService,
 		private _authService: AuthService
 	) {
-		// form fields
+		// form group
 		this.formFields = new FormGroup({
 			firstName: new FormControl('', [
 				Validators.required,

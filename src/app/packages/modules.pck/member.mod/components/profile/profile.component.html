@@ -1,6 +1,17 @@
 <div class="ham-profile">
 	<!-- Head -->
-	<app-head [pageTitle]="'Profile'"></app-head>
+	<div class="ham-head">
+		<app-head [pageTitle]="'User Profile'"></app-head>
+	</div>
 
-
+	<!-- Content -->
+	<div class="cd-row ham-padding-1">
+		<div class="cd-col cd-col-pm-s-6">
+			<!-- Update Profile -->
+			<app-update-profile></app-update-profile>
+		</div>
+		<div class="cd-col cd-col-pm-s-6">
+			Change Password Component
+		</div>
+	</div>
 </div>
