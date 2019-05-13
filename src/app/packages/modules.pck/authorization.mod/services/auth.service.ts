@@ -124,9 +124,9 @@ export class AuthService {
 	 *
 	 * @param formPayload
 	 * @param rememberMe
-	 * @param redirectUrl
+	 * @param language
 	 */
-	public authLogin(formPayload: AuthLoginInterface, rememberMe: boolean, redirectUrl?: string) {
+	public authLogin(formPayload: AuthLoginInterface, rememberMe: boolean, language: string) {
 		this._proxyService
 			.postAPI(AppServices['Auth']['Login'], { bodyParams: formPayload })
 			.subscribe(res => {
@@ -138,7 +138,8 @@ export class AuthService {
 					this.currentUserState = {
 						profile: {
 							...userInfo,
-							password: formPayload.password
+							password: formPayload.password,
+							language: language
 						},
 						credentials: {
 							accessToken: res.accessToken.jwtToken,

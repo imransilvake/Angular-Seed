@@ -57,7 +57,7 @@ export class RouterService {
 	 */
 	private setBreadcrumbsList() {
 		this.breadcrumbs = [];
-		let currentUrl = location.pathname;
+		const currentUrl = location.pathname;
 		let breadcrumbs = currentUrl && currentUrl.split('/');
 
 		// validate breadcrumbs

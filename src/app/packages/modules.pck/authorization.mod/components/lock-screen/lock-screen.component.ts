@@ -140,7 +140,7 @@ export class LockScreenComponent implements OnInit, AfterViewInit, OnDestroy {
 			};
 
 			// start login process
-			this._authService.authLogin(formPayload, currentUser.rememberMe);
+			this._authService.authLogin(formPayload, currentUser.rememberMe, currentUser.language);
 		}
 	}
 }

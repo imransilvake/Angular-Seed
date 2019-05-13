@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 				if (res && (res[0].path === AppOptions.languages['en'] || res[0].path === AppOptions.languages['de'])) {
 					this.languageName.setValue(res[0].path);
 				} else {
-					this.languageName.setValue(AppOptions.languages['en']);
+					this.languageName.setValue(AppOptions.languages['de']);
 				}
 			});
 
@@ -117,6 +117,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 		};
 
 		// start login process
-		this._authService.authLogin(formPayload, this.rememberMe && this.rememberMe.checked);
+		this._authService.authLogin(formPayload, this.rememberMe && this.rememberMe.checked, this.languageName.value);
 	}
 }
