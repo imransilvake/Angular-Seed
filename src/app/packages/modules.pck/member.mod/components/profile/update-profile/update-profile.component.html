@@ -67,6 +67,7 @@
 					[inputName]="'email'"
 					inputPlaceHolder="Email"
 					i18n-inputPlaceHolder="@@Auth_Register_Form_Email_PlaceHolder"
+					[inputDisabled]="true"
 					[control]="email">
 				</app-input>
 			</div>
@@ -75,7 +76,7 @@
 		<!-- Button -->
 		<div class="cd-row ham-padding-1 ham-button">
 			<div class="cd-col">
-				<button mat-button type="submit" class="ham-button-1" [disabled]="!isFormValid" i18n="@@Auth_Register_Form_Submit_Button">Register</button>
+				<button mat-button type="submit" class="ham-button-1" [disabled]="!isFormValid" i18n="@@Auth_Register_Form_Submit_Button">Update</button>
 			</div>
 		</div>
 	</form>
