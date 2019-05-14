@@ -20,7 +20,7 @@ import { UpdateProfileInterface } from '../../../interfaces/update-profile.inter
 })
 
 export class UpdateProfileComponent implements OnInit {
-	public formFields: FormGroup;
+	public formFields;
 	public profileIcon = faUser;
 	public profileSalutationSelectType = SelectTypeEnum.DEFAULT;
 	public profileSalutationSelectStyleType = SelectStyleEnum.INFO;

@@ -21,7 +21,7 @@ import { HelperService } from '../../../../utilities.pck/accessories.mod/service
 
 export class ResetPasswordComponent implements OnDestroy {
 	public routing = ROUTING;
-	public formFields: FormGroup;
+	public formFields;
 	public queryParams;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();

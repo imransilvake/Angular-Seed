@@ -18,7 +18,7 @@ import { AuthService } from '../../services/auth.service';
 
 export class ForgotPasswordComponent implements OnDestroy {
 	public routing = ROUTING;
-	public formFields: FormGroup;
+	public formFields;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 

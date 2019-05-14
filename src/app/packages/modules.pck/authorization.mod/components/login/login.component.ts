@@ -28,7 +28,7 @@ import { AppOptions } from '../../../../../../app.config';
 
 export class LoginComponent implements OnInit, OnDestroy {
 	public routing = ROUTING;
-	public formFields: FormGroup;
+	public formFields;
 	public loginHotelNameSelectType = SelectTypeEnum.DEFAULT;
 	public loginHotelNameSelectStyleType = SelectStyleEnum.INFO;
 	public loginIcon = faGlobeEurope;
