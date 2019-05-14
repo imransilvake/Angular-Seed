@@ -25,7 +25,7 @@
 				<target>
 					It must have at least
 					<x id="INTERPOLATION" equiv-text="{{control.errors.minlength.requiredLength}}"/>
-					characters long
+					alphabetic characters
 				</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -89,7 +89,7 @@
 					Password min. 8 characters required!
 				</source>
 				<target>
-					Password min. 8 characters required!
+					Your password must be at least 8 characters long
 				</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -218,6 +218,14 @@
 					<context context-type="linenumber">19</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="Pages_404_Link" datatype="html">
+				<source>Back to start page</source>
+				<target>Back to start page</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/frame.pck/components/pages/e404.component.html</context>
+					<context context-type="linenumber">16</context>
+				</context-group>
+			</trans-unit>
 			<trans-unit id="Auth_Register_Info_Title" datatype="html">
 				<source>Title</source>
 				<target>Welcome</target>
@@ -263,7 +271,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Register_Form_HotelList_PlaceHolder" datatype="html">
 				<source>Select Hotel</source>
-				<target>Please select a hotel</target>
+				<target>Choose ...</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/register/register.component.html
@@ -323,7 +331,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Register_Form_Email_Label" datatype="html">
 				<source>Email*</source>
-				<target>Email*</target>
+				<target>Email (user name)*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/register/register.component.html
@@ -364,7 +372,7 @@
 			<trans-unit id="Auth_Register_Form_Password_Hint" datatype="html">
 				<source>Password Hint</source>
 				<target>
-					Your password must be 8-256 characters long and must contain at least 1 special character, 1 capital letter and 1  number
+					Your password must be at least 8 characters long
 				</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -449,7 +457,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Login_Form_Username_Label" datatype="html">
 				<source>Username*</source>
-				<target>User Name*</target>
+				<target>User Name / Email*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/login/login.component.html
@@ -521,7 +529,7 @@
 				<source>Don&apos;t have an account? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Register
 					<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
 				</source>
-				<target>Don&apos;t have an account? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Create one here
+				<target>Don&apos;t have an account yet? <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Create one here
 					<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
 				</target>
 				<context-group purpose="location">
@@ -615,7 +623,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Forgot_Password_Form_Email_Label" datatype="html">
 				<source>Email*</source>
-				<target>E-Mail*</target>
+				<target>Email*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.html
@@ -625,7 +633,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Forgot_Password_Form_Email_PlaceHolder" datatype="html">
 				<source>Email</source>
-				<target>Please enter a valid email address</target>
+				<target>Please enter email address</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.html
@@ -739,7 +747,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Reset_Password_Form_Confirm_New_Password_Hint" datatype="html">
 				<source>Confirm Password Hint</source>
-				<target>Your password must be 8-256 characters long and must contain at least 1 special character, 1 capital letter and 1 number</target>
+				<target>Your password must be at least 8 characters long</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/reset-password/reset-password.component.html
@@ -777,7 +785,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Lock_Screen_Form_Password_PlaceHolder" datatype="html">
 				<source>Password</source>
-				<target>Please enter password</target>
+				<target>Enter Password</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/lock-screen/lock-screen.component.html
@@ -787,7 +795,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Lock_Screen_Form_Password_Hint" datatype="html">
 				<source>Password Hint</source>
-				<target>Enter your password to retrieve your session.</target>
+				<target>Enter your password to retrieve your session</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/lock-screen/lock-screen.component.html
@@ -837,7 +845,7 @@
 			</trans-unit>
 			<trans-unit id="Common_Button_Close" datatype="html">
 				<source>Button - Close</source>
-				<target>Close</target>
+				<target>OK</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
@@ -1049,7 +1057,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Forgot_Password_Form_Success_Title" datatype="html">
 				<source>Title: Password Reset</source>
-				<target>Password was reset</target>
+				<target>Change your password</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.ts
@@ -1059,7 +1067,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Forgot_Password_Form_Success_Description" datatype="html">
 				<source>Description: Forgot Password</source>
-				<target>Please follow the instructions in the mail we sent to you to reset your password.</target>
+				<target>Please follow the instructions from the email we sent you.</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.ts
@@ -1095,7 +1103,7 @@
 			</trans-unit>
 			<trans-unit id="Error_PasswordInvalid_Description" datatype="html">
 				<source>Description: Password Invalid Exception</source>
-				<target>Entered Password is Invalid!</target>
+				<target>The password is wrong</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/modules.pck/authorization.mod/components/lock-screen/lock-screen.component.ts
@@ -1145,7 +1153,7 @@
 			</trans-unit>
 			<trans-unit id="Error_BlockUserException_Description" datatype="html">
 				<source>Description: Block User Exception</source>
-				<target>Please try again after 30 seconds!</target>
+				<target>Three times wrong. Please wait 30 seconds.</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/modules.pck/authorization.mod/components/login/login.component.ts
@@ -1165,7 +1173,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Register_Form_Success_Description" datatype="html">
 				<source>Description: Success</source>
-				<target>Registration was successful and was sent to the hotel manager to activate your account.</target>
+				<target>Registration was successful and has been sent to the hotel manager to activate your account.</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/modules.pck/authorization.mod/components/register/register.component.ts

@@ -23,7 +23,7 @@
 					characters long
 				</source>
 				<target>
-					Es muss aus min.
+					Er muss aus min.
 					<x id="INTERPOLATION" equiv-text="{{control.errors.minlength.requiredLength}}"/>
 					alphabetischen Zeichen bestehen
 				</target>
@@ -89,7 +89,7 @@
 					Password min. 8 characters required!
 				</source>
 				<target>
-					Passwort min. 8 Zeichen erforderlich!
+					Dein Passwort muss aus mindestens 8 Zeichen bestehen
 				</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -218,6 +218,14 @@
 					<context context-type="linenumber">19</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="Pages_404_Link" datatype="html">
+				<source>Back to start page</source>
+				<target>Zurück zur Startseite</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/frame.pck/components/pages/e404.component.html</context>
+					<context context-type="linenumber">16</context>
+				</context-group>
+			</trans-unit>
 			<trans-unit id="Auth_Register_Info_Title" datatype="html">
 				<source>Title</source>
 				<target>Willkommen</target>
@@ -263,7 +271,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Register_Form_HotelList_PlaceHolder" datatype="html">
 				<source>Select Hotel</source>
-				<target>Bitte ein Hotel wählen</target>
+				<target>wählen ...</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/register/register.component.html
@@ -323,7 +331,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Register_Form_Email_Label" datatype="html">
 				<source>Email*</source>
-				<target>E-Mail*</target>
+				<target>E-Mail (User name)*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/register/register.component.html
@@ -364,7 +372,7 @@
 			<trans-unit id="Auth_Register_Form_Password_Hint" datatype="html">
 				<source>Password Hint</source>
 				<target>
-					Das Passwort kann zwischen 8-256 Zeichen lang sein und muss min. 1 Sonderzeichen, 1 Großbuchstabe und 1 Zahl enthalten
+					Dein Passwort muss aus mindestens 8 Zeichen bestehen
 				</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -450,7 +458,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Login_Form_Username_Label" datatype="html">
 				<source>Username*</source>
-				<target>Benutzername*</target>
+				<target>Benutzername / E-Mail*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/login/login.component.html
@@ -545,7 +553,7 @@
 			<trans-unit id="Auth_Forgot_Password_Info_Description" datatype="html">
 				<source>Description</source>
 				<target>
-					beim HotelAppManager. Nach erfolgreichem Zurücksetzen deines Passwortes, senden wir dir eine Mail mit weiteren Instruktionen zu. Bitte beachte, dass das Passwort innerhalb 10 Minuten zurückgesetzt werden muss.
+					beim HotelAppManager. Nach erfolgreichem Zurücksetzen deines Passwortes, senden wir dir eine E-Mail mit weiteren Instruktionen zu. Bitte beachte, dass das Passwort innerhalb von 10 Minuten zurückgesetzt werden muss.
 				</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -616,7 +624,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Forgot_Password_Form_Email_Label" datatype="html">
 				<source>Email*</source>
-				<target>Email*</target>
+				<target>E-Mail*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.html
@@ -626,7 +634,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Forgot_Password_Form_Email_PlaceHolder" datatype="html">
 				<source>Email</source>
-				<target>Bitte hinterlege eine gültige E-Mail</target>
+				<target>Bitte E-Mail eingeben</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.html
@@ -740,7 +748,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Reset_Password_Form_Confirm_New_Password_Hint" datatype="html">
 				<source>Confirm Password Hint</source>
-				<target>Das Passwort kann zwischen 8-256 Zeichen lang sein und muss min. 1 Sonderzeichen, 1 Großbuchstabe und 1 Zahl enthalten</target>
+				<target>Dein Passwort muss aus mindestens 8 Zeichen bestehen</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/reset-password/reset-password.component.html
@@ -767,7 +775,7 @@
 				<target>
 					<x id="START_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;mat-icon&gt;"/>lock
 					<x id="CLOSE_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;/mat-icon&gt;"/>
-					Verschlossen
+					Locked
 				</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -778,7 +786,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Lock_Screen_Form_Password_PlaceHolder" datatype="html">
 				<source>Password</source>
-				<target>Bitte neues Passwort eingeben</target>
+				<target>Passwort eingeben</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/lock-screen/lock-screen.component.html
@@ -788,7 +796,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Lock_Screen_Form_Password_Hint" datatype="html">
 				<source>Password Hint</source>
-				<target>Geben Sie Ihr Passwort ein, um Ihre Sitzung abzurufen.</target>
+				<target>Gib dein Passwort ein, um deine Session zu reaktivieren</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/lock-screen/lock-screen.component.html
@@ -838,7 +846,7 @@
 			</trans-unit>
 			<trans-unit id="Common_Button_Close" datatype="html">
 				<source>Button - Close</source>
-				<target>Schließen</target>
+				<target>OK</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
@@ -1050,7 +1058,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Forgot_Password_Form_Success_Title" datatype="html">
 				<source>Title: Password Reset</source>
-				<target>Passwort wurde zurückgesetzt</target>
+				<target>Ändere dein Passwort</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.ts
@@ -1060,7 +1068,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Forgot_Password_Form_Success_Description" datatype="html">
 				<source>Description: Forgot Password</source>
-				<target>Bitte folge den Anweisungen in der Mail die wir an dich gesendet haben, um dein Passwort zurückzusetzen.</target>
+				<target>Bitte folge den Anweisungen aus der E-Mail, die wir an dich gesendet haben.</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.ts
@@ -1096,7 +1104,7 @@
 			</trans-unit>
 			<trans-unit id="Error_PasswordInvalid_Description" datatype="html">
 				<source>Description: Password Invalid Exception</source>
-				<target>Das eingegebene Passwort ist ungültig!</target>
+				<target>Das Passwort ist falsch</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/modules.pck/authorization.mod/components/lock-screen/lock-screen.component.ts
@@ -1146,7 +1154,7 @@
 			</trans-unit>
 			<trans-unit id="Error_BlockUserException_Description" datatype="html">
 				<source>Description: Block User Exception</source>
-				<target>Bitte versuchen Sie es nach 30 Sekunden erneut</target>
+				<target>Drei Mal hintereinander falsch. Bitte warte 30 Sekunden.</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/modules.pck/authorization.mod/components/login/login.component.ts
@@ -1186,7 +1194,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Reset_Password_Form_Success_Description" datatype="html">
 				<source>Description: Reset Password</source>
-				<target>Bitte logge dich erneut ein um die Änderung zu prüfen.</target>
+				<target>Bitte logge dich erneut ein, um die Änderung zu prüfen.</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/modules.pck/authorization.mod/components/reset-password/reset-password.component.ts
