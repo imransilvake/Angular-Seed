@@ -73,15 +73,7 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 						const userInfo = HelperService.decodeJWTToken(res.idToken);
 
 						// set current user state
-						this._authService.currentUserState = {
-							profile: {
-								...userInfo,
-								password: data.profile.password
-							},
-							credentials: res,
-							rememberMe: data.rememberMe,
-							timestamp: data.timestamp
-						};
+						this.setUserState(userInfo, res, data);
 					}
 					return true;
 				})
@@ -109,18 +101,30 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 						const userInfo = HelperService.decodeJWTToken(res.idToken);
 
 						// set current user state
-						this._authService.currentUserState = {
-							profile: {
-								...userInfo,
-								password: data.profile.password
-							},
-							credentials: res,
-							rememberMe: data.rememberMe,
-							timestamp: data.timestamp
-						};
+						this.setUserState(userInfo, res, data);
 					}
 					return true;
 				})
 			);
+	}
+
+	/**
+	 * set current user state
+	 *
+	 * @param userInfo
+	 * @param credentials
+	 * @param data
+	 */
+	private setUserState(userInfo: any, credentials: any, data: any) {
+		this._authService.currentUserState = {
+			profile: {
+				...userInfo,
+				password: data.profile.password,
+				language: data.language
+			},
+			credentials: credentials,
+			rememberMe: data.rememberMe,
+			timestamp: data.timestamp
+		};
 	}
 }

@@ -37,6 +37,10 @@
 						background-color: cd-palette($cd-background, 2003);
 					}
 
+					&.ham-layout-1 {
+						background-color: cd-palette($cd-background, 2002, .5);
+					}
+
 					&:not(.ham-simple) {
 						min-width: 38px;
 						padding: 0;

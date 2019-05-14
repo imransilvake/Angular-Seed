@@ -22,7 +22,7 @@ export class ErrorCommonComponent {
 	 *
 	 * @param status
 	 */
-	public onClickCloseDialog(status?: boolean): void {
+	public onClickCloseDialog(status?: boolean) {
 		this.dialogRef.close(status);
 	}
 }

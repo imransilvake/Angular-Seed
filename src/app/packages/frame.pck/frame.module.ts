@@ -15,6 +15,7 @@ import { AccountMenuComponent } from './components/menus/account/account-menu.co
 import { SecondarySidebarComponent } from './components/sidebar/secondary/secondary-sidebar.component';
 import { MaintenanceComponent } from './components/pages/maintenance.component';
 import { WidgetsModule } from '../../shared/widgets/widgets.module';
+import { HeadComponent } from './components/content/head/head.component';
 
 @NgModule({
 	imports: [
@@ -31,13 +32,15 @@ import { WidgetsModule } from '../../shared/widgets/widgets.module';
 		PrimarySidebarComponent,
 		SecondarySidebarComponent,
 		NotificationMenuComponent,
-		AccountMenuComponent
+		AccountMenuComponent,
+		HeadComponent
 	],
 	exports: [
 		HeaderComponent,
 		FooterComponent,
 		ScrollTopComponent,
-		PrimarySidebarComponent
+		PrimarySidebarComponent,
+		HeadComponent
 	],
 	providers: [SidebarService]
 })

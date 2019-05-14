@@ -1,0 +1,57 @@
+// text ellipses
+.ham-ellipses {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+// form - auth
+.ham-wrapper-1 {
+	background-color: cd-palette($cd-background, 2001);
+	background-repeat: no-repeat;
+	background-size: cover;
+	bottom: 0;
+	left: 0;
+	overflow-y: auto;
+	position: fixed;
+	right: 0;
+	top: 0;
+}
+
+// form - general
+.ham-wrapper-2 {
+	background-color: cd-palette($cd-background, 2003);
+	padding: 15px;
+}
+
+// form - individual
+.ham-padding-0 {
+	> .cd-col {
+		padding: 0;
+	}
+}
+
+// form - side-by-side
+.ham-padding-1 {
+	> .cd-col {
+		&:first-child {
+			padding-left: 0;
+		}
+
+		&:last-child {
+			padding-right: 0;
+		}
+	}
+}
+
+// form - button
+.ham-button-1 {
+	background-color: cd-palette($cd-background, 2010);
+	border-radius: 2px;
+	margin-top: 5px;
+
+	&:disabled {
+		background-color: cd-palette($cd-background, 2004);
+		opacity: .6;
+	}
+}

@@ -11,6 +11,9 @@ export const AppOptions = {
 
 // services
 export const AppServices: { [moduleName: string]: { [name: string]: AppServicesInterface } } = {
+	Utilities: {
+		HotelList: { serviceUrl: '/hotels/list' }
+	},
 	Auth: {
 		Register: { serviceUrl: '/ham/auth/signup' },
 		Login: { serviceUrl: '/ham/auth/authenticate' },
@@ -19,8 +22,10 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 		Logout: { serviceUrl: '/ham/auth/signout' },
 		Session_Validity: { serviceUrl: '/ham/auth/sessionvalidity' }
 	},
-	Utilities: {
-		HotelList: { serviceUrl: '/hotels/list' }
+	Member: {
+		Fetch_Profile: { serviceUrl: '/profile/getuser' },
+		Update_Profile: { serviceUrl: '/profile/update' },
+		Change_Password: { serviceUrl: '/profile/changepassword' }
 	}
 };
 

@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 
 // app
-import { AuthOverviewComponent } from './components/auth-overview.component';
+import { AuthComponent } from './components/auth.component';
 import { AuthInfoComponent } from './components/auth-info.component';
 import { SharedModule } from '../../../shared/shared.module';
 import { RegisterComponent } from './components/register/register.component';
@@ -25,7 +25,7 @@ import { SalutationListService } from './services/salutation-list.service';
 		FieldsModule
 	],
 	declarations: [
-		AuthOverviewComponent,
+		AuthComponent,
 		AuthInfoComponent,
 		RegisterComponent,
 		LoginComponent,

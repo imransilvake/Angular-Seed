@@ -1,0 +1,22 @@
+@import 'main';
+
+.ham-profile {
+	.ham-head { margin-bottom: 30px; }
+
+	// media
+	@include cd-media(desktop, smartphone) {
+		.cd-row {
+			&.cd-row-m-top {
+				margin-top: 20px;
+			}
+
+			.cd-col {
+				padding: 0;
+
+				&.cd-col-m-top {
+					margin-top: 20px;
+				}
+			}
+		}
+	}
+}

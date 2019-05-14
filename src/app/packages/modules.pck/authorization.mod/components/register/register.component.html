@@ -24,7 +24,7 @@
 							[layoutStyleData]="{
 								status: false,
 								button: true,
-								icon: registerHotelNameIcons[0]
+								icon: registerIcons[0]
 							}"
 							[selectId]="'select-hotel-list-id'"
 							[selectClassPanel]="'ham-select-panel-with-info'"
@@ -41,12 +41,12 @@
 
 					<div class="cd-col">
 						<app-select
-							[selectType]="registerHotelNameSelectType"
-							[layoutStyleType]="registerHotelNameSelectStyleType"
+							[selectType]="registerSalutationSelectType"
+							[layoutStyleType]="registerSalutationSelectStyleType"
 							[layoutStyleData]="{
 								status: false,
 								button: true,
-								icon: registerHotelNameIcons[0]
+								icon: registerIcons[1]
 							}"
 							[selectId]="'select-salutation-id'"
 							[selectClassPanel]="'ham-select-panel-with-info'"
@@ -128,7 +128,7 @@
 
 					<!-- Button -->
 					<div class="cd-col">
-						<button mat-button type="submit" [disabled]="!isFormValid" i18n="@@Auth_Register_Form_Submit_Button">Register</button>
+						<button mat-button type="submit" class="ham-button-1" [disabled]="!isFormValid" i18n="@@Auth_Register_Form_Submit_Button">Register</button>
 					</div>
 
 					<!-- Note -->

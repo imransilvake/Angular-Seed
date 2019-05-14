@@ -24,7 +24,7 @@
 							[layoutStyleData]="{
 								status: false,
 								button: true,
-								icon: loginHotelNameIcons[0]
+								icon: loginIcon
 							}"
 							[selectId]="'select-language-id'"
 							[selectClassPanel]="'ham-select-panel-with-info'"
@@ -73,7 +73,7 @@
 
 					<!-- Button -->
 					<div class="cd-col">
-						<button mat-button type="submit" [disabled]="!isFormValid" i18n="@@Auth_Login_Form_Submit_Button">Login</button>
+						<button mat-button type="submit" class="ham-button-1" [disabled]="!isFormValid" i18n="@@Auth_Login_Form_Submit_Button">Login</button>
 					</div>
 
 					<!-- Note -->

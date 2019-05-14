@@ -48,7 +48,7 @@ export class LockScreenComponent implements OnInit, AfterViewInit, OnDestroy {
 		private _router: Router,
 		private _routerService: RouterService
 	) {
-		// form fields
+		// form group
 		this.formFields = new FormGroup({
 			password: new FormControl('', [
 				Validators.required,
@@ -68,7 +68,7 @@ export class LockScreenComponent implements OnInit, AfterViewInit, OnDestroy {
 	ngAfterViewInit() {
 		// check previous url and save to local storage
 		if (!this._storageService.exist(LocalStorageItems.lockState, StorageTypeEnum.PERSISTANT)) {
-			this._storageService.put(LocalStorageItems.lockState, { url: this._routerService.getPreviousUrl() }, StorageTypeEnum.PERSISTANT);
+			this._storageService.put(LocalStorageItems.lockState, { url: this._routerService.previousUrl }, StorageTypeEnum.PERSISTANT);
 		}
 	}
 
@@ -106,9 +106,6 @@ export class LockScreenComponent implements OnInit, AfterViewInit, OnDestroy {
 		if (!currentUser) {
 			// logout
 			this._authService.logoutUser();
-
-			// stop loading animation
-			this._loadingAnimationService.stopLoadingAnimation();
 		} else if (currentUser && (HelperService.hashPassword(this.password.value) === currentUser.profile.password)) {
 			// authenticate user
 			this._authService.authenticateUser()
@@ -119,14 +116,14 @@ export class LockScreenComponent implements OnInit, AfterViewInit, OnDestroy {
 						this._storageService.remove(LocalStorageItems.lockState);
 
 						// navigate to dashboard
-						this._router.navigate([this._routerService.getPreviousUrl()])
-							.then(() => this._loadingAnimationService.stopLoadingAnimation());
+						// stop loading animation
+						this._router.navigate([this._routerService.previousUrl])
+							.then(() =>
+								this._loadingAnimationService.stopLoadingAnimation()
+							);
 					} else {
 						// logout
 						this._authService.logoutUser();
-
-						// stop loading animation
-						this._loadingAnimationService.stopLoadingAnimation();
 					}
 				});
 		} else {
@@ -137,7 +134,7 @@ export class LockScreenComponent implements OnInit, AfterViewInit, OnDestroy {
 			};
 
 			// start login process
-			this._authService.authLogin(formPayload, currentUser.rememberMe);
+			this._authService.authLogin(formPayload, currentUser.rememberMe, currentUser.language);
 		}
 	}
 }

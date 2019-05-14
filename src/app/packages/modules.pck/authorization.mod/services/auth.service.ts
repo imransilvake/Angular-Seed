@@ -29,6 +29,7 @@ import { ErrorHandlerPayloadInterface } from '../../../utilities.pck/error-handl
 import { LoadingAnimationService } from '../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { DialogTypeEnum } from '../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { DialogService } from '../../../utilities.pck/dialog.mod/services/dialog.service';
+import { ErrorHandlerInterface } from '../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 
 @Injectable()
 export class AuthService {
@@ -37,9 +38,9 @@ export class AuthService {
 		private _proxyService: ProxyService,
 		private _storageService: StorageService,
 		private _router: Router,
-		private _store: Store<{ SessionInterface: SessionInterface }>,
+		private _store: Store<{ SessionInterface: SessionInterface, ErrorHandler: ErrorHandlerInterface }>,
 		private _i18n: I18n,
-		private _dialogService: DialogService,
+		private _dialogService: DialogService
 	) {
 	}
 
@@ -124,9 +125,9 @@ export class AuthService {
 	 *
 	 * @param formPayload
 	 * @param rememberMe
-	 * @param redirectUrl
+	 * @param language
 	 */
-	public authLogin(formPayload: AuthLoginInterface, rememberMe: boolean, redirectUrl?: string) {
+	public authLogin(formPayload: AuthLoginInterface, rememberMe: boolean, language: string) {
 		this._proxyService
 			.postAPI(AppServices['Auth']['Login'], { bodyParams: formPayload })
 			.subscribe(res => {
@@ -138,7 +139,8 @@ export class AuthService {
 					this.currentUserState = {
 						profile: {
 							...userInfo,
-							password: formPayload.password
+							password: formPayload.password,
+							language: language
 						},
 						credentials: {
 							accessToken: res.accessToken.jwtToken,
@@ -150,6 +152,7 @@ export class AuthService {
 					};
 
 					// navigate to defined url
+					// stop loading animation
 					this._router
 						.navigate([ROUTING.dashboard])
 						.then(() => this._loadingAnimationService.stopLoadingAnimation());
@@ -410,6 +413,8 @@ export class AuthService {
 		StorageService.clearAllSessionStorageItems();
 
 		// navigate to login
-		this._router.navigate([ROUTING.authorization.login]).then();
+		this._router
+			.navigate([ROUTING.authorization.login])
+			.then(() => this._loadingAnimationService.stopLoadingAnimation());
 	}
 }

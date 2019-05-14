@@ -1,0 +1,33 @@
+<header class="ham-content-head">
+	<div class="ham-top">
+		<!-- Title -->
+		<h4>{{pageTitle}}</h4>
+
+		<!-- Breadcrumbs -->
+		<ul class="ham-breadcrumb-wrapper">
+			<!-- Dashboard -->
+			<li class="ham-breadcrumb-dashboard" *ngIf="breadcrumbList.length > 0">
+				<!-- Link -->
+				<a class="breadcrumb-text" [routerLink]="['/' + routing.dashboard]">dashboard</a>
+
+				<!-- Slash -->
+				<span>/</span>
+			</li>
+
+			<!-- List -->
+			<li *ngFor="let breadcrumb of breadcrumbList; let l=last" class="breadcrumb-item">
+				<!-- Last | Normal Text -->
+				<span *ngIf="l" class="breadcrumb-text">{{breadcrumb.name}}</span>
+
+				<!-- Not Last | Link -->
+				<ng-container *ngIf="!l">
+					<!-- Link -->
+					<a [routerLink]="breadcrumb.url" class="breadcrumb-text">{{breadcrumb.name}}</a>
+
+					<!-- Slash -->
+					<span>/</span>
+				</ng-container>
+			</li>
+		</ul>
+	</div>
+</header>

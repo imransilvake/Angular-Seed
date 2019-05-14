@@ -3,12 +3,12 @@ import { Injectable } from '@angular/core';
 import { fromEvent } from 'rxjs/internal/observable/fromEvent';
 import { debounceTime } from 'rxjs/operators';
 import { merge } from 'rxjs/internal/observable/merge';
+
 // app
 import * as jwt_decode from 'jwt-decode';
 import * as CryptoJS from 'crypto-js';
 
 declare const document: any;
-declare const event: Event;
 
 @Injectable({ providedIn: 'root' })
 export class HelperService {
@@ -37,16 +37,14 @@ export class HelperService {
 	 *
 	 * @returns {boolean}
 	 */
-	public get isApp(): boolean {
+	get isApp(): boolean {
 		return document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
 	}
 
 	/**
 	 * detect view: app or desktop
-	 *
-	 * @returns {boolean}
 	 */
-	public static get isDesktopView(): boolean {
+	static get isDesktopView() {
 		return window && window.innerWidth >= 768;
 	}
 
@@ -128,5 +126,20 @@ export class HelperService {
 	 */
 	public static stopPropagation() {
 		event.stopPropagation();
+	}
+
+	/**
+	 * stop propagation from active element
+	 *
+	 * @param event
+	 */
+	public static stopPropagationFromActiveElement(event: any) {
+		if (event && event.target && event.target.childNodes) {
+			event.target.childNodes.forEach(element => {
+				if (element.className && element.className.indexOf('ham-active') !== -1) {
+					HelperService.stopPropagation();
+				}
+			});
+		}
 	}
 }

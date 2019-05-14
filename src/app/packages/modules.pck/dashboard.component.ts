@@ -1,9 +1,5 @@
 // angular
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-
-// app
-import { ROUTING } from '../../../environments/environment';
 
 @Component({
 	selector: 'app-dashboard',
@@ -11,13 +7,6 @@ import { ROUTING } from '../../../environments/environment';
 })
 
 export class DashboardComponent {
-	constructor(private _router: Router) {
-	}
-
-	/**
-	 * on click go to dashboard
-	 */
-	public onClickHome() {
-		this._router.navigate([ROUTING.pages.maintenance]);
+	constructor() {
 	}
 }

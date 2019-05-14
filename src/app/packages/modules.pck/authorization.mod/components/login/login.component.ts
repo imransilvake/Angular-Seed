@@ -23,7 +23,7 @@ import { AppOptions } from '../../../../../../app.config';
 @Component({
 	selector: 'app-login',
 	templateUrl: './login.component.html',
-	styleUrls: ['../auth.component.scss']
+	styleUrls: ['../auth-common.component.scss']
 })
 
 export class LoginComponent implements OnInit, OnDestroy {
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 	public formFields;
 	public loginHotelNameSelectType = SelectTypeEnum.DEFAULT;
 	public loginHotelNameSelectStyleType = SelectStyleEnum.INFO;
-	public loginHotelNameIcons = [faGlobeEurope];
+	public loginIcon = faGlobeEurope;
 	public languageList: SelectDefaultInterface[] = [];
 	public rememberMe: MatCheckboxChange;
 
@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 		private _authService: AuthService,
 		private _route: ActivatedRoute
 	) {
-		// form fields
+		// form group
 		this.formFields = new FormGroup({
 			languageName: new FormControl(''),
 			email: new FormControl('', [
@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 				if (res && (res[0].path === AppOptions.languages['en'] || res[0].path === AppOptions.languages['de'])) {
 					this.languageName.setValue(res[0].path);
 				} else {
-					this.languageName.setValue(AppOptions.languages['en']);
+					this.languageName.setValue(AppOptions.languages['de']);
 				}
 			});
 
@@ -117,6 +117,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 		};
 
 		// start login process
-		this._authService.authLogin(formPayload, this.rememberMe && this.rememberMe.checked);
+		this._authService.authLogin(formPayload, this.rememberMe && this.rememberMe.checked, this.languageName.value);
 	}
 }

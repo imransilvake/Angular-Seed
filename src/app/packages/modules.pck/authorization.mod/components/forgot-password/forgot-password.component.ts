@@ -13,7 +13,7 @@ import { AuthService } from '../../services/auth.service';
 @Component({
 	selector: 'app-forgot-password',
 	templateUrl: './forgot-password.component.html',
-	styleUrls: ['../auth.component.scss']
+	styleUrls: ['../auth-common.component.scss']
 })
 
 export class ForgotPasswordComponent implements OnDestroy {
@@ -26,7 +26,7 @@ export class ForgotPasswordComponent implements OnDestroy {
 		private _loadingAnimationService: LoadingAnimationService,
 		private _authService: AuthService
 	) {
-		// form fields
+		// form group
 		this.formFields = new FormGroup({
 			firstName: new FormControl('', [
 				Validators.required,

@@ -824,6 +824,26 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="Error_UnknownErrorException_Title" datatype="html">
+				<source>Title: Unknown Error Exception</source>
+				<target>Unbekannter Fehler Ausnahme</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Error_UnknownErrorException_Description" datatype="html">
+				<source>Description: Unknown Error Exception</source>
+				<target>Es ist etwas Schlimmes passiert. Bitte überprüfen Sie Ihre Internetverbindung. Andernfalls wenden Sie sich an das Support-Team.</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
 			<trans-unit id="Error_InvalidParameterException_Title" datatype="html">
 				<source>Title: Invalid Parameter Exception</source>
 				<target>Ungültige Parameterausnahme</target>
@@ -1035,23 +1055,27 @@
 				<target>Deine Sitzung ist abgelaufen!</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
-						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
 						src/app/packages/core.pck/session.mod/services/session.service.ts
 					</context>
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Error_Generic_Title" datatype="html">
-				<source>Title: Error Generic</source>
-				<target>Ein Fehler ist aufgetreten</target>
+			<trans-unit id="Logout_Confirmation_Title" datatype="html">
+				<source>Title: Logout Confirmation</source>
+				<target>Abmeldebestätigung</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
-						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
+						src/app/packages/frame.pck/components/menus/account/account-menu.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Logout_Confirmation_Description" datatype="html">
+				<source>Description: Logout Confirmation</source>
+				<target>Möchten Sie sich von der Anwendung abmelden?</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/frame.pck/components/menus/account/account-menu.component.ts
 					</context>
 					<context context-type="linenumber">1</context>
 				</context-group>
@@ -1081,13 +1105,29 @@
 				<target>OK</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
-						src/app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.ts
+						src/app/packages/frame.pck/components/menus/account/account-menu.component.ts
 					</context>
 					<context context-type="linenumber">1</context>
 				</context-group>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
-						src/app/packages/modules.pck/authorization.mod/components/reset-password/reset-password.component.ts
+						src/app/packages/modules.pck/authorization.mod/services/auth.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/services/auth.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Common_Button_Cancel" datatype="html">
+				<source>Button - Cancel</source>
+				<target>Stornieren</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/frame.pck/components/menus/account/account-menu.component.ts
 					</context>
 					<context context-type="linenumber">1</context>
 				</context-group>

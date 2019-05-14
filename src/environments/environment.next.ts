@@ -9,6 +9,9 @@ export const ENV_SERVICE_URL = 'https://c7o8rvuk52.execute-api.eu-west-1.amazona
 // routing
 export const ROUTING = {
 	dashboard: 'dashboard',
+	pages: {
+		maintenance: 'maintenance'
+	},
 	authorization: {
 		login: 'auth/login',
 		register: 'auth/register',
@@ -16,7 +19,7 @@ export const ROUTING = {
 		reset: 'auth/reset',
 		lock: 'auth/lock'
 	},
-	pages: {
-		maintenance: 'maintenance'
+	member: {
+		profile: 'member/profile'
 	}
 };

@@ -1,6 +1,6 @@
 .mat-menu-panel {
 	background-color: cd-palette($cd-background, 2003);
-	box-shadow: 1px 1px 15px cd-palette($cd-shadow, 4002, .4);
+	box-shadow: 1px 1px 15px cd-palette($cd-shadow, 4006, .4);
 	min-width: 250px !important;
 
 	.mat-menu-content {
@@ -9,6 +9,10 @@
 
 		button {
 			color: cd-palette($cd-color, 1004);
+
+			&:hover {
+				color: cd-palette($cd-color, 1001);
+			}
 		}
 
 		.ham-head-1 {
@@ -25,11 +29,36 @@
 
 			.ham-title {
 				color: cd-palette($cd-color, 1004);
+				text-transform: capitalize;
 			}
 
 			p {
 				margin-top: -3px;
 			}
+		}
+
+		.ham-btn-icon {
+			&.ham-active {
+				background-color: cd-palette($cd-background, 2002);
+				color: cd-palette($cd-color, 1001);
+				cursor: default;
+				pointer-events: none;
+			}
+		}
+	}
+
+	// media
+	@include cd-media(mobile, smartphone) {
+		margin-right: 20px;
+	}
+
+	@include cd-media(desktop, mini) {
+		&.ham-account-mat-menu {
+			margin-right: 20px;
+		}
+
+		&.ham-notification-mat-menu {
+			margin-right: -10px;
 		}
 	}
 }

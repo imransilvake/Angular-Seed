@@ -17,7 +17,7 @@ export class SidebarService {
 				section: 'Dashboard',
 				name: 'Home',
 				icon: faHome,
-				url: ROUTING.dashboard
+				url: `/${ROUTING.dashboard}`
 			},
 			{
 				section: 'Modules',
