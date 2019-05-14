@@ -3,5 +3,6 @@ export interface SelectStyleInterface {
 	changeDirection?: boolean;
 	button?: boolean;
 	icon?: any;
+	iconBG?: any;
 	title?: string;
 }

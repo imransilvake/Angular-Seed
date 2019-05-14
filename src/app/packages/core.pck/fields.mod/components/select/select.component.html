@@ -13,7 +13,8 @@
 				mat-button
 				type="submit" [disabled]="!layoutStyleData?.status || !layoutStyleData?.button"
 				class="ham-btn-icon"
-				[class.ham-simple]="!layoutStyleData?.button">
+				[class.ham-simple]="!layoutStyleData?.button"
+				[class.ham-layout-1]="layoutStyleData?.iconBG === 1">
 				<ng-container *ngIf="layoutStyleData?.button">
 					<fa-icon *ngIf="layoutStyleData?.icon" [icon]="layoutStyleData.icon"></fa-icon>
 				</ng-container>
