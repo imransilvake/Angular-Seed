@@ -100,11 +100,11 @@ export class MemberService {
 					const errorPayload: ErrorHandlerPayloadInterface = {
 						title: this._i18n({
 							value: 'Title: Profile Update Error',
-							id: 'Error_Member_Update_Profile_NotAuthorizedException_Title'
+							id: 'Error_Member_Profile_Update_Title'
 						}),
 						message: this._i18n({
 							value: 'Description: Profile Update Error',
-							id: 'Error_Member_Update_Profile_NotAuthorizedException_Description'
+							id: 'Error_Member_Profile_Update_Description'
 						}),
 						buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 					};
