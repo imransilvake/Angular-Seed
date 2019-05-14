@@ -24,6 +24,13 @@
 	padding: 15px;
 }
 
+// form - individual
+.ham-padding-0 {
+	> .cd-col {
+		padding: 0;
+	}
+}
+
 // form - side-by-side
 .ham-padding-1 {
 	> .cd-col {
