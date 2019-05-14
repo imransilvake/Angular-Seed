@@ -26,7 +26,7 @@ import { SalutationListService } from '../../services/salutation-list.service';
 
 export class RegisterComponent implements OnInit, OnDestroy {
 	public routing = ROUTING;
-	public formFields;
+	public formFields: FormGroup;
 	public registerHotelNameSelectType = SelectTypeEnum.DEFAULT;
 	public registerSalutationSelectType = SelectTypeEnum.DEFAULT;
 	public registerHotelNameSelectStyleType = SelectStyleEnum.INFO;

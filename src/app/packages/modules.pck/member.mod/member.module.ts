@@ -10,6 +10,7 @@ import { UpdateProfileComponent } from './components/profile/update-profile/upda
 import { WidgetsModule } from '../../../shared/widgets/widgets.module';
 import { FieldsModule } from '../../core.pck/fields.mod/fields.module';
 import { SharedModule } from '../../../shared/shared.module';
+import { MemberService } from './services/member.service';
 
 @NgModule({
 	imports: [
@@ -19,7 +20,13 @@ import { SharedModule } from '../../../shared/shared.module';
 		FieldsModule,
 		SharedModule
 	],
-	declarations: [ProfileComponent, UpdateProfileComponent]
+	declarations: [
+		ProfileComponent,
+		UpdateProfileComponent
+	],
+	providers: [
+		MemberService
+	]
 })
 
 export class MemberModule {

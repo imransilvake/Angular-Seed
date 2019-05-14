@@ -37,16 +37,14 @@ export class HelperService {
 	 *
 	 * @returns {boolean}
 	 */
-	public get isApp(): boolean {
+	get isApp(): boolean {
 		return document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
 	}
 
 	/**
 	 * detect view: app or desktop
-	 *
-	 * @returns {boolean}
 	 */
-	public static get isDesktopView(): boolean {
+	static get isDesktopView() {
 		return window && window.innerWidth >= 768;
 	}
 

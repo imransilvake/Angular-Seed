@@ -30,12 +30,15 @@ export class RouterService {
 	}
 
 	/**
-	 * getters
+	 * get previous url
 	 */
 	get previousUrl() {
 		return this.lastRoute;
 	}
 
+	/**
+	 * get breadcrumbs
+	 */
 	get breadcrumbsList() {
 		return this.breadcrumbs;
 	}

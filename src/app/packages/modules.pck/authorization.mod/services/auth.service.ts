@@ -29,6 +29,7 @@ import { ErrorHandlerPayloadInterface } from '../../../utilities.pck/error-handl
 import { LoadingAnimationService } from '../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { DialogTypeEnum } from '../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { DialogService } from '../../../utilities.pck/dialog.mod/services/dialog.service';
+import { ErrorHandlerInterface } from '../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 
 @Injectable()
 export class AuthService {
@@ -37,9 +38,9 @@ export class AuthService {
 		private _proxyService: ProxyService,
 		private _storageService: StorageService,
 		private _router: Router,
-		private _store: Store<{ SessionInterface: SessionInterface }>,
+		private _store: Store<{ SessionInterface: SessionInterface, ErrorHandler: ErrorHandlerInterface }>,
 		private _i18n: I18n,
-		private _dialogService: DialogService,
+		private _dialogService: DialogService
 	) {
 	}
 

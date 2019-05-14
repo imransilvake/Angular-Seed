@@ -10,6 +10,8 @@ import { SalutationListService } from '../../../../authorization.mod/services/sa
 import { LoadingAnimationService } from '../../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { SelectTypeEnum } from '../../../../../core.pck/fields.mod/enums/select-type.enum';
 import { SelectStyleEnum } from '../../../../../core.pck/fields.mod/enums/select-style.enum';
+import { MemberService } from '../../../services/member.service';
+import { UpdateProfileInterface } from '../../../interfaces/update-profile.interface';
 
 @Component({
 	selector: 'app-update-profile',
@@ -18,7 +20,7 @@ import { SelectStyleEnum } from '../../../../../core.pck/fields.mod/enums/select
 })
 
 export class UpdateProfileComponent implements OnInit {
-	public formFields;
+	public formFields: FormGroup;
 	public profileIcon = faUser;
 	public profileSalutationSelectType = SelectTypeEnum.DEFAULT;
 	public profileSalutationSelectStyleType = SelectStyleEnum.INFO;
@@ -26,7 +28,8 @@ export class UpdateProfileComponent implements OnInit {
 
 	constructor(
 		private _loadingAnimationService: LoadingAnimationService,
-		private _salutationList: SalutationListService
+		private _salutationList: SalutationListService,
+		private _memberService: MemberService
 	) {
 		// form group
 		this.formFields = new FormGroup({
@@ -51,6 +54,9 @@ export class UpdateProfileComponent implements OnInit {
 	ngOnInit() {
 		// salutation
 		this.salutationList = this._salutationList.getSalutationList();
+
+		// get user profile data
+		this._memberService.memberFetchProfile(this.formFields);
 	}
 
 	/**
@@ -80,6 +86,17 @@ export class UpdateProfileComponent implements OnInit {
 	 * on submit form
 	 */
 	public onSubmitForm() {
-		console.log(this.formFields);
+		// start loading animation
+		this._loadingAnimationService.startLoadingAnimation();
+
+		// payload
+		const formPayload: UpdateProfileInterface = {
+			salutation: this.salutation.value,
+			firstName: this.firstName.value,
+			lastName: this.lastName.value
+		};
+
+		// get user profile data
+		this._memberService.memberUpdateProfile(formPayload);
 	}
 }

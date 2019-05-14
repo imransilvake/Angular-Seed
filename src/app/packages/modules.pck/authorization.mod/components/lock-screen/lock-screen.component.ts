@@ -33,7 +33,7 @@ import { RouterService } from '../../../../utilities.pck/accessories.mod/service
 
 export class LockScreenComponent implements OnInit, AfterViewInit, OnDestroy {
 	public routing = ROUTING;
-	public formFields;
+	public formFields: FormGroup;
 	public lockPasswordIcons = [faLock, faLockOpen];
 	public lockPasswordStyleType = InputStyleEnum.INFO;
 	public currentUser;
