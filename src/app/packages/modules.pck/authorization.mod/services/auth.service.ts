@@ -413,6 +413,8 @@ export class AuthService {
 		StorageService.clearAllSessionStorageItems();
 
 		// navigate to login
-		this._router.navigate([ROUTING.authorization.login]).then();
+		this._router
+			.navigate([ROUTING.authorization.login])
+			.then(() => this._loadingAnimationService.stopLoadingAnimation());
 	}
 }

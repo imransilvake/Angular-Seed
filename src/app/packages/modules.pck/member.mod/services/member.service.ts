@@ -152,9 +152,6 @@ export class MemberService {
 					.subscribe(() => {
 						// logout user
 						this._authService.logoutUser();
-
-						// stop loading animation
-						this._loadingAnimationService.stopLoadingAnimation();
 					});
 			}, (err: HttpErrorResponse) => {
 				let errorPayload: ErrorHandlerPayloadInterface;

@@ -106,9 +106,6 @@ export class LockScreenComponent implements OnInit, AfterViewInit, OnDestroy {
 		if (!currentUser) {
 			// logout
 			this._authService.logoutUser();
-
-			// stop loading animation
-			this._loadingAnimationService.stopLoadingAnimation();
 		} else if (currentUser && (HelperService.hashPassword(this.password.value) === currentUser.profile.password)) {
 			// authenticate user
 			this._authService.authenticateUser()
@@ -127,9 +124,6 @@ export class LockScreenComponent implements OnInit, AfterViewInit, OnDestroy {
 					} else {
 						// logout
 						this._authService.logoutUser();
-
-						// stop loading animation
-						this._loadingAnimationService.stopLoadingAnimation();
 					}
 				});
 		} else {

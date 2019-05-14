@@ -89,9 +89,6 @@ export class AccountMenuComponent {
 				if (res) {
 					// logout
 					this._authService.logoutUser();
-
-					// stop loading animation
-					this._loadingAnimationService.stopLoadingAnimation();
 				}
 			});
 	}
