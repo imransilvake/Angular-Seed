@@ -18,6 +18,7 @@ import { DialogTypeEnum } from '../../../utilities.pck/dialog.mod/enums/dialog-t
 import { DialogService } from '../../../utilities.pck/dialog.mod/services/dialog.service';
 import { ErrorHandlerPayloadInterface } from '../../../utilities.pck/error-handler.mod/interfaces/error-handler-payload.interface';
 import { ErrorHandlerInterface } from '../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
+import { ChangePasswordInterface } from '../interfaces/change-password.interface';
 
 @Injectable({ providedIn: 'root' })
 export class MemberService {
@@ -30,7 +31,6 @@ export class MemberService {
 		private _i18n: I18n,
 		private _dialogService: DialogService,
 		private _store: Store<{ ErrorHandler: ErrorHandlerInterface }>
-
 	) {
 		// get current user state
 		this.userData = this._authService.currentUserState;
@@ -84,10 +84,10 @@ export class MemberService {
 				const dialogPayload = {
 					type: DialogTypeEnum.NOTICE,
 					payload: {
-						title: this._i18n({ value: 'Title: Profile Updated', id: 'Member_Profile_Update_Form_Success_Title' }),
+						title: this._i18n({ value: 'Title: Profile Updated', id: 'Member_Profile_UpdateProfile_Success_Title' }),
 						message: this._i18n({
 							value: 'Description: Profile Updated',
-							id: 'Member_Profile_Update_Form_Success_Description'
+							id: 'Member_Profile_UpdateProfile_Success_Description'
 						}),
 						buttonTexts: [this._i18n({ value: 'Button - OK', id: 'Common_Button_OK' })]
 					}
@@ -100,15 +100,93 @@ export class MemberService {
 					const errorPayload: ErrorHandlerPayloadInterface = {
 						title: this._i18n({
 							value: 'Title: Profile Update Error',
-							id: 'Error_Member_Profile_Update_Title'
+							id: 'Member_Profile_UpdateProfile_Error_Title'
 						}),
 						message: this._i18n({
 							value: 'Description: Profile Update Error',
-							id: 'Error_Member_Profile_Update_Description'
+							id: 'Member_Profile_UpdateProfile_Error_Description'
 						}),
 						buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 					};
 					this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(errorPayload));
+				}
+
+				// stop loading animation
+				this._loadingAnimationService.stopLoadingAnimation();
+			});
+	}
+
+	/**
+	 * change user password
+	 *
+	 * @param formPayload
+	 */
+	public memberChangePassword(formPayload: ChangePasswordInterface) {
+		// payload
+		const payload = {
+			...formPayload,
+			accessToken: this.userData.credentials.accessToken
+		};
+
+		// service
+		this._proxyService
+			.postAPI(AppServices['Member']['Change_Password'], { bodyParams: payload })
+			.subscribe(() => {
+				// payload
+				const dialogPayload = {
+					type: DialogTypeEnum.NOTICE,
+					payload: {
+						title: this._i18n({ value: 'Title: Password Changed', id: 'Member_Profile_ChangePassword_Success_Title' }),
+						message: this._i18n({
+							value: 'Description: Password Changed',
+							id: 'Member_Profile_ChangePassword_Success_Description'
+						}),
+						buttonTexts: [this._i18n({ value: 'Button - OK', id: 'Common_Button_OK' })]
+					}
+				};
+
+				// dialog service
+				// logout user
+				this._dialogService
+					.showDialog(dialogPayload)
+					.subscribe(() => {
+						// logout user
+						this._authService.logoutUser();
+
+						// stop loading animation
+						this._loadingAnimationService.stopLoadingAnimation();
+					});
+			}, (err: HttpErrorResponse) => {
+				let errorPayload: ErrorHandlerPayloadInterface;
+				switch (err.error.detail.code) {
+					case 'NotAuthorizedException':
+						errorPayload = {
+							title: this._i18n({
+								value: 'Title: Password Invalid Exception',
+								id: 'Member_Profile_ChangePassword_Error_PasswordInvalid_Title'
+							}),
+							message: this._i18n({
+								value: 'Description: Password Invalid Exception',
+								id: 'Member_Profile_ChangePassword_Error_PasswordInvalid_Description'
+							}),
+							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
+						};
+						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(errorPayload));
+						break;
+					case 'LimitExceededException':
+						errorPayload = {
+							title: this._i18n({
+								value: 'Title: Limit Exceed Exception',
+								id: 'Member_Profile_ChangePassword_Error_LimitExceeded_Title'
+							}),
+							message: this._i18n({
+								value: 'Description: Limit Exceed Exception',
+								id: 'Member_Profile_ChangePassword_Error_LimitExceeded_Description'
+							}),
+							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
+						};
+						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(errorPayload));
+						break;
 				}
 
 				// stop loading animation

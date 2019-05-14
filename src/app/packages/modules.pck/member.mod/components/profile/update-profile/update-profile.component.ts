@@ -96,7 +96,7 @@ export class UpdateProfileComponent implements OnInit {
 			lastName: this.lastName.value
 		};
 
-		// get user profile data
+		// update user profile
 		this._memberService.memberUpdateProfile(formPayload);
 	}
 }

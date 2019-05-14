@@ -6,6 +6,10 @@ import { Subject } from 'rxjs';
 
 // app
 import { ValidationService } from '../../../../../core.pck/fields.mod/services/validation.service';
+import { LoadingAnimationService } from '../../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
+import { MemberService } from '../../../services/member.service';
+import { ChangePasswordInterface } from '../../../interfaces/change-password.interface';
+import { HelperService } from '../../../../../utilities.pck/accessories.mod/services/helper.service';
 
 @Component({
 	selector: 'app-change-password',
@@ -18,7 +22,10 @@ export class ChangePasswordComponent implements OnDestroy {
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
-	constructor() {
+	constructor(
+		private _loadingAnimationService: LoadingAnimationService,
+		private _memberService: MemberService
+	) {
 		// form group
 		this.formFields = new FormGroup({
 			oldPassword: new FormControl('', [
@@ -71,5 +78,16 @@ export class ChangePasswordComponent implements OnDestroy {
 	 * on submit form
 	 */
 	public onSubmitForm() {
+		// start loading animation
+		this._loadingAnimationService.startLoadingAnimation();
+
+		// payload
+		const formPayload: ChangePasswordInterface = {
+			oldPassword: HelperService.hashPassword(this.oldPassword.value),
+			newPassword: HelperService.hashPassword(this.password.value)
+		};
+
+		// change user password
+		this._memberService.memberChangePassword(formPayload);
 	}
 }
