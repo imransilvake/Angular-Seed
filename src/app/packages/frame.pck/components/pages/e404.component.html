@@ -1,4 +1,4 @@
-<section class="ham-404-wrapper" [ngStyle]="{'background-image': imageUrl}">
+<section class="ham-404-wrapper ham-wrapper-1" [ngStyle]="{'background-image': imageUrl}">
 	<div class="cd-vh-center">
 		<div class="cd-row ham-row">
 			<div class="cd-col">
@@ -13,7 +13,7 @@
 						<h4>Unfortunately this page doesn't exist!</h4>
 					</div>
 					<div class="ham-text ham-bottom">
-						<a i18n="@@Pages_404_Link" href="https://www.beispiel.de/" target="_blank">Back to start page</a>
+						<a i18n="@@Pages_404_Link" [routerLink]="['/' + routing.dashboard]">Back to start page</a>
 					</div>
 				</div>
 				<div class="cd-col cd-col-pm-m-12 cd-col-pm-s-6 cd-padding">
