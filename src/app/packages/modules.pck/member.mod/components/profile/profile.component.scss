@@ -2,7 +2,7 @@
 
 .ham-profile {
 	.cd-row {
-		&:not(:nth-of-type(2)) {
+		&:not(:first-child) {
 			margin-top: 20px;
 		}
 	}
