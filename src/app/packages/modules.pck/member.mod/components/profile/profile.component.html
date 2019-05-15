@@ -1,24 +1,26 @@
 <div class="ham-profile">
 	<!-- Head -->
-	<div class="ham-head">
-		<app-head [pageTitle]="'User Profile'"></app-head>
+	<app-head [pageTitle]="'User Profile'"></app-head>
+
+	<!-- Profile Cover -->
+	<div class="cd-row ham-padding-0">
+		<app-profile-cover></app-profile-cover>
 	</div>
 
-	<!-- Content -->
+	<!-- Update Profile -->
+	<!-- Change Password -->
 	<div class="cd-row ham-padding-1">
 		<div class="cd-col cd-col-pm-t-6">
-			<!-- Update Profile -->
 			<app-update-profile></app-update-profile>
 		</div>
 		<div class="cd-col cd-col-pm-t-6 cd-col-m-top">
-			<!-- Change Password -->
 			<app-change-password></app-change-password>
 		</div>
 	</div>
 
+	<!-- Assigned Hotels -->
 	<div class="cd-row ham-padding-0 cd-row-m-top">
 		<div class="cd-col">
-			<!-- Assigned Hotels -->
 			<app-hotels-list></app-hotels-list>
 		</div>
 	</div>

@@ -1,7 +1,7 @@
 // angular
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 
 // app
@@ -76,6 +76,10 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 						this.setUserState(userInfo, res, data);
 					}
 					return true;
+				}),
+				catchError(() => {
+					this._authService.clearSessions();
+					return of(true);
 				})
 			);
 	}
@@ -104,6 +108,10 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 						this.setUserState(userInfo, res, data);
 					}
 					return true;
+				}),
+				catchError(() => {
+					this._authService.clearSessions();
+					return of(true);
 				})
 			);
 	}
