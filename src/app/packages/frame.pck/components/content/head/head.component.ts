@@ -1,9 +1,8 @@
 // angular
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 // app
 import { ROUTING } from '../../../../../../environments/environment';
-import { RouterService } from '../../../../utilities.pck/accessories.mod/services/router-service';
 
 @Component({
 	selector: 'app-head',
@@ -11,18 +10,9 @@ import { RouterService } from '../../../../utilities.pck/accessories.mod/service
 	styleUrls: ['./head.component.scss']
 })
 
-export class HeadComponent implements OnInit {
+export class HeadComponent {
 	public routing = ROUTING;
-	public breadcrumbList = [];
 
 	@Input() pageTitle;
 	@Input() notification;
-
-	constructor(private _routerService: RouterService) {
-	}
-
-	ngOnInit() {
-		// get breadcrumbs
-		this.breadcrumbList = this._routerService.breadcrumbsList;
-	}
 }

@@ -7,6 +7,9 @@ import { ProfileComponent } from './components/profile/profile.component';
 export const MEMBER_ROUTES: Routes = [
 	{
 		path: '',
-		component: ProfileComponent
+		component: ProfileComponent,
+		data: {
+			breadcrumb: 'Profile'
+		}
 	}
 ];

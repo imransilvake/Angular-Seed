@@ -7,26 +7,6 @@
 		align-items: center;
 		display: flex;
 		justify-content: space-between;
-
-		.ham-breadcrumb-wrapper {
-			list-style: none;
-
-			li {
-				display: inline-block;
-
-				.breadcrumb-text {
-					margin-left: 5px;
-					margin-right: 5px;
-					text-transform: capitalize;
-				}
-
-				&:first-child {
-					.breadcrumb-text {
-						margin-left: 0;
-					}
-				}
-			}
-		}
 	}
 
 	// media

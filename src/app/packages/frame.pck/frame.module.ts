@@ -16,12 +16,14 @@ import { SecondarySidebarComponent } from './components/sidebar/secondary/second
 import { MaintenanceComponent } from './components/pages/maintenance.component';
 import { WidgetsModule } from '../../shared/widgets/widgets.module';
 import { HeadComponent } from './components/content/head/head.component';
+import { BreadcrumbsModule } from '../utilities.pck/breadcrumbs.mod/breadcrumbs.module';
 
 @NgModule({
 	imports: [
 		SharedModule,
 		WidgetsModule,
-		NotificationModule
+		NotificationModule,
+		BreadcrumbsModule
 	],
 	declarations: [
 		E404Component,

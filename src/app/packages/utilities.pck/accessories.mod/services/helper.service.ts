@@ -136,7 +136,7 @@ export class HelperService {
 	public static stopPropagationFromActiveElement(event: any) {
 		if (event && event.target && event.target.childNodes) {
 			event.target.childNodes.forEach(element => {
-				if (element.className && element.className.indexOf('ham-active') !== -1) {
+				if (element && element.className && element.className.indexOf('ham-active') !== -1) {
 					HelperService.stopPropagation();
 				}
 			});
