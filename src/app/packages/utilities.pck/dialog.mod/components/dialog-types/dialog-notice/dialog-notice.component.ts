@@ -8,7 +8,7 @@ import { DialogComponent } from '../../dialog.component';
 @Component({
 	selector: 'app-dialog-notice',
 	templateUrl: './dialog-notice.component.html',
-	styleUrls: ['./dialog-notice.component.scss']
+	styleUrls: ['../dialog-common.component.scss']
 })
 
 export class DialogNoticeComponent {
