@@ -14,6 +14,7 @@ import { SessionInterface } from '../interfaces/session.interface';
 import { SessionTypeEnum } from '../enums/session-type.enum';
 import { ErrorHandlerInterface } from '../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 import { AuthService } from '../../../modules.pck/authorization.mod/services/auth.service';
+import { ErrorHandlerPayloadInterface } from '../../../utilities.pck/error-handler.mod/interfaces/error-handler-payload.interface';
 
 @Injectable({ providedIn: 'root' })
 export class SessionService {
@@ -87,7 +88,8 @@ export class SessionService {
 					.subscribe(res => {
 						if (!res.status || res.status === 'FAIL') {
 							// common error
-							const payload = {
+							const payload: ErrorHandlerPayloadInterface = {
+								icon: 'error_icon',
 								title: this._i18n({
 									value: 'Title: Session Timeout Exception',
 									id: 'Error_SessionTimeoutException_Title'

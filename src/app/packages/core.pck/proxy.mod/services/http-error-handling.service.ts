@@ -50,6 +50,7 @@ export class HttpErrorHandlingService {
 		if (!navigator.onLine) {
 			// system error
 			payload = {
+				icon: 'error_icon',
 				title: this._i18n({
 					value: 'Title: Internet Connection Exception',
 					id: 'Error_Internet_Connection_Title'
@@ -106,6 +107,7 @@ export class HttpErrorHandlingService {
 		switch (response.status) {
 			case 0:
 				payload = {
+					icon: 'error_icon',
 					title: this._i18n({
 						value: 'Title: Unknown Error Exception',
 						id: 'Error_UnknownErrorException_Title'

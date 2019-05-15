@@ -84,6 +84,7 @@ export class MemberService {
 				const dialogPayload = {
 					type: DialogTypeEnum.NOTICE,
 					payload: {
+						icon: 'dialog_tick',
 						title: this._i18n({ value: 'Title: Profile Updated', id: 'Member_Profile_UpdateProfile_Success_Title' }),
 						message: this._i18n({
 							value: 'Description: Profile Updated',
@@ -98,6 +99,7 @@ export class MemberService {
 			}, (err: HttpErrorResponse) => {
 				if (err.error.detail.code === 'NotAuthorizedException') {
 					const errorPayload: ErrorHandlerPayloadInterface = {
+						icon: 'error_icon',
 						title: this._i18n({
 							value: 'Title: Profile Update Error',
 							id: 'Member_Profile_UpdateProfile_Error_Title'
@@ -136,6 +138,7 @@ export class MemberService {
 				const dialogPayload = {
 					type: DialogTypeEnum.NOTICE,
 					payload: {
+						icon: 'dialog_tick',
 						title: this._i18n({ value: 'Title: Password Changed', id: 'Member_Profile_ChangePassword_Success_Title' }),
 						message: this._i18n({
 							value: 'Description: Password Changed',
@@ -158,6 +161,7 @@ export class MemberService {
 				switch (err.error.detail.code) {
 					case 'NotAuthorizedException':
 						errorPayload = {
+							icon: 'error_icon',
 							title: this._i18n({
 								value: 'Title: Password Invalid Exception',
 								id: 'Member_Profile_ChangePassword_Error_PasswordInvalid_Title'
@@ -172,6 +176,7 @@ export class MemberService {
 						break;
 					case 'LimitExceededException':
 						errorPayload = {
+							icon: 'error_icon',
 							title: this._i18n({
 								value: 'Title: Limit Exceed Exception',
 								id: 'Member_Profile_ChangePassword_Error_LimitExceeded_Title'
