@@ -100,6 +100,15 @@
 					transition: background-color 5000s ease-in-out 0s;
 				}
 
+				&::-webkit-credentials-auto-fill-button,
+				&::-webkit-caps-lock-indicator,
+				&::-webkit-contacts-auto-fill-button {
+					pointer-events: none;
+					position: absolute;
+					right: 0;
+					visibility: hidden;
+				}
+
 				@keyframes autofill {
 					100% {
 						background-color: transparent;
