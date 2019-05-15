@@ -19,21 +19,21 @@ export class SalutationListService {
 				id: 'male',
 				text: this._i18n({
 					value: 'Salutation: Mr',
-					id: 'Error_Salutation_Mr'
+					id: 'Salutation_Mr'
 				})
 			},
 			{
 				id: 'female',
 				text: this._i18n({
 					value: 'Salutation: Mrs',
-					id: 'Error_Salutation_Mrs'
+					id: 'Salutation_Mrs'
 				})
 			},
 			{
 				id: 'individual',
 				text: this._i18n({
 					value: 'Salutation: Individual',
-					id: 'Error_Salutation_Individual'
+					id: 'Salutation_Individual'
 				})
 			}
 		];

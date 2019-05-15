@@ -32,12 +32,12 @@
 
 			.ham-content {
 				.ham-block {
+					color: cd-palette($cd-color, 1004);
 					margin: 20px auto 0;
 					width: 260px;
 
 					&.ham-locked {
 						align-items: center;
-						color: cd-palette($cd-color, 1004);
 						display: flex;
 						justify-content: center;
 

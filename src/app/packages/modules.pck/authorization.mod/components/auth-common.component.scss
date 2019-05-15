@@ -55,8 +55,13 @@
 
 							&.ham-sby-remember {
 								align-items: center;
+								color: cd-palette($cd-color, 1004);
 								display: flex;
 								justify-content: space-between;
+
+								.ham-remember-color {
+									color: cd-palette($cd-color, 1010);
+								}
 							}
 
 							&.cd-divider {
