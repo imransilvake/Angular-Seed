@@ -1,6 +1,6 @@
 <div class="ham-update-profile ham-wrapper-2">
 	<!-- Title -->
-	<h4 class="ham-title">Profile</h4>
+	<h4 i18n="@@Member_Profile_Update_Profile_Title" class="ham-title">Profile</h4>
 
 	<!-- Divider -->
 	<app-widget-divider></app-widget-divider>
@@ -21,7 +21,7 @@
 					[selectId]="'select-salutation-id'"
 					[selectClassPanel]="'ham-select-panel-with-info'"
 					selectPlaceHolder="Select Salutation"
-					i18n-selectPlaceHolder="@@Auth_Register_Form_Salutation_PlaceHolder"
+					i18n-selectPlaceHolder="@@Member_Profile_Update_Profile_Form_Salutation_PlaceHolder"
 					[dataDefault]="salutationList"
 					[control]="salutation">
 				</app-select>
@@ -33,12 +33,12 @@
 				<app-input
 					[showLabel]="true"
 					labelName="First Name*"
-					i18n-labelName="@@Auth_Register_Form_FirstName_Label"
+					i18n-labelName="@@Member_Profile_Update_Profile_Form_FirstName_Label"
 					[inputId]="'register-first-name-id'"
 					[inputType]="'text'"
 					[inputName]="'firstname'"
 					inputPlaceHolder="First Name"
-					i18n-inputPlaceHolder="@@Auth_Register_Form_FirstName_PlaceHolder"
+					i18n-inputPlaceHolder="@@Member_Profile_Update_Profile_Form_FirstName_PlaceHolder"
 					[control]="firstName">
 				</app-input>
 			</div>
@@ -46,12 +46,12 @@
 				<app-input
 					[showLabel]="true"
 					labelName="Last Name*"
-					i18n-labelName="@@Auth_Register_Form_LastName_Label"
+					i18n-labelName="@@Member_Profile_Update_Profile_Form_LastName_Label"
 					[inputId]="'register-last-name-id'"
 					[inputType]="'text'"
 					[inputName]="'lastname'"
 					inputPlaceHolder="Last Name"
-					i18n-inputPlaceHolder="@@Auth_Register_Form_LastName_PlaceHolder"
+					i18n-inputPlaceHolder="@@Member_Profile_Update_Profile_Form_LastName_PlaceHolder"
 					[control]="lastName">
 				</app-input>
 			</div>
@@ -62,12 +62,12 @@
 				<app-input
 					[showLabel]="true"
 					labelName="Email*"
-					i18n-labelName="@@Auth_Register_Form_Email_Label"
+					i18n-labelName="@@Member_Profile_Update_Profile_Form_Email_Label"
 					[inputId]="'register-email-id'"
 					[inputType]="'email'"
 					[inputName]="'email'"
 					inputPlaceHolder="Email"
-					i18n-inputPlaceHolder="@@Auth_Register_Form_Email_PlaceHolder"
+					i18n-inputPlaceHolder="@@Member_Profile_Update_Profile_Form_Email_PlaceHolder"
 					[control]="email">
 				</app-input>
 			</div>
@@ -76,7 +76,7 @@
 		<!-- Button -->
 		<div class="cd-row ham-padding-1 ham-button">
 			<div class="cd-col">
-				<button mat-button type="submit" class="ham-button-1" [disabled]="!isFormValid" i18n="@@Auth_Register_Form_Submit_Button">Update</button>
+				<button mat-button type="submit" class="ham-button-1" [disabled]="!isFormValid" i18n="@@Member_Profile_Update_Profile_Form_Submit_Button">Update</button>
 			</div>
 		</div>
 	</form>
