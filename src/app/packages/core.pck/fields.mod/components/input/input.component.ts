@@ -21,7 +21,6 @@ export class InputComponent implements OnInit {
 	@Input() showLabel = false;
 	@Input() labelName;
 
-	@Input() inputDisabled = false; // styling purpose
 	@Input() inputId = 'ham-input';
 	@Input() inputName;
 	@Input() inputType = 'text';

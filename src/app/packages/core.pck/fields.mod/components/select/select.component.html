@@ -3,16 +3,17 @@
 	<div
 		class="ham-select-wrapper"
 		[class.ham-invalid]="control.invalid && control.touched"
-		[class.ham-disabled]="selectDisabled"
 		[class.ham-focused]="selectFocused"
+		[class.ham-disabled]="control.disabled"
 		[class.ham-layout-flex]="layoutStyleType === 1"
 		[class.ham-direction]="layoutStyleData?.changeDirection">
 		<!-- Info -->
 		<div class="ham-info cd-hide" *ngIf="layoutStyleData">
 			<button
 				mat-button
-				type="submit" [disabled]="!layoutStyleData?.status || !layoutStyleData?.button"
+				type="submit"
 				class="ham-btn-icon"
+				[disabled]="!layoutStyleData?.status || !layoutStyleData?.button"
 				[class.ham-simple]="!layoutStyleData?.button"
 				[class.ham-layout-1]="layoutStyleData?.iconBG === 1">
 				<ng-container *ngIf="layoutStyleData?.button">

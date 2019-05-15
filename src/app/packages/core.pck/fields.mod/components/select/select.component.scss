@@ -15,6 +15,12 @@
 			border: 1px solid cd-palette($cd-border, 3009);
 		}
 
+		&.ham-disabled {
+			button {
+				opacity: .5;
+			}
+		}
+
 		&.ham-layout-flex {
 			align-items: center;
 			display: flex;
@@ -75,20 +81,17 @@
 				font-size: cd-fontSize(s13);
 				outline: 0;
 				width: 100%;
-			}
-		}
 
-		// disabled
-		&.ham-disabled {
-			cursor: default;
-			opacity: .7;
-			pointer-events: none;
-			user-select: none;
+				&.mat-select-disabled {
+					cursor: default;
+					opacity: .5;
+				}
+			}
 		}
 
 		// focused
 		&.ham-focused {
-			&:not(.ham-invalid) {
+			&:not(.ham-invalid):not(.ham-disabled) {
 				border: 1px solid cd-palette($cd-border, 3010);
 			}
 		}

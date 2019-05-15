@@ -12,6 +12,7 @@ import { FieldsModule } from '../../core.pck/fields.mod/fields.module';
 import { SharedModule } from '../../../shared/shared.module';
 import { MemberService } from './services/member.service';
 import { ChangePasswordComponent } from './components/profile/change-password/change-password.component';
+import { HotelsListComponent } from './components/profile/hotels-list/hotels-list.component';
 
 @NgModule({
 	imports: [
@@ -24,7 +25,8 @@ import { ChangePasswordComponent } from './components/profile/change-password/ch
 	declarations: [
 		ProfileComponent,
 		UpdateProfileComponent,
-		ChangePasswordComponent
+		ChangePasswordComponent,
+		HotelsListComponent
 	],
 	providers: [
 		MemberService

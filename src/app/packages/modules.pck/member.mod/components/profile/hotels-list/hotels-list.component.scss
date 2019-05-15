@@ -1,0 +1,15 @@
+@import 'main';
+
+.ham-assigned-hotels {
+	margin-top: 20px;
+
+	.ham-hotels-list {
+		list-style: none;
+
+		li {
+			p {
+				color: cd-palette($cd-color, 1004);
+			}
+		}
+	}
+}
