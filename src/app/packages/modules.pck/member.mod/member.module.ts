@@ -13,6 +13,7 @@ import { SharedModule } from '../../../shared/shared.module';
 import { MemberService } from './services/member.service';
 import { ChangePasswordComponent } from './components/profile/change-password/change-password.component';
 import { HotelsListComponent } from './components/profile/hotels-list/hotels-list.component';
+import { ProfileCoverComponent } from './components/profile/profile-cover/profile-cover.component';
 
 @NgModule({
 	imports: [
@@ -26,7 +27,8 @@ import { HotelsListComponent } from './components/profile/hotels-list/hotels-lis
 		ProfileComponent,
 		UpdateProfileComponent,
 		ChangePasswordComponent,
-		HotelsListComponent
+		HotelsListComponent,
+		ProfileCoverComponent
 	],
 	providers: [
 		MemberService

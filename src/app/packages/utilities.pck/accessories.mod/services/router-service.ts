@@ -15,7 +15,6 @@ export class RouterService {
 		`/${ ROUTING.authorization.reset }`,
 		`/${ ROUTING.authorization.forgot }`
 	];
-	private breadcrumbs = [];
 
 	constructor(private _router: Router) {
 		this.currentUrl = this._router.url;
@@ -23,9 +22,6 @@ export class RouterService {
 			.subscribe(event => {
 				// set previous url
 				this.setPreviousUrl(event);
-
-				// set breadcrumbs
-				this.setBreadcrumbsList();
 			});
 	}
 
@@ -37,13 +33,6 @@ export class RouterService {
 	}
 
 	/**
-	 * get breadcrumbs
-	 */
-	get breadcrumbsList() {
-		return this.breadcrumbs;
-	}
-
-	/**
 	 * set previous url
 	 *
 	 * @param event
@@ -52,30 +41,6 @@ export class RouterService {
 		if (event instanceof NavigationEnd) {
 			this.lastRoute = this.authRoutes.includes(this.currentUrl) || this.currentUrl === '/' ? ROUTING.dashboard : this.currentUrl;
 			this.currentUrl = event.url;
-		}
-	}
-
-	/**
-	 * set breadcrumbs
-	 */
-	private setBreadcrumbsList() {
-		this.breadcrumbs = [];
-		const currentUrl = location.pathname;
-		let breadcrumbs = currentUrl && currentUrl.split('/');
-
-		// validate breadcrumbs
-		if (breadcrumbs && breadcrumbs.length > 0) {
-			breadcrumbs = breadcrumbs.slice(1, breadcrumbs.length);
-			for (let i = 0; i < breadcrumbs.length; i++) {
-				if (i >= 1) {
-					// payload
-					const payload = {
-						name: breadcrumbs[i],
-						url: `/${breadcrumbs[i - 1]}/${breadcrumbs[i]}`
-					};
-					this.breadcrumbs.push(payload);
-				}
-			}
 		}
 	}
 }

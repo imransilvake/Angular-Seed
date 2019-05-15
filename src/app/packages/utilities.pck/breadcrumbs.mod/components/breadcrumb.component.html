@@ -1,0 +1,9 @@
+<ul class="ham-breadcrumb" *ngIf="breadcrumbs">
+	<li *ngFor="let breadcrumb of breadcrumbs; let l=last" class="breadcrumb-item">
+		<!-- Text -->
+		<span class="breadcrumb-text">{{breadcrumb.name}}</span>
+
+		<!-- Slash -->
+		<span *ngIf="!l">/</span>
+	</li>
+</ul>

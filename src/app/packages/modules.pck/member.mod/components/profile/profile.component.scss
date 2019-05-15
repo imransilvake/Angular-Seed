@@ -1,7 +1,11 @@
 @import 'main';
 
 .ham-profile {
-	.ham-head { margin-bottom: 30px; }
+	.cd-row {
+		&:not(:first-child) {
+			margin-top: 20px;
+		}
+	}
 
 	// media
 	@include cd-media(desktop, smartphone) {
