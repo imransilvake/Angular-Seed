@@ -1,5 +1,5 @@
 // angular
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 // app
@@ -19,7 +19,7 @@ import { UpdateProfileInterface } from '../../../interfaces/update-profile.inter
 	styleUrls: ['./update-profile.component.scss']
 })
 
-export class UpdateProfileComponent implements OnInit {
+export class UpdateProfileComponent implements OnInit, AfterViewInit {
 	public formFields;
 	public profileIcon = faUser;
 	public profileSalutationSelectType = SelectTypeEnum.DEFAULT;
@@ -54,7 +54,9 @@ export class UpdateProfileComponent implements OnInit {
 	ngOnInit() {
 		// salutation
 		this.salutationList = this._salutationList.getSalutationList();
+	}
 
+	ngAfterViewInit() {
 		// get user profile data
 		this._memberService.memberFetchProfile(this.formFields);
 	}

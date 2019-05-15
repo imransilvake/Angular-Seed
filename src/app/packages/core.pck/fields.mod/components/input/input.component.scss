@@ -78,6 +78,11 @@
 				padding: 12px;
 				width: 100%;
 
+				&:disabled {
+					cursor: default;
+					opacity: .5;
+				}
+
 				&::placeholder {
 					color: cd-palette($cd-color, 1004);
 					opacity: 1;
@@ -121,12 +126,6 @@
 					width: 20px;
 				}
 			}
-		}
-
-		// disabled
-		&.ham-disabled {
-			cursor: default;
-			opacity: .7;
 		}
 
 		// focused
