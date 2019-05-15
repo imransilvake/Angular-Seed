@@ -9,7 +9,7 @@ import { LoadingAnimationService } from '../../../../loading-animation.mod/servi
 @Component({
 	selector: 'app-dialog-confirmation',
 	templateUrl: './dialog-confirmation.component.html',
-	styleUrls: ['./dialog-confirmation.component.scss']
+	styleUrls: ['../dialog-common.component.scss']
 })
 
 export class DialogConfirmationComponent {

@@ -87,6 +87,7 @@ export class AuthService {
 				const data = {
 					type: DialogTypeEnum.NOTICE,
 					payload: {
+						icon: 'dialog_email',
 						title: this._i18n({ value: 'Title: Success', id: 'Auth_Register_Form_Success_Title' }),
 						message: this._i18n({ value: 'Description: Success', id: 'Auth_Register_Form_Success_Description' }),
 						buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
@@ -102,6 +103,7 @@ export class AuthService {
 			}, (err: HttpErrorResponse) => {
 				if (err.error.detail.code === 'UsernameExistsException') {
 					const errorPayload: ErrorHandlerPayloadInterface = {
+						icon: 'error_icon',
 						title: this._i18n({
 							value: 'Title: User Exists Exception',
 							id: 'Error_UsernameExistsException_Title'
@@ -162,6 +164,7 @@ export class AuthService {
 				switch (err.error.detail.code) {
 					case 'UserLambdaValidationException':
 						errorPayload = {
+							icon: 'error_icon',
 							title: this._i18n({
 								value: 'Title: Block User Exception',
 								id: 'Error_BlockUserException_Title'
@@ -176,6 +179,7 @@ export class AuthService {
 						break;
 					case 'UserNotFoundException':
 						errorPayload = {
+							icon: 'error_icon',
 							title: this._i18n({
 								value: 'Title: User Not Found Exception',
 								id: 'Error_UserNotFoundException_Title'
@@ -190,6 +194,7 @@ export class AuthService {
 						break;
 					case 'UserNotConfirmedException':
 						errorPayload = {
+							icon: 'error_icon',
 							title: this._i18n({
 								value: 'Title: User Not Confirmed Exception',
 								id: 'Error_UserNotConfirmedException_Title'
@@ -204,6 +209,7 @@ export class AuthService {
 						break;
 					case 'NotAuthorizedException':
 						errorPayload = {
+							icon: 'error_icon',
 							title: this._i18n({
 								value: 'Title: Password Invalid Exception',
 								id: 'Error_PasswordInvalid_Title'
@@ -243,6 +249,7 @@ export class AuthService {
 				const dialogPayload = {
 					type: DialogTypeEnum.NOTICE,
 					payload: {
+						icon: 'dialog_tick',
 						title: this._i18n({ value: 'Title: Password Reset', id: 'Auth_Forgot_Password_Form_Success_Title' }),
 						message: this._i18n({
 							value: 'Description: Forgot Password',
@@ -263,6 +270,7 @@ export class AuthService {
 				switch (err.error.detail.code) {
 					case 'InvalidParameterException':
 						errorPayload = {
+							icon: 'error_icon',
 							title: this._i18n({
 								value: 'Title: Invalid Parameter Exception',
 								id: 'Error_InvalidParameterException_Title'
@@ -277,6 +285,7 @@ export class AuthService {
 						break;
 					case 'UserNotFoundException':
 						errorPayload = {
+							icon: 'error_icon',
 							title: this._i18n({
 								value: 'Title: User Not Found Exception',
 								id: 'Error_UserNotFoundException_Title'
@@ -316,6 +325,7 @@ export class AuthService {
 				const dialogPayload = {
 					type: DialogTypeEnum.NOTICE,
 					payload: {
+						icon: 'dialog_tick',
 						title: this._i18n({ value: 'Title: Reset Password', id: 'Auth_Reset_Password_Form_Success_Title' }),
 						message: this._i18n({
 							value: 'Description: Reset Password',
@@ -334,6 +344,7 @@ export class AuthService {
 			}, (err: HttpErrorResponse) => {
 				if (err.error.detail.code === 'CodeMismatchException') {
 					const errorPayload: ErrorHandlerPayloadInterface = {
+						icon: 'error_icon',
 						title: this._i18n({
 							value: 'Title: Verification Code Exception',
 							id: 'Error_CodeMismatchException_Title'

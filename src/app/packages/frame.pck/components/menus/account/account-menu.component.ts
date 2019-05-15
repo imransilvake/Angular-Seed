@@ -67,6 +67,7 @@ export class AccountMenuComponent {
 		const data = {
 			type: DialogTypeEnum.CONFIRMATION,
 			payload: {
+				icon: 'dialog_confirmation',
 				title: this._i18n({ value: 'Title: Logout Confirmation', id: 'Logout_Confirmation_Title' }),
 				message: this._i18n({ value: 'Description: Logout Confirmation', id: 'Logout_Confirmation_Description' }),
 				buttonTexts: [

@@ -1,14 +1,14 @@
 @import 'main';
 
-.ham-dialog-notice {
+.ham-dialog-common {
 	text-align: center;
 
 	.ham-header {
 		padding: 20px 40px 12px;
 
 		.modal-icon {
-			max-width: 115px;
 			margin: 20px;
+			max-width: 110px;
 		}
 	}
 
@@ -42,8 +42,8 @@
 
 		.ham-footer {
 			button {
-				width: 100%;
 				margin: 10px 0;
+				width: 100%;
 			}
 		}
 	}
