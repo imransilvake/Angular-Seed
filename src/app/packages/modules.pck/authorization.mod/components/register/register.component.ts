@@ -56,7 +56,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
 			]),
 			password: new FormControl('', [
 				Validators.required,
-				ValidationService.passwordValidator
+				ValidationService.passwordValidator,
+				ValidationService.passwordStrengthValidator
 			]),
 			email: new FormControl('', [
 				Validators.required,
