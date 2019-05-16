@@ -5,6 +5,8 @@ import { filter } from 'rxjs/operators';
 
 // app
 import { BreadcrumbInterface } from '../interfaces/breadcrumb.interface';
+import { AuthService } from '../../../modules.pck/authorization.mod/services/auth.service';
+import { AppOptions } from '../../../../../app.config';
 
 @Injectable({ providedIn: 'root' })
 export class BreadcrumbService {
@@ -13,7 +15,8 @@ export class BreadcrumbService {
 
 	constructor(
 		private _router: Router,
-		private _route: ActivatedRoute
+		private _route: ActivatedRoute,
+		private _authService: AuthService
 	) {
 		// set breadcrumbs
 		this._router.events
@@ -41,6 +44,7 @@ export class BreadcrumbService {
 	 * @param breadcrumbs
 	 */
 	private getBreadcrumbs(route: ActivatedRoute, url = '', breadcrumbs: BreadcrumbInterface[] = []): BreadcrumbInterface[] {
+		// route data for breadcrumb
 		const ROUTE_DATA_BREADCRUMB = 'breadcrumb';
 
 		// get the child routes
@@ -69,9 +73,13 @@ export class BreadcrumbService {
 			// append route URL to URL
 			url += `/${routeURL}`;
 
+			// set specific breadcrumb name
+			const currentLanguage = this._authService.currentUserState.profile.language;
+			const name = currentLanguage === AppOptions.languages['en'] ? child.snapshot.data[ROUTE_DATA_BREADCRUMB].en : child.snapshot.data[ROUTE_DATA_BREADCRUMB].de;
+
 			// add breadcrumb
 			const breadcrumb: BreadcrumbInterface = {
-				name: child.snapshot.data[ROUTE_DATA_BREADCRUMB],
+				name: name,
 				url: url
 			};
 			breadcrumbs.push(breadcrumb);

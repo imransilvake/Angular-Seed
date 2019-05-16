@@ -9,7 +9,10 @@ export const MEMBER_ROUTES: Routes = [
 		path: '',
 		component: ProfileComponent,
 		data: {
-			breadcrumb: 'Profile'
+			breadcrumb: {
+				en: 'Profile',
+				de: 'Profil'
+			}
 		}
 	}
 ];
