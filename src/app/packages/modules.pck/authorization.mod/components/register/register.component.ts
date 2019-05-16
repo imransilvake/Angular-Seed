@@ -8,10 +8,8 @@ import { takeUntil } from 'rxjs/operators';
 import { ROUTING } from '../../../../../../environments/environment';
 import { ValidationService } from '../../../../core.pck/fields.mod/services/validation.service';
 import { HotelListService } from '../../services/hotel-list.service';
-import { faHotel, faMale } from '@fortawesome/free-solid-svg-icons';
 import { SelectTypeEnum } from '../../../../core.pck/fields.mod/enums/select-type.enum';
 import { SelectDefaultInterface } from '../../../../core.pck/fields.mod/interfaces/select-default-interface';
-import { SelectStyleEnum } from '../../../../core.pck/fields.mod/enums/select-style.enum';
 import { LoadingAnimationService } from '../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { AuthRegisterInterface } from '../../interfaces/auth-register.interface';
 import { AuthService } from '../../services/auth.service';
@@ -29,9 +27,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
 	public formFields;
 	public registerHotelNameSelectType = SelectTypeEnum.DEFAULT;
 	public registerSalutationSelectType = SelectTypeEnum.DEFAULT;
-	public registerHotelNameSelectStyleType = SelectStyleEnum.INFO;
-	public registerSalutationSelectStyleType = SelectStyleEnum.INFO;
-	public registerIcons = [faHotel, faMale];
 	public hotelList: SelectDefaultInterface[] = [];
 	public salutationList: SelectDefaultInterface[] = [];
 

@@ -10,16 +10,11 @@
 		<div class="cd-row ham-padding-1">
 			<div class="cd-col">
 				<app-select
+					[showLabel]="true"
+					labelName="Salutation*"
+					i18n-labelName="@@Member_Profile_Update_Profile_Form_Salutation_Label"
 					[selectType]="profileSalutationSelectType"
-					[layoutStyleType]="profileSalutationSelectStyleType"
-					[layoutStyleData]="{
-						status: false,
-						button: true,
-						icon: profileIcon,
-						iconBG: 1
-					}"
-					[selectId]="'select-salutation-id'"
-					[selectClassPanel]="'ham-select-panel-with-info'"
+					[selectId]="'profile-salutation-id'"
 					selectPlaceHolder="Select Salutation"
 					i18n-selectPlaceHolder="@@Member_Profile_Update_Profile_Form_Salutation_PlaceHolder"
 					[dataDefault]="salutationList"

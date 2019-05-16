@@ -20,14 +20,7 @@
 					<div class="cd-col">
 						<app-select
 							[selectType]="registerHotelNameSelectType"
-							[layoutStyleType]="registerHotelNameSelectStyleType"
-							[layoutStyleData]="{
-								status: false,
-								button: true,
-								icon: registerIcons[0]
-							}"
-							[selectId]="'select-hotel-list-id'"
-							[selectClassPanel]="'ham-select-panel-with-info'"
+							[selectId]="'register-hotel-list-id'"
 							selectPlaceHolder="Select Hotel"
 							i18n-selectPlaceHolder="@@Auth_Register_Form_HotelList_PlaceHolder"
 							[dataDefault]="hotelList"
@@ -42,14 +35,7 @@
 					<div class="cd-col">
 						<app-select
 							[selectType]="registerSalutationSelectType"
-							[layoutStyleType]="registerSalutationSelectStyleType"
-							[layoutStyleData]="{
-								status: false,
-								button: true,
-								icon: registerIcons[1]
-							}"
-							[selectId]="'select-salutation-id'"
-							[selectClassPanel]="'ham-select-panel-with-info'"
+							[selectId]="'register-salutation-id'"
 							selectPlaceHolder="Select Salutation"
 							i18n-selectPlaceHolder="@@Auth_Register_Form_Salutation_PlaceHolder"
 							[dataDefault]="salutationList"
@@ -118,9 +104,6 @@
 								[showHidePassword]="true"
 								inputPlaceHolder="Password"
 								i18n-inputPlaceHolder="@@Auth_Register_Form_Password_PlaceHolder"
-								[showHint]="true"
-								hintText="Password Hint"
-								i18n-hintText="@@Auth_Register_Form_Password_Hint"
 								[control]="password">
 							</app-input>
 						</app-password-strength>

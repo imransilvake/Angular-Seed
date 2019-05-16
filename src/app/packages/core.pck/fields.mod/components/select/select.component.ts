@@ -3,8 +3,6 @@ import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 // app
-import { SelectStyleEnum } from '../../enums/select-style.enum';
-import { SelectStyleInterface } from '../../interfaces/select-style.interface';
 import { SelectTypeEnum } from '../../enums/select-type.enum';
 import { SelectDefaultInterface } from '../../interfaces/select-default-interface';
 import { SelectGroupInterface } from '../../interfaces/select-group.interface';
@@ -18,9 +16,6 @@ import { SelectGroupInterface } from '../../interfaces/select-group.interface';
 export class SelectComponent {
 	@Input() selectType: SelectTypeEnum = SelectTypeEnum.DEFAULT;
 	@Input() multipleSelection = false;
-
-	@Input() layoutStyleType: SelectStyleEnum = SelectStyleEnum.DEFAULT;
-	@Input() layoutStyleData: SelectStyleInterface;
 
 	@Input() control = new FormControl();
 	@Input() dataDefault: SelectDefaultInterface[] = [];

@@ -4,27 +4,7 @@
 		class="ham-select-wrapper"
 		[class.ham-invalid]="control.invalid && control.touched"
 		[class.ham-focused]="selectFocused"
-		[class.ham-disabled]="control.disabled"
-		[class.ham-layout-flex]="layoutStyleType === 1"
-		[class.ham-direction]="layoutStyleData?.changeDirection">
-		<!-- Info -->
-		<div class="ham-info cd-hide" *ngIf="layoutStyleData">
-			<button
-				mat-button
-				type="submit"
-				class="ham-btn-icon"
-				[disabled]="!layoutStyleData?.status || !layoutStyleData?.button"
-				[class.ham-simple]="!layoutStyleData?.button"
-				[class.ham-layout-1]="layoutStyleData?.iconBG === 1">
-				<ng-container *ngIf="layoutStyleData?.button">
-					<fa-icon *ngIf="layoutStyleData?.icon" [icon]="layoutStyleData.icon"></fa-icon>
-				</ng-container>
-				<ng-container *ngIf="!layoutStyleData?.button">
-					<p>{{layoutStyleData.title}}</p>
-				</ng-container>
-			</button>
-		</div>
-
+		[class.ham-disabled]="control.disabled">
 		<!-- Select -->
 		<div class="ham-select">
 			<mat-select

@@ -28,47 +28,6 @@
 			&.ham-direction {
 				direction: rtl;
 			}
-
-			.ham-info {
-				display: block;
-
-				button {
-					background-color: cd-palette($cd-background, 2010);
-					border-radius: 0;
-					height: 41px;
-					margin-left: 0;
-					margin-top: 0;
-
-					&:disabled {
-						background-color: cd-palette($cd-background, 2003);
-					}
-
-					&.ham-layout-1 {
-						background-color: cd-palette($cd-background, 2002, .5);
-					}
-
-					&:not(.ham-simple) {
-						min-width: 38px;
-						padding: 0;
-						width: 38px;
-					}
-
-					&.ham-simple {
-						min-width: auto;
-						padding: 0 8px;
-						width: auto;
-					}
-
-					fa-icon {
-						color: cd-palette($cd-color, 1001);
-						font-size: cd-fontSize(s14);
-					}
-
-					p {
-						color: cd-palette($cd-color, 1001);
-					}
-				}
-			}
 		}
 
 		.ham-select {

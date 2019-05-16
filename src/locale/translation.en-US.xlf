@@ -369,18 +369,6 @@
 					<context context-type="linenumber">96</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Register_Form_Password_Hint" datatype="html">
-				<source>Password Hint</source>
-				<target>
-					Your password must be at least 8 characters long
-				</target>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						app/packages/modules.pck/authorization.mod/components/register/register.component.html
-					</context>
-					<context context-type="linenumber">99</context>
-				</context-group>
-			</trans-unit>
 			<trans-unit id="Auth_Register_Form_Submit_Button" datatype="html">
 				<source>Register</source>
 				<target>Register</target>
@@ -745,16 +733,6 @@
 					<context context-type="linenumber">63</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Reset_Password_Form_Confirm_New_Password_Hint" datatype="html">
-				<source>Confirm Password Hint</source>
-				<target>Your password must be at least 8 characters long</target>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						app/packages/modules.pck/authorization.mod/components/reset-password/reset-password.component.html
-					</context>
-					<context context-type="linenumber">66</context>
-				</context-group>
-			</trans-unit>
 			<trans-unit id="Auth_Reset_Password_Form_Submit_Button" datatype="html">
 				<source>Reset</source>
 				<target>Change Password</target>
@@ -817,6 +795,16 @@
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/update-profile/update-profile.component.html</context>
 					<context context-type="linenumber">3</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Member_Profile_Update_Profile_Form_Salutation_Label" datatype="html">
+				<source>Salutation*</source>
+				<target>Select Salutation*</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/member.mod/components/profile/update-profile/update-profile.component.html
+					</context>
+					<context context-type="linenumber">14</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Member_Profile_Update_Profile_Form_Salutation_PlaceHolder" datatype="html">

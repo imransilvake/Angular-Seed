@@ -3,13 +3,11 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 // app
-import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { ValidationService } from '../../../../../core.pck/fields.mod/services/validation.service';
 import { SelectDefaultInterface } from '../../../../../core.pck/fields.mod/interfaces/select-default-interface';
 import { SalutationListService } from '../../../../authorization.mod/services/salutation-list.service';
 import { LoadingAnimationService } from '../../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { SelectTypeEnum } from '../../../../../core.pck/fields.mod/enums/select-type.enum';
-import { SelectStyleEnum } from '../../../../../core.pck/fields.mod/enums/select-style.enum';
 import { MemberService } from '../../../services/member.service';
 import { UpdateProfileInterface } from '../../../interfaces/update-profile.interface';
 
@@ -21,9 +19,7 @@ import { UpdateProfileInterface } from '../../../interfaces/update-profile.inter
 
 export class UpdateProfileComponent implements OnInit, AfterViewInit {
 	public formFields;
-	public profileIcon = faUser;
 	public profileSalutationSelectType = SelectTypeEnum.DEFAULT;
-	public profileSalutationSelectStyleType = SelectStyleEnum.INFO;
 	public salutationList: SelectDefaultInterface[] = [];
 
 	constructor(
