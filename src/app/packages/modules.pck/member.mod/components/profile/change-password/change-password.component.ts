@@ -34,11 +34,13 @@ export class ChangePasswordComponent implements OnDestroy {
 			]),
 			password: new FormControl('', [
 				Validators.required,
-				ValidationService.passwordValidator
+				ValidationService.passwordValidator,
+				ValidationService.passwordStrengthValidator
 			]),
 			confirmPassword: new FormControl('', [
 				Validators.required,
 				ValidationService.passwordValidator,
+				ValidationService.passwordStrengthValidator,
 				ValidationService.confirmPasswordValidator
 			])
 		});

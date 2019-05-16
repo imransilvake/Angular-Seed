@@ -39,11 +39,13 @@ export class ResetPasswordComponent implements OnDestroy {
 		this.formFields = new FormGroup({
 			password: new FormControl('', [
 				Validators.required,
-				ValidationService.passwordValidator
+				ValidationService.passwordValidator,
+				ValidationService.passwordStrengthValidator
 			]),
 			confirmPassword: new FormControl('', [
 				Validators.required,
 				ValidationService.passwordValidator,
+				ValidationService.passwordStrengthValidator,
 				ValidationService.confirmPasswordValidator
 			])
 		});
