@@ -10,7 +10,8 @@ import { AppOptions } from '../../../../../app.config';
 
 @Injectable({ providedIn: 'root' })
 export class BreadcrumbService {
-	public breadcrumb: BreadcrumbInterface = { name: 'Dashboard', url: '' };
+	public routeDataBreadcrumb = 'breadcrumb';
+	public firstBreadcrumb: BreadcrumbInterface = { name: 'Dashboard', url: '' };
 	public breadcrumbs: BreadcrumbInterface[];
 
 	constructor(
@@ -24,7 +25,7 @@ export class BreadcrumbService {
 			.subscribe(() => {
 				const root: ActivatedRoute = this._route.root;
 				this.breadcrumbs = this.getBreadcrumbs(root);
-				this.breadcrumbs = [this.breadcrumb, ...this.breadcrumbs];
+				this.breadcrumbs = [this.firstBreadcrumb, ...this.breadcrumbs];
 				this.breadcrumbs = this.breadcrumbs.length < 2 ? [] : this.breadcrumbs;
 			});
 	}
@@ -44,9 +45,6 @@ export class BreadcrumbService {
 	 * @param breadcrumbs
 	 */
 	private getBreadcrumbs(route: ActivatedRoute, url = '', breadcrumbs: BreadcrumbInterface[] = []): BreadcrumbInterface[] {
-		// route data for breadcrumb
-		const ROUTE_DATA_BREADCRUMB = 'breadcrumb';
-
 		// get the child routes
 		const children: ActivatedRoute[] = route.children;
 
@@ -63,7 +61,7 @@ export class BreadcrumbService {
 			}
 
 			// verify the custom data property 'breadcrumb' is specified on the route
-			if (!child.snapshot.data.hasOwnProperty(ROUTE_DATA_BREADCRUMB)) {
+			if (!child.snapshot.data.hasOwnProperty(this.routeDataBreadcrumb)) {
 				return this.getBreadcrumbs(child, url, breadcrumbs);
 			}
 
@@ -75,7 +73,8 @@ export class BreadcrumbService {
 
 			// set specific breadcrumb name
 			const currentLanguage = this._authService.currentUserState.profile.language;
-			const name = currentLanguage === AppOptions.languages['en'] ? child.snapshot.data[ROUTE_DATA_BREADCRUMB].en : child.snapshot.data[ROUTE_DATA_BREADCRUMB].de;
+			const breadcrumbData = child.snapshot.data[this.routeDataBreadcrumb];
+			const name = currentLanguage === AppOptions.languages['en'] ? breadcrumbData.en : breadcrumbData.de;
 
 			// add breadcrumb
 			const breadcrumb: BreadcrumbInterface = {
