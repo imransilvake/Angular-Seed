@@ -1,5 +1,5 @@
 // angular
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 
@@ -17,10 +17,12 @@ import { LoadingAnimationService } from '../../../../utilities.pck/loading-anima
 	templateUrl: './account-menu.component.html'
 })
 
-export class AccountMenuComponent {
+export class AccountMenuComponent implements OnInit {
 	public routing = ROUTING;
 	public faIcons = [faEnvelope, faUser, faUserLock, faPowerOff];
 	public currentUser;
+	public userName;
+	public userNameLetters;
 
 	constructor(
 		private _loadingAnimationService: LoadingAnimationService,
@@ -29,8 +31,17 @@ export class AccountMenuComponent {
 		private _dialogService: DialogService,
 		private _i18n: I18n
 	) {
-		// get current user info
-		this.currentUser = _authService.currentUserState;
+	}
+
+	ngOnInit() {
+		// get current user state
+		this.currentUser = this._authService.currentUserState;
+
+		// get user name
+		this.userName = HelperService.capitalizeString(this.currentUser.profile.name);
+
+		// get first letters of name
+		this.userNameLetters = HelperService.getFirstLetter(this.userName);
 	}
 
 	/**

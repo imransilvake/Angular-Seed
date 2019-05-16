@@ -7,7 +7,6 @@ import { merge } from 'rxjs/internal/observable/merge';
 // app
 import * as jwt_decode from 'jwt-decode';
 import * as CryptoJS from 'crypto-js';
-
 declare const document: any;
 
 @Injectable({ providedIn: 'root' })
@@ -141,5 +140,25 @@ export class HelperService {
 				}
 			});
 		}
+	}
+
+	/**
+	 * make first letter uppercase of each word in a string
+	 *
+	 * @param value
+	 */
+	public static capitalizeString(value: string) {
+		return value.replace(/\w\S*/g, (txt) => {
+			return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+		});
+	}
+
+	/**
+	 * get first letter of each word in a string
+	 *
+	 * @param value
+	 */
+	public static getFirstLetter(value: string) {
+		return value.match(/\b\w/g).join('')
 	}
 }

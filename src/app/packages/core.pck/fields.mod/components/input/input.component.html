@@ -76,6 +76,9 @@
 					It must have at most {{control.errors.usernameRequiredLength}} characters long
 				</ng-container>
 			</p>
+			<p *ngSwitchCase="'text'" i18n="@@Fields_Input_Error_Text">
+				Only alphabetic characters are allowed!
+			</p>
 			<p *ngSwitchCase="'password'" i18n="@@Fields_Input_Error_Password">
 				Password min. 8 characters required!
 			</p>

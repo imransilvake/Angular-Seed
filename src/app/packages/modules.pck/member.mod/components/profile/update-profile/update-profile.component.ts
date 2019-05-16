@@ -34,11 +34,15 @@ export class UpdateProfileComponent implements OnInit, AfterViewInit {
 			]),
 			firstName: new FormControl('', [
 				Validators.required,
-				Validators.minLength(2)
+				Validators.minLength(2),
+				ValidationService.textValidator,
+				Validators.maxLength(125)
 			]),
 			lastName: new FormControl('', [
 				Validators.required,
-				Validators.minLength(2)
+				Validators.minLength(2),
+				ValidationService.textValidator,
+				Validators.maxLength(125)
 			]),
 			email: new FormControl({ value: '', disabled: true }, [
 				Validators.required,

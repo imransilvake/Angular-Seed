@@ -7,13 +7,28 @@ import * as zxcvbn from 'zxcvbn';
 
 // patterns
 export const patterns: any = {
-	text: /^.{8,256}$/,
+	text: /^[A-Za-z]+$/,
 	password: /^.{8,256}$/,
 	email: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 };
 
 @Injectable({ providedIn: 'root' })
 export class ValidationService {
+	/**
+	 * text validator
+	 *
+	 * @param control
+	 */
+	static textValidator(control: FormControl) {
+		const value = control.value;
+
+		if (value && value.match(patterns.text)) {
+			return null;
+		}
+
+		return { text: true };
+	}
+
 	/**
 	 * password validator
 	 *

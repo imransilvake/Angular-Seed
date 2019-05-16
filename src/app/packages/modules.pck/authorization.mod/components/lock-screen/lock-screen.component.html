@@ -4,7 +4,7 @@
 			<!-- Profile -->
 			<div class="ham-profile">
 				<img [src]="'assets/images/logo.png'" alt="lock-screen"/>
-				<h5 *ngIf="currentUser">{{currentUser.profile.name}}</h5>
+				<h5 *ngIf="currentUser">{{ userName }}</h5>
 			</div>
 
 			<!-- Content -->
@@ -41,7 +41,9 @@
 
 				<!-- Note -->
 				<div class="cd-col">
-					<p class="ham-block" i18n="@@Auth_Lock_Screen_Note">Not ? <a [routerLink]="['/' + routing.authorization.login]">Click here</a></p>
+					<p class="ham-block" i18n="@@Auth_Lock_Screen_Note">
+						Not {{ userName }}? <a (click)="onClickLogoutUser()">Click here</a>
+					</p>
 				</div>
 			</div>
 		</div>

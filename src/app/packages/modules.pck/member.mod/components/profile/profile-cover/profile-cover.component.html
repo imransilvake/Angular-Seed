@@ -1,4 +1,4 @@
-<div class="ham-profile-cover ham-wrapper-2" *ngIf="userData">
+<div class="ham-profile-cover ham-wrapper-2" *ngIf="currentUser">
 	<!-- Cover -->
 	<div class="ham-cover-wrapper">
 		<img class="ham-cover" [src]="'assets/images/member/profile_cover.jpg'" alt="profile-logo"/>
@@ -9,17 +9,12 @@
 		<div class="cd-col">
 			<div class="ham-logo-wrapper">
 				<div class="ham-logo">
-					<h2>
-						{{userData.profile.given_name.charAt(0).toUpperCase()}}{{userData.profile.family_name.charAt(0).toUpperCase()}}
-					</h2>
+					<h2>{{userNameLetters}}</h2>
 				</div>
 				<p class="ham-upload">[Change Image]</p>
 			</div>
 			<div class="ham-name">
-				<h1>
-					{{userData.profile.given_name.charAt(0).toUpperCase() + userData.profile.given_name.slice(1)}}
-					{{userData.profile.family_name.charAt(0).toUpperCase() + userData.profile.family_name.slice(1)}}
-				</h1>
+				<h1>{{userName}}</h1>
 				<h5>- HotelManager -</h5>
 			</div>
 		</div>
