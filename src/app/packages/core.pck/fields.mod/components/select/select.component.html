@@ -1,11 +1,13 @@
 <div class="ham-select-field" *ngIf="control">
+	<!-- Label -->
 	<label *ngIf="showLabel" [htmlFor]="selectId">{{labelName}}</label>
+
+	<!-- Select -->
 	<div
 		class="ham-select-wrapper"
 		[class.ham-invalid]="control.invalid && control.touched"
 		[class.ham-focused]="selectFocused"
 		[class.ham-disabled]="control.disabled">
-		<!-- Select -->
 		<div class="ham-select">
 			<mat-select
 				[class.ham-selected]="control.valid"

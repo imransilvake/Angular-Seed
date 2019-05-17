@@ -1,6 +1,7 @@
 // angular
 import { NgModule } from '@angular/core';
 import {
+	MatAutocompleteModule,
 	MatButtonModule, MatButtonToggleModule,
 	MatCheckboxModule, MatDialogModule, MatFormFieldModule, MatIconModule,
 	MatInputModule, MatMenuModule,
@@ -26,7 +27,8 @@ import {
 		MatSidenavModule,
 		MatSelectModule,
 		MatTreeModule,
-		MatProgressBarModule
+		MatProgressBarModule,
+		MatAutocompleteModule
 	],
 	exports: [
 		MatButtonModule,
@@ -45,7 +47,8 @@ import {
 		MatSidenavModule,
 		MatSelectModule,
 		MatTreeModule,
-		MatProgressBarModule
+		MatProgressBarModule,
+		MatAutocompleteModule
 	]
 })
 

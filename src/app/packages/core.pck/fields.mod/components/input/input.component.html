@@ -1,5 +1,8 @@
 <div class="ham-input-field" *ngIf="control">
+	<!-- Label -->
 	<label *ngIf="showLabel" [htmlFor]="inputId">{{labelName}}</label>
+
+	<!-- Info & Input -->
 	<div
 		class="ham-input-wrapper"
 		[class.ham-invalid]="control.invalid && control.touched"

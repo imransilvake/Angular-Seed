@@ -15,6 +15,7 @@ import { AuthRegisterInterface } from '../../interfaces/auth-register.interface'
 import { AuthService } from '../../services/auth.service';
 import { HelperService } from '../../../../utilities.pck/accessories.mod/services/helper.service';
 import { SalutationListService } from '../../services/salutation-list.service';
+import { AutocompleteTypeEnum } from '../../../../core.pck/fields.mod/enums/autocomplete-type.enum';
 
 @Component({
 	selector: 'app-register',
@@ -25,7 +26,7 @@ import { SalutationListService } from '../../services/salutation-list.service';
 export class RegisterComponent implements OnInit, OnDestroy {
 	public routing = ROUTING;
 	public formFields;
-	public registerHotelNameSelectType = SelectTypeEnum.DEFAULT;
+	public registerHotelNameAutocompleteType = AutocompleteTypeEnum.DEFAULT;
 	public registerSalutationSelectType = SelectTypeEnum.DEFAULT;
 	public hotelList: SelectDefaultInterface[] = [];
 	public salutationList: SelectDefaultInterface[] = [];

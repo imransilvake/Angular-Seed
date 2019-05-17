@@ -18,14 +18,14 @@
 				<h3 i18n="@@Auth_Register_Form_Title">Register</h3>
 				<div class="cd-row cd-divider-top" *ngIf="hotelList && hotelList.length > 0">
 					<div class="cd-col">
-						<app-select
-							[selectType]="registerHotelNameSelectType"
-							[selectId]="'register-hotel-list-id'"
-							selectPlaceHolder="Select Hotel"
-							i18n-selectPlaceHolder="@@Auth_Register_Form_HotelList_PlaceHolder"
+						<app-autocomplete
+							[autocompleteType]="registerHotelNameAutocompleteType"
+							[autocompleteId]="'register-hotel-list-id'"
+							autocompletePlaceHolder="Select Hotel"
+							i18n-autocompletePlaceHolder="@@Auth_Register_Form_HotelList_PlaceHolder"
 							[dataDefault]="hotelList"
 							[control]="hotelId">
-						</app-select>
+						</app-autocomplete>
 					</div>
 
 					<div class="cd-col cd-divider">
