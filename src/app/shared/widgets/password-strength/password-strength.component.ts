@@ -28,6 +28,8 @@ export class PasswordStrengthComponent implements OnInit, OnDestroy {
 				if (res) {
 					const result = zxcvbn(res);
 					this.score = result.score;
+				} else {
+					this.score = 0;
 				}
 			});
 	}

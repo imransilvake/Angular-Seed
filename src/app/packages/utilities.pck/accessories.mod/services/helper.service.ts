@@ -36,7 +36,7 @@ export class HelperService {
 	 *
 	 * @returns {boolean}
 	 */
-	get isApp(): boolean {
+	static get isApp(): boolean {
 		return document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
 	}
 
@@ -95,7 +95,7 @@ export class HelperService {
 	 * detect: key press
 	 */
 	public static detectKeyPress() {
-		return fromEvent(document, 'keyup').pipe(debounceTime(200));
+		return fromEvent(document, 'keyup').pipe(debounceTime(100));
 	}
 
 	/**
