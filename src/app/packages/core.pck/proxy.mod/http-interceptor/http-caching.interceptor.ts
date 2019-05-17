@@ -42,7 +42,7 @@ export class HttpCachingInterceptor implements HttpInterceptor {
 					// there may be other events besides the response
 					if (event instanceof HttpResponse) {
 						// put data in memory
-						this._storageService.put(req.urlWithParams, event.body, StorageTypeEnum.MEMORY);
+						this._storageService.put(req.urlWithParams, event, StorageTypeEnum.MEMORY);
 
 						// send event
 						subject.next(event);
