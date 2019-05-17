@@ -196,6 +196,48 @@
 					<context context-type="linenumber">63</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="Fields_AutoComplete_Error_Required" datatype="html">
+				<source>
+					Required field
+				</source>
+				<target>
+					Required field!
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/core.pck/fields.mod/components/autocomplete/autocomplete.component.html
+					</context>
+					<context context-type="linenumber">47</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Fields_AutoComplete_Error_Invalid_Option" datatype="html">
+				<source>
+					Please select a valid option from the list!
+				</source>
+				<target>
+					Please select a valid option from the list!
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/core.pck/fields.mod/components/autocomplete/autocomplete.component.html
+					</context>
+					<context context-type="linenumber">50</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Fields_AutoComplete_Error_Default" datatype="html">
+				<source>
+					Unknown error occurred
+				</source>
+				<target>
+					Unknown error occurred
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/core.pck/fields.mod/components/autocomplete/autocomplete.component.html
+					</context>
+					<context context-type="linenumber">53</context>
+				</context-group>
+			</trans-unit>
 			<trans-unit id="Widget_Password_Strength_Title" datatype="html">
 				<source>Password Strength:</source>
 				<target>Password Strength:</target>

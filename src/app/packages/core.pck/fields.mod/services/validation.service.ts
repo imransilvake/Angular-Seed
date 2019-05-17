@@ -94,4 +94,19 @@ export class ValidationService {
 
 		return { passwordStrength: true };
 	}
+
+	/**
+	 * autocomplete option validator
+	 *
+	 * @param control
+	 */
+	static autocompleteOptionValidator(control: FormControl) {
+		const value = control.value;
+
+		if (value && typeof value === 'object') {
+			return null;
+		}
+
+		return { invalidOption: true };
+	}
 }

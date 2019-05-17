@@ -42,7 +42,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
 		// form group
 		this.formFields = new FormGroup({
 			hotelId: new FormControl('', [
-				Validators.required
+				Validators.required,
+				ValidationService.autocompleteOptionValidator,
 			]),
 			salutation: new FormControl('', [
 				Validators.required

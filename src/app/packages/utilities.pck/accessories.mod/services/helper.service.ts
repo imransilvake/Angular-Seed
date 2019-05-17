@@ -159,6 +159,6 @@ export class HelperService {
 	 * @param value
 	 */
 	public static getFirstLetter(value: string) {
-		return value.match(/\b\w/g).join('')
+		return value.match(/\b\w/g).join('');
 	}
 }

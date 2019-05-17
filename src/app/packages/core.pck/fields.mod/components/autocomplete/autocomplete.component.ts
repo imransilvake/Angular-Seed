@@ -51,7 +51,7 @@ export class AutocompleteComponent implements OnInit {
 	 *
 	 * @param item
 	 */
-	displayFn(item?: any) {
+	displayFn(item?: AutocompleteDefaultInterface) {
 		return item.text;
 	}
 
