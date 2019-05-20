@@ -341,7 +341,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Register_Form_HotelList_PlaceHolder" datatype="html">
 				<source>Select Hotel</source>
-				<target>wählen ...</target>
+				<target>Bitte Hotel wählen</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/register/register.component.html
@@ -351,7 +351,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Register_Form_Salutation_PlaceHolder" datatype="html">
 				<source>Select Salutation</source>
-				<target>Anrede</target>
+				<target>Bitte Anrede wählen</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/register/register.component.html
@@ -872,7 +872,7 @@
 			</trans-unit>
 			<trans-unit id="Member_Profile_Update_Profile_Title" datatype="html">
 				<source>Profile</source>
-				<target>Profile</target>
+				<target>Profil</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/update-profile/update-profile.component.html</context>
 					<context context-type="linenumber">3</context>
@@ -880,7 +880,7 @@
 			</trans-unit>
 			<trans-unit id="Member_Profile_Update_Profile_Form_Salutation_Label" datatype="html">
 				<source>Salutation*</source>
-				<target>Select Salutation*</target>
+				<target>Anrede*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/member.mod/components/profile/update-profile/update-profile.component.html
@@ -890,7 +890,7 @@
 			</trans-unit>
 			<trans-unit id="Member_Profile_Update_Profile_Form_Salutation_PlaceHolder" datatype="html">
 				<source>Select Salutation</source>
-				<target>Select Salutation</target>
+				<target>Bitte Anrede wählen</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/update-profile/update-profile.component.html</context>
 					<context context-type="linenumber">23</context>
@@ -930,7 +930,7 @@
 			</trans-unit>
 			<trans-unit id="Member_Profile_Update_Profile_Form_Email_Label" datatype="html">
 				<source>Email*</source>
-				<target>E-Mail*</target>
+				<target>E-Mail / Benutzername*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/update-profile/update-profile.component.html</context>
 					<context context-type="linenumber">64</context>
@@ -946,10 +946,98 @@
 			</trans-unit>
 			<trans-unit id="Member_Profile_Update_Profile_Form_Submit_Button" datatype="html">
 				<source>Update</source>
-				<target>Aktualisieren</target>
+				<target>Speichern</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/update-profile/update-profile.component.html</context>
 					<context context-type="linenumber">79</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Member_Profile_Change_Password_Title" datatype="html">
+				<source>Change Password</source>
+				<target>Ändere Passwort</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/change-password/change-password.component.html</context>
+					<context context-type="linenumber">3</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Member_Profile_Change_Password_Form_Current_Password_Label" datatype="html">
+				<source>Current Password*</source>
+				<target>Aktuelles Passwort</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/change-password/change-password.component.html</context>
+					<context context-type="linenumber">14</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Member_Profile_Change_Password_Form_Current_Password_PlaceHolder" datatype="html">
+				<source>Current Password</source>
+				<target>Bitte aktuelles Passwort eingeben</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/change-password/change-password.component.html</context>
+					<context context-type="linenumber">21</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Member_Profile_Change_Password_Form_New_Password_Label" datatype="html">
+				<source>New Password*</source>
+				<target>Neues Passwort</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/change-password/change-password.component.html</context>
+					<context context-type="linenumber">34</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Member_Profile_Change_Password_Form_New_Password_PlaceHolder" datatype="html">
+				<source>New Password</source>
+				<target>Bitte neues Passwort eingeben</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/change-password/change-password.component.html</context>
+					<context context-type="linenumber">41</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Member_Profile_Change_Password_Form_Confirm_New_Password_Label" datatype="html">
+				<source>Confirm New Password*</source>
+				<target>Wiederhole Passwort</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/change-password/change-password.component.html</context>
+					<context context-type="linenumber">49</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Member_Profile_Change_Password_Form_Confirm_New_Password_PlaceHolder" datatype="html">
+				<source>Confirm New Password</source>
+				<target>Bitte neues Passwort eingeben</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/change-password/change-password.component.html</context>
+					<context context-type="linenumber">56</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Member_Profile_Change_Password_Form_Submit_Button" datatype="html">
+				<source>Change</source>
+				<target>Ändern</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/change-password/change-password.component.html</context>
+					<context context-type="linenumber">67</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Member_Profile_Hotel_List_Title" datatype="html">
+				<source>Assigned Hotels</source>
+				<target>Zugewiesene Hotels</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/hotels-list/hotels-list.component.html</context>
+					<context context-type="linenumber">3</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Member_Profile_Profile_Cover_Change_Image" datatype="html">
+				<source>[Change Image]</source>
+				<target>Profilbild ändern</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/profile-cover/profile-cover.component.html</context>
+					<context context-type="linenumber">14</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Member_Profile_Profile_Cover_Last_Login" datatype="html">
+				<source>Last Login: <x id="INTERPOLATION" equiv-text="{{loginTime}}"/></source>
+				<target>Letzter Login: <x id="INTERPOLATION" equiv-text="{{loginTime}}"/></target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/profile-cover/profile-cover.component.html</context>
+					<context context-type="linenumber">24</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Error_Internet_Connection_Title" datatype="html">
