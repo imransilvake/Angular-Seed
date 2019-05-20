@@ -1,10 +1,13 @@
 // angular
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 // app
 import * as moment from 'moment';
 import { AuthService } from '../../../../authorization.mod/services/auth.service';
 import { HelperService } from '../../../../../utilities.pck/accessories.mod/services/helper.service';
+import { MemberService } from '../../../services/member.service';
 
 @Component({
 	selector: 'app-profile-cover',
@@ -12,16 +15,18 @@ import { HelperService } from '../../../../../utilities.pck/accessories.mod/serv
 	styleUrls: ['./profile-cover.component.scss']
 })
 
-export class ProfileCoverComponent implements OnInit {
+export class ProfileCoverComponent implements OnInit, OnDestroy {
 	public currentUser;
 	public userName;
 	public userNameLetters;
 	public loginTime;
 
-	constructor(private _authService: AuthService) {
-	}
+	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
-	ngOnInit() {
+	constructor(
+		private _authService: AuthService,
+		private _memberService: MemberService
+	) {
 		// get current user state
 		this.currentUser = this._authService.currentUserState;
 
@@ -30,8 +35,21 @@ export class ProfileCoverComponent implements OnInit {
 
 		// get first letters of name
 		this.userNameLetters = HelperService.getFirstLetter(this.userName);
+	}
 
-		// set login time
-		this.loginTime = moment.unix(this.currentUser.profile.auth_time).format('DD. MMMM. YYYY');
+	ngOnInit() {
+		this._memberService
+			.lastLogin
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => {
+				// set login time
+				this.loginTime = moment(res).format('DD. MMMM. YYYY');
+			});
+	}
+
+	ngOnDestroy() {
+		// remove subscriptions
+		this._ngUnSubscribe.next();
+		this._ngUnSubscribe.complete();
 	}
 }

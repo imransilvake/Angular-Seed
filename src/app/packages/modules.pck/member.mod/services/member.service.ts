@@ -1,5 +1,5 @@
 // angular
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { FormGroup } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -22,7 +22,8 @@ import { ChangePasswordInterface } from '../interfaces/change-password.interface
 
 @Injectable({ providedIn: 'root' })
 export class MemberService {
-	public userData;
+	public currentUser;
+	public lastLogin: EventEmitter<string> = new EventEmitter();
 
 	constructor(
 		private _loadingAnimationService: LoadingAnimationService,
@@ -33,7 +34,7 @@ export class MemberService {
 		private _store: Store<{ ErrorHandler: ErrorHandlerInterface }>
 	) {
 		// get current user state
-		this.userData = this._authService.currentUserState;
+		this.currentUser = this._authService.currentUserState;
 	}
 
 	/**
@@ -44,8 +45,8 @@ export class MemberService {
 	public memberFetchProfile(formFields: FormGroup) {
 		// payload
 		const payload = {
-			accessToken: this.userData.credentials.accessToken,
-			userName: this.userData.profile.email
+			accessToken: this.currentUser.credentials.accessToken,
+			userName: this.currentUser.profile.email
 		};
 
 		// service
@@ -53,10 +54,14 @@ export class MemberService {
 			.postAPI(AppServices['Member']['Fetch_Profile'], { bodyParams: payload })
 			.subscribe(res => {
 				if (res) {
+					// set forms fields
 					formFields.get('salutation').setValue(res.gender);
 					formFields.get('firstName').setValue(res.given_name);
 					formFields.get('lastName').setValue(res.family_name);
 					formFields.get('email').setValue(res.email);
+
+					// set last login
+					this.lastLogin.emit(res.lastLogin);
 				}
 			});
 	}
@@ -70,7 +75,7 @@ export class MemberService {
 		// payload
 		const payload = {
 			...formPayload,
-			accessToken: this.userData.credentials.accessToken
+			accessToken: this.currentUser.credentials.accessToken
 		};
 
 		// service
@@ -127,7 +132,7 @@ export class MemberService {
 		// payload
 		const payload = {
 			...formPayload,
-			accessToken: this.userData.credentials.accessToken
+			accessToken: this.currentUser.credentials.accessToken
 		};
 
 		// service

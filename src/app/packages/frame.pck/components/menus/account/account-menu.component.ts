@@ -1,7 +1,9 @@
 // angular
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { I18n } from '@ngx-translate/i18n-polyfill';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 // app
 import { HelperService } from '../../../../utilities.pck/accessories.mod/services/helper.service';
@@ -17,12 +19,14 @@ import { LoadingAnimationService } from '../../../../utilities.pck/loading-anima
 	templateUrl: './account-menu.component.html'
 })
 
-export class AccountMenuComponent implements OnInit {
+export class AccountMenuComponent implements OnInit, OnDestroy {
 	public routing = ROUTING;
 	public faIcons = [faEnvelope, faUser, faUserLock, faPowerOff];
 	public currentUser;
 	public userName;
 	public userNameLetters;
+
+	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
 		private _loadingAnimationService: LoadingAnimationService,
@@ -42,6 +46,12 @@ export class AccountMenuComponent implements OnInit {
 
 		// get first letters of name
 		this.userNameLetters = HelperService.getFirstLetter(this.userName);
+	}
+
+	ngOnDestroy() {
+		// remove subscriptions
+		this._ngUnSubscribe.next();
+		this._ngUnSubscribe.complete();
 	}
 
 	/**
@@ -97,6 +107,7 @@ export class AccountMenuComponent implements OnInit {
 		// dialog service
 		this._dialogService
 			.showDialog(data)
+			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
 				if (res) {
 					// logout
