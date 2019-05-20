@@ -43,7 +43,7 @@ export class ProfileCoverComponent implements OnInit, OnDestroy {
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
 				// set login time
-				this.loginTime = moment(res).format('DD. MMMM. YYYY');
+				this.loginTime = moment(res).format('DD. MMMM YYYY');
 			});
 	}
 
