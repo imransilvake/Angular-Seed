@@ -78,6 +78,6 @@ export class AutocompleteComponent implements OnInit {
 	 * @param data
 	 */
 	private filterDataResults(value: string, data: AutocompleteDefaultInterface[]) {
-		return data.filter(item => item.text.indexOf(value) !== -1);
+		return data.filter(item => item.text.toLowerCase().indexOf(value.toLowerCase()) !== -1);
 	}
 }
