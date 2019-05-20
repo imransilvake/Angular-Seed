@@ -249,7 +249,7 @@ export class AuthService {
 				const dialogPayload = {
 					type: DialogTypeEnum.NOTICE,
 					payload: {
-						icon: 'dialog_tick',
+						icon: 'dialog_email',
 						title: this._i18n({ value: 'Title: Password Reset', id: 'Auth_Forgot_Password_Form_Success_Title' }),
 						message: this._i18n({
 							value: 'Description: Forgot Password',
