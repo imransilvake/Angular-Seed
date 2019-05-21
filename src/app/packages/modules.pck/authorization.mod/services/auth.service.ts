@@ -122,10 +122,11 @@ export class AuthService {
 	 * perform login process
 	 *
 	 * @param formPayload
+	 * @param formFields
 	 * @param rememberMe
 	 * @param language
 	 */
-	public authLogin(formPayload: AuthLoginInterface, rememberMe: boolean, language: string) {
+	public authLogin(formPayload: AuthLoginInterface, formFields: FormGroup, rememberMe: boolean, language: string) {
 		this._proxyService
 			.postAPI(AppServices['Auth']['Login'], { bodyParams: formPayload })
 			.subscribe(res => {
@@ -173,6 +174,9 @@ export class AuthService {
 							id: 'Auth_Login_Error_UserNotFoundException_Description'
 						});
 
+						// set field to show error message
+						formFields.get('email').setErrors({ backendError: true, text: message });
+
 						// message
 						this.errorMessage.emit(message);
 						break;
@@ -182,6 +186,9 @@ export class AuthService {
 							id: 'Auth_Login_Error_UserNotConfirmedException_Description'
 						});
 
+						// set field to show error message
+						formFields.get('email').setErrors({ backendError: true, text: message });
+
 						// message
 						this.errorMessage.emit(message);
 						break;
@@ -190,6 +197,10 @@ export class AuthService {
 							value: 'Description: Password Invalid Exception',
 							id: 'Auth_Login_Error_PasswordInvalid_Description'
 						});
+
+						// set fields to show error message
+						formFields.get('email') && formFields.get('email').setErrors({ backendError: true, text: message });
+						formFields.get('password').setErrors({ backendError: true, text: message });
 
 						// message
 						this.errorMessage.emit(message);

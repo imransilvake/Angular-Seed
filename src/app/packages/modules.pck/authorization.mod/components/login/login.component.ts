@@ -119,6 +119,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 		};
 
 		// start login process
-		this._authService.authLogin(formPayload, this.rememberMe && this.rememberMe.checked, this.languageName.value);
+		this._authService.authLogin(formPayload, this.formFields, this.rememberMe && this.rememberMe.checked, this.languageName.value);
 	}
 }
