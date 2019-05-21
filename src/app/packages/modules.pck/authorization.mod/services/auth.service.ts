@@ -101,12 +101,16 @@ export class AuthService {
 					);
 			}, (err: HttpErrorResponse) => {
 				if (err.error.detail.code === 'UsernameExistsException') {
-					this.errorMessage.emit(
-						this._i18n({
-							value: 'Description: User Exists Exception',
-							id: 'Error_UsernameExistsException_Description'
-						})
-					);
+					const message = this._i18n({
+						value: 'Description: Username Exists Exception',
+						id: 'Auth_Register_Error_UsernameExistsException_Description'
+					});
+
+					// set field to show error message
+					formFields.get('email').setErrors({ backendError: true, text: message });
+
+					// message
+					this.errorMessage.emit(message);
 				}
 
 				// stop loading animation
@@ -237,6 +241,10 @@ export class AuthService {
 							id: 'Auth_Forgot_Password_Error_InvalidParameterException_Description'
 						});
 
+						// set field to show error message
+						formFields.get('email').setErrors({ backendError: true, text: message });
+
+						// message
 						this.errorMessage.emit(message);
 						break;
 					case 'UserNotFoundException':
@@ -245,7 +253,7 @@ export class AuthService {
 							id: 'Auth_Forgot_Password_Error_UserNotFoundException_Description'
 						});
 
-						// set email field to show error message
+						// set field to show error message
 						formFields.get('email').setErrors({ backendError: true, text: message });
 
 						// message
@@ -257,7 +265,7 @@ export class AuthService {
 							id: 'Auth_Forgot_Password_Error_InvalidFirstNameException_Description'
 						});
 
-						// set first name field to show error message
+						// set field to show error message
 						formFields.get('firstName').setErrors({ backendError: true, text: message });
 
 						// message
@@ -269,7 +277,7 @@ export class AuthService {
 							id: 'Auth_Forgot_Password_Error_InvalidLastNameException_Description'
 						});
 
-						// set first name field to show error message
+						// set field to show error message
 						formFields.get('lastName').setErrors({ backendError: true, text: message });
 
 						// message
