@@ -319,22 +319,25 @@ export class AuthService {
 						this._router.navigate([ROUTING.authorization.login]).then()
 					);
 			}, (err: HttpErrorResponse) => {
+				let message;
 				switch (err.error.detail.code) {
 					case 'CodeMismatchException':
-						this.errorMessage.emit(
-							this._i18n({
-								value: 'Description: Verification Code Exception',
-								id: 'Error_CodeMismatchException_Description'
-							})
-						);
+						message = this._i18n({
+							value: 'Description: Mismatch Verification Code Exception',
+							id: 'Auth_Reset_Password_Error_CodeMismatchException_Description'
+						});
+
+						// message
+						this.errorMessage.emit(message);
 						break;
 					case 'ExpiredCodeException':
-						this.errorMessage.emit(
-							this._i18n({
-								value: 'Description: Verification Code Exception',
-								id: 'Error_ExpiredCodeException_Description'
-							})
-						);
+						message = this._i18n({
+							value: 'Description: Expired Verification Code Exception',
+							id: 'Auth_Reset_Password_Error_ExpiredCodeException_Description'
+						});
+
+						// message
+						this.errorMessage.emit(message);
 						break;
 				}
 

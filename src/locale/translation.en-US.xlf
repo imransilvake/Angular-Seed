@@ -1179,26 +1179,6 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Error_CodeMismatchException_Description" datatype="html">
-				<source>Description: Verification Code Exception</source>
-				<target>The entered verification code is not correct. Please try another one!</target>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="Error_ExpiredCodeException_Description" datatype="html">
-				<source>Description: Verification Code Exception</source>
-				<target>Invalid code provided, please request a code again.</target>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/modules.pck/authorization.mod/services/auth.service.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
 			<trans-unit id="Error_NotAuthorizedException_Title" datatype="html">
 				<source>Title: User Not Authorized Exception</source>
 				<target>Not Authorized Exception</target>
@@ -1463,6 +1443,27 @@
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/modules.pck/authorization.mod/components/reset-password/reset-password.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Reset_Password_Error_CodeMismatchException_Description" datatype="html">
+				<source>Description: Mismatch Verification Code Exception</source>
+				<target>The entered verification code is not correct. Please try another one!</target>
+				<target></target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/services/auth.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Reset_Password_Error_ExpiredCodeException_Description" datatype="html">
+				<source>Description: Expired Verification Code Exception</source>
+				<target>Invalid code is provided, please request a code again.</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/services/auth.service.ts
 					</context>
 					<context context-type="linenumber">1</context>
 				</context-group>
