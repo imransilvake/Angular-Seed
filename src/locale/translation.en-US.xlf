@@ -993,7 +993,7 @@
 			</trans-unit>
 			<trans-unit id="Member_Profile_Change_Password_Form_Confirm_New_Password_Label" datatype="html">
 				<source>Confirm New Password*</source>
-				<target>Confirm password</target>
+				<target>Confirm new password</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/change-password/change-password.component.html</context>
 					<context context-type="linenumber">49</context>
