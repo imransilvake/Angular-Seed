@@ -53,6 +53,15 @@
 								margin-top: 20px;
 							}
 
+							&.ham-btn-error {
+								display: flex;
+
+								p {
+									color: cd-palette($cd-color, 1009);
+									margin-left: 20px;
+								}
+							}
+
 							&.ham-sby-remember {
 								align-items: center;
 								color: cd-palette($cd-color, 1004);
@@ -119,5 +128,27 @@
 	@include cd-media(desktop, smartphone) {
 		margin: 0 auto;
 		width: 100%;
+	}
+
+	@include cd-media(desktop, mini) {
+		.ham-row {
+			.ham-col {
+				&:last-child {
+					.ham-form {
+						.cd-row {
+							.cd-col {
+								&.ham-btn-error {
+									display: block;
+
+									p {
+										margin: 20px 0 0;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 }

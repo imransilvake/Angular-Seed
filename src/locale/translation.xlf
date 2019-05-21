@@ -936,15 +936,6 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Error_InvalidParameterException_Title" datatype="html">
-				<source>Title: Invalid Parameter Exception</source>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
 			<trans-unit id="Error_InvalidParameterException_Description" datatype="html">
 				<source>Description: Invalid Parameter Exception</source>
 				<context-group purpose="location">
@@ -1023,26 +1014,8 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Error_UserNotFoundException_Title" datatype="html">
-				<source>Title: User Not Found Exception</source>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
 			<trans-unit id="Error_UserNotFoundException_Description" datatype="html">
 				<source>Description: User Not Found Exception</source>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="Error_UsernameExistsException_Title" datatype="html">
-				<source>Title: User Exists Exception</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
@@ -1059,26 +1032,8 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Error_UserNotConfirmedException_Title" datatype="html">
-				<source>Title: User Not Confirmed Exception</source>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
 			<trans-unit id="Error_UserNotConfirmedException_Description" datatype="html">
 				<source>Description: User Not Confirmed Exception</source>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="Error_CodeMismatchException_Title" datatype="html">
-				<source>Title: Verification Code Exception</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
@@ -1091,6 +1046,15 @@
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Error_ExpiredCodeException_Description" datatype="html">
+				<source>Description: Verification Code Exception</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/services/auth.service.ts
 					</context>
 					<context context-type="linenumber">1</context>
 				</context-group>
@@ -1203,15 +1167,6 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Error_PasswordInvalid_Title" datatype="html">
-				<source>Title: Password Invalid Exception</source>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/modules.pck/authorization.mod/components/lock-screen/lock-screen.component.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
 			<trans-unit id="Error_PasswordInvalid_Description" datatype="html">
 				<source>Description: Password Invalid Exception</source>
 				<context-group purpose="location">
@@ -1262,15 +1217,6 @@
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/modules.pck/authorization.mod/services/salutation-list.service.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="Error_BlockUserException_Title" datatype="html">
-				<source>Title: Block User Exception</source>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/modules.pck/authorization.mod/components/login/login.component.ts
 					</context>
 					<context context-type="linenumber">1</context>
 				</context-group>

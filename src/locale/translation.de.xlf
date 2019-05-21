@@ -1080,16 +1080,6 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Error_InvalidParameterException_Title" datatype="html">
-				<source>Title: Invalid Parameter Exception</source>
-				<target>Ungültige Parameterausnahme</target>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
 			<trans-unit id="Error_InvalidParameterException_Description" datatype="html">
 				<source>Description: Invalid Parameter Exception</source>
 				<target>Bitte wenden Sie sich an das Support-Team, um weitere Informationen zu diesem Thema zu erhalten.</target>
@@ -1170,29 +1160,9 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Error_UserNotFoundException_Title" datatype="html">
-				<source>Title: User Not Found Exception</source>
-				<target>Benutzer wurde nicht gefunden</target>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
 			<trans-unit id="Error_UserNotFoundException_Description" datatype="html">
 				<source>Description: User Not Found Exception</source>
 				<target>Zu den Angaben konnte kein Profil in unserem System ermittelt werden. Bitte prüfe deine Angaben.</target>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="Error_UsernameExistsException_Title" datatype="html">
-				<source>Title: User Exists Exception</source>
-				<target>Ausnahme: Benutzer existiert</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
@@ -1210,29 +1180,9 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Error_UserNotConfirmedException_Title" datatype="html">
-				<source>Title: User Not Confirmed Exception</source>
-				<target>Benutzer nicht bestätigte Ausnahme</target>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
 			<trans-unit id="Error_UserNotConfirmedException_Description" datatype="html">
 				<source>Description: User Not Confirmed Exception</source>
 				<target>Der angegebene Benutzer ist noch nicht bestätigt. Bitte versuchen Sie es später erneut oder wenden Sie sich an das Support-Team.</target>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="Error_CodeMismatchException_Title" datatype="html">
-				<source>Title: Verification Code Exception</source>
-				<target>Falscher Bestätigungscode</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
@@ -1246,6 +1196,16 @@
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Error_ExpiredCodeException_Description" datatype="html">
+				<source>Description: Verification Code Exception</source>
+				<target>Ungültiger Code angegeben, bitte fordern Sie erneut einen Code an.</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/services/auth.service.ts
 					</context>
 					<context context-type="linenumber">1</context>
 				</context-group>
@@ -1368,19 +1328,9 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Error_PasswordInvalid_Title" datatype="html">
-				<source>Title: Password Invalid Exception</source>
-				<target>Passwort ungültig Ausnahme</target>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/modules.pck/authorization.mod/components/lock-screen/lock-screen.component.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
 			<trans-unit id="Error_PasswordInvalid_Description" datatype="html">
 				<source>Description: Password Invalid Exception</source>
-				<target>Das Passwort ist falsch</target>
+				<target>The username and password combination is incorrect. Please check your details.</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/modules.pck/authorization.mod/components/lock-screen/lock-screen.component.ts
@@ -1434,16 +1384,6 @@
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/modules.pck/authorization.mod/services/salutation-list.service.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="Error_BlockUserException_Title" datatype="html">
-				<source>Title: Block User Exception</source>
-				<target>Block User Exception</target>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/modules.pck/authorization.mod/components/login/login.component.ts
 					</context>
 					<context context-type="linenumber">1</context>
 				</context-group>

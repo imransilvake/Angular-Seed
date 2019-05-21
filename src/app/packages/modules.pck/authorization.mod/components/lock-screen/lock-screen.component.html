@@ -1,50 +1,53 @@
 <div class="cd-vh-center ham-auth-common">
 	<div class="cd-row ham-row">
-		<div class="cd-col ham-col">
-			<!-- Profile -->
-			<div class="ham-profile">
-				<img [src]="'assets/images/logo.png'" alt="lock-screen"/>
-				<h5 *ngIf="currentUser">{{ userName }}</h5>
+		<!-- Profile -->
+		<div class="cd-col ham-profile">
+			<img [src]="'assets/images/logo.png'" alt="lock-screen"/>
+			<h5 *ngIf="currentUser">{{ userName }}</h5>
+		</div>
+
+		<!-- Content -->
+		<div class="cd-col ham-content">
+			<!-- Lock -->
+			<div class="ham-block ham-locked" i18n="@@Auth_Lock_Screen_Status">
+				<mat-icon>lock</mat-icon>
+				Locked
 			</div>
 
-			<!-- Content -->
-			<div class="ham-content">
-				<!-- Lock -->
-				<div class="ham-block ham-locked" i18n="@@Auth_Lock_Screen_Status">
-					<mat-icon>lock</mat-icon>
-					Locked
-				</div>
-
-				<!-- Form -->
-				<form class="ham-block ham-form" (ngSubmit)="onSubmitForm()" (keyup.enter)="isFormValid && onSubmitForm()">
-					<app-input
-						[layoutStyleType]="lockPasswordStyleType"
-						[layoutStyleData]="{
+			<!-- Form -->
+			<form class="ham-block ham-form" (ngSubmit)="onSubmitForm()" (keyup.enter)="isFormValid && onSubmitForm()">
+				<app-input
+					[layoutStyleType]="lockPasswordStyleType"
+					[layoutStyleData]="{
 							status: isFormValid,
 							changeDirection: true,
 							button: true,
 							icon: !isFormValid ? lockPasswordIcons[0] : lockPasswordIcons[1]
 						}"
-						[inputId]="'lock-password-id'"
-						[inputType]="'password'"
-						[inputName]="'password'"
-						[hidePassword]="true"
-						[showHidePassword]="true"
-						inputPlaceHolder="Password"
-						i18n-inputPlaceHolder="@@Auth_Lock_Screen_Form_Password_PlaceHolder"
-						[showHint]="true"
-						hintText="Password Hint"
-						i18n-hintText="@@Auth_Lock_Screen_Form_Password_Hint"
-						[control]="password">
-					</app-input>
-				</form>
+					[inputId]="'lock-password-id'"
+					[inputType]="'password'"
+					[inputName]="'password'"
+					[hidePassword]="true"
+					[showHidePassword]="true"
+					inputPlaceHolder="Password"
+					i18n-inputPlaceHolder="@@Auth_Lock_Screen_Form_Password_PlaceHolder"
+					[showHint]="true"
+					hintText="Password Hint"
+					i18n-hintText="@@Auth_Lock_Screen_Form_Password_Hint"
+					[control]="password">
+				</app-input>
+			</form>
 
-				<!-- Note -->
-				<div class="cd-col">
-					<p class="ham-block" i18n="@@Auth_Lock_Screen_Note">
-						Not {{ userName }}? <a (click)="onClickLogoutUser()">Click here</a>
-					</p>
-				</div>
+			<!-- Error Message -->
+			<div class="ham-block ham-error">
+				<p *ngIf="errorMessage">{{errorMessage}}</p>
+			</div>
+
+			<!-- Note -->
+			<div class="ham-block">
+				<p i18n="@@Auth_Lock_Screen_Note">
+					Not {{ userName }}? <a (click)="onClickLogoutUser()">Click here</a>
+				</p>
 			</div>
 		</div>
 	</div>

@@ -38,6 +38,7 @@ export class LockScreenComponent implements OnInit, AfterViewInit, OnDestroy {
 	public lockPasswordStyleType = InputStyleEnum.INFO;
 	public currentUser;
 	public userName;
+	public errorMessage;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
@@ -67,6 +68,11 @@ export class LockScreenComponent implements OnInit, AfterViewInit, OnDestroy {
 
 		// get user name
 		this.userName = HelperService.capitalizeString(this.currentUser.profile.name);
+
+		// listen to error message
+		this._authService.errorMessage
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => this.errorMessage = res);
 	}
 
 	ngAfterViewInit() {

@@ -1,5 +1,5 @@
 // angular
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { I18n } from '@ngx-translate/i18n-polyfill';
@@ -11,7 +11,6 @@ import { Store } from '@ngrx/store';
 
 // app
 import * as moment from 'moment';
-import * as ErrorHandlerActions from '../../../utilities.pck/error-handler.mod/store/actions/error-handler.actions';
 import * as SessionActions from '../../../core.pck/session.mod/store/actions/session.actions';
 import { AppOptions, AppServices, LocalStorageItems, SessionStorageItems } from '../../../../../app.config';
 import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service';
@@ -25,20 +24,20 @@ import { ROUTING } from '../../../../../environments/environment';
 import { SessionInterface } from '../../../core.pck/session.mod/interfaces/session.interface';
 import { SessionsEnum } from '../../../core.pck/session.mod/enums/sessions.enum';
 import { HelperService } from '../../../utilities.pck/accessories.mod/services/helper.service';
-import { ErrorHandlerPayloadInterface } from '../../../utilities.pck/error-handler.mod/interfaces/error-handler-payload.interface';
 import { LoadingAnimationService } from '../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { DialogTypeEnum } from '../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { DialogService } from '../../../utilities.pck/dialog.mod/services/dialog.service';
-import { ErrorHandlerInterface } from '../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 
 @Injectable()
 export class AuthService {
+	public errorMessage: EventEmitter<string> = new EventEmitter();
+
 	constructor(
 		private _loadingAnimationService: LoadingAnimationService,
 		private _proxyService: ProxyService,
 		private _storageService: StorageService,
 		private _router: Router,
-		private _store: Store<{ SessionInterface: SessionInterface, ErrorHandler: ErrorHandlerInterface }>,
+		private _store: Store<{ SessionInterface: SessionInterface }>,
 		private _i18n: I18n,
 		private _dialogService: DialogService
 	) {
@@ -102,19 +101,12 @@ export class AuthService {
 					);
 			}, (err: HttpErrorResponse) => {
 				if (err.error.detail.code === 'UsernameExistsException') {
-					const errorPayload: ErrorHandlerPayloadInterface = {
-						icon: 'error_icon',
-						title: this._i18n({
-							value: 'Title: User Exists Exception',
-							id: 'Error_UsernameExistsException_Title'
-						}),
-						message: this._i18n({
+					this.errorMessage.emit(
+						this._i18n({
 							value: 'Description: User Exists Exception',
 							id: 'Error_UsernameExistsException_Description'
-						}),
-						buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-					};
-					this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(errorPayload));
+						})
+					);
 				}
 
 				// stop loading animation
@@ -160,67 +152,38 @@ export class AuthService {
 						.then(() => this._loadingAnimationService.stopLoadingAnimation());
 				}
 			}, (err: HttpErrorResponse) => {
-				let errorPayload: ErrorHandlerPayloadInterface;
 				switch (err.error.detail.code) {
 					case 'UserLambdaValidationException':
-						errorPayload = {
-							icon: 'error_icon',
-							title: this._i18n({
-								value: 'Title: Block User Exception',
-								id: 'Error_BlockUserException_Title'
-							}),
-							message: this._i18n({
+						this.errorMessage.emit(
+							this._i18n({
 								value: 'Description: Block User Exception',
 								id: 'Error_BlockUserException_Description'
-							}),
-							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-						};
-						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(errorPayload));
+							})
+						);
 						break;
 					case 'UserNotFoundException':
-						errorPayload = {
-							icon: 'error_icon',
-							title: this._i18n({
-								value: 'Title: User Not Found Exception',
-								id: 'Error_UserNotFoundException_Title'
-							}),
-							message: this._i18n({
+						this.errorMessage.emit(
+							this._i18n({
 								value: 'Description: User Not Found Exception',
 								id: 'Error_UserNotFoundException_Description'
-							}),
-							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-						};
-						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(errorPayload));
+							})
+						);
 						break;
 					case 'UserNotConfirmedException':
-						errorPayload = {
-							icon: 'error_icon',
-							title: this._i18n({
-								value: 'Title: User Not Confirmed Exception',
-								id: 'Error_UserNotConfirmedException_Title'
-							}),
-							message: this._i18n({
+						this.errorMessage.emit(
+							this._i18n({
 								value: 'Description: User Not Confirmed Exception',
 								id: 'Error_UserNotConfirmedException_Description'
-							}),
-							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-						};
-						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(errorPayload));
+							})
+						);
 						break;
 					case 'NotAuthorizedException':
-						errorPayload = {
-							icon: 'error_icon',
-							title: this._i18n({
-								value: 'Title: Password Invalid Exception',
-								id: 'Error_PasswordInvalid_Title'
-							}),
-							message: this._i18n({
+						this.errorMessage.emit(
+							this._i18n({
 								value: 'Description: Password Invalid Exception',
 								id: 'Error_PasswordInvalid_Description'
-							}),
-							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-						};
-						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(errorPayload));
+							})
+						);
 						break;
 				}
 
@@ -266,37 +229,22 @@ export class AuthService {
 						this._router.navigate([ROUTING.authorization.login]).then()
 					);
 			}, (err: HttpErrorResponse) => {
-				let errorPayload: ErrorHandlerPayloadInterface;
 				switch (err.error.detail.code) {
 					case 'InvalidParameterException':
-						errorPayload = {
-							icon: 'error_icon',
-							title: this._i18n({
-								value: 'Title: Invalid Parameter Exception',
-								id: 'Error_InvalidParameterException_Title'
-							}),
-							message: this._i18n({
+						this.errorMessage.emit(
+							this._i18n({
 								value: 'Description: Invalid Parameter Exception',
 								id: 'Error_InvalidParameterException_Description'
-							}),
-							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-						};
-						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(errorPayload));
+							})
+						);
 						break;
 					case 'UserNotFoundException':
-						errorPayload = {
-							icon: 'error_icon',
-							title: this._i18n({
-								value: 'Title: User Not Found Exception',
-								id: 'Error_UserNotFoundException_Title'
-							}),
-							message: this._i18n({
+						this.errorMessage.emit(
+							this._i18n({
 								value: 'Description: User Not Found Exception',
 								id: 'Error_UserNotFoundException_Description'
-							}),
-							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-						};
-						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(errorPayload));
+							})
+						);
 						break;
 				}
 
@@ -342,20 +290,23 @@ export class AuthService {
 						this._router.navigate([ROUTING.authorization.login]).then()
 					);
 			}, (err: HttpErrorResponse) => {
-				if (err.error.detail.code === 'CodeMismatchException') {
-					const errorPayload: ErrorHandlerPayloadInterface = {
-						icon: 'error_icon',
-						title: this._i18n({
-							value: 'Title: Verification Code Exception',
-							id: 'Error_CodeMismatchException_Title'
-						}),
-						message: this._i18n({
-							value: 'Description: Verification Code Exception',
-							id: 'Error_CodeMismatchException_Description'
-						}),
-						buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-					};
-					this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(errorPayload));
+				switch (err.error.detail.code) {
+					case 'CodeMismatchException':
+						this.errorMessage.emit(
+							this._i18n({
+								value: 'Description: Verification Code Exception',
+								id: 'Error_CodeMismatchException_Description'
+							})
+						);
+						break;
+					case 'ExpiredCodeException':
+						this.errorMessage.emit(
+							this._i18n({
+								value: 'Description: Verification Code Exception',
+								id: 'Error_ExpiredCodeException_Description'
+							})
+						);
+						break;
 				}
 
 				// stop loading animation

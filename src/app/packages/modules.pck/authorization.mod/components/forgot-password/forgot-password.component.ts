@@ -1,7 +1,8 @@
 // angular
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 // app
 import { ROUTING } from '../../../../../../environments/environment';
@@ -16,9 +17,10 @@ import { AuthService } from '../../services/auth.service';
 	styleUrls: ['../auth-common.component.scss']
 })
 
-export class ForgotPasswordComponent implements OnDestroy {
+export class ForgotPasswordComponent implements OnInit, OnDestroy {
 	public routing = ROUTING;
 	public formFields;
+	public errorMessage;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
@@ -45,6 +47,13 @@ export class ForgotPasswordComponent implements OnDestroy {
 				ValidationService.emailValidator
 			])
 		});
+	}
+
+	ngOnInit() {
+		// listen to error message
+		this._authService.errorMessage
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => this.errorMessage = res);
 	}
 
 	ngOnDestroy() {

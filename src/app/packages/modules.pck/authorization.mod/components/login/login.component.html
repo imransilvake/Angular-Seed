@@ -65,8 +65,12 @@
 					</div>
 
 					<!-- Button -->
-					<div class="cd-col">
-						<button mat-button type="submit" class="ham-button-1" [disabled]="!isFormValid" i18n="@@Auth_Login_Form_Submit_Button">Login</button>
+					<div class="cd-col ham-btn-error">
+						<div>
+							<button mat-button type="submit" class="ham-button-1" [disabled]="!isFormValid" i18n="@@Auth_Login_Form_Submit_Button">Login</button>
+						</div>
+
+						<p *ngIf="errorMessage">{{errorMessage}}</p>
 					</div>
 
 					<!-- Note -->
