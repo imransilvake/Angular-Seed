@@ -1460,7 +1460,6 @@
 			<trans-unit id="Auth_Reset_Password_Error_CodeMismatchException_Description" datatype="html">
 				<source>Description: Mismatch Verification Code Exception</source>
 				<target>The entered verification code is not correct. Please try another one!</target>
-				<target></target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/modules.pck/authorization.mod/services/auth.service.ts
