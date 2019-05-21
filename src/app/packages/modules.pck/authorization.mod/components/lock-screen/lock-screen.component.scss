@@ -5,14 +5,14 @@
 	color: cd-palette($cd-color, 1001);
 	padding: 30px 25px;
 
-	.ham-row {
+	.cd-row {
 		max-width: 500px;
 		min-width: 500px;
 
-		.ham-col {
+		.cd-col {
 			padding: 0;
 
-			.ham-profile {
+			&.ham-profile {
 				text-align: center;
 
 				img {
@@ -30,7 +30,7 @@
 				}
 			}
 
-			.ham-content {
+			&.ham-content {
 				.ham-block {
 					color: cd-palette($cd-color, 1004);
 					margin: 20px auto 0;
@@ -48,6 +48,12 @@
 							width: 15px;
 						}
 					}
+
+					&.ham-error {
+						p {
+							color: cd-palette($cd-color, 1009);
+						}
+					}
 				}
 			}
 		}
@@ -57,7 +63,7 @@
 	@include cd-media(desktop, tablet) {
 		width: 65%;
 
-		.ham-row {
+		.cd-row {
 			max-width: 100%;
 			min-width: auto;
 		}
@@ -70,9 +76,9 @@
 	@include cd-media(desktop, mini) {
 		width: 90%;
 
-		.ham-row {
-			.ham-col {
-				.ham-content {
+		.cd-row {
+			.cd-col {
+				&.ham-content {
 					.ham-block {
 						width: auto;
 
