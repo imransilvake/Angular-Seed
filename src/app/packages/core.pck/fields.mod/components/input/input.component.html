@@ -94,6 +94,9 @@
 			<p *ngSwitchCase="'confirmPassword'" i18n="@@Fields_Input_Error_Password_Mismatch">
 				The two passwords are not identical.
 			</p>
+			<p *ngSwitchCase="'backendError'">
+				Invalid Field!
+			</p>
 			<p i18n="@@Fields_Input_Error_Default" *ngSwitchDefault>
 				Unknown error occurred
 			</p>

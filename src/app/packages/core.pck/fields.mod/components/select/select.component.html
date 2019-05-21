@@ -45,6 +45,9 @@
 			<p *ngSwitchCase="'required'" i18n="@@Fields_Select_Error_Required">
 				Required field
 			</p>
+			<p *ngSwitchCase="'backendError'">
+				Invalid Field!
+			</p>
 			<p i18n="@@Fields_Select_Error_Default" *ngSwitchDefault>
 				Unknown error occurred
 			</p>

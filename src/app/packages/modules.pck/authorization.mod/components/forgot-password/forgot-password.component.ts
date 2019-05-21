@@ -90,6 +90,8 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
 
 		// payload
 		const formPayload: AuthForgotInterface = {
+			firstname: this.firstName.value,
+			lastname: this.lastName.value,
 			email: this.email.value
 		};
 

@@ -50,6 +50,9 @@
 			<p *ngSwitchCase="'invalidOption'" i18n="@@Fields_AutoComplete_Error_Invalid_Option">
 				Please select a valid option from the list!
 			</p>
+			<p *ngSwitchCase="'backendError'">
+				Invalid Field!
+			</p>
 			<p i18n="@@Fields_AutoComplete_Error_Default" *ngSwitchDefault>
 				Unknown error occurred
 			</p>

@@ -1160,16 +1160,6 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Error_UserNotFoundException_Description" datatype="html">
-				<source>Description: User Not Found Exception</source>
-				<target>Zu den Angaben konnte kein Profil in unserem System ermittelt werden. Bitte prüfe deine Angaben.</target>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
 			<trans-unit id="Error_UsernameExistsException_Description" datatype="html">
 				<source>Description: User Exists Exception</source>
 				<target>Der Benutzer ist bereits mit der angegebenen E-Mail-Adresse in unserem System vorhanden. Bitte verwenden Sie eine andere E-Mail-Adresse.</target>
@@ -1292,6 +1282,46 @@
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Forgot_Password_Error_InvalidParameterException_Description" datatype="html">
+				<source>Description: Invalid Parameter Exception</source>
+				<target>Das Kennwort für den Benutzer kann nicht zurückgesetzt werden, da keine registrierte / bestätigte E-Mail-Adresse oder Telefonnummer vorhanden ist.</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/services/auth.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Forgot_Password_Error_UserNotFoundException_Description" datatype="html">
+				<source>Description: User Not Found Exception</source>
+				<target>Zu den Angaben konnte kein Profil in unserem System ermittelt werden. Bitte prüfe deine Angaben.</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/services/auth.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Forgot_Password_Error_InvalidFirstNameException_Description" datatype="html">
+				<source>Description: Invalid First Name Exception</source>
+				<target>Vorname ist ungültig!</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/services/auth.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Forgot_Password_Error_InvalidLastNameException_Description" datatype="html">
+				<source>Description: Invalid Last Name Exception</source>
+				<target>Nachname ist ungültig!</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/services/auth.service.ts
 					</context>
 					<context context-type="linenumber">1</context>
 				</context-group>

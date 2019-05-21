@@ -229,26 +229,51 @@ export class AuthService {
 						this._router.navigate([ROUTING.authorization.login]).then()
 					);
 			}, (err: HttpErrorResponse) => {
+				let message;
 				switch (err.error.detail.code) {
 					case 'InvalidParameterException':
-						this.errorMessage.emit(
-							this._i18n({
-								value: 'Description: Invalid Parameter Exception',
-								id: 'Error_InvalidParameterException_Description'
-							})
-						);
+						message = this._i18n({
+							value: 'Description: Invalid Parameter Exception',
+							id: 'Auth_Forgot_Password_Error_InvalidParameterException_Description'
+						});
+
+						this.errorMessage.emit(message);
 						break;
 					case 'UserNotFoundException':
+						message = this._i18n({
+							value: 'Description: User Not Found Exception',
+							id: 'Auth_Forgot_Password_Error_UserNotFoundException_Description'
+						});
+
 						// set email field to show error message
-						formFields.get('email').setErrors({ email: true });
+						formFields.get('email').setErrors({ backendError: true, text: message });
 
 						// message
-						this.errorMessage.emit(
-							this._i18n({
-								value: 'Description: User Not Found Exception',
-								id: 'Error_UserNotFoundException_Description'
-							})
-						);
+						this.errorMessage.emit(message);
+						break;
+					case 'InvalidFirstName':
+						message = this._i18n({
+							value: 'Description: Invalid First Name Exception',
+							id: 'Auth_Forgot_Password_Error_InvalidFirstNameException_Description'
+						});
+
+						// set first name field to show error message
+						formFields.get('firstName').setErrors({ backendError: true, text: message });
+
+						// message
+						this.errorMessage.emit(message);
+						break;
+					case 'InvalidLastName':
+						message = this._i18n({
+							value: 'Description: Invalid Last Name Exception',
+							id: 'Auth_Forgot_Password_Error_InvalidLastNameException_Description'
+						});
+
+						// set first name field to show error message
+						formFields.get('lastName').setErrors({ backendError: true, text: message });
+
+						// message
+						this.errorMessage.emit(message);
 						break;
 				}
 
