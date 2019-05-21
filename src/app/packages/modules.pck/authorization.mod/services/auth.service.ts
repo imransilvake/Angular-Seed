@@ -156,38 +156,43 @@ export class AuthService {
 						.then(() => this._loadingAnimationService.stopLoadingAnimation());
 				}
 			}, (err: HttpErrorResponse) => {
+				let message;
 				switch (err.error.detail.code) {
 					case 'UserLambdaValidationException':
-						this.errorMessage.emit(
-							this._i18n({
-								value: 'Description: Block User Exception',
-								id: 'Error_BlockUserException_Description'
-							})
-						);
+						message = this._i18n({
+							value: 'Description: Block User Exception',
+							id: 'Auth_Login_Error_BlockUserException_Description'
+						});
+
+						// message
+						this.errorMessage.emit(message);
 						break;
 					case 'UserNotFoundException':
-						this.errorMessage.emit(
-							this._i18n({
-								value: 'Description: User Not Found Exception',
-								id: 'Error_UserNotFoundException_Description'
-							})
-						);
+						message = this._i18n({
+							value: 'Description: User Not Found Exception',
+							id: 'Auth_Login_Error_UserNotFoundException_Description'
+						});
+
+						// message
+						this.errorMessage.emit(message);
 						break;
 					case 'UserNotConfirmedException':
-						this.errorMessage.emit(
-							this._i18n({
-								value: 'Description: User Not Confirmed Exception',
-								id: 'Error_UserNotConfirmedException_Description'
-							})
-						);
+						message = this._i18n({
+							value: 'Description: User Not Confirmed Exception',
+							id: 'Auth_Login_Error_UserNotConfirmedException_Description'
+						});
+
+						// message
+						this.errorMessage.emit(message);
 						break;
 					case 'NotAuthorizedException':
-						this.errorMessage.emit(
-							this._i18n({
-								value: 'Description: Password Invalid Exception',
-								id: 'Error_PasswordInvalid_Description'
-							})
-						);
+						message = this._i18n({
+							value: 'Description: Password Invalid Exception',
+							id: 'Auth_Login_Error_PasswordInvalid_Description'
+						});
+
+						// message
+						this.errorMessage.emit(message);
 						break;
 				}
 

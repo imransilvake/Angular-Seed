@@ -1159,16 +1159,6 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Error_UserNotConfirmedException_Description" datatype="html">
-				<source>Description: User Not Confirmed Exception</source>
-				<target>The given user is not yet confirmed. Please try again later or contact the support team.</target>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
 			<trans-unit id="Error_NotAuthorizedException_Title" datatype="html">
 				<source>Title: User Not Authorized Exception</source>
 				<target>Not Authorized Exception</target>
@@ -1327,16 +1317,6 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Error_PasswordInvalid_Description" datatype="html">
-				<source>Description: Password Invalid Exception</source>
-				<target>The combination of user name and password is wrong. Please check your details.</target>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/modules.pck/authorization.mod/components/lock-screen/lock-screen.component.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
 			<trans-unit id="Language_English" datatype="html">
 				<source>English</source>
 				<target>English</target>
@@ -1387,16 +1367,6 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Error_BlockUserException_Description" datatype="html">
-				<source>Description: Block User Exception</source>
-				<target>Three times wrong. Please wait 30 seconds.</target>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/modules.pck/authorization.mod/components/login/login.component.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
 			<trans-unit id="Auth_Register_Form_Success_Title" datatype="html">
 				<source>Title: Success</source>
 				<target>Registration was successful</target>
@@ -1420,6 +1390,46 @@
 			<trans-unit id="Auth_Register_Error_UsernameExistsException_Description" datatype="html">
 				<source>Description: Username Exists Exception</source>
 				<target>User already exists on our system with the provided email address. Please use another email address.</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/services/auth.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Login_Error_BlockUserException_Description" datatype="html">
+				<source>Description: Block User Exception</source>
+				<target>Three times wrong. Please wait 30 seconds.</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/services/auth.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Login_Error_UserNotFoundException_Description" datatype="html">
+				<source>Description: User Not Found Exception</source>
+				<target>For the information no profile could be determined in our system. Please check your details.</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/services/auth.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Login_Error_UserNotConfirmedException_Description" datatype="html">
+				<source>Description: User Not Confirmed Exception</source>
+				<target>The given user is not yet confirmed. Please try again later or contact the support team.</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/services/auth.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Login_Error_PasswordInvalid_Description" datatype="html">
+				<source>Description: Password Invalid Exception</source>
+				<target>The combination of user name and password is wrong. Please check your details.</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/modules.pck/authorization.mod/services/auth.service.ts

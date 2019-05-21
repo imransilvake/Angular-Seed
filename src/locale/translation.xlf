@@ -1014,15 +1014,6 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Error_UserNotConfirmedException_Description" datatype="html">
-				<source>Description: User Not Confirmed Exception</source>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
 			<trans-unit id="Error_NotAuthorizedException_Title" datatype="html">
 				<source>Title: User Not Authorized Exception</source>
 				<context-group purpose="location">
@@ -1167,15 +1158,6 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Error_PasswordInvalid_Description" datatype="html">
-				<source>Description: Password Invalid Exception</source>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/modules.pck/authorization.mod/components/lock-screen/lock-screen.component.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
 			<trans-unit id="Language_English" datatype="html">
 				<source>English</source>
 				<context-group purpose="location">
@@ -1221,15 +1203,6 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Error_BlockUserException_Description" datatype="html">
-				<source>Description: Block User Exception</source>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/modules.pck/authorization.mod/components/login/login.component.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
 			<trans-unit id="Auth_Register_Form_Success_Title" datatype="html">
 				<source>Title: Success</source>
 				<context-group purpose="location">
@@ -1250,6 +1223,42 @@
 			</trans-unit>
 			<trans-unit id="Auth_Register_Error_UsernameExistsException_Description" datatype="html">
 				<source>Description: Username Exists Exception</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/services/auth.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Login_Error_BlockUserException_Description" datatype="html">
+				<source>Description: Block User Exception</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/services/auth.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Login_Error_UserNotFoundException_Description" datatype="html">
+				<source>Description: User Not Found Exception</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/services/auth.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Login_Error_UserNotConfirmedException_Description" datatype="html">
+				<source>Description: User Not Confirmed Exception</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/services/auth.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Login_Error_PasswordInvalid_Description" datatype="html">
+				<source>Description: Password Invalid Exception</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/modules.pck/authorization.mod/services/auth.service.ts
