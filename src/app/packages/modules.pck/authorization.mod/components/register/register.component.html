@@ -109,9 +109,13 @@
 						</app-password-strength>
 					</div>
 
-					<!-- Button -->
-					<div class="cd-col">
-						<button mat-button type="submit" class="ham-button-1" [disabled]="!isFormValid" i18n="@@Auth_Register_Form_Submit_Button">Register</button>
+					<!-- Button & Error Message -->
+					<div class="cd-col ham-btn-error">
+						<div>
+							<button mat-button type="submit" class="ham-button-1" [disabled]="!isFormValid" i18n="@@Auth_Register_Form_Submit_Button">Register</button>
+						</div>
+
+						<p *ngIf="errorMessage">{{errorMessage}}</p>
 					</div>
 
 					<!-- Note -->

@@ -1095,6 +1095,15 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="Error_ExpiredCodeException_Description" datatype="html">
+				<source>Description: Verification Code Exception</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/services/auth.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
 			<trans-unit id="Error_NotAuthorizedException_Title" datatype="html">
 				<source>Title: User Not Authorized Exception</source>
 				<context-group purpose="location">

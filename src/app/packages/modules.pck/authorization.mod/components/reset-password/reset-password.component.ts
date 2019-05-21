@@ -1,5 +1,5 @@
 // angular
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -19,10 +19,11 @@ import { HelperService } from '../../../../utilities.pck/accessories.mod/service
 	styleUrls: ['../auth-common.component.scss']
 })
 
-export class ResetPasswordComponent implements OnDestroy {
+export class ResetPasswordComponent implements OnInit, OnDestroy {
 	public routing = ROUTING;
 	public formFields;
 	public queryParams;
+	public errorMessage;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
@@ -54,6 +55,13 @@ export class ResetPasswordComponent implements OnDestroy {
 		this.password.valueChanges
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(() => this.confirmPassword.updateValueAndValidity());
+	}
+
+	ngOnInit() {
+		// listen to error message
+		this._authService.errorMessage
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => this.errorMessage = res);
 	}
 
 	ngOnDestroy() {

@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 	public loginHotelNameSelectType = SelectTypeEnum.DEFAULT;
 	public languageList: SelectDefaultInterface[] = [];
 	public rememberMe: MatCheckboxChange;
+	public errorMessage;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
@@ -72,6 +73,11 @@ export class LoginComponent implements OnInit, OnDestroy {
 		this.languageName.valueChanges
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(url => location.href = url);
+
+		// listen to error message
+		this._authService.errorMessage
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => this.errorMessage = res);
 	}
 
 	ngOnDestroy() {

@@ -30,6 +30,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 	public registerSalutationSelectType = SelectTypeEnum.DEFAULT;
 	public hotelList: SelectDefaultInterface[] = [];
 	public salutationList: SelectDefaultInterface[] = [];
+	public errorMessage;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
@@ -81,6 +82,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
 		// salutation
 		this.salutationList = this._salutationList.getSalutationList();
+
+		// listen to error message
+		this._authService.errorMessage
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => this.errorMessage = res);
 	}
 
 	ngOnDestroy() {
