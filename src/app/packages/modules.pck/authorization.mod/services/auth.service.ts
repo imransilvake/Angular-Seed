@@ -239,6 +239,10 @@ export class AuthService {
 						);
 						break;
 					case 'UserNotFoundException':
+						// set email field to show error message
+						formFields.get('email').setErrors({ email: true });
+
+						// message
 						this.errorMessage.emit(
 							this._i18n({
 								value: 'Description: User Not Found Exception',
