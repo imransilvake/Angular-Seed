@@ -199,7 +199,9 @@ export class AuthService {
 						});
 
 						// set fields to show error message
-						formFields.get('email') && formFields.get('email').setErrors({ backendError: true, text: message });
+						if (formFields.get('email')) {
+							formFields.get('email').setErrors({ backendError: true, text: message });
+						}
 						formFields.get('password').setErrors({ backendError: true, text: message });
 
 						// message
