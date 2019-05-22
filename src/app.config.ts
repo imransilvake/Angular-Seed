@@ -25,7 +25,8 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 	Member: {
 		Fetch_Profile: { serviceUrl: '/profile/getuser' },
 		Update_Profile: { serviceUrl: '/profile/update' },
-		Change_Password: { serviceUrl: '/profile/changepassword' }
+		Change_Password: { serviceUrl: '/profile/changepassword' },
+		Change_Image: { serviceUrl: '/profile/imageupload' }
 	}
 };
 

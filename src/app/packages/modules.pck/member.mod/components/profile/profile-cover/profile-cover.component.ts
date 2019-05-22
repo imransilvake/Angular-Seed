@@ -2,12 +2,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { MatDialog } from '@angular/material';
 
 // app
 import * as moment from 'moment';
 import { AuthService } from '../../../../authorization.mod/services/auth.service';
 import { HelperService } from '../../../../../utilities.pck/accessories.mod/services/helper.service';
 import { MemberService } from '../../../services/member.service';
+import { ProfileUploadImageComponent } from './profile-upload-image.component';
 
 @Component({
 	selector: 'app-profile-cover',
@@ -25,7 +27,8 @@ export class ProfileCoverComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private _authService: AuthService,
-		private _memberService: MemberService
+		private _memberService: MemberService,
+		public dialog: MatDialog
 	) {
 		// get current user state
 		this.currentUser = this._authService.currentUserState;
@@ -51,5 +54,14 @@ export class ProfileCoverComponent implements OnInit, OnDestroy {
 		// remove subscriptions
 		this._ngUnSubscribe.next();
 		this._ngUnSubscribe.complete();
+	}
+
+	/**
+	 * open upload image modal
+	 */
+	public onClickOpenImageModal() {
+		this.dialog.open(ProfileUploadImageComponent, {
+			width: '500px'
+		});
 	}
 }

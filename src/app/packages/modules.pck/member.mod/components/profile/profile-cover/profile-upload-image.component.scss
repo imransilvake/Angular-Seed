@@ -1,0 +1,93 @@
+@import 'main';
+
+.ham-upload-image {
+	background-color: cd-palette($cd-background, 2002);
+	color: cd-palette($cd-color, 1001);
+	padding: 15px;
+
+	header {
+		.ham-top {
+			align-items: center;
+			display: flex;
+			justify-content: space-between;
+
+			a {
+				color: cd-palette($cd-color, 1001);
+				cursor: pointer;
+				height: 24px;
+			}
+		}
+
+		.ham-bottom {
+			text-align: right;
+
+			p {
+				span {
+					color: cd-palette($cd-color, 1004);
+				}
+			}
+		}
+	}
+
+	.ham-upload {
+		margin: 20px 0;
+		text-align: center;
+
+		.ham-area {
+			border: 2px dashed cd-palette($cd-border, 3004);
+			cursor: grabbing;
+			height: 200px;
+			margin: 0 auto;
+			width: 200px;
+
+			.ham-dummy {
+				align-items: center;
+				background-color: cd-palette($cd-background, 2003);
+				display: flex;
+				height: 196px;
+				justify-content: center;
+
+				p {
+					color: cd-palette($cd-color, 1004);
+				}
+			}
+
+			.ham-preview {
+				min-height: 196px;
+				object-fit: contain;
+			}
+		}
+
+		.ham-select-image {
+			color: cd-palette($cd-color, 1004);
+			cursor: pointer;
+			margin-top: 10px;
+			text-align: center;
+			text-decoration: underline;
+		}
+
+		.ham-error {
+			margin: 15px 0;
+
+			p {
+				color: cd-palette($cd-color, 1009);
+			}
+		}
+	}
+
+	footer {
+		text-align: center;
+
+		button {
+			&:first-child {
+				background-color: cd-palette($cd-background, 2004);
+
+			}
+
+			&:last-child {
+				background-color: cd-palette($cd-background, 2010);
+				margin-left: 10px;
+			}
+		}
+	}
+}

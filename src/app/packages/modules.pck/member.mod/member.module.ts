@@ -14,6 +14,7 @@ import { MemberService } from './services/member.service';
 import { ChangePasswordComponent } from './components/profile/change-password/change-password.component';
 import { HotelsListComponent } from './components/profile/hotels-list/hotels-list.component';
 import { ProfileCoverComponent } from './components/profile/profile-cover/profile-cover.component';
+import { ProfileUploadImageComponent } from './components/profile/profile-cover/profile-upload-image.component';
 
 @NgModule({
 	imports: [
@@ -28,10 +29,14 @@ import { ProfileCoverComponent } from './components/profile/profile-cover/profil
 		UpdateProfileComponent,
 		ChangePasswordComponent,
 		HotelsListComponent,
-		ProfileCoverComponent
+		ProfileCoverComponent,
+		ProfileUploadImageComponent
 	],
 	providers: [
 		MemberService
+	],
+	entryComponents: [
+		ProfileUploadImageComponent
 	]
 })
 

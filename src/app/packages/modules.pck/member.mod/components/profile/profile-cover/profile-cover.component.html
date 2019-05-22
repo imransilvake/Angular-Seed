@@ -11,7 +11,10 @@
 				<div class="ham-logo">
 					<h2>{{userNameLetters}}</h2>
 				</div>
-				<p i18n="@@Member_Profile_Profile_Cover_Change_Image" class="ham-upload">[Change Image]</p>
+				<p (click)="onClickOpenImageModal()"
+				   i18n="@@Member_Profile_Profile_Cover_Change_Image"
+				   class="ham-upload">[Change Image]
+				</p>
 			</div>
 			<div class="ham-name">
 				<h1>{{userName}}</h1>

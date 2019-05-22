@@ -1,0 +1,62 @@
+<section class="ham-upload-image">
+	<!-- Header -->
+	<header>
+		<!-- Top -->
+		<div class="ham-top">
+			<h3>Upload Image</h3>
+			<a (click)="onClickCloseModal()">
+				<mat-icon class="ham-icon">cancel</mat-icon>
+			</a>
+		</div>
+
+		<!-- Divider -->
+		<app-widget-divider></app-widget-divider>
+
+		<!-- Bottom -->
+		<div class="ham-bottom">
+			<p><span>Max FileSize:</span> 1MB</p>
+			<p><span>Supported Format:</span> JPG</p>
+		</div>
+	</header>
+
+	<!-- Upload -->
+	<div class="ham-upload">
+		<!-- Area -->
+		<div class="ham-area"
+			 (drop)="onDrop($event)"
+			 (dragover)="onDragOver($event)">
+			<!-- Dummy Area -->
+			<div class="ham-dummy"
+				 *ngIf="!previewSrc">
+				<p>Drag Image Here</p>
+			</div>
+
+			<!-- Preview -->
+			<img class="ham-preview" *ngIf="previewSrc" [src]="previewSrc" alt="preview-image"/>
+		</div>
+
+		<!-- Select Option -->
+		<p class="ham-select-image">
+			<label [htmlFor]="'fileUpload'">[Select Image]
+			<input
+				class="cd-hide"
+				#file
+				[id]="'fileUpload'"
+				[type]="'file'"
+				[accept]="'image/jpg'"
+				(change)="setFile(file.files[0])"/>
+			</label>
+		</p>
+
+		<!-- Errors -->
+		<div class="ham-error" *ngIf="errorMessage">
+			<p>{{errorMessage}}</p>
+		</div>
+	</div>
+
+	<!-- Footer -->
+	<footer>
+		<button mat-button type="button">Cancel</button>
+		<button mat-button type="button" (click)="onClickSaveImage()">Save</button>
+	</footer>
+</section>

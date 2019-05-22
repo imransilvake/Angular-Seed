@@ -200,4 +200,23 @@ export class MemberService {
 				this._loadingAnimationService.stopLoadingAnimation();
 			});
 	}
+
+	/**
+	 * upload image to the database
+	 *
+	 * @param imageSrc
+	 * @param dialog
+	 */
+	public memberChangeImage(imageSrc: string, dialog: any) {
+		// payload
+		const payload = {
+			user_avatar: imageSrc
+		};
+
+		this._proxyService.postAPI(AppServices['Member']['Change_Image'], { bodyParams: payload })
+			.subscribe(res => {
+				// close modal
+				dialog.close();
+			});
+	}
 }
