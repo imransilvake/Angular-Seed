@@ -17,14 +17,15 @@
 					class="ham-chip"
 					*ngFor="let item of selectedItems"
 					[removable]="itemRemovable"
-					(removed)="remove(item)">
-					{{item}}
+					(removed)="removeItem(item.id)">
+					{{item.text}}
 					<mat-icon matChipRemove *ngIf="itemRemovable">cancel</mat-icon>
 				</mat-chip>
 			</mat-chip-list>
 
 			<!-- Input | No Multiple Selection -->
 			<input
+				#inputField
 				matInput
 				[formControl]="control"
 				[matAutocomplete]="auto"
@@ -38,7 +39,7 @@
 			<mat-autocomplete
 				#auto="matAutocomplete"
 				[displayWith]="displayFn"
-				(optionSelected)="selected($event)">
+				(optionSelected)="itemSelected($event)">
 				<!-- Default -->
 				<ng-container *ngIf="autocompleteType === 0">
 					<mat-option *ngFor="let item of filteredData | async" [value]="item">

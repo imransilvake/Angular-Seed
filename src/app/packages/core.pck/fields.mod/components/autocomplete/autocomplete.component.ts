@@ -1,14 +1,14 @@
 // angular
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material';
 
 // app
 import { AutocompleteTypeEnum } from '../../enums/autocomplete-type.enum';
 import { AutocompleteDefaultInterface } from '../../interfaces/autocomplete-default-interface';
 import { AutocompleteGroupInterface } from '../../interfaces/autocomplete-group.interface';
-import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material';
 
 @Component({
 	selector: 'app-autocomplete',
@@ -37,9 +37,10 @@ export class AutocompleteComponent implements OnInit {
 	@Input() autocompleteFocused = false;
 
 	@Input() itemRemovable = false;
-	@Input() selectedItems = [];
-	@Output() outputList = new EventEmitter<string[]>();
+	@Input() selectedItems: AutocompleteDefaultInterface[] = [];
+	@Output() outputList = new EventEmitter<AutocompleteDefaultInterface[] | string[]>();
 
+	@ViewChild('inputField') inputField: ElementRef;
 	@ViewChild('auto') matAutocomplete: MatAutocomplete;
 
 	ngOnInit() {
@@ -55,6 +56,13 @@ export class AutocompleteComponent implements OnInit {
 	}
 
 	/**
+	 * set output list format
+	 */
+	get prepareOutputList() {
+		return this.selectedItems.map(item => item.id);
+	}
+
+	/**
 	 * display value on selection
 	 *
 	 * @param item
@@ -66,19 +74,22 @@ export class AutocompleteComponent implements OnInit {
 	/**
 	 * remove item from the list
 	 *
-	 * @param item
+	 * @param itemId
 	 */
-	public remove(item: string) {
-		const index = this.selectedItems.indexOf(item);
-		if (index >= 0) {
-			// set error on empty list
-			if (index === 0) {
-				this.control.setErrors({ required: true });
-			}
+	public removeItem(itemId: string) {
+		// update list
+		this.selectedItems = this.selectedItems.filter(item => item.id !== itemId);
 
-			// remove item
-			this.selectedItems.splice(index, 1);
+		// update output list
+		this.outputList.emit(this.prepareOutputList);
+
+		// set error on empty list
+		if (this.selectedItems && this.selectedItems.length < 1) {
+			this.control.setErrors({ required: true });
 		}
+
+		// set input empty
+		this.control.setValue('');
 	}
 
 	/**
@@ -86,10 +97,18 @@ export class AutocompleteComponent implements OnInit {
 	 *
 	 * @param event
 	 */
-	public selected(event: MatAutocompleteSelectedEvent) {
-		this.selectedItems.push(this.control.value.id);
-		this.outputList.emit(this.selectedItems);
+	public itemSelected(event: MatAutocompleteSelectedEvent) {
+		// update list
+		this.selectedItems.push(this.control.value);
+
+		// update output list
+		this.outputList.emit(this.prepareOutputList);
+
+		// set input empty
 		this.control.setValue('');
+
+		// remove focus
+		this.inputField.nativeElement.blur();
 	}
 
 	/**
@@ -116,6 +135,9 @@ export class AutocompleteComponent implements OnInit {
 	 */
 	private filterDataResults(value: string, data: AutocompleteDefaultInterface[]) {
 		return data
-			.filter(item => item.text && item.text.toLowerCase().indexOf(value.toString().toLowerCase()) !== -1);
+			.filter(item =>
+				item.text && item.text.toLowerCase().indexOf(value.toString().toLowerCase()) !== -1 &&
+				!this.selectedItems.map(item => item.id).includes(item.id)
+			);
 	}
 }
