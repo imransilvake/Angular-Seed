@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import {
 	MatAutocompleteModule,
 	MatButtonModule, MatButtonToggleModule,
-	MatCheckboxModule, MatDialogModule, MatFormFieldModule, MatIconModule,
+	MatCheckboxModule, MatChipsModule, MatDialogModule, MatFormFieldModule, MatIconModule,
 	MatInputModule, MatMenuModule,
 	MatPaginatorModule, MatProgressBarModule, MatSelectModule, MatSidenavModule, MatSlideToggleModule, MatSortModule,
 	MatTableModule, MatTabsModule, MatTreeModule
@@ -28,7 +28,8 @@ import {
 		MatSelectModule,
 		MatTreeModule,
 		MatProgressBarModule,
-		MatAutocompleteModule
+		MatAutocompleteModule,
+		MatChipsModule
 	],
 	exports: [
 		MatButtonModule,
@@ -48,7 +49,8 @@ import {
 		MatSelectModule,
 		MatTreeModule,
 		MatProgressBarModule,
-		MatAutocompleteModule
+		MatAutocompleteModule,
+		MatChipsModule
 	]
 })
 

@@ -1,5 +1,5 @@
 // angular
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { AutocompleteTypeEnum } from '../../enums/autocomplete-type.enum';
 import { AutocompleteDefaultInterface } from '../../interfaces/autocomplete-default-interface';
 import { AutocompleteGroupInterface } from '../../interfaces/autocomplete-group.interface';
+import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material';
 
 @Component({
 	selector: 'app-autocomplete',
@@ -17,6 +18,7 @@ import { AutocompleteGroupInterface } from '../../interfaces/autocomplete-group.
 
 export class AutocompleteComponent implements OnInit {
 	@Input() autocompleteType: AutocompleteTypeEnum = AutocompleteTypeEnum.DEFAULT;
+	@Input() multipleSelection = false;
 
 	@Input() control = new FormControl();
 	@Input() dataDefault: AutocompleteDefaultInterface[] = [];
@@ -33,6 +35,12 @@ export class AutocompleteComponent implements OnInit {
 	@Input() hintText;
 
 	@Input() autocompleteFocused = false;
+
+	@Input() itemRemovable = false;
+	@Input() selectedItems = [];
+	@Output() outputList = new EventEmitter<string[]>();
+
+	@ViewChild('auto') matAutocomplete: MatAutocomplete;
 
 	ngOnInit() {
 		this.filteredData = this.control.valueChanges
@@ -52,7 +60,36 @@ export class AutocompleteComponent implements OnInit {
 	 * @param item
 	 */
 	displayFn(item?: AutocompleteDefaultInterface) {
-		return item.text;
+		return item && item.text;
+	}
+
+	/**
+	 * remove item from the list
+	 *
+	 * @param item
+	 */
+	public remove(item: string) {
+		const index = this.selectedItems.indexOf(item);
+		if (index >= 0) {
+			// set error on empty list
+			if (index === 0) {
+				this.control.setErrors({ required: true });
+			}
+
+			// remove item
+			this.selectedItems.splice(index, 1);
+		}
+	}
+
+	/**
+	 * push selected item into the list
+	 *
+	 * @param event
+	 */
+	public selected(event: MatAutocompleteSelectedEvent) {
+		this.selectedItems.push(this.control.value.id);
+		this.outputList.emit(this.selectedItems);
+		this.control.setValue('');
 	}
 
 	/**
@@ -78,6 +115,7 @@ export class AutocompleteComponent implements OnInit {
 	 * @param data
 	 */
 	private filterDataResults(value: string, data: AutocompleteDefaultInterface[]) {
-		return data.filter(item => item.text && item.text.toLowerCase().indexOf(value.toString().toLowerCase()) !== -1);
+		return data
+			.filter(item => item.text && item.text.toLowerCase().indexOf(value.toString().toLowerCase()) !== -1);
 	}
 }

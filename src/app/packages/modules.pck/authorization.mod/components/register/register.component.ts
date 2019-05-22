@@ -127,6 +127,14 @@ export class RegisterComponent implements OnInit, OnDestroy {
 	}
 
 	/**
+	 * set hotels list
+	 * @param list
+	 */
+	public hotelsList(list: any) {
+		this.hotelId.setValue(list);
+	}
+
+	/**
 	 * on submit form
 	 */
 	public onSubmitForm() {
@@ -135,7 +143,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
 		// payload
 		const formPayload: AuthRegisterInterface = {
-			hotelId: this.hotelId.value.id,
+			hotelId: this.hotelId.value,
 			salutation: this.salutation.value,
 			email: this.email.value,
 			firstName: this.firstName.value,

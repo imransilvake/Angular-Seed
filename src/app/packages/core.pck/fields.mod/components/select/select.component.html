@@ -10,9 +10,9 @@
 		[class.ham-disabled]="control.disabled">
 		<div class="ham-select">
 			<mat-select
+				[formControl]="control"
 				[class.ham-selected]="control.valid"
 				[panelClass]="selectClassPanel"
-				[formControl]="control"
 				[id]="selectId"
 				[placeholder]="selectPlaceHolder"
 				(focus)="selectFocused=true"
