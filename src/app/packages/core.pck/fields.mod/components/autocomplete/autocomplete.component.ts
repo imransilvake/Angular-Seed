@@ -153,6 +153,8 @@ export class AutocompleteComponent implements OnInit {
 						if (this.selectedItems && this.selectedItems.length === 0) {
 							// set error on empty list
 							this.control.setErrors({ invalidOption: true });
+						} else {
+							this.control.setErrors(null);
 						}
 					}
 				});
