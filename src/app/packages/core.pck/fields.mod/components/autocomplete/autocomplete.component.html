@@ -39,7 +39,7 @@
 			<mat-autocomplete
 				#auto="matAutocomplete"
 				[displayWith]="displayFn"
-				(optionSelected)="itemSelected($event)">
+				(optionSelected)="multipleSelection && itemSelected($event)">
 				<!-- Default -->
 				<ng-container *ngIf="autocompleteType === 0">
 					<mat-option *ngFor="let item of filteredData | async" [value]="item">

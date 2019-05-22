@@ -83,13 +83,13 @@ export class AutocompleteComponent implements OnInit {
 		// update output list
 		this.outputList.emit(this.prepareOutputList);
 
-		// set error on empty list
-		if (this.selectedItems && this.selectedItems.length < 1) {
-			this.control.setErrors({ required: true });
-		}
-
 		// set input empty
 		this.control.setValue('');
+
+		// set error on empty list
+		if (this.selectedItems && this.selectedItems.length === 0) {
+			this.control.setErrors({ required: true });
+		}
 	}
 
 	/**
