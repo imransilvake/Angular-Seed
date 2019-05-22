@@ -135,7 +135,7 @@ export class AutocompleteComponent implements OnInit {
 	private filterDataResults(value: string, data: AutocompleteDefaultInterface[]) {
 		return data
 			.filter(item =>
-				item.text && item.text.toLowerCase().indexOf(value.toString().toLowerCase()) !== -1 &&
+				item.text && item.text.toLowerCase().indexOf(value && value.toString().toLowerCase()) !== -1 &&
 				!this.selectedItems.map(item => item.id).includes(item.id)
 			);
 	}
