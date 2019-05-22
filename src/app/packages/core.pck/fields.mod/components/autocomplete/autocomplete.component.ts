@@ -4,7 +4,6 @@ import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material';
-
 // app
 import { AutocompleteTypeEnum } from '../../enums/autocomplete-type.enum';
 import { AutocompleteDefaultInterface } from '../../interfaces/autocomplete-default-interface';
@@ -47,11 +46,15 @@ export class AutocompleteComponent implements OnInit {
 		this.filteredData = this.control.valueChanges
 			.pipe(
 				startWith(''),
-				map(res =>
-					this.autocompleteType === AutocompleteTypeEnum.GROUP ?
+				map(res => {
+					// validate fields
+					this.validateField();
+
+					// set data
+					return this.autocompleteType === AutocompleteTypeEnum.GROUP ?
 						this.filterDataGroupResults(res, this.dataGroups) :
-						this.filterDataResults(res, this.dataDefault)
-				)
+						this.filterDataResults(res, this.dataDefault);
+				})
 			);
 	}
 
@@ -85,11 +88,6 @@ export class AutocompleteComponent implements OnInit {
 
 		// set input empty
 		this.control.setValue('');
-
-		// set error on empty list
-		if (this.selectedItems && this.selectedItems.length === 0) {
-			this.control.setErrors({ required: true });
-		}
 	}
 
 	/**
@@ -139,5 +137,25 @@ export class AutocompleteComponent implements OnInit {
 				item.text && item.text.toLowerCase().indexOf(value.toString().toLowerCase()) !== -1 &&
 				!this.selectedItems.map(item => item.id).includes(item.id)
 			);
+	}
+
+	/**
+	 * validate input field
+	 */
+	private validateField() {
+		if (this.multipleSelection) {
+			this.control.valueChanges
+				.subscribe(res => {
+					if (!res && this.selectedItems && this.selectedItems.length === 0) {
+						// set error on empty list
+						this.control.setErrors({ required: true });
+					} else {
+						if (this.selectedItems && this.selectedItems.length === 0) {
+							// set error on empty list
+							this.control.setErrors({ invalidOption: true });
+						}
+					}
+				});
+		}
 	}
 }

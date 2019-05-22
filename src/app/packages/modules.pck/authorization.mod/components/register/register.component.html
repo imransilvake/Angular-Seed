@@ -19,14 +19,12 @@
 				<div class="cd-row cd-divider-top" *ngIf="hotelList && hotelList.length > 0">
 					<div class="cd-col">
 						<app-autocomplete
-							[multipleSelection]="true"
-							[itemRemovable]="true"
 							[autocompleteType]="registerHotelNameAutocompleteType"
 							[autocompleteId]="'register-hotel-list-id'"
 							autocompletePlaceHolder="Select Hotel"
 							i18n-autocompletePlaceHolder="@@Auth_Register_Form_HotelList_PlaceHolder"
 							[dataDefault]="hotelList"
-							(outputList)="hotelsList($event)">
+							[control]="hotelId">
 						</app-autocomplete>
 					</div>
 
