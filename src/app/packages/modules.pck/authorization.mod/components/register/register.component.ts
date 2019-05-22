@@ -127,14 +127,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
 	}
 
 	/**
-	 * set hotels list
-	 * @param list
-	 */
-	public hotelsList(list: any) {
-		this.hotelId.setValue(list);
-	}
-
-	/**
 	 * on submit form
 	 */
 	public onSubmitForm() {
