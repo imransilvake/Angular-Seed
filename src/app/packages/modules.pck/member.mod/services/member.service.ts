@@ -215,6 +215,8 @@ export class MemberService {
 
 		this._proxyService.postAPI(AppServices['Member']['Change_Image'], { bodyParams: payload })
 			.subscribe(res => {
+				// todo change image on profile and here page.
+
 				// close modal
 				dialog.close();
 			});

@@ -1,6 +1,8 @@
 // angular
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
+
+// app
 import { MemberService } from '../../../services/member.service';
 
 @Component({
