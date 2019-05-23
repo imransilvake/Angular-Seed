@@ -1,10 +1,11 @@
 <header class="ham-header">
 	<div class="cd-row">
-		<div class="cd-col cd-col-pm-m-7 cd-col-pm-s-6">
+		<div class="cd-col cd-col-pm-s-7 cd-col-pm-m-5">
 			<div class="ham-logo">
 				<a [routerLink]="['/' + routing.dashboard]">
 					<h4>
-						<img [src]="'assets/svg/logo.svg'" alt="ham-log" />
+						<img class="cd-hide-on-m-down" [src]="'assets/svg/logo.svg'" alt="ham-logo" />
+						<img class="cd-hide-on-s-up" [src]="'assets/svg/logo_mobile.svg'" alt="ham-logo-mobile" />
 					</h4>
 				</a>
 			</div>
@@ -16,13 +17,21 @@
 				</button>
 			</div>
 		</div>
-		<div class="cd-col cd-col-pm-m-5 cd-col-pm-s-6">
+		<div class="cd-col cd-col-pm-s-5 cd-col-pm-m-7">
 			<!-- Fullscreen Button -->
 			<div class="ham-full-screen cd-tooltip">
 				<button mat-button class="ham-btn-icon" (click)="onClickShowFullScreen()" *ngIf="!appFullScreen">
 					<mat-icon>fullscreen</mat-icon>
 				</button>
 				<span class="cd-arrow cd-bottom">Show Fullscreen</span>
+			</div>
+
+			<!-- Reload Button -->
+			<div class="ham-reload cd-tooltip">
+				<button mat-button class="ham-btn-icon" (click)="onClickReloadRoute()">
+					<mat-icon>cached</mat-icon>
+				</button>
+				<span class="cd-arrow cd-bottom">Reload Services</span>
 			</div>
 
 			<!-- Menu | Notification -->

@@ -39,7 +39,7 @@ declare const require;
 		BrowserModule,
 		HttpClientModule,
 		BrowserAnimationsModule,
-		RouterModule.forRoot(APP_ROUTES),
+		RouterModule.forRoot(APP_ROUTES, { onSameUrlNavigation: 'reload' }),
 
 		// store
 		StoreModule.forRoot({
@@ -77,7 +77,7 @@ declare const require;
 			provide: TRANSLATIONS,
 			useFactory: (locale) => {
 				locale = locale || 'de';
-				return require(`raw-loader!../locale/translation.${locale}.xlf`);
+				return require(`raw-loader!../locale/translation.${ locale }.xlf`);
 			},
 			deps: [LOCALE_ID]
 		},

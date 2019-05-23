@@ -63,4 +63,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 		// show full screen
 		HelperService.showFullScreen();
 	}
+
+	/**
+	 * reload route services
+	 */
+	public onClickReloadRoute() {
+
+	}
 }
