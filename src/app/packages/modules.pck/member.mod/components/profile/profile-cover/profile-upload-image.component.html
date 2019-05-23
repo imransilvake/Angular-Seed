@@ -1,6 +1,6 @@
 <section class="ham-upload-image">
 	<!-- Header -->
-	<header>
+	<header class="ham-head">
 		<!-- Top -->
 		<div class="ham-top">
 			<h3>Upload Image</h3>
@@ -19,9 +19,9 @@
 		</div>
 	</header>
 
-	<!-- Upload -->
-	<div class="ham-upload">
-		<!-- Area -->
+	<!-- Content -->
+	<div class="ham-content">
+		<!-- Upload Area -->
 		<div class="ham-area"
 			 (drop)="onDrop($event)"
 			 (dragover)="onDragOver($event)">
@@ -55,7 +55,7 @@
 	</div>
 
 	<!-- Footer -->
-	<footer>
+	<footer class="ham-foot">
 		<button mat-button type="button">Cancel</button>
 		<button mat-button type="button" (click)="onClickSaveImage()">Save</button>
 	</footer>
