@@ -21,13 +21,9 @@
 
 	<!-- Content -->
 	<div class="ham-content">
-		<!-- Upload Area -->
-		<div class="ham-area"
-			 (drop)="onDrop($event)"
-			 (dragover)="onDragOver($event)">
+		<div class="ham-area" (drop)="onDrop($event)" (dragover)="onDragOver($event)">
 			<!-- Dummy Area -->
-			<div class="ham-dummy"
-				 *ngIf="!previewSrc">
+			<div class="ham-dummy" *ngIf="!previewSrc">
 				<p>Drag Image Here</p>
 			</div>
 
@@ -45,7 +41,7 @@
 					[id]="'fileUpload'"
 					[type]="'file'"
 					[accept]="'image/*'"
-					(change)="setFile(file.files[0])"/>
+					(change)="setFilePreview(file.files[0])"/>
 			</label>
 		</p>
 
@@ -58,8 +54,9 @@
 	<!-- Footer -->
 	<footer class="ham-foot">
 		<button mat-button type="button" class="ham-button-1" (click)="onClickCloseModal()">Cancel</button>
-		<button mat-button type="button" class="ham-button-1" (click)="onClickSaveImage()" [disabled]="!previewSrc">
-			Save
+		<button mat-button type="button" class="ham-button-1" (click)="onClickSaveImage()" [disabled]="!previewSrc || (previewSrc && loading)">
+			<fa-icon [icon]="faIcons[0]" [spin]="true" *ngIf="loading"></fa-icon>
+			<span *ngIf="!loading">Save</span>
 		</button>
 	</footer>
 </section>

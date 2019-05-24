@@ -246,6 +246,9 @@ export class MemberService {
 							dialog.close();
 						});
 				}
+			}, () => {
+				// send error status
+				this.profileImageUpdate.emit(false);
 			});
 	}
 }

@@ -80,12 +80,10 @@
 
 		button {
 			&:first-child {
-				background-color: cd-palette($cd-background, 2004);
-
+				background-color: cd-palette($cd-background, 2010);
 			}
 
 			&:last-child {
-				background-color: cd-palette($cd-background, 2010);
 				margin-left: 10px;
 			}
 		}

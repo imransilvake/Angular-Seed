@@ -1,9 +1,12 @@
 // angular
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 // app
 import { MemberService } from '../../../services/member.service';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
 	selector: 'app-profile-upload-image',
@@ -11,15 +14,32 @@ import { MemberService } from '../../../services/member.service';
 	styleUrls: ['./profile-upload-image.component.scss']
 })
 
-export class ProfileUploadImageComponent {
+export class ProfileUploadImageComponent implements OnInit, OnDestroy {
+	public faIcons = [faSpinner];
 	public fileFormats = ['image/jpeg', 'image/jpg', 'image/png'];
 	public maxFileSize = 1024;
 	public previewSrc;
 	public errorMessage;
+	public loading = false;
+
+	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
 		private _memberService: MemberService,
 		public dialogRef: MatDialogRef<ProfileUploadImageComponent>) {
+	}
+
+	ngOnInit() {
+		// listener: on new image upload
+		this._memberService.profileImageUpdate
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(() => this.loading = false);
+	}
+
+	ngOnDestroy() {
+		// remove subscriptions
+		this._ngUnSubscribe.next();
+		this._ngUnSubscribe.complete();
 	}
 
 	/**
@@ -52,7 +72,7 @@ export class ProfileUploadImageComponent {
 		const file = transfer.files[0];
 
 		// set file
-		this.setFile(file);
+		this.setFilePreview(file);
 	}
 
 	/**
@@ -60,7 +80,7 @@ export class ProfileUploadImageComponent {
 	 *
 	 * @param file
 	 */
-	public setFile(file) {
+	public setFilePreview(file) {
 		if (file) {
 			const fileType = file.type;
 			const fileSize = file.size / 1000;
@@ -77,7 +97,7 @@ export class ProfileUploadImageComponent {
 					};
 				} else {
 					this.previewSrc = null;
-					this.errorMessage = 'Filesize is greater than 1MB!';
+					this.errorMessage = 'File-size is greater than 1MB!';
 				}
 			} else {
 				this.previewSrc = null;
@@ -90,6 +110,10 @@ export class ProfileUploadImageComponent {
 	 * upload image to the database
 	 */
 	public onClickSaveImage() {
+		// show spinner and lock button
+		this.loading = true;
+
+		// service
 		this._memberService.memberChangeImage(this.previewSrc, this.dialogRef);
 	}
 }
