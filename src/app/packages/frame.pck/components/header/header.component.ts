@@ -1,13 +1,13 @@
 // angular
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { of, Subject } from 'rxjs';
-import { delay, map, mapTo, takeUntil, tap } from 'rxjs/operators';
+import { delay, takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 // app
 import { ROUTING } from '../../../../../environments/environment';
 import { HelperService } from '../../../utilities.pck/accessories.mod/services/helper.service';
-import { faSpinner, faSync } from '@fortawesome/free-solid-svg-icons';
+import { faExpandArrowsAlt, faSpinner, faSync } from '@fortawesome/free-solid-svg-icons';
 
 declare const document: any;
 
@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	@Input() drawer;
 
 	public routing = ROUTING;
-	public faIcons = [faSync, faSpinner];
+	public faIcons = [faExpandArrowsAlt, faSync, faSpinner];
 	public appFullScreen = false;
 	public reloadState = false;
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();

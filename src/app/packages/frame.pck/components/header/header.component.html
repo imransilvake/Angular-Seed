@@ -21,7 +21,7 @@
 			<!-- Fullscreen Button -->
 			<div class="ham-full-screen cd-tooltip">
 				<button mat-button class="ham-btn-icon" (click)="onClickShowFullScreen()" *ngIf="!appFullScreen">
-					<mat-icon>fullscreen</mat-icon>
+					<fa-icon [icon]="faIcons[0]"></fa-icon>
 				</button>
 				<span class="cd-arrow cd-bottom">Show Fullscreen</span>
 			</div>
@@ -29,7 +29,7 @@
 			<!-- Reload Button -->
 			<div class="ham-reload cd-tooltip">
 				<button mat-button class="ham-btn-icon" (click)="onClickReloadRoute()" [disabled]="reloadState">
-					<fa-icon [icon]="!reloadState ? faIcons[0] : faIcons[1]" [spin]="reloadState"></fa-icon>
+					<fa-icon [icon]="!reloadState ? faIcons[1] : faIcons[2]" [spin]="reloadState"></fa-icon>
 				</button>
 				<span class="cd-arrow cd-bottom">Reload Services</span>
 			</div>
