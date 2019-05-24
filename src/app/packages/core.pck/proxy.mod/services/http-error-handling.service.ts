@@ -105,7 +105,8 @@ export class HttpErrorHandlingService {
 	private handlePostErrors(response) {
 		let payload: ErrorHandlerPayloadInterface;
 		switch (response.status) {
-			case 0 || 403:
+			case 0:
+			case 403:
 				payload = {
 					icon: 'error_icon',
 					title: this._i18n({

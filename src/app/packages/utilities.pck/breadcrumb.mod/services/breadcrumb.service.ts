@@ -11,7 +11,7 @@ import { AppOptions } from '../../../../../app.config';
 @Injectable({ providedIn: 'root' })
 export class BreadcrumbService {
 	public routeDataBreadcrumb = 'breadcrumb';
-	public firstBreadcrumb: BreadcrumbInterface = { name: 'Dashboard', url: '' };
+	public firstBreadcrumb: BreadcrumbInterface = { name: 'Home', url: '' };
 	public breadcrumbs: BreadcrumbInterface[];
 
 	constructor(
@@ -26,7 +26,6 @@ export class BreadcrumbService {
 				const root: ActivatedRoute = this._route.root;
 				this.breadcrumbs = this.getBreadcrumbs(root);
 				this.breadcrumbs = [this.firstBreadcrumb, ...this.breadcrumbs];
-				this.breadcrumbs = this.breadcrumbs.length < 2 ? [] : this.breadcrumbs;
 			});
 	}
 

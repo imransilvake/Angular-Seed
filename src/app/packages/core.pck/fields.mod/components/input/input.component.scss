@@ -112,7 +112,7 @@
 				@keyframes autofill {
 					100% {
 						background-color: transparent;
-						color: inherit;
+						color: cd-palette($cd-color, 1001);
 					}
 				}
 			}

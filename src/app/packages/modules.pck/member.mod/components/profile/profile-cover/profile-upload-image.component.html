@@ -15,7 +15,7 @@
 		<!-- Bottom -->
 		<div class="ham-bottom">
 			<p><span>Max FileSize:</span> 1MB</p>
-			<p><span>Supported Formats:</span> JPG, PNG</p>
+			<p><span>Formats:</span> JPG, PNG</p>
 		</div>
 	</header>
 
@@ -37,14 +37,15 @@
 
 		<!-- Select Option -->
 		<p class="ham-select-image">
-			<label [htmlFor]="'fileUpload'">[Select Image]
-			<input
-				class="cd-hide"
-				#file
-				[id]="'fileUpload'"
-				[type]="'file'"
-				[accept]="'image/*'"
-				(change)="setFile(file.files[0])"/>
+			<label [htmlFor]="'fileUpload'">
+				[Select Image]
+				<input
+					class="cd-hide"
+					#file
+					[id]="'fileUpload'"
+					[type]="'file'"
+					[accept]="'image/*'"
+					(change)="setFile(file.files[0])"/>
 			</label>
 		</p>
 
@@ -56,7 +57,9 @@
 
 	<!-- Footer -->
 	<footer class="ham-foot">
-		<button mat-button type="button" class="ham-button-1"(click)="onClickCloseModal()">Cancel</button>
-		<button mat-button type="button" class="ham-button-1" (click)="onClickSaveImage()" [disabled]="!previewSrc">Save</button>
+		<button mat-button type="button" class="ham-button-1" (click)="onClickCloseModal()">Cancel</button>
+		<button mat-button type="button" class="ham-button-1" (click)="onClickSaveImage()" [disabled]="!previewSrc">
+			Save
+		</button>
 	</footer>
 </section>
