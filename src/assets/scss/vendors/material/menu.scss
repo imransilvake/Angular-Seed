@@ -50,6 +50,17 @@
 
 	&.ham-notification-mat-menu {
 		button {
+			&:last-child {
+				height: 35px;
+				line-height: inherit;
+				min-height: 35px;
+				text-align: center;
+
+				.ham-icon {
+					color: cd-palette($cd-color, 1004);
+				}
+			}
+
 			.cd-row {
 				align-items: center;
 
