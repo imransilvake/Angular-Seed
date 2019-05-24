@@ -733,6 +733,15 @@
 					<context context-type="linenumber">44</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="Member_Profile_Title" datatype="html">
+				<source>User Profile</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/member.mod/components/profile/profile.component.html
+					</context>
+					<context context-type="linenumber">4</context>
+				</context-group>
+			</trans-unit>
 			<trans-unit id="Member_Profile_UpdateProfile_Title" datatype="html">
 				<source>Profile</source>
 				<context-group purpose="location">

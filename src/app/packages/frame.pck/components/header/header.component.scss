@@ -19,6 +19,7 @@
 					border-right: 1px solid cd-palette($cd-border, 3002);
 					margin-right: 5px;
 					min-width: 225px;
+					padding-right: 15px;
 					width: 225px;
 
 					h4 {
@@ -91,7 +92,9 @@
 				&:first-child {
 					.ham-logo {
 						border: none;
+						margin-right: 0;
 						min-width: auto;
+						padding-right: 0;
 						width: 200px;
 					}
 
