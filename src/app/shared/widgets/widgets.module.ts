@@ -6,18 +6,21 @@ import { DividerWidgetComponent } from './divider/divider-widget.component';
 import { BadgetWidgetComponent } from './badge/badge-widget.component';
 import { PasswordStrengthComponent } from './password-strength/password-strength.component';
 import { SharedModule } from '../shared.module';
+import { ReadMoreComponent } from './read-more/read-more.component';
 
 @NgModule({
 	imports: [SharedModule],
 	declarations: [
 		DividerWidgetComponent,
 		BadgetWidgetComponent,
-		PasswordStrengthComponent
+		PasswordStrengthComponent,
+		ReadMoreComponent
 	],
 	exports: [
 		DividerWidgetComponent,
 		BadgetWidgetComponent,
-		PasswordStrengthComponent
+		PasswordStrengthComponent,
+		ReadMoreComponent
 	]
 })
 

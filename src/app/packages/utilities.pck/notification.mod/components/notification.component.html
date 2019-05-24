@@ -1,10 +1,11 @@
 <ng-container *ngIf="messages && messages">
 	<section class="ham-notification-wrapper" *ngFor="let message of messages; let idx=index;">
-		<div [attr.class]="'cd-center-align ham-message ' + getMessageType(message.type)">
-			<!-- Text -->
-			<ng-container *ngIf="message.payload && message.payload.text && !message.payload.value">
-				<p [innerHtml]="message.payload.text"></p>
-			</ng-container>
+		<div [attr.class]="'cd-center-align ham-message ' + getMessageType(message.type)" *ngIf="message.payload">
+			<!-- Text with Read More -->
+			<app-read-more
+				*ngIf="message.payload.text"
+				[fullText]="message.payload.text">
+			</app-read-more>
 
 			<!-- Button -->
 			<mat-icon (click)="onClickCloseMessage(idx)">close</mat-icon>

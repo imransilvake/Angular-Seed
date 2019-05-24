@@ -1,6 +1,6 @@
 // angular
 import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
-import { Subject } from 'rxjs';
+import { merge, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 // app
@@ -32,18 +32,14 @@ export class AppLayoutComponent implements AfterViewInit, OnDestroy {
 		this._scrollTopService.scrollTopListener();
 
 		// listen to scroll event
-		HelperService.detectScroll()
-			.pipe(takeUntil(this._ngUnSubscribe))
-			.subscribe(() => {
-				// set top Head height
-				this.calculateTopHeadHeight();
-			});
-
 		// listen to resize event
-		HelperService.detectWindowResize()
+		const mergeListeners = merge(
+			HelperService.detectScroll(),
+			HelperService.detectWindowResize()
+		);
+		mergeListeners
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(() => {
-				// set top Head height
 				this.calculateTopHeadHeight();
 			});
 	}
