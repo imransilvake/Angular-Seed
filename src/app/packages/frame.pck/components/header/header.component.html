@@ -28,8 +28,8 @@
 
 			<!-- Reload Button -->
 			<div class="ham-reload cd-tooltip">
-				<button mat-button class="ham-btn-icon" (click)="onClickReloadRoute()">
-					<mat-icon>cached</mat-icon>
+				<button mat-button class="ham-btn-icon" (click)="onClickReloadRoute()" [disabled]="reloadState">
+					<fa-icon [icon]="!reloadState ? faIcons[0] : faIcons[1]" [spin]="reloadState"></fa-icon>
 				</button>
 				<span class="cd-arrow cd-bottom">Reload Services</span>
 			</div>

@@ -20,8 +20,10 @@ export class RouterService {
 		this.currentUrl = this._router.url;
 		this._router.events
 			.subscribe(event => {
-				// set previous url
-				this.setPreviousUrl(event);
+				if (event instanceof NavigationEnd) {
+					// set previous url
+					this.setPreviousUrl(event);
+				}
 			});
 	}
 
@@ -38,9 +40,7 @@ export class RouterService {
 	 * @param event
 	 */
 	private setPreviousUrl(event) {
-		if (event instanceof NavigationEnd) {
-			this.lastRoute = this.authRoutes.includes(this.currentUrl) || this.currentUrl === '/' ? ROUTING.dashboard : this.currentUrl;
-			this.currentUrl = event.url;
-		}
+		this.lastRoute = this.authRoutes.includes(this.currentUrl) || this.currentUrl === '/' ? ROUTING.dashboard : this.currentUrl;
+		this.currentUrl = event.url;
 	}
 }

@@ -1,12 +1,13 @@
 // angular
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { of, Subject } from 'rxjs';
+import { delay, map, mapTo, takeUntil, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 // app
-import { HelperService } from '../../../utilities.pck/accessories.mod/services/helper.service';
 import { ROUTING } from '../../../../../environments/environment';
+import { HelperService } from '../../../utilities.pck/accessories.mod/services/helper.service';
+import { faSpinner, faSync } from '@fortawesome/free-solid-svg-icons';
 
 declare const document: any;
 
@@ -20,7 +21,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	@Input() drawer;
 
 	public routing = ROUTING;
+	public faIcons = [faSync, faSpinner];
 	public appFullScreen = false;
+	public reloadState = false;
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(private _router: Router) {
@@ -32,8 +35,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(() => {
 				const fullscreenElement = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement;
-
-				// in-active full screen
 				this.appFullScreen = !(fullscreenElement === null);
 			});
 
@@ -42,7 +43,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(() => {
 				if (!HelperService.isDesktopView && this.drawer.opened) {
-					// set icons menu
 					this.drawer.toggle();
 				}
 			});
@@ -69,6 +69,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	 * reload route services
 	 */
 	public onClickReloadRoute() {
-		this._router.navigate([this._router.url]).then();
+		// set spinner
+		this.reloadState = true;
+
+		// reload route
+		this._router
+			.navigate([this._router.url])
+			.then(() => {
+				of(null)
+					.pipe(
+						delay(1000),
+						takeUntil(this._ngUnSubscribe)
+					)
+					.subscribe(() => this.reloadState = false);
+			});
 	}
 }
