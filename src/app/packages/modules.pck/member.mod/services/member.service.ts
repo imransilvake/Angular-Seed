@@ -23,7 +23,7 @@ import { ChangePasswordInterface } from '../interfaces/change-password.interface
 export class MemberService {
 	public currentUser;
 	public profileImageUpdate: EventEmitter<boolean> = new EventEmitter();
-	public profileData: EventEmitter<any> = new EventEmitter();
+	public memberData: EventEmitter<any> = new EventEmitter();
 	public lastLogin: EventEmitter<string> = new EventEmitter();
 
 	constructor(
@@ -51,7 +51,7 @@ export class MemberService {
 			.postAPI(AppServices['Member']['Fetch_Profile'], { bodyParams: payload })
 			.subscribe(res => {
 				// set profile data
-				this.profileData.emit(res);
+				this.memberData.emit({ profileInfo: res });
 
 				// set last login
 				this.lastLogin.emit(res.lastLogin);

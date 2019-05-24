@@ -30,28 +30,24 @@ export class ProfileCoverComponent implements OnInit, OnDestroy {
 		private _memberService: MemberService,
 		public dialog: MatDialog
 	) {
-		// get current user state
-		this.currentUser = this._authService.currentUserState;
-
-		// get user name
-		this.userName = HelperService.capitalizeString(this.currentUser.profile.name);
-
-		// get first letters of name
-		this.userNameLetters = HelperService.getFirstLetter(this.userName);
 	}
 
 	ngOnInit() {
+		this.currentUser = this._memberService.currentUser; // get current user state
+		this.userName = HelperService.capitalizeString(this.currentUser.profile.name); // get user name
+		this.userNameLetters = HelperService.getFirstLetter(this.userName); // get first letters of name
+
+		// listener: last login
 		this._memberService.lastLogin
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
-				// set login time
-				this.loginTime = moment(res).format('DD. MMMM YYYY');
+				this.loginTime = moment(res).format('DD. MMMM YYYY'); // set login time
 			});
 
+		// listener: on new image upload
 		this._memberService.profileImageUpdate
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(() => {
-				// get current user state
 				this.currentUser = this._authService.currentUserState;
 			});
 	}
