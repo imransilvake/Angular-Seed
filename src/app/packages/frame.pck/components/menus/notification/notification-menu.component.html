@@ -12,8 +12,44 @@
 			<app-widget-badge [type]="1" [count]="50"></app-widget-badge>
 		</div>
 		<app-widget-divider></app-widget-divider>
-		<button mat-menu-item>Item 1</button>
-		<button mat-menu-item>Item 2</button>
-		<button mat-menu-item>Item 3</button>
+		<button mat-menu-item>
+			<div class="cd-row">
+				<div class="cd-col cd-col-pm-m-6 cd-col-pm-s-6">
+					<p class="ham-ellipses">System maintenance</p>
+				</div>
+				<div class="cd-col cd-col-pm-m-3 cd-col-pm-s-3">
+					<p class="ham-ellipses ham-type ham-yellow">Sys</p>
+				</div>
+				<div class="cd-col cd-col-pm-m-3 cd-col-pm-s-3">
+					<p class="ham-ellipses ham-time">Just now</p>
+				</div>
+			</div>
+		</button>
+		<button mat-menu-item>
+			<div class="cd-row">
+				<div class="cd-col cd-col-pm-m-6 cd-col-pm-s-6">
+					<p class="ham-ellipses">System maintenance</p>
+				</div>
+				<div class="cd-col cd-col-pm-m-3 cd-col-pm-s-3">
+					<p class="ham-ellipses ham-type ham-red">Alert</p>
+				</div>
+				<div class="cd-col cd-col-pm-m-3 cd-col-pm-s-3">
+					<p class="ham-ellipses ham-time">22mins</p>
+				</div>
+			</div>
+		</button>
+		<button mat-menu-item>
+			<div class="cd-row">
+				<div class="cd-col cd-col-pm-m-6 cd-col-pm-s-6">
+					<p class="ham-ellipses">System maintenance</p>
+				</div>
+				<div class="cd-col cd-col-pm-m-3 cd-col-pm-s-3">
+					<p class="ham-ellipses ham-type ham-blue">Reg</p>
+				</div>
+				<div class="cd-col cd-col-pm-m-3 cd-col-pm-s-3">
+					<p class="ham-ellipses ham-time">7hrs</p>
+				</div>
+			</div>
+		</button>
 	</mat-menu>
 </div>
