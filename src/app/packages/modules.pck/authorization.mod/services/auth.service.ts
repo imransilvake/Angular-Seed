@@ -28,7 +28,7 @@ import { LoadingAnimationService } from '../../../utilities.pck/loading-animatio
 import { DialogTypeEnum } from '../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { DialogService } from '../../../utilities.pck/dialog.mod/services/dialog.service';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AuthService {
 	public errorMessage: EventEmitter<string> = new EventEmitter();
 
@@ -257,10 +257,10 @@ export class AuthService {
 					type: DialogTypeEnum.NOTICE,
 					payload: {
 						icon: 'dialog_email',
-						title: this._i18n({ value: 'Title: Password Reset', id: 'Auth_Forgot_Password_Form_Success_Title' }),
+						title: this._i18n({ value: 'Title: Password Reset', id: 'Auth_ForgotPassword_Form_Success_Title' }),
 						message: this._i18n({
 							value: 'Description: Forgot Password',
-							id: 'Auth_Forgot_Password_Form_Success_Description'
+							id: 'Auth_ForgotPassword_Form_Success_Description'
 						}),
 						buttonTexts: [this._i18n({ value: 'Button - OK', id: 'Common_Button_OK' })]
 					}
@@ -278,7 +278,7 @@ export class AuthService {
 					case 'InvalidParameterException':
 						message = this._i18n({
 							value: 'Description: Invalid Parameter Exception',
-							id: 'Auth_Forgot_Password_Error_InvalidParameterException_Description'
+							id: 'Auth_ForgotPassword_Error_InvalidParameterException_Description'
 						});
 
 						// set field to show error message
@@ -290,7 +290,7 @@ export class AuthService {
 					case 'UserNotFoundException':
 						message = this._i18n({
 							value: 'Description: User Not Found Exception',
-							id: 'Auth_Forgot_Password_Error_UserNotFoundException_Description'
+							id: 'Auth_ForgotPassword_Error_UserNotFoundException_Description'
 						});
 
 						// set field to show error message
@@ -302,7 +302,7 @@ export class AuthService {
 					case 'InvalidFirstName':
 						message = this._i18n({
 							value: 'Description: Invalid First Name Exception',
-							id: 'Auth_Forgot_Password_Error_InvalidFirstNameException_Description'
+							id: 'Auth_ForgotPassword_Error_InvalidFirstNameException_Description'
 						});
 
 						// set field to show error message
@@ -314,7 +314,7 @@ export class AuthService {
 					case 'InvalidLastName':
 						message = this._i18n({
 							value: 'Description: Invalid Last Name Exception',
-							id: 'Auth_Forgot_Password_Error_InvalidLastNameException_Description'
+							id: 'Auth_ForgotPassword_Error_InvalidLastNameException_Description'
 						});
 
 						// set field to show error message
@@ -351,10 +351,10 @@ export class AuthService {
 					type: DialogTypeEnum.NOTICE,
 					payload: {
 						icon: 'dialog_tick',
-						title: this._i18n({ value: 'Title: Reset Password', id: 'Auth_Reset_Password_Form_Success_Title' }),
+						title: this._i18n({ value: 'Title: Reset Password', id: 'Auth_ResetPassword_Form_Success_Title' }),
 						message: this._i18n({
 							value: 'Description: Reset Password',
-							id: 'Auth_Reset_Password_Form_Success_Description'
+							id: 'Auth_ResetPassword_Form_Success_Description'
 						}),
 						buttonTexts: [this._i18n({ value: 'Button - OK', id: 'Common_Button_OK' })]
 					}
@@ -372,7 +372,7 @@ export class AuthService {
 					case 'CodeMismatchException':
 						message = this._i18n({
 							value: 'Description: Mismatch Verification Code Exception',
-							id: 'Auth_Reset_Password_Error_CodeMismatchException_Description'
+							id: 'Auth_ResetPassword_Error_CodeMismatchException_Description'
 						});
 
 						// message
@@ -381,7 +381,7 @@ export class AuthService {
 					case 'ExpiredCodeException':
 						message = this._i18n({
 							value: 'Description: Expired Verification Code Exception',
-							id: 'Auth_Reset_Password_Error_ExpiredCodeException_Description'
+							id: 'Auth_ResetPassword_Error_ExpiredCodeException_Description'
 						});
 
 						// message

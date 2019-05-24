@@ -1,5 +1,5 @@
 // angular
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { takeUntil } from 'rxjs/operators';
@@ -13,6 +13,7 @@ import { ROUTING } from '../../../../../../environments/environment';
 import { DialogTypeEnum } from '../../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { DialogService } from '../../../../utilities.pck/dialog.mod/services/dialog.service';
 import { LoadingAnimationService } from '../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
+import { MemberService } from '../../../../modules.pck/member.mod/services/member.service';
 
 @Component({
 	selector: 'app-menu-account',
@@ -20,7 +21,7 @@ import { LoadingAnimationService } from '../../../../utilities.pck/loading-anima
 	styleUrls: ['./account-menu.component.scss']
 })
 
-export class AccountMenuComponent implements OnDestroy {
+export class AccountMenuComponent implements OnInit, OnDestroy {
 	public routing = ROUTING;
 	public faIcons = [faEnvelope, faUser, faUserLock, faPowerOff];
 	public currentUser;
@@ -32,18 +33,22 @@ export class AccountMenuComponent implements OnDestroy {
 	constructor(
 		private _loadingAnimationService: LoadingAnimationService,
 		private _authService: AuthService,
+		private _memberService: MemberService,
 		private _router: Router,
 		private _dialogService: DialogService,
 		private _i18n: I18n
 	) {
-		// get current user state
-		this.currentUser = this._authService.currentUserState;
+	}
 
-		// get user name
-		this.userName = HelperService.capitalizeString(this.currentUser.profile.name);
+	ngOnInit() {
+		this.currentUser = this._authService.currentUserState; // get current user state
+		this.userName = HelperService.capitalizeString(this.currentUser.profile.name); // get user name
+		this.userNameLetters = HelperService.getFirstLetter(this.userName); // get first letters of name
 
-		// get first letters of name
-		this.userNameLetters = HelperService.getFirstLetter(this.userName);
+		// listener: on new image upload
+		this._memberService.profileImageUpdate
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(() => this.currentUser = this._authService.currentUserState);
 	}
 
 	ngOnDestroy() {

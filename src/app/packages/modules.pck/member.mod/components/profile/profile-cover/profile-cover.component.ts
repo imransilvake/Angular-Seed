@@ -40,16 +40,12 @@ export class ProfileCoverComponent implements OnInit, OnDestroy {
 		// listener: last login
 		this._memberService.lastLogin
 			.pipe(takeUntil(this._ngUnSubscribe))
-			.subscribe(res => {
-				this.loginTime = moment(res).format('DD. MMMM YYYY'); // set login time
-			});
+			.subscribe(res => this.loginTime = moment(res).format('DD. MMMM YYYY'));
 
 		// listener: on new image upload
 		this._memberService.profileImageUpdate
 			.pipe(takeUntil(this._ngUnSubscribe))
-			.subscribe(() => {
-				this.currentUser = this._authService.currentUserState;
-			});
+			.subscribe(() => this.currentUser = this._authService.currentUserState);
 	}
 
 	ngOnDestroy() {

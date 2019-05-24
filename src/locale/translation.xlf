@@ -498,7 +498,7 @@
 					<context context-type="linenumber">82</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Forgot_Password_Info_Title" datatype="html">
+			<trans-unit id="Auth_ForgotPassword_Info_Title" datatype="html">
 				<source>Title</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -507,7 +507,7 @@
 					<context context-type="linenumber">6</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Forgot_Password_Info_Description" datatype="html">
+			<trans-unit id="Auth_ForgotPassword_Info_Description" datatype="html">
 				<source>Description</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -516,7 +516,7 @@
 					<context context-type="linenumber">8</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Forgot_Password_Info_Version" datatype="html">
+			<trans-unit id="Auth_ForgotPassword_Info_Version" datatype="html">
 				<source>Version</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -525,7 +525,7 @@
 					<context context-type="linenumber">10</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Forgot_Password_Form_Title" datatype="html">
+			<trans-unit id="Auth_ForgotPassword_Form_Title" datatype="html">
 				<source>Forgot Password</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -534,7 +534,7 @@
 					<context context-type="linenumber">19</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Forgot_Password_Form_FirstName_Label" datatype="html">
+			<trans-unit id="Auth_ForgotPassword_Form_FirstName_Label" datatype="html">
 				<source>First Name*</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -543,7 +543,7 @@
 					<context context-type="linenumber">25</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Forgot_Password_Form_FirstName_PlaceHolder" datatype="html">
+			<trans-unit id="Auth_ForgotPassword_Form_FirstName_PlaceHolder" datatype="html">
 				<source>First Name</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -552,7 +552,7 @@
 					<context context-type="linenumber">30</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Forgot_Password_Form_LastName_Label" datatype="html">
+			<trans-unit id="Auth_ForgotPassword_Form_LastName_Label" datatype="html">
 				<source>Last Name*</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -561,7 +561,7 @@
 					<context context-type="linenumber">38</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Forgot_Password_Form_LastName_PlaceHolder" datatype="html">
+			<trans-unit id="Auth_ForgotPassword_Form_LastName_PlaceHolder" datatype="html">
 				<source>Last Name</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -570,7 +570,7 @@
 					<context context-type="linenumber">43</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Forgot_Password_Form_Email_Label" datatype="html">
+			<trans-unit id="Auth_ForgotPassword_Form_Email_Label" datatype="html">
 				<source>Email*</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -579,7 +579,7 @@
 					<context context-type="linenumber">55</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Forgot_Password_Form_Email_PlaceHolder" datatype="html">
+			<trans-unit id="Auth_ForgotPassword_Form_Email_PlaceHolder" datatype="html">
 				<source>Email</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -588,7 +588,7 @@
 					<context context-type="linenumber">60</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Forgot_Password_Form_Submit_Button" datatype="html">
+			<trans-unit id="Auth_ForgotPassword_Form_Submit_Button" datatype="html">
 				<source>Send</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -597,7 +597,7 @@
 					<context context-type="linenumber">68</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Forgot_Password_Form_Note" datatype="html">
+			<trans-unit id="Auth_ForgotPassword_Form_Note" datatype="html">
 				<source>Already have an account?<x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>Login
 					<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
 				</source>
@@ -608,7 +608,7 @@
 					<context context-type="linenumber">73</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Reset_Password_Info_Title" datatype="html">
+			<trans-unit id="Auth_ResetPassword_Info_Title" datatype="html">
 				<source>Title</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -617,7 +617,7 @@
 					<context context-type="linenumber">6</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Reset_Password_Info_Description" datatype="html">
+			<trans-unit id="Auth_ResetPassword_Info_Description" datatype="html">
 				<source>Description</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -626,7 +626,7 @@
 					<context context-type="linenumber">8</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Reset_Password_Info_Version" datatype="html">
+			<trans-unit id="Auth_ResetPassword_Info_Version" datatype="html">
 				<source>Version</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -635,7 +635,7 @@
 					<context context-type="linenumber">10</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Reset_Password_Form_Title" datatype="html">
+			<trans-unit id="Auth_ResetPassword_Form_Title" datatype="html">
 				<source>Reset Password</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -644,7 +644,7 @@
 					<context context-type="linenumber">19</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Reset_Password_Form_New_Password_Label" datatype="html">
+			<trans-unit id="Auth_ResetPassword_Form_New_Password_Label" datatype="html">
 				<source>New Password*</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -653,7 +653,7 @@
 					<context context-type="linenumber">38</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Reset_Password_Form_New_Password_PlaceHolder" datatype="html">
+			<trans-unit id="Auth_ResetPassword_Form_New_Password_PlaceHolder" datatype="html">
 				<source>New Password</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -662,7 +662,7 @@
 					<context context-type="linenumber">45</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Reset_Password_Form_Confirm_New_Password_Label" datatype="html">
+			<trans-unit id="Auth_ResetPassword_Form_Confirm_New_Password_Label" datatype="html">
 				<source>Confirm New Password*</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -671,7 +671,7 @@
 					<context context-type="linenumber">56</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Reset_Password_Form_Confirm_New_Password_PlaceHolder" datatype="html">
+			<trans-unit id="Auth_ResetPassword_Form_Confirm_New_Password_PlaceHolder" datatype="html">
 				<source>Confirm New Password</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -680,7 +680,7 @@
 					<context context-type="linenumber">63</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Reset_Password_Form_Submit_Button" datatype="html">
+			<trans-unit id="Auth_ResetPassword_Form_Submit_Button" datatype="html">
 				<source>Reset</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -689,7 +689,7 @@
 					<context context-type="linenumber">74</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Lock_Screen_Status" datatype="html">
+			<trans-unit id="Auth_LockScreen_Status" datatype="html">
 				<source>
 					<x id="START_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;mat-icon&gt;"/>lock
 					<x id="CLOSE_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;/mat-icon&gt;"/>
@@ -702,7 +702,7 @@
 					<context context-type="linenumber">13</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Lock_Screen_Form_Password_PlaceHolder" datatype="html">
+			<trans-unit id="Auth_LockScreen_Form_Password_PlaceHolder" datatype="html">
 				<source>Password</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -711,7 +711,7 @@
 					<context context-type="linenumber">33</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Lock_Screen_Form_Password_Hint" datatype="html">
+			<trans-unit id="Auth_LockScreen_Form_Password_Hint" datatype="html">
 				<source>Password Hint</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -720,7 +720,7 @@
 					<context context-type="linenumber">36</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Lock_Screen_Note" datatype="html">
+			<trans-unit id="Auth_LockScreen_Note" datatype="html">
 				<source>
 					Not <x id="INTERPOLATION" equiv-text="{{ userName }}"/>?<x id="START_LINK" ctype="x-a"
 					                                                          equiv-text="&lt;a&gt;"/>Click here
@@ -985,14 +985,14 @@
 					<context context-type="linenumber">3</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Member_Profile_Profile_Cover_Change_Image" datatype="html">
+			<trans-unit id="Member_Profile_ProfileCover_Change_Image" datatype="html">
 				<source>[Change Image]</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/profile-cover/profile-cover.component.html</context>
 					<context context-type="linenumber">14</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Member_Profile_Profile_Cover_Last_Login" datatype="html">
+			<trans-unit id="Member_Profile_ProfileCover_Last_Login" datatype="html">
 				<source>Last Login: <x id="INTERPOLATION" equiv-text="{{loginTime}}"/></source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/profile-cover/profile-cover.component.html</context>
@@ -1173,7 +1173,7 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Forgot_Password_Form_Success_Title" datatype="html">
+			<trans-unit id="Auth_ForgotPassword_Form_Success_Title" datatype="html">
 				<source>Title: Password Reset</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -1182,7 +1182,7 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Forgot_Password_Form_Success_Description" datatype="html">
+			<trans-unit id="Auth_ForgotPassword_Form_Success_Description" datatype="html">
 				<source>Description: Forgot Password</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -1191,7 +1191,7 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Forgot_Password_Error_InvalidParameterException_Description" datatype="html">
+			<trans-unit id="Auth_ForgotPassword_Error_InvalidParameterException_Description" datatype="html">
 				<source>Description: Invalid Parameter Exception</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -1200,7 +1200,7 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Forgot_Password_Error_UserNotFoundException_Description" datatype="html">
+			<trans-unit id="Auth_ForgotPassword_Error_UserNotFoundException_Description" datatype="html">
 				<source>Description: User Not Found Exception</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -1209,7 +1209,7 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Forgot_Password_Error_InvalidFirstNameException_Description" datatype="html">
+			<trans-unit id="Auth_ForgotPassword_Error_InvalidFirstNameException_Description" datatype="html">
 				<source>Description: Invalid First Name Exception</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -1218,7 +1218,7 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Forgot_Password_Error_InvalidLastNameException_Description" datatype="html">
+			<trans-unit id="Auth_ForgotPassword_Error_InvalidLastNameException_Description" datatype="html">
 				<source>Description: Invalid Last Name Exception</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -1374,7 +1374,7 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Reset_Password_Form_Success_Title" datatype="html">
+			<trans-unit id="Auth_ResetPassword_Form_Success_Title" datatype="html">
 				<source>Title: Reset Password</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -1383,7 +1383,7 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Reset_Password_Form_Success_Description" datatype="html">
+			<trans-unit id="Auth_ResetPassword_Form_Success_Description" datatype="html">
 				<source>Description: Reset Password</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -1392,7 +1392,7 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Reset_Password_Error_CodeMismatchException_Description" datatype="html">
+			<trans-unit id="Auth_ResetPassword_Error_CodeMismatchException_Description" datatype="html">
 				<source>Description: Mismatch Verification Code Exception</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -1401,7 +1401,7 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Reset_Password_Error_ExpiredCodeException_Description" datatype="html">
+			<trans-unit id="Auth_ResetPassword_Error_ExpiredCodeException_Description" datatype="html">
 				<source>Description: Expired Verification Code Exception</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">

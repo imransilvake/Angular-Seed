@@ -22,6 +22,11 @@ export class ProfileComponent implements OnDestroy {
 		private _authService: AuthService,
 		private _memberService: MemberService
 	) {
+		// setup reload logic
+		this.setupReload();
+	}
+
+	public setupReload() {
 		this.router.events
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe((e: any) => {

@@ -13,7 +13,7 @@
 					<img *ngIf="currentUser.profile.image" [src]="currentUser.profile.image" [alt]="userName"/>
 				</div>
 				<p (click)="onClickOpenImageModal()"
-				   i18n="@@Member_Profile_Profile_Cover_Change_Image"
+				   i18n="@@Member_Profile_ProfileCover_Change_Image"
 				   class="ham-upload">[Change Image]
 				</p>
 			</div>
@@ -27,7 +27,7 @@
 	<!-- Last Login -->
 	<div class="cd-row ham-last-login">
 		<div class="cd-col" *ngIf="loginTime">
-			<p i18n="@@Member_Profile_Profile_Cover_Last_Login">Last Login: {{loginTime}}</p>
+			<p i18n="@@Member_Profile_ProfileCover_Last_Login">Last Login: {{loginTime}}</p>
 		</div>
 	</div>
 </div>

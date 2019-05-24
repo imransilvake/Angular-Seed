@@ -10,7 +10,6 @@ import { UpdateProfileComponent } from './components/profile/update-profile/upda
 import { WidgetsModule } from '../../../shared/widgets/widgets.module';
 import { FieldsModule } from '../../core.pck/fields.mod/fields.module';
 import { SharedModule } from '../../../shared/shared.module';
-import { MemberService } from './services/member.service';
 import { ChangePasswordComponent } from './components/profile/change-password/change-password.component';
 import { HotelsListComponent } from './components/profile/hotels-list/hotels-list.component';
 import { ProfileCoverComponent } from './components/profile/profile-cover/profile-cover.component';
@@ -31,9 +30,6 @@ import { ProfileUploadImageComponent } from './components/profile/profile-cover/
 		HotelsListComponent,
 		ProfileCoverComponent,
 		ProfileUploadImageComponent
-	],
-	providers: [
-		MemberService
 	],
 	entryComponents: [
 		ProfileUploadImageComponent
