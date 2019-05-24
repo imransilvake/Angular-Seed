@@ -2,6 +2,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 // app
 import { HelperService } from '../../../utilities.pck/accessories.mod/services/helper.service';
@@ -22,7 +23,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	public appFullScreen = false;
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
-	constructor() {
+	constructor(private _router: Router) {
 	}
 
 	ngOnInit() {
@@ -68,6 +69,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	 * reload route services
 	 */
 	public onClickReloadRoute() {
-
+		this._router.navigate([this._router.url]).then();
 	}
 }

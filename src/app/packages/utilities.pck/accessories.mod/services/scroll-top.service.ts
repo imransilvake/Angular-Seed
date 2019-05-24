@@ -8,10 +8,7 @@ import { HelperService } from './helper.service';
 @Injectable({ providedIn: 'root' })
 export class ScrollTopService {
 	public scrollEvent: EventEmitter<any> = new EventEmitter();
-
-	constructor() {
-	}
-
+	
 	/**
 	 * scroll to top listener
 	 */

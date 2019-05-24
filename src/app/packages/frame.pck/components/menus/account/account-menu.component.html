@@ -1,7 +1,10 @@
 <div class="ham-account-menu">
 	<button class="ham-btn-icon" mat-button [matMenuTriggerFor]="account">
+		<!-- Image -->
+		<img *ngIf="currentUser.profile.image" class="ham-profile-logo" [src]="currentUser.profile.image" [alt]="userName"/>
+
 		<!-- No Image -->
-		<span class="ham-user-name">{{userNameLetters}}</span>
+		<span *ngIf="!currentUser.profile.image" class="ham-user-name">{{userNameLetters}}</span>
 	</button>
 	<mat-menu #account="matMenu" class="ham-account-mat-menu">
 		<!-- Head -->

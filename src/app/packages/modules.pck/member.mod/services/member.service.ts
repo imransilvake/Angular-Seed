@@ -1,7 +1,6 @@
 // angular
 import { EventEmitter, Injectable } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
-import { FormGroup } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 
 // store
@@ -23,6 +22,8 @@ import { ChangePasswordInterface } from '../interfaces/change-password.interface
 @Injectable({ providedIn: 'root' })
 export class MemberService {
 	public currentUser;
+	public profileImageUpdate: EventEmitter<boolean> = new EventEmitter();
+	public profileData: EventEmitter<any> = new EventEmitter();
 	public lastLogin: EventEmitter<string> = new EventEmitter();
 
 	constructor(
@@ -38,11 +39,9 @@ export class MemberService {
 	}
 
 	/**
-	 * get user profile
-	 *
-	 * @param formFields
+	 * fetch user profile
 	 */
-	public memberFetchProfile(formFields: FormGroup) {
+	public memberFetchProfile() {
 		// payload
 		const payload = {
 			accessToken: this.currentUser.credentials.accessToken,
@@ -53,16 +52,11 @@ export class MemberService {
 		this._proxyService
 			.postAPI(AppServices['Member']['Fetch_Profile'], { bodyParams: payload })
 			.subscribe(res => {
-				if (res) {
-					// set forms fields
-					formFields.get('salutation').setValue(res.gender);
-					formFields.get('firstName').setValue(res.given_name);
-					formFields.get('lastName').setValue(res.family_name);
-					formFields.get('email').setValue(res.email);
+				// set profile data
+				this.profileData.emit(res);
 
-					// set last login
-					this.lastLogin.emit(res.lastLogin);
-				}
+				// set last login
+				this.lastLogin.emit(res.lastLogin);
 			});
 	}
 
@@ -210,15 +204,50 @@ export class MemberService {
 	public memberChangeImage(imageSrc: string, dialog: any) {
 		// payload
 		const payload = {
-			user_avatar: imageSrc
+			accessToken: this.currentUser.credentials.accessToken,
+			image: imageSrc
 		};
 
-		this._proxyService.postAPI(AppServices['Member']['Change_Image'], { bodyParams: payload })
+		// service
+		this._proxyService.postAPI(AppServices['Utilities']['Change_Profile_Image'], { bodyParams: payload })
 			.subscribe(res => {
-				// todo change image on profile and here page.
+				if (res) {
+					// payload
+					const dialogPayload = {
+						type: DialogTypeEnum.NOTICE,
+						payload: {
+							icon: 'dialog_tick',
+							message: this._i18n({
+								value: 'Description: Profile Image Updated',
+								id: 'Member_Profile_UpdateProfileImage_Success_Description'
+							}),
+							buttonTexts: [this._i18n({ value: 'Button - OK', id: 'Common_Button_OK' })]
+						}
+					};
 
-				// close modal
-				dialog.close();
+					// dialog service
+					this._dialogService.showDialog(dialogPayload)
+						.subscribe(() => {
+							// get current user state
+							// set image to current user state
+							const data = this._authService.currentUserState;
+							this._authService.currentUserState = {
+								profile: {
+									...data.profile,
+									image: res.image
+								},
+								credentials: data.credentials,
+								rememberMe: data.rememberMe,
+								timestamp: data.timestamp
+							};
+
+							// send success status
+							this.profileImageUpdate.emit(true);
+
+							// close modal
+							dialog.close();
+						});
+				}
 			});
 	}
 }

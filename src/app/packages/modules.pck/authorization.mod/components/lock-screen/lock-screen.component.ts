@@ -67,7 +67,7 @@ export class LockScreenComponent implements OnInit, AfterViewInit, OnDestroy {
 		this.currentUser = this._authService.currentUserState;
 
 		// get user name
-		this.userName = HelperService.capitalizeString(this.currentUser.profile.name);
+		this.userName = HelperService.capitalizeString(this.currentUser && this.currentUser.profile.name);
 
 		// listen to error message
 		this._authService.errorMessage
@@ -144,7 +144,12 @@ export class LockScreenComponent implements OnInit, AfterViewInit, OnDestroy {
 			};
 
 			// start login process
-			this._authService.authLogin(formPayload, this.formFields, currentUser.rememberMe, currentUser.language);
+			this._authService.authLogin(
+				formPayload,
+				this.formFields,
+				currentUser && currentUser.rememberMe,
+				currentUser.language
+			);
 		}
 	}
 

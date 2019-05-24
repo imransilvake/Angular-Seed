@@ -1,6 +1,8 @@
 // angular
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 // app
 import { ValidationService } from '../../../../../core.pck/fields.mod/services/validation.service';
@@ -17,10 +19,12 @@ import { UpdateProfileInterface } from '../../../interfaces/update-profile.inter
 	styleUrls: ['./update-profile.component.scss']
 })
 
-export class UpdateProfileComponent implements OnInit, AfterViewInit {
+export class UpdateProfileComponent implements OnInit {
 	public formFields;
 	public profileSalutationSelectType = SelectTypeEnum.DEFAULT;
 	public salutationList: SelectDefaultInterface[] = [];
+
+	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
 		private _loadingAnimationService: LoadingAnimationService,
@@ -54,11 +58,25 @@ export class UpdateProfileComponent implements OnInit, AfterViewInit {
 	ngOnInit() {
 		// salutation
 		this.salutationList = this._salutationList.getSalutationList();
+
+		// fetch profile data
+		this._memberService.profileData
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => {
+				if (res) {
+					// set forms fields
+					this.salutation.setValue(res.gender);
+					this.firstName.setValue(res.given_name);
+					this.lastName.setValue(res.family_name);
+					this.email.setValue(res.email);
+				}
+			});
 	}
 
-	ngAfterViewInit() {
-		// get user profile data
-		this._memberService.memberFetchProfile(this.formFields);
+	ngOnDestroy() {
+		// remove subscriptions
+		this._ngUnSubscribe.next();
+		this._ngUnSubscribe.complete();
 	}
 
 	/**

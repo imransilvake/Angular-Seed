@@ -1,5 +1,5 @@
 // angular
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { takeUntil } from 'rxjs/operators';
@@ -16,10 +16,11 @@ import { LoadingAnimationService } from '../../../../utilities.pck/loading-anima
 
 @Component({
 	selector: 'app-menu-account',
-	templateUrl: './account-menu.component.html'
+	templateUrl: './account-menu.component.html',
+	styleUrls: ['./account-menu.component.scss']
 })
 
-export class AccountMenuComponent implements OnInit, OnDestroy {
+export class AccountMenuComponent implements OnDestroy {
 	public routing = ROUTING;
 	public faIcons = [faEnvelope, faUser, faUserLock, faPowerOff];
 	public currentUser;
@@ -35,9 +36,6 @@ export class AccountMenuComponent implements OnInit, OnDestroy {
 		private _dialogService: DialogService,
 		private _i18n: I18n
 	) {
-	}
-
-	ngOnInit() {
 		// get current user state
 		this.currentUser = this._authService.currentUserState;
 

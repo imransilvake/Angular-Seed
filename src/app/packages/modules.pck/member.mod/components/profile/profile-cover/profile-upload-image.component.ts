@@ -12,7 +12,7 @@ import { MemberService } from '../../../services/member.service';
 })
 
 export class ProfileUploadImageComponent {
-	public fileFormats = ['image/jpeg', 'image/jpg'];
+	public fileFormats = ['image/jpeg', 'image/jpg', 'image/png'];
 	public maxFileSize = 1024;
 	public previewSrc;
 	public errorMessage;

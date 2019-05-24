@@ -15,7 +15,7 @@
 		<!-- Bottom -->
 		<div class="ham-bottom">
 			<p><span>Max FileSize:</span> 1MB</p>
-			<p><span>Supported Format:</span> JPG</p>
+			<p><span>Supported Formats:</span> JPG, PNG</p>
 		</div>
 	</header>
 
@@ -43,7 +43,7 @@
 				#file
 				[id]="'fileUpload'"
 				[type]="'file'"
-				[accept]="'image/jpg'"
+				[accept]="'image/*'"
 				(change)="setFile(file.files[0])"/>
 			</label>
 		</p>
@@ -56,7 +56,7 @@
 
 	<!-- Footer -->
 	<footer class="ham-foot">
-		<button mat-button type="button" (click)="onClickCloseModal()">Cancel</button>
-		<button mat-button type="button" (click)="onClickSaveImage()">Save</button>
+		<button mat-button type="button" class="ham-button-1"(click)="onClickCloseModal()">Cancel</button>
+		<button mat-button type="button" class="ham-button-1" (click)="onClickSaveImage()" [disabled]="!previewSrc">Save</button>
 	</footer>
 </section>

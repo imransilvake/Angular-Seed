@@ -12,7 +12,9 @@ export const AppOptions = {
 // services
 export const AppServices: { [moduleName: string]: { [name: string]: AppServicesInterface } } = {
 	Utilities: {
-		HotelList: { serviceUrl: '/hotels/list' }
+		HotelList: { serviceUrl: '/hotels/list' },
+		Fetch_Profile_Image: { serviceUrl: '/getimage' },
+		Change_Profile_Image: { serviceUrl: '/imageupload' }
 	},
 	Auth: {
 		Register: { serviceUrl: '/ham/auth/signup' },
@@ -25,8 +27,7 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 	Member: {
 		Fetch_Profile: { serviceUrl: '/profile/getuser' },
 		Update_Profile: { serviceUrl: '/profile/update' },
-		Change_Password: { serviceUrl: '/profile/changepassword' },
-		Change_Image: { serviceUrl: '/imageupload' }
+		Change_Password: { serviceUrl: '/profile/changepassword' }
 	}
 };
 

@@ -134,27 +134,49 @@ export class AuthService {
 					// decode token
 					const userInfo = HelperService.decodeJWTToken(res.idToken.jwtToken);
 
-					// set current user state
-					this.currentUserState = {
-						profile: {
-							...userInfo,
-							password: formPayload.password,
-							language: language
-						},
-						credentials: {
-							accessToken: res.accessToken.jwtToken,
-							idToken: res.idToken.jwtToken,
-							refreshToken: res.refreshToken.token
-						},
-						rememberMe: rememberMe,
-						timestamp: moment()
-					};
+					// get profile image
+					const imagePayload = { image: userInfo.picture };
+					this._proxyService
+						.postAPI(AppServices['Utilities']['Fetch_Profile_Image'], { bodyParams: imagePayload })
+						.subscribe(resp => {
+							if (resp) {
+								// set current user state
+								this.currentUserState = {
+									profile: {
+										...userInfo,
+										password: formPayload.password,
+										language: language,
+										image: resp.image
+									},
+									credentials: {
+										accessToken: res.accessToken.jwtToken,
+										idToken: res.idToken.jwtToken,
+										refreshToken: res.refreshToken.token
+									},
+									rememberMe: rememberMe,
+									timestamp: moment()
+								};
 
-					// navigate to defined url
-					// stop loading animation
-					this._router
-						.navigate([ROUTING.dashboard])
-						.then(() => this._loadingAnimationService.stopLoadingAnimation());
+								// navigate to defined url
+								// stop loading animation
+								this._router
+									.navigate([ROUTING.dashboard])
+									.then(() => this._loadingAnimationService.stopLoadingAnimation());
+							}
+						}, (err: HttpErrorResponse) => {
+							if (err.error.detail.code === 'AccessDenied') {
+								const message = this._i18n({
+									value: 'Description: Fetch Profile Image Exception',
+									id: 'Auth_Login_Error_FetchProfileImageException_Description'
+								});
+
+								// message
+								this.errorMessage.emit(message);
+							}
+
+							// stop loading animation
+							this._loadingAnimationService.stopLoadingAnimation();
+						});
 				}
 			}, (err: HttpErrorResponse) => {
 				let message;

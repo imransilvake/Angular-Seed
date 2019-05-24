@@ -1,9 +1,9 @@
-<div class="cd-vh-center ham-auth-common">
+<div class="cd-vh-center ham-auth-common" *ngIf="currentUser">
 	<div class="cd-row ham-row">
 		<!-- Profile -->
 		<div class="cd-col ham-profile">
-			<img [src]="'assets/images/logo.png'" alt="lock-screen"/>
-			<h5 *ngIf="currentUser">{{ userName }}</h5>
+			<img [src]="currentUser.profile.image" [alt]="userName"/>
+			<h5>{{ userName }}</h5>
 		</div>
 
 		<!-- Content -->

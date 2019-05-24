@@ -733,7 +733,7 @@
 					<context context-type="linenumber">44</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Member_Profile_Update_Profile_Title" datatype="html">
+			<trans-unit id="Member_Profile_UpdateProfile_Title" datatype="html">
 				<source>Profile</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -742,7 +742,7 @@
 					<context context-type="linenumber">3</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Member_Profile_Update_Profile_Form_Salutation_Label" datatype="html">
+			<trans-unit id="Member_Profile_UpdateProfile_Form_Salutation_Label" datatype="html">
 				<source>Salutation*</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -751,7 +751,7 @@
 					<context context-type="linenumber">14</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Member_Profile_Update_Profile_Form_Salutation_PlaceHolder" datatype="html">
+			<trans-unit id="Member_Profile_UpdateProfile_Form_Salutation_PlaceHolder" datatype="html">
 				<source>Select Salutation</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -760,7 +760,7 @@
 					<context context-type="linenumber">23</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Member_Profile_Update_Profile_Form_FirstName_Label" datatype="html">
+			<trans-unit id="Member_Profile_UpdateProfile_Form_FirstName_Label" datatype="html">
 				<source>First Name*</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -769,7 +769,7 @@
 					<context context-type="linenumber">35</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Member_Profile_Update_Profile_Form_FirstName_PlaceHolder" datatype="html">
+			<trans-unit id="Member_Profile_UpdateProfile_Form_FirstName_PlaceHolder" datatype="html">
 				<source>First Name</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -778,7 +778,7 @@
 					<context context-type="linenumber">40</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Member_Profile_Update_Profile_Form_LastName_Label" datatype="html">
+			<trans-unit id="Member_Profile_UpdateProfile_Form_LastName_Label" datatype="html">
 				<source>Last Name*</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -787,7 +787,7 @@
 					<context context-type="linenumber">48</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Member_Profile_Update_Profile_Form_LastName_PlaceHolder" datatype="html">
+			<trans-unit id="Member_Profile_UpdateProfile_Form_LastName_PlaceHolder" datatype="html">
 				<source>Last Name</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -796,7 +796,7 @@
 					<context context-type="linenumber">53</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Member_Profile_Update_Profile_Form_Email_Label" datatype="html">
+			<trans-unit id="Member_Profile_UpdateProfile_Form_Email_Label" datatype="html">
 				<source>Email*</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -805,7 +805,7 @@
 					<context context-type="linenumber">64</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Member_Profile_Update_Profile_Form_Email_PlaceHolder" datatype="html">
+			<trans-unit id="Member_Profile_UpdateProfile_Form_Email_PlaceHolder" datatype="html">
 				<source>Email</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -814,7 +814,7 @@
 					<context context-type="linenumber">69</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Member_Profile_Update_Profile_Form_Submit_Button" datatype="html">
+			<trans-unit id="Member_Profile_UpdateProfile_Form_Submit_Button" datatype="html">
 				<source>Update</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -823,60 +823,159 @@
 					<context context-type="linenumber">79</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Member_Profile_Change_Password_Title" datatype="html">
+			<trans-unit id="Member_Profile_UpdateProfile_Success_Title" datatype="html">
+				<source>Title: Profile Updated</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/member.mod/services/member.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Member_Profile_UpdateProfile_Success_Description" datatype="html">
+				<source>Description: Profile Updated</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/member.mod/services/member.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Member_Profile_UpdateProfile_Error_Title" datatype="html">
+				<source>Title: Profile Update Error</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/member.mod/services/member.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Member_Profile_UpdateProfile_Error_Description" datatype="html">
+				<source>Description: Profile Update Error</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/member.mod/services/member.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Member_Profile_ChangePassword_Title" datatype="html">
 				<source>Change Password</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/change-password/change-password.component.html</context>
 					<context context-type="linenumber">3</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Member_Profile_Change_Password_Form_Current_Password_Label" datatype="html">
+			<trans-unit id="Member_Profile_ChangePassword_Form_Current_Password_Label" datatype="html">
 				<source>Current Password*</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/change-password/change-password.component.html</context>
 					<context context-type="linenumber">14</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Member_Profile_Change_Password_Form_Current_Password_PlaceHolder" datatype="html">
+			<trans-unit id="Member_Profile_ChangePassword_Form_Current_Password_PlaceHolder" datatype="html">
 				<source>Current Password</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/change-password/change-password.component.html</context>
 					<context context-type="linenumber">21</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Member_Profile_Change_Password_Form_New_Password_Label" datatype="html">
+			<trans-unit id="Member_Profile_ChangePassword_Form_New_Password_Label" datatype="html">
 				<source>New Password*</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/change-password/change-password.component.html</context>
 					<context context-type="linenumber">34</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Member_Profile_Change_Password_Form_New_Password_PlaceHolder" datatype="html">
+			<trans-unit id="Member_Profile_ChangePassword_Form_New_Password_PlaceHolder" datatype="html">
 				<source>New Password</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/change-password/change-password.component.html</context>
 					<context context-type="linenumber">41</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Member_Profile_Change_Password_Form_Confirm_New_Password_Label" datatype="html">
+			<trans-unit id="Member_Profile_ChangePassword_Form_Confirm_New_Password_Label" datatype="html">
 				<source>Confirm New Password*</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/change-password/change-password.component.html</context>
 					<context context-type="linenumber">49</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Member_Profile_Change_Password_Form_Confirm_New_Password_PlaceHolder" datatype="html">
+			<trans-unit id="Member_Profile_ChangePassword_Form_Confirm_New_Password_PlaceHolder" datatype="html">
 				<source>Confirm New Password</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/change-password/change-password.component.html</context>
 					<context context-type="linenumber">56</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Member_Profile_Change_Password_Form_Submit_Button" datatype="html">
+			<trans-unit id="Member_Profile_ChangePassword_Form_Submit_Button" datatype="html">
 				<source>Change</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/change-password/change-password.component.html</context>
 					<context context-type="linenumber">67</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Member_Profile_ChangePassword_Success_Title" datatype="html">
+				<source>Title: Password Changed</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/member.mod/services/member.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Member_Profile_ChangePassword_Success_Description" datatype="html">
+				<source>Description: Password Changed</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/member.mod/services/member.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Member_Profile_ChangePassword_Error_PasswordInvalid_Title" datatype="html">
+				<source>Title: Password Invalid Exception</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/member.mod/services/member.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Member_Profile_ChangePassword_Error_PasswordInvalid_Description" datatype="html">
+				<source>Description: Password Invalid Exception</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/member.mod/services/member.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Member_Profile_ChangePassword_Error_LimitExceeded_Title" datatype="html">
+				<source>Title: Limit Exceed Exception</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/member.mod/services/member.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Member_Profile_ChangePassword_Error_LimitExceeded_Description" datatype="html">
+				<source>Description: Limit Exceed Exception</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/member.mod/services/member.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Member_Profile_UpdateProfileImage_Success_Description" datatype="html">
+				<source>Description: Profile Image Updated</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/member.mod/services/member.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Member_Profile_Hotel_List_Title" datatype="html">
@@ -1223,6 +1322,15 @@
 			</trans-unit>
 			<trans-unit id="Auth_Register_Error_UsernameExistsException_Description" datatype="html">
 				<source>Description: Username Exists Exception</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						src/app/packages/modules.pck/authorization.mod/services/auth.service.ts
+					</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_Login_Error_FetchProfileImageException_Description" datatype="html">
+				<source>Description: Fetch Profile Image Exception</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/modules.pck/authorization.mod/services/auth.service.ts

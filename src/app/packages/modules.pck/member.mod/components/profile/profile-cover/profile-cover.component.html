@@ -9,7 +9,8 @@
 		<div class="cd-col">
 			<div class="ham-logo-wrapper">
 				<div class="ham-logo">
-					<h2>{{userNameLetters}}</h2>
+					<h2 *ngIf="!currentUser.profile.image">{{userNameLetters}}</h2>
+					<img *ngIf="currentUser.profile.image" [src]="currentUser.profile.image" [alt]="userName"/>
 				</div>
 				<p (click)="onClickOpenImageModal()"
 				   i18n="@@Member_Profile_Profile_Cover_Change_Image"
@@ -22,6 +23,8 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- Last Login -->
 	<div class="cd-row ham-last-login">
 		<div class="cd-col" *ngIf="loginTime">
 			<p i18n="@@Member_Profile_Profile_Cover_Last_Login">Last Login: {{loginTime}}</p>
