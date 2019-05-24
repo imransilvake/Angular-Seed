@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 
 // app
 import { MemberService } from '../../services/member.service';
+import { AuthService } from '../../../authorization.mod/services/auth.service';
 
 @Component({
 	selector: 'app-profile',
@@ -14,17 +15,20 @@ import { MemberService } from '../../services/member.service';
 })
 
 export class ProfileComponent implements OnDestroy {
-	public navigationSubscription;
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
 		private router: Router,
+		private _authService: AuthService,
 		private _memberService: MemberService
 	) {
-		this.navigationSubscription = this.router.events
+		this.router.events
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe((e: any) => {
 				if (e instanceof NavigationEnd) {
+					// set current user state
+					this._memberService.currentUser = this._authService.currentUserState;
+
 					// member profile data
 					this._memberService.memberFetchProfile();
 				}
@@ -32,9 +36,6 @@ export class ProfileComponent implements OnDestroy {
 	}
 
 	ngOnDestroy() {
-		// avoid memory leaks.
-		this.navigationSubscription.unsubscribe();
-
 		// remove subscriptions
 		this._ngUnSubscribe.next();
 		this._ngUnSubscribe.complete();

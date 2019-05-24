@@ -34,8 +34,6 @@ export class MemberService {
 		private _dialogService: DialogService,
 		private _store: Store<{ ErrorHandler: ErrorHandlerInterface }>
 	) {
-		// get current user state
-		this.currentUser = this._authService.currentUserState;
 	}
 
 	/**
