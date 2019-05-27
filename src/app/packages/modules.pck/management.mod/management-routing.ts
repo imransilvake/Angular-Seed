@@ -15,8 +15,8 @@ export const MANAGEMENT_ROUTES: Routes = [
 				component: UserComponent,
 				data: {
 					breadcrumb: {
-						en: 'Client',
-						de: 'Klient'
+						en: 'User Management',
+						de: 'Benutzerverwaltung'
 					}
 				}
 			},
@@ -25,8 +25,8 @@ export const MANAGEMENT_ROUTES: Routes = [
 				component: ClientComponent,
 				data: {
 					breadcrumb: {
-						en: 'Client',
-						de: 'Klient'
+						en: 'Client Management',
+						de: 'Klient-Management'
 					}
 				},
 			},
@@ -35,8 +35,8 @@ export const MANAGEMENT_ROUTES: Routes = [
 				component: SystemNotificationComponent,
 				data: {
 					breadcrumb: {
-						en: 'Client',
-						de: 'Klient'
+						en: 'System Notification',
+						de: 'Systembenachrichtigung'
 					}
 				},
 			}
