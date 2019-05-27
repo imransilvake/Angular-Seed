@@ -11,11 +11,17 @@ export const EnvironmentRoutes = {
 		lock: 'auth/lock'
 	},
 	member: {
-		profile: 'member/profile'
+		title: 'member',
+		routes: {
+			profile: 'member/profile'
+		}
 	},
 	management: {
-		user: 'management/user',
-		client: 'management/client',
-		notification: 'management/notification'
+		title: 'management',
+		routes: {
+			user: 'management/user',
+			client: 'management/client',
+			notification: 'management/notification'
+		}
 	}
 };

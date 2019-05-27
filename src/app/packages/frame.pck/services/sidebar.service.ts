@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 // app
 import { SidebarInterface } from '../interfaces/sidebar.interface';
-import { faHome, faUser, faUserTag, faBell } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faDatabase } from '@fortawesome/free-solid-svg-icons';
 import { ROUTING } from '../../../../environments/environment';
 
 @Injectable()
@@ -14,26 +14,32 @@ export class SidebarService {
 	public getSidebarMenuList() {
 		const sidebarMenuList: SidebarInterface[] = [
 			{
-				section: 'Dashboard',
-				name: 'Home',
+				name: 'Dashboard',
 				icon: faHome,
-				url: `/${ROUTING.dashboard}`
+				children: [
+					{
+						name: 'Home',
+						url: `/${ROUTING.dashboard}`,
+					}
+				]
 			},
 			{
-				section: 'Management',
-				name: 'User',
-				icon: faUser,
-				url: `/${ROUTING.management.user}`
-			},
-			{
-				name: 'Client',
-				icon: faUserTag,
-				url: `/${ROUTING.management.client}`
-			},
-			{
-				name: 'Notifications',
-				icon: faBell,
-				url: `/${ROUTING.management.notification}`
+				name: 'Management',
+				icon: faDatabase,
+				children: [
+					{
+						name: 'User',
+						url: `/${ROUTING.management.routes.user}`
+					},
+					{
+						name: 'Client',
+						url: `/${ROUTING.management.routes.client}`
+					},
+					{
+						name: 'Notifications',
+						url: `/${ROUTING.management.routes.notification}`
+					}
+				]
 			}
 		];
 
