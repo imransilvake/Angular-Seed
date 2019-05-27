@@ -1421,15 +1421,6 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Login_Error_FetchProfileImageException_Description" datatype="html">
-				<source>Description: Fetch Profile Image Exception</source>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/modules.pck/authorization.mod/services/auth.service.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
 			<trans-unit id="Auth_Login_Error_BlockUserException_Description" datatype="html">
 				<source>Description: Block User Exception</source>
 				<context-group purpose="location">
