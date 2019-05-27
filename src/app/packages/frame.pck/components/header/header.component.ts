@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { ROUTING } from '../../../../../environments/environment';
 import { HelperService } from '../../../utilities.pck/accessories.mod/services/helper.service';
 import { faExpandArrowsAlt, faSpinner, faSync } from '@fortawesome/free-solid-svg-icons';
-import { HeaderService } from '../../services/header.service';
+import { EmergencyService } from '../../services/emergency.service';
 import { EmergencyInterface } from '../../interfaces/emergency.interface';
 
 declare const document: any;
@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private _router: Router,
-		private _headerService: HeaderService
+		private _emergencyService: EmergencyService
 	) {
 	}
 
@@ -55,7 +55,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 			});
 
 		// listen: emergency state
-		this._headerService.fetchEmergencyState()
+		this._emergencyService.fetchEmergencyState()
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe((res) => this.emergencyState = res);
 	}
@@ -107,6 +107,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 		this.emergencyState.status = false;
 
 		// close notification message
-		this._headerService.removeEmergencyNotification(closeId);
+		this._emergencyService.removeEmergencyNotification(closeId);
 	}
 }

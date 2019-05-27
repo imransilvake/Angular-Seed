@@ -17,7 +17,7 @@ import { MaintenanceComponent } from './components/pages/maintenance.component';
 import { WidgetsModule } from '../../shared/widgets/widgets.module';
 import { HeadComponent } from './components/content/head/head.component';
 import { BreadcrumbModule } from '../utilities.pck/breadcrumb.mod/breadcrumb.module';
-import { HeaderService } from './services/header.service';
+import { EmergencyService } from './services/emergency.service';
 
 @NgModule({
 	imports: [
@@ -46,7 +46,7 @@ import { HeaderService } from './services/header.service';
 		HeadComponent
 	],
 	providers: [
-		HeaderService,
+		EmergencyService,
 		SidebarService
 	]
 })

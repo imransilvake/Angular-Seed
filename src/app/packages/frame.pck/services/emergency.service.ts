@@ -12,7 +12,7 @@ import { NotificationInterface } from '../../utilities.pck/notification.mod/inte
 import { EmergencyInterface } from '../interfaces/emergency.interface';
 
 @Injectable()
-export class HeaderService {
+export class EmergencyService {
 	constructor(private _store: Store<{ NotificationInterface: NotificationInterface }>) {
 	}
 

@@ -9,7 +9,9 @@ const defaultState: NotificationInterface = {
 	payload: {
 		id: '',
 		text: '',
-		keepAfterNavigationChange: false
+		keepAfterNavigationChange: false,
+		hideCloseButton: false,
+		closeId: ''
 	}
 };
 
