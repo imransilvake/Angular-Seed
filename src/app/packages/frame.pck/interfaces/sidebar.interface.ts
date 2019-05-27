@@ -1,7 +1,8 @@
 export interface SidebarInterface {
+	section?: string;
 	name: string;
 	icon?: any;
-	section?: string;
+	externalIcon?: any;
 	url?: string;
 	children?: SidebarInterface[];
 }

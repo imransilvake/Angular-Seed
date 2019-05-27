@@ -3,5 +3,5 @@ export interface NotificationPayloadInterface {
 	text?: string;
 	keepAfterNavigationChange?: boolean;
 	hideCloseButton?: boolean;
-	closeId?: string
+	closeId?: string;
 }
