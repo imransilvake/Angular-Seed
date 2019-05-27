@@ -30,6 +30,7 @@
 			matTreeNodePadding>
 			<h6 class="ham-label" *ngIf="node.section">{{node.section}}</h6>
 			<a class="ham-blank"
+			   [target]="node.externalIcon ? '_blank': null"
 			   target="_blank"
 			   mat-button
 			   matTreeNodeToggle
