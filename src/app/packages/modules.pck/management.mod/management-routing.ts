@@ -2,9 +2,9 @@
 import { Routes } from '@angular/router';
 
 // app
-import { ClientComponent } from './client/client.component';
-import { UserComponent } from './user/user.component';
-import { SystemNotificationComponent } from './system-notification/system-notification.component';
+import { ClientComponent } from './components/client/client.component';
+import { UserComponent } from './components/user/user.component';
+import { SystemNotificationComponent } from './components/system-notification/system-notification.component';
 
 export const MANAGEMENT_ROUTES: Routes = [
 	{

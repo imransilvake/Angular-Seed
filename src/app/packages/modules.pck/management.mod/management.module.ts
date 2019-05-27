@@ -4,10 +4,10 @@ import { RouterModule } from '@angular/router';
 
 // app
 import { MANAGEMENT_ROUTES } from './management-routing';
-import { ClientComponent } from './client/client.component';
+import { ClientComponent } from './components/client/client.component';
 import { FrameModule } from '../../frame.pck/frame.module';
-import { SystemNotificationComponent } from './system-notification/system-notification.component';
-import { UserComponent } from './user/user.component';
+import { SystemNotificationComponent } from './components/system-notification/system-notification.component';
+import { UserComponent } from './components/user/user.component';
 
 @NgModule({
 	imports: [
