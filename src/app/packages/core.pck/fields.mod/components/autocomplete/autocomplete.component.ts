@@ -145,6 +145,7 @@ export class AutocompleteComponent implements OnInit {
 	 */
 	private validateField() {
 		if (this.multipleSelection) {
+			// listen: control value change event
 			this.control.valueChanges
 				.subscribe(res => {
 					if (!res && this.selectedItems && this.selectedItems.length === 0) {

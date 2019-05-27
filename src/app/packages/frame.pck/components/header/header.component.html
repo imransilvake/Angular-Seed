@@ -1,22 +1,22 @@
-<header class="ham-header" [class.ham-emergency]="emergencyState">
+<header class="ham-header" [class.ham-emergency]="emergencyState.status">
 	<div class="cd-row">
 		<div class="cd-col cd-col-pm-s-7 cd-col-pm-m-5">
 			<div class="ham-logo">
 				<a [routerLink]="['/' + routing.dashboard]">
 					<h4>
-						<img *ngIf="emergencyState"
+						<img *ngIf="emergencyState.status"
 							 class="ham-logo-black cd-hide-on-m-down"
 							 [src]="'assets/svg/logo_black.svg'"
 							 alt="ham-logo"/>
-						<img *ngIf="!emergencyState"
+						<img *ngIf="!emergencyState.status"
 							 class="cd-hide-on-m-down"
 							 [src]="'assets/svg/logo.svg'"
 							 alt="ham-logo"/>
-						<img *ngIf="emergencyState"
+						<img *ngIf="emergencyState.status"
 							 class="ham-logo-black cd-hide-on-s-up"
 							 [src]="'assets/svg/logo_mobile_black.svg'"
 							 alt="ham-logo-mobile"/>
-						<img *ngIf="!emergencyState"
+						<img *ngIf="!emergencyState.status"
 							 class="cd-hide-on-s-up"
 							 [src]="'assets/svg/logo_mobile.svg'"
 							 alt="ham-logo-mobile"/>
@@ -27,7 +27,7 @@
 				<button mat-button class="ham-btn-icon" (click)="drawer.toggle()">
 					<div class="ham-hamburger-icon"
 						 [class.ham-active]="drawer && !drawer.opened"
-						 [class.ham-icon-emergency]="emergencyState">
+						 [class.ham-icon-emergency]="emergencyState.status">
 						<div></div>
 					</div>
 				</button>
@@ -35,7 +35,7 @@
 		</div>
 		<div class="cd-col cd-col-pm-s-5 cd-col-pm-m-7">
 			<!-- State: Normal -->
-			<ng-container *ngIf="!emergencyState">
+			<ng-container *ngIf="!emergencyState.status">
 				<!-- Fullscreen Button -->
 				<div class="ham-full-screen cd-tooltip">
 					<button mat-button class="ham-btn-icon" (click)="onClickShowFullScreen()" *ngIf="!appFullScreen">
@@ -60,9 +60,9 @@
 			</ng-container>
 
 			<!-- State: Emergency -->
-			<ng-container *ngIf="emergencyState">
+			<ng-container *ngIf="emergencyState.status">
 				<button mat-button class="ham-emergency-btn ham-btn-icon"
-						(click)="onClickReloadRoute()"
+						(click)="onClickEmergencyConfirm(emergencyState.closeId)"
 						[disabled]="reloadState">Confirm
 				</button>
 			</ng-container>

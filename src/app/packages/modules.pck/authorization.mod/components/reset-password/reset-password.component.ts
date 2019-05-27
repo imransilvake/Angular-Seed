@@ -32,6 +32,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
 		private _loadingAnimationService: LoadingAnimationService,
 		private _authService: AuthService
 	) {
+		// listen: query params event
 		this._route.queryParams
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe((params) => this.queryParams = params);
@@ -51,14 +52,14 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
 			])
 		});
 
-		// listen to password change: update confirm password
+		// listen: to password change (update confirm password field)
 		this.password.valueChanges
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(() => this.confirmPassword.updateValueAndValidity());
 	}
 
 	ngOnInit() {
-		// listen to error message
+		// listen: error message
 		this._authService.errorMessage
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => this.errorMessage = res);

@@ -8,7 +8,7 @@
 			</app-read-more>
 
 			<!-- Button -->
-			<mat-icon (click)="onClickCloseMessage(idx)">close</mat-icon>
+			<mat-icon *ngIf="!message.payload.hideCloseButton" (click)="onClickCloseMessage(idx)">close</mat-icon>
 		</div>
 	</section>
 </ng-container>

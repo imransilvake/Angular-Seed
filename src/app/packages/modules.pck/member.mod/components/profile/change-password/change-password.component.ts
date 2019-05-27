@@ -45,7 +45,7 @@ export class ChangePasswordComponent implements OnDestroy {
 			])
 		});
 
-		// listen to password change: update confirm password
+		// listen: to password change (update confirm password field)
 		this.password.valueChanges
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(() => this.confirmPassword.updateValueAndValidity());

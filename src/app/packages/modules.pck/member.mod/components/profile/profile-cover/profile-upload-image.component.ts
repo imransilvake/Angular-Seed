@@ -30,7 +30,7 @@ export class ProfileUploadImageComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
-		// listener: on new image upload
+		// listen: on new image upload
 		this._memberService.profileImageUpdate
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(() => this.loading = false);

@@ -74,7 +74,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
-		// set hotel list
+		// listen: hotel list event
 		this._hotelListService
 			.getHotelList()
 			.pipe(takeUntil(this._ngUnSubscribe))
@@ -83,7 +83,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 		// salutation
 		this.salutationList = this._salutationList.getSalutationList();
 
-		// listen to error message
+		// listen: error message
 		this._authService.errorMessage
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => this.errorMessage = res);

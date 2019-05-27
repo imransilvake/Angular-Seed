@@ -59,7 +59,7 @@ export class UpdateProfileComponent implements OnInit, OnDestroy {
 		// salutation
 		this.salutationList = this._salutationList.getSalutationList();
 
-		// fetch profile data
+		// listen: profile data event
 		this._memberService.memberData
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {

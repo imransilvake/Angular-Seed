@@ -5,6 +5,7 @@ import { of } from 'rxjs';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
+import { map } from 'rxjs/operators';
 
 // store
 import { Store } from '@ngrx/store';
@@ -136,47 +137,38 @@ export class AuthService {
 
 					// get profile image
 					const imagePayload = { image: userInfo.picture };
-					this._proxyService
-						.postAPI(AppServices['Utilities']['Fetch_Profile_Image'], { bodyParams: imagePayload })
-						.subscribe(resp => {
-							if (resp) {
-								// set current user state
-								this.currentUserState = {
-									profile: {
-										...userInfo,
-										password: formPayload.password,
-										language: language,
-										image: resp.image
-									},
-									credentials: {
-										accessToken: res.accessToken.jwtToken,
-										idToken: res.idToken.jwtToken,
-										refreshToken: res.refreshToken.token
-									},
-									rememberMe: rememberMe,
-									timestamp: moment()
-								};
 
-								// navigate to defined url
-								// stop loading animation
-								this._router
-									.navigate([ROUTING.dashboard])
-									.then(() => this._loadingAnimationService.stopLoadingAnimation());
-							}
-						}, (err: HttpErrorResponse) => {
-							if (err.error.detail.code === 'AccessDenied') {
-								const message = this._i18n({
-									value: 'Description: Fetch Profile Image Exception',
-									id: 'Auth_Login_Error_FetchProfileImageException_Description'
-								});
+					// service: fetch profile image
+					const imageResponse = !userInfo.picture ?
+						of(null) :
+						this._proxyService
+							.postAPI(AppServices['Utilities']['Fetch_Profile_Image'], { bodyParams: imagePayload });
 
-								// message
-								this.errorMessage.emit(message);
-							}
+					// image service response
+					imageResponse.subscribe(resp => {
+						// set current user state
+						this.currentUserState = {
+							profile: {
+								...userInfo,
+								password: formPayload.password,
+								language: language,
+								image: resp ? resp.image : null
+							},
+							credentials: {
+								accessToken: res.accessToken.jwtToken,
+								idToken: res.idToken.jwtToken,
+								refreshToken: res.refreshToken.token
+							},
+							rememberMe: rememberMe,
+							timestamp: moment()
+						};
 
-							// stop loading animation
-							this._loadingAnimationService.stopLoadingAnimation();
-						});
+						// navigate to defined url
+						// stop loading animation
+						this._router
+							.navigate([ROUTING.dashboard])
+							.then(() => this._loadingAnimationService.stopLoadingAnimation());
+					});
 				}
 			}, (err: HttpErrorResponse) => {
 				let message;

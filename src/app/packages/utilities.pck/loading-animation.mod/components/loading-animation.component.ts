@@ -35,7 +35,7 @@ export class LoadingAnimationComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
-		// subscribe: loading animation
+		// listen: loading animation event
 		this._store.select('loadingAnimation')
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe((res) => {

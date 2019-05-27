@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 		// set language list
 		this.languageList = this._languageListService.getLanguageList();
 
-		// default lang: english
+		// listen: language state (default: english)
 		this._route.url
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
@@ -69,12 +69,12 @@ export class LoginComponent implements OnInit, OnDestroy {
 				}
 			});
 
-		// check for language
+		// listen: language event
 		this.languageName.valueChanges
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(url => location.href = url);
 
-		// listen to error message
+		// listen: error message
 		this._authService.errorMessage
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => this.errorMessage = res);

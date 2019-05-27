@@ -17,6 +17,7 @@ import { MaintenanceComponent } from './components/pages/maintenance.component';
 import { WidgetsModule } from '../../shared/widgets/widgets.module';
 import { HeadComponent } from './components/content/head/head.component';
 import { BreadcrumbModule } from '../utilities.pck/breadcrumb.mod/breadcrumb.module';
+import { HeaderService } from './services/header.service';
 
 @NgModule({
 	imports: [
@@ -44,7 +45,10 @@ import { BreadcrumbModule } from '../utilities.pck/breadcrumb.mod/breadcrumb.mod
 		PrimarySidebarComponent,
 		HeadComponent
 	],
-	providers: [SidebarService]
+	providers: [
+		HeaderService,
+		SidebarService
+	]
 })
 
 export class FrameModule {

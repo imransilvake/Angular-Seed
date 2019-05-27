@@ -22,6 +22,7 @@ export class PasswordStrengthComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
+		// listen: control value change event
 		this.cPassword.valueChanges
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {

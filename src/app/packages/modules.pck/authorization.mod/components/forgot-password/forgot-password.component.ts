@@ -50,7 +50,7 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
-		// listen to error message
+		// listen: error message
 		this._authService.errorMessage
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => this.errorMessage = res);

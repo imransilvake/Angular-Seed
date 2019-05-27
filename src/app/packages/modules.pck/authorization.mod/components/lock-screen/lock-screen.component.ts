@@ -69,7 +69,7 @@ export class LockScreenComponent implements OnInit, AfterViewInit, OnDestroy {
 		// get user name
 		this.userName = HelperService.capitalizeString(this.currentUser && this.currentUser.profile.name);
 
-		// listen to error message
+		// listen: error message
 		this._authService.errorMessage
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => this.errorMessage = res);
@@ -117,7 +117,7 @@ export class LockScreenComponent implements OnInit, AfterViewInit, OnDestroy {
 			// logout
 			this._authService.logoutUser();
 		} else if (currentUser && (HelperService.hashPassword(this.password.value) === currentUser.profile.password)) {
-			// authenticate user
+			// listen: authenticate user event
 			this._authService.authenticateUser()
 				.pipe(takeUntil(this._ngUnSubscribe))
 				.subscribe(res => {

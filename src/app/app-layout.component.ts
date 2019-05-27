@@ -28,11 +28,11 @@ export class AppLayoutComponent implements AfterViewInit, OnDestroy {
 	}
 
 	ngAfterViewInit() {
-		// listen scroll to top
+		// listen: scroll to top
 		this._scrollTopService.scrollTopListener();
 
-		// listen to scroll event
-		// listen to resize event
+		// listen: scroll event
+		// listen: resize event
 		const mergeListeners = merge(
 			HelperService.detectScroll(),
 			HelperService.detectWindowResize()

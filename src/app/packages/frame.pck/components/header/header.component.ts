@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { ROUTING } from '../../../../../environments/environment';
 import { HelperService } from '../../../utilities.pck/accessories.mod/services/helper.service';
 import { faExpandArrowsAlt, faSpinner, faSync } from '@fortawesome/free-solid-svg-icons';
+import { HeaderService } from '../../services/header.service';
+import { EmergencyInterface } from '../../interfaces/emergency.interface';
 
 declare const document: any;
 
@@ -24,15 +26,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	public faIcons = [faExpandArrowsAlt, faSync, faSpinner];
 	public appFullScreen = false;
 	public reloadState = false;
-	public emergencyState = true;
+	public emergencyState: EmergencyInterface;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
-	constructor(private _router: Router) {
+	constructor(
+		private _router: Router,
+		private _headerService: HeaderService
+	) {
 	}
 
 	ngOnInit() {
-		// listen to full-screen event
+		// listen: full-screen event
 		HelperService.detectFullScreen()
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(() => {
@@ -40,7 +45,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 				this.appFullScreen = !(fullscreenElement === null);
 			});
 
-		// listen to window resize event
+		// listen: window resize event
 		HelperService.detectWindowResize()
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(() => {
@@ -48,6 +53,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 					this.drawer.toggle();
 				}
 			});
+
+		// listen: emergency state
+		this._headerService.fetchEmergencyState()
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe((res) => this.emergencyState = res);
 	}
 
 	ngOnDestroy() {
@@ -74,7 +84,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 		// set spinner
 		this.reloadState = true;
 
-		// reload route
+		// listen: router event
 		this._router
 			.navigate([this._router.url])
 			.then(() => {
@@ -85,5 +95,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
 					)
 					.subscribe(() => this.reloadState = false);
 			});
+	}
+
+	/**
+	 * confirm emergency
+	 *
+	 * @param closeId
+	 */
+	public onClickEmergencyConfirm(closeId: string) {
+		// remove emergency state
+		this.emergencyState.status = false;
+
+		// close notification message
+		this._headerService.removeEmergencyNotification(closeId);
 	}
 }
