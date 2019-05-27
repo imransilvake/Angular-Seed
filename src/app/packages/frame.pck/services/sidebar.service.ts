@@ -23,17 +23,17 @@ export class SidebarService {
 				section: 'Management',
 				name: 'User',
 				icon: faUser,
-				url: `/${ROUTING.authorization.login}`
+				url: `/${ROUTING.management.user}`
 			},
 			{
 				name: 'Client',
 				icon: faUserTag,
-				url: `/${ROUTING.authorization.login}`
+				url: `/${ROUTING.management.client}`
 			},
 			{
 				name: 'Notifications',
 				icon: faBell,
-				url: `/${ROUTING.authorization.login}`
+				url: `/${ROUTING.management.notification}`
 			}
 		];
 
