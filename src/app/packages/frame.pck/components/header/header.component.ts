@@ -24,6 +24,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 	public faIcons = [faExpandArrowsAlt, faSync, faSpinner];
 	public appFullScreen = false;
 	public reloadState = false;
+	public emergencyState = true;
+
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(private _router: Router) {

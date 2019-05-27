@@ -9,7 +9,6 @@ const defaultState: NotificationInterface = {
 	payload: {
 		id: '',
 		text: '',
-		value: '',
 		keepAfterNavigationChange: false
 	}
 };
@@ -24,7 +23,6 @@ const newState = (state, newData) => {
  *
  * @param {NotificationInterface} state
  * @param {All} action
- * @returns {any}
  */
 export function notificationReducer(state: NotificationInterface = defaultState, action: NotificationActions.All) {
 	switch (action.type) {

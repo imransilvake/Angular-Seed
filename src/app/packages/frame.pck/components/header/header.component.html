@@ -1,44 +1,71 @@
-<header class="ham-header">
+<header class="ham-header" [class.ham-emergency]="emergencyState">
 	<div class="cd-row">
 		<div class="cd-col cd-col-pm-s-7 cd-col-pm-m-5">
 			<div class="ham-logo">
 				<a [routerLink]="['/' + routing.dashboard]">
 					<h4>
-						<img class="cd-hide-on-m-down" [src]="'assets/svg/logo.svg'" alt="ham-logo" />
-						<img class="cd-hide-on-s-up" [src]="'assets/svg/logo_mobile.svg'" alt="ham-logo-mobile" />
+						<img *ngIf="emergencyState"
+							 class="ham-logo-black cd-hide-on-m-down"
+							 [src]="'assets/svg/logo_black.svg'"
+							 alt="ham-logo"/>
+						<img *ngIf="!emergencyState"
+							 class="cd-hide-on-m-down"
+							 [src]="'assets/svg/logo.svg'"
+							 alt="ham-logo"/>
+						<img *ngIf="emergencyState"
+							 class="ham-logo-black cd-hide-on-s-up"
+							 [src]="'assets/svg/logo_mobile_black.svg'"
+							 alt="ham-logo-mobile"/>
+						<img *ngIf="!emergencyState"
+							 class="cd-hide-on-s-up"
+							 [src]="'assets/svg/logo_mobile.svg'"
+							 alt="ham-logo-mobile"/>
 					</h4>
 				</a>
 			</div>
 			<div class="ham-icons">
 				<button mat-button class="ham-btn-icon" (click)="drawer.toggle()">
-					<div class="ham-hamburger-icon" [class.ham-active]="drawer && !drawer.opened">
+					<div class="ham-hamburger-icon"
+						 [class.ham-active]="drawer && !drawer.opened"
+						 [class.ham-icon-emergency]="emergencyState">
 						<div></div>
 					</div>
 				</button>
 			</div>
 		</div>
 		<div class="cd-col cd-col-pm-s-5 cd-col-pm-m-7">
-			<!-- Fullscreen Button -->
-			<div class="ham-full-screen cd-tooltip">
-				<button mat-button class="ham-btn-icon" (click)="onClickShowFullScreen()" *ngIf="!appFullScreen">
-					<fa-icon [icon]="faIcons[0]"></fa-icon>
+			<!-- State: Normal -->
+			<ng-container *ngIf="!emergencyState">
+				<!-- Fullscreen Button -->
+				<div class="ham-full-screen cd-tooltip">
+					<button mat-button class="ham-btn-icon" (click)="onClickShowFullScreen()" *ngIf="!appFullScreen">
+						<fa-icon [icon]="faIcons[0]"></fa-icon>
+					</button>
+					<span class="cd-arrow cd-bottom">Show Fullscreen</span>
+				</div>
+
+				<!-- Reload Button -->
+				<div class="ham-reload cd-tooltip">
+					<button mat-button class="ham-btn-icon" (click)="onClickReloadRoute()" [disabled]="reloadState">
+						<fa-icon [icon]="!reloadState ? faIcons[1] : faIcons[2]" [spin]="reloadState"></fa-icon>
+					</button>
+					<span class="cd-arrow cd-bottom">Reload Services</span>
+				</div>
+
+				<!-- Menu | Notification -->
+				<app-menu-notification></app-menu-notification>
+
+				<!-- Menu | Account -->
+				<app-menu-account></app-menu-account>
+			</ng-container>
+
+			<!-- State: Emergency -->
+			<ng-container *ngIf="emergencyState">
+				<button mat-button class="ham-emergency-btn ham-btn-icon"
+						(click)="onClickReloadRoute()"
+						[disabled]="reloadState">Confirm
 				</button>
-				<span class="cd-arrow cd-bottom">Show Fullscreen</span>
-			</div>
-
-			<!-- Reload Button -->
-			<div class="ham-reload cd-tooltip">
-				<button mat-button class="ham-btn-icon" (click)="onClickReloadRoute()" [disabled]="reloadState">
-					<fa-icon [icon]="!reloadState ? faIcons[1] : faIcons[2]" [spin]="reloadState"></fa-icon>
-				</button>
-				<span class="cd-arrow cd-bottom">Reload Services</span>
-			</div>
-
-			<!-- Menu | Notification -->
-			<app-menu-notification></app-menu-notification>
-
-			<!-- Menu | Account -->
-			<app-menu-account></app-menu-account>
+			</ng-container>
 		</div>
 	</div>
 </header>

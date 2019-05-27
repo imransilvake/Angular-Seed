@@ -5,7 +5,7 @@
 			class="ham-node mat-tree-node"
 			*matTreeNodeDef="let node; when: hasChild">
 			<h6 class="ham-label" *ngIf="node.section">{{node.section}}</h6>
-			<button mat-menu-item matTreeNodeToggle>
+			<button mat-button matTreeNodeToggle>
 				<!-- name -->
 				<span class="ham-btn-icon">
 					<fa-icon *ngIf="node.icon" [icon]="node.icon"></fa-icon>
@@ -28,7 +28,7 @@
 			matTreeNodePadding>
 			<h6 class="ham-label" *ngIf="node.section">{{node.section}}</h6>
 			<button
-				mat-menu-item
+				mat-button
 				matTreeNodeToggle
 				[routerLink]="node.url"
 				[routerLinkActive]="['ham-active']">
