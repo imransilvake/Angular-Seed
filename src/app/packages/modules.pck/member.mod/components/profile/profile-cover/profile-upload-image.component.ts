@@ -3,6 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { I18n } from '@ngx-translate/i18n-polyfill';
 
 // app
 import { MemberService } from '../../../services/member.service';
@@ -25,6 +26,7 @@ export class ProfileUploadImageComponent implements OnInit, OnDestroy {
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
+		private _i18n: I18n,
 		private _memberService: MemberService,
 		public dialogRef: MatDialogRef<ProfileUploadImageComponent>) {
 	}
@@ -97,11 +99,18 @@ export class ProfileUploadImageComponent implements OnInit, OnDestroy {
 					};
 				} else {
 					this.previewSrc = null;
-					this.errorMessage = 'File-size is greater than 1MB!';
+					this.errorMessage = this._i18n({
+						value: 'Description: FileSize Error',
+						id: 'Member_Profile_Upload_Image_Error_FileSize'
+					});
+
 				}
 			} else {
 				this.previewSrc = null;
-				this.errorMessage = 'Wrong file format!';
+				this.errorMessage = this._i18n({
+					value: 'Description: Wrong Format Error',
+					id: 'Member_Profile_Upload_Image_Error_Wrong_Format'
+				});
 			}
 		}
 	}
