@@ -3,7 +3,7 @@
 	<header class="ham-head">
 		<!-- Top -->
 		<div class="ham-top">
-			<h3>Upload Image</h3>
+			<h3 i18n="@@Member_Profile_ProfileCover_Upload_Image_Title">Upload Image</h3>
 			<a (click)="onClickCloseModal()">
 				<mat-icon class="ham-icon">cancel</mat-icon>
 			</a>
@@ -14,8 +14,8 @@
 
 		<!-- Bottom -->
 		<div class="ham-bottom">
-			<p><span>Max FileSize:</span> 1MB</p>
-			<p><span>Formats:</span> JPG, PNG</p>
+			<p i18n="@@Member_Profile_ProfileCover_Upload_Image_FileSize"><span>Max FileSize:</span> 1MB</p>
+			<p i18n="@@Member_Profile_ProfileCover_Upload_Image_Formats"><span>Formats:</span> JPG, PNG</p>
 		</div>
 	</header>
 
@@ -24,7 +24,7 @@
 		<div class="ham-area" (drop)="onDrop($event)" (dragover)="onDragOver($event)">
 			<!-- Dummy Area -->
 			<div class="ham-dummy" *ngIf="!previewSrc">
-				<p>Drag Image Here</p>
+				<p i18n="@@Member_Profile_ProfileCover_Upload_Image_Drag_Image">Drag Image Here</p>
 			</div>
 
 			<!-- Preview -->
@@ -32,7 +32,7 @@
 		</div>
 
 		<!-- Select Option -->
-		<p class="ham-select-image">
+		<p i18n="@@Member_Profile_ProfileCover_Upload_Image_Select_File" class="ham-select-image">
 			<label [htmlFor]="'fileUpload'">
 				[Select Image]
 				<input
@@ -53,10 +53,10 @@
 
 	<!-- Footer -->
 	<footer class="ham-foot">
-		<button mat-button type="button" class="ham-button-1" (click)="onClickCloseModal()">Cancel</button>
+		<button i18n="@@Member_Profile_ProfileCover_Upload_Image_Cancel_Button" mat-button type="button" class="ham-button-1" (click)="onClickCloseModal()">Cancel</button>
 		<button mat-button type="button" class="ham-button-1" (click)="onClickSaveImage()" [disabled]="!previewSrc || (previewSrc && loading)">
 			<fa-icon [icon]="faIcons[0]" [spin]="true" *ngIf="loading"></fa-icon>
-			<span *ngIf="!loading">Save</span>
+			<span i18n="@@Member_Profile_ProfileCover_Upload_Image_Save_Button" *ngIf="!loading">Save</span>
 		</button>
 	</footer>
 </section>
