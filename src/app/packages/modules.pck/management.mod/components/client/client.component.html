@@ -5,5 +5,28 @@
 		i18n-pageTitle="@@Management_Client_Title">
 	</app-head>
 
-
+	<!-- Hotels List -->
+	<div class="ham-hotels-list">
+		<app-table
+			tableTitle="Hotels/ Hotelgroups"
+			i18n-tableTitle="@@Management_Client_Table_Title"
+			inputName="client-table-filter"
+			i18n-inputName="@@Management_Client_Table_Input_Name"
+			inputPlaceHolder="Search"
+			i18n-inputPlaceHolder="@@Management_Client_Table_Input_Filter_PlaceHolder"
+			[tableData]="data"
+			[columnsToDisplay]="['name', 'weight', 'symbol']"
+			[pagination]="[5, 10, 20, 50, 100, 200]"
+			[templateRef]="template">
+			<!-- Add -->
+			<ng-template #template>
+				<button mat-button>
+					hello
+				</button>
+				<button mat-button>
+					world
+				</button>
+			</ng-template>
+		</app-table>
+	</div>
 </div>

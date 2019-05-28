@@ -13,9 +13,9 @@ import { LockScreenComponent } from './components/lock-screen/lock-screen.compon
 import { HotelListService } from './services/hotel-list.service';
 import { LanguageListService } from './services/language-list.service';
 import { AuthUserStatusGuard } from './guards/auth-user-status.guard';
-import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { WidgetsModule } from '../../../shared/widgets/widgets.module';
 import { SalutationListService } from './services/salutation-list.service';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 @NgModule({
 	imports: [

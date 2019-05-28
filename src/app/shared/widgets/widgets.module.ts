@@ -7,20 +7,27 @@ import { BadgetWidgetComponent } from './badge/badge-widget.component';
 import { PasswordStrengthComponent } from './password-strength/password-strength.component';
 import { SharedModule } from '../shared.module';
 import { ReadMoreComponent } from './read-more/read-more.component';
+import { TableComponent } from './table/table.component';
+import { FieldsModule } from '../../packages/core.pck/fields.mod/fields.module';
 
 @NgModule({
-	imports: [SharedModule],
+	imports: [
+		SharedModule,
+		FieldsModule
+	],
 	declarations: [
 		DividerWidgetComponent,
 		BadgetWidgetComponent,
 		PasswordStrengthComponent,
-		ReadMoreComponent
+		ReadMoreComponent,
+		TableComponent
 	],
 	exports: [
 		DividerWidgetComponent,
 		BadgetWidgetComponent,
 		PasswordStrengthComponent,
-		ReadMoreComponent
+		ReadMoreComponent,
+		TableComponent
 	]
 })
 

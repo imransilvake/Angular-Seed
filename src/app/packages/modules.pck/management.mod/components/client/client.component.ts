@@ -1,6 +1,9 @@
 // angular
 import { Component } from '@angular/core';
 
+// app
+import TableData from '../../../../../../assets/dummy/table-data';
+
 @Component({
 	selector: 'app-client',
 	templateUrl: './client.component.html',
@@ -8,6 +11,5 @@ import { Component } from '@angular/core';
 })
 
 export class ClientComponent {
-	constructor() {
-	}
+	public data = TableData;
 }

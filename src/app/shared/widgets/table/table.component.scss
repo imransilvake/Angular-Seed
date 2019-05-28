@@ -1,0 +1,57 @@
+@import 'main';
+
+.ham-table-wrapper {
+	background-color: cd-palette($cd-background, 2003);
+	padding: 15px;
+
+	.ham-top {
+		display: flex;
+		justify-content: space-between;
+
+		.ham-title {
+			font-size: cd-fontSize(s20);
+			margin-bottom: 10px;
+			padding-right: 5px;
+		}
+	}
+
+	.ham-table {
+		overflow: auto;
+		min-width: 200px;
+
+		table {
+			background-color: cd-palette($cd-background, 2003);
+			margin-top: 10px;
+			width: 100%;
+
+			tr {
+				&.mat-header-row {
+					height: 40px;
+				}
+
+				td {
+					color: cd-palette($cd-color, 1004);
+					padding-left: 10px;
+				}
+
+				th {
+					border-bottom: 1px solid cd-palette($cd-border, 3004, .3);
+					border-top: 1px solid cd-palette($cd-border, 3004, .3);
+					color: cd-palette($cd-color, 1001);
+					padding-left: 10px;
+				}
+			}
+		}
+	}
+
+	// media
+	@include cd-media(desktop, mini) {
+		.ham-top {
+			display: block;
+
+			.ham-title {
+				padding: 0;
+			}
+		}
+	}
+}
