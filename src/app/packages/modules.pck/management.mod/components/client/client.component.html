@@ -6,32 +6,17 @@
 	</app-head>
 
 	<div class="ham-details">
-		<!-- Button -->
-		<div class="ham-button-wrapper">
-			<button mat-button class="ham-button ham-button-1">
-				Create New Hotel / Group
-			</button>
-		</div>
+		<!-- View: Default -->
+		<ng-container *ngIf="pageView === 0">
+			<app-client-default (onChangeClientView)="pageView = $event.view; hotelId = $event.hotelId;"></app-client-default>
+		</ng-container>
 
-		<!-- Hotels List -->
-		<div class="ham-hotels-list">
-			<app-table
-				tableTitle="Hotels / Hotelgroups"
-				i18n-tableTitle="@@Management_Client_Table_Title"
-				inputName="client-table-filter"
-				i18n-inputName="@@Management_Client_Table_Input_Name"
-				inputPlaceHolder="Search"
-				i18n-inputPlaceHolder="@@Management_Client_Table_Input_Filter_PlaceHolder"
-				[tableData]="data"
-				[tableColumns]="['Name', 'Weight', 'Symbol', 'HotelGuest/App', 'HotelStaff/App']"
-				[tableAdditionalColumns]="['Action']"
-				[tablePagination]="[5, 10, 20, 50, 100, 200]"
-				[templateRef]="[action]">
-				<!-- Action -->
-				<ng-template #action>
-					<button mat-button class="ham-button ham-button-2">Edit</button>
-				</ng-template>
-			</app-table>
-		</div>
+		<!-- View: Form -->
+		<ng-container *ngIf="pageView === 1">
+			<app-client-form
+				(onChangeClientView)="pageView = $event.view; loadComponentServices();"
+				[hotelId]="hotelId">
+			</app-client-form>
+		</ng-container>
 	</div>
 </div>

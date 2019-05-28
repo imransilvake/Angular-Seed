@@ -1,18 +1,1 @@
-@import 'main';
 
-.ham-client-management {
-	.ham-button-wrapper {
-		margin-bottom: 20px;
-		margin-top: 40px;
-		text-align: right;
-	}
-
-	// media
-	@include cd-media(desktop, mini) {
-		.ham-button-wrapper {
-			button {
-				width: 100%;
-			}
-		}
-	}
-}

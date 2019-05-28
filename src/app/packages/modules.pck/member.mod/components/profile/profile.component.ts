@@ -22,26 +22,34 @@ export class ProfileComponent implements OnDestroy {
 		private _authService: AuthService,
 		private _memberService: MemberService
 	) {
-		// setup profile reload
-		this.setupProfileReload();
+		// setup reload system
+		this.setupReloadSystem();
 	}
 
 	/**
-	 * setup reload for profile page
+	 * setup reload system
 	 */
-	public setupProfileReload() {
+	private setupReloadSystem() {
 		// listen: router event
 		this.router.events
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe((e: any) => {
 				if (e instanceof NavigationEnd) {
-					// set current user state
-					this._memberService.currentUser = this._authService.currentUserState;
-
-					// member profile data
-					this._memberService.memberFetchProfile();
+					// load component services
+					this.loadComponentServices();
 				}
 			});
+	}
+
+	/**
+	 * load component services
+	 */
+	private loadComponentServices() {
+		// set current user state
+		this._memberService.currentUser = this._authService.currentUserState;
+
+		// member profile data
+		this._memberService.memberFetchProfile();
 	}
 
 	ngOnDestroy() {

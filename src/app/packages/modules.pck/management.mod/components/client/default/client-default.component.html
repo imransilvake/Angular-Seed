@@ -1,0 +1,29 @@
+<div class="ham-client-default">
+	<!-- Button -->
+	<div class="ham-button-wrapper">
+		<button mat-button class="ham-button ham-button-1" (click)="onClickShowClientForm()">
+			Create New Hotel / Group
+		</button>
+	</div>
+
+	<!-- Hotels List -->
+	<div class="ham-hotels-list" *ngIf="clientHotelsList && clientHotelsList.length > 0">
+		<app-table
+			tableTitle="Hotels / Hotelgroups"
+			i18n-tableTitle="@@Management_Client_Table_Title"
+			inputName="client-table-filter"
+			i18n-inputName="@@Management_Client_Table_Input_Name"
+			inputPlaceHolder="Search"
+			i18n-inputPlaceHolder="@@Management_Client_Table_Input_Filter_PlaceHolder"
+			[tableData]="clientHotelsList"
+			[tableColumns]="['Name', 'Weight', 'Symbol', 'HotelGuest/App', 'HotelStaff/App']"
+			[tableAdditionalColumns]="['Action']"
+			[tablePagination]="[20, 50, 100, 200]"
+			[templateRef]="[action]">
+			<!-- Action -->
+			<ng-template #action>
+				<button mat-button class="ham-button ham-button-2" (click)="onClickShowClientForm(2)">Edit</button>
+			</ng-template>
+		</app-table>
+	</div>
+</div>

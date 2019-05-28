@@ -10,6 +10,9 @@ import { SystemNotificationComponent } from './components/system-notification/sy
 import { UserComponent } from './components/user/user.component';
 import { WidgetsModule } from '../../../shared/widgets/widgets.module';
 import { SharedModule } from '../../../shared/shared.module';
+import { ClientService } from './services/client.service';
+import { ClientDefaultComponent } from './components/client/default/client-default.component';
+import { ClientFormComponent } from './components/client/form/client-form.component';
 
 @NgModule({
 	imports: [
@@ -20,9 +23,12 @@ import { SharedModule } from '../../../shared/shared.module';
 	],
 	declarations: [
 		ClientComponent,
+		ClientDefaultComponent,
+		ClientFormComponent,
 		SystemNotificationComponent,
 		UserComponent
-	]
+	],
+	providers: [ClientService]
 })
 
 export class ManagementModule {

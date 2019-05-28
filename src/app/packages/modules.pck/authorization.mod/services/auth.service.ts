@@ -5,7 +5,6 @@ import { of } from 'rxjs';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
-import { map } from 'rxjs/operators';
 
 // store
 import { Store } from '@ngrx/store';
