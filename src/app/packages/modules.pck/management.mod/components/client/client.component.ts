@@ -10,8 +10,7 @@ import { ClientService } from '../../services/client.service';
 
 @Component({
 	selector: 'app-client',
-	templateUrl: './client.component.html',
-	styleUrls: ['./client.component.scss']
+	templateUrl: './client.component.html'
 })
 
 export class ClientComponent {

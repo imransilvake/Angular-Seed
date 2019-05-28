@@ -1,0 +1,29 @@
+.mat-tab-group {
+	&.ham-tabs-1 {
+		.mat-tab-header {
+			.mat-tab-list {
+				.mat-tab-labels {
+					.mat-tab-label {
+						&:not(.mat-tab-label-active) {
+							background-color: cd-palette($cd-background, 2004, .6);
+							color: cd-palette($cd-color, 1001);
+						}
+
+						&.mat-tab-label-active {
+							border-top: 2px solid cd-palette($cd-border, 3008);
+							color: cd-palette($cd-color, 1004);
+						}
+					}
+				}
+
+				.mat-ink-bar {
+					background-color: transparent;
+				}
+			}
+		}
+
+		.mat-tab-body {
+			margin-top: 20px;
+		}
+	}
+}

@@ -1,2 +1,24 @@
-<a (click)="onClickCloseClientForm()">use me</a>
-Hello World
+<div class="ham-client-form ham-wrapper-2">
+	<div class="ham-top">
+		<!-- Title -->
+		<h4>B&B Hotels Germany</h4>
+
+		<!-- Close Button -->
+		<mat-icon (click)="onClickCloseClientForm()">close</mat-icon>
+	</div>
+
+	<div class="ham-details">
+		<mat-tab-group class="ham-tabs-1">
+			<mat-tab label="First">
+				<ng-template matTabContent>
+					The First Content
+				</ng-template>
+			</mat-tab>
+			<mat-tab label="Second">
+				<ng-template matTabContent>
+					The Second Content
+				</ng-template>
+			</mat-tab>
+		</mat-tab-group>
+	</div>
+</div>
