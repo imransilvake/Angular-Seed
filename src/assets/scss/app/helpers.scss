@@ -45,13 +45,24 @@
 }
 
 // form - button
-.ham-button-1 {
-	background-color: cd-palette($cd-background, 2010);
-	border-radius: 2px;
-	margin-top: 5px;
-
+.ham-button {
 	&:disabled {
 		background-color: cd-palette($cd-background, 2004);
 		opacity: .7;
 	}
+}
+
+.ham-button-1 {
+	background-color: cd-palette($cd-background, 2010);
+	border-radius: 2px;
+	margin-top: 5px;
+}
+
+.ham-button-2 {
+	background-color: cd-palette($cd-background, 2003);
+	border-radius: 2px;
+	border: 1px solid cd-palette($cd-border, 3008) !important;
+	color: cd-palette($cd-color, 1008);
+	line-height: 30px !important;
+	margin-top: 5px;
 }

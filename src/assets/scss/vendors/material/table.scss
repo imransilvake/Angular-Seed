@@ -1,0 +1,15 @@
+.ham-table {
+	.mat-header-cell {
+		&:not(:first-child) {
+			.mat-sort-header-container {
+				justify-content: center;
+			}
+		}
+
+		&:last-child {
+			.mat-sort-header-container {
+				justify-content: flex-end;
+			}
+		}
+	}
+}

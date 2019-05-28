@@ -1,12 +1,9 @@
 // angular
-import { Component, ElementRef, Input, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-
-// app
-import { HelperService } from '../../../packages/utilities.pck/accessories.mod/services/helper.service';
 
 @Component({
 	selector: 'app-table',
@@ -18,15 +15,17 @@ export class TableComponent implements OnInit, OnDestroy {
 	@Input() tableTitle;
 	@Input() inputName;
 	@Input() inputPlaceHolder;
-	@Input() columnsToDisplay = [];
+	@Input() tableColumns = [];
+	@Input() tableAdditionalColumns = [];
 	@Input() tableData;
-	@Input() pagination = [5, 10, 20, 50, 100, 200];
-	@Input() templateRef: TemplateRef<any>;
+	@Input() tablePagination = [5, 10, 20, 50, 100, 200];
+	@Input() templateRef;
 
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
 	@ViewChild('filterInput') filterInput: ElementRef;
 
+	public allColumns = [];
 	public formFields;
 	public dataSource: any;
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
@@ -39,6 +38,9 @@ export class TableComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
+		// add additional columns
+		this.allColumns = this.tableColumns.concat(this.tableAdditionalColumns);
+
 		// initialize
 		this.dataSource = new MatTableDataSource<any>(this.tableData);
 		this.dataSource.paginator = this.paginator;
@@ -64,10 +66,12 @@ export class TableComponent implements OnInit, OnDestroy {
 	}
 
 	/**
-	 * capitalize column name
+	 * validate variable type
+	 *
+	 * @param value
 	 */
-	public capitalizeString(columnName: string) {
-		return HelperService.capitalizeString(columnName);
+	public validateType(value) {
+		return typeof value;
 	}
 
 	/**

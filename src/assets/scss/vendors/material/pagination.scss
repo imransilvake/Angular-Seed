@@ -1,7 +1,8 @@
-.ham-pagination-1 {
+.ham-pagination {
 	.mat-paginator-outer-container {
 		background-color: cd-palette($cd-background, 2002);
 		color: cd-palette($cd-color, 1001);
+		margin-top: 15px;
 	}
 
 	// media

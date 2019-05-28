@@ -13,24 +13,44 @@
 
 	<!-- Table -->
 	<div class="ham-table">
-		<table mat-table [dataSource]="dataSource" matSort>
+		<table mat-table [className]="'mat-table ham-table'" [dataSource]="dataSource" matSort>
 			<!-- Column Templates -->
-			<ng-container *ngFor="let item of columnsToDisplay" matColumnDef="{{ item }}">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header>{{ capitalizeString(item) }}</th>
-				<td mat-cell *matCellDef="let element">{{ element[item] }}</td>
+			<ng-container *ngFor="let column of tableColumns" matColumnDef="{{ column }}">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header>{{ column }}</th>
+				<td mat-cell *matCellDef="let element">
+					<!-- Text -->
+					<ng-container *ngIf="validateType(element[column]) !== 'boolean'">{{ element[column] }}</ng-container>
+
+					<!-- Boolean -->
+					<ng-container *ngIf="validateType(element[column]) === 'boolean'">
+						<mat-checkbox
+							class="ham-checkbox-2"
+							[(ngModel)]="element[column]"
+							[disabled]="true">
+						</mat-checkbox>
+					</ng-container>
+				</td>
+			</ng-container>
+
+			<!-- Additional Columns Templates -->
+			<ng-container *ngFor="let column of tableAdditionalColumns; let idx=index" matColumnDef="{{ column }}">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header>{{ column }}</th>
+				<td mat-cell *matCellDef>
+					<ng-container *ngTemplateOutlet="templateRef[idx]"></ng-container>
+				</td>
 			</ng-container>
 
 			<!-- Row Templates -->
-			<tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-			<tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+			<tr mat-header-row *matHeaderRowDef="allColumns"></tr>
+			<tr mat-row *matRowDef="let row; columns: allColumns"></tr>
 		</table>
 	</div>
 
 	<!-- Pagination -->
 	<mat-paginator
-		[className]="'ham-pagination-1'"
+		[className]="'ham-pagination'"
 		[hidePageSize]="true"
-		[pageSizeOptions]="pagination"
+		[pageSizeOptions]="tablePagination"
 		showFirstLastButtons>
 	</mat-paginator>
 </section>

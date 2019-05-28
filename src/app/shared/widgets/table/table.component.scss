@@ -32,6 +32,14 @@
 				td {
 					color: cd-palette($cd-color, 1004);
 					padding-left: 10px;
+
+					&:not(:first-child) {
+						text-align: center;
+					}
+
+					&:last-child {
+						text-align: right;
+					}
 				}
 
 				th {

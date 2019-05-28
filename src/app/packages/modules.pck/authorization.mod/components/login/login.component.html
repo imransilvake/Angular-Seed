@@ -60,14 +60,14 @@
 
 					<!-- Remember Me -->
 					<div class="cd-col ham-sby-remember">
-						<mat-checkbox class="ham-type-1" i18n="@@Auth_Login_Form_Remember_Text" (change)="rememberMe = $event">Remember Me</mat-checkbox>
+						<mat-checkbox class="ham-checkbox-1" i18n="@@Auth_Login_Form_Remember_Text" (change)="rememberMe = $event">Remember Me</mat-checkbox>
 						<a class="ham-remember-color" [routerLink]="['/' + routing.authorization.forgot]" i18n="@@Auth_Login_Form_Forget_Password_Link_Text">Forget Password?</a>
 					</div>
 
 					<!-- Button -->
 					<div class="cd-col ham-btn-error">
 						<div>
-							<button mat-button type="submit" class="ham-button-1" [disabled]="!isFormValid" i18n="@@Auth_Login_Form_Submit_Button">Login</button>
+							<button mat-button type="submit" class="ham-button ham-button-1" [disabled]="!isFormValid" i18n="@@Auth_Login_Form_Submit_Button">Login</button>
 						</div>
 
 						<p *ngIf="errorMessage">{{errorMessage}}</p>
