@@ -19,7 +19,9 @@
 				<th mat-header-cell *matHeaderCellDef mat-sort-header>{{ column }}</th>
 				<td mat-cell *matCellDef="let element">
 					<!-- Text -->
-					<ng-container *ngIf="validateType(element[column]) !== 'boolean'">{{ element[column] }}</ng-container>
+					<ng-container *ngIf="validateType(element[column]) !== 'boolean'">
+						{{ element[column] }}
+					</ng-container>
 
 					<!-- Boolean -->
 					<ng-container *ngIf="validateType(element[column]) === 'boolean'">
