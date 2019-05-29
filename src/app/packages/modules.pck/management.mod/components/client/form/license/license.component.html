@@ -96,7 +96,7 @@
 			<div class="cd-row ham-padding-1">
 				<div class="cd-col">
 					<app-select
-						[selectType]="licenseCountrySelectType"
+						[selectType]="licenseSelectType"
 						[showLabel]="true"
 						labelName="Country*"
 						i18n-labelName="@@Management_Client_License_Form_Country_Label"
@@ -116,31 +116,31 @@
 			<app-divider></app-divider>
 			<div class="cd-row ham-padding-1">
 				<div class="cd-col cd-col-pm-t-6">
-					<app-input
+					<app-select
+						[selectType]="licenseSelectType"
 						[showLabel]="true"
 						labelName="Number of Hotels"
 						i18n-labelName="@@Management_Client_License_Form_HGA_NumberOfHotels_Label"
-						[inputId]="'license-hga-number-of-hotels-id'"
-						[inputType]="'text'"
-						[inputName]="'numberOfHotels'"
-						inputPlaceHolder="Number of Hotels"
-						i18n-inputPlaceHolder="@@Management_Client_License_Form_HGA_NumberOfHotels_PlaceHolder"
+						[selectId]="'license-hga-number-of-hotels-id'"
+						selectPlaceHolder="Number of Hotels"
+						i18n-selectPlaceHolder="@@Management_Client_License_Form_HGA_NumberOfHotels_PlaceHolder"
+						[dataDefault]="licenseHotelsList"
 						[control]="this.license.controls['HGA'].controls['NumberOfHotels']">
-					</app-input>
+					</app-select>
 				</div>
 
 				<div class="cd-col cd-col-pm-t-6 cd-col-m-top">
-					<app-input
+					<app-select
+						[selectType]="licenseSelectType"
 						[showLabel]="true"
 						labelName="Number of Users"
 						i18n-labelName="@@Management_Client_License_Form_HGA_NumberOfUsers_Label"
-						[inputId]="'license-hga-number-of-users-id'"
-						[inputType]="'text'"
-						[inputName]="'numberOfUsers'"
-						inputPlaceHolder="Number of Users"
-						i18n-inputPlaceHolder="@@Management_Client_License_Form_HGA_NumberOfUsers_PlaceHolder"
+						[selectId]="'license-hga-number-of-users-id'"
+						selectPlaceHolder="Number of Users"
+						i18n-selectPlaceHolder="@@Management_Client_License_Form_HGA_NumberOfUsers_PlaceHolder"
+						[dataDefault]="licenseHGAUsersList"
 						[control]="this.license.controls['HGA'].controls['NumberOfUsers']">
-					</app-input>
+					</app-select>
 				</div>
 			</div>
 
@@ -148,46 +148,46 @@
 			<app-divider></app-divider>
 			<div class="cd-row ham-padding-1">
 				<div class="cd-col cd-col-pm-t-6">
-					<app-input
+					<app-select
+						[selectType]="licenseSelectType"
 						[showLabel]="true"
 						labelName="Number of Hotels"
 						i18n-labelName="@@Management_Client_License_Form_HSA_NumberOfHotels_Label"
-						[inputId]="'license-hsa-number-of-hotels-id'"
-						[inputType]="'text'"
-						[inputName]="'numberOfHotels'"
-						inputPlaceHolder="Number of Hotels"
-						i18n-inputPlaceHolder="@@Management_Client_License_Form_HSA_NumberOfHotels_PlaceHolder"
+						[selectId]="'license-hsa-number-of-hotels-id'"
+						selectPlaceHolder="Number of Hotels"
+						i18n-selectPlaceHolder="@@Management_Client_License_Form_HSA_NumberOfHotels_PlaceHolder"
+						[dataDefault]="licenseHotelsList"
 						[control]="this.license.controls['HSA'].controls['NumberOfHotels']">
-					</app-input>
+					</app-select>
 				</div>
 
 				<div class="cd-col cd-col-pm-t-6 cd-col-m-top">
-					<app-input
+					<app-select
+						[selectType]="licenseSelectType"
 						[showLabel]="true"
 						labelName="Number of Users"
 						i18n-labelName="@@Management_Client_License_Form_HSA_NumberOfUsers_Label"
-						[inputId]="'license-hsa-number-of-users-id'"
-						[inputType]="'text'"
-						[inputName]="'numberOfUsers'"
-						inputPlaceHolder="Number of Users"
-						i18n-inputPlaceHolder="@@Management_Client_License_Form_HSA_NumberOfUsers_PlaceHolder"
+						[selectId]="'license-hsa-number-of-users-id'"
+						selectPlaceHolder="Number of Users"
+						i18n-selectPlaceHolder="@@Management_Client_License_Form_HSA_NumberOfUsers_PlaceHolder"
+						[dataDefault]="licenseHSAUsersList"
 						[control]="this.license.controls['HSA'].controls['NumberOfUsers']">
-					</app-input>
+					</app-select>
 				</div>
 			</div>
 			<div class="cd-row ham-padding-0">
 				<div class="cd-col">
-					<app-input
+					<app-select
+						[selectType]="licenseSelectType"
 						[showLabel]="true"
 						labelName="Number of User Blocks"
 						i18n-labelName="@@Management_Client_License_Form_HSA_NumberOfUserBlocks_Label"
-						[inputId]="'license-hsa-number-of-user-blocks-id'"
-						[inputType]="'text'"
-						[inputName]="'numberOfUserBlocks'"
-						inputPlaceHolder="Number of User Blocks"
-						i18n-inputPlaceHolder="@@Management_Client_License_Form_HSA_NumberOfUserBlocks_PlaceHolder"
+						[selectId]="'license-hsa-number-of-user-blocks-id'"
+						selectPlaceHolder="Number of User Blocks"
+						i18n-selectPlaceHolder="@@Management_Client_License_Form_HSA_NumberOfUserBlocks_PlaceHolder"
+						[dataDefault]="licenseHSAUserBlocksList"
 						[control]="this.license.controls['HSA'].controls['NumberOfUserBlocks']">
-					</app-input>
+					</app-select>
 				</div>
 			</div>
 		</ng-container>

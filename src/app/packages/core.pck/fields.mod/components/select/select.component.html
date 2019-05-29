@@ -19,7 +19,7 @@
 				(focusout)="selectFocused=false" [multiple]="multipleSelection">
 				<!-- Default -->
 				<ng-container *ngIf="selectType === 0">
-					<mat-option *ngFor="let item of dataDefault" [value]="item.id">
+					<mat-option *ngFor="let item of dataDefault" [value]="item">
 						{{item.text}}
 					</mat-option>
 				</ng-container>
@@ -30,7 +30,7 @@
 						*ngFor="let group of dataGroups"
 						[label]="group.name"
 						[disabled]="group.disabled">
-						<mat-option *ngFor="let item of group.items" [value]="item.id">
+						<mat-option *ngFor="let item of group.items" [value]="item">
 							{{item.text}}
 						</mat-option>
 					</mat-optgroup>

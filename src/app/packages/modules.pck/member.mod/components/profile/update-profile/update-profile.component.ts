@@ -64,7 +64,8 @@ export class UpdateProfileComponent implements OnInit, OnDestroy {
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
 				if (res && res.profileInfo) {
-					this.salutation.setValue(res.profileInfo.gender);
+					const gender = this.salutationList.filter(item => item.id === res.profileInfo.gender);
+					this.salutation.setValue(...gender);
 					this.firstName.setValue(res.profileInfo.given_name);
 					this.lastName.setValue(res.profileInfo.family_name);
 					this.email.setValue(res.profileInfo.email);
@@ -110,7 +111,7 @@ export class UpdateProfileComponent implements OnInit, OnDestroy {
 
 		// payload
 		const formPayload: UpdateProfileInterface = {
-			salutation: this.salutation.value,
+			salutation: this.salutation.value.id,
 			firstName: this.firstName.value,
 			lastName: this.lastName.value
 		};

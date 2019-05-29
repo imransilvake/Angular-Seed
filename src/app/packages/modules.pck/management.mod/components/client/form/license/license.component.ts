@@ -9,6 +9,7 @@ import { SelectTypeEnum } from '../../../../../../core.pck/fields.mod/enums/sele
 import { ClientService } from '../../../../services/client.service';
 import { ClientViewInterface } from '../../../../interfaces/client-view.interface';
 import { ClientViewTypeEnum } from '../../../../enums/client-view-type.enum';
+import { ClientLicenseService } from '../../../../services/client-license.service';
 
 @Component({
 	selector: 'app-license',
@@ -20,36 +21,71 @@ export class LicenseComponent implements OnInit, OnDestroy {
 	@Output() changeClientView: EventEmitter<any> = new EventEmitter();
 
 	public formFields;
-	public licenseCountrySelectType = SelectTypeEnum.DEFAULT;
+	public licenseSelectType = SelectTypeEnum.DEFAULT;
 	public countryList;
+	public licenseHotelsList;
+	public licenseHGAUsersList;
+	public licenseHSAUsersList;
+	public licenseHSAUserBlocksList = [];
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
-	constructor(private _clientService: ClientService) {
+	constructor(
+		private _clientService: ClientService,
+		private _clientLicenseService: ClientLicenseService
+	) {
 		// form group
 		this.formFields = new FormGroup({
-			GroupID: new FormControl('', [Validators.required]),
-			Name: new FormControl('', [Validators.required]),
+			GroupID: new FormControl('', [
+				Validators.required,
+				Validators.minLength(3),
+				Validators.maxLength(3)
+			]),
+			Name: new FormControl('', [
+				Validators.required,
+				Validators.minLength(3),
+				Validators.maxLength(256)
+			]),
 			Address: new FormGroup({
-				Address1: new FormControl('', [Validators.required]),
-				Address2: new FormControl(''),
-				PostalCode: new FormControl('', [Validators.required]),
-				City: new FormControl('', [Validators.required]),
+				Address1: new FormControl('', [
+					Validators.required,
+					Validators.minLength(3),
+					Validators.maxLength(256)
+				]),
+				Address2: new FormControl('', [Validators.maxLength(256)]),
+				PostalCode: new FormControl('', [
+					Validators.required,
+					Validators.minLength(2),
+					Validators.maxLength(20)
+				]),
+				City: new FormControl('', [
+					Validators.required,
+					Validators.minLength(2),
+					Validators.maxLength(256)
+				]),
 				Country: new FormControl('', [Validators.required])
 			}),
 			License: new FormGroup({
 				HGA: new FormGroup({
-					NumberOfHotels: new FormControl(''),
-					NumberOfUsers: new FormControl(''),
+					NumberOfHotels: new FormControl('', [Validators.required]),
+					NumberOfUsers: new FormControl({ value: '', disabled: true }),
 					NumberOfUserBlocks: new FormControl(null)
 				}),
 				HSA: new FormGroup({
-					NumberOfHotels: new FormControl(''),
-					NumberOfUsers: new FormControl(''),
-					NumberOfUserBlocks: new FormControl('')
+					NumberOfHotels: new FormControl('', [Validators.required]),
+					NumberOfUsers: new FormControl({ value: '', disabled: true }),
+					NumberOfUserBlocks: new FormControl(null)
 				})
 			})
 		});
+
+		// fill user block list with 100 values
+		new Array(101).fill(0).forEach((v, i) => {
+			this.licenseHSAUserBlocksList.push({ id: i, text: String(i) })
+		});
+
+		// pre-select user block list
+		this.license.controls['HSA'].controls['NumberOfUserBlocks'].setValue(this.licenseHSAUserBlocksList[0]);
 	}
 
 	ngOnInit() {
@@ -57,6 +93,25 @@ export class LicenseComponent implements OnInit, OnDestroy {
 		this._clientService.fetchCountryList()
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => this.countryList = res);
+
+		// get license hotels list
+		this.licenseHotelsList = this._clientLicenseService.getLicenseList();
+
+		// listen: change in hga select value
+		this.license.controls['HGA'].controls['NumberOfHotels'].valueChanges
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => {
+				this.licenseHGAUsersList = [{ id: res.value, text: `${ res.value } Users` }];
+				this.license.controls['HGA'].controls['NumberOfUsers'].setValue(this.licenseHGAUsersList[0]);
+			});
+
+		// listen: change in hsa select value
+		this.license.controls['HSA'].controls['NumberOfHotels'].valueChanges
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => {
+				this.licenseHSAUsersList = [{ id: res.value * 2, text: `${ res.value * 2 } Users` }];
+				this.license.controls['HSA'].controls['NumberOfUsers'].setValue(this.licenseHSAUsersList[0]);
+			});
 	}
 
 	ngOnDestroy() {
@@ -92,6 +147,7 @@ export class LicenseComponent implements OnInit, OnDestroy {
 	 * on submit form
 	 */
 	public onSubmitForm() {
+		console.log(this.formFields.value);
 	}
 
 	/**

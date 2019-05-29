@@ -15,6 +15,7 @@ import { ClientDefaultComponent } from './components/client/default/client-defau
 import { ClientFormComponent } from './components/client/form/client-form.component';
 import { LicenseComponent } from './components/client/form/license/license.component';
 import { FieldsModule } from '../../core.pck/fields.mod/fields.module';
+import { ClientLicenseService } from './services/client-license.service';
 
 @NgModule({
 	imports: [
@@ -32,7 +33,10 @@ import { FieldsModule } from '../../core.pck/fields.mod/fields.module';
 		UserComponent,
 		LicenseComponent
 	],
-	providers: [ClientService]
+	providers: [
+		ClientService,
+		ClientLicenseService
+	]
 })
 
 export class ManagementModule {

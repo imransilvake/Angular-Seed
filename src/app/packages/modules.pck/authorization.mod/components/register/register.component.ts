@@ -136,7 +136,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 		// payload
 		const formPayload: AuthRegisterInterface = {
 			hotelId: this.hotelId.value.id,
-			salutation: this.salutation.value,
+			salutation: this.salutation.value.id,
 			email: this.email.value,
 			firstName: this.firstName.value,
 			lastName: this.lastName.value,
