@@ -13,7 +13,7 @@ import { ClientViewInterface } from '../../../interfaces/client-view.interface';
 
 export class ClientFormComponent {
 	@Input() hotelId;
-	@Output() onChangeClientView: EventEmitter<any> = new EventEmitter();
+	@Output() changeClientView: EventEmitter<any> = new EventEmitter();
 
 	/**
 	 * close client form
@@ -22,6 +22,6 @@ export class ClientFormComponent {
 		const payload: ClientViewInterface = {
 			view: ClientViewTypeEnum.DEFAULT
 		};
-		this.onChangeClientView.emit(payload);
+		this.changeClientView.emit(payload);
 	}
 }

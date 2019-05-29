@@ -1,5 +1,5 @@
 // angular
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -13,7 +13,7 @@ import { ClientService } from '../../services/client.service';
 	templateUrl: './client.component.html'
 })
 
-export class ClientComponent {
+export class ClientComponent implements OnDestroy {
 	public pageView: ClientViewTypeEnum = ClientViewTypeEnum.DEFAULT;
 	public hotelId;
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();

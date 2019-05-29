@@ -8,13 +8,13 @@
 	<div class="ham-details">
 		<!-- View: Default -->
 		<ng-container *ngIf="pageView === 0">
-			<app-client-default (onChangeClientView)="pageView = $event.view; hotelId = $event.hotelId;"></app-client-default>
+			<app-client-default (changeClientView)="pageView = $event.view; hotelId = $event.hotelId;"></app-client-default>
 		</ng-container>
 
 		<!-- View: Form -->
 		<ng-container *ngIf="pageView === 1">
 			<app-client-form
-				(onChangeClientView)="pageView = $event.view; loadComponentServices();"
+				(changeClientView)="pageView = $event.view; loadComponentServices();"
 				[hotelId]="hotelId">
 			</app-client-form>
 		</ng-container>

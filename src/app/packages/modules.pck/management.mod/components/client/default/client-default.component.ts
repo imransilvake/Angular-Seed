@@ -15,7 +15,7 @@ import { ClientViewInterface } from '../../../interfaces/client-view.interface';
 })
 
 export class ClientDefaultComponent implements OnInit, OnDestroy {
-	@Output() onChangeClientView: EventEmitter<any> = new EventEmitter();
+	@Output() changeClientView: EventEmitter<any> = new EventEmitter();
 
 	public clientHotelsList;
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
@@ -46,6 +46,6 @@ export class ClientDefaultComponent implements OnInit, OnDestroy {
 			view: ClientViewTypeEnum.FORM,
 			hotelId: hotelId
 		};
-		this.onChangeClientView.emit(payload);
+		this.changeClientView.emit(payload);
 	}
 }
