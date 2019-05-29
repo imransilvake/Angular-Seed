@@ -15,4 +15,14 @@ export class HeadComponent {
 
 	@Input() pageTitle;
 	@Input() notification;
+	@Input() showPageHint = false;
+	@Input() pageHintTitle;
+	@Input() pageHintText;
+
+	/**
+	 * close page hint
+	 */
+	public onClickClosePageHint() {
+		this.showPageHint = false;
+	}
 }
