@@ -92,6 +92,7 @@ export class LicenseComponent implements OnInit, OnDestroy {
 	 * on submit form
 	 */
 	public onSubmitForm() {
+		console.log(this.formFields.value)
 	}
 
 	/**
