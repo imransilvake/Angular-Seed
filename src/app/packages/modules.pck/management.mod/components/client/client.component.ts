@@ -7,6 +7,7 @@ import { Subject } from 'rxjs';
 // app
 import { ClientViewTypeEnum } from '../../enums/client-view-type.enum';
 import { ClientService } from '../../services/client.service';
+import { AuthService } from '../../../authorization.mod/services/auth.service';
 
 @Component({
 	selector: 'app-client',
@@ -20,7 +21,8 @@ export class ClientComponent implements OnDestroy {
 
 	constructor(
 		private router: Router,
-		private _clientService: ClientService
+		private _clientService: ClientService,
+		private _authService: AuthService
 	) {
 		// initialize reload system
 		this.initReloadSystem();
@@ -45,6 +47,9 @@ export class ClientComponent implements OnDestroy {
 	 * load component services
 	 */
 	private loadComponentServices() {
+		// set current user state
+		this._clientService.currentUser = this._authService.currentUserState;
+
 		// client hotels list
 		this._clientService.fetchClientHotelsList();
 	}

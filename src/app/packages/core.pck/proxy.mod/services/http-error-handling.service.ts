@@ -78,9 +78,9 @@ export class HttpErrorHandlingService {
 		// check error type.
 		if (response) {
 			if (response.error instanceof ErrorEvent) {
-				backendError = `An error occurred, <span>code:</span>${ response.status }, <span>Message:</span> ${ response.statusText }`;
+				backendError = `An error occurred: <b>code:</b>${ response.status }, <b>Message:</b> ${ response.statusText }`;
 			} else {
-				backendError = `Backend Error, <span>code:</span> ${ response.status }, <span>Message:</span> ${ response.statusText }`;
+				backendError = `Get Method Error: <b>code:</b> ${ response.status }, <b>Message:</b> ${ response.statusText }`;
 			}
 		}
 

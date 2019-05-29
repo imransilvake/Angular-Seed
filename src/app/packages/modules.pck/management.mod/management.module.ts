@@ -14,13 +14,15 @@ import { ClientService } from './services/client.service';
 import { ClientDefaultComponent } from './components/client/default/client-default.component';
 import { ClientFormComponent } from './components/client/form/client-form.component';
 import { LicenseComponent } from './components/client/form/license/license.component';
+import { FieldsModule } from '../../core.pck/fields.mod/fields.module';
 
 @NgModule({
 	imports: [
 		RouterModule.forChild(MANAGEMENT_ROUTES),
 		FrameModule,
 		SharedModule,
-		WidgetsModule
+		WidgetsModule,
+		FieldsModule
 	],
 	declarations: [
 		ClientComponent,

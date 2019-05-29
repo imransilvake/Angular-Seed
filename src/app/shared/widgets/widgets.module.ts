@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 
 // app
-import { DividerWidgetComponent } from './divider/divider-widget.component';
+import { DividerComponent } from './divider/divider.component';
 import { BadgetWidgetComponent } from './badge/badge-widget.component';
 import { PasswordStrengthComponent } from './password-strength/password-strength.component';
 import { SharedModule } from '../shared.module';
@@ -16,14 +16,14 @@ import { FieldsModule } from '../../packages/core.pck/fields.mod/fields.module';
 		FieldsModule
 	],
 	declarations: [
-		DividerWidgetComponent,
+		DividerComponent,
 		BadgetWidgetComponent,
 		PasswordStrengthComponent,
 		ReadMoreComponent,
 		TableComponent
 	],
 	exports: [
-		DividerWidgetComponent,
+		DividerComponent,
 		BadgetWidgetComponent,
 		PasswordStrengthComponent,
 		ReadMoreComponent,

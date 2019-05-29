@@ -1,8 +1,8 @@
 <div class="ham-read-more" *ngIf="fullText">
 	<p>
 		<!-- Text -->
-		<span *ngIf="!isCollapsed">{{fullText.substring(0, truncateSize)}}</span>
-		<span *ngIf="isCollapsed">{{fullText}}</span>
+		<span *ngIf="!isCollapsed" [innerHTML]="fullText.substring(0, truncateSize)"></span>
+		<span *ngIf="isCollapsed" [innerHTML]="fullText"></span>
 
 		<!-- Link -->
 		<span

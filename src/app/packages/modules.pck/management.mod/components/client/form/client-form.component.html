@@ -13,7 +13,7 @@
 			<!-- License -->
 			<mat-tab [label]="'Licenses'">
 				<ng-template matTabContent>
-					<app-license></app-license>
+					<app-license (changeClientView)="onClickCloseClientForm()"></app-license>
 				</ng-template>
 			</mat-tab>
 

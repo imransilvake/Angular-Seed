@@ -128,8 +128,8 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 			profile: {
 				...userInfo,
 				password: data.profile.password,
-				language: data.language,
-				image: data.image
+				language: data.profile.language,
+				image: data.profile.image
 			},
 			credentials: credentials,
 			rememberMe: data.rememberMe,

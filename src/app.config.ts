@@ -12,6 +12,7 @@ export const AppOptions = {
 // services
 export const AppServices: { [moduleName: string]: { [name: string]: AppServicesInterface } } = {
 	Utilities: {
+		CountryList: { serviceUrl: '/config/countries/list' },
 		HotelList: { serviceUrl: '/hotels/list' },
 		Fetch_Profile_Image: { serviceUrl: '/getimage' },
 		Change_Profile_Image: { serviceUrl: '/imageupload' }
