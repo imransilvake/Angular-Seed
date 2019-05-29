@@ -22,14 +22,14 @@ export class ClientComponent implements OnDestroy {
 		private router: Router,
 		private _clientService: ClientService
 	) {
-		// setup reload
-		this.setupReloadSystem();
+		// initialize reload system
+		this.initReloadSystem();
 	}
 
 	/**
-	 * setup reload system
+	 * initialize reload system
 	 */
-	private setupReloadSystem() {
+	private initReloadSystem() {
 		// listen: router event
 		this.router.events
 			.pipe(takeUntil(this._ngUnSubscribe))

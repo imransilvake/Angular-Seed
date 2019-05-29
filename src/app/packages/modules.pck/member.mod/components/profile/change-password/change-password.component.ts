@@ -7,9 +7,9 @@ import { Subject } from 'rxjs';
 // app
 import { ValidationService } from '../../../../../core.pck/fields.mod/services/validation.service';
 import { LoadingAnimationService } from '../../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
-import { MemberService } from '../../../services/member.service';
 import { ChangePasswordInterface } from '../../../interfaces/change-password.interface';
 import { HelperService } from '../../../../../utilities.pck/accessories.mod/services/helper.service';
+import { MemberService } from '../../../services/member.service';
 
 @Component({
 	selector: 'app-change-password',

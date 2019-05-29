@@ -22,14 +22,14 @@ export class ProfileComponent implements OnDestroy {
 		private _authService: AuthService,
 		private _memberService: MemberService
 	) {
-		// setup reload system
-		this.setupReloadSystem();
+		// initialize reload system
+		this.initReloadSystem();
 	}
 
 	/**
-	 * setup reload system
+	 * initialize reload system
 	 */
-	private setupReloadSystem() {
+	private initReloadSystem() {
 		// listen: router event
 		this.router.events
 			.pipe(takeUntil(this._ngUnSubscribe))
