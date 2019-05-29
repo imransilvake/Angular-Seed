@@ -28,14 +28,26 @@ export class LicenseComponent implements OnInit, OnDestroy {
 	constructor(private _clientService: ClientService) {
 		// form group
 		this.formFields = new FormGroup({
-			systemIdentifier: new FormControl('', [Validators.required]),
-			company: new FormControl('', [Validators.required]),
-			address: new FormGroup({
-				address1: new FormControl('', [Validators.required]),
-				address2: new FormControl(''),
-				zip: new FormControl('', [Validators.required]),
-				city: new FormControl('', [Validators.required]),
-				country: new FormControl('', [Validators.required])
+			GroupID: new FormControl('', [Validators.required]),
+			Name: new FormControl('', [Validators.required]),
+			Address: new FormGroup({
+				Address1: new FormControl('', [Validators.required]),
+				Address2: new FormControl(''),
+				PostalCode: new FormControl('', [Validators.required]),
+				City: new FormControl('', [Validators.required]),
+				Country: new FormControl('', [Validators.required])
+			}),
+			License: new FormGroup({
+				HGA: new FormGroup({
+					NumberOfHotels: new FormControl(''),
+					NumberOfUsers: new FormControl(''),
+					NumberOfUserBlocks: new FormControl(null)
+				}),
+				HSA: new FormGroup({
+					NumberOfHotels: new FormControl(''),
+					NumberOfUsers: new FormControl(''),
+					NumberOfUserBlocks: new FormControl('')
+				})
 			})
 		});
 	}
@@ -57,15 +69,19 @@ export class LicenseComponent implements OnInit, OnDestroy {
 	 * getters
 	 */
 	get systemIdentifier() {
-		return this.formFields.get('systemIdentifier');
+		return this.formFields.get('GroupID');
 	}
 
 	get company() {
-		return this.formFields.get('company');
+		return this.formFields.get('Name');
 	}
 
 	get address() {
-		return this.formFields.get('address');
+		return this.formFields.get('Address');
+	}
+
+	get license() {
+		return this.formFields.get('License');
 	}
 
 	get isFormValid() {
@@ -76,7 +92,6 @@ export class LicenseComponent implements OnInit, OnDestroy {
 	 * on submit form
 	 */
 	public onSubmitForm() {
-		console.log(this.formFields.value);
 	}
 
 	/**
