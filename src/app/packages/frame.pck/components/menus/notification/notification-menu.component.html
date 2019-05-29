@@ -4,12 +4,12 @@
 		mat-button
 		[matMenuTriggerFor]="menu">
 		<mat-icon>notifications_none</mat-icon>
-		<app-widget-badge [type]="2" [count]="50"></app-widget-badge>
+		<app-badge [type]="2" [count]="50"></app-badge>
 	</button>
 	<mat-menu #menu="matMenu" class="ham-notification-mat-menu">
 		<div class="ham-head-1" (click)="onClickStopPropagation($event)">
 			<h6 class="ham-title">Notifications</h6>
-			<app-widget-badge [type]="1" [count]="50"></app-widget-badge>
+			<app-badge [type]="1" [count]="50"></app-badge>
 		</div>
 		<app-divider></app-divider>
 		<button mat-menu-item>
