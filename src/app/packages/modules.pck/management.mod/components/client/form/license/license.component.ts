@@ -81,7 +81,7 @@ export class LicenseComponent implements OnInit, OnDestroy {
 
 		// fill user block list with 100 values
 		new Array(101).fill(0).forEach((v, i) => {
-			this.licenseHSAUserBlocksList.push({ id: i, text: String(i) })
+			this.licenseHSAUserBlocksList.push({ id: i, text: String(i) });
 		});
 
 		// pre-select user block list
@@ -101,7 +101,7 @@ export class LicenseComponent implements OnInit, OnDestroy {
 		this.license.controls['HGA'].controls['NumberOfHotels'].valueChanges
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
-				this.licenseHGAUsersList = [{ id: res.value, text: `${ res.value } Users` }];
+				this.licenseHGAUsersList = [{ id: res.payload.value, text: `${ res.payload.value } ${ res.payload.text }` }];
 				this.license.controls['HGA'].controls['NumberOfUsers'].setValue(this.licenseHGAUsersList[0]);
 			});
 
@@ -109,7 +109,7 @@ export class LicenseComponent implements OnInit, OnDestroy {
 		this.license.controls['HSA'].controls['NumberOfHotels'].valueChanges
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
-				this.licenseHSAUsersList = [{ id: res.value * 2, text: `${ res.value * 2 } Users` }];
+				this.licenseHSAUsersList = [{ id: res.payload.value * 2, text: `${ res.payload.value * 2 } ${ res.payload.text }` }];
 				this.license.controls['HSA'].controls['NumberOfUsers'].setValue(this.licenseHSAUsersList[0]);
 			});
 	}
