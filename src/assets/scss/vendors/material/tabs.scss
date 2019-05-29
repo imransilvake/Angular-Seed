@@ -4,14 +4,16 @@
 			.mat-tab-list {
 				.mat-tab-labels {
 					.mat-tab-label {
+						color: cd-palette($cd-color, 1001);
+						height: 42px;
+						opacity: 1;
+
 						&:not(.mat-tab-label-active) {
-							background-color: cd-palette($cd-background, 2004, .6);
-							color: cd-palette($cd-color, 1001);
+							background-color: cd-palette($cd-background, 2004, .2);
 						}
 
 						&.mat-tab-label-active {
-							border-top: 2px solid cd-palette($cd-border, 3008);
-							color: cd-palette($cd-color, 1004);
+							border-top: 2px solid cd-palette($cd-border, 3010);
 						}
 					}
 				}

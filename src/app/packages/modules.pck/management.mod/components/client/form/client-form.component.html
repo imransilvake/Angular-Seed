@@ -7,16 +7,41 @@
 		<mat-icon (click)="onClickCloseClientForm()">close</mat-icon>
 	</div>
 
-	<div class="ham-details">
+	<!-- Tabs -->
+	<div class="ham-tabs">
 		<mat-tab-group class="ham-tabs-1">
-			<mat-tab label="First">
+			<!-- License -->
+			<mat-tab [label]="'Licenses'">
 				<ng-template matTabContent>
-					The First Content
+					<app-license></app-license>
 				</ng-template>
 			</mat-tab>
-			<mat-tab label="Second">
+
+			<!-- System Data -->
+			<mat-tab [label]="'System Data'">
 				<ng-template matTabContent>
-					The Second Content
+					System Data
+				</ng-template>
+			</mat-tab>
+
+			<!-- HotelGuest/App -->
+			<mat-tab [label]="'HotelGuest/App'">
+				<ng-template matTabContent>
+					HotelGuest
+				</ng-template>
+			</mat-tab>
+
+			<!-- HotelStaff/App -->
+			<mat-tab [label]="'HotelStaff/App'">
+				<ng-template matTabContent>
+					HotelStaff
+				</ng-template>
+			</mat-tab>
+
+			<!-- HotelAppManager -->
+			<mat-tab [label]="'HotelAppManager'">
+				<ng-template matTabContent>
+					HotelAppManager
 				</ng-template>
 			</mat-tab>
 		</mat-tab-group>

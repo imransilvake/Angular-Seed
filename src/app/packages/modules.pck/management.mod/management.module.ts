@@ -13,6 +13,7 @@ import { SharedModule } from '../../../shared/shared.module';
 import { ClientService } from './services/client.service';
 import { ClientDefaultComponent } from './components/client/default/client-default.component';
 import { ClientFormComponent } from './components/client/form/client-form.component';
+import { LicenseComponent } from './components/client/form/license/license.component';
 
 @NgModule({
 	imports: [
@@ -26,7 +27,8 @@ import { ClientFormComponent } from './components/client/form/client-form.compon
 		ClientDefaultComponent,
 		ClientFormComponent,
 		SystemNotificationComponent,
-		UserComponent
+		UserComponent,
+		LicenseComponent
 	],
 	providers: [ClientService]
 })
