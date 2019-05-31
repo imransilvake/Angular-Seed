@@ -20,7 +20,7 @@
 			<!-- System Data -->
 			<mat-tab [label]="'System Data'">
 				<ng-template matTabContent>
-					System Data
+					<app-system-data (changeClientView)="onClickCloseClientForm()"></app-system-data>
 				</ng-template>
 			</mat-tab>
 

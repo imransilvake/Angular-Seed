@@ -5,7 +5,12 @@ import { AppServicesInterface } from './app/packages/core.pck/proxy.mod/interfac
 export const AppOptions = {
 	secretKey: 'ham',
 	lockScreenSessionTime: 3600 * 1000,
-	languages: { en: 'en', de: 'de' },
+	languages: {
+		en: 'en',
+		de: 'de',
+		fr: 'fr',
+		es: 'es'
+	},
 	rememberMeValidityInDays: 90
 };
 

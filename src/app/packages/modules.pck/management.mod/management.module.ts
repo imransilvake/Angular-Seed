@@ -16,6 +16,7 @@ import { ClientFormComponent } from './components/client/form/client-form.compon
 import { LicenseComponent } from './components/client/form/license/license.component';
 import { FieldsModule } from '../../core.pck/fields.mod/fields.module';
 import { ClientLicenseService } from './services/client-license.service';
+import { SystemDataComponent } from './components/client/form/system-data/system-data.component';
 
 @NgModule({
 	imports: [
@@ -31,7 +32,8 @@ import { ClientLicenseService } from './services/client-license.service';
 		ClientFormComponent,
 		SystemNotificationComponent,
 		UserComponent,
-		LicenseComponent
+		LicenseComponent,
+		SystemDataComponent
 	],
 	providers: [
 		ClientService,

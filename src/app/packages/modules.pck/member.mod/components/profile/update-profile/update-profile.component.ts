@@ -7,11 +7,11 @@ import { takeUntil } from 'rxjs/operators';
 // app
 import { ValidationService } from '../../../../../core.pck/fields.mod/services/validation.service';
 import { SelectDefaultInterface } from '../../../../../core.pck/fields.mod/interfaces/select-default-interface';
-import { SalutationListService } from '../../../../authorization.mod/services/salutation-list.service';
 import { LoadingAnimationService } from '../../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { SelectTypeEnum } from '../../../../../core.pck/fields.mod/enums/select-type.enum';
 import { MemberService } from '../../../services/member.service';
 import { UpdateProfileInterface } from '../../../interfaces/update-profile.interface';
+import { UtilityService } from '../../../../../utilities.pck/accessories.mod/services/utility.service';
 
 @Component({
 	selector: 'app-update-profile',
@@ -28,7 +28,7 @@ export class UpdateProfileComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private _loadingAnimationService: LoadingAnimationService,
-		private _salutationList: SalutationListService,
+		private _utilityService: UtilityService,
 		private _memberService: MemberService
 	) {
 		// form group
@@ -57,15 +57,15 @@ export class UpdateProfileComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		// salutation
-		this.salutationList = this._salutationList.getSalutationList();
+		this.salutationList = this._utilityService.getSalutationList();
 
 		// listen: profile data event
 		this._memberService.memberData
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
 				if (res && res.profileInfo) {
-					const gender = this.salutationList.filter(item => item.id === res.profileInfo.gender);
-					this.salutation.setValue(...gender);
+					const salutation = this.salutationList.filter(item => item.id === res.profileInfo.gender);
+					this.salutation.setValue(...salutation);
 					this.firstName.setValue(res.profileInfo.given_name);
 					this.lastName.setValue(res.profileInfo.family_name);
 					this.email.setValue(res.profileInfo.email);

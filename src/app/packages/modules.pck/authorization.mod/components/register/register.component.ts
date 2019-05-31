@@ -7,15 +7,14 @@ import { takeUntil } from 'rxjs/operators';
 // app
 import { ROUTING } from '../../../../../../environments/environment';
 import { ValidationService } from '../../../../core.pck/fields.mod/services/validation.service';
-import { HotelListService } from '../../services/hotel-list.service';
 import { SelectTypeEnum } from '../../../../core.pck/fields.mod/enums/select-type.enum';
 import { SelectDefaultInterface } from '../../../../core.pck/fields.mod/interfaces/select-default-interface';
 import { LoadingAnimationService } from '../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { AuthRegisterInterface } from '../../interfaces/auth-register.interface';
 import { AuthService } from '../../services/auth.service';
 import { HelperService } from '../../../../utilities.pck/accessories.mod/services/helper.service';
-import { SalutationListService } from '../../services/salutation-list.service';
 import { AutocompleteTypeEnum } from '../../../../core.pck/fields.mod/enums/autocomplete-type.enum';
+import { UtilityService } from '../../../../utilities.pck/accessories.mod/services/utility.service';
 
 @Component({
 	selector: 'app-register',
@@ -37,8 +36,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 	constructor(
 		private _loadingAnimationService: LoadingAnimationService,
 		private _authService: AuthService,
-		private _hotelListService: HotelListService,
-		private _salutationList: SalutationListService
+		private _utilityService: UtilityService
 	) {
 		// form group
 		this.formFields = new FormGroup({
@@ -75,13 +73,13 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		// listen: hotel list event
-		this._hotelListService
+		this._utilityService
 			.getHotelList()
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => this.hotelList = res);
 
 		// salutation
-		this.salutationList = this._salutationList.getSalutationList();
+		this.salutationList = this._utilityService.getSalutationList();
 
 		// listen: error message
 		this._authService.errorMessage

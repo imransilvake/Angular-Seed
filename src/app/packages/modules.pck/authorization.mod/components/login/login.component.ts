@@ -9,7 +9,7 @@ import { MatCheckboxChange } from '@angular/material';
 // app
 import { ROUTING } from '../../../../../../environments/environment';
 import { ValidationService } from '../../../../core.pck/fields.mod/services/validation.service';
-import { LanguageListService } from '../../services/language-list.service';
+import { UtilityService } from '../../../../utilities.pck/accessories.mod/services/utility.service';
 import { SelectTypeEnum } from '../../../../core.pck/fields.mod/enums/select-type.enum';
 import { SelectDefaultInterface } from '../../../../core.pck/fields.mod/interfaces/select-default-interface';
 import { LoadingAnimationService } from '../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private _loadingAnimationService: LoadingAnimationService,
-		private _languageListService: LanguageListService,
+		private _utilityService: UtilityService,
 		private _authService: AuthService,
 		private _route: ActivatedRoute
 	) {
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		// set language list
-		this.languageList = this._languageListService.getLanguageList();
+		this.languageList = this._utilityService.getAuthLanguageList();
 
 		// listen: language state (default: english)
 		this._route.url

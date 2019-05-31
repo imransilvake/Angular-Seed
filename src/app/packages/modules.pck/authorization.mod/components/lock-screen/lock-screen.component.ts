@@ -23,7 +23,7 @@ import { LoadingAnimationService } from '../../../../utilities.pck/loading-anima
 import { AuthService } from '../../services/auth.service';
 import { HelperService } from '../../../../utilities.pck/accessories.mod/services/helper.service';
 import { AuthLoginInterface } from '../../interfaces/auth-login.interface';
-import { RouterService } from '../../../../utilities.pck/accessories.mod/services/router-service';
+import { RouterService } from '../../../../utilities.pck/accessories.mod/services/router.service';
 
 @Component({
 	selector: 'app-lock-screen',
