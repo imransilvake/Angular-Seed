@@ -95,14 +95,14 @@ export class LicenseComponent implements OnInit, OnDestroy {
 		// get license hotels list
 		this.licenseHotelsList = this._clientLicenseService.getLicenseList();
 
-		// listen: change in hga select value
+		// listen: HGA number of hotels
 		this.license.controls['HGA'].controls['NumberOfHotels'].valueChanges
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
 				this.license.controls['HGA'].controls['NumberOfUsers'].setValue(res.value);
 			});
 
-		// listen: change in hsa select value
+		// listen: HSA number of hotels
 		this.license.controls['HSA'].controls['NumberOfHotels'].valueChanges
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
