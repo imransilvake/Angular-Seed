@@ -55,7 +55,9 @@ export class LockScreenComponent implements OnInit, AfterViewInit, OnDestroy {
 			password: new FormControl('', [
 				Validators.required,
 				ValidationService.passwordValidator
-			])
+			]),
+			languageName: new FormControl(''),
+			rememberMe: new FormControl(false)
 		});
 
 		// start lock screen session
@@ -98,6 +100,14 @@ export class LockScreenComponent implements OnInit, AfterViewInit, OnDestroy {
 		return this.formFields.get('password');
 	}
 
+	get languageName() {
+		return this.formFields.get('languageName');
+	}
+
+	get rememberMe() {
+		return this.formFields.get('rememberMe');
+	}
+
 	get isFormValid() {
 		return this.formFields.valid;
 	}
@@ -114,8 +124,7 @@ export class LockScreenComponent implements OnInit, AfterViewInit, OnDestroy {
 
 		// validate password
 		if (!currentUser) {
-			// logout
-			this._authService.logoutUser();
+			this._authService.logoutUser(); // logout
 		} else if (currentUser && (HelperService.hashPassword(this.password.value) === currentUser.profile.password)) {
 			// listen: authenticate user event
 			this._authService.authenticateUser()
@@ -143,12 +152,16 @@ export class LockScreenComponent implements OnInit, AfterViewInit, OnDestroy {
 				password: HelperService.hashPassword(this.password.value)
 			};
 
+			// set language
+			this.languageName.setValue(currentUser.profile.language);
+
+			// set remember me
+			this.rememberMe.setValue(currentUser.rememberMe);
+
 			// start login process
 			this._authService.authLogin(
 				formPayload,
-				this.formFields,
-				currentUser && currentUser.rememberMe,
-				currentUser.language
+				this.formFields
 			);
 		}
 	}

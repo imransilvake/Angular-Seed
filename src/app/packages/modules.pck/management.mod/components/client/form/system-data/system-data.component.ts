@@ -1,6 +1,5 @@
 // angular
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { MatRadioChange } from '@angular/material';
 
 // app
 import { ClientViewInterface } from '../../../../interfaces/client-view.interface';

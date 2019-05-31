@@ -123,10 +123,8 @@ export class AuthService {
 	 *
 	 * @param formPayload
 	 * @param formFields
-	 * @param rememberMe
-	 * @param language
 	 */
-	public authLogin(formPayload: AuthLoginInterface, formFields: FormGroup, rememberMe: boolean, language: string) {
+	public authLogin(formPayload: AuthLoginInterface, formFields: FormGroup) {
 		this._proxyService
 			.postAPI(AppServices['Auth']['Login'], { bodyParams: formPayload })
 			.subscribe(res => {
@@ -150,7 +148,7 @@ export class AuthService {
 							profile: {
 								...userInfo,
 								password: formPayload.password,
-								language: language,
+								language: formFields.value.languageName,
 								image: resp ? resp.image : null
 							},
 							credentials: {
@@ -158,7 +156,7 @@ export class AuthService {
 								idToken: res.idToken.jwtToken,
 								refreshToken: res.refreshToken.token
 							},
-							rememberMe: rememberMe,
+							rememberMe: formFields.value.rememberMe,
 							timestamp: moment()
 						};
 

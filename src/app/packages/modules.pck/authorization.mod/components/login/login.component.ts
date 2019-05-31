@@ -4,7 +4,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { MatCheckboxChange } from '@angular/material';
 
 // app
 import { ROUTING } from '../../../../../../environments/environment';
@@ -29,7 +28,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 	public formFields;
 	public loginHotelNameSelectType = SelectTypeEnum.DEFAULT;
 	public languageList: SelectDefaultInterface[] = [];
-	public rememberMe: MatCheckboxChange;
 	public errorMessage;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
@@ -50,7 +48,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 			password: new FormControl('', [
 				Validators.required,
 				ValidationService.passwordValidator
-			])
+			]),
+			rememberMe: new FormControl(false)
 		});
 	}
 
@@ -101,6 +100,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 		return this.formFields.get('password');
 	}
 
+	get rememberMe() {
+		return this.formFields.get('rememberMe');
+	}
+
 	get isFormValid() {
 		return this.formFields.valid;
 	}
@@ -121,9 +124,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 		// start login process
 		this._authService.authLogin(
 			formPayload,
-			this.formFields,
-			this.rememberMe && this.rememberMe.checked,
-			this.languageName.value
+			this.formFields
 		);
 	}
 }
