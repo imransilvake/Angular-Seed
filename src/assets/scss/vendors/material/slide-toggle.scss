@@ -30,6 +30,10 @@
 						.mat-slide-toggle-thumb {
 							background-color: cd-palette($cd-background, 2010);
 						}
+
+						.mat-ripple {
+							display: none;
+						}
 					}
 				}
 			}

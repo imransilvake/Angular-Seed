@@ -1,5 +1,8 @@
 // angular
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 // app
 import { ClientViewInterface } from '../../../../interfaces/client-view.interface';
@@ -7,9 +10,6 @@ import { ClientViewTypeEnum } from '../../../../enums/client-view-type.enum';
 import { SelectTypeEnum } from '../../../../../../core.pck/fields.mod/enums/select-type.enum';
 import { UtilityService } from '../../../../../../utilities.pck/accessories.mod/services/utility.service';
 import { SelectDefaultInterface } from '../../../../../../core.pck/fields.mod/interfaces/select-default-interface';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-system-data',
@@ -51,6 +51,12 @@ export class SystemDataComponent implements OnInit, OnDestroy {
 		this.primaryLanguage.valueChanges
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
+				// on same language, clear secondary language
+				if (this.primaryLanguage.value === this.secondaryLanguage.value) {
+					this.secondaryLanguage.setValue('');
+				}
+
+				// set secondary language list
 				this.secondaryLanguageList = this.primaryLanguageList.map(item => {
 					return (item.id === res.id) ? { disabled: true, ...res } : item;
 				});
