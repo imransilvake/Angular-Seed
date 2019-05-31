@@ -130,17 +130,17 @@
 				</div>
 
 				<div class="cd-col cd-col-pm-t-6 cd-col-m-top">
-					<app-select
-						[selectType]="licenseSelectType"
+					<app-input
 						[showLabel]="true"
 						labelName="Number of Users"
 						i18n-labelName="@@Management_Client_License_Form_HGA_NumberOfUsers_Label"
-						[selectId]="'license-hga-number-of-users-id'"
-						selectPlaceHolder="Number of Users"
-						i18n-selectPlaceHolder="@@Management_Client_License_Form_HGA_NumberOfUsers_PlaceHolder"
-						[dataDefault]="licenseHGAUsersList"
+						[inputId]="'license-hga-number-of-users-id'"
+						[inputType]="'text'"
+						[inputName]="'numberOfUsers'"
+						inputPlaceHolder="Number of Users"
+						i18n-inputPlaceHolder="@@Management_Client_License_Form_HGA_NumberOfUsers_PlaceHolder"
 						[control]="this.license.controls['HGA'].controls['NumberOfUsers']">
-					</app-select>
+					</app-input>
 				</div>
 			</div>
 
@@ -162,17 +162,17 @@
 				</div>
 
 				<div class="cd-col cd-col-pm-t-6 cd-col-m-top">
-					<app-select
-						[selectType]="licenseSelectType"
+					<app-input
 						[showLabel]="true"
 						labelName="Number of Users"
 						i18n-labelName="@@Management_Client_License_Form_HSA_NumberOfUsers_Label"
-						[selectId]="'license-hsa-number-of-users-id'"
-						selectPlaceHolder="Number of Users"
-						i18n-selectPlaceHolder="@@Management_Client_License_Form_HSA_NumberOfUsers_PlaceHolder"
-						[dataDefault]="licenseHSAUsersList"
+						[inputId]="'license-hsa-number-of-users-id'"
+						[inputType]="'text'"
+						[inputName]="'numberOfUsers'"
+						inputPlaceHolder="Number of Users"
+						i18n-inputPlaceHolder="@@Management_Client_License_Form_HSA_NumberOfUsers_PlaceHolder"
 						[control]="this.license.controls['HSA'].controls['NumberOfUsers']">
-					</app-select>
+					</app-input>
 				</div>
 			</div>
 			<div class="cd-row ham-padding-0">
