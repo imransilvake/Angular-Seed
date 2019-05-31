@@ -42,7 +42,7 @@
 				(optionSelected)="multipleSelection && itemSelected($event)">
 				<!-- Default -->
 				<ng-container *ngIf="autocompleteType === 0">
-					<mat-option *ngFor="let item of filteredData | async" [value]="item">
+					<mat-option *ngFor="let item of filteredData | async" [value]="item" [disabled]="item.disabled">
 						{{item.text}}
 					</mat-option>
 				</ng-container>

@@ -1,0 +1,71 @@
+@import 'main';
+
+.ham-system-data {
+	.cd-row {
+		&:not(:last-child) {
+			margin-bottom: 20px;
+		}
+
+		.cd-col {
+			&.cd-col-top {
+				margin-top: 20px;
+			}
+
+			button {
+				margin-top: 15px;
+
+				&:first-child {
+					margin-right: 10px;
+				}
+			}
+
+			&.ham-radio {
+				margin-top: 29px;
+			}
+
+			.ham-note {
+				color: cd-palette($cd-color, 1004);
+				font-style: italic;
+				margin-top: -10px;
+			}
+		}
+	}
+
+	// media
+	@include cd-media(desktop, smartphone) {
+		.cd-row {
+			.cd-col {
+				padding: 0;
+
+				&.cd-col-m-top {
+					margin-top: 20px;
+				}
+
+				&.ham-radio {
+					margin-top: 15px;
+				}
+			}
+		}
+	}
+
+	@include cd-media(desktop, mini) {
+		.cd-row {
+			.cd-col {
+				display:flex;
+				flex-direction: column-reverse;
+
+				button {
+					width: 100%;
+
+					&:first-child {
+						margin-right: 0;
+					}
+
+					&:last-child {
+						margin-top: 10px;
+					}
+				}
+			}
+		}
+	}
+}

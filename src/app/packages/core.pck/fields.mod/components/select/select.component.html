@@ -19,7 +19,7 @@
 				(focusout)="selectFocused=false" [multiple]="multipleSelection">
 				<!-- Default -->
 				<ng-container *ngIf="selectType === 0">
-					<mat-option *ngFor="let item of dataDefault" [value]="item">
+					<mat-option *ngFor="let item of dataDefault" [value]="item" [disabled]="item.disabled">
 						{{item.text}}
 					</mat-option>
 				</ng-container>
