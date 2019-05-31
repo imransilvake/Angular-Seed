@@ -35,10 +35,17 @@ export class SystemDataComponent implements OnInit, OnDestroy {
 			PrimaryLanguageName: new FormControl(''),
 			SecondaryLanguageName: new FormControl(''),
 			BackendEndpointURL: new FormControl('', [Validators.required]),
-			BackendUsername: new FormControl('', [Validators.required]),
+			BackendUsername: new FormControl('', [
+				Validators.required,
+				Validators.minLength(2)
+			]),
 			BackendPassword: new FormControl('', [Validators.required]),
 			SyncInterval: new FormControl('DAILY', [Validators.required]),
-			Token: new FormControl('', [Validators.required])
+			Token: new FormControl('', [
+				Validators.required,
+				Validators.minLength(10),
+				Validators.maxLength(200)
+			])
 		});
 	}
 
