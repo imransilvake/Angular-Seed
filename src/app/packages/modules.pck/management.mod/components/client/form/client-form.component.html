@@ -27,7 +27,7 @@
 			<!-- HotelGuest/App -->
 			<mat-tab [label]="'HotelGuest/App'">
 				<ng-template matTabContent>
-					HotelGuest
+					<app-hotel-guest-app (changeClientView)="onClickCloseClientForm()"></app-hotel-guest-app>
 				</ng-template>
 			</mat-tab>
 
