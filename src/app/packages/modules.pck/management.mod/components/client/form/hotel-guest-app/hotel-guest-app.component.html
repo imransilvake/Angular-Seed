@@ -1,9 +1,40 @@
 <div class="ham-hotel-guest-app">
-	Hello
-	<div class="ham-columns">
-		<h6>License</h6>
+	<!-- Columns -->
+	<div class="ham-row ham-border" [class.ham-no-license]="!licenseActive">
+		<h6 *ngIf="licenseActive">License</h6>
 		<h6>Active</h6>
 		<h6>Module Name</h6>
-		<h6>License</h6>
+		<h6>Description</h6>
+		<h6></h6>
+		<h6>Preferred</h6>
+	</div>
+
+	<!-- Details -->
+	<div class="ham-details">
+		<ng-container *ngFor="let block of modulesList">
+			<div class="ham-blocks ham-hotel-room">
+				<h6>{{ block.name }}</h6>
+				<div class="ham-row" [class.ham-no-license]="!licenseActive" *ngFor="let module of block.modules">
+					<div *ngIf="licenseActive">
+						<mat-slide-toggle class="mat-slide-toggle-1" [checked]="module['Licensed']"></mat-slide-toggle>
+					</div>
+					<div>
+						<mat-slide-toggle class="mat-slide-toggle-1" [checked]="module['Active']"></mat-slide-toggle>
+					</div>
+					<div>
+						<p>Guest Push-Notifications</p>
+					</div>
+					<div>
+						<p>Send individual and automatic push notifications to your guests</p>
+					</div>
+					<div class="ham-params">
+						<p>Params</p>
+					</div>
+					<div>
+						<mat-checkbox class="ham-checkbox-2" [checked]="module['Preferred']"></mat-checkbox>
+					</div>
+				</div>
+			</div>
+		</ng-container>
 	</div>
 </div>

@@ -18,6 +18,7 @@ import { FieldsModule } from '../../core.pck/fields.mod/fields.module';
 import { ClientLicenseService } from './services/client-license.service';
 import { SystemDataComponent } from './components/client/form/system-data/system-data.component';
 import { HotelGuestAppComponent } from './components/client/form/hotel-guest-app/hotel-guest-app.component';
+import { ClientHgaService } from './services/client-hga.service';
 
 @NgModule({
 	imports: [
@@ -39,7 +40,8 @@ import { HotelGuestAppComponent } from './components/client/form/hotel-guest-app
 	],
 	providers: [
 		ClientService,
-		ClientLicenseService
+		ClientLicenseService,
+		ClientHgaService
 	]
 })
 

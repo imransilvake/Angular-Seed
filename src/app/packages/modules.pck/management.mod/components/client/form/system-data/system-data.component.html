@@ -1,6 +1,7 @@
 <div class="ham-system-data">
 	<!-- Form -->
 	<form class="ham-block ham-form" (ngSubmit)="onSubmitForm()" (keyup.enter)="isFormValid && onSubmitForm()">
+		<!-- Language -->
 		<div class="cd-row ham-padding-0">
 			<div class="cd-col">
 				<mat-slide-toggle class="mat-slide-toggle-1" [formControl]="reservation">
@@ -55,6 +56,7 @@
 
 		<app-divider></app-divider>
 
+		<!-- Credentials -->
 		<div class="cd-row ham-padding-1">
 			<div class="cd-col cd-col-pm-t-8">
 				<app-input
