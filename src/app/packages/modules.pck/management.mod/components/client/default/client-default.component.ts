@@ -24,7 +24,7 @@ export class ClientDefaultComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
-		// listen: fetch client hotels
+		// listen: get client hotels
 		this._clientService.clientData
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => this.clientHotelsList = res.hotelsList);

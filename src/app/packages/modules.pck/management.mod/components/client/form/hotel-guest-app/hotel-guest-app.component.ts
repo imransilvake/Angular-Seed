@@ -4,7 +4,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 // app
 import { ClientViewInterface } from '../../../../interfaces/client-view.interface';
 import { ClientViewTypeEnum } from '../../../../enums/client-view-type.enum';
-import { ClientHgaService } from '../../../../services/client-hga.service';
+import { ClientService } from '../../../../services/client.service';
 
 @Component({
 	selector: 'app-hotel-guest-app',
@@ -18,11 +18,12 @@ export class HotelGuestAppComponent implements OnInit {
 	public licenseActive = true;
 	public modulesList = [];
 
-	constructor(private _clientHGAService: ClientHgaService) {
+	constructor(private _clientService: ClientService) {
 	}
 
 	ngOnInit() {
-		this.modulesList = this._clientHGAService.fetchHGAModules();
+		// get HGA modules
+		this.modulesList = this._clientService.getHotelGuestAppModules();
 	}
 
 	/**

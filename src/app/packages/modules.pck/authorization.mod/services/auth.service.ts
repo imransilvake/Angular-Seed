@@ -135,7 +135,7 @@ export class AuthService {
 					// get profile image
 					const imagePayload = { image: userInfo.picture };
 
-					// service: fetch profile image
+					// service: get profile image
 					const imageResponse = !userInfo.picture ?
 						of(null) :
 						this._proxyService

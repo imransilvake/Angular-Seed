@@ -16,25 +16,35 @@
 				<h6>{{ block.name }}</h6>
 				<div class="ham-row" [class.ham-no-license]="!licenseActive" *ngFor="let module of block.modules">
 					<div *ngIf="licenseActive">
-						<mat-slide-toggle class="mat-slide-toggle-1" [checked]="module['Licensed']"></mat-slide-toggle>
+						<mat-slide-toggle class="mat-slide-toggle-1" [checked]="module.data['Licensed']"></mat-slide-toggle>
 					</div>
 					<div>
-						<mat-slide-toggle class="mat-slide-toggle-1" [checked]="module['Active']"></mat-slide-toggle>
+						<mat-slide-toggle class="mat-slide-toggle-1" [checked]="module.data['Active']"></mat-slide-toggle>
 					</div>
 					<div>
-						<p>Guest Push-Notifications</p>
+						<p>{{ module.details.title }}</p>
 					</div>
 					<div>
-						<p>Send individual and automatic push notifications to your guests</p>
+						<p>{{ module.details.description }}</p>
 					</div>
 					<div class="ham-params">
 						<p>Params</p>
 					</div>
 					<div>
-						<mat-checkbox class="ham-checkbox-2" [checked]="module['Preferred']"></mat-checkbox>
+						<mat-checkbox class="ham-checkbox-2" [checked]="module.data['Preferred']"></mat-checkbox>
 					</div>
 				</div>
 			</div>
 		</ng-container>
+	</div>
+
+	<app-divider></app-divider>
+
+	<!-- Button -->
+	<div class="cd-row ham-padding-1 ham-buttons cd-right-align">
+		<div class="cd-col">
+			<button mat-button type="submit" class="ham-button ham-button-1" (click)="onClickCloseClientForm()" i18n="@@Management_Client_License_Form_Cancel_Button">Cancel</button>
+			<button mat-button type="submit" class="ham-button ham-button-1" i18n="@@Management_Client_License_Form_Save_Button">Save</button>
+		</div>
 	</div>
 </div>

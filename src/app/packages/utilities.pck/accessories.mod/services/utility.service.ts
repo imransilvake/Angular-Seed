@@ -6,13 +6,19 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
 import { SelectDefaultInterface } from '../../../core.pck/fields.mod/interfaces/select-default-interface';
 import { AppOptions, AppServices } from '../../../../../app.config';
 import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service';
+import { AuthService } from '../../../modules.pck/authorization.mod/services/auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class UtilityService {
+	public currentUser;
+
 	constructor(
 		private _proxyService: ProxyService,
-		private _i18n: I18n
+		private _i18n: I18n,
+		private _authService: AuthService
 	) {
+		// get current user info
+		this.currentUser = this._authService.currentUserState;
 	}
 
 	/**
@@ -109,9 +115,19 @@ export class UtilityService {
 	}
 
 	/**
-	 * set of all hotels
+	 * get all hotels
 	 */
 	public getHotelList() {
 		return this._proxyService.getAPI(AppServices['Utilities']['HotelList']);
+	}
+
+	/**
+	 * get country list
+	 */
+	public getCountryList() {
+		const payload = {
+			language: this.currentUser.profile.language
+		};
+		return this._proxyService.getAPI(AppServices['Utilities']['CountryList'], { queryParams: payload });
 	}
 }

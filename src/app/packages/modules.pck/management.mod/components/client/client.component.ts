@@ -51,7 +51,7 @@ export class ClientComponent implements OnDestroy {
 		this._clientService.currentUser = this._authService.currentUserState;
 
 		// client hotels list
-		this._clientService.fetchClientHotelsList();
+		this._clientService.getClientHotelsList();
 	}
 
 	ngOnDestroy() {

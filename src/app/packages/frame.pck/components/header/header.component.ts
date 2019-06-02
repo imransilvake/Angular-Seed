@@ -55,7 +55,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 			});
 
 		// listen: emergency state
-		this._emergencyService.fetchEmergencyState()
+		this._emergencyService.getEmergencyState()
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe((res) => this.emergencyState = res);
 	}

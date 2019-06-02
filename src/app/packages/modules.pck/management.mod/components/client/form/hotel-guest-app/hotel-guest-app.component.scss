@@ -29,8 +29,8 @@
 
 			&.ham-params {
 				p {
-					border-radius: 3px;
 					border: 1px solid cd-palette($cd-border, 3010);
+					border-radius: 3px;
 					color: cd-palette($cd-color, 1010);
 					display: inline-block;
 					padding: 5px 10px;
@@ -121,6 +121,38 @@
 			h6 {
 				color: cd-palette($cd-color, 1004);
 				font-style: italic;
+			}
+		}
+	}
+
+	.ham-buttons {
+		button {
+			margin-top: 15px;
+
+			&:first-child {
+				margin-right: 10px;
+			}
+		}
+	}
+
+	// media
+	@include cd-media(desktop, mini) {
+		.ham-buttons {
+			.cd-col {
+				display:flex;
+				flex-direction: column-reverse;
+
+				button {
+					width: 100%;
+
+					&:first-child {
+						margin-right: 0;
+					}
+
+					&:last-child {
+						margin-top: 10px;
+					}
+				}
 			}
 		}
 	}

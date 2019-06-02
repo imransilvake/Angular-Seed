@@ -15,10 +15,8 @@ import { ClientDefaultComponent } from './components/client/default/client-defau
 import { ClientFormComponent } from './components/client/form/client-form.component';
 import { LicenseComponent } from './components/client/form/license/license.component';
 import { FieldsModule } from '../../core.pck/fields.mod/fields.module';
-import { ClientLicenseService } from './services/client-license.service';
 import { SystemDataComponent } from './components/client/form/system-data/system-data.component';
 import { HotelGuestAppComponent } from './components/client/form/hotel-guest-app/hotel-guest-app.component';
-import { ClientHgaService } from './services/client-hga.service';
 
 @NgModule({
 	imports: [
@@ -39,9 +37,7 @@ import { ClientHgaService } from './services/client-hga.service';
 		HotelGuestAppComponent
 	],
 	providers: [
-		ClientService,
-		ClientLicenseService,
-		ClientHgaService
+		ClientService
 	]
 })
 

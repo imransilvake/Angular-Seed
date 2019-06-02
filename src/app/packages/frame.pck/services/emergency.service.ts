@@ -17,9 +17,9 @@ export class EmergencyService {
 	}
 
 	/**
-	 * fetch emergency state
+	 * get emergency state
 	 */
-	public fetchEmergencyState() {
+	public getEmergencyState() {
 		// close id
 		const closeId = 'ham-EME-01';
 

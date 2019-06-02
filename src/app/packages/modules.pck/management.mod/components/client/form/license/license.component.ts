@@ -9,7 +9,7 @@ import { SelectTypeEnum } from '../../../../../../core.pck/fields.mod/enums/sele
 import { ClientService } from '../../../../services/client.service';
 import { ClientViewInterface } from '../../../../interfaces/client-view.interface';
 import { ClientViewTypeEnum } from '../../../../enums/client-view-type.enum';
-import { ClientLicenseService } from '../../../../services/client-license.service';
+import { UtilityService } from '../../../../../../utilities.pck/accessories.mod/services/utility.service';
 
 @Component({
 	selector: 'app-license',
@@ -29,8 +29,8 @@ export class LicenseComponent implements OnInit, OnDestroy {
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
-		private _clientService: ClientService,
-		private _clientLicenseService: ClientLicenseService
+		private _utilityService: UtilityService,
+		private _clientService: ClientService
 	) {
 		// form group
 		this.formFields = new FormGroup({
@@ -88,12 +88,12 @@ export class LicenseComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		// listen: country list
-		this._clientService.fetchCountryList()
+		this._utilityService.getCountryList()
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => this.countryList = res);
 
 		// get license hotels list
-		this.licenseHotelsList = this._clientLicenseService.getLicenseList();
+		this.licenseHotelsList = this._clientService.getLicenseList();
 
 		// listen: HGA number of hotels
 		this.license.controls['HGA'].controls['NumberOfHotels'].valueChanges

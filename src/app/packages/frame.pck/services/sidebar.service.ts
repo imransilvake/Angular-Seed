@@ -9,7 +9,7 @@ import { ROUTING } from '../../../../environments/environment';
 @Injectable()
 export class SidebarService {
 	/**
-	 * fetch sidebar menu list
+	 * get sidebar menu list
 	 */
 	public getSidebarMenuList() {
 		const sidebarMenuList: SidebarInterface[] = [
