@@ -21,9 +21,9 @@ export class TableComponent implements OnInit, OnDestroy {
 	@Input() tablePagination = [5, 10, 20, 50, 100, 200];
 	@Input() templateRef;
 
-	@ViewChild(MatPaginator) paginator: MatPaginator;
-	@ViewChild(MatSort) sort: MatSort;
-	@ViewChild('filterInput') filterInput: ElementRef;
+	@ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+	@ViewChild(MatSort, { static: true }) sort: MatSort;
+	@ViewChild('filterInput', { static: false }) filterInput: ElementRef;
 
 	public allColumns = [];
 	public formFields;

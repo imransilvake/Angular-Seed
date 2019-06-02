@@ -40,8 +40,8 @@ export class AutocompleteComponent implements OnInit {
 	@Input() selectedItems: AutocompleteDefaultInterface[] = [];
 	@Output() outputList = new EventEmitter<AutocompleteDefaultInterface[] | string[]>();
 
-	@ViewChild('inputField') inputField: ElementRef;
-	@ViewChild('auto') matAutocomplete: MatAutocomplete;
+	@ViewChild('inputField', { static: false }) inputField: ElementRef;
+	@ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
 
 	ngOnInit() {
 		this.filteredData = this.control.valueChanges

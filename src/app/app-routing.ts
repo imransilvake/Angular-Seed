@@ -38,11 +38,11 @@ const ROUTES: Routes = [
 					},
 					{
 						path: ROUTING.member.title,
-						loadChildren: './packages/modules.pck/member.mod/member.module#MemberModule'
+						loadChildren: () => import('./packages/modules.pck/member.mod/member.module').then(m => m.MemberModule)
 					},
 					{
 						path: ROUTING.management.title,
-						loadChildren: './packages/modules.pck/management.mod/management.module#ManagementModule'
+						loadChildren: () => import('./packages/modules.pck/management.mod/management.module').then(m => m.ManagementModule)
 					},
 					{
 						path: ROUTING.pages.maintenance,

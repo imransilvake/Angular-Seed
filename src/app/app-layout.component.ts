@@ -14,7 +14,7 @@ import { HelperService } from './packages/utilities.pck/accessories.mod/services
 })
 
 export class AppLayoutComponent implements AfterViewInit, OnDestroy {
-	@ViewChild('topHead') topHead: ElementRef;
+	@ViewChild('topHead', { static: true }) topHead: ElementRef;
 
 	public drawerState = false;
 	public isViewDesktop = false;
