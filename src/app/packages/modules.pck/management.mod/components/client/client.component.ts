@@ -2,7 +2,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { forkJoin, Subject } from 'rxjs';
 
 // app
 import { ClientViewTypeEnum } from '../../enums/client-view-type.enum';
@@ -58,7 +58,21 @@ export class ClientComponent implements OnDestroy {
 		this._clientService.currentUser = this._authService.currentUserState;
 
 		// refresh client hotels list
-		this._clientService.clientRefreshHotelsList();
+		forkJoin({
+			hotelsList: this._clientService.clientRefreshHotelsList(),
+			hgaModules: this._clientService.clientRefreshHotelGuestAppModules()
+		}).pipe(takeUntil(this._ngUnSubscribe)).subscribe(res => {
+			const result = {
+				hotelsList: res.hotelsList,
+				hgaModules: res.hgaModules
+			};
+
+			// save to client data
+			this._clientService.clientData = result;
+
+			// emit result
+			this._clientService.clientDataEmitter.emit(result);
+		});
 
 		// refresh hga modules
 		this._clientService.clientRefreshHotelGuestAppModules();

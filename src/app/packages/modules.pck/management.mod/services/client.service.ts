@@ -1,6 +1,7 @@
 // angular
 import { EventEmitter, Injectable } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
+import { of } from 'rxjs';
 
 // app
 import TableData from '../../../../../assets/dummy/table-data';
@@ -22,8 +23,7 @@ export class ClientService {
 	 * refresh client hotels list
 	 */
 	public clientRefreshHotelsList() {
-		this.clientData = { ...this.clientData, hotelsList: TableData };
-		this.clientDataEmitter.emit(this.clientData);
+		return of(TableData);
 	}
 
 	/**
@@ -167,11 +167,9 @@ export class ClientService {
 				'Params': {}
 			}
 		];
+
 		const result = this.mapHGAModules(response);
-		if (result) {
-			this.clientData = { ...this.clientData, hgaModules: result };
-			this.clientDataEmitter.emit(this.clientData);
-		}
+		return of(result);
 	}
 
 	/**

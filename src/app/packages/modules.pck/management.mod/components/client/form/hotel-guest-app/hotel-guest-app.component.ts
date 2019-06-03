@@ -48,7 +48,7 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 				// add form modules but not on refresh
 				if (this.formFieldsModules.value.length === 1) {
 					for (let i = 1; i < this.totalNumberOfModules; i++) {
-						this.addModule();
+						this.addNewModule();
 					}
 				}
 			});
@@ -96,9 +96,9 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 	}
 
 	/**
-	 * add empty module
+	 * add new module
 	 */
-	public addModule() {
+	public addNewModule() {
 		const control = this.formFields.controls.modules;
 		control.push(HotelGuestAppComponent.moduleItems());
 	}
@@ -110,11 +110,11 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 	 * @param iIndex
 	 */
 	public getModuleIndex(mIndex, iIndex) {
-		const res = this.modulesList.map(res => res.modules.length);
+		const result = this.modulesList.map(res => res.modules.length);
 
 		// slice till current index
 		// sum array values till slice array
-		return (mIndex === 0) ? iIndex : res.slice(0, mIndex).reduce((a, b) => a + b, 0) + iIndex;
+		return (mIndex === 0) ? iIndex : result.slice(0, mIndex).reduce((a, b) => a + b, 0) + iIndex;
 	}
 
 	/**

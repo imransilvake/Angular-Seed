@@ -1,6 +1,6 @@
 // angular
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { takeUntil } from 'rxjs/operators';
+import { startWith, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 // app
@@ -25,10 +25,14 @@ export class ClientDefaultComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		// listen: get client hotels
-		this.clientHotelsList = this._clientService.clientData.hotelsList;
 		this._clientService.clientDataEmitter
-			.pipe(takeUntil(this._ngUnSubscribe))
-			.subscribe(res => this.clientHotelsList = res.hotelsList);
+			.pipe(
+				startWith(0),
+				takeUntil(this._ngUnSubscribe)
+			)
+			.subscribe(res =>
+				this.clientHotelsList = res.hotelsList || this._clientService.clientData.hotelsList
+			);
 	}
 
 	ngOnDestroy() {
