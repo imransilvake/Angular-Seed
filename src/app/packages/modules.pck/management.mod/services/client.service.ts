@@ -9,8 +9,8 @@ import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service
 @Injectable()
 export class ClientService {
 	public currentUser;
-	public clientDataEmitter: EventEmitter<any> = new EventEmitter();
 	public clientData;
+	public clientDataEmitter: EventEmitter<any> = new EventEmitter();
 
 	constructor(
 		private _proxyService: ProxyService,
@@ -21,7 +21,7 @@ export class ClientService {
 	/**
 	 * refresh client hotels list
 	 */
-	public refreshClientHotelsList() {
+	public clientRefreshHotelsList() {
 		this.clientData = { ...this.clientData, hotelsList: TableData };
 		this.clientDataEmitter.emit(this.clientData);
 	}
@@ -29,7 +29,7 @@ export class ClientService {
 	/**
 	 * get license list - HGA / HSA
 	 */
-	public getLicenseList() {
+	public clientFetchLicenseList() {
 		return [
 			{
 				id: 1,
@@ -94,7 +94,7 @@ export class ClientService {
 	 * refresh HGA modules
 	 *
 	 */
-	public refreshHotelGuestAppModules() {
+	public clientRefreshHotelGuestAppModules() {
 		const response = [
 			{
 				'ModuleID': 'HGA_GUEST_NOTIFICATIONS',

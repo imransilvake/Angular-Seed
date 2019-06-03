@@ -58,9 +58,9 @@ export class ClientComponent implements OnDestroy {
 		this._clientService.currentUser = this._authService.currentUserState;
 
 		// refresh client hotels list
-		this._clientService.refreshClientHotelsList();
+		this._clientService.clientRefreshHotelsList();
 
 		// refresh hga modules
-		this._clientService.refreshHotelGuestAppModules();
+		this._clientService.clientRefreshHotelGuestAppModules();
 	}
 }

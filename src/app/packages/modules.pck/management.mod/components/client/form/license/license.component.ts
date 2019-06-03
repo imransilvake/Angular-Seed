@@ -93,7 +93,7 @@ export class LicenseComponent implements OnInit, OnDestroy {
 			.subscribe(res => this.countryList = res);
 
 		// get license hotels list
-		this.licenseHotelsList = this._clientService.getLicenseList();
+		this.licenseHotelsList = this._clientService.clientFetchLicenseList();
 
 		// listen: HGA number of hotels
 		this.license.controls['HGA'].controls['NumberOfHotels'].valueChanges
