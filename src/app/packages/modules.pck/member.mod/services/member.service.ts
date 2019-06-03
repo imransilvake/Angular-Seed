@@ -2,6 +2,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { HttpErrorResponse } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 // store
 import { Store } from '@ngrx/store';
@@ -48,16 +49,17 @@ export class MemberService {
 		};
 
 		// service
-		this._proxyService
+		return this._proxyService
 			.postAPI(AppServices['Member']['Fetch_Profile'], { bodyParams: payload })
-			.subscribe(res => {
-				// set profile data
-				this.memberData = { ...this.memberData, profileInfo: res };
-				this.memberDataEmitter.emit(this.memberData);
+			.pipe(
+				map(res => {
+					// set last login
+					this.lastLogin.emit(res.lastLogin);
 
-				// set last login
-				this.lastLogin.emit(res.lastLogin);
-			});
+					// set profile data
+					return res;
+				})
+			)
 	}
 
 	/**

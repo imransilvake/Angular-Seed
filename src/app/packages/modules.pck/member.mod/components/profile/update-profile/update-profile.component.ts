@@ -63,12 +63,15 @@ export class UpdateProfileComponent implements OnInit, OnDestroy {
 		this._memberService.memberDataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
-				if (res && res.profileInfo) {
-					const salutation = this.salutationList.filter(item => item.id === res.profileInfo.gender);
+				if (res && res.memberProfile) {
+					// salutation
+					const salutation = this.salutationList.filter(item => item.id === res.memberProfile.gender);
+
+					// update form
 					this.salutation.setValue(...salutation);
-					this.firstName.setValue(res.profileInfo.given_name);
-					this.lastName.setValue(res.profileInfo.family_name);
-					this.email.setValue(res.profileInfo.email);
+					this.firstName.setValue(res.memberProfile.given_name);
+					this.lastName.setValue(res.memberProfile.family_name);
+					this.email.setValue(res.memberProfile.email);
 				}
 			});
 	}

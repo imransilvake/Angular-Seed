@@ -2,7 +2,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { forkJoin, Subject } from 'rxjs';
 
 // app
 import { MemberService } from '../../services/member.service';
@@ -55,6 +55,18 @@ export class ProfileComponent implements OnDestroy {
 		this._memberService.currentUser = this._authService.currentUserState;
 
 		// refresh member profile
-		this._memberService.memberRefreshProfile();
+		forkJoin({
+			memberProfile: this._memberService.memberRefreshProfile()
+		}).pipe(takeUntil(this._ngUnSubscribe)).subscribe(res => {
+			const result = {
+				memberProfile: res.memberProfile
+			};
+
+			// save to client data
+			this._memberService.memberData = result;
+
+			// emit result
+			this._memberService.memberDataEmitter.emit(result);
+		});
 	}
 }
