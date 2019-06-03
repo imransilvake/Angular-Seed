@@ -35,7 +35,7 @@ export class ClientService {
 				id: 1,
 				text: this._i18n({
 					value: '1 Hotel',
-					id: 'HGA_License_List_1'
+					id: 'Management_Client_License_List_1'
 				}),
 				value: 2
 			},
@@ -43,7 +43,7 @@ export class ClientService {
 				id: 5,
 				text: this._i18n({
 					value: '2 to 5 Hotels',
-					id: 'HGA_License_List_2_5'
+					id: 'Management_Client_License_List_2_5'
 				}),
 				value: 12
 			},
@@ -51,7 +51,7 @@ export class ClientService {
 				id: 20,
 				text: this._i18n({
 					value: '6 to 20 Hotels',
-					id: 'HGA_License_List_6_20'
+					id: 'Management_Client_License_List_6_20'
 				}),
 				value: 56
 			},
@@ -59,7 +59,7 @@ export class ClientService {
 				id: 50,
 				text: this._i18n({
 					value: '21 to 50 Hotels',
-					id: 'HGA_License_List_21_50'
+					id: 'Management_Client_License_List_21_50'
 				}),
 				value: 150
 			},
@@ -67,7 +67,7 @@ export class ClientService {
 				id: 100,
 				text: this._i18n({
 					value: '51 to 100 Hotels',
-					id: 'HGA_License_List_51_100'
+					id: 'Management_Client_License_List_51_100'
 				}),
 				value: 320
 			},
@@ -75,7 +75,7 @@ export class ClientService {
 				id: 150,
 				text: this._i18n({
 					value: '101 to 150 Hotels',
-					id: 'HGA_License_List_101_150'
+					id: 'Management_Client_License_List_101_150'
 				}),
 				value: 510
 			},
@@ -83,7 +83,7 @@ export class ClientService {
 				id: 250,
 				text: this._i18n({
 					value: '151 to 250 hotels',
-					id: 'HGA_License_List_151_250'
+					id: 'Management_Client_License_List_151_250'
 				}),
 				value: 900
 			}
@@ -188,11 +188,11 @@ export class ClientService {
 					details: {
 						title: this._i18n({
 							value: 'Guest Push Notifications',
-							id: 'Client_HGA_General_Guest_Push_Notifications_Title'
+							id: 'Management_Client_HGA_General_Guest_Push_Notifications_Title'
 						}),
 						description: this._i18n({
 							value: 'Send individual and automatic push notifications to your guests',
-							id: 'Client_HGA_General_Guest_Push_Notifications_Description'
+							id: 'Management_Client_HGA_General_Guest_Push_Notifications_Description'
 						})
 					}
 				}]
@@ -204,11 +204,11 @@ export class ClientService {
 					details: {
 						title: this._i18n({
 							value: 'Room Key Code',
-							id: 'Client_HGA_Room_KeyCode_Title'
+							id: 'Management_Client_HGA_Room_KeyCode_Title'
 						}),
 						description: this._i18n({
 							value: 'Offer your guests access to the digital room key',
-							id: 'Client_HGA_Room_KeyCode_Description'
+							id: 'Management_Client_HGA_Room_KeyCode_Description'
 						})
 					}
 				}, {
@@ -216,11 +216,11 @@ export class ClientService {
 					details: {
 						title: this._i18n({
 							value: 'Room Cleaning Status',
-							id: 'Client_HGA_Room_CleaningStatus_Title'
+							id: 'Management_Client_HGA_Room_CleaningStatus_Title'
 						}),
 						description: this._i18n({
 							value: 'Guests can see if the room is in cleaning process',
-							id: 'Client_HGA_Room_CleaningStatus_Description'
+							id: 'Management_Client_HGA_Room_CleaningStatus_Description'
 						})
 					}
 				}, {
@@ -228,11 +228,11 @@ export class ClientService {
 					details: {
 						title: this._i18n({
 							value: 'Room Emergency Button',
-							id: 'Client_HGA_Room_EmergencyButton_Title'
+							id: 'Management_Client_HGA_Room_EmergencyButton_Title'
 						}),
 						description: this._i18n({
 							value: 'Offer your Guests the possibility to send an emergency message to the reception',
-							id: 'Client_HGA_Room_EmergencyButton_Description'
+							id: 'Management_Client_HGA_Room_EmergencyButton_Description'
 						})
 					}
 				}, {
@@ -240,11 +240,11 @@ export class ClientService {
 					details: {
 						title: this._i18n({
 							value: 'Room Repair Message',
-							id: 'Client_HGA_Room_RepairMessage_Title'
+							id: 'Management_Client_HGA_Room_RepairMessage_Title'
 						}),
 						description: this._i18n({
 							value: 'Guests can inform the hotel manager about necessary room repairs',
-							id: 'Client_HGA_Room_RepairMessage_Description'
+							id: 'Management_Client_HGA_Room_RepairMessage_Description'
 						})
 					}
 				}]
@@ -256,11 +256,11 @@ export class ClientService {
 					details: {
 						title: this._i18n({
 							value: 'Hotel Deals',
-							id: 'Client_HGA_Hotel_HotelDeals_Title'
+							id: 'Management_Client_HGA_Hotel_HotelDeals_Title'
 						}),
 						description: this._i18n({
 							value: 'Inform your guests about specific offers in your hotel',
-							id: 'Client_HGA_Hotel_HotelDeals_Description'
+							id: 'Management_Client_HGA_Hotel_HotelDeals_Description'
 						})
 					}
 				}, {
@@ -268,11 +268,11 @@ export class ClientService {
 					details: {
 						title: this._i18n({
 							value: 'Hotel Details',
-							id: 'Client_HGA_Hotel_HotelDetails_Title'
+							id: 'Management_Client_HGA_Hotel_HotelDetails_Title'
 						}),
 						description: this._i18n({
 							value: 'Guests can have a direct access to all facilities of your hotel',
-							id: 'Client_HGA_Hotel_HotelDetails_Description'
+							id: 'Management_Client_HGA_Hotel_HotelDetails_Description'
 						})
 					}
 				}, {
@@ -280,11 +280,11 @@ export class ClientService {
 					details: {
 						title: this._i18n({
 							value: 'Guest Travel Details',
-							id: 'Client_HGA_Hotel_GuestTravelDetails_Title'
+							id: 'Management_Client_HGA_Hotel_GuestTravelDetails_Title'
 						}),
 						description: this._i18n({
 							value: 'Guests can see their stay details',
-							id: 'Client_HGA_Hotel_GuestTravelDetails_Description'
+							id: 'Management_Client_HGA_Hotel_GuestTravelDetails_Description'
 						})
 					}
 				}]
@@ -296,11 +296,11 @@ export class ClientService {
 					details: {
 						title: this._i18n({
 							value: 'Hotel Magazine',
-							id: 'Client_HGA_Hotel_HotelMagazine_Title'
+							id: 'Management_Client_HGA_Hotel_HotelMagazine_Title'
 						}),
 						description: this._i18n({
 							value: 'Guests can read your digital hotel magazine',
-							id: 'Client_HGA_Hotel_HotelMagazine_Description'
+							id: 'Management_Client_HGA_Hotel_HotelMagazine_Description'
 						})
 					}
 				}]
@@ -312,11 +312,11 @@ export class ClientService {
 					details: {
 						title: this._i18n({
 							value: 'TrustYou Hotel Ratings',
-							id: 'Client_HGA_Hotel_TrustYouHotelRatings_Title'
+							id: 'Management_Client_HGA_Hotel_TrustYouHotelRatings_Title'
 						}),
 						description: this._i18n({
 							value: 'Guest can leave a hotel rating during stay',
-							id: 'Client_HGA_Hotel_TrustYouHotelRatings_Description'
+							id: 'Management_Client_HGA_Hotel_TrustYouHotelRatings_Description'
 						})
 					}
 				}]
