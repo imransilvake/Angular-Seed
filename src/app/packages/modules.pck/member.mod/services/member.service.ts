@@ -22,9 +22,10 @@ import { ChangePasswordInterface } from '../interfaces/change-password.interface
 @Injectable({ providedIn: 'root' })
 export class MemberService {
 	public currentUser;
-	public profileImageUpdate: EventEmitter<boolean> = new EventEmitter();
-	public memberData: EventEmitter<any> = new EventEmitter();
+	public memberData;
+	public memberDataEmitter: EventEmitter<any> = new EventEmitter();
 	public lastLogin: EventEmitter<string> = new EventEmitter();
+	public profileImageUpdate: EventEmitter<boolean> = new EventEmitter();
 
 	constructor(
 		private _loadingAnimationService: LoadingAnimationService,
@@ -37,9 +38,9 @@ export class MemberService {
 	}
 
 	/**
-	 * fetch user profile
+	 * refresh user profile
 	 */
-	public memberFetchProfile() {
+	public memberRefreshProfile() {
 		// payload
 		const payload = {
 			accessToken: this.currentUser.credentials.accessToken,
@@ -51,7 +52,8 @@ export class MemberService {
 			.postAPI(AppServices['Member']['Fetch_Profile'], { bodyParams: payload })
 			.subscribe(res => {
 				// set profile data
-				this.memberData.emit({ profileInfo: res });
+				this.memberData = { ...this.memberData, profileInfo: res };
+				this.memberDataEmitter.emit(this.memberData);
 
 				// set last login
 				this.lastLogin.emit(res.lastLogin);

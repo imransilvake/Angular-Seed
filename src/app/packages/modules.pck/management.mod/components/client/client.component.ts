@@ -17,6 +17,7 @@ import { AuthService } from '../../../authorization.mod/services/auth.service';
 export class ClientComponent implements OnDestroy {
 	public pageView: ClientViewTypeEnum = ClientViewTypeEnum.DEFAULT;
 	public hotelId;
+
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
@@ -26,6 +27,12 @@ export class ClientComponent implements OnDestroy {
 	) {
 		// initialize reload system
 		this.initReloadSystem();
+	}
+
+	ngOnDestroy() {
+		// remove subscriptions
+		this._ngUnSubscribe.next();
+		this._ngUnSubscribe.complete();
 	}
 
 	/**
@@ -50,13 +57,10 @@ export class ClientComponent implements OnDestroy {
 		// set current user state
 		this._clientService.currentUser = this._authService.currentUserState;
 
-		// client hotels list
-		this._clientService.getClientHotelsList();
-	}
+		// refresh client hotels list
+		this._clientService.refreshClientHotelsList();
 
-	ngOnDestroy() {
-		// remove subscriptions
-		this._ngUnSubscribe.next();
-		this._ngUnSubscribe.complete();
+		// refresh hga modules
+		this._clientService.refreshHotelGuestAppModules();
 	}
 }

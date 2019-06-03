@@ -26,6 +26,12 @@ export class ProfileComponent implements OnDestroy {
 		this.initReloadSystem();
 	}
 
+	ngOnDestroy() {
+		// remove subscriptions
+		this._ngUnSubscribe.next();
+		this._ngUnSubscribe.complete();
+	}
+
 	/**
 	 * initialize reload system
 	 */
@@ -48,13 +54,7 @@ export class ProfileComponent implements OnDestroy {
 		// set current user state
 		this._memberService.currentUser = this._authService.currentUserState;
 
-		// member profile data
-		this._memberService.memberFetchProfile();
-	}
-
-	ngOnDestroy() {
-		// remove subscriptions
-		this._ngUnSubscribe.next();
-		this._ngUnSubscribe.complete();
+		// refresh member profile
+		this._memberService.memberRefreshProfile();
 	}
 }
