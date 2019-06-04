@@ -5,62 +5,65 @@
 	</div>
 
 	<form [formGroup]="formFields" (ngSubmit)="onSubmitForm()" (keyup.enter)="isFormValid && onSubmitForm()">
-		<!-- Columns -->
-		<div class="ham-row ham-border" [class.ham-no-license]="!licenseActive">
-			<h6 i18n="@@Management_Client_HGA_Column_License" *ngIf="licenseActive">License</h6>
-			<h6 i18n="@@Management_Client_HGA_Column_Active">Active</h6>
-			<h6 i18n="@@Management_Client_HGA_Column_Module">Module</h6>
-			<h6 i18n="@@Management_Client_HGA_Column_Description">Description</h6>
-			<h6></h6>
-			<h6 i18n="@@Management_Client_HGA_Column_Preferred">Preferred</h6>
-		</div>
+		<div class="ham-form">
+			<!-- Columns -->
+			<div class="ham-row ham-border" [class.ham-no-license]="!licenseActive">
+				<h6 i18n="@@Management_Client_HGA_Column_License" *ngIf="licenseActive">License</h6>
+				<h6 i18n="@@Management_Client_HGA_Column_Active">Active</h6>
+				<h6 i18n="@@Management_Client_HGA_Column_Module">Module</h6>
+				<h6 i18n="@@Management_Client_HGA_Column_Description">Description</h6>
+				<h6></h6>
+				<h6 i18n="@@Management_Client_HGA_Column_Preferred">Preferred</h6>
+			</div>
 
-		<!-- Details -->
-		<div class="ham-details">
-			<ng-container *ngFor="let block of modulesList; let mIndex=index;">
-				<div class="ham-blocks ham-hotel-room">
-					<h6 *ngIf="block.modules.length > 0">{{ block.name }}</h6>
-					<div class="ham-row" [class.ham-no-license]="!licenseActive" *ngFor="let module of block.modules; let iIndex=index;">
-						<!-- License -->
-						<div class="ham-license" *ngIf="licenseActive">
-							<mat-slide-toggle
-								class="mat-slide-toggle-1"
-								(change)="onChangeLicense(mIndex, iIndex)"
-								[formControl]="modules.controls[getModuleIndex(mIndex, iIndex)].get('Licensed')">
-							</mat-slide-toggle>
-						</div>
+			<!-- Details -->
+			<div class="ham-details">
+				<ng-container *ngFor="let block of modulesList; let mIndex=index;">
+					<div class="ham-blocks ham-hotel-room">
+						<h6 *ngIf="block.modules.length > 0">{{ block.name }}</h6>
+						<div class="ham-row" [class.ham-no-license]="!licenseActive" *ngFor="let module of block.modules; let iIndex=index;">
+							<!-- License -->
+							<div class="ham-license" *ngIf="licenseActive">
+								<mat-slide-toggle
+									class="mat-slide-toggle-1"
+									(change)="onChangeLicense(mIndex, iIndex)"
+									[formControl]="modules.controls[getModuleIndex(mIndex, iIndex)].get('Licensed')">
+								</mat-slide-toggle>
+							</div>
 
-						<!-- Active -->
-						<div class="ham-active">
-							<mat-slide-toggle
-								class="mat-slide-toggle-1"
-								[formControl]="modules.controls[getModuleIndex(mIndex, iIndex)].get('Active')">
-							</mat-slide-toggle>
-						</div>
+							<!-- Active -->
+							<div class="ham-active">
+								<mat-slide-toggle
+									class="mat-slide-toggle-1"
+									[formControl]="modules.controls[getModuleIndex(mIndex, iIndex)].get('Active')">
+								</mat-slide-toggle>
+							</div>
 
-						<!-- Title -->
-						<div class="ham-title"><p>{{ module.details.title }}</p></div>
+							<!-- Title -->
+							<div class="ham-title"><p>{{ module.details.title }}</p></div>
 
-						<!-- Description -->
-						<div class="ham-desc"><p>{{ module.details.description }}</p></div>
+							<!-- Description -->
+							<div class="ham-desc"><p>{{ module.details.description }}</p></div>
 
-						<!-- Params -->
-						<div class="ham-params">
-							<p i18n="@@Management_Client_HGA_Form_Params">Params</p>
-						</div>
+							<!-- Params -->
+							<div class="ham-params">
+								<p i18n="@@Management_Client_HGA_Form_Params">Params</p>
+							</div>
 
-						<!-- Preferred -->
-						<div class="ham-preferred" *ngIf="(mIndex + iIndex) !== 0">
-							<mat-checkbox
-								class="ham-checkbox-2"
-								(change)="onChangePreferred(mIndex, iIndex)"
-								[formControl]="modules.controls[getModuleIndex(mIndex, iIndex)].get('Preferred')">
-							</mat-checkbox>
+							<!-- Preferred -->
+							<div class="ham-preferred" [class.cd-hidden]="(mIndex + iIndex) === 0">
+								<mat-checkbox
+									class="ham-checkbox-2"
+									(change)="onChangePreferred(mIndex, iIndex)"
+									[formControl]="modules.controls[getModuleIndex(mIndex, iIndex)].get('Preferred')">
+								</mat-checkbox>
+							</div>
 						</div>
 					</div>
-				</div>
-			</ng-container>
+				</ng-container>
+			</div>
 		</div>
+
 
 		<app-divider></app-divider>
 

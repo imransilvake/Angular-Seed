@@ -13,126 +13,134 @@
 		}
 	}
 
-	.ham-row {
-		display: flex;
+	.ham-form {
+		overflow: auto;
 
-		&:not(:last-child) {
-			margin-bottom: 6px;
-		}
-
-		&.ham-border {
-			border-bottom: 1px solid cd-palette($cd-border, 3004);
-			border-top: 1px solid cd-palette($cd-border, 3004);
-			padding-bottom: 5px;
-			padding-top: 5px;
-		}
-
-		h6, div {
-			color: cd-palette($cd-color, 1001, .8);
-
-			&:not(div) {
-				color: cd-palette($cd-color, 1001, .8);
-				font-weight: cd-fontWeight(700);
-			}
-
-			&:not(h6) {
-				padding-right: 15px;
-			}
-
-			&.ham-params {
-				p {
-					border: 1px solid cd-palette($cd-border, 3010);
-					border-radius: 3px;
-					color: cd-palette($cd-color, 1010);
-					display: inline-block;
-					padding: 5px 10px;
-				}
-			}
-		}
-
-		&.ham-no-license {
-			h6, div {
-				&:first-child {
-					min-width: 80px;
-					width: 10%;
-				}
-
-				&:nth-of-type(2) {
-					min-width: 125px;
-					width: 25%;
-				}
-
-				&:nth-of-type(3) {
-					min-width: 175px;
-					width: 40%;
-				}
-
-				&:nth-of-type(4) {
-					min-width: 100px;
-					width: 15%;
-				}
-
-				&:nth-of-type(5) {
-					margin-bottom: 0;
-					min-width: 80px;
-					width: 10%;
-				}
-			}
-		}
-
-		&:not(.ham-no-license) {
-			h6, div {
-				&:first-child {
-					min-width: 80px;
-					width: 10%;
-				}
-
-				&:nth-of-type(2) {
-					min-width: 80px;
-					width: 10%;
-				}
-
-				&:nth-of-type(3) {
-					min-width: 125px;
-					width: 20%;
-				}
-
-				&:nth-of-type(4) {
-					min-width: 175px;
-					width: 35%;
-				}
-
-				&:nth-of-type(5) {
-					min-width: 100px;
-					width: 15%;
-				}
-
-				&:nth-of-type(6) {
-					margin-bottom: 0;
-					min-width: 80px;
-					width: 10%;
-				}
-			}
-		}
-	}
-
-	.ham-details {
-		margin-top: 10px;
-
-		.ham-blocks {
-			.ham-row {
-				&:nth-of-type(1) {
-					margin-top: 5px;
-				}
-			}
+		.ham-row {
+			display: flex;
 
 			&:not(:last-child) {
-				margin-bottom: 20px;
+				margin-bottom: 6px;
 			}
 
-			h6 {
-				color: cd-palette($cd-color, 1004);
-				font-style: italic;
+			&.ham-border {
+				border-bottom: 1px solid cd-palette($cd-border, 3004);
+				border-top: 1px solid cd-palette($cd-border, 3004);
+				padding-bottom: 5px;
+				padding-top: 5px;
+			}
+
+			h6, div {
+				color: cd-palette($cd-color, 1001, .8);
+
+				&:not(div) {
+					color: cd-palette($cd-color, 1001, .8);
+					font-weight: cd-fontWeight(700);
+				}
+
+				&:not(h6) {
+					padding-right: 15px;
+				}
+
+				&.ham-params {
+					p {
+						border: 1px solid cd-palette($cd-border, 3010);
+						border-radius: 3px;
+						color: cd-palette($cd-color, 1010);
+						display: inline-block;
+						padding: 5px 10px;
+					}
+				}
+			}
+
+			&.ham-no-license {
+				min-width: (80 + 125 + 175 + 100 + 80) + px;
+
+				h6, div {
+					&:first-child {
+						min-width: 80px;
+						width: 10%;
+					}
+
+					&:nth-of-type(2) {
+						min-width: 125px;
+						width: 25%;
+					}
+
+					&:nth-of-type(3) {
+						min-width: 175px;
+						width: 40%;
+					}
+
+					&:nth-of-type(4) {
+						min-width: 100px;
+						width: 15%;
+					}
+
+					&:nth-of-type(5) {
+						margin-bottom: 0;
+						min-width: 80px;
+						width: 10%;
+					}
+				}
+			}
+
+			&:not(.ham-no-license) {
+				min-width: (80 + 80 + 125 + 175 + 100 + 80) + px;
+
+				h6, div {
+					&:first-child {
+						min-width: 80px;
+						width: 10%;
+					}
+
+					&:nth-of-type(2) {
+						min-width: 80px;
+						width: 10%;
+					}
+
+					&:nth-of-type(3) {
+						min-width: 125px;
+						width: 20%;
+					}
+
+					&:nth-of-type(4) {
+						min-width: 175px;
+						width: 35%;
+					}
+
+					&:nth-of-type(5) {
+						min-width: 100px;
+						width: 15%;
+					}
+
+					&:nth-of-type(6) {
+						margin-bottom: 0;
+						min-width: 80px;
+						width: 10%;
+					}
+				}
+			}
+		}
+
+		.ham-details {
+			margin-top: 10px;
+
+			.ham-blocks {
+				.ham-row {
+					&:nth-of-type(1) {
+						margin-top: 5px;
+					}
+				}
+
+				&:not(:last-child) {
+					margin-bottom: 20px;
+				}
+
+				h6 {
+					color: cd-palette($cd-color, 1004);
+					font-style: italic;
+				}
 			}
 		}
 	}
