@@ -50,7 +50,7 @@
 						</div>
 
 						<!-- Preferred -->
-						<div class="ham-preferred">
+						<div class="ham-preferred" *ngIf="(mIndex + iIndex) !== 0">
 							<mat-checkbox
 								class="ham-checkbox-2"
 								(change)="onChangePreferred(mIndex, iIndex)"

@@ -26,6 +26,7 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 	public formFields;
 	public modulesList = [];
 	public licenseActive = true;
+	public formValid = false;
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
@@ -94,7 +95,7 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 	}
 
 	get isFormValid() {
-		return this.formFields.valid;
+		return this.formValid;
 	}
 
 	/**
@@ -204,6 +205,7 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 		const active = this.modules.controls[idx].get('Active');
 		const preferred = this.modules.controls[idx].get('Preferred');
 
+		// validate license
 		if (licensedValue) {
 			// set active & preferred
 			active.enable();
@@ -212,8 +214,12 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 			// unset active & preferred
 			active.disable();
 			preferred.disable();
-			preferred.setValue(false);
+			preferred.setValue(0);
 		}
+
+		// validate form
+		const activeModules = this.modules.value.filter(module => module.Licensed);
+		this.formValid = activeModules.length >= 1;
 	}
 
 	/**
@@ -231,7 +237,7 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 
 		// check all current license preferred value
 		if (count > 2 && preferredValue) {
-			preferred.setValue(false);
+			preferred.setValue(0);
 		}
 	}
 
