@@ -100,7 +100,7 @@ export class ClientService {
 				'ModuleID': 'HGA_GUEST_NOTIFICATIONS',
 				'Licensed': true,
 				'Active': true,
-				'Preferred': 1,
+				'Preferred': 0,
 				'Params': {}
 			},
 			{
