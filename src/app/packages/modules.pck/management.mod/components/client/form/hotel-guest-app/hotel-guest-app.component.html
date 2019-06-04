@@ -20,13 +20,13 @@
 							<mat-slide-toggle
 								class="mat-slide-toggle-1"
 								(change)="onChangeLicense(mIndex, iIndex)"
-								[formControl]="formFieldsModules.controls[getModuleIndex(mIndex, iIndex)].get('Licensed')">
+								[formControl]="modules.controls[getModuleIndex(mIndex, iIndex)].get('Licensed')">
 							</mat-slide-toggle>
 						</div>
 						<div>
 							<mat-slide-toggle
 								class="mat-slide-toggle-1"
-								[formControl]="formFieldsModules.controls[getModuleIndex(mIndex, iIndex)].get('Active')">
+								[formControl]="modules.controls[getModuleIndex(mIndex, iIndex)].get('Active')">
 							</mat-slide-toggle>
 						</div>
 						<div>
@@ -42,7 +42,7 @@
 							<mat-checkbox
 								class="ham-checkbox-2"
 								(change)="onChangePreferred(mIndex, iIndex)"
-								[formControl]="formFieldsModules.controls[getModuleIndex(mIndex, iIndex)].get('Preferred')">
+								[formControl]="modules.controls[getModuleIndex(mIndex, iIndex)].get('Preferred')">
 							</mat-checkbox>
 						</div>
 					</div>

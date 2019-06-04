@@ -8,6 +8,7 @@ import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { ClientViewInterface } from '../../../../interfaces/client-view.interface';
 import { ClientViewTypeEnum } from '../../../../enums/client-view-type.enum';
 import { ClientService } from '../../../../services/client.service';
+import { HelperService } from '../../../../../../utilities.pck/accessories.mod/services/helper.service';
 
 @Component({
 	selector: 'app-hotel-guest-app',
@@ -48,15 +49,17 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 				this.modulesList = res.hgaModules || this._clientService.clientData.hgaModules;
 
 				// not on refresh (header)
-				if (this.formFieldsModules.value.length === 1) {
-					// refactor
-					const modules = [];
-					this.modulesList.forEach(module => modules.push(...module.modules));
+				if (this.modules.value.length === 1) {
+					// flat modules
+					const modules = HelperService.flatNestedArrays(this.modulesList.map(block => block.modules));
+
+					// count modules length
+					const modulesCount = modules.length;
 
 					// add & update modules
 					// update: 0
 					// add: 1-9
-					for (let i = 0; i < this.totalNumberOfModules; i++) {
+					for (let i = 0; i < modulesCount; i++) {
 						this.updateAndAddModule(modules[i], i);
 					}
 				}
@@ -72,25 +75,12 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 	/**
 	 * getters
 	 */
-	get totalNumberOfModules() {
-		return this.modulesList
-			.map(res => res.modules.length)
-			.reduce((a, b) => a + b, 0);
-	}
-
-	get formFieldsModules() {
+	get modules() {
 		return this.formFields.controls.modules;
 	}
 
 	get isFormValid() {
 		return this.formFields.valid;
-	}
-
-	/**
-	 * on submit form
-	 */
-	public onSubmitForm() {
-		console.log(this.formFields.value);
 	}
 
 	/**
@@ -150,10 +140,10 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 	 */
 	public onChangeLicense(mIndex, iIndex) {
 		const idx = this.getModuleIndex(mIndex, iIndex);
-		const licensed = this.formFieldsModules.controls[idx].get('Licensed');
+		const licensed = this.modules.controls[idx].get('Licensed');
 		const licensedValue = licensed.value;
-		const active = this.formFieldsModules.controls[idx].get('Active');
-		const preferred = this.formFieldsModules.controls[idx].get('Preferred');
+		const active = this.modules.controls[idx].get('Active');
+		const preferred = this.modules.controls[idx].get('Preferred');
 
 		if (licensedValue) {
 			// set active & preferred
@@ -175,7 +165,7 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 	 */
 	public onChangePreferred(mIndex, iIndex) {
 		const idx = this.getModuleIndex(mIndex, iIndex);
-		const preferred = this.formFieldsModules.controls[idx].get('Preferred');
+		const preferred = this.modules.controls[idx].get('Preferred');
 		const preferredValue = preferred.value;
 		const modulesList = this.formFields.controls.modules.value;
 		const count = modulesList.filter(module => module.Licensed && (module.Preferred || module.Preferred.value)).length;
@@ -184,6 +174,13 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 		if (count > 2 && preferredValue) {
 			preferred.setValue(false);
 		}
+	}
+
+	/**
+	 * on submit form
+	 */
+	public onSubmitForm() {
+		console.log(this.formFields.value);
 	}
 
 	/**

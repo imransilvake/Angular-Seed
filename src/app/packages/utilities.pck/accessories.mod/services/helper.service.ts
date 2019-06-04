@@ -168,4 +168,13 @@ export class HelperService {
 	public static getFirstLetter(value: string) {
 		return value.match(/\b\w/g).join('');
 	}
+
+	/**
+	 * flat nested arrays
+	 *
+	 * @param array
+	 */
+	public static flatNestedArrays(array: any) {
+		return [].concat(...array);
+	}
 }
