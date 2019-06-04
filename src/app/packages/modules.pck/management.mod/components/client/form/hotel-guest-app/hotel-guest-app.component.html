@@ -20,8 +20,8 @@
 			<div class="ham-details">
 				<ng-container *ngFor="let block of modulesList; let mIndex=index;">
 					<div class="ham-blocks ham-hotel-room">
-						<h6 *ngIf="block.modules.length > 0">{{ block.name }}</h6>
-						<div class="ham-row" [class.ham-no-license]="!licenseActive" *ngFor="let module of block.modules; let iIndex=index;">
+						<h6 *ngIf="block['modules'].length > 0">{{ block.name }}</h6>
+						<div class="ham-row" [class.ham-no-license]="!licenseActive" *ngFor="let module of block['modules']; let iIndex=index;">
 							<!-- License -->
 							<div class="ham-license" *ngIf="licenseActive">
 								<mat-slide-toggle
