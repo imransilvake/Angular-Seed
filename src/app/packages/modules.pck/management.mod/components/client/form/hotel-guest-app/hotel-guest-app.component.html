@@ -19,15 +19,14 @@
 						<div *ngIf="licenseActive">
 							<mat-slide-toggle
 								class="mat-slide-toggle-1"
-								[formControl]="formFieldsModules.controls[getModuleIndex(mIndex, iIndex)].get('License')"
-								[checked]="module.data['Licensed']">
+								(change)="onChangeLicense(mIndex, iIndex)"
+								[formControl]="formFieldsModules.controls[getModuleIndex(mIndex, iIndex)].get('Licensed')">
 							</mat-slide-toggle>
 						</div>
 						<div>
 							<mat-slide-toggle
 								class="mat-slide-toggle-1"
-								[formControl]="formFieldsModules.controls[getModuleIndex(mIndex, iIndex)].get('Active')"
-								[checked]="module.data['Active']">
+								[formControl]="formFieldsModules.controls[getModuleIndex(mIndex, iIndex)].get('Active')">
 							</mat-slide-toggle>
 						</div>
 						<div>
@@ -42,8 +41,8 @@
 						<div>
 							<mat-checkbox
 								class="ham-checkbox-2"
-								[formControl]="formFieldsModules.controls[getModuleIndex(mIndex, iIndex)].get('Preferred')"
-								[checked]="module.data['Preferred']">
+								(change)="onChangePreferred(mIndex, iIndex)"
+								[formControl]="formFieldsModules.controls[getModuleIndex(mIndex, iIndex)].get('Preferred')">
 							</mat-checkbox>
 						</div>
 					</div>

@@ -23,13 +23,15 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 	public licenseActive = true;
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
-	constructor(
-		private _clientService: ClientService
-	) {
+	constructor(private _clientService: ClientService) {
 		// form fields
 		this.formFields = new FormGroup({
 			modules: new FormArray([
-				HotelGuestAppComponent.moduleItems()
+				HotelGuestAppComponent.moduleItems({
+					Licensed: false,
+					Active: false,
+					Preferred: 0
+				})
 			])
 		});
 	}
@@ -45,10 +47,21 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 				// module list
 				this.modulesList = res.hgaModules || this._clientService.clientData.hgaModules;
 
-				// add form modules but not on refresh
+				// not on refresh (header)
 				if (this.formFieldsModules.value.length === 1) {
-					for (let i = 1; i < this.totalNumberOfModules; i++) {
-						this.addNewModule();
+					// refactor
+					const modules = [];
+					this.modulesList.forEach(res => modules.push(...res.modules));
+
+					// add & update modules
+					// update: 0
+					// add: 1-9
+					for (let i = 0; i < this.totalNumberOfModules; i++) {
+						if (i === 0) {
+							this.updateAndAddModule(modules[i], 0)
+						} else {
+							this.updateAndAddModule(modules[i], 1);
+						}
 					}
 				}
 			});
@@ -86,21 +99,37 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 
 	/**
 	 * list of module items
+	 *
+	 * @param result
 	 */
-	public static moduleItems() {
+	public static moduleItems(result) {
 		return new FormGroup({
-			License: new FormControl(false),
-			Active: new FormControl(false),
-			Preferred: new FormControl(false)
+			Licensed: new FormControl(result.Licensed),
+			Active: new FormControl(result.Active),
+			Preferred: new FormControl(result.Preferred)
 		});
 	}
 
 	/**
-	 * add new module
+	 * update & add module
+	 *
+	 * @param result
+	 * @param type (0 = update | 1 = add)
 	 */
-	public addNewModule() {
+	public updateAndAddModule(result: any, type: number) {
 		const control = this.formFields.controls.modules;
-		control.push(HotelGuestAppComponent.moduleItems());
+		const output = {
+			Licensed: result.data.Licensed,
+			Active: { value: result.data.Active, disabled: !result.data.Licensed },
+			Preferred: { value: result.data.Preferred, disabled: !result.data.Licensed },
+		};
+
+		// update & add form fields
+		if (type === 0) {
+			control.at(0).patchValue(output);
+		} else {
+			control.push(HotelGuestAppComponent.moduleItems(output));
+		}
 	}
 
 	/**
@@ -115,6 +144,50 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 		// slice till current index
 		// sum array values till slice array
 		return (mIndex === 0) ? iIndex : result.slice(0, mIndex).reduce((a, b) => a + b, 0) + iIndex;
+	}
+
+	/**
+	 * on change license
+	 *
+	 * @param mIndex
+	 * @param iIndex
+	 */
+	public onChangeLicense(mIndex, iIndex) {
+		const idx = this.getModuleIndex(mIndex, iIndex);
+		const licensed = this.formFieldsModules.controls[idx].get('Licensed');
+		const licensedValue = licensed.value;
+		const active = this.formFieldsModules.controls[idx].get('Active');
+		const preferred = this.formFieldsModules.controls[idx].get('Preferred');
+
+		if (licensedValue) {
+			// set active & preferred
+			active.enable();
+			preferred.enable();
+		} else {
+			// unset active & preferred
+			active.disable();
+			preferred.disable();
+			preferred.setValue(false);
+		}
+	}
+
+	/**
+	 * on change preferred
+	 *
+	 * @param mIndex
+	 * @param iIndex
+	 */
+	public onChangePreferred(mIndex, iIndex) {
+		const idx = this.getModuleIndex(mIndex, iIndex);
+		const preferred = this.formFieldsModules.controls[idx].get('Preferred');
+		const preferredValue = preferred.value;
+		const modulesList = this.formFields.controls.modules.value;
+		const count = modulesList.filter(module => module.Licensed && (module.Preferred || module.Preferred.value)).length;
+
+		// check all current license preferred value
+		if (count > 2 && preferredValue) {
+			preferred.setValue(false);
+		}
 	}
 
 	/**

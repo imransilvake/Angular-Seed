@@ -36,4 +36,8 @@
 			}
 		}
 	}
+
+	&.mat-checkbox-disabled {
+		opacity: .6;
+	}
 }
