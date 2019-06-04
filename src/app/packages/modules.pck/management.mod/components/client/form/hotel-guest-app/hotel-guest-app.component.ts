@@ -124,6 +124,7 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 		// dialog service
 		if (this.hgaState.value) {
 			this._dialogService.showDialog(dialogPayload)
+				.pipe(takeUntil(this._ngUnSubscribe))
 				.subscribe(res => {
 					this.hgaState.setValue(res);
 
@@ -156,18 +157,23 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 	 * @param type (0 = update | 1-9 = add)
 	 */
 	public updateAndAddModule(result: any, type: number) {
-		const control = this.formFields.controls.modules;
 		const output = {
 			Licensed: result.data.Licensed,
-			Active: { value: result.data.Active, disabled: !result.data.Licensed },
-			Preferred: { value: result.data.Preferred, disabled: !result.data.Licensed },
+			Active: result.data.Active,
+			Preferred: result.data.Preferred
 		};
 
 		// update & add form fields
 		if (type === 0) {
-			control.at(0).patchValue(output);
+			this.modules.at(type).setValue(output);
 		} else {
-			control.push(HotelGuestAppComponent.moduleItems(output));
+			this.modules.push(HotelGuestAppComponent.moduleItems(output));
+		}
+
+		// disable fields
+		if (!this.modules.at(type).get('Licensed').value) {
+			this.modules.at(type).get('Active').disable();
+			this.modules.at(type).get('Preferred').disable();
 		}
 	}
 

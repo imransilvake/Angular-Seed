@@ -127,7 +127,7 @@ export class ClientService {
 			{
 				'ModuleID': 'HGA_ROOM_REPAIR_MESSAGE',
 				'Licensed': false,
-				'Active': false,
+				'Active': true,
 				'Preferred': 0,
 				'Params': {}
 			},
