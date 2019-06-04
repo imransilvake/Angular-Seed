@@ -1,6 +1,18 @@
 @import 'main';
 
 .ham-hotel-guest-app {
+	.ham-state {
+		align-items: center;
+		display: flex;
+		justify-content: flex-end;
+		margin: 0 0 10px;
+
+		p {
+			color: cd-palette($cd-color, 1004);
+			margin-right: 20px;
+		}
+	}
+
 	.ham-row {
 		display: flex;
 

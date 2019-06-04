@@ -3,12 +3,16 @@ import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/cor
 import { startWith, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { I18n } from '@ngx-translate/i18n-polyfill';
 
 // app
 import { ClientViewInterface } from '../../../../interfaces/client-view.interface';
 import { ClientViewTypeEnum } from '../../../../enums/client-view-type.enum';
 import { ClientService } from '../../../../services/client.service';
 import { HelperService } from '../../../../../../utilities.pck/accessories.mod/services/helper.service';
+import { DialogService } from '../../../../../../utilities.pck/dialog.mod/services/dialog.service';
+import { DialogTypeEnum } from '../../../../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
+import { LoadingAnimationService } from '../../../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 
 @Component({
 	selector: 'app-hotel-guest-app',
@@ -24,9 +28,15 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 	public licenseActive = true;
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
-	constructor(private _clientService: ClientService) {
+	constructor(
+		private _clientService: ClientService,
+		private _dialogService: DialogService,
+		private _loadingAnimationService: LoadingAnimationService,
+		private _i18n: I18n
+	) {
 		// form fields
 		this.formFields = new FormGroup({
+			hgaState: new FormControl(false),
 			modules: new FormArray([
 				HotelGuestAppComponent.moduleItems({
 					Licensed: false,
@@ -75,12 +85,55 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 	/**
 	 * getters
 	 */
+	get hgaState() {
+		return this.formFields.get('hgaState');
+	}
+
 	get modules() {
 		return this.formFields.controls.modules;
 	}
 
 	get isFormValid() {
 		return this.formFields.valid;
+	}
+
+	/**
+	 * validate HGA state
+	 */
+	public onChangeHGAState() {
+		// payload
+		const dialogPayload = {
+			type: DialogTypeEnum.CONFIRMATION,
+			payload: {
+				icon: 'dialog_confirmation',
+				title: this._i18n({ value: 'Title: HGA Activation Confirmation', id: 'HGA_Activation_Title' }),
+				message: this._i18n({ value: 'Description: HGA Activation Confirmation', id: 'HGA_Activation_Description' }),
+				buttonTexts: [
+					this._i18n({
+						value: 'Button - OK',
+						id: 'Common_Button_OK'
+					}),
+					this._i18n({
+						value: 'Button - Cancel',
+						id: 'Common_Button_Cancel'
+					}),
+				]
+			}
+		};
+
+		// dialog service
+		if (this.hgaState.value) {
+			this._dialogService.showDialog(dialogPayload)
+				.subscribe(res => {
+					this.hgaState.setValue(res);
+
+					// update
+					if (res) { }
+
+					// stop loading animation
+					this._loadingAnimationService.stopLoadingAnimation();
+				});
+		}
 	}
 
 	/**

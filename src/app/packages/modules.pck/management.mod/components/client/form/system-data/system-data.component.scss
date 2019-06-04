@@ -1,6 +1,8 @@
 @import 'main';
 
 .ham-system-data {
+	margin-top: 10px;
+
 	.cd-row {
 		&:not(:last-child) {
 			margin-bottom: 20px;

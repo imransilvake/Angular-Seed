@@ -1,13 +1,18 @@
 <div class="ham-hotel-guest-app">
+	<div class="ham-state" *ngIf="licenseActive">
+		<p i18n="@@Management_Client_HGA_Toggle">HotelManager can activate / deactivate licensed modules too</p>
+		<mat-slide-toggle class="mat-slide-toggle-1" (change)="onChangeHGAState()" [formControl]="hgaState"></mat-slide-toggle>
+	</div>
+
 	<form [formGroup]="formFields" (ngSubmit)="onSubmitForm()" (keyup.enter)="isFormValid && onSubmitForm()">
 		<!-- Columns -->
 		<div class="ham-row ham-border" [class.ham-no-license]="!licenseActive">
-			<h6 *ngIf="licenseActive">License</h6>
-			<h6>Active</h6>
-			<h6>Module</h6>
-			<h6>Description</h6>
+			<h6 i18n="@@Management_Client_HGA_Column_License" *ngIf="licenseActive">License</h6>
+			<h6 i18n="@@Management_Client_HGA_Column_Active">Active</h6>
+			<h6 i18n="@@Management_Client_HGA_Column_Module">Module</h6>
+			<h6 i18n="@@Management_Client_HGA_Column_Description">Description</h6>
 			<h6></h6>
-			<h6>Preferred</h6>
+			<h6 i18n="@@Management_Client_HGA_Column_Preferred">Preferred</h6>
 		</div>
 
 		<!-- Details -->
@@ -16,29 +21,36 @@
 				<div class="ham-blocks ham-hotel-room">
 					<h6 *ngIf="block.modules.length > 0">{{ block.name }}</h6>
 					<div class="ham-row" [class.ham-no-license]="!licenseActive" *ngFor="let module of block.modules; let iIndex=index;">
-						<div *ngIf="licenseActive">
+						<!-- License -->
+						<div class="ham-license" *ngIf="licenseActive">
 							<mat-slide-toggle
 								class="mat-slide-toggle-1"
 								(change)="onChangeLicense(mIndex, iIndex)"
 								[formControl]="modules.controls[getModuleIndex(mIndex, iIndex)].get('Licensed')">
 							</mat-slide-toggle>
 						</div>
-						<div>
+
+						<!-- Active -->
+						<div class="ham-active">
 							<mat-slide-toggle
 								class="mat-slide-toggle-1"
 								[formControl]="modules.controls[getModuleIndex(mIndex, iIndex)].get('Active')">
 							</mat-slide-toggle>
 						</div>
-						<div>
-							<p>{{ module.details.title }}</p>
-						</div>
-						<div>
-							<p>{{ module.details.description }}</p>
-						</div>
+
+						<!-- Title -->
+						<div class="ham-title"><p>{{ module.details.title }}</p></div>
+
+						<!-- Description -->
+						<div class="ham-desc"><p>{{ module.details.description }}</p></div>
+
+						<!-- Params -->
 						<div class="ham-params">
-							<p>Params</p>
+							<p i18n="@@Management_Client_HGA_Form_Params">Params</p>
 						</div>
-						<div>
+
+						<!-- Preferred -->
+						<div class="ham-preferred">
 							<mat-checkbox
 								class="ham-checkbox-2"
 								(change)="onChangePreferred(mIndex, iIndex)"
