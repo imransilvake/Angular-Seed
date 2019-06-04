@@ -51,17 +51,13 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 				if (this.formFieldsModules.value.length === 1) {
 					// refactor
 					const modules = [];
-					this.modulesList.forEach(res => modules.push(...res.modules));
+					this.modulesList.forEach(module => modules.push(...module.modules));
 
 					// add & update modules
 					// update: 0
 					// add: 1-9
 					for (let i = 0; i < this.totalNumberOfModules; i++) {
-						if (i === 0) {
-							this.updateAndAddModule(modules[i], 0)
-						} else {
-							this.updateAndAddModule(modules[i], 1);
-						}
+						this.updateAndAddModule(modules[i], i);
 					}
 				}
 			});
@@ -114,7 +110,7 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 	 * update & add module
 	 *
 	 * @param result
-	 * @param type (0 = update | 1 = add)
+	 * @param type (0 = update | 1-9 = add)
 	 */
 	public updateAndAddModule(result: any, type: number) {
 		const control = this.formFields.controls.modules;

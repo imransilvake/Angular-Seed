@@ -59,7 +59,7 @@ export class MemberService {
 					// set profile data
 					return res;
 				})
-			)
+			);
 	}
 
 	/**

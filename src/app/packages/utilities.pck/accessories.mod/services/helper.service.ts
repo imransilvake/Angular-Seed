@@ -123,8 +123,15 @@ export class HelperService {
 	/**
 	 * stop propagation
 	 */
-	public static stopPropagation() {
-		event.stopPropagation();
+	public static stopPropagation($event) {
+		$event.stopPropagation();
+	}
+
+	/**
+	 * prevent default
+	 */
+	public static preventDefault($event) {
+		$event.preventDefault();
 	}
 
 	/**
@@ -136,7 +143,7 @@ export class HelperService {
 		if (event && event.target && event.target.childNodes) {
 			event.target.childNodes.forEach(element => {
 				if (element && element.className && element.className.indexOf('ham-active') !== -1) {
-					HelperService.stopPropagation();
+					HelperService.stopPropagation(event);
 				}
 			});
 		}

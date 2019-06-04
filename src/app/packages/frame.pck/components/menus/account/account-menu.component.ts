@@ -72,7 +72,7 @@ export class AccountMenuComponent implements OnInit, OnDestroy {
 	 * @param event
 	 */
 	public onClickStopPropagation(event) {
-		HelperService.stopPropagation();
+		HelperService.stopPropagation(event);
 	}
 
 	/**

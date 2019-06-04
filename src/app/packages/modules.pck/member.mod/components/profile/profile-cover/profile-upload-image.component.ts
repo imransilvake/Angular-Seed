@@ -8,6 +8,7 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
 // app
 import { MemberService } from '../../../services/member.service';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { HelperService } from '../../../../../utilities.pck/accessories.mod/services/helper.service';
 
 @Component({
 	selector: 'app-profile-upload-image',
@@ -57,8 +58,8 @@ export class ProfileUploadImageComponent implements OnInit, OnDestroy {
 	 * @param $event
 	 */
 	public onDragOver($event) {
-		$event.stopPropagation();
-		$event.preventDefault();
+		HelperService.stopPropagation($event);
+		HelperService.preventDefault($event);
 	}
 
 	/**
@@ -67,8 +68,8 @@ export class ProfileUploadImageComponent implements OnInit, OnDestroy {
 	 * @param $event
 	 */
 	public onDrop($event) {
-		$event.stopPropagation();
-		event.preventDefault();
+		HelperService.stopPropagation($event);
+		HelperService.preventDefault($event);
 
 		const transfer = $event.dataTransfer;
 		const file = transfer.files[0];
