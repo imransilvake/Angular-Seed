@@ -75,6 +75,17 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 					}
 				}
 			});
+
+		// listen: validate form
+		this.modules.valueChanges
+			.pipe(
+				startWith(0),
+				takeUntil(this._ngUnSubscribe)
+			)
+			.subscribe(() => {
+				const activeModules = this.modules.value.filter(module => module.Licensed);
+				this.formValid = activeModules.length >= 1;
+			});
 	}
 
 	ngOnDestroy() {
@@ -216,10 +227,6 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 			preferred.disable();
 			preferred.setValue(0);
 		}
-
-		// validate form
-		const activeModules = this.modules.value.filter(module => module.Licensed);
-		this.formValid = activeModules.length >= 1;
 	}
 
 	/**
