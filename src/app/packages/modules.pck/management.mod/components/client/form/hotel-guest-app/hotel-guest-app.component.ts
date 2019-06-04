@@ -249,6 +249,15 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 	}
 
 	/**
+	 * open params modal
+	 *
+	 * @param index
+	 */
+	public onClickOpenParamsModal(index: number) {
+		// const module = this.modules.at(index).value;
+	}
+
+	/**
 	 * on submit form
 	 */
 	public onSubmitForm() {

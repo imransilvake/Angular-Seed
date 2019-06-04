@@ -88,9 +88,7 @@ export class LicenseComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		// listen: country list
-		this._utilityService.getCountryList()
-			.pipe(takeUntil(this._ngUnSubscribe))
-			.subscribe(res => this.countryList = res);
+		this.countryList = this._utilityService.countryList;
 
 		// get license hotels list
 		this.licenseHotelsList = this._clientService.clientFetchLicenseList();

@@ -11,6 +11,7 @@ import { AuthService } from '../../../modules.pck/authorization.mod/services/aut
 @Injectable({ providedIn: 'root' })
 export class UtilityService {
 	public currentUser;
+	public countryList;
 
 	constructor(
 		private _proxyService: ProxyService,
@@ -19,6 +20,9 @@ export class UtilityService {
 	) {
 		// get current user info
 		this.currentUser = this._authService.currentUserState;
+
+		// country list
+		this.getCountryList().subscribe(res => this.countryList = res);
 	}
 
 	/**
