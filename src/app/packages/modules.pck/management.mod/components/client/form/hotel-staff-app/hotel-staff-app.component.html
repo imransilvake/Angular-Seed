@@ -2,7 +2,7 @@
 	<form [formGroup]="formFields" (ngSubmit)="onSubmitForm()" (keyup.enter)="isFormValid && onSubmitForm()">
 		<div class="ham-form">
 			<!-- Columns -->
-			<div class="ham-row ham-border" [class.ham-no-license]="!licenseActive">
+			<div class="ham-row ham-border ham-columns" [class.ham-no-license]="!licenseActive">
 				<h6 i18n="@@Management_Client_HSA_Column_License" *ngIf="licenseActive">License</h6>
 				<h6 i18n="@@Management_Client_HSA_Column_Active">Active</h6>
 				<h6 i18n="@@Management_Client_HSA_Column_Module">Module</h6>
@@ -14,7 +14,7 @@
 			<div class="ham-details">
 				<ng-container *ngFor="let block of modulesList; let mIndex=index;">
 					<div class="ham-blocks ham-hotel-room">
-						<div class="ham-row" [class.ham-no-license]="!licenseActive" *ngFor="let module of block['modules']; let iIndex=index;">
+						<div class="ham-row ham-columns" [class.ham-no-license]="!licenseActive" *ngFor="let module of block['modules']; let iIndex=index;">
 							<!-- License -->
 							<div class="ham-license" *ngIf="licenseActive">
 								<mat-slide-toggle

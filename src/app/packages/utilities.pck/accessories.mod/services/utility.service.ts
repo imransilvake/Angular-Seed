@@ -130,7 +130,7 @@ export class UtilityService {
 	 */
 	public getCountryList() {
 		const payload = {
-			language: this.currentUser.profile.language
+			language: this.currentUser && this.currentUser.profile.language || AppOptions.languages['de']
 		};
 		return this._proxyService.getAPI(AppServices['Utilities']['CountryList'], { queryParams: payload });
 	}
