@@ -2,10 +2,11 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 // app
-import TableData from '../../../../../assets/dummy/table-data';
 import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service';
+import { AppOptions, AppServices } from '../../../../../app.config';
 
 @Injectable()
 export class ClientService {
@@ -22,8 +23,16 @@ export class ClientService {
 	/**
 	 * refresh client hotels list
 	 */
-	public clientRefreshHotelsList() {
-		return of(TableData);
+	public clientRefreshHotelGroupList() {
+		const payload = {
+			offset: 0,
+			limit: AppOptions.tableItemsPerPage
+		};
+
+		// service
+		return this._proxyService
+			.getAPI(AppServices['Management']['Client_HotelGroup_List'], { queryParams: payload })
+			.pipe(map(res => res));
 	}
 
 	/**

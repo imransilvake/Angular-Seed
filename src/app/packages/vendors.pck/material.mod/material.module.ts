@@ -2,11 +2,26 @@
 import { NgModule } from '@angular/core';
 import {
 	MatAutocompleteModule,
-	MatButtonModule, MatButtonToggleModule,
-	MatCheckboxModule, MatChipsModule, MatDialogModule, MatFormFieldModule, MatIconModule,
-	MatInputModule, MatMenuModule,
-	MatPaginatorModule, MatProgressBarModule, MatRadioModule, MatSelectModule, MatSidenavModule, MatSlideToggleModule, MatSortModule,
-	MatTableModule, MatTabsModule, MatTreeModule
+	MatButtonModule,
+	MatButtonToggleModule,
+	MatCheckboxModule,
+	MatChipsModule,
+	MatDialogModule,
+	MatFormFieldModule,
+	MatIconModule,
+	MatInputModule,
+	MatMenuModule,
+	MatPaginatorModule,
+	MatProgressBarModule,
+	MatProgressSpinnerModule,
+	MatRadioModule,
+	MatSelectModule,
+	MatSidenavModule,
+	MatSlideToggleModule,
+	MatSortModule,
+	MatTableModule,
+	MatTabsModule,
+	MatTreeModule
 } from '@angular/material';
 
 @NgModule({
@@ -30,7 +45,8 @@ import {
 		MatProgressBarModule,
 		MatAutocompleteModule,
 		MatChipsModule,
-		MatRadioModule
+		MatRadioModule,
+		MatProgressSpinnerModule
 	],
 	exports: [
 		MatButtonModule,
@@ -52,7 +68,8 @@ import {
 		MatProgressBarModule,
 		MatAutocompleteModule,
 		MatChipsModule,
-		MatRadioModule
+		MatRadioModule,
+		MatProgressSpinnerModule
 	]
 })
 

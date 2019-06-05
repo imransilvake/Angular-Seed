@@ -16,6 +16,10 @@
 		min-width: 200px;
 		overflow: auto;
 
+		.ham-spinner {
+			padding: 25px 0 10px;
+		}
+
 		table {
 			background-color: cd-palette($cd-background, 2003);
 			margin-top: 10px;

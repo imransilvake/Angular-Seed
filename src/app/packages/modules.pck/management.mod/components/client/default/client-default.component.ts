@@ -31,7 +31,8 @@ export class ClientDefaultComponent implements OnInit, OnDestroy {
 				takeUntil(this._ngUnSubscribe)
 			)
 			.subscribe(res =>
-				this.clientHotelsList = res.hotelsList || this._clientService.clientData.hotelsList
+				this.clientHotelsList = res.hotelGroupList ||
+					this._clientService.clientData && this._clientService.clientData.hotelGroupList
 			);
 	}
 
@@ -46,7 +47,7 @@ export class ClientDefaultComponent implements OnInit, OnDestroy {
 	 *
 	 * @param hotelId
 	 */
-	public onClickShowClientForm(hotelId?: number) {
+	public onClickFetchId(hotelId?: string) {
 		const payload: ClientViewInterface = {
 			view: ClientViewTypeEnum.FORM,
 			hotelId: hotelId

@@ -11,7 +11,8 @@ export const AppOptions = {
 		fr: 'fr',
 		es: 'es'
 	},
-	rememberMeValidityInDays: 90
+	rememberMeValidityInDays: 90,
+	tableItemsPerPage: 20
 };
 
 // services
@@ -34,6 +35,10 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 		Fetch_Profile: { serviceUrl: '/profile/getuser' },
 		Update_Profile: { serviceUrl: '/profile/update' },
 		Change_Password: { serviceUrl: '/profile/changepassword' }
+	},
+	Management: {
+		Client_HotelGroup_List: { serviceUrl: '/management/hotelgroup/list' },
+		Client_HotelGroup_List_Hotel: { serviceUrl: '/management/hotelgroup/list/:hotelId' }
 	}
 };
 

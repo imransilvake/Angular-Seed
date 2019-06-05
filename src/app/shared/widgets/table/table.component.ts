@@ -1,5 +1,5 @@
 // angular
-import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
@@ -12,6 +12,8 @@ import { takeUntil } from 'rxjs/operators';
 })
 
 export class TableComponent implements OnInit, OnDestroy {
+	@Output() rowId: EventEmitter<any> = new EventEmitter();
+
 	@Input() tableTitle;
 	@Input() inputName;
 	@Input() inputPlaceHolder;
@@ -72,6 +74,15 @@ export class TableComponent implements OnInit, OnDestroy {
 	 */
 	public validateType(value) {
 		return typeof value;
+	}
+
+	/**
+	 * get row id
+	 *
+	 * @param rowId
+	 */
+	public onClickRow(rowId: number) {
+		this.rowId.emit(rowId);
 	}
 
 	/**

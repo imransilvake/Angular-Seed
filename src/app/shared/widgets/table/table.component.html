@@ -44,12 +44,18 @@
 
 			<!-- Row Templates -->
 			<tr mat-header-row *matHeaderRowDef="allColumns"></tr>
-			<tr mat-row *matRowDef="let row; columns: allColumns"></tr>
+			<tr mat-row *matRowDef="let row; columns: allColumns" (click)="onClickRow(row.Id)"></tr>
 		</table>
+
+		<!-- Spinner -->
+		<div class="ham-spinner" *ngIf="dataSource.data.length === 0">
+			<mat-spinner class="ham-spinner-1" [diameter]="50"></mat-spinner>
+		</div>
 	</div>
 
 	<!-- Pagination -->
 	<mat-paginator
+		*ngIf="dataSource.data.length > 0"
 		[className]="'ham-pagination'"
 		[hidePageSize]="true"
 		[pageSizeOptions]="tablePagination"

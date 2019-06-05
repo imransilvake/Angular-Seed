@@ -54,7 +54,7 @@ export class ProfileComponent implements OnDestroy {
 		// set current user state
 		this._memberService.currentUser = this._authService.currentUserState;
 
-		// refresh member profile
+		// refresh member services
 		forkJoin({
 			memberProfile: this._memberService.memberRefreshProfile()
 		}).pipe(takeUntil(this._ngUnSubscribe)).subscribe(res => {
