@@ -7,6 +7,7 @@ import { Subject } from 'rxjs';
 import { ClientViewTypeEnum } from '../../../enums/client-view-type.enum';
 import { ClientService } from '../../../services/client.service';
 import { ClientViewInterface } from '../../../interfaces/client-view.interface';
+import { AppOptions } from '../../../../../../../app.config';
 
 @Component({
 	selector: 'app-client-default',
@@ -18,6 +19,7 @@ export class ClientDefaultComponent implements OnInit, OnDestroy {
 	@Output() changeClientView: EventEmitter<any> = new EventEmitter();
 
 	public clientHotelsList;
+	public tablePageSize = AppOptions.tablePageSizeLimit - 1;
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(private _clientService: ClientService) {

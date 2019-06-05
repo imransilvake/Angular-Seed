@@ -13,11 +13,12 @@
 	}
 
 	.ham-table {
+		margin-bottom: 8px;
 		min-width: 200px;
 		overflow: auto;
 
 		.ham-spinner {
-			padding: 25px 0 10px;
+			padding: 20px 0;
 		}
 
 		table {
@@ -53,6 +54,15 @@
 		}
 	}
 
+	.ham-pagination-wrapper {
+		.mat-toolbar-row {
+			align-items: center;
+			background-color: cd-palette($cd-background, 2002);
+			color: cd-palette($cd-color, 1001);
+			justify-content: space-between;
+		}
+	}
+
 	// media
 	@include cd-media(desktop, mini) {
 		.ham-top {
@@ -60,6 +70,19 @@
 
 			.ham-title {
 				padding: 0;
+			}
+		}
+
+		.ham-pagination-wrapper {
+			.mat-toolbar-row {
+				display: block;
+				height: auto;
+
+				p {
+					margin-bottom: -10px;
+					margin-top: 6px;
+					text-align: center;
+				}
 			}
 		}
 	}

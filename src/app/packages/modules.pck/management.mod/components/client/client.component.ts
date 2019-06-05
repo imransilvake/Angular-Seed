@@ -65,7 +65,7 @@ export class ClientComponent implements OnDestroy {
 			hmaModules: this._clientService.clientRefreshHotelManagerAppModules()
 		}).pipe(takeUntil(this._ngUnSubscribe)).subscribe(res => {
 			const result = {
-				hotelGroupList: res.hotelGroupList.data,
+				hotelGroupList: res.hotelGroupList,
 				hgaModules: res.hgaModules,
 				hsaModules: res.hsaModules,
 				hmaModules: res.hmaModules

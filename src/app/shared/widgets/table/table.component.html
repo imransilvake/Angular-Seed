@@ -48,17 +48,27 @@
 		</table>
 
 		<!-- Spinner -->
-		<div class="ham-spinner" *ngIf="dataSource.data.length === 0">
+		<div class="ham-spinner" *ngIf="dataSource.data.length === 0 || loading">
 			<mat-spinner class="ham-spinner-1" [diameter]="50"></mat-spinner>
 		</div>
 	</div>
 
-	<!-- Pagination -->
-	<mat-paginator
-		*ngIf="dataSource.data.length > 0"
-		[className]="'ham-pagination'"
-		[hidePageSize]="true"
-		[pageSizeOptions]="tablePagination"
-		showFirstLastButtons>
-	</mat-paginator>
+	<div class="ham-pagination-wrapper">
+		<mat-toolbar>
+			<mat-toolbar-row class="mat-toolbar-row">
+				<!-- Info -->
+				<p>{{ tableInfo }}</p>
+
+				<!-- Pagination -->
+				<mat-paginator
+					(page)="onChangePagination($event)"
+					[pageSize]="tablePageSize"
+					[className]="'ham-pagination'"
+					[hidePageSize]="true"
+					[pageSizeOptions]="tablePagination"
+					[showFirstLastButtons]="true">
+				</mat-paginator>
+			</mat-toolbar-row>
+		</mat-toolbar>
+	</div>
 </section>

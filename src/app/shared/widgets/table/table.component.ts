@@ -5,6 +5,10 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
+// app
+import { AppServices } from '../../../../app.config';
+import { ProxyService } from '../../../packages/core.pck/proxy.mod/services/proxy.service';
+
 @Component({
 	selector: 'app-table',
 	templateUrl: './table.component.html',
@@ -20,8 +24,10 @@ export class TableComponent implements OnInit, OnDestroy {
 	@Input() tableColumns = [];
 	@Input() tableAdditionalColumns = [];
 	@Input() tableData;
+	@Input() tablePageSize;
 	@Input() tablePagination = [5, 10, 20, 50, 100, 200];
 	@Input() templateRef;
+	@Input() currentAPI = [];
 
 	@ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 	@ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -29,10 +35,12 @@ export class TableComponent implements OnInit, OnDestroy {
 
 	public allColumns = [];
 	public formFields;
-	public dataSource: any;
+	public dataSource;
+	public loading = false;
+	public tableInfo;
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
-	constructor() {
+	constructor(private _proxyService: ProxyService) {
 		// form group
 		this.formFields = new FormGroup({
 			search: new FormControl('')
@@ -44,9 +52,12 @@ export class TableComponent implements OnInit, OnDestroy {
 		this.allColumns = this.tableColumns.concat(this.tableAdditionalColumns);
 
 		// initialize
-		this.dataSource = new MatTableDataSource<any>(this.tableData);
+		this.dataSource = new MatTableDataSource<any>(this.tableData.data);
 		this.dataSource.paginator = this.paginator;
 		this.dataSource.sort = this.sort;
+
+		// set page info
+		this.setTableInformation();
 
 		// filter search results
 		this.search.valueChanges
@@ -86,6 +97,47 @@ export class TableComponent implements OnInit, OnDestroy {
 	}
 
 	/**
+	 * get page data on page change
+	 *
+	 * @param pageInfo
+	 */
+	public onChangePagination(pageInfo) {
+		const prevPageIndex = pageInfo.previousPageIndex;
+		const pageIndex = pageInfo.pageIndex;
+
+		// set page info
+		this.setTableInformation(pageIndex);
+
+		// validate next click
+		if (pageInfo.pageIndex > prevPageIndex) {
+			// start animation
+			this.loading = true;
+
+			// set payload
+			const payload = {
+				offset: (pageIndex * this.tablePageSize) + 1,
+				limit: this.tablePageSize
+			};
+
+			// service
+			this._proxyService
+				.getAPI(AppServices[this.currentAPI[0]][this.currentAPI[1]],{ queryParams: payload })
+				.pipe(takeUntil(this._ngUnSubscribe))
+				.subscribe(res => {
+					// stop animation
+					this.loading = false;
+
+					// set table data
+					res.data && res.data.forEach(item => {
+						if (!this.dataSource.data.includes(item)) {
+							this.dataSource.data = [...this.dataSource.data, item];
+						}
+					});
+				});
+		}
+	}
+
+	/**
 	 * filter table content
 	 *
 	 * @param inputValue
@@ -97,5 +149,17 @@ export class TableComponent implements OnInit, OnDestroy {
 		if (this.dataSource.paginator) {
 			this.dataSource.paginator.firstPage();
 		}
+	}
+
+	/**
+	 * set table information
+	 */
+	private setTableInformation(currentPageIndex?: number) {
+		const pageIndex = currentPageIndex || 0;
+		const total = this.tableData.total;
+		const pageSize = this.tablePageSize;
+		const from = (pageSize * pageIndex) + 1;
+		const to = (pageSize * (pageIndex + 1) > total) ? total : pageSize * (pageIndex + 1);
+		this.tableInfo = total > 0 ? `${from} - ${to} of ${total}` : null;
 	}
 }

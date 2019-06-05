@@ -26,7 +26,7 @@ export class ClientService {
 	public clientRefreshHotelGroupList() {
 		const payload = {
 			offset: 0,
-			limit: AppOptions.tableItemsPerPage
+			limit: AppOptions.tablePageSizeLimit
 		};
 
 		// service

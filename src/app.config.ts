@@ -12,7 +12,7 @@ export const AppOptions = {
 		es: 'es'
 	},
 	rememberMeValidityInDays: 90,
-	tableItemsPerPage: 20
+	tablePageSizeLimit: 21
 };
 
 // services

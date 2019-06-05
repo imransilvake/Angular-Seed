@@ -21,6 +21,7 @@ import {
 	MatSortModule,
 	MatTableModule,
 	MatTabsModule,
+	MatToolbarModule,
 	MatTreeModule
 } from '@angular/material';
 
@@ -46,7 +47,8 @@ import {
 		MatAutocompleteModule,
 		MatChipsModule,
 		MatRadioModule,
-		MatProgressSpinnerModule
+		MatProgressSpinnerModule,
+		MatToolbarModule
 	],
 	exports: [
 		MatButtonModule,
@@ -69,7 +71,8 @@ import {
 		MatAutocompleteModule,
 		MatChipsModule,
 		MatRadioModule,
-		MatProgressSpinnerModule
+		MatProgressSpinnerModule,
+		MatToolbarModule
 	]
 })
 

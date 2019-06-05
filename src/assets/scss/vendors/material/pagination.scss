@@ -1,8 +1,6 @@
 .ham-pagination {
-	.mat-paginator-outer-container {
-		background-color: cd-palette($cd-background, 2002);
-		color: cd-palette($cd-color, 1001);
-		margin-top: 15px;
+	.mat-paginator-range-label {
+		display: none;
 	}
 
 	// media
@@ -10,13 +8,8 @@
 		.mat-paginator-outer-container {
 			.mat-paginator-range-actions {
 				display: block;
-				margin-top: 5px;
 				text-align: center;
 				width: 100%;
-
-				.mat-paginator-range-label {
-					margin: 0;
-				}
 			}
 		}
 	}
