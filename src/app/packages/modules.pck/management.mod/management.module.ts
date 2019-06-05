@@ -17,6 +17,7 @@ import { LicenseComponent } from './components/client/form/license/license.compo
 import { FieldsModule } from '../../core.pck/fields.mod/fields.module';
 import { SystemDataComponent } from './components/client/form/system-data/system-data.component';
 import { HotelGuestAppComponent } from './components/client/form/hotel-guest-app/hotel-guest-app.component';
+import { HotelStaffAppComponent } from './components/client/form/hotel-staff-app/hotel-staff-app.component';
 
 @NgModule({
 	imports: [
@@ -34,7 +35,8 @@ import { HotelGuestAppComponent } from './components/client/form/hotel-guest-app
 		UserComponent,
 		LicenseComponent,
 		SystemDataComponent,
-		HotelGuestAppComponent
+		HotelGuestAppComponent,
+		HotelStaffAppComponent
 	],
 	providers: [
 		ClientService

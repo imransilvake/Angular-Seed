@@ -1,6 +1,10 @@
 @import 'main';
 
-.ham-hotel-guest-app {
+.ham-hotel-app {
+	&.ham-hsa {
+		margin-top: 10px;
+	}
+
 	.ham-state {
 		align-items: center;
 		display: flex;

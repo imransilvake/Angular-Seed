@@ -11,35 +11,45 @@
 	<div class="ham-tabs">
 		<mat-tab-group class="ham-tabs-1" [@.disabled]="true">
 			<!-- License -->
-			<mat-tab [label]="'Licenses'">
+			<mat-tab
+				label="Licenses"
+				i18n-label="@@Management_Client_Form_License_Label">
 				<ng-template matTabContent>
 					<app-license (changeClientView)="onClickCloseClientForm()"></app-license>
 				</ng-template>
 			</mat-tab>
 
 			<!-- System Data -->
-			<mat-tab [label]="'System Data'">
+			<mat-tab
+				label="System Data"
+				i18n-label="@@Management_Client_Form_SystemData_Label">
 				<ng-template matTabContent>
 					<app-system-data (changeClientView)="onClickCloseClientForm()"></app-system-data>
 				</ng-template>
 			</mat-tab>
 
 			<!-- HotelGuest/App -->
-			<mat-tab [label]="'HotelGuest/App'">
+			<mat-tab
+				label="HotelGuest/App"
+				i18n-label="@@Management_Client_Form_HotelGuestApp_Label">
 				<ng-template matTabContent>
 					<app-hotel-guest-app (changeClientView)="onClickCloseClientForm()"></app-hotel-guest-app>
 				</ng-template>
 			</mat-tab>
 
 			<!-- HotelStaff/App -->
-			<mat-tab [label]="'HotelStaff/App'">
+			<mat-tab
+				label="HotelStaff/App"
+				i18n-label="@@Management_Client_Form_HotelStaffApp_Label">
 				<ng-template matTabContent>
-					HotelStaff
+					<app-hotel-staff-app (changeClientView)="onClickCloseClientForm()"></app-hotel-staff-app>
 				</ng-template>
 			</mat-tab>
 
 			<!-- HotelAppManager -->
-			<mat-tab [label]="'HotelAppManager'">
+			<mat-tab
+				label="HotelAppManager"
+				i18n-label="@@Management_Client_Form_HotelAppManager_Label">
 				<ng-template matTabContent>
 					HotelAppManager
 				</ng-template>

@@ -92,7 +92,6 @@ export class ClientService {
 
 	/**
 	 * refresh HGA modules
-	 *
 	 */
 	public clientRefreshHotelGuestAppModules() {
 		const response = [
@@ -315,6 +314,112 @@ export class ClientService {
 						description: this._i18n({
 							value: 'Guest can leave a hotel rating during stay',
 							id: 'Management_Client_HGA_Hotel_TrustYouHotelRatings_Description'
+						})
+					}
+				}]
+			}
+		];
+	}
+
+	/**
+	 * refresh HSA modules
+	 */
+	public clientRefreshHotelStaffAppModules() {
+		const response = [
+			{
+				'ModuleID': 'HSA_HOUSE_KEEPING',
+				'Licensed': true,
+				'Active': true,
+				'Params': {}
+			},
+			{
+				'ModuleID': 'HSA_REPAIRS',
+				'Licensed': false,
+				'Active': false,
+				'Params': {}
+			}
+		];
+
+		const result = this.mapHSAModules(response);
+		return of(result);
+	}
+
+	/**
+	 * map HSA modules
+	 *
+	 * @param response
+	 */
+	private mapHSAModules(response: any) {
+		return [
+			{
+				'name': 'All',
+				'modules': [{
+					data: response.filter(module => module.ModuleID === 'HSA_HOUSE_KEEPING')[0],
+					details: {
+						title: this._i18n({
+							value: 'House Keeping',
+							id: 'Management_Client_HSA_HouseKeeping_Title'
+						}),
+						description: this._i18n({
+							value: 'Housekeeping Description',
+							id: 'Management_Client_HSA_HouseKeeping_Description'
+						})
+					}
+				}, {
+					data: response.filter(module => module.ModuleID === 'HSA_REPAIRS')[0],
+					details: {
+						title: this._i18n({
+							value: 'Repairs',
+							id: 'Management_Client_HSA_Repairs_Title'
+						}),
+						description: this._i18n({
+							value: 'Repairs Description',
+							id: 'Management_Client_HSA_Repairs_Description'
+						})
+					}
+				}]
+			}
+		];
+	}
+
+	/**
+	 * refresh HAM modules
+	 */
+	public clientRefreshHotelAppManagerModules() {
+
+	}
+
+	/**
+	 * map HAM modules
+	 *
+	 * @param response
+	 */
+	private mapHAMModules(response: any) {
+		return [
+			{
+				'name': 'All',
+				'modules': [{
+					data: response.filter(module => module.ModuleID === 'HAM_ONLINE_BOOKING_STATISTICS')[0],
+					details: {
+						title: this._i18n({
+							value: 'Online Booking Statistics',
+							id: 'Management_Client_HAM_OnlineBooking_Title'
+						}),
+						description: this._i18n({
+							value: 'Online Booking Statistics Description',
+							id: 'Management_Client_HAM_OnlineBooking_Description'
+						})
+					}
+				}, {
+					data: response.filter(module => module.ModuleID === 'HAM_INTERNATIONAL_GUEST_OVERVIEW')[0],
+					details: {
+						title: this._i18n({
+							value: 'International Guest Overview',
+							id: 'Management_Client_HAM_GuestOverview_Title'
+						}),
+						description: this._i18n({
+							value: 'Guest Overview Description',
+							id: 'Management_Client_HAM_GuestOverview_Description'
 						})
 					}
 				}]

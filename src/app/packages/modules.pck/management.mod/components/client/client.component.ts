@@ -60,11 +60,13 @@ export class ClientComponent implements OnDestroy {
 		// refresh client hotels list
 		forkJoin({
 			hotelsList: this._clientService.clientRefreshHotelsList(),
-			hgaModules: this._clientService.clientRefreshHotelGuestAppModules()
+			hgaModules: this._clientService.clientRefreshHotelGuestAppModules(),
+			hsaModules: this._clientService.clientRefreshHotelStaffAppModules()
 		}).pipe(takeUntil(this._ngUnSubscribe)).subscribe(res => {
 			const result = {
 				hotelsList: res.hotelsList,
-				hgaModules: res.hgaModules
+				hgaModules: res.hgaModules,
+				hsaModules: res.hsaModules
 			};
 
 			// save to client data
