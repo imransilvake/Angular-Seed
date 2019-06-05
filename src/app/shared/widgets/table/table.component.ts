@@ -6,7 +6,6 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 // app
-import { AppServices } from '../../../../app.config';
 import { ProxyService } from '../../../packages/core.pck/proxy.mod/services/proxy.service';
 
 @Component({
@@ -27,7 +26,7 @@ export class TableComponent implements OnInit, OnDestroy {
 	@Input() tablePageSize;
 	@Input() tablePagination = [5, 10, 20, 50, 100, 200];
 	@Input() templateRef;
-	@Input() currentAPI = [];
+	@Input() currentApiUrl;
 
 	@ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 	@ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -121,7 +120,7 @@ export class TableComponent implements OnInit, OnDestroy {
 
 			// service
 			this._proxyService
-				.getAPI(AppServices[this.currentAPI[0]][this.currentAPI[1]],{ queryParams: payload })
+				.getAPI(this.currentApiUrl,{ queryParams: payload })
 				.pipe(takeUntil(this._ngUnSubscribe))
 				.subscribe(res => {
 					// stop animation

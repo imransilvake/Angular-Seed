@@ -20,7 +20,7 @@
 			[tableAdditionalColumns]="['Action']"
 			[tablePageSize]="tablePageSize"
 			[templateRef]="[action]"
-			[currentAPI]="['Management', 'Client_HotelGroup_List']"
+			[currentApiUrl]="tableApiUrl"
 			(rowId)="onClickFetchId($event)">
 			<!-- Action -->
 			<ng-template #action>
