@@ -1,26 +1,22 @@
 // angular
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { startWith, takeUntil } from 'rxjs/operators';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Subject } from 'rxjs';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
-import { I18n } from '@ngx-translate/i18n-polyfill';
+import { startWith, takeUntil } from 'rxjs/operators';
 
 // app
-import { ClientViewInterface } from '../../../../interfaces/client-view.interface';
-import { ClientViewTypeEnum } from '../../../../enums/client-view-type.enum';
 import { ClientService } from '../../../../services/client.service';
 import { HelperService } from '../../../../../../utilities.pck/accessories.mod/services/helper.service';
-import { DialogService } from '../../../../../../utilities.pck/dialog.mod/services/dialog.service';
-import { DialogTypeEnum } from '../../../../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
-import { LoadingAnimationService } from '../../../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
+import { ClientViewInterface } from '../../../../interfaces/client-view.interface';
+import { ClientViewTypeEnum } from '../../../../enums/client-view-type.enum';
 
 @Component({
-	selector: 'app-hotel-guest-app',
-	templateUrl: './hotel-guest-app.component.html',
+	selector: 'app-hotel-manager-app',
+	templateUrl: './hotel-manager-app.component.html',
 	styleUrls: ['../hotel-common.component.scss']
 })
 
-export class HotelGuestAppComponent implements OnInit, OnDestroy {
+export class HotelManagerAppComponent implements OnInit {
 	@Output() changeClientView: EventEmitter<any> = new EventEmitter();
 
 	public formFields;
@@ -29,20 +25,13 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 	public formValid = false;
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
-	constructor(
-		private _clientService: ClientService,
-		private _dialogService: DialogService,
-		private _loadingAnimationService: LoadingAnimationService,
-		private _i18n: I18n
-	) {
+	constructor(private _clientService: ClientService) {
 		// form fields
 		this.formFields = new FormGroup({
-			hgaState: new FormControl(false),
 			modules: new FormArray([
-				HotelGuestAppComponent.moduleItems({
+				HotelManagerAppComponent.moduleItems({
 					Licensed: false,
-					Active: false,
-					Preferred: 0
+					Active: false
 				})
 			])
 		});
@@ -57,7 +46,7 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 			)
 			.subscribe(res => {
 				// module list
-				this.modulesList = res.hgaModules || this._clientService.clientData.hgaModules;
+				this.modulesList = res.hmaModules || this._clientService.clientData.hmaModules;
 
 				// not on refresh (header)
 				if (this.modules.value.length === 1) {
@@ -88,65 +77,15 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 			});
 	}
 
-	ngOnDestroy() {
-		// remove subscriptions
-		this._ngUnSubscribe.next();
-		this._ngUnSubscribe.complete();
-	}
-
 	/**
 	 * getters
 	 */
-	get hgaState() {
-		return this.formFields.get('hgaState');
-	}
-
 	get modules() {
 		return this.formFields.controls.modules;
 	}
 
 	get isFormValid() {
 		return this.formValid;
-	}
-
-	/**
-	 * validate HGA state
-	 */
-	public onChangeHGAState() {
-		// payload
-		const dialogPayload = {
-			type: DialogTypeEnum.CONFIRMATION,
-			payload: {
-				icon: 'dialog_confirmation',
-				title: this._i18n({ value: 'Title: HGA Activation Confirmation', id: 'HGA_Activation_Title' }),
-				message: this._i18n({ value: 'Description: HGA Activation Confirmation', id: 'HGA_Activation_Description' }),
-				buttonTexts: [
-					this._i18n({
-						value: 'Button - OK',
-						id: 'Common_Button_OK'
-					}),
-					this._i18n({
-						value: 'Button - Cancel',
-						id: 'Common_Button_Cancel'
-					}),
-				]
-			}
-		};
-
-		// dialog service
-		if (this.hgaState.value) {
-			this._dialogService.showDialog(dialogPayload)
-				.pipe(takeUntil(this._ngUnSubscribe))
-				.subscribe(res => {
-					this.hgaState.setValue(res);
-
-					// update
-					if (res) { }
-
-					// stop loading animation
-					this._loadingAnimationService.stopLoadingAnimation();
-				});
-		}
 	}
 
 	/**
@@ -157,8 +96,7 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 	public static moduleItems(result) {
 		return new FormGroup({
 			Licensed: new FormControl(result.Licensed),
-			Active: new FormControl(result.Active),
-			Preferred: new FormControl(result.Preferred)
+			Active: new FormControl(result.Active)
 		});
 	}
 
@@ -171,21 +109,19 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 	public updateAndAddModule(result: any, type: number) {
 		const output = {
 			Licensed: result.data.Licensed,
-			Active: result.data.Active,
-			Preferred: result.data.Preferred
+			Active: result.data.Active
 		};
 
 		// update & add form fields
 		if (type === 0) {
 			this.modules.at(type).setValue(output);
 		} else {
-			this.modules.push(HotelGuestAppComponent.moduleItems(output));
+			this.modules.push(HotelManagerAppComponent.moduleItems(output));
 		}
 
 		// disable fields
 		if (!this.modules.at(type).get('Licensed').value) {
 			this.modules.at(type).get('Active').disable();
-			this.modules.at(type).get('Preferred').disable();
 		}
 	}
 
@@ -214,37 +150,14 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 		const licensed = this.modules.controls[idx].get('Licensed');
 		const licensedValue = licensed.value;
 		const active = this.modules.controls[idx].get('Active');
-		const preferred = this.modules.controls[idx].get('Preferred');
 
 		// validate license
 		if (licensedValue) {
-			// set active & preferred
+			// set active
 			active.enable();
-			preferred.enable();
 		} else {
-			// unset active & preferred
+			// unset active
 			active.disable();
-			preferred.disable();
-			preferred.setValue(0);
-		}
-	}
-
-	/**
-	 * on change preferred
-	 *
-	 * @param mIndex
-	 * @param iIndex
-	 */
-	public onChangePreferred(mIndex, iIndex) {
-		const idx = this.getModuleIndex(mIndex, iIndex);
-		const preferred = this.modules.controls[idx].get('Preferred');
-		const preferredValue = preferred.value;
-		const modulesList = this.formFields.controls.modules.value;
-		const count = modulesList.filter(module => module.Licensed && (module.Preferred || module.Preferred.value)).length;
-
-		// check all current license preferred value
-		if (count > 2 && preferredValue) {
-			preferred.setValue(0);
 		}
 	}
 

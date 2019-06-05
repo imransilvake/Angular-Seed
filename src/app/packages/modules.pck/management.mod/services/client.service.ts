@@ -385,8 +385,24 @@ export class ClientService {
 	/**
 	 * refresh HAM modules
 	 */
-	public clientRefreshHotelAppManagerModules() {
+	public clientRefreshHotelManagerAppModules() {
+		const response = [
+			{
+				'ModuleID': 'HAM_ONLINE_BOOKING_STATISTICS',
+				'Licensed': false,
+				'Active': true,
+				'Params': {}
+			},
+			{
+				'ModuleID': 'HAM_INTERNATIONAL_GUEST_OVERVIEW',
+				'Licensed': false,
+				'Active': true,
+				'Params': {}
+			}
+		];
 
+		const result = this.mapHAMModules(response);
+		return of(result);
 	}
 
 	/**

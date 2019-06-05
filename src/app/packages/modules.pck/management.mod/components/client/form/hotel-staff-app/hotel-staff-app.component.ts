@@ -38,7 +38,7 @@ export class HotelStaffAppComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		// listen: get HGA modules
+		// listen: get modules
 		this._clientService.clientDataEmitter
 			.pipe(
 				startWith(0),

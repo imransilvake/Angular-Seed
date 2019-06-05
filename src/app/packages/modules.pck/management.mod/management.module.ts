@@ -18,6 +18,7 @@ import { FieldsModule } from '../../core.pck/fields.mod/fields.module';
 import { SystemDataComponent } from './components/client/form/system-data/system-data.component';
 import { HotelGuestAppComponent } from './components/client/form/hotel-guest-app/hotel-guest-app.component';
 import { HotelStaffAppComponent } from './components/client/form/hotel-staff-app/hotel-staff-app.component';
+import { HotelManagerAppComponent } from './components/client/form/hotel-manager-app/hotel-manager-app.component';
 
 @NgModule({
 	imports: [
@@ -36,7 +37,8 @@ import { HotelStaffAppComponent } from './components/client/form/hotel-staff-app
 		LicenseComponent,
 		SystemDataComponent,
 		HotelGuestAppComponent,
-		HotelStaffAppComponent
+		HotelStaffAppComponent,
+		HotelManagerAppComponent
 	],
 	providers: [
 		ClientService

@@ -51,7 +51,7 @@
 				label="HotelAppManager"
 				i18n-label="@@Management_Client_Form_HotelAppManager_Label">
 				<ng-template matTabContent>
-					HotelAppManager
+					<app-hotel-manager-app (changeClientView)="onClickCloseClientForm()"></app-hotel-manager-app>
 				</ng-template>
 			</mat-tab>
 		</mat-tab-group>
