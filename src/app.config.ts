@@ -38,7 +38,7 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 	},
 	Management: {
 		Client_HotelGroup_List: { serviceUrl: '/management/hotelgroup/list' },
-		Client_HotelGroup_List_Hotel: { serviceUrl: '/management/hotelgroup/list/:hotelId' }
+		Client_HotelGroup_List_Hotel: { serviceUrl: '/management/hotelgroup/list/:id' }
 	}
 };
 
@@ -51,6 +51,11 @@ export const LocalStorageItems = {
 // session-storage items
 export const SessionStorageItems = {
 	userState: 'ham-session-us'
+};
+
+// neutral-storage items
+export const NeutralStorageItems = {
+	appState: 'ham-local-as'
 };
 
 // headers for a request to backend

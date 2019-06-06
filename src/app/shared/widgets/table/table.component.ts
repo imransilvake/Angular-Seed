@@ -7,6 +7,7 @@ import { takeUntil } from 'rxjs/operators';
 
 // app
 import { ProxyService } from '../../../packages/core.pck/proxy.mod/services/proxy.service';
+import { SidebarService } from '../../../packages/frame.pck/services/sidebar.service';
 
 @Component({
 	selector: 'app-table',
@@ -39,7 +40,10 @@ export class TableComponent implements OnInit, OnDestroy {
 	public tableInfo;
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
-	constructor(private _proxyService: ProxyService) {
+	constructor(
+		private _proxyService: ProxyService,
+		private _sidebarService: SidebarService
+	) {
 		// form group
 		this.formFields = new FormGroup({
 			search: new FormControl('')
@@ -114,20 +118,23 @@ export class TableComponent implements OnInit, OnDestroy {
 
 			// set payload
 			const payload = {
-				offset: (pageIndex * this.tablePageSize) + 1,
-				limit: this.tablePageSize
+				pathParams: { id: this._sidebarService.appState.id },
+				queryParams: {
+					offset: (pageIndex * this.tablePageSize) + 1,
+					limit: this.tablePageSize
+				}
 			};
 
 			// service
 			this._proxyService
-				.getAPI(this.currentApiUrl,{ queryParams: payload })
+				.getAPI(this.currentApiUrl, payload)
 				.pipe(takeUntil(this._ngUnSubscribe))
 				.subscribe(res => {
 					// stop animation
 					this.loading = false;
 
 					// set table data
-					res.data && res.data.forEach(item => {
+					res.data.forEach(item => {
 						if (!this.dataSource.data.includes(item)) {
 							this.dataSource.data = [...this.dataSource.data, item];
 						}

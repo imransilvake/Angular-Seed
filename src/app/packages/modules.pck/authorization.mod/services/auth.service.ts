@@ -49,11 +49,8 @@ export class AuthService {
 	 * @param data
 	 */
 	set currentUserState(data: any) {
-		if (data.rememberMe) {
-			this._storageService.put(LocalStorageItems.userState, data, StorageTypeEnum.PERSISTANT);
-		} else {
-			this._storageService.put(SessionStorageItems.userState, data, StorageTypeEnum.SESSION);
-		}
+		const storageType = data.rememberMe ? StorageTypeEnum.PERSISTANT : StorageTypeEnum.SESSION;
+		this._storageService.put(LocalStorageItems.userState, data, storageType);
 	}
 
 	/**

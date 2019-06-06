@@ -131,8 +131,13 @@ export class RegisterComponent implements OnInit, OnDestroy {
 		// start loading animation
 		this._loadingAnimationService.startLoadingAnimation();
 
+		// get browser language
+		const language = navigator.languages && navigator.languages.length > 0 ? navigator.languages[0] : navigator.language;
+		const browserLanguage = language.split('-')[0];
+
 		// payload
 		const formPayload: AuthRegisterInterface = {
+			lang: browserLanguage,
 			hotelId: this.hotelId.value.id,
 			salutation: this.salutation.value.id,
 			email: this.email.value,

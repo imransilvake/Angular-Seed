@@ -18,13 +18,15 @@ import { WidgetsModule } from '../../shared/widgets/widgets.module';
 import { HeadComponent } from './components/content/head/head.component';
 import { BreadcrumbModule } from '../utilities.pck/breadcrumb.mod/breadcrumb.module';
 import { EmergencyService } from './services/emergency.service';
+import { FieldsModule } from '../core.pck/fields.mod/fields.module';
 
 @NgModule({
 	imports: [
 		SharedModule,
 		WidgetsModule,
 		NotificationModule,
-		BreadcrumbModule
+		BreadcrumbModule,
+		FieldsModule
 	],
 	declarations: [
 		E404Component,

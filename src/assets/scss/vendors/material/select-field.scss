@@ -38,5 +38,13 @@
 .mat-select-panel-wrap {
 	.mat-select-panel {
 		border-radius: 2px;
+
+		.ham-group-label {
+			padding: 0 10px;
+
+			.mat-option-text {
+				font-weight: cd-fontWeight(500);
+			}
+		}
 	}
 }

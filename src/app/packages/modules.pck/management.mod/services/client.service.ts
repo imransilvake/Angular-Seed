@@ -7,11 +7,14 @@ import { map } from 'rxjs/operators';
 // app
 import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service';
 import { AppOptions, AppServices } from '../../../../../app.config';
+import { AppViewTypeEnum } from '../../../frame.pck/enums/app-view-type.enum';
 
 @Injectable()
 export class ClientService {
+	public appState;
 	public currentUser;
 	public clientData;
+	public clientTablesServices;
 	public clientDataEmitter: EventEmitter<any> = new EventEmitter();
 
 	constructor(
@@ -24,14 +27,33 @@ export class ClientService {
 	 * refresh client hotels list
 	 */
 	public clientRefreshHotelGroupList() {
+		const allApi = AppServices['Management']['Client_HotelGroup_List'];
+		const hotelGroupApi = AppServices['Management']['Client_HotelGroup_List_Hotel'];
 		const payload = {
 			offset: 0,
 			limit: AppOptions.tablePageSizeLimit
 		};
 
+		// call service based on app state
+		if (this.appState.type === AppViewTypeEnum.ALL) {
+			// set table service
+			this.clientTablesServices = { ...this.clientTablesServices, hotelsByGroup: allApi };
+
+			// service
+			return this._proxyService
+				.getAPI(allApi, { queryParams: payload })
+				.pipe(map(res => res));
+		}
+
+		// set table service
+		this.clientTablesServices = { ...this.clientTablesServices, hotelsByGroup: hotelGroupApi };
+
 		// service
 		return this._proxyService
-			.getAPI(AppServices['Management']['Client_HotelGroup_List'], { queryParams: payload })
+			.getAPI(hotelGroupApi, {
+				pathParams: { id: this.appState.id },
+				queryParams: payload
+			})
 			.pipe(map(res => res));
 	}
 

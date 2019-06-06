@@ -8,6 +8,7 @@ import { forkJoin, Subject } from 'rxjs';
 import { ClientViewTypeEnum } from '../../enums/client-view-type.enum';
 import { ClientService } from '../../services/client.service';
 import { AuthService } from '../../../authorization.mod/services/auth.service';
+import { SidebarService } from '../../../../frame.pck/services/sidebar.service';
 
 @Component({
 	selector: 'app-client',
@@ -23,7 +24,8 @@ export class ClientComponent implements OnDestroy {
 	constructor(
 		private router: Router,
 		private _clientService: ClientService,
-		private _authService: AuthService
+		private _authService: AuthService,
+		private _sidebarService: SidebarService
 	) {
 		// initialize reload system
 		this.initReloadSystem();
@@ -54,6 +56,9 @@ export class ClientComponent implements OnDestroy {
 	 * load component services
 	 */
 	private loadComponentServices() {
+		// set app state
+		this._clientService.appState = this._sidebarService.appState;
+
 		// set current user state
 		this._clientService.currentUser = this._authService.currentUserState;
 

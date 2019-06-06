@@ -1,4 +1,17 @@
 <section class="ham-sidebar-primary">
+	<!-- Hotel Select -->
+	<div class="ham-select" [class.ham-hide]="!drawerState">
+		<app-select
+			[selectType]="hotelSelectType"
+			[selectId]="'sidenav-hotel-list-id'"
+			selectPlaceHolder="Select Hotel / Group"
+			i18n-selectPlaceHolder="@@Frame_HotelList_PlaceHolder"
+			[dataGroups]="hotelGroupList"
+			[control]="hotelByGroupList">
+		</app-select>
+	</div>
+
+	<!-- Tree -->
 	<mat-tree class="ham-tree-primary" [dataSource]="sidebarMenuList" [treeControl]="treeControl">
 		<!-- Expandable Node -->
 		<mat-nested-tree-node

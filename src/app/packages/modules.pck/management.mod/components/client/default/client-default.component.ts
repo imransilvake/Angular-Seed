@@ -7,7 +7,7 @@ import { Subject } from 'rxjs';
 import { ClientViewTypeEnum } from '../../../enums/client-view-type.enum';
 import { ClientService } from '../../../services/client.service';
 import { ClientViewInterface } from '../../../interfaces/client-view.interface';
-import { AppOptions, AppServices } from '../../../../../../../app.config';
+import { AppOptions } from '../../../../../../../app.config';
 
 @Component({
 	selector: 'app-client-default',
@@ -20,13 +20,16 @@ export class ClientDefaultComponent implements OnInit, OnDestroy {
 
 	public clientHotelsList;
 	public tablePageSize = AppOptions.tablePageSizeLimit - 1;
-	public tableApiUrl = AppServices['Management']['Client_HotelGroup_List'];
+	public tableApiUrl;
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(private _clientService: ClientService) {
 	}
 
 	ngOnInit() {
+		// set table api
+		this.tableApiUrl = this._clientService.clientTablesServices.hotelsByGroup;
+
 		// listen: get client hotels
 		this._clientService.clientDataEmitter
 			.pipe(

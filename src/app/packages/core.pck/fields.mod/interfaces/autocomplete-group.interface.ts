@@ -2,7 +2,7 @@
 export interface AutocompleteGroupInterface {
 	disabled?: boolean;
 	name: string;
-	items: AutocompleteGroupItems[];
+	items?: AutocompleteGroupItems[];
 }
 
 // group items
