@@ -21,6 +21,12 @@
 			padding: 20px 0;
 		}
 
+		.ham-no-data {
+			color: cd-palette($cd-color, 1004);
+			margin-top: 25px;
+			text-align: center;
+		}
+
 		table {
 			background-color: cd-palette($cd-background, 2003);
 			margin-top: 10px;

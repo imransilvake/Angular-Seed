@@ -48,13 +48,18 @@
 		</table>
 
 		<!-- Spinner -->
-		<div class="ham-spinner" *ngIf="dataSource.data.length === 0 || loading">
+		<div class="ham-spinner" *ngIf="loading">
 			<mat-spinner class="ham-spinner-1" [diameter]="50"></mat-spinner>
 		</div>
+
+		<!-- Info -->
+		<p class="ham-no-data" i18n="@@Management_Table_No_Data" *ngIf="dataSource.data.length === 0">
+			No Data is available.
+		</p>
 	</div>
 
 	<!-- Info & Pagination -->
-	<div class="ham-pagination-wrapper">
+	<div class="ham-pagination-wrapper" *ngIf="dataSource.data.length !== 0">
 		<mat-toolbar>
 			<mat-toolbar-row class="mat-toolbar-row">
 				<!-- Info -->

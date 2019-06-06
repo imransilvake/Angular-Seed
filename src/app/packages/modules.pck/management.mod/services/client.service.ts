@@ -3,11 +3,14 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { of } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { HttpErrorResponse } from '@angular/common/http';
 
 // app
 import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service';
 import { AppOptions, AppServices } from '../../../../../app.config';
 import { AppViewTypeEnum } from '../../../frame.pck/enums/app-view-type.enum';
+import { LicenseSystemInterface } from '../interfaces/license-system.interface';
+import { LoadingAnimationService } from '../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 
 @Injectable()
 export class ClientService {
@@ -19,7 +22,8 @@ export class ClientService {
 
 	constructor(
 		private _proxyService: ProxyService,
-		private _i18n: I18n
+		private _i18n: I18n,
+		private _loadingAnimationService: LoadingAnimationService
 	) {
 	}
 
@@ -27,8 +31,8 @@ export class ClientService {
 	 * refresh client hotels list
 	 */
 	public clientRefreshHotelGroupList() {
-		const allApi = AppServices['Management']['Client_HotelGroup_List'];
-		const hotelGroupApi = AppServices['Management']['Client_HotelGroup_List_Hotel'];
+		const allApi = AppServices['Management']['Client_Default_List'];
+		const hotelGroupApi = AppServices['Management']['Client_Default_List_Hotel'];
 		const payload = {
 			offset: 0,
 			limit: AppOptions.tablePageSizeLimit
@@ -55,6 +59,23 @@ export class ClientService {
 				queryParams: payload
 			})
 			.pipe(map(res => res));
+	}
+
+	/**
+	 * update license information
+	 *
+	 * @param formPayload
+	 */
+	public clientUpdateLicense(formPayload: LicenseSystemInterface) {
+		this._proxyService.postAPI(AppServices['Management']['Client_Form_Update_License_HotelGroup'], { bodyParams: formPayload })
+			.subscribe(res => {
+				console.log(res);
+				// stop loading animation
+				this._loadingAnimationService.stopLoadingAnimation();
+			}, (err: HttpErrorResponse) => {
+				// stop loading animation
+				this._loadingAnimationService.stopLoadingAnimation();
+			});
 	}
 
 	/**
@@ -199,6 +220,52 @@ export class ClientService {
 		];
 
 		const result = this.mapHGAModules(response);
+		return of(result);
+	}
+
+	/**
+	 * refresh HSA modules
+	 */
+	public clientRefreshHotelStaffAppModules() {
+		const response = [
+			{
+				'ModuleID': 'HSA_HOUSE_KEEPING',
+				'Licensed': true,
+				'Active': true,
+				'Params': {}
+			},
+			{
+				'ModuleID': 'HSA_REPAIRS',
+				'Licensed': false,
+				'Active': false,
+				'Params': {}
+			}
+		];
+
+		const result = this.mapHSAModules(response);
+		return of(result);
+	}
+
+	/**
+	 * refresh HAM modules
+	 */
+	public clientRefreshHotelManagerAppModules() {
+		const response = [
+			{
+				'ModuleID': 'HAM_ONLINE_BOOKING_STATISTICS',
+				'Licensed': false,
+				'Active': true,
+				'Params': {}
+			},
+			{
+				'ModuleID': 'HAM_INTERNATIONAL_GUEST_OVERVIEW',
+				'Licensed': false,
+				'Active': true,
+				'Params': {}
+			}
+		];
+
+		const result = this.mapHAMModules(response);
 		return of(result);
 	}
 
@@ -353,29 +420,6 @@ export class ClientService {
 	}
 
 	/**
-	 * refresh HSA modules
-	 */
-	public clientRefreshHotelStaffAppModules() {
-		const response = [
-			{
-				'ModuleID': 'HSA_HOUSE_KEEPING',
-				'Licensed': true,
-				'Active': true,
-				'Params': {}
-			},
-			{
-				'ModuleID': 'HSA_REPAIRS',
-				'Licensed': false,
-				'Active': false,
-				'Params': {}
-			}
-		];
-
-		const result = this.mapHSAModules(response);
-		return of(result);
-	}
-
-	/**
 	 * map HSA modules
 	 *
 	 * @param response
@@ -411,29 +455,6 @@ export class ClientService {
 				}]
 			}
 		];
-	}
-
-	/**
-	 * refresh HAM modules
-	 */
-	public clientRefreshHotelManagerAppModules() {
-		const response = [
-			{
-				'ModuleID': 'HAM_ONLINE_BOOKING_STATISTICS',
-				'Licensed': false,
-				'Active': true,
-				'Params': {}
-			},
-			{
-				'ModuleID': 'HAM_INTERNATIONAL_GUEST_OVERVIEW',
-				'Licensed': false,
-				'Active': true,
-				'Params': {}
-			}
-		];
-
-		const result = this.mapHAMModules(response);
-		return of(result);
 	}
 
 	/**

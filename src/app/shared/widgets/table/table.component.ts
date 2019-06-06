@@ -1,5 +1,5 @@
 // angular
-import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
@@ -15,7 +15,7 @@ import { SidebarService } from '../../../packages/frame.pck/services/sidebar.ser
 	styleUrls: ['./table.component.scss']
 })
 
-export class TableComponent implements OnInit, OnDestroy {
+export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	@Output() rowId: EventEmitter<any> = new EventEmitter();
 
 	@Input() tableTitle;
@@ -55,9 +55,7 @@ export class TableComponent implements OnInit, OnDestroy {
 		this.allColumns = this.tableColumns.concat(this.tableAdditionalColumns);
 
 		// initialize
-		this.dataSource = new MatTableDataSource<any>(this.tableData.data);
-		this.dataSource.paginator = this.paginator;
-		this.dataSource.sort = this.sort;
+		this.initilizeTable();
 
 		// set page info
 		this.setTableInformation();
@@ -66,6 +64,11 @@ export class TableComponent implements OnInit, OnDestroy {
 		this.search.valueChanges
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => this.applyFilter(res));
+	}
+
+	ngOnChanges() {
+		// re-initialize
+		this.initilizeTable();
 	}
 
 	ngOnDestroy() {
@@ -79,6 +82,15 @@ export class TableComponent implements OnInit, OnDestroy {
 	 */
 	get search() {
 		return this.formFields.get('search');
+	}
+
+	/**
+	 * init table
+	 */
+	public initilizeTable() {
+		this.dataSource = new MatTableDataSource<any>(this.tableData.data);
+		this.dataSource.paginator = this.paginator;
+		this.dataSource.sort = this.sort;
 	}
 
 	/**

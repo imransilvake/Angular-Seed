@@ -10,6 +10,8 @@ import { ClientService } from '../../../../services/client.service';
 import { ClientViewInterface } from '../../../../interfaces/client-view.interface';
 import { ClientViewTypeEnum } from '../../../../enums/client-view-type.enum';
 import { UtilityService } from '../../../../../../utilities.pck/accessories.mod/services/utility.service';
+import { LoadingAnimationService } from '../../../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
+import { LicenseSystemInterface } from '../../../../interfaces/license-system.interface';
 
 @Component({
 	selector: 'app-license',
@@ -30,7 +32,8 @@ export class LicenseComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private _utilityService: UtilityService,
-		private _clientService: ClientService
+		private _clientService: ClientService,
+		private _loadingAnimationService: LoadingAnimationService
 	) {
 		// form group
 		this.formFields = new FormGroup({
@@ -141,7 +144,36 @@ export class LicenseComponent implements OnInit, OnDestroy {
 	 * on submit form
 	 */
 	public onSubmitForm() {
-		console.log(this.formFields.value);
+		// start loading animation
+		this._loadingAnimationService.startLoadingAnimation();
+
+		// payload
+		const formPayload: LicenseSystemInterface = {
+			GroupID: this.formFields.value.GroupID,
+			Name: this.formFields.value.Name,
+			Address: {
+				...this.formFields.value.Address,
+				Country: this.formFields.value.Address.Country.id
+			},
+			License: {
+				HGA: {
+					...this.formFields.value.License.HGA,
+					NumberOfHotels: this.formFields.value.License.HGA.NumberOfHotels.id,
+					NumberOfUsers: this.formFields.value.License.HGA.NumberOfHotels.value,
+					NumberOfUserBlocks: null
+				},
+				HSA: {
+					...this.formFields.value.License.HSA,
+					NumberOfHotels: this.formFields.value.License.HSA.NumberOfHotels.id,
+					NumberOfUsers: this.formFields.value.License.HSA.NumberOfHotels.value,
+					NumberOfUserBlocks: this.formFields.value.License.HSA.NumberOfUserBlocks.id
+				}
+			},
+			System: {}
+		};
+
+		// update license information
+		this._clientService.clientUpdateLicense(formPayload);
 	}
 
 	/**

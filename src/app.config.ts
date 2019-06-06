@@ -37,8 +37,10 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 		Change_Password: { serviceUrl: '/profile/changepassword' }
 	},
 	Management: {
-		Client_HotelGroup_List: { serviceUrl: '/management/hotelgroup/list' },
-		Client_HotelGroup_List_Hotel: { serviceUrl: '/management/hotelgroup/list/:id' }
+		Client_Default_List: { serviceUrl: '/management/hotelgroup/list' },
+		Client_Default_List_Hotel: { serviceUrl: '/management/hotelgroup/list/:id' },
+		Client_Form_Update_License_Hotel: { serviceUrl: '/management/hotel' },
+		Client_Form_Update_License_HotelGroup: { serviceUrl: '/management/hotelgroup' }
 	}
 };
 
