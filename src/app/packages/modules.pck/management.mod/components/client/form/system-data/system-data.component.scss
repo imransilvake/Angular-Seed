@@ -13,14 +13,6 @@
 				margin-top: 20px;
 			}
 
-			button {
-				margin-top: 15px;
-
-				&:first-child {
-					margin-right: 10px;
-				}
-			}
-
 			&.ham-radio {
 				margin-top: 29px;
 			}
@@ -29,6 +21,26 @@
 				color: cd-palette($cd-color, 1004);
 				font-style: italic;
 				margin-top: -10px;
+			}
+		}
+
+		&.ham-buttons {
+			align-items: center;
+			display: flex;
+			justify-content: space-between;
+
+			.cd-col {
+				p {
+					color: cd-palette($cd-color, 1009);
+				}
+
+				button {
+					margin-top: 10px;
+
+					&:first-child {
+						margin-right: 10px;
+					}
+				}
 			}
 		}
 	}
@@ -52,19 +64,23 @@
 
 	@include cd-media(desktop, mini) {
 		.cd-row {
-			.cd-col {
-				display:flex;
-				flex-direction: column-reverse;
+			&.ham-buttons {
+				display: block;
 
-				button {
-					width: 100%;
+				.cd-col {
+					display:flex;
+					flex-direction: column-reverse;
 
-					&:first-child {
-						margin-right: 0;
-					}
+					button {
+						width: 100%;
 
-					&:last-child {
-						margin-top: 10px;
+						&:first-child {
+							margin-right: 0;
+						}
+
+						&:last-child {
+							margin-top: 10px;
+						}
 					}
 				}
 			}

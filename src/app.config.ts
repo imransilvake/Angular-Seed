@@ -43,7 +43,8 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 		Client_Form_License_Hotel_Update: { serviceUrl: '/management/hotel' },
 		Client_Form_License_HotelGroup_Fetch: { serviceUrl: '/management/hotelgroup/:id' },
 		Client_Form_License_HotelGroup_Validate: { serviceUrl: '/management/hotelgroup/validate' },
-		Client_Form_License_HotelGroup_Update: { serviceUrl: '/management/hotelgroup' }
+		Client_Form_System_HotelGroup_Validate: { serviceUrl: '/management/endpoint/validate' },
+		Client_Form_License_System_HotelGroup_Update: { serviceUrl: '/management/hotelgroup' }
 	}
 };
 

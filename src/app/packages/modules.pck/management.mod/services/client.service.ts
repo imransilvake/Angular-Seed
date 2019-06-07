@@ -12,7 +12,8 @@ import { AppOptions, AppServices } from '../../../../../app.config';
 import { AppViewTypeEnum } from '../../../frame.pck/enums/app-view-type.enum';
 import { LicenseSystemInterface } from '../interfaces/license-system.interface';
 import { LoadingAnimationService } from '../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
-import { LicenseSystemIdentifierInterface } from '../interfaces/license-system-identifier.interface';
+import { LicenseIdentifierInterface } from '../interfaces/license-identifier.interface';
+import { SystemBackendEndpointUrlInterface } from '../interfaces/system-backend-endpoint-url.interface';
 
 @Injectable()
 export class ClientService {
@@ -83,7 +84,7 @@ export class ClientService {
 	 * @param formPayload
 	 * @param formFields
 	 */
-	public clientValidateLicense(formPayload: LicenseSystemIdentifierInterface, formFields: FormGroup) {
+	public clientValidateLicense(formPayload: LicenseIdentifierInterface, formFields: FormGroup) {
 		this._proxyService
 			.postAPI(AppServices['Management']['Client_Form_License_HotelGroup_Validate'], { bodyParams: formPayload })
 			.subscribe(() => this.errorMessage.emit(), (err: HttpErrorResponse) => {
@@ -103,18 +104,91 @@ export class ClientService {
 	}
 
 	/**
-	 * update license information
+	 * validate system endpoint
 	 *
 	 * @param formPayload
+	 * @param formFields
+	 * @param licenseData
 	 */
-	public clientUpdateLicense(formPayload: LicenseSystemInterface) {
+	public clientValidateSystemEndpoint(formPayload: SystemBackendEndpointUrlInterface, formFields: FormGroup, licenseData: LicenseSystemInterface) {
 		this._proxyService
-			.postAPI(AppServices['Management']['Client_Form_License_HotelGroup_Update'], { bodyParams: formPayload })
-			.subscribe(() => {
+			.postAPI(AppServices['Management']['Client_Form_System_HotelGroup_Validate'], { bodyParams: formPayload })
+			.subscribe(res => {
 				// stop loading animation
 				this._loadingAnimationService.stopLoadingAnimation();
 
+				// validate
+				if (res && res.success) {
+					// clear message
+					this.errorMessage.emit();
 
+					// payload
+					const formPayload: LicenseSystemInterface = {
+						...licenseData,
+						System: {
+							BackendEndpointURL: formFields.value.BackendEndpointURL,
+							BackendUsername: formFields.value.BackendUsername,
+							BackendPassword: formFields.value.BackendPassword,
+							BackendEndpointToken: formFields.value.BackendEndpointToken,
+							IsReservationRequired: formFields.value.Reservation,
+							UseTargetGroups: formFields.value.UseTargetGroups,
+							SyncInterval: formFields.value.SyncInterval,
+							Languages: [
+								formFields.value.PrimaryLanguageName && formFields.value.PrimaryLanguageName.id,
+								formFields.value.SecondaryLanguageName && formFields.value.SecondaryLanguageName.id
+							],
+							BackendType: 'TOURISMUSSUITE'
+						}
+					};
+
+					// update system information
+					this.clientUpdateLicenseAndSystem(formPayload);
+				} else {
+
+				}
+			}, (err) => {
+				// stop loading animation
+				this._loadingAnimationService.stopLoadingAnimation();
+
+				if (err && err.status === 500) {
+					const message = this._i18n({
+						value: 'Description: Invalid Endpoint Credentials Exception',
+						id: 'Member_Client_System_Error_InvalidEndpointCredentials_Description'
+					});
+
+					// set fields to show error message
+					formFields.get('BackendUsername').setErrors({ backendError: true, text: message });
+					formFields.get('BackendPassword').setErrors({ backendError: true, text: message });
+					formFields.get('BackendEndpointToken').setErrors({ backendError: true, text: message });
+
+					// message
+					this.errorMessage.emit(message);
+				} else {
+					const message = this._i18n({
+						value: 'Description: Invalid Endpoint Url Exception',
+						id: 'Member_Client_System_Error_InvalidEndpointUrl_Description'
+					});
+
+					// set field to show error message
+					formFields.get('BackendEndpointURL').setErrors({ backendError: true, text: message });
+
+					// message
+					this.errorMessage.emit(message);
+				}
+			});
+	}
+
+	/**
+	 * update license & system information
+	 *
+	 * @param formPayload
+	 */
+	public clientUpdateLicenseAndSystem(formPayload: LicenseSystemInterface) {
+		this._proxyService
+			.postAPI(AppServices['Management']['Client_Form_License_System_HotelGroup_Update'], { bodyParams: formPayload })
+			.subscribe(() => {
+				// stop loading animation
+				this._loadingAnimationService.stopLoadingAnimation();
 			});
 	}
 

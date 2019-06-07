@@ -1,4 +1,4 @@
 // license system identifier interface
-export interface LicenseSystemIdentifierInterface {
+export interface LicenseIdentifierInterface {
 	GroupID: string;
 }

@@ -14,48 +14,41 @@
 			<mat-tab
 				label="Licenses"
 				i18n-label="@@Management_Client_Form_License_Label">
-				<ng-template matTabContent>
-					<app-license
-						[hotelId]="hotelId"
-						(changeClientView)="onClickCloseClientForm()">
-					</app-license>
-				</ng-template>
+				<app-license
+					[hotelId]="hotelId"
+					(changeClientView)="onClickCloseClientForm()">
+				</app-license>
 			</mat-tab>
 
 			<!-- System Data -->
 			<mat-tab
 				label="System Data"
 				i18n-label="@@Management_Client_Form_SystemData_Label">
-				<ng-template matTabContent>
-					<app-system-data (changeClientView)="onClickCloseClientForm()"></app-system-data>
-				</ng-template>
+				<app-system-data
+					[hotelId]="hotelId"
+					(changeClientView)="onClickCloseClientForm()">
+				</app-system-data>
 			</mat-tab>
 
 			<!-- HotelGuest/App -->
 			<mat-tab
 				label="HotelGuest/App"
 				i18n-label="@@Management_Client_Form_HotelGuestApp_Label">
-				<ng-template matTabContent>
-					<app-hotel-guest-app (changeClientView)="onClickCloseClientForm()"></app-hotel-guest-app>
-				</ng-template>
+				<app-hotel-guest-app (changeClientView)="onClickCloseClientForm()"></app-hotel-guest-app>
 			</mat-tab>
 
 			<!-- HotelStaff/App -->
 			<mat-tab
 				label="HotelStaff/App"
 				i18n-label="@@Management_Client_Form_HotelStaffApp_Label">
-				<ng-template matTabContent>
-					<app-hotel-staff-app (changeClientView)="onClickCloseClientForm()"></app-hotel-staff-app>
-				</ng-template>
+				<app-hotel-staff-app (changeClientView)="onClickCloseClientForm()"></app-hotel-staff-app>
 			</mat-tab>
 
 			<!-- HotelAppManager -->
 			<mat-tab
 				label="HotelAppManager"
 				i18n-label="@@Management_Client_Form_HotelAppManager_Label">
-				<ng-template matTabContent>
-					<app-hotel-manager-app (changeClientView)="onClickCloseClientForm()"></app-hotel-manager-app>
-				</ng-template>
+				<app-hotel-manager-app (changeClientView)="onClickCloseClientForm()"></app-hotel-manager-app>
 			</mat-tab>
 		</mat-tab-group>
 	</div>

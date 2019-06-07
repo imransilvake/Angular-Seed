@@ -29,6 +29,7 @@ export class LicenseComponent implements OnInit, OnDestroy {
 	public countryList;
 	public licenseHotelsList;
 	public licenseHSAUserBlocksList = [];
+	public systemData;
 	public errorMessage;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
@@ -113,7 +114,7 @@ export class LicenseComponent implements OnInit, OnDestroy {
 				this.license.get('HSA').get('NumberOfUsers').setValue(res.value * 2);
 			});
 
-		// listen: get license data
+		// listen: get license & system data
 		this._clientService.clientDataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
@@ -139,6 +140,9 @@ export class LicenseComponent implements OnInit, OnDestroy {
 					this.license.get('HSA').get('NumberOfHotels').setValue(hsaNumberOfHotels);
 					this.license.get('HSA').get('NumberOfUsers').setValue(res.licenseSystemData.License.HSA.NumberOfUsers);
 					this.license.get('HSA').get('NumberOfUserBlocks').setValue(hsaNumberOfUserBlocks);
+
+					// set system data
+					this.systemData = res.licenseSystemData.System;
 				}
 			});
 
@@ -222,11 +226,11 @@ export class LicenseComponent implements OnInit, OnDestroy {
 					NumberOfUserBlocks: this.formFields.value.License.HSA.NumberOfUserBlocks.id
 				}
 			},
-			System: { ...this.formFields.value.System }
+			System: { ...this.systemData }
 		};
 
 		// update license information
-		this._clientService.clientUpdateLicense(formPayload);
+		this._clientService.clientUpdateLicenseAndSystem(formPayload);
 	}
 
 	/**

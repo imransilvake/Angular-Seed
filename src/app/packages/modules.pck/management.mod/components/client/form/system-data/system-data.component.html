@@ -5,14 +5,14 @@
 		<div class="cd-row ham-padding-0">
 			<div class="cd-col">
 				<mat-slide-toggle class="mat-slide-toggle-1" [formControl]="reservation">
-					<h6 i18n="@@Management_Client_SystemData_Form_Reservation_Title">Title</h6>
+					<h6 i18n="@@Management_Client_SystemData_Form_Reservation_Title">Allow guests with a valid reservation only</h6>
 					<p i18n="@@Management_Client_SystemData_Form_Reservation_Note">Note</p>
 				</mat-slide-toggle>
 			</div>
 
 			<div class="cd-col cd-col-top">
 				<mat-slide-toggle class="mat-slide-toggle-1" [formControl]="targetGroups">
-					<h6 i18n="@@Management_Client_SystemData_Form_TargetGroup_Title">Title</h6>
+					<h6 i18n="@@Management_Client_SystemData_Form_TargetGroup_Title">Seperate target groups between member and guests with a valid reservation</h6>
 					<p i18n="@@Management_Client_SystemData_Form_TargetGroup_Note">Note</p>
 				</mat-slide-toggle>
 			</div>
@@ -121,7 +121,7 @@
 					[inputName]="'token'"
 					inputPlaceHolder="Token"
 					i18n-inputPlaceHolder="@@Management_Client_SystemData_Form_Token_PlaceHolder"
-					[control]="token">
+					[control]="backendEndpointToken">
 				</app-input>
 			</div>
 		</div>
@@ -135,8 +135,11 @@
 		<app-divider></app-divider>
 
 		<!-- Button -->
-		<div class="cd-row ham-padding-1 cd-right-align">
-			<div class="cd-col">
+		<div class="cd-row ham-padding-1 ham-buttons">
+			<div class="cd-col cd-col-pm-s-6">
+				<p>{{errorMessage}}</p>
+			</div>
+			<div class="cd-col cd-col-pm-s-6 cd-right-align">
 				<button mat-button type="button" class="ham-button ham-button-1" (click)="onClickCloseClientForm()" i18n="@@Management_Client_SystemData_Form_Cancel_Button">Cancel</button>
 				<button mat-button type="submit" class="ham-button ham-button-1" [disabled]="!isFormValid" i18n="@@Management_Client_SystemData_Form_Save_Button">Save</button>
 			</div>
