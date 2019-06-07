@@ -117,7 +117,8 @@ export class UpdateProfileComponent implements OnInit, OnDestroy {
 		const formPayload: UpdateProfileInterface = {
 			salutation: this.salutation.value.id,
 			firstName: this.firstName.value,
-			lastName: this.lastName.value
+			lastName: this.lastName.value,
+			email: this.email.value
 		};
 
 		// update user profile

@@ -71,7 +71,7 @@ export class ClientService {
 	 */
 	public clientFetchLicenseSystem(groupId: string) {
 		return !groupId ? of(null) : this._proxyService
-			.getAPI(AppServices['Management']['Client_Form_Fetch_License_HotelGroup'], {
+			.getAPI(AppServices['Management']['Client_Form_License_HotelGroup_Fetch'], {
 				pathParams: { id: groupId }
 			})
 			.pipe(map(res => res));

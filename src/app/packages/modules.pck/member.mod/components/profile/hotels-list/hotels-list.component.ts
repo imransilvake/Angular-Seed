@@ -33,7 +33,7 @@ export class HotelsListComponent implements OnInit, OnDestroy {
 
 					// fetch assigned hotels
 					this._memberService.memberFetchAssignedHotels(groupId, hotelIds)
-						.subscribe(res => this.hotelList = res.items);
+						.subscribe(result => this.hotelList = result.items);
 				}
 			});
 	}
