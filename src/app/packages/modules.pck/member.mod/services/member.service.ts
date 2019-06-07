@@ -3,6 +3,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { HttpErrorResponse } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 
 // store
 import { Store } from '@ngrx/store';
@@ -24,7 +25,7 @@ import { ChangePasswordInterface } from '../interfaces/change-password.interface
 export class MemberService {
 	public currentUser;
 	public memberData;
-	public memberDataEmitter: EventEmitter<any> = new EventEmitter();
+	public memberDataEmitter: BehaviorSubject<any> = new BehaviorSubject(0);
 	public lastLogin: EventEmitter<string> = new EventEmitter();
 	public profileImageUpdate: EventEmitter<boolean> = new EventEmitter();
 

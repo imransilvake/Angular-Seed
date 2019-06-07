@@ -1,22 +1,24 @@
 // angular
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 // app
-import { faHome, faDatabase, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
+import { faDatabase, faExternalLinkAlt, faHome } from '@fortawesome/free-solid-svg-icons';
 import { ROUTING } from '../../../../environments/environment';
 import { SidebarInterface } from '../interfaces/sidebar.interface';
 import { SelectGroupInterface } from '../../core.pck/fields.mod/interfaces/select-group.interface';
 import { StorageTypeEnum } from '../../core.pck/storage.mod/enums/storage-type.enum';
-import { NeutralStorageItems } from '../../../../app.config';
+import { AppServices, NeutralStorageItems } from '../../../../app.config';
 import { StorageService } from '../../core.pck/storage.mod/services/storage.service';
 import { AuthService } from '../../modules.pck/authorization.mod/services/auth.service';
+import { ProxyService } from '../../core.pck/proxy.mod/services/proxy.service';
 
 @Injectable()
 export class SidebarService {
 	constructor(
 		private _authService: AuthService,
-		private _storageService: StorageService
+		private _storageService: StorageService,
+		private _proxyService: ProxyService
 	) {
 	}
 
@@ -49,7 +51,7 @@ export class SidebarService {
 				children: [
 					{
 						name: 'Home',
-						url: `/${ROUTING.dashboard}`,
+						url: `/${ ROUTING.dashboard }`,
 					}
 				]
 			},
@@ -59,17 +61,17 @@ export class SidebarService {
 				children: [
 					{
 						name: 'User',
-						url: `/${ROUTING.management.routes.user}`,
+						url: `/${ ROUTING.management.routes.user }`,
 						externalIcon: faExternalLinkAlt
 					},
 					{
 						name: 'Client',
-						url: `/${ROUTING.management.routes.client}`,
+						url: `/${ ROUTING.management.routes.client }`,
 						externalIcon: faExternalLinkAlt
 					},
 					{
 						name: 'Notifications',
-						url: `/${ROUTING.management.routes.notification}`,
+						url: `/${ ROUTING.management.routes.notification }`,
 						externalIcon: faExternalLinkAlt
 					}
 				]
@@ -82,29 +84,35 @@ export class SidebarService {
 	/**
 	 * get hotel by group list
 	 */
-	public static getHotelsByGroup() {
-		const hotelByGroupList: SelectGroupInterface[] = [
-			{
-				name: 'All'
-			},
-			{
-				name: 'EMO',
-				items: [
-					{ id: 'EMO_1', text: 'EMO Aachen' },
-					{ id: 'EMO_2', text: 'EMO Bonn' },
-					{ id: 'EMO_3', text: 'EMO Düsseldorf' }
-				]
-			},
-			{
-				name: 'BBH',
-				items: [
-					{ id: 'BBH_1', text: 'BBH Keller' },
-					{ id: 'BBH_2', text: 'BBH Am Kaiser' },
-					{ id: 'BBH_3', text: 'BBH Nierdorf' }
-				]
-			}
-		];
+	public getHotelsByGroup() {
+		return this._proxyService.getAPI(AppServices['Utilities']['HotelList'])
+			.pipe(
+				map(res => {
+					const hotelByGroupList: SelectGroupInterface[] = [{
+						name: 'All'
+					}];
 
-		return of(hotelByGroupList);
+					// mapping
+					const mapped = res.reduce((acc, hotel) => {
+						if (!acc.hasOwnProperty(hotel.group)) {
+							acc[hotel.group] = [];
+						}
+						acc[hotel.group].push(hotel);
+						return acc;
+					}, {});
+
+					// structuring
+					for (const key in mapped) {
+						if (mapped.hasOwnProperty(key)) {
+							hotelByGroupList.push({
+								name: key,
+								items: mapped[key]
+							});
+						}
+					}
+
+					return hotelByGroupList;
+				})
+			);
 	}
 }

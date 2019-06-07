@@ -60,7 +60,7 @@ export class PrimarySidebarComponent implements OnInit, OnDestroy {
 		}
 
 		// listen: get hotel by group list
-		SidebarService.getHotelsByGroup()
+		this._sidebarService.getHotelsByGroup()
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
 				if (res) {

@@ -7,6 +7,8 @@ import { forkJoin, Subject } from 'rxjs';
 // app
 import { MemberService } from '../../services/member.service';
 import { AuthService } from '../../../authorization.mod/services/auth.service';
+import { StorageTypeEnum } from '../../../../core.pck/storage.mod/enums/storage-type.enum';
+import { StorageService } from '../../../../core.pck/storage.mod/services/storage.service';
 
 @Component({
 	selector: 'app-profile',
@@ -20,7 +22,8 @@ export class ProfileComponent implements OnDestroy {
 	constructor(
 		private router: Router,
 		private _authService: AuthService,
-		private _memberService: MemberService
+		private _memberService: MemberService,
+		private _storageService: StorageService
 	) {
 		// initialize reload system
 		this.initReloadSystem();
@@ -54,6 +57,9 @@ export class ProfileComponent implements OnDestroy {
 		// set current user state
 		this._memberService.currentUser = this._authService.currentUserState;
 
+		// clear memory storage to get fresh data on refresh
+		this._storageService.remove(null, StorageTypeEnum.MEMORY);
+
 		// refresh member services
 		forkJoin({
 			memberProfile: this._memberService.memberRefreshProfile()
@@ -66,7 +72,7 @@ export class ProfileComponent implements OnDestroy {
 			this._memberService.memberData = result;
 
 			// emit result
-			this._memberService.memberDataEmitter.emit(result);
+			this._memberService.memberDataEmitter.next(result);
 		});
 	}
 }
