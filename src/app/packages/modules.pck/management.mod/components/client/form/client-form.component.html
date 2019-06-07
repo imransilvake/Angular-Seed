@@ -15,7 +15,10 @@
 				label="Licenses"
 				i18n-label="@@Management_Client_Form_License_Label">
 				<ng-template matTabContent>
-					<app-license (changeClientView)="onClickCloseClientForm()"></app-license>
+					<app-license
+						[hotelId]="hotelId"
+						(changeClientView)="onClickCloseClientForm()">
+					</app-license>
 				</ng-template>
 			</mat-tab>
 

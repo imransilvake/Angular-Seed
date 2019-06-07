@@ -1,9 +1,10 @@
 // angular
 import { EventEmitter, Injectable } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
-import { of } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
+import { FormGroup } from '@angular/forms';
 
 // app
 import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service';
@@ -11,6 +12,7 @@ import { AppOptions, AppServices } from '../../../../../app.config';
 import { AppViewTypeEnum } from '../../../frame.pck/enums/app-view-type.enum';
 import { LicenseSystemInterface } from '../interfaces/license-system.interface';
 import { LoadingAnimationService } from '../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
+import { LicenseSystemIdentifierInterface } from '../interfaces/license-system-identifier.interface';
 
 @Injectable()
 export class ClientService {
@@ -18,7 +20,8 @@ export class ClientService {
 	public currentUser;
 	public clientData;
 	public clientTablesServices;
-	public clientDataEmitter: EventEmitter<any> = new EventEmitter();
+	public clientDataEmitter: BehaviorSubject<any> = new BehaviorSubject(0);
+	public errorMessage: EventEmitter<string> = new EventEmitter();
 
 	constructor(
 		private _proxyService: ProxyService,
@@ -62,19 +65,56 @@ export class ClientService {
 	}
 
 	/**
+	 * fetch license & system information
+	 *
+	 * @param groupId
+	 */
+	public clientFetchLicenseSystem(groupId: string) {
+		return !groupId ? of(null) : this._proxyService
+			.getAPI(AppServices['Management']['Client_Form_Fetch_License_HotelGroup'], {
+				pathParams: { id: groupId }
+			})
+			.pipe(map(res => res));
+	}
+
+	/**
 	 * update license information
 	 *
 	 * @param formPayload
 	 */
 	public clientUpdateLicense(formPayload: LicenseSystemInterface) {
-		this._proxyService.postAPI(AppServices['Management']['Client_Form_Update_License_HotelGroup'], { bodyParams: formPayload })
-			.subscribe(res => {
-				console.log(res);
+		this._proxyService
+			.postAPI(AppServices['Management']['Client_Form_Update_License_HotelGroup'], { bodyParams: formPayload })
+			.subscribe(() => {
 				// stop loading animation
 				this._loadingAnimationService.stopLoadingAnimation();
-			}, (err: HttpErrorResponse) => {
-				// stop loading animation
-				this._loadingAnimationService.stopLoadingAnimation();
+
+
+			});
+	}
+
+	/**
+	 * validate license
+	 *
+	 * @param formPayload
+	 * @param formFields
+	 */
+	public clientValidateLicense(formPayload: LicenseSystemIdentifierInterface, formFields: FormGroup) {
+		this._proxyService
+			.postAPI(AppServices['Management']['Client_Form_Update_License_HotelGroup_Validate'], { bodyParams: formPayload })
+			.subscribe(() => this.errorMessage.emit(), (err: HttpErrorResponse) => {
+				if (err.error.detail.code === 'InvalidGroupID') {
+					const message = this._i18n({
+						value: 'Description: Invalid Group ID Exception',
+						id: 'Member_Client_License_SystemIdentifier_Error_InvalidGroupID_Description'
+					});
+
+					// set field to show error message
+					formFields.get('GroupID').setErrors({ backendError: true, text: message });
+
+					// message
+					this.errorMessage.emit(message);
+				}
 			});
 	}
 

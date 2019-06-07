@@ -9,6 +9,8 @@ import { ClientViewTypeEnum } from '../../enums/client-view-type.enum';
 import { ClientService } from '../../services/client.service';
 import { AuthService } from '../../../authorization.mod/services/auth.service';
 import { SidebarService } from '../../../../frame.pck/services/sidebar.service';
+import { StorageService } from '../../../../core.pck/storage.mod/services/storage.service';
+import { StorageTypeEnum } from '../../../../core.pck/storage.mod/enums/storage-type.enum';
 
 @Component({
 	selector: 'app-client',
@@ -25,7 +27,8 @@ export class ClientComponent implements OnDestroy {
 		private router: Router,
 		private _clientService: ClientService,
 		private _authService: AuthService,
-		private _sidebarService: SidebarService
+		private _sidebarService: SidebarService,
+		private _storageService: StorageService
 	) {
 		// initialize reload system
 		this.initReloadSystem();
@@ -62,15 +65,20 @@ export class ClientComponent implements OnDestroy {
 		// set current user state
 		this._clientService.currentUser = this._authService.currentUserState;
 
+		// clear memory storage to get fresh data on refresh
+		this._storageService.remove(null, StorageTypeEnum.MEMORY);
+
 		// refresh client services
 		forkJoin({
 			hotelGroupList: this._clientService.clientRefreshHotelGroupList(),
+			licenseSystemData: this._clientService.clientFetchLicenseSystem(this.hotelId),
 			hgaModules: this._clientService.clientRefreshHotelGuestAppModules(),
 			hsaModules: this._clientService.clientRefreshHotelStaffAppModules(),
 			hmaModules: this._clientService.clientRefreshHotelManagerAppModules()
 		}).pipe(takeUntil(this._ngUnSubscribe)).subscribe(res => {
 			const result = {
 				hotelGroupList: res.hotelGroupList,
+				licenseSystemData: res.licenseSystemData,
 				hgaModules: res.hgaModules,
 				hsaModules: res.hsaModules,
 				hmaModules: res.hmaModules
@@ -80,7 +88,7 @@ export class ClientComponent implements OnDestroy {
 			this._clientService.clientData = result;
 
 			// emit result
-			this._clientService.clientDataEmitter.emit(result);
+			this._clientService.clientDataEmitter.next(result);
 		});
 
 		// refresh hga modules

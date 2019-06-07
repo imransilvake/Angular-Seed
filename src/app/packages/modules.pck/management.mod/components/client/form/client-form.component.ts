@@ -12,8 +12,8 @@ import { ClientViewInterface } from '../../../interfaces/client-view.interface';
 })
 
 export class ClientFormComponent {
-	@Input() hotelId;
 	@Output() changeClientView: EventEmitter<any> = new EventEmitter();
+	@Input() hotelId;
 
 	/**
 	 * close client form

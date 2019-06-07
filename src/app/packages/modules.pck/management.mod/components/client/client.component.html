@@ -9,14 +9,16 @@
 	<div class="ham-details">
 		<!-- View: Default -->
 		<ng-container *ngIf="pageView === 0">
-			<app-client-default (changeClientView)="pageView = $event.view; hotelId = $event.hotelId;"></app-client-default>
+			<app-client-default
+				(changeClientView)="pageView = $event.view; hotelId = $event.hotelId; loadComponentServices();">
+			</app-client-default>
 		</ng-container>
 
 		<!-- View: Form -->
 		<ng-container *ngIf="pageView === 1">
 			<app-client-form
-				(changeClientView)="pageView = $event.view; loadComponentServices();"
-				[hotelId]="hotelId">
+				[hotelId]="hotelId"
+				(changeClientView)="pageView = $event.view; loadComponentServices();">
 			</app-client-form>
 		</ng-container>
 	</div>

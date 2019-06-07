@@ -8,6 +8,7 @@ import { takeUntil } from 'rxjs/operators';
 // app
 import { ProxyService } from '../../../packages/core.pck/proxy.mod/services/proxy.service';
 import { SidebarService } from '../../../packages/frame.pck/services/sidebar.service';
+import { UtilityService } from '../../../packages/utilities.pck/accessories.mod/services/utility.service';
 
 @Component({
 	selector: 'app-table',
@@ -42,7 +43,8 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
 	constructor(
 		private _proxyService: ProxyService,
-		private _sidebarService: SidebarService
+		private _sidebarService: SidebarService,
+		private _utilityService: UtilityService
 	) {
 		// form group
 		this.formFields = new FormGroup({
@@ -54,8 +56,8 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 		// add additional columns
 		this.allColumns = this.tableColumns.concat(this.tableAdditionalColumns);
 
-		// initialize
-		this.initilizeTable();
+		// initialize table
+		this.initializeTable();
 
 		// set page info
 		this.setTableInformation();
@@ -67,8 +69,8 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	}
 
 	ngOnChanges() {
-		// re-initialize
-		this.initilizeTable();
+		// re-initialize table
+		this.initializeTable();
 	}
 
 	ngOnDestroy() {
@@ -85,9 +87,9 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	}
 
 	/**
-	 * init table
+	 * initialize table
 	 */
-	public initilizeTable() {
+	public initializeTable() {
 		this.dataSource = new MatTableDataSource<any>(this.tableData.data);
 		this.dataSource.paginator = this.paginator;
 		this.dataSource.sort = this.sort;
@@ -100,6 +102,15 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	 */
 	public validateType(value) {
 		return typeof value;
+	}
+
+	/**
+	 * get country name
+	 *
+	 * @param countryId
+	 */
+	public countryName(countryId) {
+		return this._utilityService.countryList.filter(country => country.id === countryId)[0].text;
 	}
 
 	/**

@@ -195,8 +195,11 @@
 		<app-divider></app-divider>
 
 		<!-- Button -->
-		<div class="cd-row ham-padding-1 cd-right-align">
-			<div class="cd-col">
+		<div class="cd-row ham-padding-1 ham-buttons">
+			<div class="cd-col cd-col-pm-s-6">
+				<p>{{errorMessage}}</p>
+			</div>
+			<div class="cd-col cd-col-pm-s-6 cd-right-align">
 				<button mat-button type="button" class="ham-button ham-button-1" (click)="onClickCloseClientForm()" i18n="@@Management_Client_License_Form_Cancel_Button">Cancel</button>
 				<button mat-button type="submit" class="ham-button ham-button-1" [disabled]="!isFormValid" i18n="@@Management_Client_License_Form_Save_Button">Save</button>
 			</div>

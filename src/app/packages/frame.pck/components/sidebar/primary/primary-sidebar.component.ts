@@ -63,14 +63,16 @@ export class PrimarySidebarComponent implements OnInit, OnDestroy {
 		SidebarService.getHotelsByGroup()
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
-				// set hotel by group list
-				this.hotelGroupList = res;
+				if (res) {
+					// set hotel by group list
+					this.hotelGroupList = res;
 
-				// get app state
-				const appState = this._sidebarService.appState;
+					// get app state
+					const appState = this._sidebarService.appState;
 
-				// set current value
-				this.hotelByGroupList.setValue(appState.id);
+					// set current value
+					this.hotelByGroupList.setValue(appState.id);
+				}
 			});
 
 		// listen: on hotels by group selection

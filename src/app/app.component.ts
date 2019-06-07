@@ -11,18 +11,14 @@ import { UtilityService } from './packages/utilities.pck/accessories.mod/service
 	selector: 'app-root',
 	template: `
 		<!-- Loading Animation -->
-		<app-loading-animation (changedAnimationStatus)="isShowLoadingAnimation = $event"></app-loading-animation>
+		<app-loading-animation></app-loading-animation>
 
 		<!-- Router Outlet -->
-		<div [class.cd-hide]="isShowLoadingAnimation">
-			<router-outlet></router-outlet>
-		</div>
+		<router-outlet></router-outlet>
 	`,
 })
 
 export class AppComponent {
-	public isShowLoadingAnimation = false;
-
 	constructor(
 		private _errorHandlerService: ErrorHandlerService,
 		private _sessionService: SessionService,

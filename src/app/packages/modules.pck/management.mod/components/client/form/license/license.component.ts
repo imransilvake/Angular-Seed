@@ -1,7 +1,7 @@
 // angular
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { takeUntil } from 'rxjs/operators';
+import { debounceTime, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 // app
@@ -21,12 +21,15 @@ import { LicenseSystemInterface } from '../../../../interfaces/license-system.in
 
 export class LicenseComponent implements OnInit, OnDestroy {
 	@Output() changeClientView: EventEmitter<any> = new EventEmitter();
+	@Input() hotelId;
+	@Input() licenseSystemData;
 
 	public formFields;
 	public licenseSelectType = SelectTypeEnum.DEFAULT;
 	public countryList;
 	public licenseHotelsList;
 	public licenseHSAUserBlocksList = [];
+	public errorMessage;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
@@ -86,7 +89,7 @@ export class LicenseComponent implements OnInit, OnDestroy {
 		});
 
 		// pre-select user block list
-		this.license.controls['HSA'].controls['NumberOfUserBlocks'].setValue(this.licenseHSAUserBlocksList[0]);
+		this.license.get('HSA').get('NumberOfUserBlocks').setValue(this.licenseHSAUserBlocksList[0]);
 	}
 
 	ngOnInit() {
@@ -97,18 +100,68 @@ export class LicenseComponent implements OnInit, OnDestroy {
 		this.licenseHotelsList = this._clientService.clientFetchLicenseList();
 
 		// listen: HGA number of hotels
-		this.license.controls['HGA'].controls['NumberOfHotels'].valueChanges
+		this.license.get('HGA').get('NumberOfHotels').valueChanges
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
-				this.license.controls['HGA'].controls['NumberOfUsers'].setValue(res.value);
+				this.license.get('HGA').get('NumberOfUsers').setValue(res.value);
 			});
 
 		// listen: HSA number of hotels
-		this.license.controls['HSA'].controls['NumberOfHotels'].valueChanges
+		this.license.get('HSA').get('NumberOfHotels').valueChanges
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
-				this.license.controls['HSA'].controls['NumberOfUsers'].setValue(res.value * 2);
+				this.license.get('HSA').get('NumberOfUsers').setValue(res.value * 2);
 			});
+
+		// listen: get license data
+		this._clientService.clientDataEmitter
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => {
+				if (res && res.licenseSystemData) {
+					// set values
+					const countryName = this.countryList.filter(country => country.id === res.licenseSystemData.Address.Country)[0];
+					const hgaNumberOfHotels = this.licenseHotelsList.filter(hotel => hotel.id === res.licenseSystemData.License.HGA.NumberOfHotels)[0];
+					const hsaNumberOfHotels = this.licenseHotelsList.filter(hotel => hotel.id === res.licenseSystemData.License.HSA.NumberOfHotels)[0];
+					const hsaNumberOfUserBlocks = this.licenseHSAUserBlocksList.filter(user => user.id === res.licenseSystemData.License.HSA.NumberOfUserBlocks)[0];
+
+					// update form
+					this.company.setValue(res.licenseSystemData.Name);
+					this.systemIdentifier.disable();
+					this.systemIdentifier.setValue(res.licenseSystemData.GroupID);
+					this.address.get('Address1').setValue(res.licenseSystemData.Address.Address1);
+					this.address.get('Address2').setValue(res.licenseSystemData.Address.Address2);
+					this.address.get('City').setValue(res.licenseSystemData.Address.City);
+					this.address.get('Country').setValue(countryName);
+					this.address.get('PostalCode').setValue(res.licenseSystemData.Address.PostalCode);
+					this.license.get('HGA').get('NumberOfHotels').setValue(hgaNumberOfHotels);
+					this.license.get('HGA').get('NumberOfUsers').setValue(res.licenseSystemData.License.HGA.NumberOfUsers);
+					this.license.get('HGA').get('NumberOfUserBlocks').setValue(null);
+					this.license.get('HSA').get('NumberOfHotels').setValue(hsaNumberOfHotels);
+					this.license.get('HSA').get('NumberOfUsers').setValue(res.licenseSystemData.License.HSA.NumberOfUsers);
+					this.license.get('HSA').get('NumberOfUserBlocks').setValue(hsaNumberOfUserBlocks);
+				}
+			});
+
+		// listen: validate system identifier on new form
+		if (!this.hotelId) {
+			this.systemIdentifier.valueChanges
+				.pipe(
+					debounceTime(200),
+					takeUntil(this._ngUnSubscribe)
+				)
+				.subscribe(res => {
+					// payload
+					const formPayload = { GroupID: res };
+
+					// service
+					this._clientService.clientValidateLicense(formPayload, this.formFields);
+				});
+		}
+
+		// listen: error message
+		this._clientService.errorMessage
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => this.errorMessage = res);
 	}
 
 	ngOnDestroy() {
@@ -149,8 +202,8 @@ export class LicenseComponent implements OnInit, OnDestroy {
 
 		// payload
 		const formPayload: LicenseSystemInterface = {
-			GroupID: this.formFields.value.GroupID,
-			Name: this.formFields.value.Name,
+			GroupID: this.systemIdentifier.value,
+			Name: this.company.value,
 			Address: {
 				...this.formFields.value.Address,
 				Country: this.formFields.value.Address.Country.id
@@ -169,7 +222,7 @@ export class LicenseComponent implements OnInit, OnDestroy {
 					NumberOfUserBlocks: this.formFields.value.License.HSA.NumberOfUserBlocks.id
 				}
 			},
-			System: {}
+			System: { ...this.formFields.value.System }
 		};
 
 		// update license information

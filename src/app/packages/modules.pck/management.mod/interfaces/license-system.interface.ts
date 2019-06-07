@@ -22,12 +22,12 @@ interface LicenseInterface {
 		NumberOfHotels: number;
 		NumberOfUsers: number;
 		NumberOfUserBlocks: number;
-	},
+	};
 	HSA: {
 		NumberOfHotels: number;
 		NumberOfUsers: number;
 		NumberOfUserBlocks: number;
-	}
+	};
 }
 
 // system interface
@@ -36,9 +36,9 @@ interface SystemInterface {
 	BackendUsername?: string;
 	BackendPassword?: string;
 	BackendEndpointToken?: string;
-	IsReservationRequired?: boolean,
-	UseTargetGroups?: boolean,
-	Languages?: Array<string>,
+	IsReservationRequired?: boolean;
+	UseTargetGroups?: boolean;
+	Languages?: Array<string>;
 	BackendType?: string;
 	SyncInterval?: string;
 }
