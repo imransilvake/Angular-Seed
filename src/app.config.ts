@@ -20,6 +20,7 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 	Utilities: {
 		CountryList: { serviceUrl: '/config/countries/list' },
 		HotelList: { serviceUrl: '/hotels/list' },
+		HotelListGroup: { serviceUrl: '/hotels/list/groups/:id' },
 		Fetch_Profile_Image: { serviceUrl: '/getimage' },
 		Change_Profile_Image: { serviceUrl: '/imageupload' }
 	},
@@ -39,10 +40,10 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 	Management: {
 		Client_Default_List: { serviceUrl: '/management/hotelgroup/list' },
 		Client_Default_List_Hotel: { serviceUrl: '/management/hotelgroup/list/:id' },
-		Client_Form_Update_License_Hotel: { serviceUrl: '/management/hotel' },
-		Client_Form_Update_License_HotelGroup: { serviceUrl: '/management/hotelgroup' },
-		Client_Form_Update_License_HotelGroup_Validate: { serviceUrl: '/management/hotelgroup/validate' },
-		Client_Form_Fetch_License_HotelGroup: { serviceUrl: '/management/hotelgroup/:id' }
+		Client_Form_License_Hotel_Update: { serviceUrl: '/management/hotel' },
+		Client_Form_License_HotelGroup_Fetch: { serviceUrl: '/management/hotelgroup/:id' },
+		Client_Form_License_HotelGroup_Validate: { serviceUrl: '/management/hotelgroup/validate' },
+		Client_Form_License_HotelGroup_Update: { serviceUrl: '/management/hotelgroup' }
 	}
 };
 

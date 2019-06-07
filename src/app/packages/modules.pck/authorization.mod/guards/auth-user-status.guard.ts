@@ -1,7 +1,7 @@
 // angular
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot } from '@angular/router';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, distinctUntilChanged, map } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 
 // app
@@ -93,6 +93,7 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 	canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
 		return this._authService.authenticateUser()
 			.pipe(
+				distinctUntilChanged(),
 				map(res => {
 					if (res.status) {
 						if (res.status === 'FAIL') {

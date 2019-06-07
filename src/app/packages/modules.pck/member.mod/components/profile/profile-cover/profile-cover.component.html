@@ -19,7 +19,7 @@
 			</div>
 			<div class="ham-name">
 				<h1>{{userName}}</h1>
-				<h5>- HotelManager -</h5>
+				<h5 *ngIf="userType">{{userType.replace('_', ' ')}}</h5>
 			</div>
 		</div>
 	</div>

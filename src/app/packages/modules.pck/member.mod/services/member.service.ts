@@ -26,7 +26,6 @@ export class MemberService {
 	public currentUser;
 	public memberData;
 	public memberDataEmitter: BehaviorSubject<any> = new BehaviorSubject(0);
-	public lastLogin: EventEmitter<string> = new EventEmitter();
 	public profileImageUpdate: EventEmitter<boolean> = new EventEmitter();
 
 	constructor(
@@ -45,22 +44,33 @@ export class MemberService {
 	public memberRefreshProfile() {
 		// payload
 		const payload = {
-			accessToken: this.currentUser.credentials.accessToken,
-			userName: this.currentUser.profile.email
+			ID: this.currentUser.profile.sub
 		};
 
 		// service
 		return this._proxyService
-			.postAPI(AppServices['Member']['Fetch_Profile'], { bodyParams: payload })
-			.pipe(
-				map(res => {
-					// set last login
-					this.lastLogin.emit(res.lastLogin);
+			.getAPI(AppServices['Member']['Fetch_Profile'], { queryParams: payload })
+			.pipe(map(res => res));
+	}
 
-					// set profile data
-					return res;
-				})
-			);
+	/**
+	 * fetch assigned hotels
+	 *
+	 * @param groupId
+	 * @param hotelIds
+	 */
+	public memberFetchAssignedHotels(groupId: string, hotelIds: Array<string>) {
+		// payload
+		const payload = {
+			'HotelIDs[]': hotelIds
+		};
+
+		// service
+		return this._proxyService
+			.getAPI(AppServices['Utilities']['HotelListGroup'], {
+				pathParams: { id: groupId },
+				queryParams: payload
+			});
 	}
 
 	/**

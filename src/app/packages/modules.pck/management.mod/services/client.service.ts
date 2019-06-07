@@ -78,22 +78,6 @@ export class ClientService {
 	}
 
 	/**
-	 * update license information
-	 *
-	 * @param formPayload
-	 */
-	public clientUpdateLicense(formPayload: LicenseSystemInterface) {
-		this._proxyService
-			.postAPI(AppServices['Management']['Client_Form_Update_License_HotelGroup'], { bodyParams: formPayload })
-			.subscribe(() => {
-				// stop loading animation
-				this._loadingAnimationService.stopLoadingAnimation();
-
-
-			});
-	}
-
-	/**
 	 * validate license
 	 *
 	 * @param formPayload
@@ -101,7 +85,7 @@ export class ClientService {
 	 */
 	public clientValidateLicense(formPayload: LicenseSystemIdentifierInterface, formFields: FormGroup) {
 		this._proxyService
-			.postAPI(AppServices['Management']['Client_Form_Update_License_HotelGroup_Validate'], { bodyParams: formPayload })
+			.postAPI(AppServices['Management']['Client_Form_License_HotelGroup_Validate'], { bodyParams: formPayload })
 			.subscribe(() => this.errorMessage.emit(), (err: HttpErrorResponse) => {
 				if (err.error.detail.code === 'InvalidGroupID') {
 					const message = this._i18n({
@@ -115,6 +99,22 @@ export class ClientService {
 					// message
 					this.errorMessage.emit(message);
 				}
+			});
+	}
+
+	/**
+	 * update license information
+	 *
+	 * @param formPayload
+	 */
+	public clientUpdateLicense(formPayload: LicenseSystemInterface) {
+		this._proxyService
+			.postAPI(AppServices['Management']['Client_Form_License_HotelGroup_Update'], { bodyParams: formPayload })
+			.subscribe(() => {
+				// stop loading animation
+				this._loadingAnimationService.stopLoadingAnimation();
+
+
 			});
 	}
 

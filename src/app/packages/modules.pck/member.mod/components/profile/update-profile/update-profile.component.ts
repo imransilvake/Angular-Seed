@@ -20,6 +20,7 @@ import { UtilityService } from '../../../../../utilities.pck/accessories.mod/ser
 })
 
 export class UpdateProfileComponent implements OnInit, OnDestroy {
+
 	public formFields;
 	public profileSalutationSelectType = SelectTypeEnum.DEFAULT;
 	public salutationList: SelectDefaultInterface[] = [];
@@ -65,13 +66,13 @@ export class UpdateProfileComponent implements OnInit, OnDestroy {
 			.subscribe(res => {
 				if (res && res.memberProfile) {
 					// salutation
-					const salutation = this.salutationList.filter(item => item.id === res.memberProfile.gender);
+					const salutation = this.salutationList.filter(item => item.id === res.memberProfile.Gender);
 
 					// update form
 					this.salutation.setValue(...salutation);
-					this.firstName.setValue(res.memberProfile.given_name);
-					this.lastName.setValue(res.memberProfile.family_name);
-					this.email.setValue(res.memberProfile.email);
+					this.firstName.setValue(res.memberProfile.Firstname);
+					this.lastName.setValue(res.memberProfile.Lastname);
+					this.email.setValue(res.memberProfile.Email);
 				}
 			});
 	}

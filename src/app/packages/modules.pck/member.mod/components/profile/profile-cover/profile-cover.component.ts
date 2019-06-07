@@ -22,6 +22,7 @@ export class ProfileCoverComponent implements OnInit, OnDestroy {
 	public userName;
 	public userNameLetters;
 	public loginTime;
+	public userType;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
@@ -37,10 +38,20 @@ export class ProfileCoverComponent implements OnInit, OnDestroy {
 		this.userName = HelperService.capitalizeString(this.currentUser.profile.name); // get user name
 		this.userNameLetters = HelperService.getFirstLetter(this.userName); // get first letters of name
 
-		// listen: last login
-		this._memberService.lastLogin
+		// listen: profile data event
+		this._memberService.memberDataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
-			.subscribe(res => this.loginTime = moment(res).format('DD. MMMM YYYY'));
+			.subscribe(res => {
+				if (res && res.memberProfile) {
+					// set last login
+					this.loginTime = moment
+						.utc(res.memberProfile.LoginDate)
+						.format('DD. MMMM YYYY');
+
+					// set user type
+					this.userType = res.memberProfile.Type;
+				}
+			});
 
 		// listen: on new image upload
 		this._memberService.profileImageUpdate
