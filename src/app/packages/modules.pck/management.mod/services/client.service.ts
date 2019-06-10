@@ -106,13 +106,13 @@ export class ClientService {
 	/**
 	 * validate system endpoint
 	 *
-	 * @param formPayload
+	 * @param validateFormPayload
 	 * @param formFields
 	 * @param licenseData
 	 */
-	public clientValidateSystemEndpoint(formPayload: SystemBackendEndpointUrlInterface, formFields: FormGroup, licenseData: LicenseSystemInterface) {
+	public clientValidateSystemEndpoint(validateFormPayload: SystemBackendEndpointUrlInterface, formFields: FormGroup, licenseData: LicenseSystemInterface) {
 		this._proxyService
-			.postAPI(AppServices['Management']['Client_Form_System_HotelGroup_Validate'], { bodyParams: formPayload })
+			.postAPI(AppServices['Management']['Client_Form_System_HotelGroup_Validate'], { bodyParams: validateFormPayload })
 			.subscribe(res => {
 				// stop loading animation
 				this._loadingAnimationService.stopLoadingAnimation();
@@ -123,7 +123,7 @@ export class ClientService {
 					this.errorMessage.emit();
 
 					// payload
-					const formPayload: LicenseSystemInterface = {
+					const updateFormPayload: LicenseSystemInterface = {
 						...licenseData,
 						System: {
 							BackendEndpointURL: formFields.value.BackendEndpointURL,
@@ -142,7 +142,7 @@ export class ClientService {
 					};
 
 					// update system information
-					this.clientUpdateLicenseAndSystem(formPayload);
+					this.clientUpdateLicenseAndSystem(updateFormPayload);
 				} else {
 
 				}

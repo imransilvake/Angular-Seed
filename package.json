@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "scripts": {
         "ng": "ng",
-        "start": "ng serve --host 192.168.0.171 --port 1500",
+        "start": "ng serve --port 1500",
         "build": "ng build",
         "serve.app.next": "ng serve -c next --port 2000",
         "build.app.next": "ng build -c next",
@@ -40,8 +40,8 @@
         "@fortawesome/free-solid-svg-icons": "^5.8.2",
         "@imransilvake/scss-framework": "^2.1.0",
         "@ngrx/core": "^1.2.0",
-        "@ngrx/store": "^7.4.0",
-        "@ngrx/store-devtools": "^7.4.0",
+        "@ngrx/store": "^8.0.0",
+        "@ngrx/store-devtools": "^8.0.0",
         "@ngx-translate/i18n-polyfill": "^1.0.0",
         "core-js": "^3.1.2",
         "crypto-js": "^3.1.9-1",
@@ -73,6 +73,6 @@
         "stylelint-order": "^3.0.0",
         "ts-node": "~8.2.0",
         "tslint": "~5.17.0",
-        "typescript": "~3.4.0"
+        "typescript": "~3.4.5"
     }
 }
