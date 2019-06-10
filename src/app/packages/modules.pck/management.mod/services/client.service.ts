@@ -43,7 +43,7 @@ export class ClientService {
 		};
 
 		// call service based on app state
-		if (this.appState.type === AppViewTypeEnum.ALL) {
+		if (this.appState && this.appState.type === AppViewTypeEnum.ALL) {
 			// set table service
 			this.clientTablesServices = { ...this.clientTablesServices, hotelsByGroup: allApi };
 
@@ -59,7 +59,7 @@ export class ClientService {
 		// service
 		return this._proxyService
 			.getAPI(hotelGroupApi, {
-				pathParams: { id: this.appState.id },
+				pathParams: { id: this.appState && this.appState.id },
 				queryParams: payload
 			})
 			.pipe(map(res => res));

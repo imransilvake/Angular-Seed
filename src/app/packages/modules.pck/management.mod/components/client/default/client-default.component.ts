@@ -28,7 +28,8 @@ export class ClientDefaultComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		// set table api
-		this.tableApiUrl = this._clientService.clientTablesServices.hotelsByGroup;
+		this.tableApiUrl = this._clientService.clientTablesServices &&
+			this._clientService.clientTablesServices.hotelsByGroup;
 
 		// listen: get client hotels
 		this._clientService.clientDataEmitter

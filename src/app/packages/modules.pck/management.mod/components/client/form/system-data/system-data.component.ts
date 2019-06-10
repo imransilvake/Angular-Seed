@@ -71,15 +71,17 @@ export class SystemDataComponent implements OnInit, OnDestroy {
 				takeUntil(this._ngUnSubscribe)
 			)
 			.subscribe(res => {
-				// on same language, clear secondary language
-				if (this.primaryLanguage.value === this.secondaryLanguage.value) {
-					this.secondaryLanguage.setValue('');
-				}
+				if (res) {
+					// on same language, clear secondary language
+					if (this.primaryLanguage.value === this.secondaryLanguage.value) {
+						this.secondaryLanguage.setValue('');
+					}
 
-				// set secondary language list
-				this.secondaryLanguageList = this.primaryLanguageList.map(item => {
-					return (item.id === res.id) ? { disabled: true, ...res } : item;
-				});
+					// set secondary language list
+					this.secondaryLanguageList = this.primaryLanguageList.map(item => {
+						return (item.id === res.id) ? { disabled: true, ...res } : item;
+					});
+				}
 			});
 
 		// listen: get license & system data
@@ -88,8 +90,13 @@ export class SystemDataComponent implements OnInit, OnDestroy {
 			.subscribe(res => {
 				if (res && res.licenseSystemData) {
 					// set values
-					const primaryLanguage = this.primaryLanguageList.filter(language => language.id === res.licenseSystemData.System.Languages[0])[0];
-					const secondaryLanguage = this.secondaryLanguageList.filter(language => language.id === res.licenseSystemData.System.Languages[1])[0];
+					const languages = res.licenseSystemData.System.Languages;
+					const primaryLanguage = languages && this.primaryLanguageList.filter(language =>
+						language.id === languages[0]
+					)[0];
+					const secondaryLanguage = languages && this.secondaryLanguageList.filter(language =>
+						language.id === languages[1]
+					)[0];
 
 					// update form
 					this.reservation.setValue(res.licenseSystemData.System.IsReservationRequired);

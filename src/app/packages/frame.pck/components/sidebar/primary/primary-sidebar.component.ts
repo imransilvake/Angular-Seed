@@ -71,7 +71,9 @@ export class PrimarySidebarComponent implements OnInit, OnDestroy {
 					const appState = this._sidebarService.appState;
 
 					// set current value
-					this.hotelByGroupList.setValue(appState.id);
+					if (appState && appState.id) {
+						this.hotelByGroupList.setValue(appState.id);
+					}
 				}
 			});
 
