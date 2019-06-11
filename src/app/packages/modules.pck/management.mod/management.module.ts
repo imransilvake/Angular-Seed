@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { MANAGEMENT_ROUTES } from './management-routing';
 import { ClientComponent } from './components/client/client.component';
 import { FrameModule } from '../../frame.pck/frame.module';
-import { SystemNotificationComponent } from './components/system-notification/system-notification.component';
+import { NotificationComponent } from './components/notification/notification.component';
 import { UserComponent } from './components/user/user.component';
 import { WidgetsModule } from '../../../shared/widgets/widgets.module';
 import { SharedModule } from '../../../shared/shared.module';
@@ -32,7 +32,7 @@ import { HotelManagerAppComponent } from './components/client/form/hotel-manager
 		ClientComponent,
 		ClientDefaultComponent,
 		ClientFormComponent,
-		SystemNotificationComponent,
+		NotificationComponent,
 		UserComponent,
 		LicenseComponent,
 		SystemDataComponent,

@@ -141,7 +141,10 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
 			// set payload
 			const payload = {
-				pathParams: { id: this._sidebarService.appState.id },
+				pathParams: {
+					groupId: this._sidebarService.appState.groupId,
+					hotelId: this._sidebarService.appState.hotelId
+				},
 				queryParams: {
 					offset: (pageIndex * this.tablePageSize) + 1,
 					limit: this.tablePageSize

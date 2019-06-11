@@ -12,7 +12,7 @@ import { UtilityService } from '../../../../../../utilities.pck/accessories.mod/
 import { SelectDefaultInterface } from '../../../../../../core.pck/fields.mod/interfaces/select-default-interface';
 import { ClientService } from '../../../../services/client.service';
 import { LoadingAnimationService } from '../../../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
-import { SystemBackendEndpointUrlInterface } from '../../../../interfaces/system-backend-endpoint-url.interface';
+import { SystemEndpointInterface } from '../../../../interfaces/system-endpoint.interface';
 
 @Component({
 	selector: 'app-system-data',
@@ -22,7 +22,7 @@ import { SystemBackendEndpointUrlInterface } from '../../../../interfaces/system
 
 export class SystemDataComponent implements OnInit, OnDestroy {
 	@Output() changeClientView: EventEmitter<any> = new EventEmitter();
-	@Input() hotelId;
+	@Input() id;
 
 	public formFields;
 	public systemDataSelectType = SelectTypeEnum.DEFAULT;
@@ -67,7 +67,7 @@ export class SystemDataComponent implements OnInit, OnDestroy {
 		// listen: primary language change
 		this.primaryLanguage.valueChanges
 			.pipe(
-				skip(this.hotelId ? 1 : 0),
+				skip(this.id ? 1 : 0),
 				takeUntil(this._ngUnSubscribe)
 			)
 			.subscribe(res => {
@@ -182,7 +182,7 @@ export class SystemDataComponent implements OnInit, OnDestroy {
 		this._loadingAnimationService.startLoadingAnimation();
 
 		// payload
-		const payload: SystemBackendEndpointUrlInterface = {
+		const payload: SystemEndpointInterface = {
 			BackendEndpointURL: this.backendEndpointUrl.value,
 			BackendUsername: this.backendUsername.value,
 			BackendPassword: this.backendPassword.value,

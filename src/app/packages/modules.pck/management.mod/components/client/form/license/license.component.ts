@@ -21,7 +21,7 @@ import { LicenseSystemInterface } from '../../../../interfaces/license-system.in
 
 export class LicenseComponent implements OnInit, OnDestroy {
 	@Output() changeClientView: EventEmitter<any> = new EventEmitter();
-	@Input() hotelId;
+	@Input() id;
 	@Input() licenseSystemData;
 
 	public formFields;
@@ -147,7 +147,7 @@ export class LicenseComponent implements OnInit, OnDestroy {
 			});
 
 		// listen: validate system identifier on new form
-		if (!this.hotelId) {
+		if (!this.id) {
 			this.systemIdentifier.valueChanges
 				.pipe(
 					debounceTime(200),

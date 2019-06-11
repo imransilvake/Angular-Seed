@@ -19,7 +19,7 @@ import { StorageTypeEnum } from '../../../../core.pck/storage.mod/enums/storage-
 
 export class ClientComponent implements OnInit, OnDestroy {
 	public pageView: ClientViewTypeEnum = ClientViewTypeEnum.DEFAULT;
-	public hotelId;
+	public id;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
@@ -67,9 +67,10 @@ export class ClientComponent implements OnInit, OnDestroy {
 
 		// refresh client services
 		forkJoin({
-			hotelGroupList: this._clientService.clientRefreshHotelGroupList(),
-			licenseSystemData: this._clientService.clientFetchLicenseSystem(this.hotelId),
+			hotelGroupList: this._clientService.clientRefreshHotelGroupList(this.id),
+			licenseSystemData: this._clientService.clientFetchLicenseSystem(this.id),
 			hgaModules: this._clientService.clientRefreshHotelGuestAppModules(),
+			hgaOverride: this._clientService.clientFetchOverrideHGA(this.id),
 			hsaModules: this._clientService.clientRefreshHotelStaffAppModules(),
 			hmaModules: this._clientService.clientRefreshHotelManagerAppModules()
 		}).pipe(takeUntil(this._ngUnSubscribe)).subscribe(res => {
@@ -77,6 +78,7 @@ export class ClientComponent implements OnInit, OnDestroy {
 				hotelGroupList: res.hotelGroupList,
 				licenseSystemData: res.licenseSystemData,
 				hgaModules: res.hgaModules,
+				hgaOverride: res.hgaOverride,
 				hsaModules: res.hsaModules,
 				hmaModules: res.hmaModules
 			};

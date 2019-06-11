@@ -15,7 +15,7 @@
 				label="Licenses"
 				i18n-label="@@Management_Client_Form_License_Label">
 				<app-license
-					[hotelId]="hotelId"
+					[id]="id"
 					(changeClientView)="onClickCloseClientForm()">
 				</app-license>
 			</mat-tab>
@@ -25,7 +25,7 @@
 				label="System Data"
 				i18n-label="@@Management_Client_Form_SystemData_Label">
 				<app-system-data
-					[hotelId]="hotelId"
+					[id]="id"
 					(changeClientView)="onClickCloseClientForm()">
 				</app-system-data>
 			</mat-tab>

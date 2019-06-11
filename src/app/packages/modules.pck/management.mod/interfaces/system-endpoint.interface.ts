@@ -1,5 +1,5 @@
 // system endpoint interface
-export interface SystemBackendEndpointUrlInterface {
+export interface SystemEndpointInterface {
 	BackendEndpointURL: string;
 	BackendUsername: string;
 	BackendPassword: string;

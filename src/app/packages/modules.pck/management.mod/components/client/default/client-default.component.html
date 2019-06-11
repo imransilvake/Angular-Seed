@@ -1,4 +1,4 @@
-<div class="ham-client-default">
+<div class="ham-client-default" *ngIf="clientGroupHotelsList">
 	<!-- Button -->
 	<div class="ham-button-wrapper">
 		<button mat-button class="ham-button ham-button-1" i18n="@@Management_Client_Create_Hotel_Group" (click)="onClickFetchId()">
@@ -6,8 +6,8 @@
 		</button>
 	</div>
 
-	<!-- Hotels List -->
-	<div class="ham-hotels-list" *ngIf="clientHotelsList && clientHotelsList.data">
+	<!-- Group Hotels List -->
+	<div class="ham-hotels-list" *ngIf="overrideState">
 		<app-table
 			tableTitle="Hotels / Hotelgroups"
 			i18n-tableTitle="@@Management_Client_Table_Title"
@@ -15,7 +15,7 @@
 			i18n-inputName="@@Management_Client_Table_Input_Name"
 			inputPlaceHolder="Search"
 			i18n-inputPlaceHolder="@@Management_Client_Table_Input_Filter_PlaceHolder"
-			[tableData]="clientHotelsList"
+			[tableData]="clientGroupHotelsList"
 			[tableColumns]="['Name', 'Country', 'HotelGuest/App', 'Hotels(HGA)', 'Users(HGA)', 'HotelStaff/App', 'Hotels(HSA)', 'Users(HSA)']"
 			[tableAdditionalColumns]="['Action']"
 			[tablePageSize]="tablePageSize"
@@ -27,5 +27,10 @@
 				<button mat-button class="ham-button ham-button-2" i18n="@@Management_Client_Table_Edit">Edit</button>
 			</ng-template>
 		</app-table>
+	</div>
+
+	<!-- Access Denied -->
+	<div class="ham-wrapper-2 ham-access-denied cd-center-align" *ngIf="!overrideState">
+		<p>Access Denied!</p>
 	</div>
 </div>

@@ -13,9 +13,11 @@ import { AppViewTypeEnum } from '../../../frame.pck/enums/app-view-type.enum';
 import { LicenseSystemInterface } from '../interfaces/license-system.interface';
 import { LoadingAnimationService } from '../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { LicenseIdentifierInterface } from '../interfaces/license-identifier.interface';
-import { SystemBackendEndpointUrlInterface } from '../interfaces/system-backend-endpoint-url.interface';
 import { DialogTypeEnum } from '../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { DialogService } from '../../../utilities.pck/dialog.mod/services/dialog.service';
+import { HgaOverrideInterface } from '../interfaces/hga-override.interface';
+import { SystemEndpointInterface } from '../interfaces/system-endpoint.interface';
+import { ClientAppTypeEnum } from '../enums/client-app-type.enum';
 
 @Injectable()
 export class ClientService {
@@ -36,8 +38,10 @@ export class ClientService {
 
 	/**
 	 * refresh client hotel group list
+	 *
+	 * @param id
 	 */
-	public clientRefreshHotelGroupList() {
+	public clientRefreshHotelGroupList(id: string) {
 		const allApi = AppServices['Management']['Client_Default_List'];
 		const hotelGroupApi = AppServices['Management']['Client_Default_List_Hotel'];
 		const payload = {
@@ -51,7 +55,7 @@ export class ClientService {
 			this.clientTablesServices = { ...this.clientTablesServices, hotelsByGroup: allApi };
 
 			// service
-			return this._proxyService
+			return id ? of(null) : this._proxyService
 				.getAPI(allApi, { queryParams: payload })
 				.pipe(map(res => res));
 		}
@@ -60,9 +64,9 @@ export class ClientService {
 		this.clientTablesServices = { ...this.clientTablesServices, hotelsByGroup: hotelGroupApi };
 
 		// service
-		return this._proxyService
+		return id ? of(null) : this._proxyService
 			.getAPI(hotelGroupApi, {
-				pathParams: { id: this.appState && this.appState.id },
+				pathParams: { groupId: this.appState && this.appState.groupId },
 				queryParams: payload
 			})
 			.pipe(map(res => res));
@@ -71,14 +75,78 @@ export class ClientService {
 	/**
 	 * fetch license & system information
 	 *
-	 * @param groupId
+	 * @param id
 	 */
-	public clientFetchLicenseSystem(groupId: string) {
-		return !groupId ? of(null) : this._proxyService
+	public clientFetchLicenseSystem(id: string) {
+		return !id ? of(null) : this._proxyService
 			.getAPI(AppServices['Management']['Client_Form_License_HotelGroup_Fetch'], {
-				pathParams: { id: groupId }
+				pathParams: { groupId: id }
 			})
 			.pipe(map(res => res));
+	}
+
+	/**
+	 * get license list for Licence and System
+	 */
+	public clientFetchLicenseList() {
+		return [
+			{
+				id: 1,
+				text: this._i18n({
+					value: '1 Hotel',
+					id: 'Management_Client_License_List_1'
+				}),
+				value: 2
+			},
+			{
+				id: 5,
+				text: this._i18n({
+					value: '2 to 5 Hotels',
+					id: 'Management_Client_License_List_2_5'
+				}),
+				value: 12
+			},
+			{
+				id: 20,
+				text: this._i18n({
+					value: '6 to 20 Hotels',
+					id: 'Management_Client_License_List_6_20'
+				}),
+				value: 56
+			},
+			{
+				id: 50,
+				text: this._i18n({
+					value: '21 to 50 Hotels',
+					id: 'Management_Client_License_List_21_50'
+				}),
+				value: 150
+			},
+			{
+				id: 100,
+				text: this._i18n({
+					value: '51 to 100 Hotels',
+					id: 'Management_Client_License_List_51_100'
+				}),
+				value: 320
+			},
+			{
+				id: 150,
+				text: this._i18n({
+					value: '101 to 150 Hotels',
+					id: 'Management_Client_License_List_101_150'
+				}),
+				value: 510
+			},
+			{
+				id: 250,
+				text: this._i18n({
+					value: '151 to 250 hotels',
+					id: 'Management_Client_License_List_151_250'
+				}),
+				value: 900
+			}
+		];
 	}
 
 	/**
@@ -113,7 +181,7 @@ export class ClientService {
 	 * @param formFields
 	 * @param licenseData
 	 */
-	public clientValidateSystemEndpoint(validateFormPayload: SystemBackendEndpointUrlInterface, formFields: FormGroup, licenseData: LicenseSystemInterface) {
+	public clientValidateSystemEndpoint(validateFormPayload: SystemEndpointInterface, formFields: FormGroup, licenseData: LicenseSystemInterface) {
 		this._proxyService
 			.postAPI(AppServices['Management']['Client_Form_System_HotelGroup_Validate'], { bodyParams: validateFormPayload })
 			.subscribe(res => {
@@ -198,7 +266,10 @@ export class ClientService {
 					type: DialogTypeEnum.NOTICE,
 					payload: {
 						icon: 'dialog_tick',
-						title: this._i18n({ value: 'Title: Client License & System Data Updated', id: 'Management_Client_License_System_Success_Title' }),
+						title: this._i18n({
+							value: 'Title: Client License & System Data Updated',
+							id: 'Management_Client_License_System_Success_Title'
+						}),
 						message: this._i18n({
 							value: 'Description: Client License & System Data Updated',
 							id: 'Management_Client_License_System_Success_Description'
@@ -213,67 +284,33 @@ export class ClientService {
 	}
 
 	/**
-	 * get license list - HGA / HSA
+	 * fetch hga override status
+	 *
+	 * @param id
 	 */
-	public clientFetchLicenseList() {
-		return [
-			{
-				id: 1,
-				text: this._i18n({
-					value: '1 Hotel',
-					id: 'Management_Client_License_List_1'
-				}),
-				value: 2
-			},
-			{
-				id: 5,
-				text: this._i18n({
-					value: '2 to 5 Hotels',
-					id: 'Management_Client_License_List_2_5'
-				}),
-				value: 12
-			},
-			{
-				id: 20,
-				text: this._i18n({
-					value: '6 to 20 Hotels',
-					id: 'Management_Client_License_List_6_20'
-				}),
-				value: 56
-			},
-			{
-				id: 50,
-				text: this._i18n({
-					value: '21 to 50 Hotels',
-					id: 'Management_Client_License_List_21_50'
-				}),
-				value: 150
-			},
-			{
-				id: 100,
-				text: this._i18n({
-					value: '51 to 100 Hotels',
-					id: 'Management_Client_License_List_51_100'
-				}),
-				value: 320
-			},
-			{
-				id: 150,
-				text: this._i18n({
-					value: '101 to 150 Hotels',
-					id: 'Management_Client_License_List_101_150'
-				}),
-				value: 510
-			},
-			{
-				id: 250,
-				text: this._i18n({
-					value: '151 to 250 hotels',
-					id: 'Management_Client_License_List_151_250'
-				}),
-				value: 900
-			}
-		];
+	public clientFetchOverrideHGA(id: string) {
+		return this._proxyService
+			.getAPI(AppServices['Management']['Client_Form_HGA_Override_Fetch'], {
+				pathParams: {
+					groupId: this.appState.groupId,
+					appId: ClientAppTypeEnum.HGA
+				}
+			})
+			.pipe(map(res => res));
+	}
+
+	/**
+	 * update hga override state
+	 *
+	 * @param formPayload
+	 */
+	public clientUpdateOverrideHGA(formPayload: HgaOverrideInterface) {
+		this._proxyService
+			.postAPI(AppServices['Management']['Client_Form_HGA_Override_Update'], { bodyParams: formPayload })
+			.subscribe(() => {
+				// stop loading animation
+				this._loadingAnimationService.stopLoadingAnimation();
+			});
 	}
 
 	/**

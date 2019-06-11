@@ -1,6 +1,6 @@
 // angular
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { startWith, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 // app
@@ -18,7 +18,8 @@ import { AppOptions } from '../../../../../../../app.config';
 export class ClientDefaultComponent implements OnInit, OnDestroy {
 	@Output() changeClientView: EventEmitter<any> = new EventEmitter();
 
-	public clientHotelsList;
+	public overrideState = true;
+	public clientGroupHotelsList;
 	public tablePageSize = AppOptions.tablePageSizeLimit - 1;
 	public tableApiUrl;
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
@@ -33,14 +34,15 @@ export class ClientDefaultComponent implements OnInit, OnDestroy {
 
 		// listen: get client hotels
 		this._clientService.clientDataEmitter
-			.pipe(
-				startWith(0),
-				takeUntil(this._ngUnSubscribe)
-			)
-			.subscribe(res =>
-				this.clientHotelsList = res.hotelGroupList ||
-					this._clientService.clientData && this._clientService.clientData.hotelGroupList
-			);
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => {
+				// set override state
+				this.overrideState = res.hgaOverride && res.hgaOverride.HotelManagerOverride;
+
+				// set
+				this.clientGroupHotelsList = res.hotelGroupList ||
+					this._clientService.clientData && this._clientService.clientData.hotelGroupList;
+			});
 	}
 
 	ngOnDestroy() {
@@ -52,12 +54,12 @@ export class ClientDefaultComponent implements OnInit, OnDestroy {
 	/**
 	 * show client form
 	 *
-	 * @param hotelId
+	 * @param id
 	 */
-	public onClickFetchId(hotelId?: string) {
+	public onClickFetchId(id?: string) {
 		const payload: ClientViewInterface = {
 			view: ClientViewTypeEnum.FORM,
-			hotelId: hotelId
+			id: id
 		};
 		this.changeClientView.emit(payload);
 	}

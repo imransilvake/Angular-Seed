@@ -10,15 +10,15 @@
 		<!-- View: Default -->
 		<ng-container *ngIf="pageView === 0">
 			<app-client-default
-				(changeClientView)="pageView = $event.view; hotelId = $event.hotelId; loadComponentServices();">
+				(changeClientView)="pageView = $event.view; id = $event.id; loadComponentServices();">
 			</app-client-default>
 		</ng-container>
 
 		<!-- View: Form -->
 		<ng-container *ngIf="pageView === 1">
 			<app-client-form
-				[hotelId]="hotelId"
-				(changeClientView)="pageView = $event.view; hotelId = null; loadComponentServices();">
+				[id]="id"
+				(changeClientView)="pageView = $event.view; id = null; loadComponentServices();">
 			</app-client-form>
 		</ng-container>
 	</div>

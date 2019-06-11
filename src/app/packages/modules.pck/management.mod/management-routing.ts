@@ -4,7 +4,7 @@ import { Routes } from '@angular/router';
 // app
 import { ClientComponent } from './components/client/client.component';
 import { UserComponent } from './components/user/user.component';
-import { SystemNotificationComponent } from './components/system-notification/system-notification.component';
+import { NotificationComponent } from './components/notification/notification.component';
 
 export const MANAGEMENT_ROUTES: Routes = [
 	{
@@ -32,7 +32,7 @@ export const MANAGEMENT_ROUTES: Routes = [
 			},
 			{
 				path: 'notification',
-				component: SystemNotificationComponent,
+				component: NotificationComponent,
 				data: {
 					breadcrumb: {
 						en: 'System Notification',

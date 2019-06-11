@@ -73,8 +73,8 @@ export class PrimarySidebarComponent implements OnInit, OnDestroy {
 					const appState = this._sidebarService.appState;
 
 					// set current value
-					if (appState && appState.id) {
-						this.hotelByGroupList.setValue(appState.id);
+					if (appState && appState.hotelId) {
+						this.hotelByGroupList.setValue(appState.hotelId);
 					}
 				}
 			});
@@ -86,13 +86,15 @@ export class PrimarySidebarComponent implements OnInit, OnDestroy {
 				let payload: AppViewStateInterface;
 				if (typeof res === 'object') {
 					payload = {
-						id: res.id,
+						hotelId: res.id,
+						groupId: res.split('_')[0],
 						text: res.text,
 						type: AppViewTypeEnum.HOTEL
 					};
 				} else {
 					payload = {
-						id: res,
+						hotelId: res,
+						groupId: res.split('_')[0],
 						type: (res.toLowerCase() === 'all') ? AppViewTypeEnum.ALL : AppViewTypeEnum.GROUP
 					};
 				}

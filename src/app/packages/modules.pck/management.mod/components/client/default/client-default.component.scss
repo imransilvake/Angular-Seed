@@ -7,6 +7,12 @@
 		text-align: right;
 	}
 
+	.ham-access-denied {
+		p {
+			color: cd-palette($cd-color, 1009);
+		}
+	}
+
 	// media
 	@include cd-media(desktop, mini) {
 		.ham-button-wrapper {

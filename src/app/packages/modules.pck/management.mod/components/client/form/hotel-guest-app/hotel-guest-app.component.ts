@@ -13,6 +13,8 @@ import { HelperService } from '../../../../../../utilities.pck/accessories.mod/s
 import { DialogService } from '../../../../../../utilities.pck/dialog.mod/services/dialog.service';
 import { DialogTypeEnum } from '../../../../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { LoadingAnimationService } from '../../../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
+import { HgaOverrideInterface } from '../../../../interfaces/hga-override.interface';
+import { ClientAppTypeEnum } from '../../../../enums/client-app-type.enum';
 
 @Component({
 	selector: 'app-hotel-guest-app',
@@ -27,6 +29,7 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 	public modulesList = [];
 	public licenseActive = true;
 	public formValid = false;
+	public groupId;
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
@@ -51,11 +54,11 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 	ngOnInit() {
 		// listen: get modules
 		this._clientService.clientDataEmitter
-			.pipe(
-				startWith(0),
-				takeUntil(this._ngUnSubscribe)
-			)
+			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
+				// set group id
+				this.groupId = this._clientService.clientData.licenseSystemData && this._clientService.clientData.licenseSystemData.GroupID;
+
 				// module list
 				this.modulesList = res.hgaModules || this._clientService.clientData.hgaModules;
 
@@ -78,10 +81,7 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 
 		// listen: validate form
 		this.modules.valueChanges
-			.pipe(
-				startWith(0),
-				takeUntil(this._ngUnSubscribe)
-			)
+			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(() => {
 				const activeModules = this.modules.value.filter(module => module.Licensed);
 				this.formValid = activeModules.length >= 1;
@@ -134,19 +134,33 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 		};
 
 		// dialog service
-		if (this.hgaState.value) {
-			this._dialogService.showDialog(dialogPayload)
-				.pipe(takeUntil(this._ngUnSubscribe))
-				.subscribe(res => {
-					this.hgaState.setValue(res);
+		this._dialogService.showDialog(dialogPayload)
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => {
+				if (res) {
+					// override value
+					const value = this.hgaState.value;
 
-					// update
-					if (res) { }
+					// set override state
+					this.hgaState.setValue(value);
 
-					// stop loading animation
-					this._loadingAnimationService.stopLoadingAnimation();
-				});
-		}
+					// payload
+					const payload: HgaOverrideInterface = {
+						AppID: ClientAppTypeEnum.HGA,
+						GroupID: this.groupId,
+						HotelManagerOverride: value
+					};
+
+					// service
+					this._clientService.clientUpdateOverrideHGA(payload);
+				} else {
+					// set override state
+					this.hgaState.setValue(!this.hgaState.value);
+				}
+
+				// stop loading animation
+				this._loadingAnimationService.stopLoadingAnimation();
+			});
 	}
 
 	/**
