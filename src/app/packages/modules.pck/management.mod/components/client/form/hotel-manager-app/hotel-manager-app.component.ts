@@ -2,13 +2,15 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Subject } from 'rxjs';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
-import { startWith, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 // app
 import { ClientService } from '../../../../services/client.service';
 import { HelperService } from '../../../../../../utilities.pck/accessories.mod/services/helper.service';
 import { ClientViewInterface } from '../../../../interfaces/client-view.interface';
 import { ClientViewTypeEnum } from '../../../../enums/client-view-type.enum';
+import { ClientAppTypeEnum } from '../../../../enums/client-app-type.enum';
+import { LoadingAnimationService } from '../../../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 
 @Component({
 	selector: 'app-hotel-manager-app',
@@ -21,11 +23,15 @@ export class HotelManagerAppComponent implements OnInit {
 
 	public formFields;
 	public modulesList = [];
+	public flatModulesList = [];
 	public licenseActive = true;
 	public formValid = false;
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
-	constructor(private _clientService: ClientService) {
+	constructor(
+		private _clientService: ClientService,
+		private _loadingAnimationService: LoadingAnimationService
+	) {
 		// form fields
 		this.formFields = new FormGroup({
 			modules: new FormArray([
@@ -40,37 +46,31 @@ export class HotelManagerAppComponent implements OnInit {
 	ngOnInit() {
 		// listen: get modules
 		this._clientService.clientDataEmitter
-			.pipe(
-				startWith(0),
-				takeUntil(this._ngUnSubscribe)
-			)
-			.subscribe(res => {
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(() => {
 				// module list
-				this.modulesList = res.hmaModules || this._clientService.clientData.hmaModules;
+				this.modulesList = this._clientService.clientData.hmaModules;
 
 				// not on refresh (header)
-				if (this.modules.value.length === 1) {
+				if (this.modulesList && this.modulesList.length > 0) {
 					// flat modules
-					const modules = HelperService.flatNestedArrays(this.modulesList.map(block => block.modules));
+					this.flatModulesList = HelperService.flatNestedArrays(this.modulesList.map(block => block.modules));
 
 					// count modules length
-					const modulesCount = modules.length;
+					const modulesCount = this.flatModulesList.length;
 
 					// add & update modules
 					// update: 0
 					// add: 1 onwards
 					for (let i = 0; i < modulesCount; i++) {
-						this.updateAndAddModule(modules[i], i);
+						this.updateAndAddModule(this.flatModulesList[i], i);
 					}
 				}
 			});
 
 		// listen: validate form
 		this.modules.valueChanges
-			.pipe(
-				startWith(0),
-				takeUntil(this._ngUnSubscribe)
-			)
+			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(() => {
 				const activeModules = this.modules.value.filter(module => module.Licensed);
 				this.formValid = activeModules.length >= 1;
@@ -174,9 +174,12 @@ export class HotelManagerAppComponent implements OnInit {
 	 * on submit form
 	 */
 	public onSubmitForm() {
-		console.log(this.formFields.value);
-	}
+		// start loading animation
+		this._loadingAnimationService.startLoadingAnimation();
 
+		// service
+		this._clientService.clientUpdateAppModules(ClientAppTypeEnum.HMA, this.formFields.value, this.flatModulesList);
+	}
 	/**
 	 * close client form
 	 */
