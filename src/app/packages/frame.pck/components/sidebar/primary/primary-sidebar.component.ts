@@ -13,6 +13,7 @@ import { SidebarService } from '../../../services/sidebar.service';
 import { SelectTypeEnum } from '../../../../core.pck/fields.mod/enums/select-type.enum';
 import { AppViewTypeEnum } from '../../../enums/app-view-type.enum';
 import { AppViewStateInterface } from '../../../interfaces/app-view-state.interfsce';
+import { AuthService } from '../../../../modules.pck/authorization.mod/services/auth.service';
 
 @Component({
 	selector: 'app-sidebar-primary',
@@ -33,7 +34,8 @@ export class PrimarySidebarComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private _router: Router,
-		private _sidebarService: SidebarService
+		private _sidebarService: SidebarService,
+		private _authService: AuthService
 	) {
 		// set side menu
 		this.sidebarMenuList.data = SidebarService.getSidebarMenuList();
@@ -96,7 +98,10 @@ export class PrimarySidebarComponent implements OnInit, OnDestroy {
 				}
 
 				// set app state
-				this._sidebarService.appState = payload;
+				this._sidebarService.appState = {
+					...payload,
+					role: this._authService.currentUserState.profile['cognito:groups'][0]
+				};
 
 				// refresh current route
 				this._router.navigate([this._router.url]).then();
