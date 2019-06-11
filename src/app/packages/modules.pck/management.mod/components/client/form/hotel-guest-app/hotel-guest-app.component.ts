@@ -187,9 +187,9 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 	 */
 	public updateAndAddModule(result: any, type: number) {
 		const output = {
-			Licensed: result.data.Licensed,
-			Active: result.data.Active,
-			Preferred: result.data.Preferred
+			Licensed: result.data && result.data.Licensed ? result.data.Licensed : false,
+			Active: result.data && result.data.Active ? result.data.Active : false,
+			Preferred: result.data && result.data.Preferred ? result.data.Preferred : 0
 		};
 
 		// update & add form fields
@@ -278,7 +278,14 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 	 * on submit form
 	 */
 	public onSubmitForm() {
-		console.log(this.formFields.value);
+		// start loading animation
+		this._loadingAnimationService.startLoadingAnimation();
+
+		// flat modules
+		const modules = HelperService.flatNestedArrays(this.modulesList.map(block => block.modules));
+
+		// service
+		this._clientService.clientUpdateHGAModules(this.formFields.value, modules);
 	}
 
 	/**

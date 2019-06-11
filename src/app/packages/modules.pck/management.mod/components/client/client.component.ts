@@ -69,7 +69,7 @@ export class ClientComponent implements OnInit, OnDestroy {
 		forkJoin({
 			hotelGroupList: this._clientService.clientRefreshHotelGroupList(this.id),
 			licenseSystemData: this._clientService.clientFetchLicenseSystem(this.id),
-			hgaModules: this._clientService.clientFetchHotelGuestAppModules(),
+			hgaModules: this._clientService.clientFetchHGAModules(),
 			hgaOverride: this._clientService.clientFetchOverrideHGA(this.id),
 			hsaModules: this._clientService.clientFetchHotelStaffAppModules(),
 			hmaModules: this._clientService.clientFetchHotelManagerAppModules()
