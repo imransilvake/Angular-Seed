@@ -12,6 +12,7 @@
 		<mat-tab-group class="ham-tabs-1" [@.disabled]="true">
 			<!-- License -->
 			<mat-tab
+				*ngIf="currentUserRole === 0"
 				label="Licenses"
 				i18n-label="@@Management_Client_Form_License_Label">
 				<app-license
@@ -22,6 +23,7 @@
 
 			<!-- System Data -->
 			<mat-tab
+				*ngIf="currentUserRole === 0"
 				label="System Data"
 				i18n-label="@@Management_Client_Form_SystemData_Label">
 				<app-system-data
