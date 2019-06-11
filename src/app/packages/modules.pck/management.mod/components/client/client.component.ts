@@ -11,6 +11,7 @@ import { AuthService } from '../../../authorization.mod/services/auth.service';
 import { SidebarService } from '../../../../frame.pck/services/sidebar.service';
 import { StorageService } from '../../../../core.pck/storage.mod/services/storage.service';
 import { StorageTypeEnum } from '../../../../core.pck/storage.mod/enums/storage-type.enum';
+import { ClientAppTypeEnum } from '../../enums/client-app-type.enum';
 
 @Component({
 	selector: 'app-client',
@@ -69,10 +70,10 @@ export class ClientComponent implements OnInit, OnDestroy {
 		forkJoin({
 			hotelGroupList: this._clientService.clientRefreshHotelGroupList(this.id),
 			licenseSystemData: this._clientService.clientFetchLicenseSystem(this.id),
-			hgaModules: this._clientService.clientFetchHGAModules(),
+			hgaModules: this._clientService.clientFetchAppModules(ClientAppTypeEnum.HGA),
 			hgaOverride: this._clientService.clientFetchOverrideHGA(this.id),
-			hsaModules: this._clientService.clientFetchHotelStaffAppModules(),
-			hmaModules: this._clientService.clientFetchHotelManagerAppModules()
+			hsaModules: this._clientService.clientFetchAppModules(ClientAppTypeEnum.HSA),
+			hmaModules: this._clientService.clientFetchAppModules(ClientAppTypeEnum.HMA)
 		}).pipe(takeUntil(this._ngUnSubscribe)).subscribe(res => {
 			const result = {
 				hotelGroupList: res.hotelGroupList,

@@ -1,5 +1,5 @@
 // hga interface
-export interface HgaInterface {
+export interface ClientAppInterface {
 	AppID: string;
 	GroupID: string;
 	Modules: Array<HGAModulesInterface>;

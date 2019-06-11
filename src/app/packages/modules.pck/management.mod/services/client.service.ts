@@ -18,7 +18,7 @@ import { DialogService } from '../../../utilities.pck/dialog.mod/services/dialog
 import { HgaOverrideInterface } from '../interfaces/hga-override.interface';
 import { SystemEndpointInterface } from '../interfaces/system-endpoint.interface';
 import { ClientAppTypeEnum } from '../enums/client-app-type.enum';
-import { HgaInterface } from '../interfaces/hga.interface';
+import { ClientAppInterface } from '../interfaces/client-app.interface';
 
 @Injectable()
 export class ClientService {
@@ -315,35 +315,51 @@ export class ClientService {
 	}
 
 	/**
-	 * fetch HGA modules
+	 * fetch HGA / HSA / HMA modules
+	 *
+	 * @param clientAppType
 	 */
-	public clientFetchHGAModules() {
+	public clientFetchAppModules(clientAppType: string) {
 		const isHotel = this.appState.hotelId !== this.appState.groupId;
 		if (isHotel) {
 			return this._proxyService
-				.getAPI(AppServices['Management']['Client_Form_HGA_Hotel_Fetch'], {
+				.getAPI(AppServices['Management']['Client_Form_App_Hotel_Fetch'], {
 					pathParams: {
 						hotelId: this.appState.groupId,
-						appId: ClientAppTypeEnum.HGA
+						appId: clientAppType
 					}
 				})
 				.pipe(map(res => {
 					if (res && res.Modules) {
-						return this.mapHGAModules(res.Modules);
+						switch (clientAppType) {
+							case ClientAppTypeEnum.HGA:
+								return this.mapHGAModules(res.Modules);
+							case ClientAppTypeEnum.HSA:
+								return this.mapHSAModules(res.Modules);
+							case ClientAppTypeEnum.HMA:
+								return this.mapHMAModules(res.Modules);
+						}
 					}
 					return null;
 				}));
 		} else {
 			return this._proxyService
-				.getAPI(AppServices['Management']['Client_Form_HGA_HotelGroup_Fetch'], {
+				.getAPI(AppServices['Management']['Client_Form_App_HotelGroup_Fetch'], {
 					pathParams: {
 						groupId: this.appState.groupId,
-						appId: ClientAppTypeEnum.HGA
+						appId: clientAppType
 					}
 				})
 				.pipe(map(res => {
 					if (res && res.Modules) {
-						return this.mapHGAModules(res.Modules);
+						switch (clientAppType) {
+							case ClientAppTypeEnum.HGA:
+								return this.mapHGAModules(res.Modules);
+							case ClientAppTypeEnum.HSA:
+								return this.mapHSAModules(res.Modules);
+							case ClientAppTypeEnum.HMA:
+								return this.mapHMAModules(res.Modules);
+						}
 					}
 					return null;
 				}));
@@ -351,12 +367,13 @@ export class ClientService {
 	}
 
 	/**
-	 * update HGA modules
+	 * update HGA / HSA / HMA modules
 	 *
+	 * @param clientAppType
 	 * @param rawFormData
 	 * @param modules
 	 */
-	public clientUpdateHGAModules(rawFormData: any, modules: any) {
+	public clientUpdateAppModules(clientAppType: string, rawFormData: any, modules: any) {
 		// map modules
 		const mapModules = rawFormData.modules
 			.map((module, index) => {
@@ -370,8 +387,8 @@ export class ClientService {
 			});
 
 		// form payload
-		const formPayload: HgaInterface = {
-			AppID: ClientAppTypeEnum.HGA,
+		const formPayload: ClientAppInterface = {
+			AppID: clientAppType,
 			GroupID: this.appState.groupId,
 			Modules: mapModules
 		};
@@ -380,7 +397,7 @@ export class ClientService {
 		const isHotel = this.appState.hotelId !== this.appState.groupId;
 		if (isHotel) {
 			this._proxyService
-				.postAPI(AppServices['Management']['Client_Form_HGA_Hotel_Update'], { bodyParams: { ...formPayload, HotelID: this.appState.hotelId } })
+				.postAPI(AppServices['Management']['Client_Form_App_Hotel_Update'], { bodyParams: { ...formPayload, HotelID: this.appState.hotelId } })
 				.subscribe(() => {
 					// stop loading animation
 					this._loadingAnimationService.stopLoadingAnimation();
@@ -391,12 +408,12 @@ export class ClientService {
 						payload: {
 							icon: 'dialog_tick',
 							title: this._i18n({
-								value: 'Title: HGA Data Updated',
-								id: 'Management_Client_HGA_Success_Title'
+								value: 'Title: App Data Updated',
+								id: 'Management_Client_App_Success_Title'
 							}),
 							message: this._i18n({
-								value: 'Description: HGA Data Updated',
-								id: 'Management_Client_HGA_Success_Description'
+								value: 'Description: App Data Updated',
+								id: 'Management_Client_App_Success_Description'
 							}),
 							buttonTexts: [this._i18n({ value: 'Button - OK', id: 'Common_Button_OK' })]
 						}
@@ -407,7 +424,7 @@ export class ClientService {
 				});
 		} else {
 			this._proxyService
-				.postAPI(AppServices['Management']['Client_Form_HGA_HotelGroup_Update'], { bodyParams: formPayload })
+				.postAPI(AppServices['Management']['Client_Form_App_HotelGroup_Update'], { bodyParams: formPayload })
 				.subscribe(() => {
 					// stop loading animation
 					this._loadingAnimationService.stopLoadingAnimation();
@@ -418,12 +435,12 @@ export class ClientService {
 						payload: {
 							icon: 'dialog_tick',
 							title: this._i18n({
-								value: 'Title: HGA Data Updated',
-								id: 'Management_Client_HGA_Success_Title'
+								value: 'Title: App Data Updated',
+								id: 'Management_Client_App_Success_Title'
 							}),
 							message: this._i18n({
-								value: 'Description: HGA Data Updated',
-								id: 'Management_Client_HGA_Success_Description'
+								value: 'Description: App Data Updated',
+								id: 'Management_Client_App_Success_Description'
 							}),
 							buttonTexts: [this._i18n({ value: 'Button - OK', id: 'Common_Button_OK' })]
 						}
@@ -433,52 +450,6 @@ export class ClientService {
 					this._dialogService.showDialog(dialogPayload).subscribe();
 				});
 		}
-	}
-
-	/**
-	 * fetch HSA modules
-	 */
-	public clientFetchHotelStaffAppModules() {
-		const response = [
-			{
-				'ModuleID': 'HSA_HOUSE_KEEPING',
-				'Licensed': true,
-				'Active': true,
-				'Params': {}
-			},
-			{
-				'ModuleID': 'HSA_REPAIRS',
-				'Licensed': false,
-				'Active': false,
-				'Params': {}
-			}
-		];
-
-		const result = this.mapHSAModules(response);
-		return of(result);
-	}
-
-	/**
-	 * fetch HAM modules
-	 */
-	public clientFetchHotelManagerAppModules() {
-		const response = [
-			{
-				'ModuleID': 'HAM_ONLINE_BOOKING_STATISTICS',
-				'Licensed': false,
-				'Active': true,
-				'Params': {}
-			},
-			{
-				'ModuleID': 'HAM_INTERNATIONAL_GUEST_OVERVIEW',
-				'Licensed': false,
-				'Active': true,
-				'Params': {}
-			}
-		];
-
-		const result = this.mapHAMModules(response);
-		return of(result);
 	}
 
 	/**
@@ -641,7 +612,7 @@ export class ClientService {
 			{
 				'name': 'All',
 				'modules': [{
-					data: response.filter(module => module.ModuleID === 'HSA_HOUSE_KEEPING')[0],
+					data: response.filter(module => module.ModuleID === 'HSA_CLEANING')[0],
 					details: {
 						title: this._i18n({
 							value: 'House Keeping',
@@ -653,7 +624,7 @@ export class ClientService {
 						})
 					}
 				}, {
-					data: response.filter(module => module.ModuleID === 'HSA_REPAIRS')[0],
+					data: response.filter(module => module.ModuleID === 'HSA_REPAIR')[0],
 					details: {
 						title: this._i18n({
 							value: 'Repairs',
@@ -670,16 +641,16 @@ export class ClientService {
 	}
 
 	/**
-	 * map HAM modules
+	 * map HMA modules
 	 *
 	 * @param response
 	 */
-	private mapHAMModules(response: any) {
+	private mapHMAModules(response: any) {
 		return [
 			{
 				'name': 'All',
 				'modules': [{
-					data: response.filter(module => module.ModuleID === 'HAM_ONLINE_BOOKING_STATISTICS')[0],
+					data: response.filter(module => module.ModuleID === 'HMA_STATISTICS')[0],
 					details: {
 						title: this._i18n({
 							value: 'Online Booking Statistics',
@@ -691,7 +662,7 @@ export class ClientService {
 						})
 					}
 				}, {
-					data: response.filter(module => module.ModuleID === 'HAM_INTERNATIONAL_GUEST_OVERVIEW')[0],
+					data: response.filter(module => module.ModuleID === 'HMA_STATISTICS')[0],
 					details: {
 						title: this._i18n({
 							value: 'International Guest Overview',

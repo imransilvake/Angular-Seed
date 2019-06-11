@@ -27,6 +27,7 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 
 	public formFields;
 	public modulesList = [];
+	public flatModulesList = [];
 	public licenseActive = true;
 	public formValid = false;
 	public groupId;
@@ -63,21 +64,21 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 				this.groupId = this._clientService.clientData.licenseSystemData && this._clientService.clientData.licenseSystemData.GroupID;
 
 				// module list
-				this.modulesList = res.hgaModules || this._clientService.clientData.hgaModules;
+				this.modulesList = this._clientService.clientData.hgaModules;
 
 				// not on refresh (header)
 				if (this.modulesList && this.modulesList.length > 0) {
 					// flat modules
-					const modules = HelperService.flatNestedArrays(this.modulesList.map(block => block.modules));
+					this.flatModulesList = HelperService.flatNestedArrays(this.modulesList.map(block => block.modules));
 
 					// count modules length
-					const modulesCount = modules.length;
+					const modulesCount = this.flatModulesList.length;
 
 					// add & update modules
 					// update: 0
 					// add: 1 onwards
 					for (let i = 0; i < modulesCount; i++) {
-						this.updateAndAddModule(modules[i], i);
+						this.updateAndAddModule(this.flatModulesList[i], i);
 					}
 				}
 			});
@@ -281,11 +282,8 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 		// start loading animation
 		this._loadingAnimationService.startLoadingAnimation();
 
-		// flat modules
-		const modules = HelperService.flatNestedArrays(this.modulesList.map(block => block.modules));
-
 		// service
-		this._clientService.clientUpdateHGAModules(this.formFields.value, modules);
+		this._clientService.clientUpdateAppModules(ClientAppTypeEnum.HGA, this.formFields.value, this.flatModulesList);
 	}
 
 	/**
