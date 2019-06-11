@@ -66,7 +66,7 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 				this.modulesList = res.hgaModules || this._clientService.clientData.hgaModules;
 
 				// not on refresh (header)
-				if (this.modules.value.length === 1 && this.modulesList.length > 0) {
+				if (this.modulesList && this.modulesList.length > 0) {
 					// flat modules
 					const modules = HelperService.flatNestedArrays(this.modulesList.map(block => block.modules));
 
@@ -193,7 +193,7 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 		};
 
 		// update & add form fields
-		if (type === 0) {
+		if (this.modules.at(type)) {
 			this.modules.at(type).setValue(output);
 		} else {
 			this.modules.push(HotelGuestAppComponent.moduleItems(output));
