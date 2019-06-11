@@ -158,7 +158,7 @@ export class LicenseComponent implements OnInit, OnDestroy {
 					const formPayload = { GroupID: res };
 
 					// service
-					this._clientService.clientValidateLicense(formPayload, this.formFields);
+					this._clientService.clientValidateLicenseIdentifier(formPayload, this.formFields);
 				});
 		}
 

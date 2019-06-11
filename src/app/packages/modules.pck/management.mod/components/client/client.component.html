@@ -18,7 +18,7 @@
 		<ng-container *ngIf="pageView === 1">
 			<app-client-form
 				[hotelId]="hotelId"
-				(changeClientView)="pageView = $event.view; loadComponentServices();">
+				(changeClientView)="pageView = $event.view; hotelId = null; loadComponentServices();">
 			</app-client-form>
 		</ng-container>
 	</div>

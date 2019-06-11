@@ -14,6 +14,8 @@ import { LicenseSystemInterface } from '../interfaces/license-system.interface';
 import { LoadingAnimationService } from '../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { LicenseIdentifierInterface } from '../interfaces/license-identifier.interface';
 import { SystemBackendEndpointUrlInterface } from '../interfaces/system-backend-endpoint-url.interface';
+import { DialogTypeEnum } from '../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
+import { DialogService } from '../../../utilities.pck/dialog.mod/services/dialog.service';
 
 @Injectable()
 export class ClientService {
@@ -27,12 +29,13 @@ export class ClientService {
 	constructor(
 		private _proxyService: ProxyService,
 		private _i18n: I18n,
-		private _loadingAnimationService: LoadingAnimationService
+		private _loadingAnimationService: LoadingAnimationService,
+		private _dialogService: DialogService
 	) {
 	}
 
 	/**
-	 * refresh client hotels list
+	 * refresh client hotel group list
 	 */
 	public clientRefreshHotelGroupList() {
 		const allApi = AppServices['Management']['Client_Default_List'];
@@ -84,7 +87,7 @@ export class ClientService {
 	 * @param formPayload
 	 * @param formFields
 	 */
-	public clientValidateLicense(formPayload: LicenseIdentifierInterface, formFields: FormGroup) {
+	public clientValidateLicenseIdentifier(formPayload: LicenseIdentifierInterface, formFields: FormGroup) {
 		this._proxyService
 			.postAPI(AppServices['Management']['Client_Form_License_HotelGroup_Validate'], { bodyParams: formPayload })
 			.subscribe(() => this.errorMessage.emit(), (err: HttpErrorResponse) => {
@@ -189,6 +192,23 @@ export class ClientService {
 			.subscribe(() => {
 				// stop loading animation
 				this._loadingAnimationService.stopLoadingAnimation();
+
+				// payload
+				const dialogPayload = {
+					type: DialogTypeEnum.NOTICE,
+					payload: {
+						icon: 'dialog_tick',
+						title: this._i18n({ value: 'Title: Client License & System Data Updated', id: 'Management_Client_License_System_Success_Title' }),
+						message: this._i18n({
+							value: 'Description: Client License & System Data Updated',
+							id: 'Management_Client_License_System_Success_Description'
+						}),
+						buttonTexts: [this._i18n({ value: 'Button - OK', id: 'Common_Button_OK' })]
+					}
+				};
+
+				// dialog service
+				this._dialogService.showDialog(dialogPayload).subscribe();
 			});
 	}
 
