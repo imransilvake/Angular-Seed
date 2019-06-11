@@ -47,6 +47,13 @@ declare const require;
 			notification: notificationReducer,
 			errorHandler: errorHandlerReducer,
 			session: sessionReducer
+		}, {
+			runtimeChecks: {
+				strictStateImmutability: true,
+				strictActionImmutability: true,
+				strictStateSerializability: true,
+				strictActionSerializability: true
+			}
 		}),
 		StoreDevtoolsModule.instrument({ maxAge: 10 }),
 
