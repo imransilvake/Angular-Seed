@@ -317,93 +317,36 @@ export class ClientService {
 	 * fetch HGA modules
 	 */
 	public clientFetchHotelGuestAppModules() {
-		// check type here!!!!
-
-		this._proxyService
-			.getAPI(AppServices['Management']['Client_Form_HGA_Hotel_Fetch'], {
-				pathParams: {
-					groupId: this.appState.groupId,
-					appId: ClientAppTypeEnum.HGA
-				}
-			})
-			.pipe(map(res => console.log(res)));
-
-
-		const response = [
-			{
-				'ModuleID': 'HGA_GUEST_NOTIFICATIONS',
-				'Licensed': true,
-				'Active': true,
-				'Preferred': 0,
-				'Params': {}
-			},
-			{
-				'ModuleID': 'HGA_ROOM_KEY',
-				'Licensed': false,
-				'Active': false,
-				'Preferred': 0,
-				'Params': {}
-			},
-			{
-				'ModuleID': 'HGA_ROOM_CLEANING_STATUS',
-				'Licensed': true,
-				'Active': false,
-				'Preferred': 1,
-				'Params': {}
-			},
-			{
-				'ModuleID': 'HGA_ROOM_EMERGENCY_BUTTON',
-				'Licensed': false,
-				'Active': false,
-				'Preferred': 0,
-				'Params': {}
-			},
-			{
-				'ModuleID': 'HGA_ROOM_REPAIR_MESSAGE',
-				'Licensed': false,
-				'Active': true,
-				'Preferred': 0,
-				'Params': {}
-			},
-			{
-				'ModuleID': 'HGA_HOTEL_DEALS',
-				'Licensed': false,
-				'Active': false,
-				'Preferred': 0,
-				'Params': {}
-			},
-			{
-				'ModuleID': 'HGA_HOTEL_DETAILS',
-				'Licensed': false,
-				'Active': false,
-				'Preferred': 0,
-				'Params': {}
-			},
-			{
-				'ModuleID': 'HGA_HOTEL_GUEST_DETAILS',
-				'Licensed': false,
-				'Active': false,
-				'Preferred': 0,
-				'Params': {}
-			},
-			{
-				'ModuleID': 'HGA_MAGAZINE_HOTEL_MAGAZINE',
-				'Licensed': false,
-				'Active': false,
-				'Preferred': 0,
-				'Params': {}
-			},
-			{
-				'ModuleID': 'HGA_REVIEWS_TRUSTYOU',
-				'Licensed': false,
-				'Active': false,
-				'Preferred': 0,
-				'Params': {}
-			}
-		];
-
-		const result = this.mapHGAModules(response);
-		return of(result);
+		const isHotel = this.appState.hotelId !== this.appState.groupId;
+		if (isHotel) {
+			return this._proxyService
+				.getAPI(AppServices['Management']['Client_Form_HGA_Hotel_Fetch'], {
+					pathParams: {
+						hotelId: this.appState.groupId,
+						appId: ClientAppTypeEnum.HGA
+					}
+				})
+				.pipe(map(res => {
+					if (res && res.Modules) {
+						return this.mapHGAModules(res.Modules);
+					}
+					return null;
+				}));
+		} else {
+			return this._proxyService
+				.getAPI(AppServices['Management']['Client_Form_HGA_HotelGroup_Fetch'], {
+					pathParams: {
+						groupId: this.appState.groupId,
+						appId: ClientAppTypeEnum.HGA
+					}
+				})
+				.pipe(map(res => {
+					if (res && res.Modules) {
+						return this.mapHGAModules(res.Modules);
+					}
+					return null;
+				}));
+		}
 	}
 
 	/**
@@ -490,7 +433,7 @@ export class ClientService {
 						})
 					}
 				}, {
-					data: response.filter(module => module.ModuleID === 'HGA_ROOM_CLEANING_STATUS')[0],
+					data: response.filter(module => module.ModuleID === 'HGA_ROOM_CLEANING')[0],
 					details: {
 						title: this._i18n({
 							value: 'Room Cleaning Status',
@@ -502,7 +445,7 @@ export class ClientService {
 						})
 					}
 				}, {
-					data: response.filter(module => module.ModuleID === 'HGA_ROOM_EMERGENCY_BUTTON')[0],
+					data: response.filter(module => module.ModuleID === 'HGA_ROOM_EMERGENCY')[0],
 					details: {
 						title: this._i18n({
 							value: 'Room Emergency Button',
@@ -514,7 +457,7 @@ export class ClientService {
 						})
 					}
 				}, {
-					data: response.filter(module => module.ModuleID === 'HGA_ROOM_REPAIR_MESSAGE')[0],
+					data: response.filter(module => module.ModuleID === 'HGA_ROOM_REPAIR')[0],
 					details: {
 						title: this._i18n({
 							value: 'Room Repair Message',
@@ -554,7 +497,7 @@ export class ClientService {
 						})
 					}
 				}, {
-					data: response.filter(module => module.ModuleID === 'HGA_HOTEL_GUEST_DETAILS')[0],
+					data: response.filter(module => module.ModuleID === 'HGA_HOTEL_DETAILS')[0],
 					details: {
 						title: this._i18n({
 							value: 'Guest Travel Details',
@@ -570,7 +513,7 @@ export class ClientService {
 			{
 				'name': 'Hotel Magazine',
 				'modules': [{
-					data: response.filter(module => module.ModuleID === 'HGA_MAGAZINE_HOTEL_MAGAZINE')[0],
+					data: response.filter(module => module.ModuleID === 'HGA_HOTEL_MAGAZINE')[0],
 					details: {
 						title: this._i18n({
 							value: 'Hotel Magazine',
@@ -586,7 +529,7 @@ export class ClientService {
 			{
 				'name': 'Hotel Reviews',
 				'modules': [{
-					data: response.filter(module => module.ModuleID === 'HGA_REVIEWS_TRUSTYOU')[0],
+					data: response.filter(module => module.ModuleID === 'HGA_HOTEL_RATINGS')[0],
 					details: {
 						title: this._i18n({
 							value: 'TrustYou Hotel Ratings',

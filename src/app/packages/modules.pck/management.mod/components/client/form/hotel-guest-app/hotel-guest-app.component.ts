@@ -66,7 +66,7 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 				this.modulesList = res.hgaModules || this._clientService.clientData.hgaModules;
 
 				// not on refresh (header)
-				if (this.modules.value.length === 1) {
+				if (this.modules.value.length === 1 && this.modulesList.length > 0) {
 					// flat modules
 					const modules = HelperService.flatNestedArrays(this.modulesList.map(block => block.modules));
 
