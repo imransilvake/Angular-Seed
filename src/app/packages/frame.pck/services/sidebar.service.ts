@@ -93,13 +93,15 @@ export class SidebarService {
 					}];
 
 					// mapping
-					const mapped = res.reduce((acc, hotel) => {
-						if (!acc.hasOwnProperty(hotel.group)) {
-							acc[hotel.group] = [];
-						}
-						acc[hotel.group].push(hotel);
-						return acc;
-					}, {});
+					const mapped = res
+						.filter(hotel => hotel.hasOwnProperty('id'))
+						.reduce((acc, hotel) => {
+							if (!acc.hasOwnProperty(hotel.group)) {
+								acc[hotel.group] = [];
+							}
+							acc[hotel.group].push(hotel);
+							return acc;
+						}, {});
 
 					// structuring
 					for (const key in mapped) {

@@ -1,5 +1,5 @@
 // angular
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { forkJoin, Subject } from 'rxjs';
@@ -17,7 +17,7 @@ import { StorageTypeEnum } from '../../../../core.pck/storage.mod/enums/storage-
 	templateUrl: './client.component.html'
 })
 
-export class ClientComponent implements OnDestroy {
+export class ClientComponent implements OnInit, OnDestroy {
 	public pageView: ClientViewTypeEnum = ClientViewTypeEnum.DEFAULT;
 	public hotelId;
 
@@ -30,20 +30,11 @@ export class ClientComponent implements OnDestroy {
 		private _sidebarService: SidebarService,
 		private _storageService: StorageService
 	) {
-		// initialize reload system
-		this.initReloadSystem();
+		// set current user state
+		this._clientService.currentUser = this._authService.currentUserState;
 	}
 
-	ngOnDestroy() {
-		// remove subscriptions
-		this._ngUnSubscribe.next();
-		this._ngUnSubscribe.complete();
-	}
-
-	/**
-	 * initialize reload system
-	 */
-	private initReloadSystem() {
+	ngOnInit() {
 		// listen: router event
 		this.router.events
 			.pipe(takeUntil(this._ngUnSubscribe))
@@ -53,6 +44,12 @@ export class ClientComponent implements OnDestroy {
 					this.loadComponentServices();
 				}
 			});
+	}
+
+	ngOnDestroy() {
+		// remove subscriptions
+		this._ngUnSubscribe.next();
+		this._ngUnSubscribe.complete();
 	}
 
 	/**

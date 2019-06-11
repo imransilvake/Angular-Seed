@@ -1,5 +1,5 @@
 // angular
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { forkJoin, Subject } from 'rxjs';
@@ -16,7 +16,7 @@ import { StorageService } from '../../../../core.pck/storage.mod/services/storag
 	styleUrls: ['./profile.component.scss']
 })
 
-export class ProfileComponent implements OnDestroy {
+export class ProfileComponent implements OnInit, OnDestroy {
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
@@ -25,20 +25,11 @@ export class ProfileComponent implements OnDestroy {
 		private _memberService: MemberService,
 		private _storageService: StorageService
 	) {
-		// initialize reload system
-		this.initReloadSystem();
+		// set current user state
+		this._memberService.currentUser = this._authService.currentUserState;
 	}
 
-	ngOnDestroy() {
-		// remove subscriptions
-		this._ngUnSubscribe.next();
-		this._ngUnSubscribe.complete();
-	}
-
-	/**
-	 * initialize reload system
-	 */
-	private initReloadSystem() {
+	ngOnInit() {
 		// listen: router event
 		this.router.events
 			.pipe(takeUntil(this._ngUnSubscribe))
@@ -48,6 +39,12 @@ export class ProfileComponent implements OnDestroy {
 					this.loadComponentServices();
 				}
 			});
+	}
+
+	ngOnDestroy() {
+		// remove subscriptions
+		this._ngUnSubscribe.next();
+		this._ngUnSubscribe.complete();
 	}
 
 	/**

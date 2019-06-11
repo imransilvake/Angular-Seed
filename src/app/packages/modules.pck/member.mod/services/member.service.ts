@@ -243,7 +243,7 @@ export class MemberService {
 						.subscribe(() => {
 							// get current user state
 							// set image to current user state
-							const data = this._authService.currentUserState;
+							const data = this.currentUser;
 							this._authService.currentUserState = {
 								profile: {
 									...data.profile,
