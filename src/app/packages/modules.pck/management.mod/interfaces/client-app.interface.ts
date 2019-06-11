@@ -10,5 +10,5 @@ interface HGAModulesInterface {
 	Licensed: boolean;
 	Active: boolean;
 	Preferred: number | boolean;
-	Params: object
+	Params: object;
 }

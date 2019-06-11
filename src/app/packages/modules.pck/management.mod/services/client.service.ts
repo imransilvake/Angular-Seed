@@ -383,7 +383,7 @@ export class ClientService {
 					Active: module.Active ? module.Active : false,
 					Preferred: module.Preferred  ? 1 : 0,
 					Params: {}
-				}
+				};
 			});
 
 		// form payload
