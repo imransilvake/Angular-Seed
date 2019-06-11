@@ -68,7 +68,7 @@ export class MemberService {
 		// service
 		return this._proxyService
 			.getAPI(AppServices['Utilities']['HotelListGroup'], {
-				pathParams: { id: groupId },
+				pathParams: { groupId: groupId },
 				queryParams: payload
 			});
 	}

@@ -314,9 +314,21 @@ export class ClientService {
 	}
 
 	/**
-	 * refresh HGA modules
+	 * fetch HGA modules
 	 */
-	public clientRefreshHotelGuestAppModules() {
+	public clientFetchHotelGuestAppModules() {
+		// check type here!!!!
+
+		this._proxyService
+			.getAPI(AppServices['Management']['Client_Form_HGA_Hotel_Fetch'], {
+				pathParams: {
+					groupId: this.appState.groupId,
+					appId: ClientAppTypeEnum.HGA
+				}
+			})
+			.pipe(map(res => console.log(res)));
+
+
 		const response = [
 			{
 				'ModuleID': 'HGA_GUEST_NOTIFICATIONS',
@@ -395,9 +407,9 @@ export class ClientService {
 	}
 
 	/**
-	 * refresh HSA modules
+	 * fetch HSA modules
 	 */
-	public clientRefreshHotelStaffAppModules() {
+	public clientFetchHotelStaffAppModules() {
 		const response = [
 			{
 				'ModuleID': 'HSA_HOUSE_KEEPING',
@@ -418,9 +430,9 @@ export class ClientService {
 	}
 
 	/**
-	 * refresh HAM modules
+	 * fetch HAM modules
 	 */
-	public clientRefreshHotelManagerAppModules() {
+	public clientFetchHotelManagerAppModules() {
 		const response = [
 			{
 				'ModuleID': 'HAM_ONLINE_BOOKING_STATISTICS',

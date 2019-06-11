@@ -1,6 +1,6 @@
 // angular
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { startWith, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { I18n } from '@ngx-translate/i18n-polyfill';
@@ -56,6 +56,9 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 		this._clientService.clientDataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
+				// set override state
+				this.hgaState.setValue(res.hgaOverride && res.hgaOverride.HotelManagerOverride);
+
 				// set group id
 				this.groupId = this._clientService.clientData.licenseSystemData && this._clientService.clientData.licenseSystemData.GroupID;
 

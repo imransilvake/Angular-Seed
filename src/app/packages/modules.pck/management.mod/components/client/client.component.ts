@@ -69,10 +69,10 @@ export class ClientComponent implements OnInit, OnDestroy {
 		forkJoin({
 			hotelGroupList: this._clientService.clientRefreshHotelGroupList(this.id),
 			licenseSystemData: this._clientService.clientFetchLicenseSystem(this.id),
-			hgaModules: this._clientService.clientRefreshHotelGuestAppModules(),
+			hgaModules: this._clientService.clientFetchHotelGuestAppModules(),
 			hgaOverride: this._clientService.clientFetchOverrideHGA(this.id),
-			hsaModules: this._clientService.clientRefreshHotelStaffAppModules(),
-			hmaModules: this._clientService.clientRefreshHotelManagerAppModules()
+			hsaModules: this._clientService.clientFetchHotelStaffAppModules(),
+			hmaModules: this._clientService.clientFetchHotelManagerAppModules()
 		}).pipe(takeUntil(this._ngUnSubscribe)).subscribe(res => {
 			const result = {
 				hotelGroupList: res.hotelGroupList,
@@ -89,8 +89,5 @@ export class ClientComponent implements OnInit, OnDestroy {
 			// emit result
 			this._clientService.clientDataEmitter.next(result);
 		});
-
-		// refresh hga modules
-		this._clientService.clientRefreshHotelGuestAppModules();
 	}
 }

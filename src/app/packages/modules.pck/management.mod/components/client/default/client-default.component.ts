@@ -18,7 +18,7 @@ import { AppOptions } from '../../../../../../../app.config';
 export class ClientDefaultComponent implements OnInit, OnDestroy {
 	@Output() changeClientView: EventEmitter<any> = new EventEmitter();
 
-	public overrideState = true;
+	public overrideState = false;
 	public clientGroupHotelsList;
 	public tablePageSize = AppOptions.tablePageSizeLimit - 1;
 	public tableApiUrl;

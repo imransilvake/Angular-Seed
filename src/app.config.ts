@@ -46,7 +46,9 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 		Client_Form_System_HotelGroup_Validate: { serviceUrl: '/management/endpoint/validate' },
 		Client_Form_License_System_HotelGroup_Update: { serviceUrl: '/management/hotelgroup' },
 		Client_Form_HGA_Override_Fetch: { serviceUrl: '/management/module/override/group/:groupId/app/:appId' },
-		Client_Form_HGA_Override_Update: { serviceUrl: '/management/module/override' }
+		Client_Form_HGA_Override_Update: { serviceUrl: '/management/module/override' },
+		Client_Form_HGA_Hotel_Fetch: { serviceUrl: '/management/module/hotel/:groupId/app/:appId' },
+		Client_Form_HGA_HotelGroup_Fetch: { serviceUrl: '/management/module/group/:groupId/app/:appId' }
 	}
 };
 
