@@ -113,7 +113,7 @@ export class HotelManagerAppComponent implements OnInit {
 		};
 
 		// update & add form fields
-		if (type === 0) {
+		if (this.modules.at(type)) {
 			this.modules.at(type).setValue(output);
 		} else {
 			this.modules.push(HotelManagerAppComponent.moduleItems(output));
