@@ -37,7 +37,7 @@ export class ClientDefaultComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		// set current user role
-		this.currentUserRole = this._clientService.appState.role;
+		this.currentUserRole = this._clientService.appState && this._clientService.appState.role;
 
 		// set table api
 		this.tableApiUrl = this._clientService.clientTablesServices.hotelsByGroup;

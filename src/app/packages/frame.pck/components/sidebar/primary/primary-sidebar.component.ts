@@ -4,7 +4,7 @@ import { MatTreeNestedDataSource } from '@angular/material';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
-import { takeUntil } from 'rxjs/operators';
+import { startWith, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 // app
@@ -53,12 +53,13 @@ export class PrimarySidebarComponent implements OnInit, OnDestroy {
 	ngOnInit() {
 		// show hotel group list dropdown on selected routes
 		this._routerService.routeChanged
-			.pipe(takeUntil(this._ngUnSubscribe))
-			.subscribe(res => {
-				if (res) {
-					this.hotelGroupListVisibility =
-						this._sidebarService.hotelGroupListRoutes.includes(res.url);
-				}
+			.pipe(
+				startWith(0),
+				takeUntil(this._ngUnSubscribe)
+			)
+			.subscribe(() => {
+				this.hotelGroupListVisibility =
+					this._sidebarService.hotelGroupListRoutes.includes(this._router.url);
 			});
 
 		// open node based on current url

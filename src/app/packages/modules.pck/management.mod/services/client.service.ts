@@ -293,7 +293,7 @@ export class ClientService {
 		return this._proxyService
 			.getAPI(AppServices['Management']['Client_Form_HGA_Override_Fetch'], {
 				pathParams: {
-					groupId: this.appState.groupId,
+					groupId: this.appState && this.appState.groupId,
 					appId: ClientAppTypeEnum.HGA
 				}
 			})
@@ -320,7 +320,7 @@ export class ClientService {
 	 * @param clientAppType
 	 */
 	public clientFetchAppModules(clientAppType: string) {
-		const isHotel = this.appState.hotelId !== this.appState.groupId;
+		const isHotel = this.appState && (this.appState.hotelId !== this.appState.groupId);
 		if (isHotel) {
 			return this._proxyService
 				.getAPI(AppServices['Management']['Client_Form_App_Hotel_Fetch'], {
@@ -346,7 +346,7 @@ export class ClientService {
 			return this._proxyService
 				.getAPI(AppServices['Management']['Client_Form_App_HotelGroup_Fetch'], {
 					pathParams: {
-						groupId: this.appState.groupId,
+						groupId: this.appState && this.appState.groupId,
 						appId: clientAppType
 					}
 				})
@@ -389,12 +389,12 @@ export class ClientService {
 		// form payload
 		const formPayload: ClientAppInterface = {
 			AppID: clientAppType,
-			GroupID: this.appState.groupId,
+			GroupID: this.appState && this.appState.groupId,
 			Modules: mapModules
 		};
 
 		// service
-		const isHotel = this.appState.hotelId !== this.appState.groupId;
+		const isHotel = this.appState.hotelId && (this.appState.hotelId !== this.appState.groupId);
 		if (isHotel) {
 			this._proxyService
 				.postAPI(AppServices['Management']['Client_Form_App_Hotel_Update'], { bodyParams: { ...formPayload, HotelID: this.appState.hotelId } })
