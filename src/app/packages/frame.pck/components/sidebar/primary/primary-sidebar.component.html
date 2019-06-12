@@ -1,6 +1,6 @@
 <section class="ham-sidebar-primary">
 	<!-- Hotel Select -->
-	<div class="ham-select" [class.ham-hide]="!drawerState">
+	<div class="ham-select" [class.ham-hide]="!drawerState" *ngIf="hotelGroupListVisibility">
 		<app-select
 			[selectType]="hotelSelectType"
 			[selectId]="'sidenav-hotel-list-id'"
@@ -43,7 +43,7 @@
 			matTreeNodePadding>
 			<h6 class="ham-label" *ngIf="node.section">{{node.section}}</h6>
 			<a class="ham-blank"
-			   [target]="node.externalIcon ? '_blank': null"
+			   [target]="node.externalIcon ? '_blank' : null"
 			   target="_blank"
 			   mat-button
 			   matTreeNodeToggle

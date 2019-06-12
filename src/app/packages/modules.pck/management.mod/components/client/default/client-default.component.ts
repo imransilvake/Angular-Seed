@@ -9,6 +9,7 @@ import { ClientService } from '../../../services/client.service';
 import { ClientViewInterface } from '../../../interfaces/client-view.interface';
 import { AppOptions } from '../../../../../../../app.config';
 import { UtilityService } from '../../../../../utilities.pck/accessories.mod/services/utility.service';
+import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum';
 
 @Component({
 	selector: 'app-client-default',
@@ -19,10 +20,13 @@ import { UtilityService } from '../../../../../utilities.pck/accessories.mod/ser
 export class ClientDefaultComponent implements OnInit, OnDestroy {
 	@Output() changeClientView: EventEmitter<any> = new EventEmitter();
 
+	public currentUserRole: UserRoleEnum;
+	public expectedUserRole: UserRoleEnum = UserRoleEnum[UserRoleEnum.HOTEL_MANAGER];
 	public overrideState = false;
 	public clientGroupHotelsList;
 	public tablePageSize = AppOptions.tablePageSizeLimit - 1;
 	public tableApiUrl;
+
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
@@ -32,15 +36,17 @@ export class ClientDefaultComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
+		// set current user role
+		this.currentUserRole = this._clientService.appState.role;
+
 		// set table api
-		this.tableApiUrl = this._clientService.clientTablesServices &&
-			this._clientService.clientTablesServices.hotelsByGroup;
+		this.tableApiUrl = this._clientService.clientTablesServices.hotelsByGroup;
 
 		// listen: get client hotels
 		this._clientService.clientDataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
-				if (res && res.hotelGroupList) {
+				if (res && res.hotelGroupList && res.hgaOverride) {
 					// set override state
 					this.overrideState = res.hgaOverride && res.hgaOverride.HotelManagerOverride;
 

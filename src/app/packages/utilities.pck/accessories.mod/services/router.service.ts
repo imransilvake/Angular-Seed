@@ -1,5 +1,5 @@
 // angular
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
@@ -8,6 +8,7 @@ import { ROUTING } from '../../../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class RouterService {
+	public routeChanged: EventEmitter<any> = new EventEmitter();
 	private lastRoute;
 	private currentUrl;
 	private authRoutes = [
@@ -22,6 +23,9 @@ export class RouterService {
 		this._router.events
 			.pipe(filter(event => event instanceof NavigationEnd))
 			.subscribe(event => {
+				// broadcast change of route
+				this.routeChanged.emit(event);
+
 				// set previous url
 				this.setPreviousUrl(event);
 			});

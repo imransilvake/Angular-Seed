@@ -15,6 +15,10 @@ import { ProxyService } from '../../core.pck/proxy.mod/services/proxy.service';
 
 @Injectable()
 export class SidebarService {
+	public hotelGroupListRoutes = [
+		`/${ ROUTING.management.routes.client }`
+	];
+
 	constructor(
 		private _authService: AuthService,
 		private _storageService: StorageService,

@@ -1,6 +1,6 @@
 <div class="ham-client-default" *ngIf="clientGroupHotelsList">
 	<!-- Button -->
-	<div class="ham-button-wrapper">
+	<div class="ham-button-wrapper" *ngIf="currentUserRole === expectedUserRole">
 		<button mat-button class="ham-button ham-button-1" i18n="@@Management_Client_Create_Hotel_Group" (click)="onClickFetchId()">
 			Create New Hotel / Group
 		</button>

@@ -14,6 +14,7 @@ import { SelectTypeEnum } from '../../../../core.pck/fields.mod/enums/select-typ
 import { AppViewTypeEnum } from '../../../enums/app-view-type.enum';
 import { AppViewStateInterface } from '../../../interfaces/app-view-state.interfsce';
 import { AuthService } from '../../../../modules.pck/authorization.mod/services/auth.service';
+import { RouterService } from '../../../../utilities.pck/accessories.mod/services/router.service';
 
 @Component({
 	selector: 'app-sidebar-primary',
@@ -28,6 +29,7 @@ export class PrimarySidebarComponent implements OnInit, OnDestroy {
 	public treeControl = new NestedTreeControl<SidebarInterface>(node => node.children);
 	public sidebarMenuList = new MatTreeNestedDataSource<SidebarInterface>();
 	public hotelSelectType = SelectTypeEnum.GROUP_CUSTOM;
+	public hotelGroupListVisibility = false;
 	public hotelGroupList;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
@@ -35,7 +37,8 @@ export class PrimarySidebarComponent implements OnInit, OnDestroy {
 	constructor(
 		private _router: Router,
 		private _sidebarService: SidebarService,
-		private _authService: AuthService
+		private _authService: AuthService,
+		private _routerService: RouterService
 	) {
 		// set side menu
 		this.sidebarMenuList.data = SidebarService.getSidebarMenuList();
@@ -48,6 +51,16 @@ export class PrimarySidebarComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
+		// show hotel group list dropdown on selected routes
+		this._routerService.routeChanged
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => {
+				if (res) {
+					this.hotelGroupListVisibility =
+						this._sidebarService.hotelGroupListRoutes.includes(res.url);
+				}
+			});
+
 		// open node based on current url
 		if (this.treeControl.dataNodes.length > 0) {
 			this.treeControl.dataNodes.forEach(node => {
