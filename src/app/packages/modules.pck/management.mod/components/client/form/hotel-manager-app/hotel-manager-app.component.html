@@ -1,5 +1,5 @@
 <div class="ham-hotel-app ham-margin-top">
-	<form [formGroup]="formFields" (ngSubmit)="onSubmitForm()" (keyup.enter)="isFormValid && onSubmitForm()">
+	<form [formGroup]="formFields" (ngSubmit)="onSubmitForm()">
 		<div class="ham-form" *ngIf="modulesList.length !== 0">
 			<!-- Columns -->
 			<div class="ham-row ham-border ham-columns" [class.ham-no-license]="!licenseActive">

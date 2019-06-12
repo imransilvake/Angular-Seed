@@ -4,7 +4,7 @@
 		<mat-slide-toggle class="mat-slide-toggle-1" (change)="onChangeHGAState()" [formControl]="hgaState"></mat-slide-toggle>
 	</div>
 
-	<form [formGroup]="formFields" (ngSubmit)="onSubmitForm()" (keyup.enter)="isFormValid && onSubmitForm()">
+	<form [formGroup]="formFields" (ngSubmit)="onSubmitForm()">
 		<!-- List -->
 		<div class="ham-form" *ngIf="modulesList.length !== 0">
 			<!-- Columns -->
