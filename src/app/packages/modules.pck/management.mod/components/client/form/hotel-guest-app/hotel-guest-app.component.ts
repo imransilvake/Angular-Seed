@@ -236,11 +236,9 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 
 		// validate license
 		if (licensedValue) {
-			// set active & preferred
 			active.enable();
 			preferred.enable();
 		} else {
-			// unset active & preferred
 			active.disable();
 			preferred.disable();
 			preferred.setValue(0);

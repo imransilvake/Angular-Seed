@@ -1,6 +1,6 @@
 <div class="ham-hotel-app ham-margin-top">
 	<form [formGroup]="formFields" (ngSubmit)="onSubmitForm()" (keyup.enter)="isFormValid && onSubmitForm()">
-		<div class="ham-form">
+		<div class="ham-form" *ngIf="modulesList">
 			<!-- Columns -->
 			<div class="ham-row ham-border ham-columns" [class.ham-no-license]="!licenseActive">
 				<h6 i18n="@@Management_Client_HSA_Column_License" *ngIf="licenseActive">License</h6>
@@ -50,6 +50,14 @@
 				</ng-container>
 			</div>
 		</div>
+
+		<!-- Empty -->
+		<ng-container *ngIf="!modulesList">
+			<app-divider></app-divider>
+			<div class="ham-no-module cd-center-align">
+				<p i18n="@@Management_Client_Form_No_module_Available">No Module available!</p>
+			</div>
+		</ng-container>
 
 		<app-divider></app-divider>
 

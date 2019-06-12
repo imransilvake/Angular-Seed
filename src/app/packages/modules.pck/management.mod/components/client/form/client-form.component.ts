@@ -18,6 +18,7 @@ export class ClientFormComponent implements OnInit {
 	@Input() id;
 
 	public currentUserRole: UserRoleEnum;
+	public expectedUserRole: UserRoleEnum = UserRoleEnum[UserRoleEnum.HOTEL_MANAGER];
 
 	constructor(private _clientService: ClientService) {
 	}

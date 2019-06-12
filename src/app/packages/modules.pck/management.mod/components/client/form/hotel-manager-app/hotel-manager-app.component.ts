@@ -153,10 +153,8 @@ export class HotelManagerAppComponent implements OnInit {
 
 		// validate license
 		if (licensedValue) {
-			// set active
 			active.enable();
 		} else {
-			// unset active
 			active.disable();
 		}
 	}
