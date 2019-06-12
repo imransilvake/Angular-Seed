@@ -8,7 +8,6 @@ import { takeUntil } from 'rxjs/operators';
 // app
 import { ProxyService } from '../../../packages/core.pck/proxy.mod/services/proxy.service';
 import { SidebarService } from '../../../packages/frame.pck/services/sidebar.service';
-import { UtilityService } from '../../../packages/utilities.pck/accessories.mod/services/utility.service';
 
 @Component({
 	selector: 'app-table',
@@ -43,8 +42,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
 	constructor(
 		private _proxyService: ProxyService,
-		private _sidebarService: SidebarService,
-		private _utilityService: UtilityService
+		private _sidebarService: SidebarService
 	) {
 		// form group
 		this.formFields = new FormGroup({
@@ -102,15 +100,6 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	 */
 	public validateType(value) {
 		return typeof value;
-	}
-
-	/**
-	 * get country name
-	 *
-	 * @param countryId
-	 */
-	public countryName(countryId) {
-		return this._utilityService.countryList.filter(country => country.id === countryId)[0].text;
 	}
 
 	/**

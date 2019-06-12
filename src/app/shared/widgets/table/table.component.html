@@ -18,30 +18,22 @@
 			<ng-container *ngFor="let column of tableColumns" matColumnDef="{{ column }}">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header>{{ column }}</th>
 				<td mat-cell *matCellDef="let element">
-					<!-- Country Column -->
-					<ng-container *ngIf="column === 'Country'">
-						{{ countryName(element[column]) }}
-					</ng-container>
+					<ng-container [ngSwitch]="validateType(element[column])">
+						<!-- Undefined -->
+						<ng-container *ngSwitchCase="'undefined'">-</ng-container>
 
-					<!-- Other Columns -->
-					<ng-container *ngIf="column !== 'Country'">
-						<ng-container [ngSwitch]="validateType(element[column])">
-							<!-- Undefined -->
-							<ng-container *ngSwitchCase="'undefined'">-</ng-container>
+						<!-- Boolean -->
+						<ng-container *ngSwitchCase="'boolean'">
+							<mat-checkbox
+								class="ham-checkbox-2"
+								[(ngModel)]="element[column]"
+								[disabled]="true">
+							</mat-checkbox>
+						</ng-container>
 
-							<!-- Boolean -->
-							<ng-container *ngSwitchCase="'boolean'">
-								<mat-checkbox
-									class="ham-checkbox-2"
-									[(ngModel)]="element[column]"
-									[disabled]="true">
-								</mat-checkbox>
-							</ng-container>
-
-							<!-- Text -->
-							<ng-container *ngSwitchDefault>
-								{{ element[column] }}
-							</ng-container>
+						<!-- Text -->
+						<ng-container *ngSwitchDefault>
+							{{ element[column] }}
 						</ng-container>
 					</ng-container>
 				</td>

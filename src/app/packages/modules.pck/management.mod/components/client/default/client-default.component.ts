@@ -8,6 +8,7 @@ import { ClientViewTypeEnum } from '../../../enums/client-view-type.enum';
 import { ClientService } from '../../../services/client.service';
 import { ClientViewInterface } from '../../../interfaces/client-view.interface';
 import { AppOptions } from '../../../../../../../app.config';
+import { UtilityService } from '../../../../../utilities.pck/accessories.mod/services/utility.service';
 
 @Component({
 	selector: 'app-client-default',
@@ -24,7 +25,10 @@ export class ClientDefaultComponent implements OnInit, OnDestroy {
 	public tableApiUrl;
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
-	constructor(private _clientService: ClientService) {
+	constructor(
+		private _clientService: ClientService,
+		private _utilityService: UtilityService
+	) {
 	}
 
 	ngOnInit() {
@@ -36,12 +40,23 @@ export class ClientDefaultComponent implements OnInit, OnDestroy {
 		this._clientService.clientDataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
-				// set override state
-				this.overrideState = res.hgaOverride && res.hgaOverride.HotelManagerOverride;
+				if (res && res.hotelGroupList) {
+					// set override state
+					this.overrideState = res.hgaOverride && res.hgaOverride.HotelManagerOverride;
 
-				// set
-				this.clientGroupHotelsList = res.hotelGroupList ||
-					this._clientService.clientData && this._clientService.clientData.hotelGroupList;
+					// set table data
+					this.clientGroupHotelsList = res.hotelGroupList;
+
+					// set country name
+					this.clientGroupHotelsList.data = res.hotelGroupList.data.map(hotel => {
+						return {
+							...hotel,
+							Country: this._utilityService.countryList.filter(
+								country => country.id === hotel.Country
+							)[0].text
+						};
+					});
+				}
 			});
 	}
 
