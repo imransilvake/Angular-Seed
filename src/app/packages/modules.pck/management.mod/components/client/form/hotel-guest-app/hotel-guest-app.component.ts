@@ -57,28 +57,30 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 		this._clientService.clientDataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
-				// set override state
-				this.hgaState.setValue(res.hgaOverride && res.hgaOverride.HotelManagerOverride);
+				if (res && res.hgaModules && res.licenseSystemData && res.hgaOverride) {
+					// set override state
+					this.hgaState.setValue(res.hgaOverride && res.hgaOverride.HotelManagerOverride);
 
-				// set group id
-				this.groupId = this._clientService.clientData.licenseSystemData && this._clientService.clientData.licenseSystemData.GroupID;
+					// set group id
+					this.groupId = res.licenseSystemData.GroupID;
 
-				// module list
-				this.modulesList = this._clientService.clientData.hgaModules;
+					// module list
+					this.modulesList = res.hgaModules;
 
-				// not on refresh (header)
-				if (this.modulesList && this.modulesList.length > 0) {
-					// flat modules
-					this.flatModulesList = HelperService.flatNestedArrays(this.modulesList.map(block => block.modules));
+					// not on refresh (header)
+					if (this.modulesList && this.modulesList.length > 0) {
+						// flat modules
+						this.flatModulesList = HelperService.flatNestedArrays(this.modulesList.map(block => block.modules));
 
-					// count modules length
-					const modulesCount = this.flatModulesList.length;
+						// count modules length
+						const modulesCount = this.flatModulesList.length;
 
-					// add & update modules
-					// update: 0
-					// add: 1 onwards
-					for (let i = 0; i < modulesCount; i++) {
-						this.updateAndAddModule(this.flatModulesList[i], i);
+						// add & update modules
+						// update: 0
+						// add: 1 onwards
+						for (let i = 0; i < modulesCount; i++) {
+							this.updateAndAddModule(this.flatModulesList[i], i);
+						}
 					}
 				}
 			});

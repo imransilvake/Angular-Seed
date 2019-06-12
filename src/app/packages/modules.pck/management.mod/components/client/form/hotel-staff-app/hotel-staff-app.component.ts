@@ -47,23 +47,25 @@ export class HotelStaffAppComponent implements OnInit {
 		// listen: get modules
 		this._clientService.clientDataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
-			.subscribe(() => {
-				// module list
-				this.modulesList = this._clientService.clientData.hsaModules;
+			.subscribe(res => {
+				if (res && res.hsaModules) {
+					// module list
+					this.modulesList = res.hsaModules;
 
-				// not on refresh (header)
-				if (this.modulesList && this.modulesList.length > 0) {
-					// flat modules
-					this.flatModulesList = HelperService.flatNestedArrays(this.modulesList.map(block => block.modules));
+					// not on refresh (header)
+					if (this.modulesList && this.modulesList.length > 0) {
+						// flat modules
+						this.flatModulesList = HelperService.flatNestedArrays(this.modulesList.map(block => block.modules));
 
-					// count modules length
-					const modulesCount = this.flatModulesList.length;
+						// count modules length
+						const modulesCount = this.flatModulesList.length;
 
-					// add & update modules
-					// update: 0
-					// add: 1 onwards
-					for (let i = 0; i < modulesCount; i++) {
-						this.updateAndAddModule(this.flatModulesList[i], i);
+						// add & update modules
+						// update: 0
+						// add: 1 onwards
+						for (let i = 0; i < modulesCount; i++) {
+							this.updateAndAddModule(this.flatModulesList[i], i);
+						}
 					}
 				}
 			});

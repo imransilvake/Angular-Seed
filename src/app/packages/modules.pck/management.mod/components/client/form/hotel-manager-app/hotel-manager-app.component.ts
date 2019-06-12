@@ -47,23 +47,25 @@ export class HotelManagerAppComponent implements OnInit {
 		// listen: get modules
 		this._clientService.clientDataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
-			.subscribe(() => {
-				// module list
-				this.modulesList = this._clientService.clientData.hmaModules;
+			.subscribe(res => {
+				if (res && res.hmaModules) {
+					// module list
+					this.modulesList = res.hmaModules;
 
-				// not on refresh (header)
-				if (this.modulesList && this.modulesList.length > 0) {
-					// flat modules
-					this.flatModulesList = HelperService.flatNestedArrays(this.modulesList.map(block => block.modules));
+					// not on refresh (header)
+					if (this.modulesList && this.modulesList.length > 0) {
+						// flat modules
+						this.flatModulesList = HelperService.flatNestedArrays(this.modulesList.map(block => block.modules));
 
-					// count modules length
-					const modulesCount = this.flatModulesList.length;
+						// count modules length
+						const modulesCount = this.flatModulesList.length;
 
-					// add & update modules
-					// update: 0
-					// add: 1 onwards
-					for (let i = 0; i < modulesCount; i++) {
-						this.updateAndAddModule(this.flatModulesList[i], i);
+						// add & update modules
+						// update: 0
+						// add: 1 onwards
+						for (let i = 0; i < modulesCount; i++) {
+							this.updateAndAddModule(this.flatModulesList[i], i);
+						}
 					}
 				}
 			});
