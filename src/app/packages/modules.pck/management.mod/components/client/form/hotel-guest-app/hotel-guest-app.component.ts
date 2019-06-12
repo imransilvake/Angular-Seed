@@ -82,6 +82,9 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 							this.updateAndAddModule(this.flatModulesList[i], i);
 						}
 					}
+				} else {
+					// clear modules list
+					this.modulesList = [];
 				}
 			});
 

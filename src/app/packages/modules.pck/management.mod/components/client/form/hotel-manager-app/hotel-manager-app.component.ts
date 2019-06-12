@@ -67,6 +67,9 @@ export class HotelManagerAppComponent implements OnInit {
 							this.updateAndAddModule(this.flatModulesList[i], i);
 						}
 					}
+				} else {
+					// clear modules list
+					this.modulesList = [];
 				}
 			});
 

@@ -1,8 +1,8 @@
 // angular
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
-import { takeUntil } from 'rxjs/operators';
+import { Component, OnDestroy } from '@angular/core';
+import { filter, takeUntil } from 'rxjs/operators';
 import { forkJoin, Subject } from 'rxjs';
+import { NavigationEnd, Router } from '@angular/router';
 
 // app
 import { MemberService } from '../../services/member.service';
@@ -16,7 +16,7 @@ import { StorageService } from '../../../../core.pck/storage.mod/services/storag
 	styleUrls: ['./profile.component.scss']
 })
 
-export class ProfileComponent implements OnInit, OnDestroy {
+export class ProfileComponent implements OnDestroy {
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
@@ -25,20 +25,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
 		private _memberService: MemberService,
 		private _storageService: StorageService
 	) {
-		// set current user state
-		this._memberService.currentUser = this._authService.currentUserState;
-	}
-
-	ngOnInit() {
 		// listen: router event
 		this.router.events
-			.pipe(takeUntil(this._ngUnSubscribe))
-			.subscribe((e: any) => {
-				if (e instanceof NavigationEnd) {
-					// load component services
-					this.loadComponentServices();
-				}
-			});
+			.pipe(
+				takeUntil(this._ngUnSubscribe),
+				filter(event => event instanceof NavigationEnd)
+			)
+			.subscribe(() => this.triggerServices());
 	}
 
 	ngOnDestroy() {
@@ -48,9 +41,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
 	}
 
 	/**
-	 * load component services
+	 * trigger all components services
 	 */
-	private loadComponentServices() {
+	private triggerServices() {
 		// set current user state
 		this._memberService.currentUser = this._authService.currentUserState;
 

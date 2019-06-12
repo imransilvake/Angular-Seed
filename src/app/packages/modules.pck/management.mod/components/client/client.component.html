@@ -10,7 +10,7 @@
 		<!-- View: Default -->
 		<ng-container *ngIf="pageView === 0">
 			<app-client-default
-				(changeClientView)="pageView = $event.view; id = $event.id; loadComponentServices();">
+				(changeClientView)="pageView = $event.view; id = $event.id; triggerServices();">
 			</app-client-default>
 		</ng-container>
 
@@ -18,7 +18,7 @@
 		<ng-container *ngIf="pageView === 1">
 			<app-client-form
 				[id]="id"
-				(changeClientView)="pageView = $event.view; id = null; loadComponentServices();">
+				(changeClientView)="pageView = $event.view; id = null; triggerServices();">
 			</app-client-form>
 		</ng-container>
 	</div>

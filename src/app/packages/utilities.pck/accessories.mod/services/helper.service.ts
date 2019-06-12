@@ -32,15 +32,6 @@ export class HelperService {
 	}
 
 	/**
-	 * detect device: app or browser
-	 *
-	 * @returns {boolean}
-	 */
-	static get isApp(): boolean {
-		return document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
-	}
-
-	/**
 	 * detect view: app or desktop
 	 */
 	static get isDesktopView() {
@@ -89,13 +80,6 @@ export class HelperService {
 		if (methodToBeInvoked) {
 			methodToBeInvoked.call(elem);
 		}
-	}
-
-	/**
-	 * detect: key press
-	 */
-	public static detectKeyPress() {
-		return fromEvent(document, 'keyup').pipe(debounceTime(100));
 	}
 
 	/**

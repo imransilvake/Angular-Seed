@@ -67,6 +67,9 @@ export class HotelStaffAppComponent implements OnInit {
 							this.updateAndAddModule(this.flatModulesList[i], i);
 						}
 					}
+				} else {
+					// clear modules list
+					this.modulesList = [];
 				}
 			});
 

@@ -20,7 +20,6 @@ import { UtilityService } from '../../../../../utilities.pck/accessories.mod/ser
 })
 
 export class UpdateProfileComponent implements OnInit, OnDestroy {
-
 	public formFields;
 	public profileSalutationSelectType = SelectTypeEnum.DEFAULT;
 	public salutationList: SelectDefaultInterface[] = [];

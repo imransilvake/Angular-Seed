@@ -1,7 +1,7 @@
 // angular
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { takeUntil } from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
 import { forkJoin, Subject } from 'rxjs';
 
 // app
@@ -18,7 +18,7 @@ import { ClientAppTypeEnum } from '../../enums/client-app-type.enum';
 	templateUrl: './client.component.html'
 })
 
-export class ClientComponent implements OnInit, OnDestroy {
+export class ClientComponent implements OnDestroy {
 	public pageView: ClientViewTypeEnum = ClientViewTypeEnum.DEFAULT;
 	public id;
 
@@ -31,20 +31,13 @@ export class ClientComponent implements OnInit, OnDestroy {
 		private _sidebarService: SidebarService,
 		private _storageService: StorageService
 	) {
-		// set current user state
-		this._clientService.currentUser = this._authService.currentUserState;
-	}
-
-	ngOnInit() {
 		// listen: router event
 		this.router.events
-			.pipe(takeUntil(this._ngUnSubscribe))
-			.subscribe((e: any) => {
-				if (e instanceof NavigationEnd) {
-					// load component services
-					this.loadComponentServices();
-				}
-			});
+			.pipe(
+				takeUntil(this._ngUnSubscribe),
+				filter(event => event instanceof NavigationEnd)
+			)
+			.subscribe(() => this.triggerServices());
 	}
 
 	ngOnDestroy() {
@@ -54,9 +47,9 @@ export class ClientComponent implements OnInit, OnDestroy {
 	}
 
 	/**
-	 * load component services
+	 * trigger all components services
 	 */
-	private loadComponentServices() {
+	private triggerServices() {
 		// set app state
 		this._clientService.appState = this._sidebarService.appState;
 
