@@ -12,21 +12,22 @@ import { AppOptions } from '../../../../../app.config';
 export class BreadcrumbService {
 	public routeDataBreadcrumb = 'breadcrumb';
 	public firstBreadcrumb: BreadcrumbInterface = { name: 'Home', url: '' };
-	public breadcrumbs: BreadcrumbInterface[];
+	public breadcrumbs: BreadcrumbInterface[] = [];
 
 	constructor(
 		private _router: Router,
 		private _route: ActivatedRoute,
 		private _authService: AuthService
 	) {
+		// set on page refresh
+		if (this.breadcrumbs.length === 0) {
+			this.breadcrumbsList = _route.root;
+		}
+
 		// set breadcrumbs
 		this._router.events
 			.pipe(filter(event => event instanceof NavigationEnd))
-			.subscribe(() => {
-				const root: ActivatedRoute = this._route.root;
-				this.breadcrumbs = this.getBreadcrumbs(root);
-				this.breadcrumbs = [this.firstBreadcrumb, ...this.breadcrumbs];
-			});
+			.subscribe(() => this.breadcrumbsList = _route.root);
 	}
 
 	/**
@@ -34,6 +35,14 @@ export class BreadcrumbService {
 	 */
 	get breadcrumbsList() {
 		return this.breadcrumbs;
+	}
+
+	/**
+	 * set breadcrumbs
+	 */
+	set breadcrumbsList(routerRoot: any) {
+		this.breadcrumbs = this.getBreadcrumbs(routerRoot);
+		this.breadcrumbs = [this.firstBreadcrumb, ...this.breadcrumbs];
 	}
 
 	/**

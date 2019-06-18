@@ -38,11 +38,11 @@ export class ClientService {
 	}
 
 	/**
-	 * refresh client hotel group list
+	 * fetch client hotel group list
 	 *
 	 * @param id
 	 */
-	public clientRefreshHotelGroupList(id: string) {
+	public clientFetchHotelGroupList(id: string) {
 		const allApi = AppServices['Management']['Client_Default_List'];
 		const hotelGroupApi = AppServices['Management']['Client_Default_List_Hotel'];
 		const payload = {

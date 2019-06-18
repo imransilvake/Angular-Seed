@@ -41,7 +41,7 @@ export class MemberService {
 	/**
 	 * refresh user profile
 	 */
-	public memberRefreshProfile() {
+	public memberFetchProfile() {
 		// payload
 		const payload = {
 			ID: this.currentUser.profile.sub

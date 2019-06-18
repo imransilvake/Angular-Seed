@@ -52,7 +52,7 @@ export class ProfileComponent implements OnDestroy {
 
 		// refresh member services
 		forkJoin({
-			memberProfile: this._memberService.memberRefreshProfile()
+			memberProfile: this._memberService.memberFetchProfile()
 		}).pipe(takeUntil(this._ngUnSubscribe)).subscribe(res => {
 			const result = {
 				memberProfile: res.memberProfile

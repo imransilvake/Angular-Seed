@@ -18,7 +18,6 @@
 			[tableData]="clientGroupHotelsList"
 			[tableColumns]="['Name', 'Country', 'HotelGuest/App', 'Hotels(HGA)', 'Users(HGA)', 'HotelStaff/App', 'Hotels(HSA)', 'Users(HSA)']"
 			[tableAdditionalColumns]="['Action']"
-			[tablePageSize]="tablePageSize"
 			[templateRef]="[action]"
 			[currentApiUrl]="tableApiUrl"
 			(rowId)="onClickFetchId($event)">

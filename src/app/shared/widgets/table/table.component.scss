@@ -48,6 +48,15 @@
 					&:last-child {
 						text-align: right;
 					}
+
+					.ham-image, .ham-no-image {
+						border: 1px solid cd-palette($cd-border, 3004, .3);
+						border-radius: 50%;
+						height: 35px;
+						padding: 5px;
+						text-align: center;
+						width: 35px;
+					}
 				}
 
 				th {

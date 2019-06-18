@@ -7,7 +7,6 @@ import { Subject } from 'rxjs';
 import { ClientViewTypeEnum } from '../../../enums/client-view-type.enum';
 import { ClientService } from '../../../services/client.service';
 import { ClientViewInterface } from '../../../interfaces/client-view.interface';
-import { AppOptions } from '../../../../../../../app.config';
 import { UtilityService } from '../../../../../utilities.pck/accessories.mod/services/utility.service';
 import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum';
 
@@ -24,7 +23,6 @@ export class ClientDefaultComponent implements OnInit, OnDestroy {
 	public expectedUserRole: UserRoleEnum = UserRoleEnum[UserRoleEnum.HOTEL_MANAGER];
 	public overrideState = false;
 	public clientGroupHotelsList;
-	public tablePageSize = AppOptions.tablePageSizeLimit - 1;
 	public tableApiUrl;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();

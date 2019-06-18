@@ -8,6 +8,7 @@ import { takeUntil } from 'rxjs/operators';
 // app
 import { ProxyService } from '../../../packages/core.pck/proxy.mod/services/proxy.service';
 import { SidebarService } from '../../../packages/frame.pck/services/sidebar.service';
+import { AppOptions } from '../../../../app.config';
 
 @Component({
 	selector: 'app-table',
@@ -24,7 +25,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	@Input() tableColumns = [];
 	@Input() tableAdditionalColumns = [];
 	@Input() tableData;
-	@Input() tablePageSize;
+	@Input() tablePageSize = AppOptions.tablePageSizeLimit - 1;
 	@Input() tablePagination = [5, 10, 20, 50, 100, 200];
 	@Input() templateRef;
 	@Input() currentApiUrl;
@@ -91,6 +92,15 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 		this.dataSource = new MatTableDataSource<any>(this.tableData.data);
 		this.dataSource.paginator = this.paginator;
 		this.dataSource.sort = this.sort;
+	}
+
+	/**
+	 * validate whether string contains a text or an image
+	 *
+	 * @param value
+	 */
+	public validateExtension(value) {
+		return value && value.split('.').pop();
 	}
 
 	/**

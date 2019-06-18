@@ -61,7 +61,7 @@ export class ClientComponent implements OnDestroy {
 
 		// refresh client services
 		forkJoin({
-			hotelGroupList: this._clientService.clientRefreshHotelGroupList(this.id),
+			hotelGroupList: this._clientService.clientFetchHotelGroupList(this.id),
 			licenseSystemData: this._clientService.clientFetchLicenseSystem(this.id),
 			hgaModules: this._clientService.clientFetchAppModules(ClientAppTypeEnum.HGA),
 			hgaOverride: this._clientService.clientFetchOverrideHGA(this.id),

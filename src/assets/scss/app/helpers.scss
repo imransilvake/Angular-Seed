@@ -66,3 +66,15 @@
 	line-height: 30px !important;
 	margin-top: 5px;
 }
+
+// table - button
+.ham-table-button-1 {
+	margin-top: 5px !important;
+}
+
+.ham-table-button-2 {
+	background-color: cd-palette($cd-background, 2009);
+	border: 1px solid cd-palette($cd-border, 3009) !important;
+	color: cd-palette($cd-color, 1001);
+	margin: 5px 0 5px 5px !important;
+}
