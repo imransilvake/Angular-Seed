@@ -148,9 +148,7 @@ export class SidebarService {
 					} else { // role: GROUP_MANAGER & HOTEL_MANAGER
 						hotelByGroupList = Array
 							.from(new Set(hotelByGroupList.map(a => a.id)))
-							.map(id => {
-								return hotelByGroupList.find(a => a.id === id)
-							});
+							.map(id => hotelByGroupList.find(a => a.id === id));
 					}
 
 					return hotelByGroupList;
