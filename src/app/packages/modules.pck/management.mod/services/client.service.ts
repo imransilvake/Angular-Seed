@@ -97,7 +97,7 @@ export class ClientService {
 	 * @param id
 	 */
 	public clientFetchLicenseSystem(id: string) {
-		return !id ? of(null) : this._proxyService
+		return !id || this.appState.role !== UserRoleEnum[UserRoleEnum.ADMIN] ? of(null) : this._proxyService
 			.getAPI(AppServices['Management']['Client_Form_License_HotelGroup_Fetch'], {
 				pathParams: { groupId: id }
 			})

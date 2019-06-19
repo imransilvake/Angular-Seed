@@ -21,7 +21,7 @@ export const EnvironmentRoutes = {
 		routes: {
 			user: 'management/user',
 			client: 'management/client',
-			notification: 'management/notification'
+			broadcast: 'management/broadcast'
 		}
 	}
 };

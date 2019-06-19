@@ -75,8 +75,8 @@ export class SidebarService {
 						externalIcon: faExternalLinkAlt
 					},
 					{
-						name: 'Notifications',
-						url: `/${ ROUTING.management.routes.notification }`,
+						name: 'Broadcast',
+						url: `/${ ROUTING.management.routes.broadcast }`,
 						externalIcon: faExternalLinkAlt
 					}
 				]
@@ -94,11 +94,16 @@ export class SidebarService {
 		const hotelIds = this._authService.currentUserState.profile['custom:hotelId'].split(',');
 		const role = this._authService.currentUserState.profile['cognito:groups'][0];
 
+		// role: GROUP_MANAGER & HOTEL_MANAGER
+		let payload = (role !== UserRoleEnum[UserRoleEnum.ADMIN]) ? {
+			pathParams: { groupId: groupId },
+			queryParams: { 'HotelIDs[]': hotelIds }
+		} : {
+			pathParams: { groupId: groupId }
+		};
+
 		return this._proxyService
-			.getAPI(AppServices['Utilities']['HotelListGroup'], {
-				pathParams: { groupId: groupId },
-				queryParams: { 'HotelIDs[]': hotelIds }
-			})
+			.getAPI(AppServices['Utilities']['HotelListGroup'], payload)
 			.pipe(
 				map(res => {
 					const response = res.items;
@@ -112,17 +117,17 @@ export class SidebarService {
 						});
 					}
 
-					// mapping
+					// map response
 					const mapped = response
 						.filter(hotel => hotel.hasOwnProperty('HotelID'))
 						.reduce((acc, hotel) => {
-							// role: ADMIN
-							if (role !== UserRoleEnum[UserRoleEnum.ADMIN]) {
+							// role: HOTEL_MANAGER
+							if (role === UserRoleEnum[UserRoleEnum.HOTEL_MANAGER]) {
 								hotelByGroupList.push({
 									id: (role === UserRoleEnum[UserRoleEnum.HOTEL_MANAGER]) ? hotel.HotelID : hotel.GroupID,
 									name: (role === UserRoleEnum[UserRoleEnum.HOTEL_MANAGER]) ? hotel.Name : hotel.GroupID
 								});
-							} else { // role: GROUP_MANAGER & HOTEL_MANAGER
+							} else { // role: ADMIN & GROUP_MANAGER
 								if (!acc.hasOwnProperty(hotel.GroupID)) {
 									acc[hotel.GroupID] = [];
 								}
@@ -134,8 +139,8 @@ export class SidebarService {
 							}
 						}, {});
 
-					// role: ADMIN
-					if (role === UserRoleEnum[UserRoleEnum.ADMIN]) {
+					// role: ADMIN & GROUP_MANAGER
+					if (role !== UserRoleEnum[UserRoleEnum.HOTEL_MANAGER]) {
 						for (const key in mapped) {
 							if (mapped.hasOwnProperty(key)) {
 								hotelByGroupList.push({
@@ -145,7 +150,7 @@ export class SidebarService {
 								});
 							}
 						}
-					} else { // role: GROUP_MANAGER & HOTEL_MANAGER
+					} else { // role: HOTEL_MANAGER
 						hotelByGroupList = Array
 							.from(new Set(hotelByGroupList.map(a => a.id)))
 							.map(id => hotelByGroupList.find(a => a.id === id));

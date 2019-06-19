@@ -4,7 +4,7 @@ import { Routes } from '@angular/router';
 // app
 import { ClientComponent } from './components/client/client.component';
 import { UserComponent } from './components/user/user.component';
-import { NotificationComponent } from './components/notification/notification.component';
+import { BroadcastComponent } from './components/broadcast/broadcast.component';
 
 export const MANAGEMENT_ROUTES: Routes = [
 	{
@@ -31,12 +31,12 @@ export const MANAGEMENT_ROUTES: Routes = [
 				},
 			},
 			{
-				path: 'notification',
-				component: NotificationComponent,
+				path: 'broadcast',
+				component: BroadcastComponent,
 				data: {
 					breadcrumb: {
-						en: 'System Notification',
-						de: 'Systembenachrichtigung'
+						en: 'Broadcast',
+						de: 'Übertragung'
 					}
 				},
 			}

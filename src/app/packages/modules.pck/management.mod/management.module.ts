@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { MANAGEMENT_ROUTES } from './management-routing';
 import { ClientComponent } from './components/client/client.component';
 import { FrameModule } from '../../frame.pck/frame.module';
-import { NotificationComponent } from './components/notification/notification.component';
+import { BroadcastComponent } from './components/broadcast/broadcast.component';
 import { UserComponent } from './components/user/user.component';
 import { WidgetsModule } from '../../../shared/widgets/widgets.module';
 import { SharedModule } from '../../../shared/shared.module';
@@ -33,7 +33,7 @@ import { UserService } from './services/user.service';
 		ClientComponent,
 		ClientDefaultComponent,
 		ClientFormComponent,
-		NotificationComponent,
+		BroadcastComponent,
 		UserComponent,
 		LicenseComponent,
 		SystemDataComponent,
