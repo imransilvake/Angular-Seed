@@ -9,7 +9,6 @@ import { FormGroup } from '@angular/forms';
 // app
 import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service';
 import { AppOptions, AppServices } from '../../../../../app.config';
-import { AppViewTypeEnum } from '../../../frame.pck/enums/app-view-type.enum';
 import { LicenseSystemInterface } from '../interfaces/license-system.interface';
 import { LoadingAnimationService } from '../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { LicenseIdentifierInterface } from '../interfaces/license-identifier.interface';
@@ -19,6 +18,8 @@ import { HgaOverrideInterface } from '../interfaces/hga-override.interface';
 import { SystemEndpointInterface } from '../interfaces/system-endpoint.interface';
 import { ClientAppTypeEnum } from '../enums/client-app-type.enum';
 import { ClientAppInterface } from '../interfaces/client-app.interface';
+import { UserRoleEnum } from '../../authorization.mod/enums/user-role.enum';
+import { AppViewStateEnum } from '../../../frame.pck/enums/app-view-state.enum';
 
 @Injectable()
 export class ClientService {
@@ -44,14 +45,15 @@ export class ClientService {
 	 */
 	public clientFetchHotelGroupList(id: string) {
 		const allApi = AppServices['Management']['Client_Default_List'];
-		const hotelGroupApi = AppServices['Management']['Client_Default_List_Hotel'];
+		const hotelGroupApi = AppServices['Management']['Client_Default_List_Hotel_Group'];
+		const hotelApi = AppServices['Management']['Client_Default_List_Hotel'];
 		const payload = {
 			offset: 0,
 			limit: AppOptions.tablePageSizeLimit
 		};
 
-		// call service based on app state
-		if (this.appState && this.appState.type === AppViewTypeEnum.ALL) {
+		// call service based on user role
+		if (this.appState && this.appState.type === AppViewStateEnum.ALL) {
 			// set table service
 			this.clientTablesServices = { ...this.clientTablesServices, hotelsByGroup: allApi };
 
@@ -59,18 +61,34 @@ export class ClientService {
 			return id ? of(null) : this._proxyService
 				.getAPI(allApi, { queryParams: payload })
 				.pipe(map(res => res));
+		} else if (this.appState && this.appState.type === AppViewStateEnum.GROUP) {
+			// set table service
+			this.clientTablesServices = { ...this.clientTablesServices, hotelsByGroup: hotelGroupApi };
+
+			// service
+			return id ? of(null) : this._proxyService
+				.getAPI(hotelGroupApi, {
+					pathParams: {
+						groupId: this.appState && this.appState.groupId
+					},
+					queryParams: payload
+				})
+				.pipe(map(res => res));
+		} else {
+			// set table service
+			this.clientTablesServices = { ...this.clientTablesServices, hotelsByGroup: hotelApi };
+
+			// service
+			return id ? of(null) : this._proxyService
+				.getAPI(hotelApi, {
+					pathParams: {
+						groupId: this.appState && this.appState.groupId,
+						hotelId: this.appState && this.appState.hotelId
+					},
+					queryParams: payload
+				})
+				.pipe(map(res => res));
 		}
-
-		// set table service
-		this.clientTablesServices = { ...this.clientTablesServices, hotelsByGroup: hotelGroupApi };
-
-		// service
-		return id ? of(null) : this._proxyService
-			.getAPI(hotelGroupApi, {
-				pathParams: { groupId: this.appState && this.appState.groupId },
-				queryParams: payload
-			})
-			.pipe(map(res => res));
 	}
 
 	/**
@@ -290,14 +308,19 @@ export class ClientService {
 	 * @param id
 	 */
 	public clientFetchOverrideHGA(id: string) {
-		return this._proxyService
-			.getAPI(AppServices['Management']['Client_Form_HGA_Override_Fetch'], {
-				pathParams: {
-					groupId: this.appState && this.appState.groupId,
-					appId: ClientAppTypeEnum.HGA
-				}
-			})
-			.pipe(map(res => res));
+		if (this.appState.role === UserRoleEnum.HOTEL_MANAGER) {
+			return this._proxyService
+				.getAPI(AppServices['Management']['Client_Form_HGA_Override_Hotel_Fetch'], {
+					pathParams: {
+						groupId: this.appState && this.appState.groupId,
+						hotelId: this.appState && this.appState.hotelId,
+						appId: ClientAppTypeEnum.HGA
+					}
+				})
+				.pipe(map(res => res));
+		} else {
+			return of (null);
+		}
 	}
 
 	/**
@@ -317,52 +340,58 @@ export class ClientService {
 	/**
 	 * fetch HGA / HSA / HMA modules
 	 *
+	 * @param id
 	 * @param clientAppType
 	 */
-	public clientFetchAppModules(clientAppType: string) {
-		const isHotel = this.appState && (this.appState.hotelId !== this.appState.groupId);
-		if (isHotel) {
-			return this._proxyService
-				.getAPI(AppServices['Management']['Client_Form_App_Hotel_Fetch'], {
-					pathParams: {
-						hotelId: this.appState.groupId,
-						appId: clientAppType
-					}
-				})
-				.pipe(map(res => {
-					if (res && res.Modules) {
-						switch (clientAppType) {
-							case ClientAppTypeEnum.HGA:
-								return this.mapHGAModules(res.Modules);
-							case ClientAppTypeEnum.HSA:
-								return this.mapHSAModules(res.Modules);
-							case ClientAppTypeEnum.HMA:
-								return this.mapHMAModules(res.Modules);
+	public clientFetchAppModules(id: string, clientAppType: string) {
+		if (id) {
+			const isHotel = this.appState && (this.appState.hotelId !== this.appState.groupId);
+			if (isHotel) {
+				return this._proxyService
+					.getAPI(AppServices['Management']['Client_Form_App_Hotel_Fetch'], {
+						pathParams: {
+							groupId: id,
+							hotelId: this.appState && this.appState.hotelId,
+							appId: clientAppType
 						}
-					}
-					return null;
-				}));
+					})
+					.pipe(map(res => {
+						if (res && res.Modules) {
+							switch (clientAppType) {
+								case ClientAppTypeEnum.HGA:
+									return this.mapHGAModules(res.Modules);
+								case ClientAppTypeEnum.HSA:
+									return this.mapHSAModules(res.Modules);
+								case ClientAppTypeEnum.HMA:
+									return this.mapHMAModules(res.Modules);
+							}
+						}
+						return null;
+					}));
+			} else {
+				return this._proxyService
+					.getAPI(AppServices['Management']['Client_Form_App_HotelGroup_Fetch'], {
+						pathParams: {
+							groupId: id,
+							appId: clientAppType
+						}
+					})
+					.pipe(map(res => {
+						if (res && res.Modules) {
+							switch (clientAppType) {
+								case ClientAppTypeEnum.HGA:
+									return this.mapHGAModules(res.Modules);
+								case ClientAppTypeEnum.HSA:
+									return this.mapHSAModules(res.Modules);
+								case ClientAppTypeEnum.HMA:
+									return this.mapHMAModules(res.Modules);
+							}
+						}
+						return null;
+					}));
+			}
 		} else {
-			return this._proxyService
-				.getAPI(AppServices['Management']['Client_Form_App_HotelGroup_Fetch'], {
-					pathParams: {
-						groupId: this.appState && this.appState.groupId,
-						appId: clientAppType
-					}
-				})
-				.pipe(map(res => {
-					if (res && res.Modules) {
-						switch (clientAppType) {
-							case ClientAppTypeEnum.HGA:
-								return this.mapHGAModules(res.Modules);
-							case ClientAppTypeEnum.HSA:
-								return this.mapHSAModules(res.Modules);
-							case ClientAppTypeEnum.HMA:
-								return this.mapHMAModules(res.Modules);
-						}
-					}
-					return null;
-				}));
+			return of(null);
 		}
 	}
 

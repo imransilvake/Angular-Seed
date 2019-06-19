@@ -12,6 +12,7 @@ import { AppServices, NeutralStorageItems } from '../../../../app.config';
 import { StorageService } from '../../core.pck/storage.mod/services/storage.service';
 import { AuthService } from '../../modules.pck/authorization.mod/services/auth.service';
 import { ProxyService } from '../../core.pck/proxy.mod/services/proxy.service';
+import { UserRoleEnum } from '../../modules.pck/authorization.mod/enums/user-role.enum';
 
 @Injectable()
 export class SidebarService {
@@ -89,32 +90,67 @@ export class SidebarService {
 	 * get hotel by group list
 	 */
 	public getHotelsByGroup() {
-		return this._proxyService.getAPI(AppServices['Utilities']['HotelList'])
+		const groupId = this._authService.currentUserState.profile['custom:hotel_group_id'];
+		const hotelIds = this._authService.currentUserState.profile['custom:hotelId'].split(',');
+		const role = this._authService.currentUserState.profile['cognito:groups'][0];
+
+		return this._proxyService
+			.getAPI(AppServices['Utilities']['HotelListGroup'], {
+				pathParams: { groupId: groupId },
+				queryParams: { 'HotelIDs[]': hotelIds }
+			})
 			.pipe(
 				map(res => {
-					const hotelByGroupList: SelectGroupInterface[] = [{
-						name: 'All'
-					}];
+					const response = res.items;
+					let hotelByGroupList: SelectGroupInterface[] = [];
+
+					// role: ADMIN
+					if (role === UserRoleEnum[UserRoleEnum.ADMIN]) {
+						hotelByGroupList.push({
+							id: 'All',
+							name: 'All'
+						});
+					}
 
 					// mapping
-					const mapped = res
-						.filter(hotel => hotel.hasOwnProperty('id'))
+					const mapped = response
+						.filter(hotel => hotel.hasOwnProperty('HotelID'))
 						.reduce((acc, hotel) => {
-							if (!acc.hasOwnProperty(hotel.group)) {
-								acc[hotel.group] = [];
+							// role: ADMIN
+							if (role !== UserRoleEnum[UserRoleEnum.ADMIN]) {
+								hotelByGroupList.push({
+									id: (role === UserRoleEnum[UserRoleEnum.HOTEL_MANAGER]) ? hotel.HotelID : hotel.GroupID,
+									name: (role === UserRoleEnum[UserRoleEnum.HOTEL_MANAGER]) ? hotel.Name : hotel.GroupID
+								});
+							} else { // role: GROUP_MANAGER & HOTEL_MANAGER
+								if (!acc.hasOwnProperty(hotel.GroupID)) {
+									acc[hotel.GroupID] = [];
+								}
+								acc[hotel.GroupID].push({
+									id: hotel.HotelID,
+									text: hotel.Name
+								});
+								return acc;
 							}
-							acc[hotel.group].push(hotel);
-							return acc;
 						}, {});
 
-					// structuring
-					for (const key in mapped) {
-						if (mapped.hasOwnProperty(key)) {
-							hotelByGroupList.push({
-								name: key,
-								items: mapped[key]
-							});
+					// role: ADMIN
+					if (role === UserRoleEnum[UserRoleEnum.ADMIN]) {
+						for (const key in mapped) {
+							if (mapped.hasOwnProperty(key)) {
+								hotelByGroupList.push({
+									id: key,
+									name: key,
+									items: mapped[key]
+								});
+							}
 						}
+					} else { // role: GROUP_MANAGER & HOTEL_MANAGER
+						hotelByGroupList = Array
+							.from(new Set(hotelByGroupList.map(a => a.id)))
+							.map(id => {
+								return hotelByGroupList.find(a => a.id === id)
+							});
 					}
 
 					return hotelByGroupList;

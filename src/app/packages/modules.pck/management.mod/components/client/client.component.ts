@@ -63,10 +63,10 @@ export class ClientComponent implements OnDestroy {
 		forkJoin({
 			hotelGroupList: this._clientService.clientFetchHotelGroupList(this.id),
 			licenseSystemData: this._clientService.clientFetchLicenseSystem(this.id),
-			hgaModules: this._clientService.clientFetchAppModules(ClientAppTypeEnum.HGA),
+			hgaModules: this._clientService.clientFetchAppModules(this.id, ClientAppTypeEnum.HGA),
 			hgaOverride: this._clientService.clientFetchOverrideHGA(this.id),
-			hsaModules: this._clientService.clientFetchAppModules(ClientAppTypeEnum.HSA),
-			hmaModules: this._clientService.clientFetchAppModules(ClientAppTypeEnum.HMA)
+			hsaModules: this._clientService.clientFetchAppModules(this.id, ClientAppTypeEnum.HSA),
+			hmaModules: this._clientService.clientFetchAppModules(this.id, ClientAppTypeEnum.HMA)
 		}).pipe(takeUntil(this._ngUnSubscribe)).subscribe(res => {
 			const result = {
 				hotelGroupList: res.hotelGroupList,

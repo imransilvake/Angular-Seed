@@ -2,10 +2,10 @@
 	<!-- Hotel Select -->
 	<div class="ham-select" [class.ham-hide]="!drawerState" *ngIf="hotelGroupListVisibility">
 		<app-select
-			[selectType]="hotelSelectType"
-			[selectId]="'sidenav-hotel-list-id'"
+			[selectType]="hotelGroupSelectType"
+			[selectId]="'sidenav-hotel-group-list-id'"
 			selectPlaceHolder="Select Hotel / Group"
-			i18n-selectPlaceHolder="@@Frame_HotelList_PlaceHolder"
+			i18n-selectPlaceHolder="@@Frame_Hotel_Group_List_PlaceHolder"
 			[dataGroups]="hotelGroupList"
 			[control]="hotelByGroupList">
 		</app-select>

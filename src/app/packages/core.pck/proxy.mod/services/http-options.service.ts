@@ -3,10 +3,15 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 
 // app
-import { RequestHeaders } from '../../../../../app.config';
+import { LocalStorageItems, RequestHeaders, SessionStorageItems } from '../../../../../app.config';
+import { StorageService } from '../../storage.mod/services/storage.service';
+import { StorageTypeEnum } from '../../storage.mod/enums/storage-type.enum';
 
 @Injectable({ providedIn: 'root' })
 export class HttpOptionsService {
+	constructor(private _storageService: StorageService) {
+	}
+
 	/**
 	 * returns important headers for the request
 	 *
@@ -21,6 +26,15 @@ export class HttpOptionsService {
 			Object.keys(headerValues).forEach((key) => {
 				headers = headers.set(key, headerValues[key]);
 			});
+		}
+
+		// add access token
+		const userState =
+			this._storageService.get(LocalStorageItems.userState, StorageTypeEnum.PERSISTANT) ||
+			this._storageService.get(SessionStorageItems.userState, StorageTypeEnum.SESSION);
+
+		if (userState) {
+			headers = headers.set('Authorization', userState.credentials.accessToken.toString());
 		}
 
 		return headers;

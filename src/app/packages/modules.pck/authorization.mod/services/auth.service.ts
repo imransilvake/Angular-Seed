@@ -12,7 +12,7 @@ import { Store } from '@ngrx/store';
 // app
 import * as moment from 'moment';
 import * as SessionActions from '../../../core.pck/session.mod/store/actions/session.actions';
-import { AppOptions, AppServices, LocalStorageItems, SessionStorageItems } from '../../../../../app.config';
+import { AppOptions, AppServices, LocalStorageItems, NeutralStorageItems, SessionStorageItems } from '../../../../../app.config';
 import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service';
 import { AuthForgotInterface } from '../interfaces/auth-forgot.interface';
 import { AuthRegisterInterface } from '../interfaces/auth-register.interface';
@@ -27,6 +27,8 @@ import { HelperService } from '../../../utilities.pck/accessories.mod/services/h
 import { LoadingAnimationService } from '../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { DialogTypeEnum } from '../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { DialogService } from '../../../utilities.pck/dialog.mod/services/dialog.service';
+import { AppViewStateInterface } from '../../../frame.pck/interfaces/app-view-state.interfsce';
+import { UserRoleEnum } from '../enums/user-role.enum';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -162,7 +164,38 @@ export class AuthService {
 						// stop loading animation
 						this._router
 							.navigate([ROUTING.dashboard])
-							.then(() => this._loadingAnimationService.stopLoadingAnimation());
+							.then(() => {
+								// stop loading animation
+								this._loadingAnimationService.stopLoadingAnimation();
+
+								// set initial app state
+								const groupId = this.currentUserState.profile['custom:hotel_group_id'];
+								const hotelIds = this.currentUserState.profile['custom:hotelId'].split(',');
+								const role = this.currentUserState.profile['cognito:groups'][0];
+								let type = 0;
+
+								// set type
+								switch (role) {
+									case UserRoleEnum[UserRoleEnum.GROUP_MANAGER]:
+										type = 1;
+										break;
+									case UserRoleEnum[UserRoleEnum.HOTEL_MANAGER]:
+										type = 2;
+										break;
+								}
+
+								// app state payload
+								const appStatePayload: AppViewStateInterface = {
+									hotelId: hotelIds[0],
+									groupId: groupId,
+									role: role,
+									type: type
+								};
+
+								// save to browser storage
+								const storagePlace = this.currentUserState.rememberMe ? StorageTypeEnum.PERSISTANT : StorageTypeEnum.SESSION;
+								this._storageService.put(NeutralStorageItems.appState, appStatePayload, storagePlace);
+							});
 					});
 				}
 			}, (err: HttpErrorResponse) => {

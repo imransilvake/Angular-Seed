@@ -20,7 +20,8 @@ export class ClientDefaultComponent implements OnInit, OnDestroy {
 	@Output() changeClientView: EventEmitter<any> = new EventEmitter();
 
 	public currentUserRole: UserRoleEnum;
-	public expectedUserRole: UserRoleEnum = UserRoleEnum[UserRoleEnum.HOTEL_MANAGER];
+	public userRoleAdmin: UserRoleEnum = UserRoleEnum[UserRoleEnum.ADMIN];
+	public userRoleHotelManager: UserRoleEnum = UserRoleEnum[UserRoleEnum.HOTEL_MANAGER];
 	public overrideState = false;
 	public clientGroupHotelsList;
 	public tableApiUrl;
@@ -44,7 +45,7 @@ export class ClientDefaultComponent implements OnInit, OnDestroy {
 		this._clientService.clientDataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
-				if (res && res.hotelGroupList && res.hgaOverride) {
+				if (res && res.hotelGroupList) {
 					// set override state
 					this.overrideState = res.hgaOverride && res.hgaOverride.HotelManagerOverride;
 

@@ -20,7 +20,7 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 	Utilities: {
 		CountryList: { serviceUrl: '/config/countries/list' },
 		HotelList: { serviceUrl: '/hotels/list' },
-		HotelListGroup: { serviceUrl: '/hotels/list/groups/:groupId' },
+		HotelListGroup: { serviceUrl: '/hotels/list/group/:groupId' },
 		Fetch_Profile_Image: { serviceUrl: '/getimage' },
 		Change_Profile_Image: { serviceUrl: '/imageupload' }
 	},
@@ -39,15 +39,17 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 	},
 	Management: {
 		Client_Default_List: { serviceUrl: '/management/hotelgroup/list' },
-		Client_Default_List_Hotel: { serviceUrl: '/management/hotelgroup/list/:groupId' },
+		Client_Default_List_Hotel_Group: { serviceUrl: '/management/hotelgroup/list/group/:groupId' },
+		Client_Default_List_Hotel: { serviceUrl: '/management/hotelgroup/list/group/:groupId/hotel/:hotelId' },
 		Client_Form_License_HotelGroup_Fetch: { serviceUrl: '/management/hotelgroup/:groupId' },
 		Client_Form_License_HotelGroup_Validate: { serviceUrl: '/management/hotelgroup/validate' },
 		Client_Form_System_HotelGroup_Validate: { serviceUrl: '/management/endpoint/validate' },
 		Client_Form_License_System_Hotel_Update: { serviceUrl: '/management/hotel' },
 		Client_Form_License_System_HotelGroup_Update: { serviceUrl: '/management/hotelgroup' },
-		Client_Form_HGA_Override_Fetch: { serviceUrl: '/management/module/override/group/:groupId/app/:appId' },
+		Client_Form_HGA_Override_All_Fetch: { serviceUrl: '/management/module/override/group/:groupId/app/:appId' },
+		Client_Form_HGA_Override_Hotel_Fetch: { serviceUrl: '/management/module/override/group/:groupId/hotel/:hotelId/app/:appId' },
 		Client_Form_HGA_Override_Update: { serviceUrl: '/management/module/override' },
-		Client_Form_App_Hotel_Fetch: { serviceUrl: '/management/module/hotel/:hotelId/app/:appId' },
+		Client_Form_App_Hotel_Fetch: { serviceUrl: '/management/module/group/:groupId/hotel/:hotelId/app/:appId' },
 		Client_Form_App_HotelGroup_Fetch: { serviceUrl: '/management/module/group/:groupId/app/:appId' },
 		Client_Form_App_Hotel_Update: { serviceUrl: '/management/module/hotel' },
 		Client_Form_App_HotelGroup_Update: { serviceUrl: '/management/module/group' }

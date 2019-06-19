@@ -1,13 +1,13 @@
 <div class="ham-client-default" *ngIf="clientGroupHotelsList">
 	<!-- Button -->
-	<div class="ham-button-wrapper" *ngIf="currentUserRole === expectedUserRole">
+	<div class="ham-button-wrapper" *ngIf="currentUserRole === userRoleAdmin">
 		<button mat-button class="ham-button ham-button-1" i18n="@@Management_Client_Create_Hotel_Group" (click)="onClickFetchId()">
 			Create New Hotel / Group
 		</button>
 	</div>
 
 	<!-- Group Hotels List -->
-	<div class="ham-hotels-list" *ngIf="overrideState">
+	<div class="ham-hotels-list" *ngIf="overrideState || currentUserRole !== userRoleHotelManager">
 		<app-table
 			tableTitle="Hotels / Hotelgroups"
 			i18n-tableTitle="@@Management_Client_Table_Title"
@@ -29,7 +29,7 @@
 	</div>
 
 	<!-- Access Denied -->
-	<div class="ham-wrapper-2 ham-access-denied cd-center-align" *ngIf="!overrideState">
+	<div class="ham-wrapper-2 ham-access-denied cd-center-align" *ngIf="!overrideState && currentUserRole === userRoleHotelManager">
 		<p i18n="@@Management_Client_Access_Denied">Access Denied!</p>
 	</div>
 </div>

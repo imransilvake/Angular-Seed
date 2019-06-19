@@ -39,7 +39,7 @@
 				<!-- Group | Custom - Group Clickable -->
 				<ng-container *ngIf="selectType === 2">
 					<ng-container *ngFor="let group of dataGroups">
-						<mat-option class="ham-group-label" [value]="group.name">
+						<mat-option class="ham-group-label" [value]="group.id">
 							{{group.name}}
 						</mat-option>
 						<mat-option *ngFor="let item of group.items" [value]="item.id">

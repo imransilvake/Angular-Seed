@@ -2,6 +2,7 @@
 export interface SelectGroupInterface {
 	disabled?: boolean;
 	name: string;
+	id?: string;
 	items?: SelectGroupItems[];
 }
 

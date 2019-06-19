@@ -11,10 +11,10 @@ import { Subject } from 'rxjs';
 import { SidebarInterface } from '../../../interfaces/sidebar.interface';
 import { SidebarService } from '../../../services/sidebar.service';
 import { SelectTypeEnum } from '../../../../core.pck/fields.mod/enums/select-type.enum';
-import { AppViewTypeEnum } from '../../../enums/app-view-type.enum';
 import { AppViewStateInterface } from '../../../interfaces/app-view-state.interfsce';
 import { AuthService } from '../../../../modules.pck/authorization.mod/services/auth.service';
 import { RouterService } from '../../../../utilities.pck/accessories.mod/services/router.service';
+import { AppViewStateEnum } from '../../../enums/app-view-state.enum';
 
 @Component({
 	selector: 'app-sidebar-primary',
@@ -28,7 +28,7 @@ export class PrimarySidebarComponent implements OnInit, OnDestroy {
 	public formFields;
 	public treeControl = new NestedTreeControl<SidebarInterface>(node => node.children);
 	public sidebarMenuList = new MatTreeNestedDataSource<SidebarInterface>();
-	public hotelSelectType = SelectTypeEnum.GROUP_CUSTOM;
+	public hotelGroupSelectType = SelectTypeEnum.GROUP_CUSTOM;
 	public hotelGroupListVisibility = false;
 	public hotelGroupList;
 
@@ -86,8 +86,12 @@ export class PrimarySidebarComponent implements OnInit, OnDestroy {
 					// get app state
 					const appState = this._sidebarService.appState;
 
-					// set current value
-					if (appState && appState.hotelId) {
+					// select option
+					if (appState.type === 0) {
+						this.hotelByGroupList.setValue('All');
+					} else if (appState.type === 1) {
+						this.hotelByGroupList.setValue(appState.groupId);
+					} else {
 						this.hotelByGroupList.setValue(appState.hotelId);
 					}
 				}
@@ -97,30 +101,31 @@ export class PrimarySidebarComponent implements OnInit, OnDestroy {
 		this.hotelByGroupList.valueChanges
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
-				let payload: AppViewStateInterface;
-				if (typeof res === 'object') {
-					payload = {
-						hotelId: res.id,
-						groupId: res.split('_')[0],
-						text: res.text,
-						type: AppViewTypeEnum.HOTEL
+				if (res) {
+					let payload: AppViewStateInterface;
+					if (res !== 'All') {
+						payload = {
+							hotelId: res,
+							groupId: res.split('_')[0],
+							type: res.split('_')[1] ? AppViewStateEnum.HOTEL : AppViewStateEnum.GROUP
+						};
+					} else {
+						payload = {
+							hotelId: res,
+							groupId: res.split('_')[0],
+							type: AppViewStateEnum.ALL
+						};
+					}
+
+					// set app state
+					this._sidebarService.appState = {
+						...payload,
+						role: this._authService.currentUserState.profile['cognito:groups'][0]
 					};
-				} else {
-					payload = {
-						hotelId: res,
-						groupId: res.split('_')[0],
-						type: (res.toLowerCase() === 'all') ? AppViewTypeEnum.ALL : AppViewTypeEnum.GROUP
-					};
+
+					// refresh current route
+					this._router.navigate([this._router.url]).then();
 				}
-
-				// set app state
-				this._sidebarService.appState = {
-					...payload,
-					role: this._authService.currentUserState.profile['cognito:groups'][0]
-				};
-
-				// refresh current route
-				this._router.navigate([this._router.url]).then();
 			});
 	}
 
