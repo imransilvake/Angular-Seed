@@ -24,7 +24,6 @@ import { ChangePasswordInterface } from '../interfaces/change-password.interface
 @Injectable({ providedIn: 'root' })
 export class MemberService {
 	public currentUser;
-	public memberData;
 	public memberDataEmitter: BehaviorSubject<any> = new BehaviorSubject(0);
 	public profileImageUpdate: EventEmitter<boolean> = new EventEmitter();
 

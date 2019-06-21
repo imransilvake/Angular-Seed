@@ -53,9 +53,6 @@ export class ClientComponent implements OnDestroy {
 		// set app state
 		this._clientService.appState = this._sidebarService.appState;
 
-		// set current user state
-		this._clientService.currentUser = this._authService.currentUserState;
-
 		// clear memory storage to get fresh data on refresh
 		this._storageService.remove(null, StorageTypeEnum.MEMORY);
 
@@ -76,9 +73,6 @@ export class ClientComponent implements OnDestroy {
 				hsaModules: res.hsaModules,
 				hmaModules: res.hmaModules
 			};
-
-			// save to client data
-			this._clientService.clientData = result;
 
 			// emit result
 			this._clientService.clientDataEmitter.next(result);

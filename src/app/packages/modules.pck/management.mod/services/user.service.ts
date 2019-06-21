@@ -8,8 +8,6 @@ import { AppServices } from '../../../../../app.config';
 @Injectable()
 export class UserService {
 	public appState;
-	public currentUser;
-	public userData;
 	public userTablesServices;
 	public userDataEmitter: BehaviorSubject<any> = new BehaviorSubject(0);
 	public errorMessage: EventEmitter<string> = new EventEmitter();

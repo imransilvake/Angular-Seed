@@ -58,9 +58,6 @@ export class ProfileComponent implements OnDestroy {
 				memberProfile: res.memberProfile
 			};
 
-			// save to client data
-			this._memberService.memberData = result;
-
 			// emit result
 			this._memberService.memberDataEmitter.next(result);
 		});

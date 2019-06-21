@@ -23,8 +23,6 @@ import { AppViewStateEnum } from '../../../frame.pck/enums/app-view-state.enum';
 @Injectable()
 export class ClientService {
 	public appState;
-	public currentUser;
-	public clientData;
 	public clientTablesServices;
 	public clientDataEmitter: BehaviorSubject<any> = new BehaviorSubject(0);
 	public errorMessage: EventEmitter<string> = new EventEmitter();

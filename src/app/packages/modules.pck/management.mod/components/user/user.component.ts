@@ -72,9 +72,6 @@ export class UserComponent implements OnInit, OnDestroy {
 		// set app state
 		this._userService.appState = this._sidebarService.appState;
 
-		// set current user state
-		this._userService.currentUser = this._authService.currentUserState;
-
 		// clear memory storage to get fresh data on refresh
 		this._storageService.remove(null, StorageTypeEnum.MEMORY);
 
@@ -87,9 +84,6 @@ export class UserComponent implements OnInit, OnDestroy {
 				newUsers: res.newUsers,
 				existingUsers: res.existingUsers
 			};
-
-			// save to user data
-			this._userService.userData = result;
 
 			// emit result
 			this._userService.userDataEmitter.next(result);
