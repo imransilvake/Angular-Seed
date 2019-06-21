@@ -1,8 +1,8 @@
 // angular
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { map, startWith } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { map, startWith, takeUntil } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
 import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material';
 
 // app
@@ -16,7 +16,7 @@ import { AutocompleteGroupInterface } from '../../interfaces/autocomplete-group.
 	styleUrls: ['./autocomplete.component.scss']
 })
 
-export class AutocompleteComponent implements OnInit {
+export class AutocompleteComponent implements OnInit, OnDestroy {
 	@Input() autocompleteType: AutocompleteTypeEnum = AutocompleteTypeEnum.DEFAULT;
 	@Input() multipleSelection = false;
 
@@ -43,9 +43,12 @@ export class AutocompleteComponent implements OnInit {
 	@ViewChild('inputField', { static: false }) inputField: ElementRef;
 	@ViewChild('auto', { static: false }) matAutocomplete: MatAutocomplete;
 
+	private _ngUnSubscribe: Subject<void> = new Subject<void>();
+
 	ngOnInit() {
 		this.filteredData = this.control.valueChanges
 			.pipe(
+				takeUntil(this._ngUnSubscribe),
 				startWith(''),
 				map(res => {
 					// validate fields
@@ -57,6 +60,12 @@ export class AutocompleteComponent implements OnInit {
 						this.filterDataResults(res, this.dataDefault);
 				})
 			);
+	}
+
+	ngOnDestroy() {
+		// remove subscriptions
+		this._ngUnSubscribe.next();
+		this._ngUnSubscribe.complete();
 	}
 
 	/**
@@ -147,6 +156,7 @@ export class AutocompleteComponent implements OnInit {
 		if (this.multipleSelection) {
 			// listen: control value change event
 			this.control.valueChanges
+				.pipe(takeUntil(this._ngUnSubscribe))
 				.subscribe(res => {
 					if (!res && this.selectedItems && this.selectedItems.length === 0) {
 						// set error on empty list

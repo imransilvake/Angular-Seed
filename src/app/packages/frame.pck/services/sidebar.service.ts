@@ -95,7 +95,7 @@ export class SidebarService {
 		const role = this._authService.currentUserState.profile['cognito:groups'][0];
 
 		// role: GROUP_MANAGER & HOTEL_MANAGER
-		let payload = (role !== UserRoleEnum[UserRoleEnum.ADMIN]) ? {
+		const payload = (role !== UserRoleEnum[UserRoleEnum.ADMIN]) ? {
 			pathParams: { groupId: groupId },
 			queryParams: { 'HotelIDs[]': hotelIds }
 		} : {
