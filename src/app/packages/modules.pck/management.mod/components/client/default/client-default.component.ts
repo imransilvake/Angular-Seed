@@ -19,9 +19,9 @@ import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum
 export class ClientDefaultComponent implements OnInit, OnDestroy {
 	@Output() changeClientView: EventEmitter<any> = new EventEmitter();
 
-	public currentUserRole: UserRoleEnum;
-	public userRoleAdmin: UserRoleEnum = UserRoleEnum[UserRoleEnum.ADMIN];
-	public userRoleHotelManager: UserRoleEnum = UserRoleEnum[UserRoleEnum.HOTEL_MANAGER];
+	public currentRole: UserRoleEnum;
+	public roleAdmin: UserRoleEnum = UserRoleEnum[UserRoleEnum.ADMIN];
+	public roleHotelManager: UserRoleEnum = UserRoleEnum[UserRoleEnum.HOTEL_MANAGER];
 	public overrideState = false;
 	public clientGroupHotelsList;
 	public tableApiUrl;
@@ -36,7 +36,7 @@ export class ClientDefaultComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		// set current user role
-		this.currentUserRole = this._clientService.appState && this._clientService.appState.role;
+		this.currentRole = this._clientService.appState && this._clientService.appState.role;
 
 		// set table api
 		this.tableApiUrl = this._clientService.clientTablesServices.hotelsByGroup;

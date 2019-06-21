@@ -506,10 +506,13 @@ export class ClientService {
 	 * @param response
 	 */
 	private mapHGAModules(response: any) {
+		const roleHotelManager = UserRoleEnum[UserRoleEnum.HOTEL_MANAGER];
+		const isHotelManager = this.appState.role === roleHotelManager;
+
 		return [
 			{
 				'name': 'General',
-				'modules': [response.filter(module => module.ModuleID === 'HGA_GUEST_NOTIFICATIONS')[0] ? {
+				'modules': [response.filter(module => module.ModuleID === 'HGA_GUEST_NOTIFICATIONS')[0] && (!isHotelManager || isHotelManager && response.filter(module => module.ModuleID === 'HGA_GUEST_NOTIFICATIONS')[0].Licensed) ? {
 					data: response.filter(module => module.ModuleID === 'HGA_GUEST_NOTIFICATIONS')[0],
 					details: {
 						title: this._i18n({

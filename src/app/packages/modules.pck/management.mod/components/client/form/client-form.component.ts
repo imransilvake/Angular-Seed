@@ -17,15 +17,15 @@ export class ClientFormComponent implements OnInit {
 	@Output() changeClientView: EventEmitter<any> = new EventEmitter();
 	@Input() id;
 
-	public currentUserRole: UserRoleEnum;
-	public userRoleAdmin: UserRoleEnum = UserRoleEnum[UserRoleEnum.ADMIN];
+	public currentRole: UserRoleEnum;
+	public roleAdmin: UserRoleEnum = UserRoleEnum[UserRoleEnum.ADMIN];
 
 	constructor(private _clientService: ClientService) {
 	}
 
 	ngOnInit() {
 		// set current user role
-		this.currentUserRole = this._clientService.appState.role;
+		this.currentRole = this._clientService.appState.role;
 	}
 
 	/**

@@ -11,6 +11,7 @@ import { ClientViewInterface } from '../../../../interfaces/client-view.interfac
 import { ClientViewTypeEnum } from '../../../../enums/client-view-type.enum';
 import { LoadingAnimationService } from '../../../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { ClientAppTypeEnum } from '../../../../enums/client-app-type.enum';
+import { UserRoleEnum } from '../../../../../authorization.mod/enums/user-role.enum';
 
 @Component({
 	selector: 'app-hotel-staff-app',
@@ -27,29 +28,34 @@ export class HotelStaffAppComponent implements OnInit {
 	public flatModulesList = [];
 	public licenseActive = true;
 	public formValid = false;
+	public currentRole: UserRoleEnum;
+
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
 		private _clientService: ClientService,
 		private _loadingAnimationService: LoadingAnimationService
 	) {
-		// form fields
-		this.formFields = new FormGroup({
-			modules: new FormArray([
-				HotelStaffAppComponent.moduleItems({
-					Licensed: false,
-					Active: false
-				})
-			])
-		});
+		// init form
+		this.initForm();
 	}
 
 	ngOnInit() {
+		// set current user role
+		this.currentRole = this._clientService.appState.role;
+
 		// listen: get modules
 		this._clientService.clientDataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
+				// set license state
+				this.licenseActive = this._clientService.appState && (this._clientService.appState.hotelId === this._clientService.appState.groupId);
+
+				// set modules
 				if (res && res.hsaModules) {
+					// re-init form
+					this.initForm();
+
 					// module list
 					this.modulesList = res.hsaModules;
 
@@ -68,9 +74,6 @@ export class HotelStaffAppComponent implements OnInit {
 							this.updateAndAddModule(this.flatModulesList[i], i);
 						}
 					}
-				} else {
-					// clear modules list
-					this.modulesList = [];
 				}
 			});
 
@@ -90,8 +93,19 @@ export class HotelStaffAppComponent implements OnInit {
 		return this.formFields.controls.modules;
 	}
 
-	get isFormValid() {
-		return this.formValid;
+	/**
+	 * init form
+	 */
+	public initForm() {
+		// form fields
+		this.formFields = new FormGroup({
+			modules: new FormArray([
+				HotelStaffAppComponent.moduleItems({
+					Licensed: false,
+					Active: false
+				})
+			])
+		});
 	}
 
 	/**

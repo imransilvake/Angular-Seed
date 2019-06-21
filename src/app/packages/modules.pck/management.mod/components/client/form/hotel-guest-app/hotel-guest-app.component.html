@@ -1,12 +1,12 @@
 <div class="ham-hotel-app">
-	<div class="ham-state" *ngIf="licenseActive && currentUserRole !== userRoleHotelManager">
+	<div class="ham-state" *ngIf="currentRole !== roleHotelManager">
 		<p i18n="@@Management_Client_HGA_Toggle">HotelManager can activate / deactivate licensed modules too</p>
 		<mat-slide-toggle class="mat-slide-toggle-1" (change)="onChangeHGAState()" [formControl]="hgaState"></mat-slide-toggle>
 	</div>
 
-	<form [formGroup]="formFields" (ngSubmit)="onSubmitForm()" [class.ham-margin-top]="!(licenseActive && currentUserRole !== userRoleHotelManager)">
+	<form [formGroup]="formFields" (ngSubmit)="onSubmitForm()" [class.ham-margin-top]="currentRole === roleHotelManager">
 		<!-- List -->
-		<div class="ham-form" *ngIf="modulesList.length !== 0 && (currentUserRole !== userRoleHotelManager || currentUserRole === userRoleHotelManager && hgaState.value)">
+		<div class="ham-form" *ngIf="modulesList.length !== 0 && (currentRole !== roleHotelManager || currentRole === roleHotelManager && hgaState.value)">
 			<!-- Columns -->
 			<div class="ham-row ham-border" [class.ham-no-license]="!licenseActive">
 				<h6 i18n="@@Management_Client_HGA_Column_License" *ngIf="licenseActive">License</h6>
@@ -40,7 +40,7 @@
 								</mat-slide-toggle>
 							</div>
 
-							<!-- Title -->
+							<!-- Module -->
 							<div class="ham-title"><p>{{ module.details.title }}</p></div>
 
 							<!-- Description -->
@@ -77,7 +77,7 @@
 		</ng-container>
 
 		<!-- Override Deactivated -->
-		<ng-container *ngIf="currentUserRole === userRoleHotelManager && !hgaState.value">
+		<ng-container *ngIf="currentRole === roleHotelManager && !hgaState.value">
 			<app-divider></app-divider>
 			<div class="ham-no-module cd-center-align">
 				<p i18n="@@Management_Client_Form_No_Access_Available">Access Denied!</p>
@@ -87,7 +87,7 @@
 		<app-divider></app-divider>
 
 		<!-- Button -->
-		<div class="cd-row ham-padding-1 ham-buttons cd-right-align" *ngIf="modulesList.length !== 0">
+		<div class="cd-row ham-padding-1 ham-buttons cd-right-align" *ngIf="modulesList.length !== 0 && (currentRole !== roleHotelManager || currentRole === roleHotelManager && hgaState.value)">
 			<div class="cd-col">
 				<button
 					mat-button
@@ -100,7 +100,6 @@
 					mat-button
 					type="submit"
 					class="ham-button ham-button-1"
-					[disabled]="!isFormValid"
 					i18n="@@Management_Client_HGA_Form_Save_Button">Save
 				</button>
 			</div>

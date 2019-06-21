@@ -33,9 +33,8 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 	public licenseActive = true;
 	public formValid = false;
 	public groupId;
-	public currentUserRole: UserRoleEnum;
-	public userRoleHotelAdmin: UserRoleEnum = UserRoleEnum[UserRoleEnum.ADMIN];
-	public userRoleHotelManager: UserRoleEnum = UserRoleEnum[UserRoleEnum.HOTEL_MANAGER];
+	public currentRole: UserRoleEnum;
+	public roleHotelManager: UserRoleEnum = UserRoleEnum[UserRoleEnum.HOTEL_MANAGER];
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
@@ -45,38 +44,28 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 		private _loadingAnimationService: LoadingAnimationService,
 		private _i18n: I18n
 	) {
-		// form fields
-		this.formFields = new FormGroup({
-			hgaState: new FormControl(false),
-			modules: new FormArray([
-				HotelGuestAppComponent.moduleItems({
-					Licensed: false,
-					Active: false,
-					Preferred: 0
-				})
-			])
-		});
+		// init form
+		this.initForm();
 	}
 
 	ngOnInit() {
-		// set current user role
-		this.currentUserRole = this._clientService.appState.role;
-
-		// set license state
-		if (this.currentUserRole !== this.userRoleHotelAdmin) {
-			this.licenseActive = false;
-		}
+		// set current role
+		this.currentRole = this._clientService.appState.role;
 
 		// listen: get modules
 		this._clientService.clientDataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
+				// set license state
+				this.licenseActive = this._clientService.appState && (this._clientService.appState.hotelId === this.id);
+
+				// set modules
 				if (res && res.hgaModules) {
+					// re-init form
+					this.initForm();
+
 					// set override state
 					this.hgaState.setValue(res.hgaOverride && res.hgaOverride.HotelManagerOverride);
-
-					// set group id
-					this.groupId = res.licenseSystemData && res.licenseSystemData.GroupID;
 
 					// module list
 					this.modulesList = res.hgaModules;
@@ -96,9 +85,6 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 							this.updateAndAddModule(this.flatModulesList[i], i);
 						}
 					}
-				} else {
-					// clear modules list
-					this.modulesList = [];
 				}
 			});
 
@@ -128,8 +114,21 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 		return this.formFields.controls.modules;
 	}
 
-	get isFormValid() {
-		return this.formValid;
+	/**
+	 * init form
+	 */
+	public initForm() {
+		// form fields
+		this.formFields = new FormGroup({
+			hgaState: new FormControl(false),
+			modules: new FormArray([
+				HotelGuestAppComponent.moduleItems({
+					Licensed: false,
+					Active: false,
+					Preferred: 0
+				})
+			])
+		});
 	}
 
 	/**
@@ -170,7 +169,7 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 					// payload
 					const payload: HgaOverrideInterface = {
 						AppID: ClientAppTypeEnum.HGA,
-						GroupID: this.groupId,
+						GroupID: this.id,
 						HotelManagerOverride: value
 					};
 
