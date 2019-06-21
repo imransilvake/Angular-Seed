@@ -16,10 +16,6 @@ import { UserRoleEnum } from '../../modules.pck/authorization.mod/enums/user-rol
 
 @Injectable()
 export class SidebarService {
-	public hotelGroupListRoutes = [
-		`/${ ROUTING.management.routes.client }`
-	];
-
 	constructor(
 		private _authService: AuthService,
 		private _storageService: StorageService,

@@ -4,7 +4,7 @@ import { MatTreeNestedDataSource } from '@angular/material';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
-import { startWith, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 // app
@@ -13,7 +13,6 @@ import { SidebarService } from '../../../services/sidebar.service';
 import { SelectTypeEnum } from '../../../../core.pck/fields.mod/enums/select-type.enum';
 import { AppViewStateInterface } from '../../../interfaces/app-view-state.interfsce';
 import { AuthService } from '../../../../modules.pck/authorization.mod/services/auth.service';
-import { RouterService } from '../../../../utilities.pck/accessories.mod/services/router.service';
 import { AppViewStateEnum } from '../../../enums/app-view-state.enum';
 
 @Component({
@@ -29,7 +28,6 @@ export class PrimarySidebarComponent implements OnInit, OnDestroy {
 	public treeControl = new NestedTreeControl<SidebarInterface>(node => node.children);
 	public sidebarMenuList = new MatTreeNestedDataSource<SidebarInterface>();
 	public hotelGroupSelectType = SelectTypeEnum.GROUP_CUSTOM;
-	public hotelGroupListVisibility = false;
 	public hotelGroupList;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
@@ -37,8 +35,7 @@ export class PrimarySidebarComponent implements OnInit, OnDestroy {
 	constructor(
 		private _router: Router,
 		private _sidebarService: SidebarService,
-		private _authService: AuthService,
-		private _routerService: RouterService
+		private _authService: AuthService
 	) {
 		// set side menu
 		this.sidebarMenuList.data = SidebarService.getSidebarMenuList();
@@ -51,17 +48,6 @@ export class PrimarySidebarComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
-		// show hotel group list dropdown on selected routes
-		this._routerService.routeChanged
-			.pipe(
-				startWith(0),
-				takeUntil(this._ngUnSubscribe)
-			)
-			.subscribe(() => {
-				this.hotelGroupListVisibility =
-					this._sidebarService.hotelGroupListRoutes.includes(this._router.url);
-			});
-
 		// open node based on current url
 		if (this.treeControl.dataNodes.length > 0) {
 			this.treeControl.dataNodes.forEach(node => {

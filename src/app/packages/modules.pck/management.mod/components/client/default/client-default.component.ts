@@ -54,7 +54,7 @@ export class ClientDefaultComponent implements OnInit, OnDestroy {
 
 					// set country name
 					this.clientGroupHotelsList.data = res.hotelGroupList.data.map(hotel => {
-						return {
+						return hotel.Country.length === 2 && {
 							...hotel,
 							Country: this._utilityService.countryList.filter(
 								country => country.id === hotel.Country
