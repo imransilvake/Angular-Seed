@@ -1,7 +1,7 @@
 <div class="ham-client-form ham-wrapper-2">
 	<div class="ham-top">
 		<!-- Title -->
-		<h4>B&B Hotels Germany - 1</h4>
+		<h4>{{ groupName }}</h4>
 
 		<!-- Close Button -->
 		<mat-icon (click)="onClickCloseClientForm()">close</mat-icon>
@@ -17,7 +17,8 @@
 				i18n-label="@@Management_Client_Form_License_Label">
 				<app-license
 					[id]="id"
-					(changeClientView)="onClickCloseClientForm()">
+					(changeClientView)="onClickCloseClientForm()"
+					(groupName)="groupName = $event;">
 				</app-license>
 			</mat-tab>
 

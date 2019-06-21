@@ -17,6 +17,7 @@ export class ClientFormComponent implements OnInit {
 	@Output() changeClientView: EventEmitter<any> = new EventEmitter();
 	@Input() id;
 
+	public groupName;
 	public currentRole: UserRoleEnum;
 	public roleAdmin: UserRoleEnum = UserRoleEnum[UserRoleEnum.ADMIN];
 

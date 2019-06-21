@@ -21,6 +21,7 @@ import { LicenseSystemInterface } from '../../../../interfaces/license-system.in
 
 export class LicenseComponent implements OnInit, OnDestroy {
 	@Output() changeClientView: EventEmitter<any> = new EventEmitter();
+	@Output() groupName: EventEmitter<any> = new EventEmitter();
 	@Input() id;
 	@Input() licenseSystemData;
 
@@ -143,6 +144,9 @@ export class LicenseComponent implements OnInit, OnDestroy {
 
 					// set system data
 					this.systemData = res.licenseSystemData.System;
+
+					// set group name
+					this.groupName.emit(res.licenseSystemData.Name);
 				}
 			});
 
