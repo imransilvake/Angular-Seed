@@ -21,6 +21,7 @@ import { ClientAppTypeEnum } from '../../enums/client-app-type.enum';
 export class ClientComponent implements OnDestroy {
 	public pageView: ClientViewTypeEnum = ClientViewTypeEnum.DEFAULT;
 	public id;
+	public groupName;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 

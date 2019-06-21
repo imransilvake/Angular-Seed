@@ -10,7 +10,7 @@
 		<!-- View: Default -->
 		<ng-container *ngIf="pageView === 0">
 			<app-client-default
-				(changeClientView)="pageView = $event.view; id = $event.id; triggerServices();">
+				(changeClientView)="pageView = $event.view; id = $event.id; groupName = $event.name; triggerServices();">
 			</app-client-default>
 		</ng-container>
 
@@ -18,7 +18,8 @@
 		<ng-container *ngIf="pageView === 1">
 			<app-client-form
 				[id]="id"
-				(changeClientView)="pageView = $event.view; id = null; triggerServices();">
+				[groupName]="groupName"
+				(changeClientView)="pageView = $event.view; id = null; groupName = null; triggerServices();">
 			</app-client-form>
 		</ng-container>
 	</div>

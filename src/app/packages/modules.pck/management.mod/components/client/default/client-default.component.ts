@@ -77,9 +77,16 @@ export class ClientDefaultComponent implements OnInit, OnDestroy {
 	 * @param id
 	 */
 	public onClickFetchId(id?: string) {
+		// group name
+		const groupName = this.clientGroupHotelsList.data
+			.filter(res => res.Id === id)
+			.map(group => group.Name)[0];
+
+		// payload
 		const payload: ClientViewInterface = {
 			view: ClientViewTypeEnum.FORM,
-			id: id
+			id: id,
+			name: groupName
 		};
 		this.changeClientView.emit(payload);
 	}

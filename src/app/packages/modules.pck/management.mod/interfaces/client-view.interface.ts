@@ -5,4 +5,5 @@ import { ClientViewTypeEnum } from '../enums/client-view-type.enum';
 export interface ClientViewInterface {
 	view: ClientViewTypeEnum;
 	id?: string;
+	name?: string;
 }

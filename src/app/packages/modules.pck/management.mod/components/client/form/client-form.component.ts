@@ -16,8 +16,8 @@ import { ClientService } from '../../../services/client.service';
 export class ClientFormComponent implements OnInit {
 	@Output() changeClientView: EventEmitter<any> = new EventEmitter();
 	@Input() id;
+	@Input() groupName;
 
-	public groupName;
 	public currentRole: UserRoleEnum;
 	public roleAdmin: UserRoleEnum = UserRoleEnum[UserRoleEnum.ADMIN];
 
