@@ -1,5 +1,5 @@
 // angular
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Subject } from 'rxjs';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { takeUntil } from 'rxjs/operators';
@@ -20,6 +20,7 @@ import { LoadingAnimationService } from '../../../../../../utilities.pck/loading
 
 export class HotelManagerAppComponent implements OnInit {
 	@Output() changeClientView: EventEmitter<any> = new EventEmitter();
+	@Input() id;
 
 	public formFields;
 	public modulesList = [];
@@ -181,7 +182,7 @@ export class HotelManagerAppComponent implements OnInit {
 		this._loadingAnimationService.startLoadingAnimation();
 
 		// service
-		this._clientService.clientUpdateAppModules(ClientAppTypeEnum.HMA, this.formFields.value, this.flatModulesList);
+		this._clientService.clientUpdateAppModules(this.id, ClientAppTypeEnum.HMA, this.formFields.value, this.flatModulesList);
 	}
 	/**
 	 * close client form

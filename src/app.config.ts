@@ -50,12 +50,12 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 
 		Client_Form_HGA_Override_All_Fetch: { serviceUrl: '/management/module/override/group/:groupId/app/:appId' },
 		Client_Form_HGA_Override_Hotel_Fetch: { serviceUrl: '/management/module/override/group/:groupId/hotel/:hotelId/app/:appId' },
-		Client_Form_HGA_Override_Update: { serviceUrl: '/management/module/override' },
+		Client_Form_HGA_Override_Update: { serviceUrl: '/management/module/override/group/:groupId' },
 
 		Client_Form_App_Hotel_Fetch: { serviceUrl: '/management/module/group/:groupId/hotel/:hotelId/app/:appId' },
 		Client_Form_App_HotelGroup_Fetch: { serviceUrl: '/management/module/group/:groupId/app/:appId' },
-		Client_Form_App_Hotel_Update: { serviceUrl: '/management/module/hotel' },
-		Client_Form_App_HotelGroup_Update: { serviceUrl: '/management/module/group' }
+		Client_Form_App_Hotel_Update: { serviceUrl: '/management/module/group/:groupId/hotel/:hotelId' },
+		Client_Form_App_HotelGroup_Update: { serviceUrl: '/management/module/group/:groupId' }
 	}
 };
 

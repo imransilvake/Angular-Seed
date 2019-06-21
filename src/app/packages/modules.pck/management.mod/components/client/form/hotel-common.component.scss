@@ -225,6 +225,10 @@
 		}
 	}
 
+	.ham-margin-top {
+		margin-top: 20px;
+	}
+
 	// media
 	@include cd-media(desktop, mini) {
 		.ham-buttons {

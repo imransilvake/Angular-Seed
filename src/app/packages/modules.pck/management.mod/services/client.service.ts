@@ -5,7 +5,6 @@ import { BehaviorSubject, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
-
 // app
 import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service';
 import { AppOptions, AppServices } from '../../../../../app.config';
@@ -308,18 +307,25 @@ export class ClientService {
 	 * @param id
 	 */
 	public clientFetchOverrideHGA(id: string) {
-		if (this.appState.role === UserRoleEnum.HOTEL_MANAGER) {
+		if (this.appState.role !== UserRoleEnum[UserRoleEnum.HOTEL_MANAGER]) {
 			return this._proxyService
-				.getAPI(AppServices['Management']['Client_Form_HGA_Override_Hotel_Fetch'], {
+				.getAPI(AppServices['Management']['Client_Form_HGA_Override_All_Fetch'], {
 					pathParams: {
-						groupId: this.appState && this.appState.groupId,
-						hotelId: this.appState && this.appState.hotelId,
+						groupId: this.appState.role === UserRoleEnum[UserRoleEnum.ADMIN] ? id : this.appState.groupId,
 						appId: ClientAppTypeEnum.HGA
 					}
 				})
 				.pipe(map(res => res));
 		} else {
-			return of (null);
+			return this._proxyService
+				.getAPI(AppServices['Management']['Client_Form_HGA_Override_Hotel_Fetch'], {
+					pathParams: {
+						groupId: this.appState.role === UserRoleEnum[UserRoleEnum.ADMIN] ? id : this.appState.groupId,
+						hotelId: this.appState.hotelId,
+						appId: ClientAppTypeEnum.HGA
+					}
+				})
+				.pipe(map(res => res));
 		}
 	}
 
@@ -330,7 +336,10 @@ export class ClientService {
 	 */
 	public clientUpdateOverrideHGA(formPayload: HgaOverrideInterface) {
 		this._proxyService
-			.postAPI(AppServices['Management']['Client_Form_HGA_Override_Update'], { bodyParams: formPayload })
+			.postAPI(AppServices['Management']['Client_Form_HGA_Override_Update'], {
+				bodyParams: formPayload,
+				pathParams: { groupId: formPayload.GroupID }
+			})
 			.subscribe(() => {
 				// stop loading animation
 				this._loadingAnimationService.stopLoadingAnimation();
@@ -398,11 +407,12 @@ export class ClientService {
 	/**
 	 * update HGA / HSA / HMA modules
 	 *
+	 * @param id
 	 * @param clientAppType
 	 * @param rawFormData
 	 * @param modules
 	 */
-	public clientUpdateAppModules(clientAppType: string, rawFormData: any, modules: any) {
+	public clientUpdateAppModules(id: string, clientAppType: string, rawFormData: any, modules: any) {
 		// map modules
 		const mapModules = rawFormData.modules
 			.map((module, index) => {
@@ -410,7 +420,7 @@ export class ClientService {
 					ModuleID: modules[index].data.ModuleID,
 					Licensed: module.Licensed ? module.Licensed : false,
 					Active: module.Active ? module.Active : false,
-					Preferred: module.Preferred  ? 1 : 0,
+					Preferred: module.Preferred ? 1 : 0,
 					Params: {}
 				};
 			});
@@ -418,7 +428,7 @@ export class ClientService {
 		// form payload
 		const formPayload: ClientAppInterface = {
 			AppID: clientAppType,
-			GroupID: this.appState && this.appState.groupId,
+			GroupID: id,
 			Modules: mapModules
 		};
 
@@ -426,7 +436,13 @@ export class ClientService {
 		const isHotel = this.appState.hotelId && (this.appState.hotelId !== this.appState.groupId);
 		if (isHotel) {
 			this._proxyService
-				.postAPI(AppServices['Management']['Client_Form_App_Hotel_Update'], { bodyParams: { ...formPayload, HotelID: this.appState.hotelId } })
+				.postAPI(AppServices['Management']['Client_Form_App_Hotel_Update'], {
+					pathParams: {
+						groupId: id,
+						hotelId: this.appState.hotelId
+					},
+					bodyParams: { ...formPayload, HotelID: this.appState.hotelId }
+				})
 				.subscribe(() => {
 					// stop loading animation
 					this._loadingAnimationService.stopLoadingAnimation();
@@ -453,7 +469,10 @@ export class ClientService {
 				});
 		} else {
 			this._proxyService
-				.postAPI(AppServices['Management']['Client_Form_App_HotelGroup_Update'], { bodyParams: formPayload })
+				.postAPI(AppServices['Management']['Client_Form_App_HotelGroup_Update'], {
+					pathParams: { groupId: id },
+					bodyParams: formPayload
+				})
 				.subscribe(() => {
 					// stop loading animation
 					this._loadingAnimationService.stopLoadingAnimation();
@@ -490,7 +509,7 @@ export class ClientService {
 		return [
 			{
 				'name': 'General',
-				'modules': [{
+				'modules': [response.filter(module => module.ModuleID === 'HGA_GUEST_NOTIFICATIONS')[0] ? {
 					data: response.filter(module => module.ModuleID === 'HGA_GUEST_NOTIFICATIONS')[0],
 					details: {
 						title: this._i18n({
@@ -502,11 +521,11 @@ export class ClientService {
 							id: 'Management_Client_HGA_General_Guest_Push_Notifications_Description'
 						})
 					}
-				}]
+				} : null]
 			},
 			{
 				'name': 'Hotel Room',
-				'modules': [{
+				'modules': [response.filter(module => module.ModuleID === 'HGA_ROOM_KEY')[0] ? {
 					data: response.filter(module => module.ModuleID === 'HGA_ROOM_KEY')[0],
 					details: {
 						title: this._i18n({
@@ -518,7 +537,7 @@ export class ClientService {
 							id: 'Management_Client_HGA_Room_KeyCode_Description'
 						})
 					}
-				}, {
+				} : null, response.filter(module => module.ModuleID === 'HGA_ROOM_CLEANING')[0] ? {
 					data: response.filter(module => module.ModuleID === 'HGA_ROOM_CLEANING')[0],
 					details: {
 						title: this._i18n({
@@ -530,7 +549,7 @@ export class ClientService {
 							id: 'Management_Client_HGA_Room_CleaningStatus_Description'
 						})
 					}
-				}, {
+				} : null, response.filter(module => module.ModuleID === 'HGA_ROOM_EMERGENCY')[0] ? {
 					data: response.filter(module => module.ModuleID === 'HGA_ROOM_EMERGENCY')[0],
 					details: {
 						title: this._i18n({
@@ -542,7 +561,7 @@ export class ClientService {
 							id: 'Management_Client_HGA_Room_EmergencyButton_Description'
 						})
 					}
-				}, {
+				} : null, response.filter(module => module.ModuleID === 'HGA_ROOM_REPAIR')[0] ? {
 					data: response.filter(module => module.ModuleID === 'HGA_ROOM_REPAIR')[0],
 					details: {
 						title: this._i18n({
@@ -554,11 +573,11 @@ export class ClientService {
 							id: 'Management_Client_HGA_Room_RepairMessage_Description'
 						})
 					}
-				}]
+				} : null]
 			},
 			{
 				'name': 'Hotel General',
-				'modules': [{
+				'modules': [response.filter(module => module.ModuleID === 'HGA_HOTEL_DEALS')[0] ? {
 					data: response.filter(module => module.ModuleID === 'HGA_HOTEL_DEALS')[0],
 					details: {
 						title: this._i18n({
@@ -570,7 +589,7 @@ export class ClientService {
 							id: 'Management_Client_HGA_Hotel_HotelDeals_Description'
 						})
 					}
-				}, {
+				} : null, response.filter(module => module.ModuleID === 'HGA_HOTEL_DETAILS')[0] ? {
 					data: response.filter(module => module.ModuleID === 'HGA_HOTEL_DETAILS')[0],
 					details: {
 						title: this._i18n({
@@ -582,7 +601,7 @@ export class ClientService {
 							id: 'Management_Client_HGA_Hotel_HotelDetails_Description'
 						})
 					}
-				}, {
+				} : null, response.filter(module => module.ModuleID === 'HGA_HOTEL_TRAVEL')[0] ? {
 					data: response.filter(module => module.ModuleID === 'HGA_HOTEL_TRAVEL')[0],
 					details: {
 						title: this._i18n({
@@ -594,11 +613,11 @@ export class ClientService {
 							id: 'Management_Client_HGA_Hotel_GuestTravelDetails_Description'
 						})
 					}
-				}]
+				} : null]
 			},
 			{
 				'name': 'Hotel Magazine',
-				'modules': [{
+				'modules': [response.filter(module => module.ModuleID === 'HGA_HOTEL_MAGAZINE')[0] ? {
 					data: response.filter(module => module.ModuleID === 'HGA_HOTEL_MAGAZINE')[0],
 					details: {
 						title: this._i18n({
@@ -610,11 +629,11 @@ export class ClientService {
 							id: 'Management_Client_HGA_Hotel_HotelMagazine_Description'
 						})
 					}
-				}]
+				} : null]
 			},
 			{
 				'name': 'Hotel Reviews',
-				'modules': [{
+				'modules': [response.filter(module => module.ModuleID === 'HGA_HOTEL_RATINGS')[0] ? {
 					data: response.filter(module => module.ModuleID === 'HGA_HOTEL_RATINGS')[0],
 					details: {
 						title: this._i18n({
@@ -626,9 +645,14 @@ export class ClientService {
 							id: 'Management_Client_HGA_Hotel_TrustYouHotelRatings_Description'
 						})
 					}
-				}]
+				} : null]
 			}
-		];
+		].map(m => {
+			return {
+				name: m.name,
+				modules: m.modules.filter(n => n)
+			};
+		});
 	}
 
 	/**
@@ -640,7 +664,7 @@ export class ClientService {
 		return [
 			{
 				'name': 'All',
-				'modules': [{
+				'modules': [response.filter(module => module.ModuleID === 'HSA_CLEANING')[0] ? {
 					data: response.filter(module => module.ModuleID === 'HSA_CLEANING')[0],
 					details: {
 						title: this._i18n({
@@ -652,7 +676,7 @@ export class ClientService {
 							id: 'Management_Client_HSA_HouseKeeping_Description'
 						})
 					}
-				}, {
+				} : null, response.filter(module => module.ModuleID === 'HSA_REPAIR')[0] ? {
 					data: response.filter(module => module.ModuleID === 'HSA_REPAIR')[0],
 					details: {
 						title: this._i18n({
@@ -664,9 +688,14 @@ export class ClientService {
 							id: 'Management_Client_HSA_Repairs_Description'
 						})
 					}
-				}]
+				} : null]
 			}
-		];
+		].map(m => {
+			return {
+				name: m.name,
+				modules: m.modules.filter(n => n)
+			};
+		});
 	}
 
 	/**
@@ -678,7 +707,7 @@ export class ClientService {
 		return [
 			{
 				'name': 'All',
-				'modules': [{
+				'modules': [response.filter(module => module.ModuleID === 'HMA_STATISTICS')[0] ? {
 					data: response.filter(module => module.ModuleID === 'HMA_STATISTICS')[0],
 					details: {
 						title: this._i18n({
@@ -690,7 +719,7 @@ export class ClientService {
 							id: 'Management_Client_HAM_OnlineBooking_Description'
 						})
 					}
-				}, {
+				} : null, response.filter(module => module.ModuleID === 'HMA_STATISTICS')[0] ? {
 					data: response.filter(module => module.ModuleID === 'HMA_STATISTICS')[0],
 					details: {
 						title: this._i18n({
@@ -702,8 +731,13 @@ export class ClientService {
 							id: 'Management_Client_HAM_GuestOverview_Description'
 						})
 					}
-				}]
+				} : null]
 			}
-		];
+		].map(m => {
+			return {
+				name: m.name,
+				modules: m.modules.filter(n => n)
+			};
+		});
 	}
 }

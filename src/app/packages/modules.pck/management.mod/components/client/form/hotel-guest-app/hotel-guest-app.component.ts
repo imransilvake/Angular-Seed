@@ -1,5 +1,5 @@
 // angular
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
@@ -15,6 +15,7 @@ import { DialogTypeEnum } from '../../../../../../utilities.pck/dialog.mod/enums
 import { LoadingAnimationService } from '../../../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { HgaOverrideInterface } from '../../../../interfaces/hga-override.interface';
 import { ClientAppTypeEnum } from '../../../../enums/client-app-type.enum';
+import { UserRoleEnum } from '../../../../../authorization.mod/enums/user-role.enum';
 
 @Component({
 	selector: 'app-hotel-guest-app',
@@ -24,6 +25,7 @@ import { ClientAppTypeEnum } from '../../../../enums/client-app-type.enum';
 
 export class HotelGuestAppComponent implements OnInit, OnDestroy {
 	@Output() changeClientView: EventEmitter<any> = new EventEmitter();
+	@Input() id;
 
 	public formFields;
 	public modulesList = [];
@@ -31,6 +33,10 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 	public licenseActive = true;
 	public formValid = false;
 	public groupId;
+	public currentUserRole: UserRoleEnum;
+	public userRoleHotelAdmin: UserRoleEnum = UserRoleEnum[UserRoleEnum.ADMIN];
+	public userRoleHotelManager: UserRoleEnum = UserRoleEnum[UserRoleEnum.HOTEL_MANAGER];
+
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
@@ -53,16 +59,24 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
+		// set current user role
+		this.currentUserRole = this._clientService.appState.role;
+
+		// set license state
+		if (this.currentUserRole !== this.userRoleHotelAdmin) {
+			this.licenseActive = false;
+		}
+
 		// listen: get modules
 		this._clientService.clientDataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
-				if (res && res.hgaModules && res.licenseSystemData && res.hgaOverride) {
+				if (res && res.hgaModules) {
 					// set override state
 					this.hgaState.setValue(res.hgaOverride && res.hgaOverride.HotelManagerOverride);
 
 					// set group id
-					this.groupId = res.licenseSystemData.GroupID;
+					this.groupId = res.licenseSystemData && res.licenseSystemData.GroupID;
 
 					// module list
 					this.modulesList = res.hgaModules;
@@ -286,7 +300,7 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 		this._loadingAnimationService.startLoadingAnimation();
 
 		// service
-		this._clientService.clientUpdateAppModules(ClientAppTypeEnum.HGA, this.formFields.value, this.flatModulesList);
+		this._clientService.clientUpdateAppModules(this.id, ClientAppTypeEnum.HGA, this.formFields.value, this.flatModulesList);
 	}
 
 	/**

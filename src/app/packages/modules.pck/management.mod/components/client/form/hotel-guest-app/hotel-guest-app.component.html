@@ -1,12 +1,12 @@
 <div class="ham-hotel-app">
-	<div class="ham-state" *ngIf="licenseActive">
+	<div class="ham-state" *ngIf="licenseActive && currentUserRole !== userRoleHotelManager">
 		<p i18n="@@Management_Client_HGA_Toggle">HotelManager can activate / deactivate licensed modules too</p>
 		<mat-slide-toggle class="mat-slide-toggle-1" (change)="onChangeHGAState()" [formControl]="hgaState"></mat-slide-toggle>
 	</div>
 
-	<form [formGroup]="formFields" (ngSubmit)="onSubmitForm()">
+	<form [formGroup]="formFields" (ngSubmit)="onSubmitForm()" [class.ham-margin-top]="!(licenseActive && currentUserRole !== userRoleHotelManager)">
 		<!-- List -->
-		<div class="ham-form" *ngIf="modulesList.length !== 0">
+		<div class="ham-form" *ngIf="modulesList.length !== 0 && (currentUserRole !== userRoleHotelManager || currentUserRole === userRoleHotelManager && hgaState.value)">
 			<!-- Columns -->
 			<div class="ham-row ham-border" [class.ham-no-license]="!licenseActive">
 				<h6 i18n="@@Management_Client_HGA_Column_License" *ngIf="licenseActive">License</h6>
@@ -73,6 +73,14 @@
 			<app-divider></app-divider>
 			<div class="ham-no-module cd-center-align">
 				<p i18n="@@Management_Client_Form_No_module_Available">No Module available!</p>
+			</div>
+		</ng-container>
+
+		<!-- Override Deactivated -->
+		<ng-container *ngIf="currentUserRole === userRoleHotelManager && !hgaState.value">
+			<app-divider></app-divider>
+			<div class="ham-no-module cd-center-align">
+				<p i18n="@@Management_Client_Form_No_Access_Available">Access Denied!</p>
 			</div>
 		</ng-container>
 

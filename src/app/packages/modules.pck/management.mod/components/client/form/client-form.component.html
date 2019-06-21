@@ -36,21 +36,30 @@
 			<mat-tab
 				label="HotelGuest/App"
 				i18n-label="@@Management_Client_Form_HotelGuestApp_Label">
-				<app-hotel-guest-app (changeClientView)="onClickCloseClientForm()"></app-hotel-guest-app>
+				<app-hotel-guest-app
+					[id]="id"
+					(changeClientView)="onClickCloseClientForm()">
+				</app-hotel-guest-app>
 			</mat-tab>
 
 			<!-- HotelStaff/App -->
 			<mat-tab
 				label="HotelStaff/App"
 				i18n-label="@@Management_Client_Form_HotelStaffApp_Label">
-				<app-hotel-staff-app (changeClientView)="onClickCloseClientForm()"></app-hotel-staff-app>
+				<app-hotel-staff-app
+					[id]="id"
+					(changeClientView)="onClickCloseClientForm()">
+				</app-hotel-staff-app>
 			</mat-tab>
 
 			<!-- HotelAppManager -->
 			<mat-tab
 				label="HotelAppManager"
 				i18n-label="@@Management_Client_Form_HotelAppManager_Label">
-				<app-hotel-manager-app (changeClientView)="onClickCloseClientForm()"></app-hotel-manager-app>
+				<app-hotel-manager-app
+					[id]="id"
+					(changeClientView)="onClickCloseClientForm()">
+				</app-hotel-manager-app>
 			</mat-tab>
 		</mat-tab-group>
 	</div>
