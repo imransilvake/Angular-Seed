@@ -22,20 +22,15 @@ export class HttpOptionsService {
 		const headerValues: { [s: string]: string } = (postBodyParams) ? RequestHeaders.post : RequestHeaders.get;
 		let headers = new HttpHeaders();
 
+		// request headers defined in app config file
 		if (Object.keys(headerValues).length !== 0) {
 			Object.keys(headerValues).forEach((key) => {
 				headers = headers.set(key, headerValues[key]);
 			});
 		}
 
-		// add access token
-		const userState =
-			this._storageService.get(LocalStorageItems.userState, StorageTypeEnum.PERSISTANT) ||
-			this._storageService.get(SessionStorageItems.userState, StorageTypeEnum.SESSION);
-
-		if (userState) {
-			headers = headers.set('Authorization', userState.credentials.accessToken.toString());
-		}
+		// add access token to the headers
+		headers = this.addAccessToken(headers);
 
 		return headers;
 	}
@@ -133,5 +128,24 @@ export class HttpOptionsService {
 		}
 
 		return url;
+	}
+
+	/**
+	 * add access token to the headers
+	 *
+	 * @param headers
+	 */
+	private addAccessToken(headers: HttpHeaders) {
+		// current user
+		const userState =
+			this._storageService.get(LocalStorageItems.userState, StorageTypeEnum.PERSISTANT) ||
+			this._storageService.get(SessionStorageItems.userState, StorageTypeEnum.SESSION);
+
+		// add access token
+		if (userState) {
+			return headers.set('Authorization', userState.credentials.accessToken.toString());
+		}
+
+		return headers;
 	}
 }
