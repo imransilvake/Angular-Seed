@@ -12,6 +12,7 @@ import { ClientViewTypeEnum } from '../../../../enums/client-view-type.enum';
 import { LoadingAnimationService } from '../../../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { ClientAppTypeEnum } from '../../../../enums/client-app-type.enum';
 import { UserRoleEnum } from '../../../../../authorization.mod/enums/user-role.enum';
+import { AppViewStateEnum } from '../../../../../../frame.pck/enums/app-view-state.enum';
 
 @Component({
 	selector: 'app-hotel-staff-app',
@@ -49,7 +50,10 @@ export class HotelStaffAppComponent implements OnInit {
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
 				// set license state
-				this.licenseActive = this._clientService.appState && (this._clientService.appState.hotelId === this._clientService.appState.groupId);
+				this.licenseActive = this._clientService.appState && (
+					this._clientService.appState.type === AppViewStateEnum.ALL ||
+					this._clientService.appState.type === AppViewStateEnum.GROUP
+				);
 
 				// set modules
 				if (res && res.hsaModules) {

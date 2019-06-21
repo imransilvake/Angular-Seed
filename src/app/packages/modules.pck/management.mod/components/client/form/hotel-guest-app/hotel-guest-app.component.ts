@@ -16,6 +16,7 @@ import { LoadingAnimationService } from '../../../../../../utilities.pck/loading
 import { HgaOverrideInterface } from '../../../../interfaces/hga-override.interface';
 import { ClientAppTypeEnum } from '../../../../enums/client-app-type.enum';
 import { UserRoleEnum } from '../../../../../authorization.mod/enums/user-role.enum';
+import { AppViewStateEnum } from '../../../../../../frame.pck/enums/app-view-state.enum';
 
 @Component({
 	selector: 'app-hotel-guest-app',
@@ -32,7 +33,6 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 	public flatModulesList = [];
 	public licenseActive = true;
 	public formValid = false;
-	public groupId;
 	public currentRole: UserRoleEnum;
 	public roleHotelManager: UserRoleEnum = UserRoleEnum[UserRoleEnum.HOTEL_MANAGER];
 
@@ -57,7 +57,10 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
 				// set license state
-				this.licenseActive = this._clientService.appState && (this._clientService.appState.hotelId === this.id);
+				this.licenseActive = this._clientService.appState && (
+					this._clientService.appState.type === AppViewStateEnum.ALL ||
+					this._clientService.appState.type === AppViewStateEnum.GROUP
+				);
 
 				// set modules
 				if (res && res.hgaModules) {
