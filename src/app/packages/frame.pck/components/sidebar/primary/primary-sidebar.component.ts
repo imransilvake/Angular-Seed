@@ -14,6 +14,7 @@ import { SelectTypeEnum } from '../../../../core.pck/fields.mod/enums/select-typ
 import { AppViewStateInterface } from '../../../interfaces/app-view-state.interfsce';
 import { AuthService } from '../../../../modules.pck/authorization.mod/services/auth.service';
 import { AppViewStateEnum } from '../../../enums/app-view-state.enum';
+import { RouterService } from '../../../../utilities.pck/accessories.mod/services/router.service';
 
 @Component({
 	selector: 'app-sidebar-primary',
@@ -35,7 +36,8 @@ export class PrimarySidebarComponent implements OnInit, OnDestroy {
 	constructor(
 		private _router: Router,
 		private _sidebarService: SidebarService,
-		private _authService: AuthService
+		private _authService: AuthService,
+		private _routerService: RouterService
 	) {
 		// set side menu
 		this.sidebarMenuList.data = SidebarService.getSidebarMenuList();
@@ -45,9 +47,30 @@ export class PrimarySidebarComponent implements OnInit, OnDestroy {
 		this.formFields = new FormGroup({
 			hotelByGroupList: new FormControl('')
 		});
+
+		// TODO
+		this._sidebarService.hotelGroupListEvent
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res=> console.log(res));
 	}
 
 	ngOnInit() {
+		// show hotel group list dropdown on selected routes
+		this._routerService.routeChanged
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(() => {
+				const isAllow = this._sidebarService.hotelGroupListRoutes.includes(this._router.url);
+				if (isAllow) {
+					if (this.hotelByGroupList.disabled) {
+						this.hotelByGroupList.enable();
+					}
+				} else {
+					if (!this.hotelByGroupList.disabled) {
+						this.hotelByGroupList.disable();
+					}
+				}
+			});
+
 		// open node based on current url
 		if (this.treeControl.dataNodes.length > 0) {
 			this.treeControl.dataNodes.forEach(node => {

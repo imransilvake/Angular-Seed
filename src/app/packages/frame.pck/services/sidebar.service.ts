@@ -1,5 +1,5 @@
 // angular
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 
 // app
@@ -16,6 +16,12 @@ import { UserRoleEnum } from '../../modules.pck/authorization.mod/enums/user-rol
 
 @Injectable()
 export class SidebarService {
+	hotelGroupListEvent: EventEmitter<boolean> = new EventEmitter(false);
+
+	public hotelGroupListRoutes = [
+		`/${ ROUTING.management.routes.client }`
+	];
+
 	constructor(
 		private _authService: AuthService,
 		private _storageService: StorageService,

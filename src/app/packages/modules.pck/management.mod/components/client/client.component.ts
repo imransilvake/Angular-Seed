@@ -52,7 +52,7 @@ export class ClientComponent implements OnDestroy {
 	 */
 	private triggerServices() {
 		// disable dropdown on form view
-		this._clientService.hotelGroupList.emit(this.pageView !== ClientViewTypeEnum.DEFAULT);
+		this._sidebarService.hotelGroupListEvent.emit(this.pageView !== ClientViewTypeEnum.DEFAULT);
 
 		// set app state
 		this._clientService.appState = this._sidebarService.appState;
