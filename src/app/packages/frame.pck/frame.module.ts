@@ -9,7 +9,6 @@ import { FooterComponent } from './components/footer/footer.component';
 import { NotificationModule } from '../utilities.pck/notification.mod/notification.module';
 import { ScrollTopComponent } from './components/scroll-top/scroll-top.component';
 import { PrimarySidebarComponent } from './components/sidebar/primary/primary-sidebar.component';
-import { SidebarService } from './services/sidebar.service';
 import { NotificationMenuComponent } from './components/menus/notification/notification-menu.component';
 import { AccountMenuComponent } from './components/menus/account/account-menu.component';
 import { SecondarySidebarComponent } from './components/sidebar/secondary/secondary-sidebar.component';
@@ -48,8 +47,7 @@ import { FieldsModule } from '../core.pck/fields.mod/fields.module';
 		HeadComponent
 	],
 	providers: [
-		EmergencyService,
-		SidebarService
+		EmergencyService
 	]
 })
 

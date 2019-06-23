@@ -4,7 +4,7 @@ import { MatTreeNestedDataSource } from '@angular/material';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
-import { takeUntil } from 'rxjs/operators';
+import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 // app
@@ -47,28 +47,22 @@ export class PrimarySidebarComponent implements OnInit, OnDestroy {
 		this.formFields = new FormGroup({
 			hotelByGroupList: new FormControl('')
 		});
-
-		// TODO
-		this._sidebarService.hotelGroupListEvent
-			.pipe(takeUntil(this._ngUnSubscribe))
-			.subscribe(res=> console.log(res));
 	}
 
 	ngOnInit() {
-		// show hotel group list dropdown on selected routes
+		// listen: update hotel by groups dropdown on route view change
+		this._sidebarService.hotelGroupListEvent
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => {
+				this.updateHotelByGroupList(res);
+			});
+
+		// listen: show hotel group list dropdown on selected routes
 		this._routerService.routeChanged
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(() => {
 				const isAllow = this._sidebarService.hotelGroupListRoutes.includes(this._router.url);
-				if (isAllow) {
-					if (this.hotelByGroupList.disabled) {
-						this.hotelByGroupList.enable();
-					}
-				} else {
-					if (!this.hotelByGroupList.disabled) {
-						this.hotelByGroupList.disable();
-					}
-				}
+				this.updateHotelByGroupList(isAllow);
 			});
 
 		// open node based on current url
@@ -108,7 +102,10 @@ export class PrimarySidebarComponent implements OnInit, OnDestroy {
 
 		// listen: on hotels by group selection
 		this.hotelByGroupList.valueChanges
-			.pipe(takeUntil(this._ngUnSubscribe))
+			.pipe(
+				takeUntil(this._ngUnSubscribe),
+				distinctUntilChanged()
+			)
 			.subscribe(res => {
 				if (res) {
 					let payload: AppViewStateInterface;
@@ -164,5 +161,22 @@ export class PrimarySidebarComponent implements OnInit, OnDestroy {
 	 */
 	public expandNode(node: SidebarInterface) {
 		this.treeControl.expand(node);
+	}
+
+	/**
+	 * update hotel by groups dropdown
+	 *
+	 * @param status
+	 */
+	public updateHotelByGroupList(status: boolean) {
+		if (status) {
+			if (this.hotelByGroupList.disabled) {
+				this.hotelByGroupList.enable();
+			}
+		} else {
+			if (!this.hotelByGroupList.disabled) {
+				this.hotelByGroupList.disable();
+			}
+		}
 	}
 }

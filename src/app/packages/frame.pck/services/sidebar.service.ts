@@ -14,7 +14,7 @@ import { AuthService } from '../../modules.pck/authorization.mod/services/auth.s
 import { ProxyService } from '../../core.pck/proxy.mod/services/proxy.service';
 import { UserRoleEnum } from '../../modules.pck/authorization.mod/enums/user-role.enum';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class SidebarService {
 	hotelGroupListEvent: EventEmitter<boolean> = new EventEmitter(false);
 
