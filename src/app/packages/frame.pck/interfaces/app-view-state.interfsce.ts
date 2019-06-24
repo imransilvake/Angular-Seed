@@ -1,10 +1,10 @@
 // app
-import { AppViewStateEnum } from '../enums/app-view-state.enum';
+import { AppStateEnum } from '../enums/app-state.enum';
 
 // app view interface
 export interface AppViewStateInterface {
 	hotelId: string;
 	groupId: string;
-	type: AppViewStateEnum;
+	type: AppStateEnum;
 	role?: string;
 }

@@ -20,6 +20,7 @@ import { HotelGuestAppComponent } from './components/client/form/hotel-guest-app
 import { HotelStaffAppComponent } from './components/client/form/hotel-staff-app/hotel-staff-app.component';
 import { HotelManagerAppComponent } from './components/client/form/hotel-manager-app/hotel-manager-app.component';
 import { UserService } from './services/user.service';
+import { UserDefaultComponent } from './components/user/default/user-default.component';
 
 @NgModule({
 	imports: [
@@ -39,7 +40,8 @@ import { UserService } from './services/user.service';
 		SystemDataComponent,
 		HotelGuestAppComponent,
 		HotelStaffAppComponent,
-		HotelManagerAppComponent
+		HotelManagerAppComponent,
+		UserDefaultComponent
 	],
 	providers: [
 		UserService,

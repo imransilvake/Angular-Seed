@@ -13,7 +13,7 @@ import { SidebarService } from '../../../services/sidebar.service';
 import { SelectTypeEnum } from '../../../../core.pck/fields.mod/enums/select-type.enum';
 import { AppViewStateInterface } from '../../../interfaces/app-view-state.interfsce';
 import { AuthService } from '../../../../modules.pck/authorization.mod/services/auth.service';
-import { AppViewStateEnum } from '../../../enums/app-view-state.enum';
+import { AppStateEnum } from '../../../enums/app-state.enum';
 import { RouterService } from '../../../../utilities.pck/accessories.mod/services/router.service';
 
 @Component({
@@ -113,13 +113,13 @@ export class PrimarySidebarComponent implements OnInit, OnDestroy {
 						payload = {
 							hotelId: res,
 							groupId: res.split('_')[0],
-							type: res.split('_')[1] ? AppViewStateEnum.HOTEL : AppViewStateEnum.GROUP
+							type: res.split('_')[1] ? AppStateEnum.HOTEL : AppStateEnum.GROUP
 						};
 					} else {
 						payload = {
 							hotelId: res,
 							groupId: res.split('_')[0],
-							type: AppViewStateEnum.ALL
+							type: AppStateEnum.ALL
 						};
 					}
 

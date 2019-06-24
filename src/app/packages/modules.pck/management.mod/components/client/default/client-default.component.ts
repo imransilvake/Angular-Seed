@@ -4,7 +4,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 // app
-import { ClientViewTypeEnum } from '../../../enums/client-view-type.enum';
+import { AppViewTypeEnum } from '../../../enums/app-view-type.enum';
 import { ClientService } from '../../../services/client.service';
 import { ClientViewInterface } from '../../../interfaces/client-view.interface';
 import { UtilityService } from '../../../../../utilities.pck/accessories.mod/services/utility.service';
@@ -84,7 +84,7 @@ export class ClientDefaultComponent implements OnInit, OnDestroy {
 
 		// payload
 		const payload: ClientViewInterface = {
-			view: ClientViewTypeEnum.FORM,
+			view: AppViewTypeEnum.FORM,
 			id: id,
 			name: groupName
 		};

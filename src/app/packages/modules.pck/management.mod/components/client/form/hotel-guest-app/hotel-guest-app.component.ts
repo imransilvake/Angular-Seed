@@ -7,7 +7,7 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
 
 // app
 import { ClientViewInterface } from '../../../../interfaces/client-view.interface';
-import { ClientViewTypeEnum } from '../../../../enums/client-view-type.enum';
+import { AppViewTypeEnum } from '../../../../enums/app-view-type.enum';
 import { ClientService } from '../../../../services/client.service';
 import { HelperService } from '../../../../../../utilities.pck/accessories.mod/services/helper.service';
 import { DialogService } from '../../../../../../utilities.pck/dialog.mod/services/dialog.service';
@@ -16,7 +16,7 @@ import { LoadingAnimationService } from '../../../../../../utilities.pck/loading
 import { HgaOverrideInterface } from '../../../../interfaces/hga-override.interface';
 import { ClientAppTypeEnum } from '../../../../enums/client-app-type.enum';
 import { UserRoleEnum } from '../../../../../authorization.mod/enums/user-role.enum';
-import { AppViewStateEnum } from '../../../../../../frame.pck/enums/app-view-state.enum';
+import { AppStateEnum } from '../../../../../../frame.pck/enums/app-state.enum';
 
 @Component({
 	selector: 'app-hotel-guest-app',
@@ -58,8 +58,8 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 			.subscribe(res => {
 				// set license state
 				this.licenseActive = this._clientService.appState && (
-					this._clientService.appState.type === AppViewStateEnum.ALL ||
-					this._clientService.appState.type === AppViewStateEnum.GROUP
+					this._clientService.appState.type === AppStateEnum.ALL ||
+					this._clientService.appState.type === AppStateEnum.GROUP
 				);
 
 				// set modules
@@ -310,7 +310,7 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 	 */
 	public onClickCloseClientForm() {
 		const payload: ClientViewInterface = {
-			view: ClientViewTypeEnum.DEFAULT
+			view: AppViewTypeEnum.DEFAULT
 		};
 		this.changeClientView.emit(payload);
 	}

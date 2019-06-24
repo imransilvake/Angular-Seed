@@ -19,7 +19,7 @@ import { SystemEndpointInterface } from '../interfaces/system-endpoint.interface
 import { ClientAppTypeEnum } from '../enums/client-app-type.enum';
 import { ClientAppInterface } from '../interfaces/client-app.interface';
 import { UserRoleEnum } from '../../authorization.mod/enums/user-role.enum';
-import { AppViewStateEnum } from '../../../frame.pck/enums/app-view-state.enum';
+import { AppStateEnum } from '../../../frame.pck/enums/app-state.enum';
 
 @Injectable()
 export class ClientService {
@@ -51,7 +51,7 @@ export class ClientService {
 		};
 
 		// call service based on user role
-		if (this.appState && this.appState.type === AppViewStateEnum.ALL) {
+		if (this.appState && this.appState.type === AppStateEnum.ALL) {
 			// set table service
 			this.clientTablesServices = { ...this.clientTablesServices, hotelsByGroup: allApi };
 
@@ -59,7 +59,7 @@ export class ClientService {
 			return id ? of(null) : this._proxyService
 				.getAPI(allApi, { queryParams: payload })
 				.pipe(map(res => res));
-		} else if (this.appState && this.appState.type === AppViewStateEnum.GROUP) {
+		} else if (this.appState && this.appState.type === AppStateEnum.GROUP) {
 			// set table service
 			this.clientTablesServices = { ...this.clientTablesServices, hotelsByGroup: hotelGroupApi };
 

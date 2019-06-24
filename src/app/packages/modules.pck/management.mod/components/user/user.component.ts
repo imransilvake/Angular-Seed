@@ -6,10 +6,9 @@ import { NavigationEnd, Router } from '@angular/router';
 
 // app
 import { UserService } from '../../services/user.service';
-import { StorageTypeEnum } from '../../../../core.pck/storage.mod/enums/storage-type.enum';
 import { AuthService } from '../../../authorization.mod/services/auth.service';
 import { SidebarService } from '../../../../frame.pck/services/sidebar.service';
-import { StorageService } from '../../../../core.pck/storage.mod/services/storage.service';
+import { AppViewTypeEnum } from '../../enums/app-view-type.enum';
 
 @Component({
 	selector: 'app-user',
@@ -18,18 +17,21 @@ import { StorageService } from '../../../../core.pck/storage.mod/services/storag
 })
 
 export class UserComponent implements OnInit, OnDestroy {
+	public pageView: AppViewTypeEnum = AppViewTypeEnum.DEFAULT;
+	public id;
+
+	public userOldAccountsList;
 	public newUsersTableApiUrl;
 	public existingUsersTableApiUrl;
 	public userNewRegistrationsList;
-	public userOldAccountsList;
+
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
 		private router: Router,
 		private _userService: UserService,
 		private _authService: AuthService,
-		private _sidebarService: SidebarService,
-		private _storageService: StorageService
+		private _sidebarService: SidebarService
 	) {
 		// listen: router event
 		this.router.events
@@ -41,11 +43,11 @@ export class UserComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
-		// set table api
+		// set tables api
 		this.newUsersTableApiUrl = this._userService.userTablesServices.newUsers;
 		this.existingUsersTableApiUrl = this._userService.userTablesServices.existingUsers;
 
-		// listen: new registrations
+		// listen: fetch new users & old user accounts list
 		this._userService.userDataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
@@ -71,9 +73,6 @@ export class UserComponent implements OnInit, OnDestroy {
 	private triggerServices() {
 		// set app state
 		this._userService.appState = this._sidebarService.appState;
-
-		// clear memory storage to get fresh data on refresh
-		this._storageService.remove(null, StorageTypeEnum.MEMORY);
 
 		// refresh user services
 		forkJoin({

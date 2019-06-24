@@ -6,7 +6,7 @@ import { skip, takeUntil } from 'rxjs/operators';
 
 // app
 import { ClientViewInterface } from '../../../../interfaces/client-view.interface';
-import { ClientViewTypeEnum } from '../../../../enums/client-view-type.enum';
+import { AppViewTypeEnum } from '../../../../enums/app-view-type.enum';
 import { SelectTypeEnum } from '../../../../../../core.pck/fields.mod/enums/select-type.enum';
 import { UtilityService } from '../../../../../../utilities.pck/accessories.mod/services/utility.service';
 import { SelectDefaultInterface } from '../../../../../../core.pck/fields.mod/interfaces/select-default-interface';
@@ -198,7 +198,7 @@ export class SystemDataComponent implements OnInit, OnDestroy {
 	 */
 	public onClickCloseClientForm() {
 		const payload: ClientViewInterface = {
-			view: ClientViewTypeEnum.DEFAULT
+			view: AppViewTypeEnum.DEFAULT
 		};
 		this.changeClientView.emit(payload);
 	}

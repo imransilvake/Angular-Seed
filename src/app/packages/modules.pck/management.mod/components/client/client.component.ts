@@ -5,12 +5,10 @@ import { filter, takeUntil } from 'rxjs/operators';
 import { forkJoin, Subject } from 'rxjs';
 
 // app
-import { ClientViewTypeEnum } from '../../enums/client-view-type.enum';
+import { AppViewTypeEnum } from '../../enums/app-view-type.enum';
 import { ClientService } from '../../services/client.service';
 import { AuthService } from '../../../authorization.mod/services/auth.service';
 import { SidebarService } from '../../../../frame.pck/services/sidebar.service';
-import { StorageService } from '../../../../core.pck/storage.mod/services/storage.service';
-import { StorageTypeEnum } from '../../../../core.pck/storage.mod/enums/storage-type.enum';
 import { ClientAppTypeEnum } from '../../enums/client-app-type.enum';
 
 @Component({
@@ -19,7 +17,7 @@ import { ClientAppTypeEnum } from '../../enums/client-app-type.enum';
 })
 
 export class ClientComponent implements OnDestroy {
-	public pageView: ClientViewTypeEnum = ClientViewTypeEnum.DEFAULT;
+	public pageView: AppViewTypeEnum = AppViewTypeEnum.DEFAULT;
 	public id;
 	public groupName;
 
@@ -29,8 +27,7 @@ export class ClientComponent implements OnDestroy {
 		private router: Router,
 		private _clientService: ClientService,
 		private _authService: AuthService,
-		private _sidebarService: SidebarService,
-		private _storageService: StorageService
+		private _sidebarService: SidebarService
 	) {
 		// listen: router event
 		this.router.events
@@ -52,13 +49,10 @@ export class ClientComponent implements OnDestroy {
 	 */
 	private triggerServices() {
 		// disable dropdown on form view
-		this._sidebarService.hotelGroupListEvent.emit(this.pageView === ClientViewTypeEnum.DEFAULT);
+		this._sidebarService.hotelGroupListEvent.emit(this.pageView === AppViewTypeEnum.DEFAULT);
 
 		// set app state
 		this._clientService.appState = this._sidebarService.appState;
-
-		// clear memory storage to get fresh data on refresh
-		this._storageService.remove(null, StorageTypeEnum.MEMORY);
 
 		// refresh client services
 		forkJoin({

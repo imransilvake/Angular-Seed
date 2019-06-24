@@ -8,11 +8,11 @@ import { takeUntil } from 'rxjs/operators';
 import { ClientService } from '../../../../services/client.service';
 import { HelperService } from '../../../../../../utilities.pck/accessories.mod/services/helper.service';
 import { ClientViewInterface } from '../../../../interfaces/client-view.interface';
-import { ClientViewTypeEnum } from '../../../../enums/client-view-type.enum';
+import { AppViewTypeEnum } from '../../../../enums/app-view-type.enum';
 import { ClientAppTypeEnum } from '../../../../enums/client-app-type.enum';
 import { LoadingAnimationService } from '../../../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { UserRoleEnum } from '../../../../../authorization.mod/enums/user-role.enum';
-import { AppViewStateEnum } from '../../../../../../frame.pck/enums/app-view-state.enum';
+import { AppStateEnum } from '../../../../../../frame.pck/enums/app-state.enum';
 
 @Component({
 	selector: 'app-hotel-manager-app',
@@ -51,8 +51,8 @@ export class HotelManagerAppComponent implements OnInit {
 			.subscribe(res => {
 				// set license state
 				this.licenseActive = this._clientService.appState && (
-					this._clientService.appState.type === AppViewStateEnum.ALL ||
-					this._clientService.appState.type === AppViewStateEnum.GROUP
+					this._clientService.appState.type === AppStateEnum.ALL ||
+					this._clientService.appState.type === AppStateEnum.GROUP
 				);
 
 				// set modules
@@ -207,7 +207,7 @@ export class HotelManagerAppComponent implements OnInit {
 	 */
 	public onClickCloseClientForm() {
 		const payload: ClientViewInterface = {
-			view: ClientViewTypeEnum.DEFAULT
+			view: AppViewTypeEnum.DEFAULT
 		};
 		this.changeClientView.emit(payload);
 	}

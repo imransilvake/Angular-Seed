@@ -7,8 +7,6 @@ import { NavigationEnd, Router } from '@angular/router';
 // app
 import { MemberService } from '../../services/member.service';
 import { AuthService } from '../../../authorization.mod/services/auth.service';
-import { StorageTypeEnum } from '../../../../core.pck/storage.mod/enums/storage-type.enum';
-import { StorageService } from '../../../../core.pck/storage.mod/services/storage.service';
 
 @Component({
 	selector: 'app-profile',
@@ -22,8 +20,7 @@ export class ProfileComponent implements OnDestroy {
 	constructor(
 		private router: Router,
 		private _authService: AuthService,
-		private _memberService: MemberService,
-		private _storageService: StorageService
+		private _memberService: MemberService
 	) {
 		// listen: router event
 		this.router.events
@@ -46,9 +43,6 @@ export class ProfileComponent implements OnDestroy {
 	private triggerServices() {
 		// set current user state
 		this._memberService.currentUser = this._authService.currentUserState;
-
-		// clear memory storage to get fresh data on refresh
-		this._storageService.remove(null, StorageTypeEnum.MEMORY);
 
 		// refresh member services
 		forkJoin({

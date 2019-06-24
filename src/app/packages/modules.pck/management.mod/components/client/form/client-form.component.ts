@@ -2,7 +2,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 // app
-import { ClientViewTypeEnum } from '../../../enums/client-view-type.enum';
+import { AppViewTypeEnum } from '../../../enums/app-view-type.enum';
 import { ClientViewInterface } from '../../../interfaces/client-view.interface';
 import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum';
 import { ClientService } from '../../../services/client.service';
@@ -34,7 +34,7 @@ export class ClientFormComponent implements OnInit {
 	 */
 	public onClickCloseClientForm() {
 		const payload: ClientViewInterface = {
-			view: ClientViewTypeEnum.DEFAULT
+			view: AppViewTypeEnum.DEFAULT
 		};
 		this.changeClientView.emit(payload);
 	}
