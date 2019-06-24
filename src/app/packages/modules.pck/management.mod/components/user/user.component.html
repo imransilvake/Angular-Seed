@@ -1,4 +1,4 @@
-<div class="ham-user-management" *ngIf="userNewRegistrationsList">
+<div class="ham-user-management">
 	<!-- Head -->
 	<app-head
 		pageTitle="User Management"
@@ -7,57 +7,15 @@
 
 	<!-- Details -->
 	<div class="ham-details">
-		<!-- New Users -->
-		<div class="ham-new-users">
-			<app-table
-				tableTitle="Received Registrations"
-				i18n-tableTitle="@@Management_User_NewUsers_Table_Title"
-				inputName="user-new-table-filter"
-				i18n-inputName="@@Management_User_NewUsers_Table_Input_Name"
-				inputPlaceHolder="Search"
-				i18n-inputPlaceHolder="@@Management_User_NewUsers_Table_Input_Filter_PlaceHolder"
-				[tableData]="userNewRegistrationsList"
-				[tableColumns]="['Photo', 'Name', 'Email', 'Reg. Date', 'Role', 'Hotels']"
-				[tableAdditionalColumns]="['Action']"
-				[templateRef]="[action]"
-				[currentApiUrl]="newUsersTableApiUrl"
-				(rowId)="onClickNewRegistrationFetchId($event)">
-				<!-- Action -->
-				<ng-template #action>
-					<button mat-button class="ham-button ham-button-2 ham-table-button-1" i18n="@@Management_User_NewUsers_Table_Edit">Edit</button>
-					<button mat-button class="ham-button ham-button-2 ham-table-button-2" i18n="@@Management_User_NewUsers_Table_Edit">Decline</button>
-				</ng-template>
-			</app-table>
-		</div>
+		<!-- View: Default -->
+		<ng-container *ngIf="pageView === 0">
+			<app-user-default
+				(changeUserView)="pageView = $event.view; id = $event.id; triggerServices();">
+			</app-user-default>
+		</ng-container>
 
-		<!-- Button: Create New User -->
-		<div class="ham-button-wrapper">
-			<button mat-button class="ham-button ham-button-1" i18n="@@Management_User_Create_NewUser" (click)="onClickCreateNewUser()">
-				Create New User
-			</button>
-		</div>
-
-		<!-- Existing Users -->
-		<div class="ham-existing-users">
-			<app-table
-				tableTitle="Existing Users"
-				i18n-tableTitle="@@Management_User_ExistingUsers_Table_Title"
-				inputName="user-existing-table-filter"
-				i18n-inputName="@@Management_User_ExistingUsers_Table_Input_Name"
-				inputPlaceHolder="Search"
-				i18n-inputPlaceHolder="@@Management_User_ExistingUsers_Table_Input_Filter_PlaceHolder"
-				[tableData]="userOldAccountsList"
-				[tableColumns]="['Photo', 'Name', 'Email', 'Last Login', 'Creator', 'Role', 'Hotels']"
-				[tableAdditionalColumns]="['Action']"
-				[templateRef]="[action]"
-				[currentApiUrl]="existingUsersTableApiUrl"
-				(rowId)="onClickOldUserFetchId($event)">
-				<!-- Action -->
-				<ng-template #action>
-					<button mat-button class="ham-button ham-button-2 ham-table-button-1" i18n="@@Management_User_ExistingUsers_Table_Edit">Edit</button>
-					<button mat-button class="ham-button ham-button-2 ham-table-button-2" i18n="@@Management_User_ExistingUsers_Table_Edit">Decline</button>
-				</ng-template>
-			</app-table>
-		</div>
+		<!-- View: Form -->
+		<ng-container *ngIf="pageView === 1">
+		</ng-container>
 	</div>
 </div>
