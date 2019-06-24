@@ -21,22 +21,24 @@ export class UserService {
 	}
 
 	/**
-	 * fetch new user registrations
+	 * fetch new/existing users
 	 *
 	 * @param id
+	 * @param userListType
 	 */
-	public userFetchNewRegistrations(id: string) {
+	public userFetchList(id: string, userListType: string) {
 		const allApi = AppServices['Management']['User_Default_List'];
 		const hotelGroupApi = AppServices['Management']['User_Default_List_Hotel_Group'];
 		const hotelApi = AppServices['Management']['User_Default_List_Hotel'];
-		const payload = {
+		const queryParamsPayload = {
 			offset: 0,
 			limit: AppOptions.tablePageSizeLimit,
-			state: 'APPLIED'
+			state: userListType
 		};
 
 		// validate app state
 		if (this.appState || !id) {
+			let payload = {};
 			let api;
 			switch (this.appState.type) {
 				case AppStateEnum.ALL:
@@ -45,6 +47,11 @@ export class UserService {
 
 					// set api
 					api = allApi;
+
+					// set payload
+					payload = {
+						queryParams: queryParamsPayload
+					};
 					break;
 				case AppStateEnum.GROUP:
 					// set table api
@@ -52,6 +59,14 @@ export class UserService {
 
 					// set api
 					api = hotelGroupApi;
+
+					// set payload
+					payload = {
+						pathParams: {
+							groupId: this.appState && this.appState.groupId
+						},
+						queryParams: queryParamsPayload
+					};
 					break;
 				case AppStateEnum.HOTEL:
 					// set table api
@@ -59,62 +74,24 @@ export class UserService {
 
 					// set api
 					api = hotelApi;
+
+					// set payload
+					payload = {
+						pathParams: {
+							groupId: this.appState && this.appState.groupId,
+							hotelId: this.appState && this.appState.hotelId
+						},
+						queryParams: queryParamsPayload
+					};
 					break;
 			}
 
 			// service
 			return this._proxyService
-				.getAPI(api, { queryParams: payload })
+				.getAPI(api, payload)
 				.pipe(map(res => res));
 		} else {
 			return of(null);
 		}
-	}
-
-	/**
-	 * fetch existing user accounts
-	 */
-	public userFetchExistingAccounts() {
-		// set table api
-		const allApi = AppServices['Management']['Client_Default_List'];
-		this.userTablesServices = { ...this.userTablesServices, existingUsers: allApi };
-
-		// return data
-		return of(
-			{
-				data: [
-					{
-						Id: 1,
-						Image: 'assets/svg/logo_powered_by.svg',
-						Name: 'Imran Khan',
-						Email: 'imransilvake@gmail.com',
-						'Last Login': '12/12/2018',
-						Creator: 'imransilvake',
-						'Role': 'HOTEL MANAGER',
-						'Hotels': 'Bonn'
-					},
-					{
-						Id: 2,
-						Image: 'assets/svg/logo_powered_by.svg',
-						Name: 'Harry Potter',
-						Email: 'harry@gmail.com',
-						'Last Login': '11/01/2019',
-						Creator: 'imransilvake',
-						'Role': 'GROUP MANAGER',
-						'Hotels': 'Aachen'
-					},
-					{
-						Id: 3,
-						Image: 'assets/svg/logo_powered_by.svg',
-						Name: 'Aylan Case',
-						Email: 'case@gmail.com',
-						'Last Login': '15/03/2019',
-						Creator: 'imransilvake',
-						'Role': 'ADMIN',
-						'Hotels': 'Düsseldorf'
-					}
-				]
-			}
-		);
 	}
 }

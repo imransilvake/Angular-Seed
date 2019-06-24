@@ -9,6 +9,7 @@ import { UserService } from '../../services/user.service';
 import { AuthService } from '../../../authorization.mod/services/auth.service';
 import { SidebarService } from '../../../../frame.pck/services/sidebar.service';
 import { AppViewTypeEnum } from '../../enums/app-view-type.enum';
+import { UserListTypeEnum } from '../../enums/user-list-type.enum';
 
 @Component({
 	selector: 'app-user',
@@ -51,8 +52,8 @@ export class UserComponent implements OnDestroy {
 
 		// refresh user services
 		forkJoin({
-			newUsers: this._userService.userFetchNewRegistrations(this.id),
-			existingUsers: this._userService.userFetchExistingAccounts()
+			newUsers: this._userService.userFetchList(this.id, UserListTypeEnum.APPLIED),
+			existingUsers: this._userService.userFetchList(this.id, UserListTypeEnum.CONFIRMED)
 		}).pipe(takeUntil(this._ngUnSubscribe)).subscribe(res => {
 			const result = {
 				newUsers: res.newUsers,

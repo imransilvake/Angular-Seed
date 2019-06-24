@@ -10,6 +10,7 @@ import { AppViewTypeEnum } from '../../../enums/app-view-type.enum';
 import { UserViewInterface } from '../../../interfaces/user-view.interface';
 import { MemberService } from '../../../../member.mod/services/member.service';
 import { HelperService } from '../../../../../utilities.pck/accessories.mod/services/helper.service';
+import { UserListTypeEnum } from '../../../enums/user-list-type.enum';
 
 @Component({
 	selector: 'app-user-default',
@@ -20,10 +21,10 @@ import { HelperService } from '../../../../../utilities.pck/accessories.mod/serv
 export class UserDefaultComponent implements OnInit, OnDestroy {
 	@Output() changeUserView: EventEmitter<any> = new EventEmitter();
 
-	public userOldAccountsList;
+	public userNewRegistrationsList;
+	public userExistingUsersList;
 	public newUsersTableApiUrl;
 	public existingUsersTableApiUrl;
-	public userNewRegistrationsList;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
@@ -44,33 +45,14 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 			.subscribe(res => {
 				if (res && (res.newUsers || res.existingUsers)) {
 					// map new users list
-					const mapNewUsersData = res.newUsers && res.newUsers.data.map(user => {
-						// hotel ids
-						const hotelNames = this._memberService
-							.memberFetchAssignedHotels(this._userService.appState.groupId, user.HotelIDs)
-							.pipe(
-								map(hotelRes => {
-									return hotelRes.items && hotelRes.items.map(hotel => {
-										return hotel.Name;
-									});
-								})
-							);
+					if (res.newUsers) {
+						this.mapUsers(res.newUsers, UserListTypeEnum.APPLIED);
+					}
 
-						// prepare table row
-						return {
-							...user,
-							Image: user.Image === null ? HelperService.getFirstLetter(user.Name) : user.Image,
-							Role: '-',
-							Hotels: ['Dummy1', 'Dummy2'].join(', '),
-							'Reg. Date': user.CreateDate && moment
-								.utc(user.CreateDate)
-								.format('DD. MMMM YYYY, hh:mm:ss')
-						};
-					});
-					this.userNewRegistrationsList = { ...res.newUsers, data: mapNewUsersData };
-
-					// set old user accounts list
-					this.userOldAccountsList = res.existingUsers;
+					// map existing users list
+					if (res.existingUsers) {
+						this.mapUsers(res.existingUsers, UserListTypeEnum.CONFIRMED);
+					}
 				}
 			});
 	}
@@ -79,6 +61,58 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 		// remove subscriptions
 		this._ngUnSubscribe.next();
 		this._ngUnSubscribe.complete();
+	}
+
+	/**
+	 * map new/existing users list
+	 *
+	 * @param users
+	 * @param userListType
+	 */
+	public mapUsers(users: any, userListType: string) {
+		const mapNewUsersData = users && users.data.map(user => {
+			// set values
+			const image = user.Image === null ? HelperService.getFirstLetter(user.Name).toUpperCase() : user.Image;
+			const role = user.Type ? HelperService.capitalizeString(user.Type.replace('_', ' ').toLowerCase()) : '-';
+			const hotelNames = this._memberService
+				.memberFetchAssignedHotels(this._userService.appState.groupId, user.HotelIDs)
+				.pipe(
+					map(hotelRes => {
+						return hotelRes.items && hotelRes.items.map(hotel => {
+							return hotel.Name;
+						});
+					})
+				);
+			let date;
+			let uniqueProperties = {};
+			if (userListType === UserListTypeEnum.APPLIED) {
+				date = user.CreateDate ? moment.utc(user.CreateDate).format('DD. MMMM YYYY, hh:mm:ss') : '-';
+				uniqueProperties = {
+					'Reg. Date': date
+				};
+			} else {
+				date = user.LoginDate ? moment.utc(user.LoginDate).format('DD. MMMM YYYY, hh:mm:ss') : '-';
+				uniqueProperties = {
+					'Last Login': date
+				};
+			}
+
+			// prepare table row
+			return {
+				...user,
+				...uniqueProperties,
+				Image: image,
+				Role: role,
+				Hotels: ['Dummy1', 'Dummy2'].join(', ')
+			};
+		});
+
+		// set users list based on user list type
+		if (userListType === UserListTypeEnum.APPLIED) {
+			this.userNewRegistrationsList = { ...users, data: mapNewUsersData };
+		} else {
+			this.userExistingUsersList = { ...users, data: mapNewUsersData };
+		}
 	}
 
 	/**

@@ -30,7 +30,7 @@
 	</div>
 
 	<!-- Existing Users -->
-	<div class="ham-existing-users" *ngIf="userOldAccountsList">
+	<div class="ham-existing-users" *ngIf="userExistingUsersList">
 		<app-table
 			tableTitle="Existing Users"
 			i18n-tableTitle="@@Management_User_ExistingUsers_Table_Title"
@@ -38,7 +38,7 @@
 			i18n-inputName="@@Management_User_ExistingUsers_Table_Input_Name"
 			inputPlaceHolder="Search"
 			i18n-inputPlaceHolder="@@Management_User_ExistingUsers_Table_Input_Filter_PlaceHolder"
-			[tableData]="userOldAccountsList"
+			[tableData]="userExistingUsersList"
 			[tableColumns]="['Image', 'Name', 'Email', 'Last Login', 'Creator', 'Role', 'Hotels']"
 			[tableAdditionalColumns]="['Action']"
 			[templateRef]="[action]"
