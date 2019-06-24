@@ -9,7 +9,6 @@ import { ROUTING } from '../environments/environment';
 import { E404Component } from './packages/frame.pck/components/pages/e404.component';
 import { AuthUserStatusGuard } from './packages/modules.pck/authorization.mod/guards/auth-user-status.guard';
 import { DashboardComponent } from './packages/modules.pck/dashboard.component';
-import { MaintenanceComponent } from './packages/frame.pck/components/pages/maintenance.component';
 
 const ROUTES: Routes = [
 	{
@@ -43,10 +42,6 @@ const ROUTES: Routes = [
 					{
 						path: ROUTING.management.title,
 						loadChildren: () => import('./packages/modules.pck/management.mod/management.module').then(m => m.ManagementModule)
-					},
-					{
-						path: ROUTING.pages.maintenance,
-						component: MaintenanceComponent
 					}
 				],
 				canActivateChild: [AuthUserStatusGuard]

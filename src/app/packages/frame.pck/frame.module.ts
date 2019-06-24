@@ -12,7 +12,6 @@ import { PrimarySidebarComponent } from './components/sidebar/primary/primary-si
 import { NotificationMenuComponent } from './components/menus/notification/notification-menu.component';
 import { AccountMenuComponent } from './components/menus/account/account-menu.component';
 import { SecondarySidebarComponent } from './components/sidebar/secondary/secondary-sidebar.component';
-import { MaintenanceComponent } from './components/pages/maintenance.component';
 import { WidgetsModule } from '../../shared/widgets/widgets.module';
 import { HeadComponent } from './components/content/head/head.component';
 import { BreadcrumbModule } from '../utilities.pck/breadcrumb.mod/breadcrumb.module';
@@ -29,7 +28,6 @@ import { FieldsModule } from '../core.pck/fields.mod/fields.module';
 	],
 	declarations: [
 		E404Component,
-		MaintenanceComponent,
 		HeaderComponent,
 		FooterComponent,
 		ScrollTopComponent,

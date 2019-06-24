@@ -19,6 +19,7 @@ export class SidebarService {
 	hotelGroupListEvent: EventEmitter<boolean> = new EventEmitter(false);
 
 	public hotelGroupListRoutes = [
+		`/${ ROUTING.management.routes.user }`,
 		`/${ ROUTING.management.routes.client }`
 	];
 
