@@ -45,47 +45,67 @@ export class ClientService {
 		const allApi = AppServices['Management']['Client_Default_List'];
 		const hotelGroupApi = AppServices['Management']['Client_Default_List_Hotel_Group'];
 		const hotelApi = AppServices['Management']['Client_Default_List_Hotel'];
-		const payload = {
+		const queryParamsPayload = {
 			offset: 0,
 			limit: AppOptions.tablePageSizeLimit
 		};
 
-		// call service based on user role
-		if (this.appState && this.appState.type === AppStateEnum.ALL) {
-			// set table service
-			this.clientTablesServices = { ...this.clientTablesServices, hotelsByGroup: allApi };
+		// validate app state
+		if (this.appState || !id) {
+			let payload = {};
+			let api;
+			switch (this.appState.type) {
+				case AppStateEnum.ALL:
+					// set table api
+					this.clientTablesServices = { ...this.clientTablesServices, hotelsByGroup: allApi };
+
+					// set api
+					api = allApi;
+
+					// set payload
+					payload = {
+						queryParams: queryParamsPayload
+					};
+					break;
+				case AppStateEnum.GROUP:
+					// set table api
+					this.clientTablesServices = { ...this.clientTablesServices, hotelsByGroup: hotelGroupApi };
+
+					// set api
+					api = hotelGroupApi;
+
+					// set payload
+					payload = {
+						pathParams: {
+							groupId: this.appState && this.appState.groupId
+						},
+						queryParams: queryParamsPayload
+					};
+					break;
+				case AppStateEnum.HOTEL:
+					// set table api
+					this.clientTablesServices = { ...this.clientTablesServices, hotelsByGroup: hotelApi };
+
+					// set api
+					api = hotelApi;
+
+					// set payload
+					payload = {
+						pathParams: {
+							groupId: this.appState && this.appState.groupId,
+							hotelId: this.appState && this.appState.hotelId
+						},
+						queryParams: queryParamsPayload
+					};
+					break;
+			}
 
 			// service
-			return id ? of(null) : this._proxyService
-				.getAPI(allApi, { queryParams: payload })
-				.pipe(map(res => res));
-		} else if (this.appState && this.appState.type === AppStateEnum.GROUP) {
-			// set table service
-			this.clientTablesServices = { ...this.clientTablesServices, hotelsByGroup: hotelGroupApi };
-
-			// service
-			return id ? of(null) : this._proxyService
-				.getAPI(hotelGroupApi, {
-					pathParams: {
-						groupId: this.appState && this.appState.groupId
-					},
-					queryParams: payload
-				})
+			return this._proxyService
+				.getAPI(api, payload)
 				.pipe(map(res => res));
 		} else {
-			// set table service
-			this.clientTablesServices = { ...this.clientTablesServices, hotelsByGroup: hotelApi };
-
-			// service
-			return id ? of(null) : this._proxyService
-				.getAPI(hotelApi, {
-					pathParams: {
-						groupId: this.appState && this.appState.groupId,
-						hotelId: this.appState && this.appState.hotelId
-					},
-					queryParams: payload
-				})
-				.pipe(map(res => res));
+			return of(null);
 		}
 	}
 

@@ -55,7 +55,11 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 		Client_Form_App_Hotel_Fetch: { serviceUrl: '/management/module/group/:groupId/hotel/:hotelId/app/:appId' },
 		Client_Form_App_HotelGroup_Fetch: { serviceUrl: '/management/module/group/:groupId/app/:appId' },
 		Client_Form_App_Hotel_Update: { serviceUrl: '/management/module/group/:groupId/hotel/:hotelId' },
-		Client_Form_App_HotelGroup_Update: { serviceUrl: '/management/module/group/:groupId' }
+		Client_Form_App_HotelGroup_Update: { serviceUrl: '/management/module/group/:groupId' },
+
+		User_Default_List: { serviceUrl: '/ham/auth/listusers' },
+		User_Default_List_Hotel_Group: { serviceUrl: '/ham/auth/listusers/group/:groupId' },
+		User_Default_List_Hotel: { serviceUrl: '/ham/auth/listusers/group/:groupId/hotel/:hotelId' }
 	}
 };
 

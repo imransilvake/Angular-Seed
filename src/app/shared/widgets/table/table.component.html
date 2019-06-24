@@ -19,20 +19,20 @@
 				<th mat-header-cell *matHeaderCellDef mat-sort-header>{{ column }}</th>
 				<td mat-cell *matCellDef="let element">
 					<!-- Column: Photo -->
-					<ng-container *ngIf="column === 'Photo'">
+					<ng-container *ngIf="column === 'Image'">
 						<img
 							class="ham-image"
-							*ngIf="validateExtension(element[column]) !== element[column]"
+							*ngIf="element[column] && validateExtension(element[column]) !== element[column]"
 							[src]="element[column]" alt="table-photo"/>
 						<p
 							class="ham-no-image"
-							*ngIf="validateExtension(element[column]) === element[column]">
+							*ngIf="!element[column] || validateExtension(element[column]) === element[column]">
 							{{element[column]}}
 						</p>
 					</ng-container>
 
 					<!-- Column: Rest -->
-					<ng-container *ngIf="column !== 'Photo'">
+					<ng-container *ngIf="column !== 'Image'">
 						<ng-container [ngSwitch]="validateType(element[column])">
 							<!-- Undefined -->
 							<ng-container *ngSwitchCase="'undefined'">-</ng-container>

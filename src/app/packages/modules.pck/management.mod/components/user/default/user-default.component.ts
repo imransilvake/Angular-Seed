@@ -1,12 +1,15 @@
 // angular
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { takeUntil } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 // app
+import * as moment from 'moment';
 import { UserService } from '../../../services/user.service';
 import { AppViewTypeEnum } from '../../../enums/app-view-type.enum';
 import { UserViewInterface } from '../../../interfaces/user-view.interface';
+import { MemberService } from '../../../../member.mod/services/member.service';
+import { HelperService } from '../../../../../utilities.pck/accessories.mod/services/helper.service';
 
 @Component({
 	selector: 'app-user-default',
@@ -24,7 +27,10 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
-	constructor(private _userService: UserService) {
+	constructor(
+		private _userService: UserService,
+		private _memberService: MemberService
+	) {
 	}
 
 	ngOnInit() {
@@ -37,8 +43,31 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
 				if (res && (res.newUsers || res.existingUsers)) {
-					// set new users list
-					this.userNewRegistrationsList = res.newUsers;
+					// map new users list
+					const mapNewUsersData = res.newUsers && res.newUsers.data.map(user => {
+						// hotel ids
+						const hotelNames = this._memberService
+							.memberFetchAssignedHotels(this._userService.appState.groupId, user.HotelIDs)
+							.pipe(
+								map(hotelRes => {
+									return hotelRes.items && hotelRes.items.map(hotel => {
+										return hotel.Name;
+									});
+								})
+							);
+
+						// prepare table row
+						return {
+							...user,
+							Image: user.Image === null ? HelperService.getFirstLetter(user.Name) : user.Image,
+							Role: '-',
+							Hotels: ['Dummy1', 'Dummy2'].join(', '),
+							'Reg. Date': user.CreateDate && moment
+								.utc(user.CreateDate)
+								.format('DD. MMMM YYYY, hh:mm:ss')
+						};
+					});
+					this.userNewRegistrationsList = { ...res.newUsers, data: mapNewUsersData };
 
 					// set old user accounts list
 					this.userOldAccountsList = res.existingUsers;

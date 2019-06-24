@@ -12,8 +12,7 @@ import { AppViewTypeEnum } from '../../enums/app-view-type.enum';
 
 @Component({
 	selector: 'app-user',
-	templateUrl: './user.component.html',
-	styleUrls: ['./user.component.scss']
+	templateUrl: './user.component.html'
 })
 
 export class UserComponent implements OnDestroy {
@@ -52,7 +51,7 @@ export class UserComponent implements OnDestroy {
 
 		// refresh user services
 		forkJoin({
-			newUsers: this._userService.userFetchNewRegistrations(),
+			newUsers: this._userService.userFetchNewRegistrations(this.id),
 			existingUsers: this._userService.userFetchExistingAccounts()
 		}).pipe(takeUntil(this._ngUnSubscribe)).subscribe(res => {
 			const result = {
