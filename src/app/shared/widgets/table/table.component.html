@@ -22,11 +22,11 @@
 					<ng-container *ngIf="column === 'Image'">
 						<img
 							class="ham-image"
-							*ngIf="element[column] && validateExtension(element[column]) !== element[column]"
+							*ngIf="element[column].length > 10"
 							[src]="element[column]" alt="table-photo"/>
 						<p
 							class="ham-no-image"
-							*ngIf="!element[column] || validateExtension(element[column]) === element[column]">
+							*ngIf="element[column].length < 10">
 							{{element[column]}}
 						</p>
 					</ng-container>

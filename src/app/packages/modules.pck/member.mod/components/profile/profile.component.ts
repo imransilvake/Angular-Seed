@@ -7,6 +7,7 @@ import { NavigationEnd, Router } from '@angular/router';
 // app
 import { MemberService } from '../../services/member.service';
 import { AuthService } from '../../../authorization.mod/services/auth.service';
+import { SidebarService } from '../../../../frame.pck/services/sidebar.service';
 
 @Component({
 	selector: 'app-profile',
@@ -20,7 +21,8 @@ export class ProfileComponent implements OnDestroy {
 	constructor(
 		private router: Router,
 		private _authService: AuthService,
-		private _memberService: MemberService
+		private _memberService: MemberService,
+		private _sidebarService: SidebarService
 	) {
 		// listen: router event
 		this.router.events
@@ -43,6 +45,9 @@ export class ProfileComponent implements OnDestroy {
 	private triggerServices() {
 		// set current user state
 		this._memberService.currentUser = this._authService.currentUserState;
+
+		// set app state
+		this._memberService.appState = this._sidebarService.appState;
 
 		// refresh member services
 		forkJoin({

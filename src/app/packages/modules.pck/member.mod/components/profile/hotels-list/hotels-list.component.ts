@@ -25,14 +25,11 @@ export class HotelsListComponent implements OnInit, OnDestroy {
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
 				if (res && res.memberProfile) {
-					// group
-					const groupId = res.memberProfile.GroupID;
-
 					// hotel list
 					const hotelIds = res.memberProfile.HotelIDs;
 
 					// fetch assigned hotels
-					this._memberService.memberFetchAssignedHotels(groupId, hotelIds)
+					this._memberService.memberFetchAssignedHotels(hotelIds)
 						.subscribe(result => this.hotelList = result.items);
 				}
 			});

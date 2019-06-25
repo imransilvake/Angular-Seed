@@ -1,7 +1,7 @@
 // angular
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { map, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { forkJoin, Subject } from 'rxjs';
 
 // app
 import * as moment from 'moment';
@@ -11,6 +11,8 @@ import { UserViewInterface } from '../../../interfaces/user-view.interface';
 import { MemberService } from '../../../../member.mod/services/member.service';
 import { HelperService } from '../../../../../utilities.pck/accessories.mod/services/helper.service';
 import { UserListTypeEnum } from '../../../enums/user-list-type.enum';
+import { ProxyService } from '../../../../../core.pck/proxy.mod/services/proxy.service';
+import { AppServices } from '../../../../../../../app.config';
 
 @Component({
 	selector: 'app-user-default',
@@ -30,7 +32,8 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private _userService: UserService,
-		private _memberService: MemberService
+		private _memberService: MemberService,
+		private _proxyService: ProxyService
 	) {
 	}
 
@@ -51,7 +54,7 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 
 					// map existing users list
 					if (res.existingUsers) {
-						this.mapUsers(res.existingUsers, UserListTypeEnum.CONFIRMED);
+						//this.mapUsers(res.existingUsers, UserListTypeEnum.CONFIRMED);
 					}
 				}
 			});
@@ -70,49 +73,81 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 	 * @param userListType
 	 */
 	public mapUsers(users: any, userListType: string) {
-		const mapNewUsersData = users && users.data.map(user => {
-			// set values
-			const image = user.Image === null ? HelperService.getFirstLetter(user.Name).toUpperCase() : user.Image;
-			const role = user.Type ? HelperService.capitalizeString(user.Type.replace('_', ' ').toLowerCase()) : '-';
-			const hotelNames = this._memberService
-				.memberFetchAssignedHotels(this._userService.appState.groupId, user.HotelIDs)
-				.pipe(
-					map(hotelRes => {
-						return hotelRes.items && hotelRes.items.map(hotel => {
-							return hotel.Name;
-						});
-					})
-				);
-			let date;
-			let uniqueProperties = {};
-			if (userListType === UserListTypeEnum.APPLIED) {
-				date = user.CreateDate ? moment.utc(user.CreateDate).format('DD. MMMM YYYY, hh:mm:ss') : '-';
-				uniqueProperties = {
-					'Reg. Date': date
-				};
-			} else {
-				date = user.LoginDate ? moment.utc(user.LoginDate).format('DD. MMMM YYYY, hh:mm:ss') : '-';
-				uniqueProperties = {
-					'Last Login': date
-				};
+		let observables = [];
+		users && users.data.map(user => {
+			let forkList = [
+				this._memberService.memberFetchAssignedHotels(
+					Array.isArray(user.HotelIDs) ? user.HotelIDs : [user.HotelIDs]
+				)
+			];
+
+			// image
+			if (user.Image !== null) {
+				//forkList.push(this._proxyService.postAPI(AppServices['Utilities']['Fetch_Profile_Image'], { bodyParams: { image: user.Image } }))
 			}
 
-			// prepare table row
-			return {
-				...user,
-				...uniqueProperties,
-				Image: image,
-				Role: role,
-				Hotels: ['Dummy1', 'Dummy2'].join(', ')
-			};
+			observables.push(forkList);
 		});
 
-		// set users list based on user list type
-		if (userListType === UserListTypeEnum.APPLIED) {
-			this.userNewRegistrationsList = { ...users, data: mapNewUsersData };
-		} else {
-			this.userExistingUsersList = { ...users, data: mapNewUsersData };
-		}
+		forkJoin(observables)
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe((observablesList: any) => {
+				let allTableRows = [];
+				let uniqueProperties = {};
+				observablesList.forEach((res, i) => {
+					let date;
+					res.subscribe(a => {
+						const role = users.data[i].Type ? HelperService.capitalizeString(users.data[i].Type.replace('_', ' ').toLowerCase()) : '-';
+						let hotelsList = [];
+						if (a.items) {
+							hotelsList = a.items.map(hotel => {
+								return hotel.Name;
+							});
+						} else {
+							hotelsList = a.map(hotel => {
+								return hotel.text;
+							});
+						}
+
+						const result = {
+							//image: users.data[i].Image !== null ? res.imageUrl.image : HelperService.getFirstLetter(users.data[i].Name).toUpperCase(),
+							hotels: hotelsList
+						};
+
+						// handle date & uniquer tables properties
+						if (userListType === UserListTypeEnum.APPLIED) {
+							date = users.data[i].CreateDate ? moment.utc(users.data[i].CreateDate).format('DD. MMMM YYYY, hh:mm:ss') : '-';
+							uniqueProperties = {
+								'Reg. Date': date
+							};
+						} else {
+							date = users.data[i].LoginDate ? moment.utc(users.data[i].LoginDate).format('DD. MMMM YYYY, hh:mm:ss') : '-';
+							uniqueProperties = {
+								'Last Login': date,
+								Role: role,
+								Hotels: result.hotels.join(', ')
+							};
+						}
+
+						// row
+						const row = {
+							...users.data[i],
+							...uniqueProperties,
+							Image: 'svg'
+						};
+
+						// add row to the list
+						allTableRows.push(row);
+
+						// set users list based on user list type
+						if (userListType === UserListTypeEnum.APPLIED) {
+							this.userNewRegistrationsList = { ...users, data: allTableRows };
+						} else {
+							this.userExistingUsersList = { ...users, data: allTableRows };
+						}
+					});
+				});
+			});
 	}
 
 	/**

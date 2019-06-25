@@ -95,15 +95,6 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	}
 
 	/**
-	 * validate whether string contains a text or an image
-	 *
-	 * @param value
-	 */
-	public validateExtension(value) {
-		return value && value.split('.').pop();
-	}
-
-	/**
 	 * validate variable type
 	 *
 	 * @param value

@@ -3,7 +3,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { HttpErrorResponse } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 
 // store
 import { Store } from '@ngrx/store';
@@ -20,10 +20,12 @@ import { DialogService } from '../../../utilities.pck/dialog.mod/services/dialog
 import { ErrorHandlerPayloadInterface } from '../../../utilities.pck/error-handler.mod/interfaces/error-handler-payload.interface';
 import { ErrorHandlerInterface } from '../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 import { ChangePasswordInterface } from '../interfaces/change-password.interface';
+import { AppStateEnum } from '../../../frame.pck/enums/app-state.enum';
 
 @Injectable({ providedIn: 'root' })
 export class MemberService {
 	public currentUser;
+	public appState;
 	public memberDataEmitter: BehaviorSubject<any> = new BehaviorSubject(0);
 	public profileImageUpdate: EventEmitter<boolean> = new EventEmitter();
 
@@ -55,21 +57,27 @@ export class MemberService {
 	/**
 	 * fetch assigned hotels
 	 *
-	 * @param groupId
 	 * @param hotelIds
 	 */
-	public memberFetchAssignedHotels(groupId: string, hotelIds: Array<string>) {
+	public memberFetchAssignedHotels(hotelIds: Array<string>) {
 		// payload
 		const payload = {
 			'HotelIDs[]': hotelIds
 		};
 
-		// service
-		return this._proxyService
-			.getAPI(AppServices['Utilities']['HotelListGroup'], {
-				pathParams: { groupId: groupId },
-				queryParams: payload
-			});
+		// group id
+		if (hotelIds[0]) {
+			const groupId = hotelIds[0].split('_')[0];
+
+			// service
+			return this._proxyService
+				.getAPI(AppServices['Utilities']['HotelListGroup'], {
+					pathParams: { groupId: groupId },
+					queryParams: payload
+				});
+		} else {
+			return of(null);
+		}
 	}
 
 	/**
