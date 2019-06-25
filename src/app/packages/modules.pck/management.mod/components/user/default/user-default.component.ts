@@ -27,6 +27,7 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 	public userExistingUsersList;
 	public newUsersTableApiUrl;
 	public existingUsersTableApiUrl;
+	public buttonType;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
@@ -107,6 +108,7 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 
 					// object properties
 					uniqueProperties = {
+						Id: user.ID,
 						'Last Login': date,
 						Role: role,
 						Hotels: hotels.length !== 0 ? hotels.join(', ') : '-'
@@ -161,6 +163,35 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 			view: AppViewTypeEnum.FORM,
 			id: id
 		};
-		this.changeUserView.emit(payload);
+		// this.changeUserView.emit(payload);
+		console.log(id);
+	}
+
+	/**
+	 * edit new user
+	 */
+	public onClickEditNewUser() {
+		this.buttonType = 1;
+	}
+
+	/**
+	 * delete new user
+	 */
+	public onClickDeleteNewUser() {
+		this.buttonType = 2;
+	}
+
+	/**
+	 * edit existing user
+	 */
+	public onClickEditExistingUser() {
+		this.buttonType = 3;
+	}
+
+	/**
+	 * delete existing user
+	 */
+	public onClickDeleteExistingUser() {
+		this.buttonType = 4;
 	}
 }

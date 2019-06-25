@@ -74,20 +74,30 @@ export class ClientDefaultComponent implements OnInit, OnDestroy {
 	/**
 	 * show client form
 	 *
-	 * @param id
+	 * @param row
 	 */
-	public onClickFetchId(id?: string) {
-		// group name
-		const groupName = this.clientGroupHotelsList.data
-			.filter(res => res.Id === id)
-			.map(group => group.Name)[0];
+	public onClickFetchRow(row?: any) {
+		if (row && row.Id) {
+			// group name
+			const groupName = this.clientGroupHotelsList.data
+				.filter(res => res.Id === row.Id)
+				.map(group => group.Name)[0];
 
-		// payload
-		const payload: ClientViewInterface = {
-			view: AppViewTypeEnum.FORM,
-			id: id,
-			name: groupName
-		};
-		this.changeClientView.emit(payload);
+			// payload
+			const payload: ClientViewInterface = {
+				view: AppViewTypeEnum.FORM,
+				id: row.Id,
+				name: groupName
+			};
+			this.changeClientView.emit(payload);
+		} else {
+			// payload
+			const payload: ClientViewInterface = {
+				view: AppViewTypeEnum.FORM,
+				id: null,
+				name: null
+			};
+			this.changeClientView.emit(payload);
+		}
 	}
 }

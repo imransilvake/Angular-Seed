@@ -17,7 +17,7 @@ import { AppOptions, AppServices } from '../../../../app.config';
 })
 
 export class TableComponent implements OnInit, OnChanges, OnDestroy {
-	@Output() rowId: EventEmitter<any> = new EventEmitter();
+	@Output() rowData: EventEmitter<any> = new EventEmitter();
 
 	@Input() tableTitle;
 	@Input() inputName;
@@ -88,7 +88,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	public initializeTable() {
 		// set image url
 		this.tableData.data = this.tableData.data && this.tableData.data.map(item => {
-			if (item.Image.length > 10) {
+			if (item.Image && item.Image.length > 10) {
 				const imagePromise = this.getImageSrc(item.Image);
 				return {
 					...item,
@@ -133,10 +133,10 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	/**
 	 * get row id
 	 *
-	 * @param rowId
+	 * @param row
 	 */
-	public onClickRow(rowId: number) {
-		this.rowId.emit(rowId);
+	public onClickRow(row: number) {
+		this.rowData.emit(row);
 	}
 
 	/**

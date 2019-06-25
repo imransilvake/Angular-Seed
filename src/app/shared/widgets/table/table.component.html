@@ -65,7 +65,7 @@
 
 			<!-- Row Templates -->
 			<tr mat-header-row *matHeaderRowDef="allColumns"></tr>
-			<tr mat-row *matRowDef="let row; columns: allColumns" (click)="onClickRow(row.Id)"></tr>
+			<tr mat-row *matRowDef="let row; columns: allColumns" (click)="onClickRow(row)"></tr>
 		</table>
 
 		<!-- Spinner -->
