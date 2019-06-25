@@ -23,7 +23,7 @@
 
 			<!-- System Data -->
 			<mat-tab
-				*ngIf="currentRole === roleAdmin"
+				*ngIf="currentRole === roleAdmin && id"
 				label="System Data"
 				i18n-label="@@Management_Client_Form_SystemData_Label">
 				<app-system-data
@@ -34,6 +34,7 @@
 
 			<!-- HotelGuest/App -->
 			<mat-tab
+				*ngIf="id"
 				label="HotelGuest/App"
 				i18n-label="@@Management_Client_Form_HotelGuestApp_Label">
 				<app-hotel-guest-app
@@ -44,6 +45,7 @@
 
 			<!-- HotelStaff/App -->
 			<mat-tab
+				*ngIf="id"
 				label="HotelStaff/App"
 				i18n-label="@@Management_Client_Form_HotelStaffApp_Label">
 				<app-hotel-staff-app
@@ -54,6 +56,7 @@
 
 			<!-- HotelAppManager -->
 			<mat-tab
+				*ngIf="id"
 				label="HotelAppManager"
 				i18n-label="@@Management_Client_Form_HotelAppManager_Label">
 				<app-hotel-manager-app

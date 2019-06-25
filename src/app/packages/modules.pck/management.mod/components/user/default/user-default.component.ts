@@ -150,21 +150,7 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 	 * create new user
 	 */
 	public onClickCreateNewUser() {
-	}
-
-	/**
-	 * old users: update table row
-	 *
-	 * @param id
-	 */
-	public onClickOldUserFetchId(id?: string) {
-		// payload
-		const payload: UserViewInterface = {
-			view: AppViewTypeEnum.FORM,
-			id: id
-		};
-		// this.changeUserView.emit(payload);
-		console.log(id);
+		this.buttonType = 0;
 	}
 
 	/**
@@ -193,5 +179,20 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 	 */
 	public onClickDeleteExistingUser() {
 		this.buttonType = 4;
+	}
+
+	/**
+	 * old users: update table row
+	 *
+	 * @param id
+	 */
+	public onClickOldUserFetchId(id?: string) {
+		// payload
+		const payload: UserViewInterface = {
+			view: AppViewTypeEnum.FORM,
+			id: id
+		};
+		// this.changeUserView.emit(payload);
+		console.log(id, this.buttonType);
 	}
 }

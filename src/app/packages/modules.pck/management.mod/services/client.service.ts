@@ -251,8 +251,6 @@ export class ClientService {
 
 					// update system information
 					this.clientUpdateLicenseAndSystem(updateFormPayload);
-				} else {
-
 				}
 			}, (err) => {
 				// stop loading animation
