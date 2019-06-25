@@ -12,6 +12,7 @@ import { AuthService } from '../../../modules.pck/authorization.mod/services/aut
 export class UtilityService {
 	public currentUser;
 	public countryList;
+	public hotelList: Array<string[]> = [];
 
 	constructor(
 		private _proxyService: ProxyService,
@@ -23,6 +24,15 @@ export class UtilityService {
 
 		// country list
 		this.getCountryList().subscribe(res => this.countryList = res);
+
+		// hotels list
+		this.getHotelList().subscribe(res => {
+			res && res.forEach(hotel => {
+				if (hotel) {
+					this.hotelList[hotel.id] = hotel.text;
+				}
+			});
+		});
 	}
 
 	/**

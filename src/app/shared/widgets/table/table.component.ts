@@ -8,7 +8,7 @@ import { takeUntil } from 'rxjs/operators';
 // app
 import { ProxyService } from '../../../packages/core.pck/proxy.mod/services/proxy.service';
 import { SidebarService } from '../../../packages/frame.pck/services/sidebar.service';
-import { AppOptions } from '../../../../app.config';
+import { AppOptions, AppServices } from '../../../../app.config';
 
 @Component({
 	selector: 'app-table',
@@ -58,9 +58,6 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 		// initialize table
 		this.initializeTable();
 
-		// set page info
-		this.setTableInformation();
-
 		// filter search results
 		this.search.valueChanges
 			.pipe(takeUntil(this._ngUnSubscribe))
@@ -89,9 +86,26 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	 * initialize table
 	 */
 	public initializeTable() {
+		// set image url
+		this.tableData.data = this.tableData.data && this.tableData.data.map(item => {
+			if (item.Image.length > 10) {
+				const imagePromise = this.getImageSrc(item.Image);
+				return {
+					...item,
+					Image: imagePromise
+				};
+			} else {
+				return item;
+			}
+		});
+
+		// set data to table
 		this.dataSource = new MatTableDataSource<any>(this.tableData.data);
 		this.dataSource.paginator = this.paginator;
 		this.dataSource.sort = this.sort;
+
+		// set page info
+		this.setTableInformation();
 	}
 
 	/**
@@ -101,6 +115,19 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	 */
 	public validateType(value) {
 		return typeof value;
+	}
+
+	/**
+	 * async wait for image
+	 *
+	 * @param imageName
+	 */
+	async getImageSrc(imageName) {
+		let response = await this._proxyService
+			.postAPI(AppServices['Utilities']['Fetch_Profile_Image'], { bodyParams: { image: imageName } })
+			.toPromise();
+
+		return typeof response.image === 'string' ? response.image : null;
 	}
 
 	/**
