@@ -35,6 +35,7 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 	public currentRole: UserRoleEnum;
 	public roleAdmin: UserRoleEnum = UserRoleEnum[UserRoleEnum.ADMIN];
 	public roleGroupManager: UserRoleEnum = UserRoleEnum[UserRoleEnum.GROUP_MANAGER];
+	public roleHotelManager: UserRoleEnum = UserRoleEnum[UserRoleEnum.HOTEL_MANAGER];
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 

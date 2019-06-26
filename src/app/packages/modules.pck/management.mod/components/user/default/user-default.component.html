@@ -17,7 +17,7 @@
 			<!-- Action -->
 			<ng-template #action>
 				<button
-					*ngIf="currentRole === roleAdmin || currentRole === roleGroupManager"
+					*ngIf="currentRole === roleAdmin || currentRole === roleGroupManager || currentRole === roleHotelManager"
 					mat-button
 					class="ham-button ham-button-2 ham-table-button-1"
 					(click)="onClickEditNewUser()"
@@ -60,7 +60,7 @@
 			<!-- Action -->
 			<ng-template #action>
 				<button
-					*ngIf="currentRole === roleAdmin || currentRole === roleGroupManager"
+					*ngIf="currentRole === roleAdmin || currentRole === roleGroupManager || currentRole === roleHotelManager"
 					mat-button
 					class="ham-button ham-button-2 ham-table-button-1"
 					(click)="onClickEditExistingUser()"

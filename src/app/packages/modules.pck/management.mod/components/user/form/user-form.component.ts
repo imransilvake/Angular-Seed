@@ -8,6 +8,8 @@ import { SelectTypeEnum } from '../../../../../core.pck/fields.mod/enums/select-
 import { SelectDefaultInterface } from '../../../../../core.pck/fields.mod/interfaces/select-default-interface';
 import { UtilityService } from '../../../../../utilities.pck/accessories.mod/services/utility.service';
 import { ValidationService } from '../../../../../core.pck/fields.mod/services/validation.service';
+import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum';
+import { UserService } from '../../../services/user.service';
 
 @Component({
 	selector: 'app-user-form',
@@ -20,9 +22,12 @@ export class UserFormComponent {
 	public selectType = SelectTypeEnum.DEFAULT;
 	public languageList: SelectDefaultInterface[] = [];
 	public salutationList: SelectDefaultInterface[] = [];
+	public currentRole;
+	public roleList: SelectDefaultInterface[] = [];
 	public errorMessage;
 
 	constructor(
+		private _userService: UserService,
 		private _utilityService: UtilityService,
 		public dialogRef: MatDialogRef<UserFormComponent>,
 		@Inject(MAT_DIALOG_DATA) public data: any
@@ -50,16 +55,28 @@ export class UserFormComponent {
 			email: new FormControl('', [
 				Validators.required,
 				ValidationService.emailValidator
+			]),
+			role: new FormControl('', [
+				Validators.required
+			]),
+			hotels: new FormControl('', [
+				Validators.required
 			])
 		});
 	}
 
 	ngOnInit() {
+		// set current role
+		this.currentRole = this._userService.appState.role;
+
 		// set language list
 		this.languageList = this._utilityService.getAuthLanguageList();
 
 		// set salutation list
 		this.salutationList = this._utilityService.getSalutationList();
+
+		// set salutation list
+		this.roleList = this._utilityService.userRoleList;
 
 		// fill form with data
 		if (this.data) {
@@ -80,6 +97,24 @@ export class UserFormComponent {
 			this.lastName.setValue(this.data.Lastname);
 			this.email.setValue(this.data.Email);
 			this.email.disable();
+
+			// role
+			if (this.currentRole === UserRoleEnum[UserRoleEnum.GROUP_MANAGER]) {
+				this.roleList = this.roleList.slice(1, 5);
+			}
+
+			if (this.currentRole === UserRoleEnum[UserRoleEnum.HOTEL_MANAGER]) {
+				this.roleList = this.roleList.slice(2, 5);
+			}
+
+			if (this.data.Role) {
+				//const roleId = this.data.Role.replace(' ', '_').toUpperCase();
+				//this.role.setValue(roleId);
+				//console.log(this.roleList, this.role.value, roleId);
+			}
+
+			// hotels is disabled initially
+			this.hotels.disable();
 		}
 	}
 
@@ -104,6 +139,14 @@ export class UserFormComponent {
 
 	get email() {
 		return this.formFields.get('email');
+	}
+
+	get role() {
+		return this.formFields.get('role');
+	}
+
+	get hotels() {
+		return this.formFields.get('hotels');
 	}
 
 	get isFormValid() {

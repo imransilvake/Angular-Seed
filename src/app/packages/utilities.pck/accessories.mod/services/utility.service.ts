@@ -12,7 +12,8 @@ import { AuthService } from '../../../modules.pck/authorization.mod/services/aut
 export class UtilityService {
 	public currentUser;
 	public countryList;
-	public hotelList: Array<string[]> = [];
+	public hotelList: Array<string> = [];
+	public userRoleList;
 
 	constructor(
 		private _proxyService: ProxyService,
@@ -21,6 +22,9 @@ export class UtilityService {
 	) {
 		// get current user info
 		this.currentUser = this._authService.currentUserState;
+
+		// user roles
+		this.userRoleList = UtilityService.getUserRoleList();
 
 		// country list
 		this.getCountryList().subscribe(res => this.countryList = res);
@@ -38,7 +42,37 @@ export class UtilityService {
 	}
 
 	/**
-	 * set of app auth languages
+	 * user roles
+	 */
+	public static getUserRoleList() {
+		const userRoleList: SelectDefaultInterface[] = [
+			{
+				id: 'ADMIN',
+				text: 'Admin'
+			},
+			{
+				id: 'GROUP_MANAGER',
+				text: 'Group Manager'
+			},
+			{
+				id: 'HOTEL_MANAGER',
+				text: 'Hotel Manager'
+			},
+			{
+				id: 'HOTEL_SUB_MANAGER',
+				text: 'Hotel Sub Manager'
+			},
+			{
+				id: 'HOUSEKEEPING',
+				text: 'House Keeping'
+			}
+		];
+
+		return userRoleList;
+	}
+
+	/**
+	 * auth languages
 	 */
 	public getAuthLanguageList() {
 		const languageList: SelectDefaultInterface[] = [
@@ -62,7 +96,7 @@ export class UtilityService {
 	}
 
 	/**
-	 * set of app system languages
+	 * system languages
 	 */
 	public getSystemLanguageList() {
 		const languageList: SelectDefaultInterface[] = [
@@ -131,14 +165,14 @@ export class UtilityService {
 	}
 
 	/**
-	 * get all hotels
+	 * all hotels
 	 */
 	public getHotelList() {
 		return this._proxyService.getAPI(AppServices['Utilities']['HotelList']);
 	}
 
 	/**
-	 * get country list
+	 * country list
 	 */
 	public getCountryList() {
 		const payload = {
