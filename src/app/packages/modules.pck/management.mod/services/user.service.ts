@@ -10,6 +10,7 @@ import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service
 
 @Injectable()
 export class UserService {
+	public currentUser;
 	public appState;
 	public userTablesServices;
 	public userDataEmitter: BehaviorSubject<any> = new BehaviorSubject(0);

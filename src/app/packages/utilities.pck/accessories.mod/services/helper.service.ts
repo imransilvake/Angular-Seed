@@ -7,6 +7,7 @@ import { merge } from 'rxjs/internal/observable/merge';
 // app
 import * as jwt_decode from 'jwt-decode';
 import * as CryptoJS from 'crypto-js';
+import * as moment from 'moment';
 declare const document: any;
 
 @Injectable({ providedIn: 'root' })
@@ -160,5 +161,17 @@ export class HelperService {
 	 */
 	public static flatNestedArrays(array: any) {
 		return [].concat(...array);
+	}
+
+	/**
+	 * multilingual utc time
+	 *
+	 * @param lang
+	 * @param date
+	 * @param dateFormat
+	 */
+	public static getUTC(lang: string, date: any, dateFormat?: string) {
+		const format = dateFormat ? dateFormat : 'DD. MMMM YYYY, hh:mm:ss';
+		return moment().locale(lang).utc(date).format(format);
 	}
 }

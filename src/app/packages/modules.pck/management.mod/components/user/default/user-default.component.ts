@@ -4,7 +4,6 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 // app
-import * as moment from 'moment';
 import { UserService } from '../../../services/user.service';
 import { AppViewTypeEnum } from '../../../enums/app-view-type.enum';
 import { UserViewInterface } from '../../../interfaces/user-view.interface';
@@ -91,7 +90,7 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 
 				if (userListType === UserListTypeEnum.APPLIED) {
 					// date
-					date = user.CreateDate ? moment.utc(user.CreateDate).format('DD. MMMM YYYY, hh:mm:ss') : '-';
+					date = user.CreateDate ? HelperService.getUTC(this._userService.currentUser.profile.language, user.CreateDate) : '-';
 
 					// object properties
 					uniqueProperties = {
@@ -99,7 +98,7 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 					};
 				} else {
 					// date
-					date = user.LoginDate ? moment.utc(user.LoginDate).format('DD. MMMM YYYY, hh:mm:ss') : '-';
+					date = user.LoginDate ? HelperService.getUTC(this._userService.currentUser.profile.language, user.LoginDate) : '-';
 
 					// hotels
 					user.HotelIDs && user.HotelIDs.forEach(hotel => {

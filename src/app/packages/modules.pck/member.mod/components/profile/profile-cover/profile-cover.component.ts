@@ -5,7 +5,6 @@ import { Subject } from 'rxjs';
 import { MatDialog } from '@angular/material';
 
 // app
-import * as moment from 'moment';
 import { AuthService } from '../../../../authorization.mod/services/auth.service';
 import { HelperService } from '../../../../../utilities.pck/accessories.mod/services/helper.service';
 import { MemberService } from '../../../services/member.service';
@@ -44,9 +43,11 @@ export class ProfileCoverComponent implements OnInit, OnDestroy {
 			.subscribe(res => {
 				if (res && res.memberProfile) {
 					// set last login
-					this.loginTime = moment
-						.utc(res.memberProfile.LoginDate)
-						.format('DD. MMMM YYYY');
+					this.loginTime = HelperService.getUTC(
+						this.currentUser.profile.language,
+						res.memberProfile.LoginDate,
+						'DD. MMMM YYYY'
+					);
 
 					// set user type
 					this.userType = res.memberProfile.Type;
