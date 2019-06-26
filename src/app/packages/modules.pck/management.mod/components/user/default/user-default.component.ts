@@ -16,7 +16,7 @@ import { DialogService } from '../../../../../utilities.pck/dialog.mod/services/
 import { LoadingAnimationService } from '../../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { UserViewInterface } from '../../../interfaces/user-view.interface';
 import { AppViewTypeEnum } from '../../../enums/app-view-type.enum';
-import { UserFormTypeEnum } from '../../../enums/user-form-type.enum';
+import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum';
 
 @Component({
 	selector: 'app-user-default',
@@ -32,6 +32,9 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 	public newUsersTableApiUrl;
 	public existingUsersTableApiUrl;
 	public buttonType;
+	public currentRole: UserRoleEnum;
+	public roleAdmin: UserRoleEnum = UserRoleEnum[UserRoleEnum.ADMIN];
+	public roleGroupManager: UserRoleEnum = UserRoleEnum[UserRoleEnum.GROUP_MANAGER];
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
@@ -47,6 +50,9 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
+		// set current user role
+		this.currentRole = this._userService.appState.role;
+
 		// set tables api
 		this.newUsersTableApiUrl = this._userService.userTablesServices.newUsers;
 		this.existingUsersTableApiUrl = this._userService.userTablesServices.existingUsers;
@@ -146,6 +152,9 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 	 */
 	public onClickCreateNewUser() {
 		this.buttonType = 0;
+
+		// change page view
+		this.changePageView();
 	}
 
 	/**
@@ -202,14 +211,8 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 			// perform action
 			this.deleteOrDeclineUser(row, this.buttonType, text);
 		} else {
-			// payload
-			const state = (this.buttonType == 0) ? UserFormTypeEnum.NEW : UserFormTypeEnum.UPDATE;
-			const payload: UserViewInterface = {
-				view: AppViewTypeEnum.FORM,
-				data: row,
-				state: state
-			};
-			this.changeUserView.emit(payload);
+			// change page view
+			this.changePageView(row);
 		}
 	}
 
@@ -271,5 +274,19 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 				// stop loading animation
 				this._loadingAnimationService.stopLoadingAnimation();
 			});
+	}
+
+	/**
+	 * change page view
+	 *
+	 * @param data
+	 */
+	public changePageView(data?: any) {
+		// payload
+		const payload: UserViewInterface = {
+			view: AppViewTypeEnum.FORM,
+			data: data ? data : null
+		};
+		this.changeUserView.emit(payload);
 	}
 }

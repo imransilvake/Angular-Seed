@@ -60,6 +60,27 @@ export class UserFormComponent {
 
 		// set salutation list
 		this.salutationList = this._utilityService.getSalutationList();
+
+		// fill form with data
+		if (this.data) {
+			// language
+			if (this.data.Language) {
+				const language = this.languageList.filter(item => item.id === this.data.Language.toLowerCase());
+				this.languageName.setValue(...language);
+			}
+
+			// salutation
+			if (this.data.Gender) {
+				const salutation = this.salutationList.filter(item => item.id === this.data.Gender.toLowerCase());
+				this.salutation.setValue(...salutation);
+			}
+
+			// update form
+			this.firstName.setValue(this.data.Lastname);
+			this.lastName.setValue(this.data.Lastname);
+			this.email.setValue(this.data.Email);
+			this.email.disable();
+		}
 	}
 
 	/**

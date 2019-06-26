@@ -23,7 +23,7 @@
 					i18n-labelName="@@Management_User_Form_Language_Label"
 					[selectType]="selectType"
 					[selectId]="'management-user-language-id'"
-					selectPlaceHolder="Language"
+					selectPlaceHolder="Select Language"
 					i18n-selectPlaceHolder="@@Management_User_Form_Language_PlaceHolder"
 					[dataDefault]="languageList"
 					[control]="languageName">
@@ -88,6 +88,41 @@
 					[control]="email">
 				</app-input>
 			</div>
+		</div>
+
+		<div class="cd-row ham-padding-1">
+			<div class="cd-col cd-col-pm-t-6">
+				<app-select
+					[showLabel]="true"
+					labelName="Role*"
+					i18n-labelName="@@Management_User_Form_Role_Label"
+					[selectType]="selectType"
+					[selectId]="'management-user-role-id'"
+					selectPlaceHolder="Select Role"
+					i18n-selectPlaceHolder="@@Management_User_Form_Role_PlaceHolder"
+					[dataDefault]="languageList"
+					[control]="languageName">
+				</app-select>
+			</div>
+
+			<div class="cd-col cd-col-pm-t-6 cd-col-m-top">
+				<app-select
+					[showLabel]="true"
+					labelName="Hotel(s)*"
+					i18n-labelName="@@Management_User_Form_Hotel_Label"
+					[selectType]="selectType"
+					[selectId]="'management-user-hotel-id'"
+					selectPlaceHolder="Select Hotel(s)"
+					i18n-selectPlaceHolder="@@Management_User_Form_Hotel_PlaceHolder"
+					[dataDefault]="salutationList"
+					[control]="salutation">
+				</app-select>
+			</div>
+		</div>
+
+		<!-- Note -->
+		<div class="ham-description">
+			<p i18n="@@Management_User_Form_Note">Form Note.</p>
 		</div>
 
 		<!-- Divider -->

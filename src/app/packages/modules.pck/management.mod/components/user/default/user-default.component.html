@@ -16,14 +16,27 @@
 			(rowData)="onClickRowActionButtons($event)">
 			<!-- Action -->
 			<ng-template #action>
-				<button mat-button class="ham-button ham-button-2 ham-table-button-1" (click)="onClickEditNewUser()" i18n="@@Management_User_NewUsers_Table_Edit">Edit</button>
-				<button mat-button class="ham-button ham-button-2 ham-table-button-2" (click)="onClickDeleteNewUser()" i18n="@@Management_User_NewUsers_Table_Decline">Decline</button>
+				<button
+					*ngIf="currentRole === roleAdmin || currentRole === roleGroupManager"
+					mat-button
+					class="ham-button ham-button-2 ham-table-button-1"
+					(click)="onClickEditNewUser()"
+					i18n="@@Management_User_NewUsers_Table_Edit">
+					Edit
+				</button>
+				<button
+					mat-button
+					class="ham-button ham-button-2 ham-table-button-2"
+					(click)="onClickDeleteNewUser()"
+					i18n="@@Management_User_NewUsers_Table_Decline">
+					Decline
+				</button>
 			</ng-template>
 		</app-table>
 	</div>
 
 	<!-- Button: Create New User -->
-	<div class="ham-button-wrapper">
+	<div class="ham-button-wrapper" *ngIf="currentRole === roleAdmin">
 		<button mat-button class="ham-button ham-button-1" i18n="@@Management_User_Create_NewUser" (click)="onClickCreateNewUser()">
 			Create New User
 		</button>
@@ -46,8 +59,21 @@
 			(rowData)="onClickRowActionButtons($event)">
 			<!-- Action -->
 			<ng-template #action>
-				<button mat-button class="ham-button ham-button-2 ham-table-button-1" (click)="onClickEditExistingUser()" i18n="@@Management_User_ExistingUsers_Table_Edit">Edit</button>
-				<button mat-button class="ham-button ham-button-2 ham-table-button-2" (click)="onClickDeleteExistingUser()" i18n="@@Management_User_ExistingUsers_Table_Delete">Delete</button>
+				<button
+					*ngIf="currentRole === roleAdmin || currentRole === roleGroupManager"
+					mat-button
+					class="ham-button ham-button-2 ham-table-button-1"
+					(click)="onClickEditExistingUser()"
+					i18n="@@Management_User_ExistingUsers_Table_Edit">
+					Edit
+				</button>
+				<button
+					mat-button
+					class="ham-button ham-button-2 ham-table-button-2"
+					(click)="onClickDeleteExistingUser()"
+					i18n="@@Management_User_ExistingUsers_Table_Delete">
+					Delete
+				</button>
 			</ng-template>
 		</app-table>
 	</div>
