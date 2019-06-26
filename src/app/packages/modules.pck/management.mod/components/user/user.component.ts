@@ -3,6 +3,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { forkJoin, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { NavigationEnd, Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
 
 // app
 import { UserService } from '../../services/user.service';
@@ -10,6 +11,7 @@ import { AuthService } from '../../../authorization.mod/services/auth.service';
 import { SidebarService } from '../../../../frame.pck/services/sidebar.service';
 import { AppViewTypeEnum } from '../../enums/app-view-type.enum';
 import { UserListTypeEnum } from '../../enums/user-list-type.enum';
+import { UserFormComponent } from './form/user-form.component';
 
 @Component({
 	selector: 'app-user',
@@ -19,6 +21,7 @@ import { UserListTypeEnum } from '../../enums/user-list-type.enum';
 export class UserComponent implements OnDestroy {
 	public pageView: AppViewTypeEnum = AppViewTypeEnum.DEFAULT;
 	public id;
+	public data;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
@@ -26,7 +29,8 @@ export class UserComponent implements OnDestroy {
 		private router: Router,
 		private _userService: UserService,
 		private _authService: AuthService,
-		private _sidebarService: SidebarService
+		private _sidebarService: SidebarService,
+		private _dialog: MatDialog
 	) {
 		// listen: router event
 		this.router.events
@@ -41,6 +45,24 @@ export class UserComponent implements OnDestroy {
 		// remove subscriptions
 		this._ngUnSubscribe.next();
 		this._ngUnSubscribe.complete();
+	}
+
+	public openUserFormModal() {
+		// open modal
+		const modal = this._dialog.open(UserFormComponent, {
+			disableClose: true,
+			width: '700px',
+			data: this.data
+		});
+
+		// modal after closed
+		modal.afterClosed()
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => {
+				if (res) {
+					this.triggerServices();
+				}
+			});
 	}
 
 	/**

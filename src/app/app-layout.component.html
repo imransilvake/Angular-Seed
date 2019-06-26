@@ -15,6 +15,7 @@
 				#drawer
 				mode="side"
 				[opened]="isViewDesktop"
+				[ngStyle]="{'top': topHeadHeight + 'px'}"
 				[class.ham-drawer-closed]="!drawerState"
 				(openedStart)="drawerState=true"
 				(closedStart)="drawerState=false">

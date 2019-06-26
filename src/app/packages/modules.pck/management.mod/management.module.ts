@@ -48,6 +48,9 @@ import { UserFormComponent } from './components/user/form/user-form.component';
 	providers: [
 		UserService,
 		ClientService
+	],
+	entryComponents: [
+		UserFormComponent
 	]
 })
 

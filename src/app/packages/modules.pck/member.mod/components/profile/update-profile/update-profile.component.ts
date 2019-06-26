@@ -56,7 +56,7 @@ export class UpdateProfileComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
-		// salutation
+		// set salutation list
 		this.salutationList = this._utilityService.getSalutationList();
 
 		// listen: profile data event

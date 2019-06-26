@@ -2,6 +2,7 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { I18n } from '@ngx-translate/i18n-polyfill';
 
 // app
 import { UserService } from '../../../services/user.service';
@@ -11,9 +12,11 @@ import { ProxyService } from '../../../../../core.pck/proxy.mod/services/proxy.s
 import { UtilityService } from '../../../../../utilities.pck/accessories.mod/services/utility.service';
 import { HelperService } from '../../../../../utilities.pck/accessories.mod/services/helper.service';
 import { DialogTypeEnum } from '../../../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { DialogService } from '../../../../../utilities.pck/dialog.mod/services/dialog.service';
 import { LoadingAnimationService } from '../../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
+import { UserViewInterface } from '../../../interfaces/user-view.interface';
+import { AppViewTypeEnum } from '../../../enums/app-view-type.enum';
+import { UserFormTypeEnum } from '../../../enums/user-form-type.enum';
 
 @Component({
 	selector: 'app-user-default',
@@ -179,7 +182,7 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 	 *
 	 * @param row
 	 */
-	public onClickRowActionButtons(row?: string) {
+	public onClickRowActionButtons(row?: any) {
 		// delete / decline user
 		if (this.buttonType > 2) {
 			// set text
@@ -198,6 +201,15 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 
 			// perform action
 			this.deleteOrDeclineUser(row, this.buttonType, text);
+		} else {
+			// payload
+			const state = (this.buttonType == 0) ? UserFormTypeEnum.NEW : UserFormTypeEnum.UPDATE;
+			const payload: UserViewInterface = {
+				view: AppViewTypeEnum.FORM,
+				data: row,
+				state: state
+			};
+			this.changeUserView.emit(payload);
 		}
 	}
 

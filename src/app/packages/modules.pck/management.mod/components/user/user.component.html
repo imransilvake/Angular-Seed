@@ -8,17 +8,10 @@
 	<!-- Details -->
 	<div class="ham-details">
 		<!-- View: Default -->
-		<ng-container *ngIf="pageView === 0">
+		<ng-container>
 			<app-user-default
-				(changeUserView)="pageView = $event.view; id = $event.id; triggerServices();">
+				(changeUserView)="pageView = $event.view; id = $event.id; data = $event.data; openUserFormModal();">
 			</app-user-default>
-		</ng-container>
-
-		<!-- View: Form -->
-		<ng-container *ngIf="pageView === 1">
-			<app-user-form
-				(changeUserView)="pageView = $event.view; id = null; triggerServices();">
-			</app-user-form>
 		</ng-container>
 	</div>
 </div>

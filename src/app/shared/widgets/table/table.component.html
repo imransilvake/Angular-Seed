@@ -22,7 +22,7 @@
 					<ng-container *ngIf="column === 'Image'">
 						<img
 							class="ham-image"
-							*ngIf="element[column] && validateType(element[column]) !== 'string'"
+							*ngIf="element[column] && validateType(element[column]) !== 'string' && element[column] | async"
 							[src]="element[column] | async" alt="table-photo"/>
 						<p
 							class="ham-no-image"
