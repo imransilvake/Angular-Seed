@@ -7,7 +7,7 @@ import { Subject } from 'rxjs';
 
 // app
 import { HelperService } from '../../../../utilities.pck/accessories.mod/services/helper.service';
-import { faEnvelope, faPowerOff, faUser, faUserLock } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faPowerOff, faUser } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../../../../modules.pck/authorization.mod/services/auth.service';
 import { ROUTING } from '../../../../../../environments/environment';
 import { DialogTypeEnum } from '../../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
@@ -23,7 +23,7 @@ import { MemberService } from '../../../../modules.pck/member.mod/services/membe
 
 export class AccountMenuComponent implements OnInit, OnDestroy {
 	public routing = ROUTING;
-	public faIcons = [faEnvelope, faUser, faUserLock, faPowerOff];
+	public faIcons = [faEnvelope, faUser, faPowerOff];
 	public currentUser;
 	public userName;
 	public userNameLetters;
@@ -73,14 +73,6 @@ export class AccountMenuComponent implements OnInit, OnDestroy {
 	 */
 	public onClickStopPropagation(event) {
 		HelperService.stopPropagation(event);
-	}
-
-	/**
-	 * navigate: lock screen
-	 */
-	public onClickLockScreen() {
-		// navigate to lock
-		this._router.navigate([ROUTING.authorization.lock]).then();
 	}
 
 	/**

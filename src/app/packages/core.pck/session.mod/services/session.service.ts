@@ -8,7 +8,6 @@ import { Store } from '@ngrx/store';
 
 // app
 import * as ErrorHandlerActions from '../../../utilities.pck/error-handler.mod/store/actions/error-handler.actions';
-import { AppOptions } from '../../../../../app.config';
 import { StorageService } from '../../storage.mod/services/storage.service';
 import { SessionInterface } from '../interfaces/session.interface';
 import { SessionTypeEnum } from '../enums/session-type.enum';
@@ -18,7 +17,7 @@ import { ErrorHandlerPayloadInterface } from '../../../utilities.pck/error-handl
 
 @Injectable({ providedIn: 'root' })
 export class SessionService {
-	private sessionLockScreen;
+	private notification;
 
 	constructor(
 		private _authService: AuthService,
@@ -47,14 +46,14 @@ export class SessionService {
 	 */
 	private exitSessions(session) {
 		switch (session) {
-			case 'LOCK_SCREEN':
-				if (this.sessionLockScreen) {
-					this.sessionLockScreen.unsubscribe();
+			case 'NOTIFICATION':
+				if (this.notification) {
+					this.notification.unsubscribe();
 				}
 				break;
 			case 'ALL':
-				if (this.sessionLockScreen) {
-					this.sessionLockScreen.unsubscribe();
+				if (this.notification) {
+					this.notification.unsubscribe();
 				}
 				break;
 			default:
@@ -68,44 +67,19 @@ export class SessionService {
 	 */
 	private handleSessions(session) {
 		switch (session) {
-			case 'LOCK_SCREEN':
-				this.handleLockScreenSession(AppOptions.lockScreenSessionTime);
+			case 'NOTIFICATION':
+				break;
+			case 'ALL':
 				break;
 			default:
 		}
 	}
 
 	/**
-	 * handle lock screen session
+	 * handle notification session
 	 *
 	 * @param seconds
 	 */
-	private handleLockScreenSession(seconds: number) {
-		const sessionHandler = this.sessionLockScreen = timer(0, seconds)
-			.subscribe(() => {
-				// authenticate user
-				this._authService.authenticateUser()
-					.subscribe(res => {
-						if (!res.status || res.status === 'FAIL') {
-							// common error
-							const payload: ErrorHandlerPayloadInterface = {
-								icon: 'error_icon',
-								title: this._i18n({
-									value: 'Title: Session Timeout Exception',
-									id: 'Error_SessionTimeoutException_Title'
-								}),
-								message: this._i18n({
-									value: 'Description: Session Timeout Exception',
-									id: 'Error_SessionTimeoutException_Description'
-								}),
-								buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-							};
-							this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
-
-							// unsubscribe session handler
-							sessionHandler.unsubscribe();
-						}
-					});
-			});
+	private handleNotificationSession(seconds: number) {
 	}
 }

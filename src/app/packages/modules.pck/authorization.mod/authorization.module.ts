@@ -9,7 +9,6 @@ import { RegisterComponent } from './components/register/register.component';
 import { FieldsModule } from '../../core.pck/fields.mod/fields.module';
 import { LoginComponent } from './components/login/login.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
-import { LockScreenComponent } from './components/lock-screen/lock-screen.component';
 import { AuthUserStatusGuard } from './guards/auth-user-status.guard';
 import { WidgetsModule } from '../../../shared/widgets/widgets.module';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
@@ -26,8 +25,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 		RegisterComponent,
 		LoginComponent,
 		ForgotPasswordComponent,
-		ResetPasswordComponent,
-		LockScreenComponent
+		ResetPasswordComponent
 	],
 	providers: [
 		AuthUserStatusGuard

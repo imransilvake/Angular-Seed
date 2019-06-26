@@ -813,62 +813,6 @@
 					<context context-type="linenumber">74</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_LockScreen_Status" datatype="html">
-				<source>
-					<x id="START_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;mat-icon&gt;"/>lock
-					<x id="CLOSE_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;/mat-icon&gt;"/>
-					Locked
-				</source>
-				<target>
-					<x id="START_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;mat-icon&gt;"/>lock
-					<x id="CLOSE_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;/mat-icon&gt;"/>
-					Locked
-				</target>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						app/packages/modules.pck/authorization.mod/components/lock-screen/lock-screen.component.html
-					</context>
-					<context context-type="linenumber">13</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="Auth_LockScreen_Form_Password_PlaceHolder" datatype="html">
-				<source>Password</source>
-				<target>Enter Password</target>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						app/packages/modules.pck/authorization.mod/components/lock-screen/lock-screen.component.html
-					</context>
-					<context context-type="linenumber">33</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="Auth_LockScreen_Form_Password_Hint" datatype="html">
-				<source>Password Hint</source>
-				<target>Enter your password to retrieve your session</target>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						app/packages/modules.pck/authorization.mod/components/lock-screen/lock-screen.component.html
-					</context>
-					<context context-type="linenumber">36</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="Auth_LockScreen_Note" datatype="html">
-				<source>
-					Not <x id="INTERPOLATION" equiv-text="{{ userName }}"/>? <x id="START_LINK" ctype="x-a"
-					                                                          equiv-text="&lt;a&gt;"/>Click here
-					<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
-				</source>
-				<target>
-					Not <x id="INTERPOLATION" equiv-text="{{ userName }}"/>? <x id="START_LINK" ctype="x-a"
-					                                                          equiv-text="&lt;a&gt;"/>Click here
-					<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/>
-				</target>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						app/packages/modules.pck/authorization.mod/components/lock-screen/lock-screen.component.html
-					</context>
-					<context context-type="linenumber">44</context>
-				</context-group>
-			</trans-unit>
 			<trans-unit id="Member_Profile_Title" datatype="html">
 				<source>User Profile</source>
 				<target>User Profile</target>
