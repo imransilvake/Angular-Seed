@@ -59,7 +59,10 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 
 		User_Default_List: { serviceUrl: '/ham/auth/listusers' },
 		User_Default_List_Hotel_Group: { serviceUrl: '/ham/auth/listusers/group/:groupId' },
-		User_Default_List_Hotel: { serviceUrl: '/ham/auth/listusers/group/:groupId/hotel/:hotelId' }
+		User_Default_List_Hotel: { serviceUrl: '/ham/auth/listusers/group/:groupId/hotel/:hotelId' },
+		User_Default_List_Remove_User: { serviceUrl: '/ham/auth/deleteuser' },
+		User_Default_List_Remove_User_Group: { serviceUrl: '/ham/auth/deleteuser/group/:groupId' },
+		User_Default_List_Remove_User_Hotel: { serviceUrl: '/ham/auth/deleteuser/group/:groupId/hotel/:hotelId' }
 	}
 };
 

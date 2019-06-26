@@ -5,13 +5,15 @@ import { Subject } from 'rxjs';
 
 // app
 import { UserService } from '../../../services/user.service';
-import { AppViewTypeEnum } from '../../../enums/app-view-type.enum';
-import { UserViewInterface } from '../../../interfaces/user-view.interface';
 import { MemberService } from '../../../../member.mod/services/member.service';
 import { UserListTypeEnum } from '../../../enums/user-list-type.enum';
 import { ProxyService } from '../../../../../core.pck/proxy.mod/services/proxy.service';
 import { UtilityService } from '../../../../../utilities.pck/accessories.mod/services/utility.service';
 import { HelperService } from '../../../../../utilities.pck/accessories.mod/services/helper.service';
+import { DialogTypeEnum } from '../../../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
+import { I18n } from '@ngx-translate/i18n-polyfill';
+import { DialogService } from '../../../../../utilities.pck/dialog.mod/services/dialog.service';
+import { LoadingAnimationService } from '../../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 
 @Component({
 	selector: 'app-user-default',
@@ -34,7 +36,10 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 		private _userService: UserService,
 		private _memberService: MemberService,
 		private _proxyService: ProxyService,
-		private _utilityService: UtilityService
+		private _utilityService: UtilityService,
+		private _i18n: I18n,
+		private _dialogService: DialogService,
+		private _loadingAnimationService: LoadingAnimationService
 	) {
 	}
 
@@ -84,9 +89,9 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 			const mapNewUsersData = users && users.data.map(user => {
 				const image = user.Image === null && user.Name ? HelperService.getFirstLetter(user.Name).toUpperCase() : user.Image;
 				const role = user.Type ? HelperService.capitalizeString(user.Type.replace('_', ' ').toLowerCase()) : '-';
+				const hotels = [];
 				let date;
 				let uniqueProperties = {};
-				let hotels = [];
 
 				if (userListType === UserListTypeEnum.APPLIED) {
 					// date
@@ -101,9 +106,11 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 					date = user.LoginDate ? HelperService.getUTC(this._userService.currentUser.profile.language, user.LoginDate) : '-';
 
 					// hotels
-					user.HotelIDs && user.HotelIDs.forEach(hotel => {
-						hotels.push(this._utilityService.hotelList[hotel]);
-					});
+					if (user && user.HotelIDs) {
+						user.HotelIDs.forEach(hotel => {
+							hotels.push(this._utilityService.hotelList[hotel]);
+						});
+					}
 
 					// object properties
 					uniqueProperties = {
@@ -132,20 +139,6 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 	}
 
 	/**
-	 * registration: update table row
-	 *
-	 * @param id
-	 */
-	public onClickNewRegistrationFetchId(id?: string) {
-		// payload
-		const payload: UserViewInterface = {
-			view: AppViewTypeEnum.FORM,
-			id: id
-		};
-		this.changeUserView.emit(payload);
-	}
-
-	/**
 	 * create new user
 	 */
 	public onClickCreateNewUser() {
@@ -160,16 +153,16 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 	}
 
 	/**
-	 * delete new user
+	 * edit existing user
 	 */
-	public onClickDeleteNewUser() {
+	public onClickEditExistingUser() {
 		this.buttonType = 2;
 	}
 
 	/**
-	 * edit existing user
+	 * delete new user
 	 */
-	public onClickEditExistingUser() {
+	public onClickDeleteNewUser() {
 		this.buttonType = 3;
 	}
 
@@ -182,17 +175,89 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 	}
 
 	/**
-	 * old users: update table row
+	 * new / old action
 	 *
-	 * @param id
+	 * @param row
 	 */
-	public onClickOldUserFetchId(id?: string) {
-		// payload
-		const payload: UserViewInterface = {
-			view: AppViewTypeEnum.FORM,
-			id: id
+	public onClickRowActionButtons(row?: string) {
+		// delete / decline user
+		if (this.buttonType > 2) {
+			// set text
+			let text;
+			if (this.buttonType === 3) {
+				text = {
+					title: this._i18n({ value: 'Title: Decline User Confirmation', id: 'User_List_Decline_User_Confirmation_Title' }),
+					message: this._i18n({ value: 'Description: Decline User Confirmation', id: 'User_List_Decline_User_Confirmation_Description' }),
+				};
+			} else {
+				text = {
+					title: this._i18n({ value: 'Title: Delete User Confirmation', id: 'User_List_Delete_User_Confirmation_Title' }),
+					message: this._i18n({ value: 'Description: Delete User Confirmation', id: 'User_List_Delete_User_Confirmation_Description' }),
+				};
+			}
+
+			// perform action
+			this.deleteOrDeclineUser(row, this.buttonType, text);
+		}
+	}
+
+	/**
+	 * delete or decline user
+	 *
+	 * @param row
+	 * @param state
+	 * @param text
+	 */
+	public deleteOrDeclineUser(row: any, state: number, text: any) {
+		// dialog payload
+		const data = {
+			type: DialogTypeEnum.CONFIRMATION,
+			payload: {
+				...text,
+				icon: 'dialog_confirmation',
+				buttonTexts: [
+					this._i18n({
+						value: 'Button - OK',
+						id: 'Common_Button_OK'
+					}),
+					this._i18n({
+						value: 'Button - Cancel',
+						id: 'Common_Button_Cancel'
+					}),
+				]
+			}
 		};
-		// this.changeUserView.emit(payload);
-		console.log(id, this.buttonType);
+
+		// listen: dialog service
+		this._dialogService
+			.showDialog(data)
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => {
+				// delete / decline
+				if (res) {
+					// service
+					this._userService.removeUser(this.buttonType, row);
+
+					// remove row from client side
+					if (this.buttonType === 3) {
+						const listData = this.userNewRegistrationsList.data.filter(listRow => listRow.ID !== row.ID);
+						this.userNewRegistrationsList = {
+							...this.userNewRegistrationsList,
+							data: listData,
+							total: this.userNewRegistrationsList.total - 1
+						};
+					} else {
+						const listData = this.userExistingUsersList.data.filter(listRow => listRow.ID !== row.ID);
+						this.userExistingUsersList = {
+							...this.userExistingUsersList,
+							data: listData,
+							total: this.userExistingUsersList.total - 1
+						};
+					}
+				}
+
+				// stop loading animation
+				this._loadingAnimationService.stopLoadingAnimation();
+			});
 	}
 }

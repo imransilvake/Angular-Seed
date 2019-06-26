@@ -95,4 +95,53 @@ export class UserService {
 			return of(null);
 		}
 	}
+
+	/**
+	 * remove user
+	 *
+	 * @param type
+	 * @param row
+	 */
+	public removeUser(type: number, row: any) {
+		// payload
+		let payload: any = {
+			bodyParams: {
+				email: row.Email
+			}
+		};
+		let api;
+		switch (this.appState.type) {
+			case AppStateEnum.ALL:
+				// set api
+				api = AppServices['Management']['User_Default_List_Remove_User'];
+				break;
+			case AppStateEnum.GROUP:
+				// set api
+				api = AppServices['Management']['User_Default_List_Remove_User_Group'];
+
+				// set payload
+				payload = {
+					...payload,
+					pathParams: {
+						groupId: this.appState && this.appState.groupId
+					}
+				};
+				break;
+			case AppStateEnum.HOTEL:
+				// set api
+				api = AppServices['Management']['User_Default_List_Remove_User_Hotel'];
+
+				payload = {
+					...payload,
+					pathParams: {
+						groupId: this.appState && this.appState.groupId,
+						hotelId: this.appState && this.appState.hotelId
+					}
+				};
+				break;
+		}
+
+		// service
+		this._proxyService.postAPI(api, payload).subscribe();
+	}
 }

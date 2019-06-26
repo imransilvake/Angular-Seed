@@ -13,11 +13,11 @@
 			[tableAdditionalColumns]="['Action']"
 			[templateRef]="[action]"
 			[currentApiUrl]="newUsersTableApiUrl"
-			(rowData)="onClickNewRegistrationFetchId($event)">
+			(rowData)="onClickRowActionButtons($event)">
 			<!-- Action -->
 			<ng-template #action>
-				<button mat-button class="ham-button ham-button-2 ham-table-button-1" i18n="@@Management_User_NewUsers_Table_Edit">Edit</button>
-				<button mat-button class="ham-button ham-button-2 ham-table-button-2" i18n="@@Management_User_NewUsers_Table_Decline">Decline</button>
+				<button mat-button class="ham-button ham-button-2 ham-table-button-1" (click)="onClickEditNewUser()" i18n="@@Management_User_NewUsers_Table_Edit">Edit</button>
+				<button mat-button class="ham-button ham-button-2 ham-table-button-2" (click)="onClickDeleteNewUser()" i18n="@@Management_User_NewUsers_Table_Decline">Decline</button>
 			</ng-template>
 		</app-table>
 	</div>
@@ -43,7 +43,7 @@
 			[tableAdditionalColumns]="['Action']"
 			[templateRef]="[action]"
 			[currentApiUrl]="existingUsersTableApiUrl"
-			(rowData)="onClickOldUserFetchId($event)">
+			(rowData)="onClickRowActionButtons($event)">
 			<!-- Action -->
 			<ng-template #action>
 				<button mat-button class="ham-button ham-button-2 ham-table-button-1" (click)="onClickEditExistingUser()" i18n="@@Management_User_ExistingUsers_Table_Edit">Edit</button>

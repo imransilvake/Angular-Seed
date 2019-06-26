@@ -27,11 +27,13 @@ export class UtilityService {
 
 		// hotels list
 		this.getHotelList().subscribe(res => {
-			res && res.forEach(hotel => {
-				if (hotel) {
-					this.hotelList[hotel.id] = hotel.text;
-				}
-			});
+			if (res) {
+				res.forEach(hotel => {
+					if (hotel) {
+						this.hotelList[hotel.id] = hotel.text;
+					}
+				});
+			}
 		});
 	}
 

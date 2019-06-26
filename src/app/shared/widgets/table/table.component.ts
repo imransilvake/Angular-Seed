@@ -123,7 +123,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	 * @param imageName
 	 */
 	async getImageSrc(imageName) {
-		let response = await this._proxyService
+		const response = await this._proxyService
 			.postAPI(AppServices['Utilities']['Fetch_Profile_Image'], { bodyParams: { image: imageName } })
 			.toPromise();
 
