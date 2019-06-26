@@ -31,6 +31,7 @@ export class LicenseComponent implements OnInit, OnDestroy {
 	public licenseHSAUserBlocksList = [];
 	public systemData;
 	public errorMessage;
+	public systemIdentifierSubscription;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
@@ -148,7 +149,7 @@ export class LicenseComponent implements OnInit, OnDestroy {
 
 		// listen: validate system identifier on new form
 		if (!this.id) {
-			this.systemIdentifier.valueChanges
+			this.systemIdentifierSubscription = this.systemIdentifier.valueChanges
 				.pipe(
 					debounceTime(200),
 					takeUntil(this._ngUnSubscribe)
@@ -203,6 +204,11 @@ export class LicenseComponent implements OnInit, OnDestroy {
 	public onSubmitForm() {
 		// start loading animation
 		this._loadingAnimationService.startLoadingAnimation();
+
+		// unsubscribe system identifier
+		if (this.systemIdentifierSubscription) {
+			this.systemIdentifierSubscription.unsubscribe();
+		}
 
 		// payload
 		const formPayload: LicenseSystemInterface = {

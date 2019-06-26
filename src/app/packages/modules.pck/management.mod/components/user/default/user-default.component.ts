@@ -178,6 +178,7 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 	 * delete existing user
 	 */
 	public onClickDeleteExistingUser() {
+		// set button type
 		this.buttonType = 4;
 	}
 

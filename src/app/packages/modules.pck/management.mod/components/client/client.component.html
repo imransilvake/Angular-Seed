@@ -19,7 +19,8 @@
 			<app-client-form
 				[id]="id"
 				[groupName]="groupName"
-				(changeClientView)="pageView = $event.view; id = null; groupName = null; triggerServices();">
+				(changeClientView)="pageView = $event.view; id = null; groupName = null; triggerServices();"
+				(updateViewOnNewGroup)="id = $event.id; triggerServices();">
 			</app-client-form>
 		</ng-container>
 	</div>

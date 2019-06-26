@@ -27,6 +27,7 @@ export class ClientService {
 	public clientTablesServices;
 	public clientDataEmitter: BehaviorSubject<any> = new BehaviorSubject(0);
 	public errorMessage: EventEmitter<string> = new EventEmitter();
+	public newlyCreatedGroupId: EventEmitter<string> = new EventEmitter();
 
 	constructor(
 		private _proxyService: ProxyService,
@@ -314,7 +315,12 @@ export class ClientService {
 				};
 
 				// dialog service
-				this._dialogService.showDialog(dialogPayload).subscribe();
+				this._dialogService
+					.showDialog(dialogPayload)
+					.subscribe(() =>
+						// pass newly created group id
+						this.newlyCreatedGroupId.emit(formPayload.GroupID)
+					);
 			});
 	}
 
