@@ -1,15 +1,27 @@
 // angular
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { I18n } from '@ngx-translate/i18n-polyfill';
+
+// store
+import { Store } from '@ngrx/store';
 
 // app
+import * as ErrorHandlerActions from '../../../../../utilities.pck/error-handler.mod/store/actions/error-handler.actions';
 import { SelectTypeEnum } from '../../../../../core.pck/fields.mod/enums/select-type.enum';
 import { SelectDefaultInterface } from '../../../../../core.pck/fields.mod/interfaces/select-default-interface';
 import { UtilityService } from '../../../../../utilities.pck/accessories.mod/services/utility.service';
 import { ValidationService } from '../../../../../core.pck/fields.mod/services/validation.service';
 import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum';
 import { UserService } from '../../../services/user.service';
+import { UserInterface } from '../../../interfaces/user.interface';
+import { ProxyService } from '../../../../../core.pck/proxy.mod/services/proxy.service';
+import { AppServices } from '../../../../../../../app.config';
+import { SelectGroupInterface } from '../../../../../core.pck/fields.mod/interfaces/select-group.interface';
+import { ErrorHandlerInterface } from '../../../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 
 @Component({
 	selector: 'app-user-form',
@@ -17,20 +29,32 @@ import { UserService } from '../../../services/user.service';
 	styleUrls: ['./user-form.component.scss']
 })
 
-export class UserFormComponent {
+export class UserFormComponent implements OnInit, OnDestroy {
 	public formFields;
-	public selectType = SelectTypeEnum.DEFAULT;
+	public selectTypeDefault = SelectTypeEnum.DEFAULT;
+	public selectTypeGroup = SelectTypeEnum.GROUP;
 	public languageList: SelectDefaultInterface[] = [];
 	public salutationList: SelectDefaultInterface[] = [];
 	public currentRole;
+	public roleAdmin: UserRoleEnum = UserRoleEnum[UserRoleEnum.ADMIN];
+	public roleGroupManager: UserRoleEnum = UserRoleEnum[UserRoleEnum.GROUP_MANAGER];
+	public roleHotelManager: UserRoleEnum = UserRoleEnum[UserRoleEnum.HOTEL_MANAGER];
 	public roleList: SelectDefaultInterface[] = [];
+	public hotelList: SelectDefaultInterface[] = [];
+	public hotelListGroup: SelectGroupInterface[] = [];
 	public errorMessage;
+	public selectedHotels = [];
+
+	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
+		@Inject(MAT_DIALOG_DATA) public data: any,
+		private _proxyService: ProxyService,
 		private _userService: UserService,
 		private _utilityService: UtilityService,
 		public dialogRef: MatDialogRef<UserFormComponent>,
-		@Inject(MAT_DIALOG_DATA) public data: any
+		private _i18n: I18n,
+		private _store: Store<{ ErrorHandlerInterface: ErrorHandlerInterface }>
 	) {
 		// form group
 		this.formFields = new FormGroup({
@@ -78,6 +102,44 @@ export class UserFormComponent {
 		// set salutation list
 		this.roleList = this._utilityService.userRoleList;
 
+		// hotels set based on logged in users
+		let payload;
+		switch (this.currentRole) {
+			case this.roleAdmin:
+				// hotel list
+				this.getAllGroupHotels();
+
+				// hotels
+				this.hotels.disable();
+				break;
+			case this.roleGroupManager:
+				// role list
+				this.roleList = this.roleList.slice(1, 5);
+
+				// payload
+				payload = {
+					pathParams: { groupId: this._userService.appState.groupId }
+				};
+
+				// hotel list
+				this.getGroupHotels(payload);
+				break;
+			case this.roleHotelManager:
+				// role list
+				this.roleList = this.roleList.slice(2, 5);
+
+				// payload
+				const hotelIds = this._userService.currentUser.profile['custom:hotelId'].split(',');
+				payload = {
+					pathParams: { groupId: this._userService.appState.groupId },
+					queryParams: { 'HotelIDs[]': hotelIds }
+				};
+
+				// hotel list
+				this.getGroupHotels(payload);
+				break;
+		}
+
 		// fill form with data
 		if (this.data) {
 			// language
@@ -88,34 +150,87 @@ export class UserFormComponent {
 
 			// salutation
 			if (this.data.Gender) {
-				const salutation = this.salutationList.filter(item => item.id === this.data.Gender.toLowerCase());
+				const salutation = this.salutationList.filter(item => item.id === this.data.Gender.toUpperCase());
 				this.salutation.setValue(...salutation);
 			}
 
-			// update form
+			// firstName, lastName & email
 			this.firstName.setValue(this.data.Lastname);
 			this.lastName.setValue(this.data.Lastname);
 			this.email.setValue(this.data.Email);
 			this.email.disable();
 
-			// role
-			if (this.currentRole === UserRoleEnum[UserRoleEnum.GROUP_MANAGER]) {
-				this.roleList = this.roleList.slice(1, 5);
+			// current role: admin and group manager
+			if (this.currentRole === this.roleGroupManager) {
+				this.hotels.disable();
 			}
 
-			if (this.currentRole === UserRoleEnum[UserRoleEnum.HOTEL_MANAGER]) {
-				this.roleList = this.roleList.slice(2, 5);
-			}
-
+			// check user selected role and pre-select role
 			if (this.data.Role) {
-				//const roleId = this.data.Role.replace(' ', '_').toUpperCase();
-				//this.role.setValue(roleId);
-				//console.log(this.roleList, this.role.value, roleId);
-			}
+				const roleId = this.data.Role.replace(' ', '_').toUpperCase();
+				const role = this.roleList.filter(role => role.id === roleId);
+				this.role.setValue(...role);
 
-			// hotels is disabled initially
-			this.hotels.disable();
+				// current role: not admin and group manager
+				if (roleId !== this.roleAdmin && roleId !== this.roleGroupManager) {
+					this.hotels.enable();
+				}
+			}
 		}
+
+		// listen: on role change
+		this.role.valueChanges
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => {
+				if (res) {
+					if (
+						this.currentRole === this.roleAdmin && res.id === this.roleAdmin ||
+						this.currentRole === this.roleGroupManager && res.id === this.roleGroupManager
+					) {
+						this.hotels.disable();
+					} else {
+						this.hotels.enable();
+					}
+				}
+			});
+
+		// listen: on hotels change
+		this.hotels.valueChanges
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => {
+				if (res) {
+					const hotels = res.map(hotel => hotel.id.split('_')[0]);
+					const uniqueSet = new Set(hotels);
+					const hotelsList = [...uniqueSet];
+					if (hotelsList.length > 1) {
+						// set previous values
+						this.hotels.setValue(this.selectedHotels);
+
+						// payload
+						payload = {
+							icon: 'error_icon',
+							title: this._i18n({
+								value: 'Title: Group Selection Error Exception',
+								id: 'Error_GroupSelection_Title'
+							}),
+							message: this._i18n({
+								value: 'Description: Group Selection Error Exception',
+								id: 'Error_GroupSelection_Description'
+							}),
+							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
+						};
+						this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
+					} else {
+						this.selectedHotels = this.hotels.value;
+					}
+				}
+			});
+	}
+
+	ngOnDestroy() {
+		// remove subscriptions
+		this._ngUnSubscribe.next();
+		this._ngUnSubscribe.complete();
 	}
 
 	/**
@@ -157,6 +272,130 @@ export class UserFormComponent {
 	 * on submit form
 	 */
 	public onSubmitForm() {
+		let groupId;
+		let hotelIds;
+		let formPayload;
+
+		// prepare group and hotel id.
+		if (this.role.value.id === this.roleAdmin) {
+			groupId = 'ANY';
+			hotelIds = 'ANY';
+		} else if (this.currentRole === this.roleGroupManager && this.role.value.id === this.roleGroupManager) {
+			groupId = this._userService.appState.groupId;
+			hotelIds = 'ANY';
+		} else if(this.currentRole === this.roleAdmin && this.role.value.id === this.roleGroupManager) {
+			groupId = this.hotels.value[0].id.split('_')[0];
+			hotelIds = 'ANY';
+		} else {
+			const hotels = this.hotels.value.map(hotel => hotel.id);
+			groupId = this.hotels.value[0].id.split('_')[0];
+			hotelIds = hotels;
+		}
+
+		// form payload
+		const formData: UserInterface = {
+			groupId: groupId,
+			email: this.email.value,
+			lang: this.languageName.value.id,
+			salutation: this.salutation.value.id,
+			role: this.role.value.id,
+			hotelId: hotelIds,
+			firstName: this.firstName.value,
+			lastName: this.lastName.value
+		};
+
+		// create user
+		if (!this.data) {
+			// payload
+			formPayload = {
+				...formData
+			};
+
+			// service
+			this._userService.userCreate(formPayload);
+		} else {
+			formPayload = {
+				ID: this.data.ID,
+				...formData
+			};
+
+			// service
+			this._userService.userUpdate(formPayload);
+		}
+	}
+
+	/**
+	 * get particular group hotels
+	 *
+	 * @param payload
+	 */
+	public getGroupHotels(payload: any) {
+		this._utilityService
+			.getHotelListByGroup(payload)
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(result => {
+				// set hotel list
+				this.hotelList = result.items.map(hotel => {
+					return {
+						id: hotel.HotelID,
+						text: hotel.Name
+					};
+				});
+
+				// pre-select hotels
+				if (this.data && this.data.HotelIDs) {
+					const hotelIds = this.data.HotelIDs;
+					const hotels = this.hotelList.filter(hotel => hotelIds.includes(hotel.id));
+					this.hotels.setValue(hotels);
+				}
+			});
+	}
+
+	/**
+	 * get all group hotels
+	 */
+	public getAllGroupHotels() {
+		// service
+		this._proxyService
+			.getAPI(AppServices['Utilities']['HotelListAll'])
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => {
+				// map response
+				const mapped = res.items
+					.filter(hotel => hotel.hasOwnProperty('HotelID'))
+					.reduce((acc, hotel) => {
+						if (!acc.hasOwnProperty(hotel.GroupID)) {
+							acc[hotel.GroupID] = [];
+						}
+						acc[hotel.GroupID].push({
+							id: hotel.HotelID,
+							text: hotel.Name
+						});
+						return acc;
+					}, {});
+
+				// convert object to array
+				// @ts-ignore
+				this.hotelListGroup = Object.entries(mapped).map(hotel => {
+					return {
+						name: hotel[0],
+						items: hotel[1]
+					}
+				});
+
+				// pre-select hotels
+				if (this.data && this.data.HotelIDs) {
+					const hotelIds = this.data.HotelIDs;
+					const groupId = hotelIds[0].split('_')[0];
+					let selectedItems = [];
+					for (let i = 0; i < this.hotelListGroup.length; i++) {
+						if (this.hotelListGroup[i].name === groupId) {
+							selectedItems = this.hotelListGroup[i].items.filter(hotel => hotelIds.includes(hotel.id))
+						}
+					}
+					this.hotels.setValue(selectedItems);
+				}
+			});
 	}
 
 	/**

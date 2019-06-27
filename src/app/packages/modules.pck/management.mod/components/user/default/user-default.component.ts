@@ -252,7 +252,7 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 				// delete / decline
 				if (res) {
 					// service
-					this._userService.removeUser(this.buttonType, row);
+					this._userService.userRemove(this.buttonType, row);
 
 					// remove row from client side
 					if (this.buttonType === 3) {

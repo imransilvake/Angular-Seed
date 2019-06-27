@@ -36,7 +36,7 @@
 	</div>
 
 	<!-- Button: Create New User -->
-	<div class="ham-button-wrapper" *ngIf="currentRole === roleAdmin">
+	<div class="ham-button-wrapper" *ngIf="currentRole === roleAdmin || currentRole === roleGroupManager || currentRole === roleHotelManager">
 		<button mat-button class="ham-button ham-button-1" i18n="@@Management_User_Create_NewUser" (click)="onClickCreateNewUser()">
 			Create New User
 		</button>

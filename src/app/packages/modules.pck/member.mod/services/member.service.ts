@@ -55,32 +55,6 @@ export class MemberService {
 	}
 
 	/**
-	 * fetch assigned hotels
-	 *
-	 * @param hotelIds
-	 */
-	public memberFetchAssignedHotels(hotelIds: Array<string>) {
-		// payload
-		const payload = {
-			'HotelIDs[]': hotelIds
-		};
-
-		// group id
-		if (hotelIds[0]) {
-			const groupId = hotelIds[0].split('_')[0];
-
-			// service
-			return this._proxyService
-				.getAPI(AppServices['Utilities']['HotelListGroup'], {
-					pathParams: { groupId: groupId },
-					queryParams: payload
-				});
-		} else {
-			return of(null);
-		}
-	}
-
-	/**
 	 * update user profile
 	 *
 	 * @param formPayload

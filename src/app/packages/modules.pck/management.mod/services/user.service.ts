@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { AppOptions, AppServices } from '../../../../../app.config';
 import { AppStateEnum } from '../../../frame.pck/enums/app-state.enum';
 import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service';
+import { UserInterface } from '../interfaces/user.interface';
 
 @Injectable()
 export class UserService {
@@ -102,7 +103,7 @@ export class UserService {
 	 * @param type
 	 * @param row
 	 */
-	public removeUser(type: number, row: any) {
+	public userRemove(type: number, row: any) {
 		// payload
 		let payload: any = {
 			bodyParams: {
@@ -143,5 +144,23 @@ export class UserService {
 
 		// service
 		this._proxyService.postAPI(api, payload).subscribe();
+	}
+
+	/**
+	 * create new user
+	 *
+	 * @param formPayload
+	 */
+	public userCreate(formPayload: UserInterface) {
+		console.log(formPayload);
+	}
+
+	/**
+	 * create new user
+	 *
+	 * @param formPayload
+	 */
+	public userUpdate(formPayload: UserInterface) {
+		console.log(formPayload);
 	}
 }

@@ -20,6 +20,7 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 	Utilities: {
 		CountryList: { serviceUrl: '/config/countries/list' },
 		HotelList: { serviceUrl: '/hotels/list' },
+		HotelListAll: { serviceUrl: '/hotels/list/all' },
 		HotelListGroup: { serviceUrl: '/hotels/list/group/:groupId' },
 		Fetch_Profile_Image: { serviceUrl: '/getimage' },
 		Change_Profile_Image: { serviceUrl: '/imageupload' }

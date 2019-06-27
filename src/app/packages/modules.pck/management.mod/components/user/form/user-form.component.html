@@ -21,7 +21,7 @@
 					[showLabel]="true"
 					labelName="Language*"
 					i18n-labelName="@@Management_User_Form_Language_Label"
-					[selectType]="selectType"
+					[selectType]="selectTypeDefault"
 					[selectId]="'management-user-language-id'"
 					selectPlaceHolder="Select Language"
 					i18n-selectPlaceHolder="@@Management_User_Form_Language_PlaceHolder"
@@ -35,7 +35,7 @@
 					[showLabel]="true"
 					labelName="Salutation*"
 					i18n-labelName="@@Management_User_Form_Salutation_Label"
-					[selectType]="selectType"
+					[selectType]="selectTypeDefault"
 					[selectId]="'management-user-salutation-id'"
 					selectPlaceHolder="Select Salutation"
 					i18n-selectPlaceHolder="@@Management_User_Form_Salutation_PlaceHolder"
@@ -96,7 +96,7 @@
 					[showLabel]="true"
 					labelName="Role*"
 					i18n-labelName="@@Management_User_Form_Role_Label"
-					[selectType]="selectType"
+					[selectType]="selectTypeDefault"
 					[selectId]="'management-user-role-id'"
 					selectPlaceHolder="Select Role"
 					i18n-selectPlaceHolder="@@Management_User_Form_Role_PlaceHolder"
@@ -107,14 +107,29 @@
 
 			<div class="cd-col cd-col-pm-t-6 cd-col-m-top">
 				<app-select
+					*ngIf="currentRole === roleAdmin"
+					[multipleSelection]="true"
 					[showLabel]="true"
 					labelName="Hotel(s)*"
 					i18n-labelName="@@Management_User_Form_Hotel_Label"
-					[selectType]="selectType"
+					[selectType]="selectTypeGroup"
 					[selectId]="'management-user-hotel-id'"
 					selectPlaceHolder="Select Hotel(s)"
 					i18n-selectPlaceHolder="@@Management_User_Form_Hotel_PlaceHolder"
-					[dataDefault]="salutationList"
+					[dataGroups]="hotelListGroup"
+					[control]="hotels">
+				</app-select>
+				<app-select
+					*ngIf="currentRole !== roleAdmin"
+					[multipleSelection]="true"
+					[showLabel]="true"
+					labelName="Hotel(s)*"
+					i18n-labelName="@@Management_User_Form_Hotel_Label"
+					[selectType]="selectTypeDefault"
+					[selectId]="'management-user-hotel-id'"
+					selectPlaceHolder="Select Hotel(s)"
+					i18n-selectPlaceHolder="@@Management_User_Form_Hotel_PlaceHolder"
+					[dataDefault]="hotelList"
 					[control]="hotels">
 				</app-select>
 			</div>
@@ -122,7 +137,7 @@
 
 		<!-- Note -->
 		<div class="ham-description">
-			<p i18n="@@Management_User_Form_Note">Form Note.</p>
+			<p i18n="@@Management_User_Form_Note">Note</p>
 		</div>
 
 		<!-- Divider -->

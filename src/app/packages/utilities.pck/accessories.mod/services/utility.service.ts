@@ -1,6 +1,7 @@
 // angular
 import { Injectable } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
+import { of } from 'rxjs';
 
 // app
 import { SelectDefaultInterface } from '../../../core.pck/fields.mod/interfaces/select-default-interface';
@@ -139,21 +140,21 @@ export class UtilityService {
 	public getSalutationList() {
 		const salutationList: SelectDefaultInterface[] = [
 			{
-				id: 'male',
+				id: 'MALE',
 				text: this._i18n({
 					value: 'Salutation: Mr',
 					id: 'Salutation_Mr'
 				})
 			},
 			{
-				id: 'female',
+				id: 'FEMALE',
 				text: this._i18n({
 					value: 'Salutation: Mrs',
 					id: 'Salutation_Mrs'
 				})
 			},
 			{
-				id: 'individual',
+				id: 'INDIVIDUAL',
 				text: this._i18n({
 					value: 'Salutation: Individual',
 					id: 'Salutation_Individual'
@@ -165,13 +166,6 @@ export class UtilityService {
 	}
 
 	/**
-	 * all hotels
-	 */
-	public getHotelList() {
-		return this._proxyService.getAPI(AppServices['Utilities']['HotelList']);
-	}
-
-	/**
 	 * country list
 	 */
 	public getCountryList() {
@@ -179,5 +173,25 @@ export class UtilityService {
 			language: this.currentUser && this.currentUser.profile.language || AppOptions.languages['de']
 		};
 		return this._proxyService.getAPI(AppServices['Utilities']['CountryList'], { queryParams: payload });
+	}
+
+	/**
+	 * all hotels
+	 */
+	public getHotelList() {
+		return this._proxyService.getAPI(AppServices['Utilities']['HotelList']);
+	}
+
+	/**
+	 * hotels by group
+	 *
+	 * @param payload
+	 */
+	public getHotelListByGroup(payload: any) {
+		if (payload) {
+			return this._proxyService.getAPI(AppServices['Utilities']['HotelListGroup'], payload);
+		} else {
+			return of(null);
+		}
 	}
 }

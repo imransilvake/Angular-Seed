@@ -96,17 +96,37 @@ export class SidebarService {
 		const groupId = this._authService.currentUserState.profile['custom:hotel_group_id'];
 		const hotelIds = this._authService.currentUserState.profile['custom:hotelId'].split(',');
 		const role = this._authService.currentUserState.profile['cognito:groups'][0];
+		let api;
+		let payload;
 
-		// role: GROUP_MANAGER & HOTEL_MANAGER
-		const payload = (role !== UserRoleEnum[UserRoleEnum.ADMIN]) ? {
-			pathParams: { groupId: groupId },
-			queryParams: { 'HotelIDs[]': hotelIds }
-		} : {
-			pathParams: { groupId: groupId }
-		};
+		switch (role) {
+			case UserRoleEnum[UserRoleEnum.ADMIN]:
+				// set api
+				api = AppServices['Utilities']['HotelListAll'];
+				break;
+			case UserRoleEnum[UserRoleEnum.GROUP_MANAGER]:
+				// set api
+				api = AppServices['Utilities']['HotelListGroup'];
+
+				// set payload
+				payload = {
+					pathParams: { groupId: groupId }
+				};
+				break;
+			default:
+				// set api
+				api = AppServices['Utilities']['HotelListGroup'];
+
+				// set payload
+				payload = {
+					pathParams: { groupId: groupId },
+					queryParams: { 'HotelIDs[]': hotelIds }
+				};
+				break;
+		}
 
 		return this._proxyService
-			.getAPI(AppServices['Utilities']['HotelListGroup'], payload)
+			.getAPI(api, payload)
 			.pipe(
 				map(res => {
 					const response = res.items;

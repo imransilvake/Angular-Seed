@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 
 // app
 import { MemberService } from '../../../services/member.service';
+import { UtilityService } from '../../../../../utilities.pck/accessories.mod/services/utility.service';
 
 @Component({
 	selector: 'app-hotels-list',
@@ -16,7 +17,10 @@ export class HotelsListComponent implements OnInit, OnDestroy {
 	public hotelList;
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
-	constructor(private _memberService: MemberService) {
+	constructor(
+		private _memberService: MemberService,
+		private _utilityService: UtilityService
+	) {
 	}
 
 	ngOnInit() {
@@ -29,7 +33,7 @@ export class HotelsListComponent implements OnInit, OnDestroy {
 					const hotelIds = res.memberProfile.HotelIDs;
 
 					// fetch assigned hotels
-					this._memberService.memberFetchAssignedHotels(hotelIds)
+					this._utilityService.getHotelListByGroup(hotelIds)
 						.subscribe(result => this.hotelList = result.items);
 				}
 			});

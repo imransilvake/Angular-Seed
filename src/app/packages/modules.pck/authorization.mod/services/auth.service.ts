@@ -172,14 +172,17 @@ export class AuthService {
 								const groupId = this.currentUserState.profile['custom:hotel_group_id'];
 								const hotelIds = this.currentUserState.profile['custom:hotelId'].split(',');
 								const role = this.currentUserState.profile['cognito:groups'][0];
-								let type = 0;
+								let type;
 
 								// set type
 								switch (role) {
+									case UserRoleEnum[UserRoleEnum.ADMIN]:
+										type = 0;
+										break;
 									case UserRoleEnum[UserRoleEnum.GROUP_MANAGER]:
 										type = 1;
 										break;
-									case UserRoleEnum[UserRoleEnum.HOTEL_MANAGER]:
+									default:
 										type = 2;
 										break;
 								}

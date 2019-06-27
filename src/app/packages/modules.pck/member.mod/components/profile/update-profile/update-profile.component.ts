@@ -65,7 +65,7 @@ export class UpdateProfileComponent implements OnInit, OnDestroy {
 			.subscribe(res => {
 				if (res && res.memberProfile) {
 					// salutation
-					const salutation = this.salutationList.filter(item => item.id === res.memberProfile.Gender);
+					const salutation = this.salutationList.filter(item => item.id === res.memberProfile.Gender.toUpperCase());
 
 					// update form
 					this.salutation.setValue(...salutation);
