@@ -2,3 +2,19 @@
 .cdk-overlay-dark-backdrop {
 	background-color: cd-palette($cd-background, 2000, .6);
 }
+
+.cdk-global-overlay-wrapper {
+	// media
+	@include cd-media(desktop, smartphone) {
+		.cdk-overlay-pane {
+			height: 100%;
+			max-width: 100% !important;
+			overflow: auto;
+			width: 100% !important;
+
+			.mat-dialog-container {
+				background-color: cd-palette($cd-background, 2002);
+			}
+		}
+	}
+}

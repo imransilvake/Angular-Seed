@@ -1,7 +1,7 @@
 @import 'main';
 
 .ham-user-form {
-	background-color: cd-palette($cd-background, 2003);
+	background-color: cd-palette($cd-background, 2002);
 	color: cd-palette($cd-color, 1001);
 	position: relative;
 
@@ -46,6 +46,10 @@
 			&.ham-buttons {
 				margin-top: 20px;
 
+				p {
+					color: cd-palette($cd-color, 1009);
+				}
+
 				button {
 					&:first-child {
 						background-color: cd-palette($cd-background, 2010);
@@ -89,6 +93,10 @@
 					.cd-col {
 						display:flex;
 						flex-direction: column-reverse;
+
+						p {
+							margin-bottom: 10px;
+						}
 
 						button {
 							width: 100%;
