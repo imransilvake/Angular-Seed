@@ -22,7 +22,6 @@ import { ProxyService } from '../../../../../core.pck/proxy.mod/services/proxy.s
 import { AppServices } from '../../../../../../../app.config';
 import { SelectGroupInterface } from '../../../../../core.pck/fields.mod/interfaces/select-group.interface';
 import { ErrorHandlerInterface } from '../../../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
-import { LoadingAnimationService } from '../../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 
 @Component({
 	selector: 'app-user-form',
@@ -54,7 +53,6 @@ export class UserFormComponent implements OnInit, OnDestroy {
 		private _proxyService: ProxyService,
 		private _userService: UserService,
 		private _utilityService: UtilityService,
-		private _loadingAnimationService: LoadingAnimationService,
 		private _store: Store<{ ErrorHandlerInterface: ErrorHandlerInterface }>,
 		private _i18n: I18n
 	) {
@@ -379,9 +377,6 @@ export class UserFormComponent implements OnInit, OnDestroy {
 			firstName: this.firstName.value,
 			lastName: this.lastName.value
 		};
-
-		// start loading animation
-		this._loadingAnimationService.startLoadingAnimation();
 
 		// create user
 		if (!this.data) {

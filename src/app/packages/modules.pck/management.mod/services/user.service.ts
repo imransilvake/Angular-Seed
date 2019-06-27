@@ -11,7 +11,6 @@ import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service
 import { UserInterface } from '../interfaces/user.interface';
 import { UserRoleEnum } from '../../authorization.mod/enums/user-role.enum';
 import { DialogTypeEnum } from '../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
-import { LoadingAnimationService } from '../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { DialogService } from '../../../utilities.pck/dialog.mod/services/dialog.service';
 
 @Injectable()
@@ -24,7 +23,6 @@ export class UserService {
 
 	constructor(
 		private _proxyService: ProxyService,
-		private _loadingAnimationService: LoadingAnimationService,
 		private _i18n: I18n,
 		private _dialogService: DialogService
 	) {
@@ -204,9 +202,6 @@ export class UserService {
 		// service
 		this._proxyService.postAPI(api, payload)
 			.subscribe(() => {
-				// stop loading animation
-				this._loadingAnimationService.stopLoadingAnimation();
-
 				// payload
 				const dialogPayload = {
 					type: DialogTypeEnum.NOTICE,
@@ -278,9 +273,6 @@ export class UserService {
 		// service
 		this._proxyService.postAPI(api, payload)
 			.subscribe(() => {
-				// stop loading animation
-				this._loadingAnimationService.stopLoadingAnimation();
-
 				// payload
 				const dialogPayload = {
 					type: DialogTypeEnum.NOTICE,
