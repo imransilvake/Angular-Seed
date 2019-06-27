@@ -31,10 +31,18 @@ export class HotelsListComponent implements OnInit, OnDestroy {
 				if (res && res.memberProfile) {
 					// hotel list
 					const hotelIds = res.memberProfile.HotelIDs;
+					if (hotelIds[0]) {
+						// payload
+						const payload = {
+							pathParams: { groupId: hotelIds[0].split('_')[0] },
+							queryParams: { 'HotelIDs[]': hotelIds }
+						};
 
-					// fetch assigned hotels
-					this._utilityService.getHotelListByGroup(hotelIds)
-						.subscribe(result => this.hotelList = result.items);
+						// fetch assigned hotels
+						this._utilityService.getHotelListByGroup(payload)
+							.subscribe(result => this.hotelList = result.items);
+					}
+
 				}
 			});
 	}

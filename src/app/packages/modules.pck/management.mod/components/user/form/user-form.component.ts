@@ -160,7 +160,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
 			this.email.setValue(this.data.Email);
 			this.email.disable();
 
-			// current role: admin and group manager
+			// current role: group manager
 			if (this.currentRole === this.roleGroupManager) {
 				this.hotels.disable();
 			}
