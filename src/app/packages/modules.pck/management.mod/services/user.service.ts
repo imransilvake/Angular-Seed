@@ -2,12 +2,17 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { BehaviorSubject, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { I18n } from '@ngx-translate/i18n-polyfill';
 
 // app
 import { AppOptions, AppServices } from '../../../../../app.config';
 import { AppStateEnum } from '../../../frame.pck/enums/app-state.enum';
 import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service';
 import { UserInterface } from '../interfaces/user.interface';
+import { UserRoleEnum } from '../../authorization.mod/enums/user-role.enum';
+import { DialogTypeEnum } from '../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
+import { LoadingAnimationService } from '../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
+import { DialogService } from '../../../utilities.pck/dialog.mod/services/dialog.service';
 
 @Injectable()
 export class UserService {
@@ -18,7 +23,10 @@ export class UserService {
 	public errorMessage: EventEmitter<string> = new EventEmitter();
 
 	constructor(
-		private _proxyService: ProxyService
+		private _proxyService: ProxyService,
+		private _loadingAnimationService: LoadingAnimationService,
+		private _i18n: I18n,
+		private _dialogService: DialogService
 	) {
 	}
 
@@ -150,17 +158,147 @@ export class UserService {
 	 * create new user
 	 *
 	 * @param formPayload
+	 * @param dialogRef
 	 */
-	public userCreate(formPayload: UserInterface) {
-		console.log(formPayload);
+	public userCreate(formPayload: UserInterface, dialogRef: any) {
+		const role = this.appState.role;
+		let api;
+		let payload;
+		switch (role) {
+			case UserRoleEnum[UserRoleEnum.ADMIN]:
+				// set api
+				api = AppServices['Management']['User_Form_Create_User'];
+
+				// set payload
+				payload = {
+					bodyParams: formPayload
+				};
+				break;
+			case UserRoleEnum[UserRoleEnum.GROUP_MANAGER]:
+				// set api
+				api = AppServices['Management']['User_Form_Create_User_Group'];
+
+				// set payload
+				payload = {
+					bodyParams: formPayload,
+					pathParams: {
+						groupId: this.appState && this.appState.groupId
+					}
+				};
+				break;
+			case UserRoleEnum[UserRoleEnum.HOTEL_MANAGER]:
+				// set api
+				api = AppServices['Management']['User_Form_Create_User_Hotel'];
+
+				// set payload
+				payload = {
+					bodyParams: formPayload,
+					pathParams: {
+						groupId: this.appState && this.appState.groupId,
+						hotelId: this.appState && this.appState.hotelId
+					}
+				};
+				break;
+		}
+
+		// service
+		this._proxyService.postAPI(api, payload)
+			.subscribe(() => {
+				// stop loading animation
+				this._loadingAnimationService.stopLoadingAnimation();
+
+				// payload
+				const dialogPayload = {
+					type: DialogTypeEnum.NOTICE,
+					payload: {
+						icon: 'dialog_tick',
+						title: this._i18n({ value: 'Title: New User Created', id: 'Management_User_Form_NewUserCreated_Success_Title' }),
+						message: this._i18n({
+							value: 'Description: New User Created',
+							id: 'Management_User_Form_NewUserCreated_Success_Description'
+						}),
+						buttonTexts: [this._i18n({ value: 'Button - OK', id: 'Common_Button_OK' })]
+					}
+				};
+
+				// dialog service
+				this._dialogService
+					.showDialog(dialogPayload)
+					.subscribe(() => dialogRef.close(true));
+			});
 	}
 
 	/**
 	 * create new user
 	 *
 	 * @param formPayload
+	 * @param dialogRef
 	 */
-	public userUpdate(formPayload: UserInterface) {
-		console.log(formPayload);
+	public userUpdate(formPayload: UserInterface, dialogRef: any) {
+		const role = this.appState.role;
+		let api;
+		let payload;
+		switch (role) {
+			case UserRoleEnum[UserRoleEnum.ADMIN]:
+				// set api
+				api = AppServices['Management']['User_Form_Update_User'];
+
+				// set payload
+				payload = {
+					bodyParams: formPayload
+				};
+				break;
+			case UserRoleEnum[UserRoleEnum.GROUP_MANAGER]:
+				// set api
+				api = AppServices['Management']['User_Form_Update_User_Group'];
+
+				// set payload
+				payload = {
+					bodyParams: formPayload,
+					pathParams: {
+						groupId: this.appState && this.appState.groupId
+					}
+				};
+				break;
+			case UserRoleEnum[UserRoleEnum.HOTEL_MANAGER]:
+				// set api
+				api = AppServices['Management']['User_Form_Update_User_Hotel'];
+
+				// set payload
+				payload = {
+					bodyParams: formPayload,
+					pathParams: {
+						groupId: this.appState && this.appState.groupId,
+						hotelId: this.appState && this.appState.hotelId
+					}
+				};
+				break;
+		}
+
+		// service
+		this._proxyService.postAPI(api, payload)
+			.subscribe(() => {
+				// stop loading animation
+				this._loadingAnimationService.stopLoadingAnimation();
+
+				// payload
+				const dialogPayload = {
+					type: DialogTypeEnum.NOTICE,
+					payload: {
+						icon: 'dialog_tick',
+						title: this._i18n({ value: 'Title: User Updated', id: 'Management_UserUpdated_Form_Success_Title' }),
+						message: this._i18n({
+							value: 'Description: User Updated',
+							id: 'Management_UserUpdated_Form_Success_Description'
+						}),
+						buttonTexts: [this._i18n({ value: 'Button - OK', id: 'Common_Button_OK' })]
+					}
+				};
+
+				// dialog service
+				this._dialogService
+					.showDialog(dialogPayload)
+					.subscribe(() => dialogRef.close(true));
+			});
 	}
 }

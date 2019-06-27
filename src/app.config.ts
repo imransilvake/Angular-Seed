@@ -63,7 +63,13 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 		User_Default_List_Hotel: { serviceUrl: '/ham/auth/listusers/group/:groupId/hotel/:hotelId' },
 		User_Default_List_Remove_User: { serviceUrl: '/ham/auth/deleteuser' },
 		User_Default_List_Remove_User_Group: { serviceUrl: '/ham/auth/deleteuser/group/:groupId' },
-		User_Default_List_Remove_User_Hotel: { serviceUrl: '/ham/auth/deleteuser/group/:groupId/hotel/:hotelId' }
+		User_Default_List_Remove_User_Hotel: { serviceUrl: '/ham/auth/deleteuser/group/:groupId/hotel/:hotelId' },
+		User_Form_Update_User: { serviceUrl: '/ham/auth/updateuser' },
+		User_Form_Update_User_Group: { serviceUrl: '/ham/auth/updateuser/group/:groupId' },
+		User_Form_Update_User_Hotel: { serviceUrl: '/ham/auth/updateuser/group/:groupId/hotel/:hotelId' },
+		User_Form_Create_User: { serviceUrl: '/ham/auth/createuser' },
+		User_Form_Create_User_Group: { serviceUrl: '/ham/auth/createuser/group/:groupId' },
+		User_Form_Create_User_Hotel: { serviceUrl: '/ham/auth/createuser/group/:groupId/hotel/:hotelId' },
 	}
 };
 

@@ -22,6 +22,7 @@ import { ProxyService } from '../../../../../core.pck/proxy.mod/services/proxy.s
 import { AppServices } from '../../../../../../../app.config';
 import { SelectGroupInterface } from '../../../../../core.pck/fields.mod/interfaces/select-group.interface';
 import { ErrorHandlerInterface } from '../../../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
+import { LoadingAnimationService } from '../../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 
 @Component({
 	selector: 'app-user-form',
@@ -49,12 +50,13 @@ export class UserFormComponent implements OnInit, OnDestroy {
 
 	constructor(
 		@Inject(MAT_DIALOG_DATA) public data: any,
+		public _dialogRef: MatDialogRef<UserFormComponent>,
 		private _proxyService: ProxyService,
 		private _userService: UserService,
 		private _utilityService: UtilityService,
-		public dialogRef: MatDialogRef<UserFormComponent>,
-		private _i18n: I18n,
-		private _store: Store<{ ErrorHandlerInterface: ErrorHandlerInterface }>
+		private _loadingAnimationService: LoadingAnimationService,
+		private _store: Store<{ ErrorHandlerInterface: ErrorHandlerInterface }>,
+		private _i18n: I18n
 	) {
 		// form group
 		this.formFields = new FormGroup({
@@ -155,7 +157,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
 			}
 
 			// firstName, lastName & email
-			this.firstName.setValue(this.data.Lastname);
+			this.firstName.setValue(this.data.Firstname);
 			this.lastName.setValue(this.data.Lastname);
 			this.email.setValue(this.data.Email);
 			this.email.disable();
@@ -210,12 +212,12 @@ export class UserFormComponent implements OnInit, OnDestroy {
 						payload = {
 							icon: 'error_icon',
 							title: this._i18n({
-								value: 'Title: Group Selection Error Exception',
-								id: 'Error_GroupSelection_Title'
+								value: 'Title: Wrong Group Selection Error Exception',
+								id: 'Error_Management_User_GroupSelection_Title'
 							}),
 							message: this._i18n({
-								value: 'Description: Group Selection Error Exception',
-								id: 'Error_GroupSelection_Description'
+								value: 'Description: Wrong Group Selection Error Exception',
+								id: 'Error_Management_User_GroupSelection_Description'
 							}),
 							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 						};
@@ -269,62 +271,6 @@ export class UserFormComponent implements OnInit, OnDestroy {
 	}
 
 	/**
-	 * on submit form
-	 */
-	public onSubmitForm() {
-		let groupId;
-		let hotelIds;
-		let formPayload;
-
-		// prepare group and hotel id.
-		if (this.role.value.id === this.roleAdmin) {
-			groupId = 'ANY';
-			hotelIds = 'ANY';
-		} else if (this.currentRole === this.roleGroupManager && this.role.value.id === this.roleGroupManager) {
-			groupId = this._userService.appState.groupId;
-			hotelIds = 'ANY';
-		} else if(this.currentRole === this.roleAdmin && this.role.value.id === this.roleGroupManager) {
-			groupId = this.hotels.value[0].id.split('_')[0];
-			hotelIds = 'ANY';
-		} else {
-			const hotels = this.hotels.value.map(hotel => hotel.id);
-			groupId = this.hotels.value[0].id.split('_')[0];
-			hotelIds = hotels;
-		}
-
-		// form payload
-		const formData: UserInterface = {
-			groupId: groupId,
-			email: this.email.value,
-			lang: this.languageName.value.id,
-			salutation: this.salutation.value.id,
-			role: this.role.value.id,
-			hotelId: hotelIds,
-			firstName: this.firstName.value,
-			lastName: this.lastName.value
-		};
-
-		// create user
-		if (!this.data) {
-			// payload
-			formPayload = {
-				...formData
-			};
-
-			// service
-			this._userService.userCreate(formPayload);
-		} else {
-			formPayload = {
-				ID: this.data.ID,
-				...formData
-			};
-
-			// service
-			this._userService.userUpdate(formPayload);
-		}
-	}
-
-	/**
 	 * get particular group hotels
 	 *
 	 * @param payload
@@ -355,7 +301,6 @@ export class UserFormComponent implements OnInit, OnDestroy {
 	 * get all group hotels
 	 */
 	public getAllGroupHotels() {
-		// service
 		this._proxyService
 			.getAPI(AppServices['Utilities']['HotelListAll'])
 			.pipe(takeUntil(this._ngUnSubscribe))
@@ -399,9 +344,70 @@ export class UserFormComponent implements OnInit, OnDestroy {
 	}
 
 	/**
+	 * on submit form
+	 */
+	public onSubmitForm() {
+		let groupId;
+		let hotelIds;
+		let formPayload;
+
+
+		// prepare group and hotel id.
+		if (this.role.value.id === this.roleAdmin) {
+			groupId = 'ANY';
+			hotelIds = 'ANY';
+		} else if (this.currentRole === this.roleGroupManager && this.role.value.id === this.roleGroupManager) {
+			groupId = this._userService.appState.groupId;
+			hotelIds = 'ANY';
+		} else if(this.currentRole === this.roleAdmin && this.role.value.id === this.roleGroupManager) {
+			groupId = this.hotels.value && this.hotels.value[0].id.split('_')[0];
+			hotelIds = 'ANY';
+		} else {
+			const hotels = this.hotels.value.map(hotel => hotel.id);
+			groupId = this.hotels.value && this.hotels.value[0].id.split('_')[0];
+			hotelIds = hotels;
+		}
+
+		// form payload
+		const formData: UserInterface = {
+			groupId: groupId,
+			email: this.email.value,
+			lang: this.languageName.value.id,
+			salutation: this.salutation.value.id,
+			role: this.role.value.id,
+			hotelId: hotelIds,
+			firstName: this.firstName.value,
+			lastName: this.lastName.value
+		};
+
+		// start loading animation
+		this._loadingAnimationService.startLoadingAnimation();
+
+		// create user
+		if (!this.data) {
+			// payload
+			formPayload = {
+				creator: this._userService.currentUser.profile.email,
+				...formData
+			};
+
+			// service
+			this._userService.userCreate(formPayload, this._dialogRef);
+		} else {
+			formPayload = {
+				ID: this.data.ID,
+				...formData
+			};
+
+			// service
+			this._userService.userUpdate(formPayload, this._dialogRef);
+		}
+	}
+
+	/**
 	 * close modal
 	 */
 	public onClickCloseModal() {
-		this.dialogRef.close();
+		this._dialogRef.close();
 	}
 }

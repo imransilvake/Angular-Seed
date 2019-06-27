@@ -116,7 +116,7 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 					date = user.LoginDate ? HelperService.getUTC(this._userService.currentUser.profile.language, user.LoginDate) : '-';
 
 					// hotels
-					if (user && user.HotelIDs) {
+					if (user && user.HotelIDs && typeof user.HotelIDs !== 'string') {
 						user.HotelIDs.forEach(hotel => {
 							hotels.push(this._utilityService.hotelList[hotel]);
 						});
