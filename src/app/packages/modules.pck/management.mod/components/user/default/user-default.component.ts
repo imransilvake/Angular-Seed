@@ -29,8 +29,8 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 
 	public userNewRegistrationsList;
 	public userExistingUsersList;
-	public newUsersTableApiUrl;
-	public existingUsersTableApiUrl;
+	public newUsersTable;
+	public existingUsersTable;
 	public buttonType;
 	public currentRole: UserRoleEnum;
 	public roleAdmin: UserRoleEnum = UserRoleEnum[UserRoleEnum.ADMIN];
@@ -54,9 +54,17 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 		// set current user role
 		this.currentRole = this._userService.appState.role;
 
-		// set tables api
-		this.newUsersTableApiUrl = this._userService.userTablesServices.newUsers;
-		this.existingUsersTableApiUrl = this._userService.userTablesServices.existingUsers;
+		// set tables resources
+		this.newUsersTable = {
+			api: this._userService.userTablesServices.newUsers,
+			payload: this._userService.userTablesServices.payload,
+			uniqueID: this._userService.userTablesServices.uniqueID
+		};
+		this.existingUsersTable = {
+			api: this._userService.userTablesServices.newUsers,
+			payload: this._userService.userTablesServices.payload,
+			uniqueID: this._userService.userTablesServices.uniqueID
+		};
 
 		// listen: fetch new users & old user accounts list
 		this._userService.userDataEmitter

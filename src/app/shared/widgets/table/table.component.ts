@@ -7,8 +7,8 @@ import { takeUntil } from 'rxjs/operators';
 
 // app
 import { ProxyService } from '../../../packages/core.pck/proxy.mod/services/proxy.service';
-import { SidebarService } from '../../../packages/frame.pck/services/sidebar.service';
 import { AppOptions, AppServices } from '../../../../app.config';
+import { HelperService } from '../../../packages/utilities.pck/accessories.mod/services/helper.service';
 
 @Component({
 	selector: 'app-table',
@@ -26,9 +26,8 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	@Input() tableAdditionalColumns = [];
 	@Input() tableData;
 	@Input() tablePageSize = AppOptions.tablePageSizeLimit - 1;
-	@Input() tablePagination = [5, 10, 20, 50, 100, 200];
 	@Input() templateRef;
-	@Input() currentApiUrl;
+	@Input() tableResources;
 
 	@ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 	@ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -39,12 +38,10 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	public dataSource;
 	public loading = false;
 	public tableInfo;
+
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
-	constructor(
-		private _proxyService: ProxyService,
-		private _sidebarService: SidebarService
-	) {
+	constructor(private _proxyService: ProxyService) {
 		// form group
 		this.formFields = new FormGroup({
 			search: new FormControl('')
@@ -156,13 +153,11 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 			// start animation
 			this.loading = true;
 
-			// set payload
+			// payload
 			const payload = {
-				pathParams: {
-					groupId: this._sidebarService.appState.groupId,
-					hotelId: this._sidebarService.appState.hotelId
-				},
+				...this.tableResources.payload,
 				queryParams: {
+					...this.tableResources.payload.queryParams,
 					offset: (pageIndex * this.tablePageSize) + 1,
 					limit: this.tablePageSize
 				}
@@ -170,16 +165,34 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
 			// service
 			this._proxyService
-				.getAPI(this.currentApiUrl, payload)
+				.getAPI(this.tableResources.api, payload)
 				.pipe(takeUntil(this._ngUnSubscribe))
 				.subscribe(res => {
 					// stop animation
 					this.loading = false;
 
-					// set table data
+					// update table data
 					res.data.forEach(item => {
-						if (!this.dataSource.data.includes(item)) {
-							this.dataSource.data = [...this.dataSource.data, item];
+						const id = this.tableResources.uniqueID;
+						if (!this.dataSource.data.some(row => row[id] === item[id])) {
+							console.log(item);
+							let newItem;
+							if (item.Image && item.Image.length > 10) {
+								const imagePromise = this.getImageSrc(item.Image);
+								newItem = {
+									...item,
+									Image: imagePromise
+								};
+							} else {
+								const image = item.Image === null && item.Name ? HelperService.getFirstLetter(item.Name).toUpperCase() : item.Image;
+								newItem = {
+									...item,
+									Image: image
+								};
+							}
+
+							// update data source
+							this.dataSource.data = [...this.dataSource.data, newItem];
 						}
 					});
 				});

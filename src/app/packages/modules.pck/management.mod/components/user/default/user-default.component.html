@@ -12,7 +12,7 @@
 			[tableColumns]="['Image', 'Name', 'Email', 'Reg. Date']"
 			[tableAdditionalColumns]="['Action']"
 			[templateRef]="[action]"
-			[currentApiUrl]="newUsersTableApiUrl"
+			[tableResources]="newUsersTable"
 			(rowData)="onClickRowActionButtons($event)">
 			<!-- Action -->
 			<ng-template #action>
@@ -55,7 +55,7 @@
 			[tableColumns]="['Image', 'Name', 'Email', 'Last Login', 'Creator', 'Role', 'Hotels']"
 			[tableAdditionalColumns]="['Action']"
 			[templateRef]="[action]"
-			[currentApiUrl]="existingUsersTableApiUrl"
+			[tableResources]="existingUsersTable"
 			(rowData)="onClickRowActionButtons($event)">
 			<!-- Action -->
 			<ng-template #action>

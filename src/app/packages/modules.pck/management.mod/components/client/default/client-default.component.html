@@ -19,7 +19,7 @@
 			[tableColumns]="['Name', 'Country', 'HotelGuest/App', 'Hotels(HGA)', 'Users(HGA)', 'HotelStaff/App', 'Hotels(HSA)', 'Users(HSA)']"
 			[tableAdditionalColumns]="['Action']"
 			[templateRef]="[action]"
-			[currentApiUrl]="tableApiUrl"
+			[tableResources]="tableApiUrl"
 			(rowData)="onClickFetchRow($event)">
 			<!-- Action -->
 			<ng-template #action>

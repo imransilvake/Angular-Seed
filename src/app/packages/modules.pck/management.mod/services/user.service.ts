@@ -51,9 +51,6 @@ export class UserService {
 			let api;
 			switch (this.appState.type) {
 				case AppStateEnum.ALL:
-					// set table api
-					this.userTablesServices = { ...this.userTablesServices, newUsers: allApi };
-
 					// set api
 					api = allApi;
 
@@ -61,11 +58,17 @@ export class UserService {
 					payload = {
 						queryParams: queryParamsPayload
 					};
+
+					// set table api
+					this.userTablesServices = {
+						...this.userTablesServices,
+						newUsers: allApi,
+						existingUsers: allApi,
+						payload: payload,
+						uniqueID: 'ID'
+					};
 					break;
 				case AppStateEnum.GROUP:
-					// set table api
-					this.userTablesServices = { ...this.userTablesServices, newUsers: hotelGroupApi };
-
 					// set api
 					api = hotelGroupApi;
 
@@ -76,11 +79,17 @@ export class UserService {
 						},
 						queryParams: queryParamsPayload
 					};
+
+					// set table api
+					this.userTablesServices = {
+						...this.userTablesServices,
+						newUsers: hotelGroupApi,
+						existingUsers: hotelGroupApi,
+						payload: payload,
+						uniqueID: 'ID'
+					};
 					break;
 				case AppStateEnum.HOTEL:
-					// set table api
-					this.userTablesServices = { ...this.userTablesServices, newUsers: hotelApi };
-
 					// set api
 					api = hotelApi;
 
@@ -91,6 +100,15 @@ export class UserService {
 							hotelId: this.appState && this.appState.hotelId
 						},
 						queryParams: queryParamsPayload
+					};
+
+					// set table api
+					this.userTablesServices = {
+						...this.userTablesServices,
+						newUsers: hotelApi,
+						existingUsers: hotelApi,
+						payload: payload,
+						uniqueID: 'ID'
 					};
 					break;
 			}

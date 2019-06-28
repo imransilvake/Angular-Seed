@@ -80,7 +80,7 @@
 	</div>
 
 	<!-- Info & Pagination -->
-	<div class="ham-pagination-wrapper" *ngIf="dataSource.data.length !== 0">
+	<div class="ham-pagination-wrapper">
 		<mat-toolbar>
 			<mat-toolbar-row class="mat-toolbar-row">
 				<!-- Info -->
@@ -92,7 +92,6 @@
 					[pageSize]="tablePageSize"
 					[className]="'ham-pagination'"
 					[hidePageSize]="true"
-					[pageSizeOptions]="tablePagination"
 					[showFirstLastButtons]="true">
 				</mat-paginator>
 			</mat-toolbar-row>
