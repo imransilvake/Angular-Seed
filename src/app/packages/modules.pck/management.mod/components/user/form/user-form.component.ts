@@ -22,6 +22,7 @@ import { ProxyService } from '../../../../../core.pck/proxy.mod/services/proxy.s
 import { AppServices } from '../../../../../../../app.config';
 import { SelectGroupInterface } from '../../../../../core.pck/fields.mod/interfaces/select-group.interface';
 import { ErrorHandlerInterface } from '../../../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
 	selector: 'app-user-form',
@@ -30,6 +31,7 @@ import { ErrorHandlerInterface } from '../../../../../utilities.pck/error-handle
 })
 
 export class UserFormComponent implements OnInit, OnDestroy {
+	public faIcons = [faSpinner];
 	public formFields;
 	public selectTypeDefault = SelectTypeEnum.DEFAULT;
 	public selectTypeGroup = SelectTypeEnum.GROUP;
@@ -42,8 +44,9 @@ export class UserFormComponent implements OnInit, OnDestroy {
 	public roleList: SelectDefaultInterface[] = [];
 	public hotelList: SelectDefaultInterface[] = [];
 	public hotelListGroup: SelectGroupInterface[] = [];
-	public errorMessage;
 	public selectedHotels = [];
+	public errorMessage;
+	public loading = false;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
@@ -225,6 +228,11 @@ export class UserFormComponent implements OnInit, OnDestroy {
 					}
 				}
 			});
+
+		// listen: form loading state
+		this._userService.formLoadingState
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(() => this.loading = false);
 	}
 
 	ngOnDestroy() {
@@ -345,12 +353,12 @@ export class UserFormComponent implements OnInit, OnDestroy {
 	 * on submit form
 	 */
 	public onSubmitForm() {
-		let groupId;
-		let hotelIds;
-		let formPayload;
-
+		// show spinner
+		this.loading = true;
 
 		// prepare group and hotel id.
+		let groupId;
+		let hotelIds;
 		if (this.role.value.id === this.roleAdmin) {
 			groupId = 'ANY';
 			hotelIds = 'ANY';
@@ -378,9 +386,9 @@ export class UserFormComponent implements OnInit, OnDestroy {
 			lastName: this.lastName.value
 		};
 
-		// create user
+		// create / update user
+		let formPayload;
 		if (!this.data) {
-			// payload
 			formPayload = {
 				creator: this._userService.currentUser.profile.email,
 				...formData
@@ -395,7 +403,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
 			};
 
 			// service
-			this._userService.userUpdate(formPayload, this._dialogRef);
+			this._userService.userUpdate(formPayload, this._dialogRef, this.data && this.data.Role);
 		}
 	}
 

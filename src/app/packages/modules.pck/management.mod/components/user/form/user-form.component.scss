@@ -58,6 +58,10 @@
 					&:last-child {
 						margin-left: 10px;
 					}
+
+					span, .fa-icon {
+						vertical-align: unset;
+					}
 				}
 			}
 		}

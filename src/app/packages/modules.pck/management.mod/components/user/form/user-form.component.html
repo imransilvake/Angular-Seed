@@ -149,7 +149,10 @@
 			</div>
 			<div class="cd-col cd-col-pm-s-6 cd-right-align">
 				<button mat-button type="button" class="ham-button ham-button-1" (click)="onClickCloseModal()" i18n="@@Management_User_Form_Cancel_Button">Cancel</button>
-				<button mat-button type="submit" class="ham-button ham-button-1" [disabled]="!isFormValid" i18n="@@Management_User_Form_Save_Button">Save</button>
+				<button mat-button type="submit" class="ham-button ham-button-1" [disabled]="!isFormValid || loading">
+					<fa-icon class="fa-icon" [icon]="faIcons[0]" [spin]="true" *ngIf="loading"></fa-icon>
+					<span i18n="@@Management_User_Form_Save_Button" *ngIf="!loading">Save</span>
+				</button>
 			</div>
 		</div>
 	</form>

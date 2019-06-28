@@ -20,6 +20,7 @@ export class UserService {
 	public userTablesServices;
 	public userDataEmitter: BehaviorSubject<any> = new BehaviorSubject(0);
 	public errorMessage: EventEmitter<string> = new EventEmitter();
+	public formLoadingState: EventEmitter<boolean> = new EventEmitter();
 
 	constructor(
 		private _proxyService: ProxyService,
@@ -228,15 +229,20 @@ export class UserService {
 	 *
 	 * @param formPayload
 	 * @param dialogRef
+	 * @param updateUser
 	 */
-	public userUpdate(formPayload: UserInterface, dialogRef: any) {
+	public userUpdate(formPayload: UserInterface, dialogRef: any, updateUser: boolean) {
 		const role = this.appState.role;
 		let api;
 		let payload;
 		switch (role) {
 			case UserRoleEnum[UserRoleEnum.ADMIN]:
 				// set api
-				api = AppServices['Management']['User_Form_Update_User'];
+				if (updateUser) {
+					api = AppServices['Management']['User_Form_Update_User'];
+				} else {
+					api = AppServices['Management']['User_Form_Confirm_User'];
+				}
 
 				// set payload
 				payload = {
@@ -245,7 +251,11 @@ export class UserService {
 				break;
 			case UserRoleEnum[UserRoleEnum.GROUP_MANAGER]:
 				// set api
-				api = AppServices['Management']['User_Form_Update_User_Group'];
+				if (updateUser) {
+					api = AppServices['Management']['User_Form_Update_User_Group'];
+				} else {
+					api = AppServices['Management']['User_Form_Confirm_User_Group'];
+				}
 
 				// set payload
 				payload = {
@@ -257,7 +267,11 @@ export class UserService {
 				break;
 			case UserRoleEnum[UserRoleEnum.HOTEL_MANAGER]:
 				// set api
-				api = AppServices['Management']['User_Form_Update_User_Hotel'];
+				if (updateUser) {
+					api = AppServices['Management']['User_Form_Update_User_Hotel'];
+				} else {
+					api = AppServices['Management']['User_Form_Confirm_User_Hotel'];
+				}
 
 				// set payload
 				payload = {
@@ -273,6 +287,9 @@ export class UserService {
 		// service
 		this._proxyService.postAPI(api, payload)
 			.subscribe(() => {
+				// update loading state
+				this.formLoadingState.emit();
+
 				// payload
 				const dialogPayload = {
 					type: DialogTypeEnum.NOTICE,
