@@ -22,14 +22,15 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	@Output() rowData: EventEmitter<any> = new EventEmitter();
 
 	@Input() tableTitle;
-	@Input() inputName;
-	@Input() inputPlaceHolder;
+	@Input() tableFilterInputName;
+	@Input() tableFilterInputPlaceHolder;
 	@Input() tableColumns = [];
+	@Input() tableApplySorting = true;
 	@Input() tableSorting = [];
 	@Input() tableAdditionalColumns = [];
 	@Input() tableData;
 	@Input() tablePageSize = AppOptions.tablePageSizeLimit - 1;
-	@Input() templateRef;
+	@Input() tableTemplateRef;
 	@Input() tableResources;
 
 	@ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -110,7 +111,11 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
 		// set data to table
 		this.dataSource = new MatTableDataSource<any>(this.tableData.data);
+
+		// add pagination
 		this.dataSource.paginator = this.paginator;
+
+		// add sorting
 		this.dataSource.sort = this.sort;
 
 		// set page info

@@ -5,15 +5,15 @@
 
 		<!-- Input Filter -->
 		<app-input
-			[inputName]="inputName"
-			[inputPlaceHolder]="inputPlaceHolder"
+			[inputName]="tableFilterInputName"
+			[inputPlaceHolder]="tableFilterInputPlaceHolder"
 			[control]="search">
 		</app-input>
 	</div>
 
 	<!-- Table -->
 	<div class="ham-table">
-		<table mat-table [className]="'mat-table ham-table'" [dataSource]="dataSource" matSort>
+		<table mat-table [className]="'mat-table ham-table'" [dataSource]="dataSource" matSort [matSortDisabled]="!tableApplySorting">
 			<!-- Column Templates -->
 			<ng-container *ngFor="let column of tableColumns; let idx = index;" matColumnDef="{{ column }}">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="!tableSorting[idx]">{{ column }}</th>
@@ -59,7 +59,7 @@
 			<ng-container *ngFor="let column of tableAdditionalColumns; let idx=index" matColumnDef="{{ column }}">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="!tableSorting[tableSorting.length - 1]">{{ column }}</th>
 				<td mat-cell *matCellDef>
-					<ng-container *ngTemplateOutlet="templateRef[idx]"></ng-container>
+					<ng-container *ngTemplateOutlet="tableTemplateRef[idx]"></ng-container>
 				</td>
 			</ng-container>
 

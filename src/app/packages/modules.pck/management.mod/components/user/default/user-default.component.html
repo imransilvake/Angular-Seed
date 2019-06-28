@@ -4,15 +4,15 @@
 		<app-table
 			tableTitle="Received Registrations"
 			i18n-tableTitle="@@Management_User_NewUsers_Table_Title"
-			inputName="user-new-table-filter"
-			i18n-inputName="@@Management_User_NewUsers_Table_Input_Name"
-			inputPlaceHolder="Search"
-			i18n-inputPlaceHolder="@@Management_User_NewUsers_Table_Input_Filter_PlaceHolder"
+			tableFilterInputName="user-new-table-filter"
+			i18n-tableFilterInputName="@@Management_User_NewUsers_Table_Input_Name"
+			tableFilterInputPlaceHolder="Search"
+			i18n-tableFilterInputPlaceHolder="@@Management_User_NewUsers_Table_Input_Filter_PlaceHolder"
 			[tableData]="userNewRegistrationsList"
 			[tableColumns]="['Image', 'Name', 'Email', 'Reg. Date']"
 			[tableSorting]="[false, true, true, false, false]"
 			[tableAdditionalColumns]="['Action']"
-			[templateRef]="[action]"
+			[tableTemplateRef]="[action]"
 			[tableResources]="newUsersTable"
 			(rowData)="onClickRowActionButtons($event)">
 			<!-- Action -->
@@ -48,15 +48,15 @@
 		<app-table
 			tableTitle="Existing Users"
 			i18n-tableTitle="@@Management_User_ExistingUsers_Table_Title"
-			inputName="user-existing-table-filter"
-			i18n-inputName="@@Management_User_ExistingUsers_Table_Input_Name"
-			inputPlaceHolder="Search"
-			i18n-inputPlaceHolder="@@Management_User_ExistingUsers_Table_Input_Filter_PlaceHolder"
+			tableFilterInputName="user-existing-table-filter"
+			i18n-tableFilterInputName="@@Management_User_ExistingUsers_Table_Input_Name"
+			tableFilterInputPlaceHolder="Search"
+			i18n-tableFilterInputPlaceHolder="@@Management_User_ExistingUsers_Table_Input_Filter_PlaceHolder"
 			[tableData]="userExistingUsersList"
 			[tableColumns]="['Image', 'Name', 'Email', 'Last Login', 'Creator', 'Role', 'Hotels']"
 			[tableSorting]="[false, true, true, false, true, true, false, false]"
 			[tableAdditionalColumns]="['Action']"
-			[templateRef]="[action]"
+			[tableTemplateRef]="[action]"
 			[tableResources]="existingUsersTable"
 			(rowData)="onClickRowActionButtons($event)">
 			<!-- Action -->

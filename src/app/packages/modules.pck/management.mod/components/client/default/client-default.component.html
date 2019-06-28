@@ -11,15 +11,15 @@
 		<app-table
 			tableTitle="Hotels / Hotelgroups"
 			i18n-tableTitle="@@Management_Client_Table_Title"
-			inputName="client-table-filter"
-			i18n-inputName="@@Management_Client_Table_Input_Name"
-			inputPlaceHolder="Search"
-			i18n-inputPlaceHolder="@@Management_Client_Table_Input_Filter_PlaceHolder"
+			tableFilterInputName="client-table-filter"
+			i18n-tableFilterInputName="@@Management_Client_Table_Input_Name"
+			tableFilterInputPlaceHolder="Search"
+			i18n-tableFilterInputPlaceHolder="@@Management_Client_Table_Input_Filter_PlaceHolder"
 			[tableData]="clientGroupHotelsList"
 			[tableColumns]="['Name', 'Country', 'HotelGuest/App', 'Hotels(HGA)', 'Users(HGA)', 'HotelStaff/App', 'Hotels(HSA)', 'Users(HSA)']"
 			[tableSorting]="[true, true, false, false, false, false, false, false, false]"
 			[tableAdditionalColumns]="['Action']"
-			[templateRef]="[action]"
+			[tableTemplateRef]="[action]"
 			[tableResources]="tableApiUrl"
 			(rowData)="onClickFetchRow($event)">
 			<!-- Action -->
