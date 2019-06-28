@@ -71,6 +71,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
 	ngOnChanges() {
 		// move to first page when clicked on refresh button from header area.
+		// when component input is changed
 		if (this.dataSource && this.dataSource.paginator) {
 			this.dataSource.paginator.firstPage();
 		}
@@ -95,31 +96,24 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	/**
 	 * initialize table
 	 */
-	public initializeTable() {
-		// set image url
-		this.tableData.data = this.tableData.data && this.tableData.data.map(item => {
-			if (item.Image && item.Image.length > 10) {
-				const imagePromise = this.getImageSrc(item.Image);
-				return {
-					...item,
-					Image: imagePromise
-				};
-			} else {
-				return item;
-			}
-		});
+	public initializeTable(dataSource?: any) {
+		const d = dataSource ? dataSource.data : this.tableData.data;
+		if (d) {
+			// set data to table
+			this.dataSource = new MatTableDataSource<any>([]);
 
-		// set data to table
-		this.dataSource = new MatTableDataSource<any>(this.tableData.data);
+			// update table data
+			this.mapData(d, !!dataSource);
 
-		// add pagination
-		this.dataSource.paginator = this.paginator;
+			// add pagination
+			this.dataSource.paginator = this.paginator;
 
-		// add sorting
-		this.dataSource.sort = this.sort;
+			// add sorting
+			this.dataSource.sort = this.sort;
 
-		// set page info
-		this.setTableInformation();
+			// set page info
+			this.setTableInformation();
+		}
 	}
 
 	/**
@@ -175,97 +169,13 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 				...this.tableResources.payload,
 				queryParams: {
 					...this.tableResources.payload.queryParams,
-					offset: (pageIndex * this.tablePageSize) + 1,
+					offset: pageIndex ? (pageIndex * this.tablePageSize) + 1 : 0,
 					limit: this.tablePageSize
 				}
 			};
 
-			// service
-			this._proxyService
-				.getAPI(this.tableResources.api, payload)
-				.pipe(takeUntil(this._ngUnSubscribe))
-				.subscribe(res => {
-					// stop animation
-					this.loading = false;
-
-					// update table data
-					res.data.forEach(item => {
-						const id = this.tableResources.uniqueID;
-						if (!this.dataSource.data.some(row => row[id] === item[id])) {
-							let newItem = item;
-							// Image
-							if (item.hasOwnProperty('Image')) {
-								if (item.Image && item.Image.length > 10) {
-									const imagePromise = this.getImageSrc(item.Image);
-									newItem = {
-										...newItem,
-										Image: imagePromise
-									};
-								} else {
-									const image = item.Image === null && item.Name ? HelperService.getFirstLetter(item.Name).toUpperCase() : item.Image;
-									newItem = {
-										...newItem,
-										Image: image
-									};
-								}
-							}
-
-							// Role
-							if (item.hasOwnProperty('Type')) {
-								const role = item.Type ? HelperService.capitalizeString(item.Type.replace(/_/g, ' ').toLowerCase()) : '-';
-								newItem = {
-									...newItem,
-									Role: role
-								};
-							}
-
-							// Hotels
-							if (item.hasOwnProperty('HotelIDs')) {
-								const hotels = [];
-								if (item && item.HotelIDs && typeof item.HotelIDs !== 'string') {
-									item.HotelIDs.forEach(hotel => {
-										if (hotel.split('_')[1]) {
-											hotels.push(this._utilityService.hotelList[hotel]);
-										}
-									});
-								}
-								newItem = {
-									...newItem,
-									Hotels: hotels && hotels.length ? hotels.join(', ') : 'ALL'
-								};
-							}
-
-							// Create Date
-							if (item.hasOwnProperty('CreateDate')) {
-								const date = item.CreateDate ? HelperService.getUTC(this._authService.currentUserState.profile.language, item.CreateDate) : '-';
-								newItem = {
-									...newItem,
-									'Reg. Date': date
-								};
-							}
-
-							// Login Date
-							if (item.hasOwnProperty('LoginDate')) {
-								const date = item.LoginDate ? HelperService.getUTC(this._authService.currentUserState.profile.language, item.LoginDate) : '-';
-								newItem = {
-									...newItem,
-									'Last Login': date
-								};
-							}
-
-							// Creator
-							if (item.hasOwnProperty('LoginDate')) {
-								newItem = {
-									...newItem,
-									Creator: item.Creator ? item.Creator : '-'
-								};
-							}
-
-							// update data source
-							this.dataSource.data = [...this.dataSource.data, newItem];
-						}
-					});
-				});
+			// load next data
+			this.loadNextData(this.tableResources.api, payload, pageIndex);
 		}
 	}
 
@@ -275,7 +185,43 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	 * @param inputValue
 	 */
 	private applyFilter(inputValue: string) {
-		this.dataSource.filter = inputValue.trim().toLowerCase();
+		// start animation
+		this.loading = true;
+
+		// payload
+		const payload = {
+			...this.tableResources.payload,
+			queryParams: {
+				...this.tableResources.payload.queryParams,
+				offset: 0,
+				limit: this.tablePageSize
+			}
+		};
+
+		// case: text search
+		if (inputValue) {
+			const payloadWithInput = {
+				...payload,
+				queryParams: {
+					...payload.queryParams,
+					term: inputValue.toLowerCase()
+				}
+			};
+
+			// load next data
+			this.loadNextData(this.tableResources.searchApi, payloadWithInput, -1);
+		} else {
+			const payloadUpdate = {
+				...payload,
+				queryParams: {
+					...payload.queryParams,
+					limit: this.tablePageSize + 1
+				}
+			};
+
+			// load next data
+			this.loadNextData(this.tableResources.api, payloadUpdate, 0);
+		}
 
 		// move to first page.
 		if (this.dataSource.paginator) {
@@ -293,5 +239,120 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 		const from = (pageSize * pageIndex) + 1;
 		const to = (pageSize * (pageIndex + 1) > total) ? total : pageSize * (pageIndex + 1);
 		this.tableInfo = total > 0 ? `${from} - ${to} of ${total}` : null;
+	}
+
+	/**
+	 * load next data
+	 *
+	 * @param pageIndex
+	 * @param api
+	 * @param payload
+	 */
+	private loadNextData(api: any, payload: any, pageIndex?: number) {
+		this._proxyService
+			.getAPI(api, payload)
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => {
+				// stop animation
+				this.loading = false;
+
+				// case: text search
+				if (pageIndex === -1) {
+					this.initializeTable(res);
+				} else {
+					this.mapData(res.data);
+				}
+			});
+	}
+
+	/**
+	 * map user
+	 *
+	 * @param data
+	 * @param init
+	 */
+	public mapData(data, init?: boolean) {
+		if (data) {
+			data.forEach(item => {
+				const id = this.tableResources.uniqueID;
+				if (!this.dataSource.data.some(row => row[id] === item[id])) {
+					let newItem = item;
+					// Image
+					if (item.hasOwnProperty('Image')) {
+						if (item.Image && item.Image.length > 10) {
+							const imagePromise = this.getImageSrc(item.Image);
+							newItem = {
+								...newItem,
+								Image: imagePromise
+							};
+						} else {
+							const image = item.Image === null && item.Name ? HelperService.getFirstLetter(item.Name).toUpperCase() : item.Image;
+							newItem = {
+								...newItem,
+								Image: image
+							};
+						}
+					}
+
+					// Role
+					if (item.hasOwnProperty('Type')) {
+						const role = item.Type ? HelperService.capitalizeString(item.Type.replace(/_/g, ' ').toLowerCase()) : '-';
+						newItem = {
+							...newItem,
+							Role: role
+						};
+					}
+
+					// Hotels
+					if (item.hasOwnProperty('HotelIDs')) {
+						const hotels = [];
+						if (item && item.HotelIDs && typeof item.HotelIDs !== 'string') {
+							item.HotelIDs.forEach(hotel => {
+								if (hotel.split('_')[1]) {
+									hotels.push(this._utilityService.hotelList[hotel]);
+								}
+							});
+						}
+						newItem = {
+							...newItem,
+							Hotels: hotels && hotels.length ? hotels.join(', ') : 'ALL'
+						};
+					}
+
+					// Create Date
+					if (item.hasOwnProperty('CreateDate')) {
+						const date = item.CreateDate ? HelperService.getUTC(this._authService.currentUserState.profile.language, item.CreateDate) : '-';
+						newItem = {
+							...newItem,
+							'Reg. Date': date
+						};
+					}
+
+					// Login Date
+					if (item.hasOwnProperty('LoginDate')) {
+						const date = item.LoginDate ? HelperService.getUTC(this._authService.currentUserState.profile.language, item.LoginDate) : '-';
+						newItem = {
+							...newItem,
+							'Last Login': date
+						};
+					}
+
+					// Creator
+					if (item.hasOwnProperty('LoginDate')) {
+						newItem = {
+							...newItem,
+							Creator: item.Creator ? item.Creator : '-'
+						};
+					}
+
+					// update data source
+					if (!init) {
+						this.dataSource.data = [...this.dataSource.data, newItem];
+					} else {
+						this.dataSource.data.push(newItem);
+					}
+				}
+			});
+		}
 	}
 }

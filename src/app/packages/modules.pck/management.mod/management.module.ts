@@ -22,6 +22,8 @@ import { HotelManagerAppComponent } from './components/client/form/hotel-manager
 import { UserService } from './services/user.service';
 import { UserDefaultComponent } from './components/user/default/user-default.component';
 import { UserFormComponent } from './components/user/form/user-form.component';
+import { BroadcastDefaultComponent } from './components/broadcast/default/broadcast-default.component';
+import { BroadcastService } from './services/broadcast.service';
 
 @NgModule({
 	imports: [
@@ -43,11 +45,13 @@ import { UserFormComponent } from './components/user/form/user-form.component';
 		HotelStaffAppComponent,
 		HotelManagerAppComponent,
 		UserDefaultComponent,
-		UserFormComponent
+		UserFormComponent,
+		//BroadcastDefaultComponent
 	],
 	providers: [
 		UserService,
-		ClientService
+		ClientService,
+		BroadcastService
 	],
 	entryComponents: [
 		UserFormComponent

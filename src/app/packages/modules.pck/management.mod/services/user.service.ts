@@ -39,6 +39,9 @@ export class UserService {
 		const allApi = AppServices['Management']['User_Default_List'];
 		const hotelGroupApi = AppServices['Management']['User_Default_List_Hotel_Group'];
 		const hotelApi = AppServices['Management']['User_Default_List_Hotel'];
+		const searchAllApi = AppServices['Management']['User_Default_Search'];
+		const searchHotelGroupApi = AppServices['Management']['User_Default_Search_Group'];
+		const searchHotelApi = AppServices['Management']['User_Default_Search_Hotel'];
 		const queryParamsPayload = {
 			offset: 0,
 			limit: AppOptions.tablePageSizeLimit,
@@ -64,6 +67,7 @@ export class UserService {
 						...this.userTablesServices,
 						newUsers: allApi,
 						existingUsers: allApi,
+						searchApi: searchAllApi,
 						payload: payload,
 						uniqueID: 'ID'
 					};
@@ -85,6 +89,7 @@ export class UserService {
 						...this.userTablesServices,
 						newUsers: hotelGroupApi,
 						existingUsers: hotelGroupApi,
+						searchApi: searchHotelGroupApi,
 						payload: payload,
 						uniqueID: 'ID'
 					};
@@ -107,6 +112,7 @@ export class UserService {
 						...this.userTablesServices,
 						newUsers: hotelApi,
 						existingUsers: hotelApi,
+						searchApi: searchHotelApi,
 						payload: payload,
 						uniqueID: 'ID'
 					};

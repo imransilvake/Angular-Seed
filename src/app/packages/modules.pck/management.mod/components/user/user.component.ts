@@ -47,6 +47,9 @@ export class UserComponent implements OnDestroy {
 		this._ngUnSubscribe.complete();
 	}
 
+	/**
+	 * open form component in a modal
+	 */
 	public openUserFormModal() {
 		// open modal
 		const modal = this._dialog.open(UserFormComponent, {

@@ -58,11 +58,13 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 		this.newUsersTable = {
 			api: this._userService.userTablesServices.newUsers,
 			payload: this._userService.userTablesServices.payload,
+			searchApi: this._userService.userTablesServices.searchApi,
 			uniqueID: this._userService.userTablesServices.uniqueID
 		};
 		this.existingUsersTable = {
 			api: this._userService.userTablesServices.newUsers,
 			payload: this._userService.userTablesServices.payload,
+			searchApi: this._userService.userTablesServices.searchApi,
 			uniqueID: this._userService.userTablesServices.uniqueID
 		};
 

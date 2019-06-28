@@ -74,13 +74,13 @@
 		</div>
 
 		<!-- Info -->
-		<p class="ham-no-data" i18n="@@Management_Table_No_Data" *ngIf="dataSource.data.length === 0">
+		<p class="ham-no-data" i18n="@@Management_Table_No_Data" *ngIf="dataSource && dataSource.data.length === 0">
 			No Data is available.
 		</p>
 	</div>
 
 	<!-- Info & Pagination -->
-	<div class="ham-pagination-wrapper" [ngStyle]="{ 'display' : dataSource.data.length === 0 ? 'none' : 'block' }">
+	<div class="ham-pagination-wrapper" [ngStyle]="{ 'display' : dataSource && dataSource.data.length === 0 ? 'none' : 'block' }">
 		<mat-toolbar>
 			<mat-toolbar-row class="mat-toolbar-row">
 				<!-- Info -->
