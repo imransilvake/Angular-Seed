@@ -113,6 +113,9 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
 			// set page info
 			this.setTableInformation();
+		} else {
+			// set data to table
+			this.dataSource = new MatTableDataSource<any>([]);
 		}
 	}
 
@@ -230,18 +233,6 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	}
 
 	/**
-	 * set table information
-	 */
-	private setTableInformation(currentPageIndex?: number) {
-		const pageIndex = currentPageIndex || 0;
-		const total = this.tableData.total;
-		const pageSize = this.tablePageSize;
-		const from = (pageSize * pageIndex) + 1;
-		const to = (pageSize * (pageIndex + 1) > total) ? total : pageSize * (pageIndex + 1);
-		this.tableInfo = total > 0 ? `${from} - ${to} of ${total}` : null;
-	}
-
-	/**
 	 * load next data
 	 *
 	 * @param pageIndex
@@ -271,7 +262,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	 * @param data
 	 * @param init
 	 */
-	public mapData(data, init?: boolean) {
+	private mapData(data, init?: boolean) {
 		if (data) {
 			data.forEach(item => {
 				const id = this.tableResources.uniqueID;
@@ -354,5 +345,17 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 				}
 			});
 		}
+	}
+
+	/**
+	 * set table information
+	 */
+	private setTableInformation(currentPageIndex?: number) {
+		const pageIndex = currentPageIndex || 0;
+		const total = this.tableData.total;
+		const pageSize = this.tablePageSize;
+		const from = (pageSize * pageIndex) + 1;
+		const to = (pageSize * (pageIndex + 1) > total) ? total : pageSize * (pageIndex + 1);
+		this.tableInfo = total > 0 ? `${from} - ${to} of ${total}` : null;
 	}
 }
