@@ -9,6 +9,8 @@ import { takeUntil } from 'rxjs/operators';
 import { ProxyService } from '../../../packages/core.pck/proxy.mod/services/proxy.service';
 import { AppOptions, AppServices } from '../../../../app.config';
 import { HelperService } from '../../../packages/utilities.pck/accessories.mod/services/helper.service';
+import { UtilityService } from '../../../packages/utilities.pck/accessories.mod/services/utility.service';
+import { AuthService } from '../../../packages/modules.pck/authorization.mod/services/auth.service';
 
 @Component({
 	selector: 'app-table',
@@ -23,6 +25,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	@Input() inputName;
 	@Input() inputPlaceHolder;
 	@Input() tableColumns = [];
+	@Input() tableSorting = [];
 	@Input() tableAdditionalColumns = [];
 	@Input() tableData;
 	@Input() tablePageSize = AppOptions.tablePageSizeLimit - 1;
@@ -41,7 +44,11 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
-	constructor(private _proxyService: ProxyService) {
+	constructor(
+		private _proxyService: ProxyService,
+		private _utilityService: UtilityService,
+		private _authService: AuthService
+	) {
 		// form group
 		this.formFields = new FormGroup({
 			search: new FormControl('')
@@ -62,6 +69,11 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	}
 
 	ngOnChanges() {
+		// move to first page when clicked on refresh button from header area.
+		if (this.dataSource && this.dataSource.paginator) {
+			this.dataSource.paginator.firstPage();
+		}
+
 		// re-initialize table
 		this.initializeTable();
 	}
@@ -175,19 +187,72 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 					res.data.forEach(item => {
 						const id = this.tableResources.uniqueID;
 						if (!this.dataSource.data.some(row => row[id] === item[id])) {
-							console.log(item);
-							let newItem;
-							if (item.Image && item.Image.length > 10) {
-								const imagePromise = this.getImageSrc(item.Image);
+							let newItem = item;
+							// Image
+							if (item.hasOwnProperty('Image')) {
+								if (item.Image && item.Image.length > 10) {
+									const imagePromise = this.getImageSrc(item.Image);
+									newItem = {
+										...newItem,
+										Image: imagePromise
+									};
+								} else {
+									const image = item.Image === null && item.Name ? HelperService.getFirstLetter(item.Name).toUpperCase() : item.Image;
+									newItem = {
+										...newItem,
+										Image: image
+									};
+								}
+							}
+
+							// Role
+							if (item.hasOwnProperty('Type')) {
+								const role = item.Type ? HelperService.capitalizeString(item.Type.replace(/_/g, ' ').toLowerCase()) : '-';
 								newItem = {
-									...item,
-									Image: imagePromise
+									...newItem,
+									Role: role
 								};
-							} else {
-								const image = item.Image === null && item.Name ? HelperService.getFirstLetter(item.Name).toUpperCase() : item.Image;
+							}
+
+							// Hotels
+							if (item.hasOwnProperty('HotelIDs')) {
+								const hotels = [];
+								if (item && item.HotelIDs && typeof item.HotelIDs !== 'string') {
+									item.HotelIDs.forEach(hotel => {
+										if (hotel.split('_')[1]) {
+											hotels.push(this._utilityService.hotelList[hotel]);
+										}
+									});
+								}
 								newItem = {
-									...item,
-									Image: image
+									...newItem,
+									Hotels: hotels && hotels.length ? hotels.join(', ') : 'ALL'
+								};
+							}
+
+							// Create Date
+							if (item.hasOwnProperty('CreateDate')) {
+								const date = item.CreateDate ? HelperService.getUTC(this._authService.currentUserState.profile.language, item.CreateDate) : '-';
+								newItem = {
+									...newItem,
+									'Reg. Date': date
+								};
+							}
+
+							// Login Date
+							if (item.hasOwnProperty('LoginDate')) {
+								const date = item.LoginDate ? HelperService.getUTC(this._authService.currentUserState.profile.language, item.LoginDate) : '-';
+								newItem = {
+									...newItem,
+									'Last Login': date
+								};
+							}
+
+							// Creator
+							if (item.hasOwnProperty('LoginDate')) {
+								newItem = {
+									...newItem,
+									Creator: item.Creator ? item.Creator : '-'
 								};
 							}
 

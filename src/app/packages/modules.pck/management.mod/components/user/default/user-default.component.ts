@@ -106,7 +106,7 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 		} else {
 			const mapNewUsersData = users && users.data.map(user => {
 				const image = user.Image === null && user.Name ? HelperService.getFirstLetter(user.Name).toUpperCase() : user.Image;
-				const role = user.Type ? HelperService.capitalizeString(user.Type.replace('_', ' ').toLowerCase()) : '-';
+				const role = user.Type ? HelperService.capitalizeString(user.Type.replace(/_/g, ' ').toLowerCase()) : '-';
 				const hotels = [];
 				let date;
 				let uniqueProperties = {};
@@ -126,7 +126,9 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 					// hotels
 					if (user && user.HotelIDs && typeof user.HotelIDs !== 'string') {
 						user.HotelIDs.forEach(hotel => {
-							hotels.push(this._utilityService.hotelList[hotel]);
+							if (hotel.split('_')[1]) {
+								hotels.push(this._utilityService.hotelList[hotel]);
+							}
 						});
 					}
 
@@ -135,7 +137,8 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 						Id: user.ID,
 						'Last Login': date,
 						Role: role,
-						Hotels: hotels.length !== 0 ? hotels.join(', ') : '-'
+						Hotels: hotels && hotels.length ? hotels.join(', ') : 'ALL',
+						Creator: user.Creator ? user.Creator : '-'
 					};
 				}
 
