@@ -20,7 +20,7 @@
 			[tableSorting]="[true, true, false, false, false, false, false, false, false]"
 			[tableAdditionalColumns]="['Action']"
 			[tableTemplateRef]="[action]"
-			[tableResources]="tableApiUrl"
+			[tableResources]="clientsTable"
 			(rowData)="onClickFetchRow($event)">
 			<!-- Action -->
 			<ng-template #action>

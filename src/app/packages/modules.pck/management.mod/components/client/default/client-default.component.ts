@@ -24,7 +24,7 @@ export class ClientDefaultComponent implements OnInit, OnDestroy {
 	public roleHotelManager: UserRoleEnum = UserRoleEnum[UserRoleEnum.HOTEL_MANAGER];
 	public overrideState = false;
 	public clientGroupHotelsList;
-	public tableApiUrl;
+	public clientsTable;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
@@ -38,13 +38,14 @@ export class ClientDefaultComponent implements OnInit, OnDestroy {
 		// set current user role
 		this.currentRole = this._clientService.appState && this._clientService.appState.role;
 
-		// set table api
-		this.tableApiUrl = this._clientService.clientTablesServices.hotelsByGroup;
-
 		// listen: get client hotels
 		this._clientService.clientDataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
+				// set table api
+				this.clientsTable = this._clientService.clientTablesServices.hotelsByGroup;
+
+				// set table data
 				if (res && res.hotelGroupList) {
 					// set override state
 					this.overrideState = res.hgaOverride && res.hgaOverride.HotelManagerOverride;
