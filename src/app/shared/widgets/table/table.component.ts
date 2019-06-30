@@ -77,6 +77,9 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 			this.dataSource.paginator.firstPage();
 		}
 
+		// clear input
+		this.search.setValue('');
+
 		// re-initialize table
 		this.initializeTable();
 	}
@@ -355,6 +358,15 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 			.subscribe(res => {
 				// stop animation
 				this.loading = false;
+
+				// works when search is empty
+				if (pageIndex === 0) {
+					// update table data
+					this.tableData = res;
+
+					// update pagination info
+					this.setTableInformation();
+				}
 
 				// case: text search
 				if (pageIndex === -1) {
