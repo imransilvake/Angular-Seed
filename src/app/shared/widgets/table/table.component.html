@@ -5,6 +5,7 @@
 
 		<!-- Input Filter -->
 		<app-input
+			*ngIf="tableShowFilterInput"
 			[inputName]="tableFilterInputName"
 			[inputPlaceHolder]="tableFilterInputPlaceHolder"
 			[control]="search">

@@ -22,6 +22,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	@Output() rowData: EventEmitter<any> = new EventEmitter();
 
 	@Input() tableTitle;
+	@Input() tableShowFilterInput = true;
 	@Input() tableFilterInputName;
 	@Input() tableFilterInputPlaceHolder;
 	@Input() tableColumns = [];
