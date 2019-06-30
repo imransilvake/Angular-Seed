@@ -54,24 +54,25 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 		// set current user role
 		this.currentRole = this._userService.appState.role;
 
-		// set tables resources
-		this.newUsersTable = {
-			api: this._userService.userTablesServices.newUsers,
-			payload: this._userService.userTablesServices.payload,
-			searchApi: this._userService.userTablesServices.searchApi,
-			uniqueID: this._userService.userTablesServices.uniqueID
-		};
-		this.existingUsersTable = {
-			api: this._userService.userTablesServices.existingUsers,
-			payload: this._userService.userTablesServices.payload,
-			searchApi: this._userService.userTablesServices.searchApi,
-			uniqueID: this._userService.userTablesServices.uniqueID
-		};
-
 		// listen: fetch new users & old user accounts list
 		this._userService.userDataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
+				// set tables resources
+				this.newUsersTable = {
+					api: this._userService.userTablesServices.newUsers,
+					payload: this._userService.userTablesServices.payload1,
+					searchApi: this._userService.userTablesServices.searchApi,
+					uniqueID: this._userService.userTablesServices.uniqueID
+				};
+				this.existingUsersTable = {
+					api: this._userService.userTablesServices.existingUsers,
+					payload: this._userService.userTablesServices.payload2,
+					searchApi: this._userService.userTablesServices.searchApi,
+					uniqueID: this._userService.userTablesServices.uniqueID
+				};
+
+				// set tables data
 				if (res && (res.newUsers || res.existingUsers)) {
 					// map new users list
 					if (res.newUsers) {

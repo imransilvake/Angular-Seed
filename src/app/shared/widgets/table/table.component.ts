@@ -77,9 +77,6 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 			this.dataSource.paginator.firstPage();
 		}
 
-		// clear input
-		this.search.setValue('');
-
 		// re-initialize table
 		this.initializeTable();
 	}
@@ -154,6 +151,9 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 			// set page info
 			this.setTableInformation();
 		} else {
+			// empty table data
+			this.tableData = [];
+
 			// set data to table
 			this.dataSource = new MatTableDataSource<any>([]);
 		}
@@ -256,10 +256,12 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	private setTableInformation(currentPageIndex?: number) {
 		const pageIndex = currentPageIndex || 0;
 		const total = this.tableData.total;
-		const pageSize = this.tablePageSize;
-		const from = (pageSize * pageIndex) + 1;
-		const to = (pageSize * (pageIndex + 1) > total) ? total : pageSize * (pageIndex + 1);
-		this.tableInfo = total > 0 ? `${from} - ${to} of ${total}` : null;
+		if (this.tableData && this.tableData.total) {
+			const pageSize = this.tablePageSize;
+			const from = (pageSize * pageIndex) + 1;
+			const to = (pageSize * (pageIndex + 1) > total) ? total : pageSize * (pageIndex + 1);
+			this.tableInfo = total > 0 ? `${from} - ${to} of ${total}` : null;
+		}
 	}
 
 	/**
@@ -359,19 +361,10 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 				// stop animation
 				this.loading = false;
 
-				// works when search is empty
-				if (pageIndex === 0) {
-					// update table data
-					this.tableData = res;
-
-					// update pagination info
-					this.setTableInformation();
-				}
-
-				// case: text search
-				if (pageIndex === -1) {
+				// when input is changed
+				if (pageIndex <= 0) {
 					this.initializeTable(res);
-				} else {
+				} else { // when next button is clicked
 					this.mapData(res.data);
 				}
 			});

@@ -12,6 +12,7 @@ import { UserInterface } from '../interfaces/user.interface';
 import { UserRoleEnum } from '../../authorization.mod/enums/user-role.enum';
 import { DialogTypeEnum } from '../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { DialogService } from '../../../utilities.pck/dialog.mod/services/dialog.service';
+import { UserListTypeEnum } from '../enums/user-list-type.enum';
 
 @Injectable()
 export class UserService {
@@ -58,18 +59,34 @@ export class UserService {
 					api = allApi;
 
 					// set payload
-					payload = {
-						queryParams: queryParamsPayload
-					};
+					if (userListType === UserListTypeEnum.APPLIED) {
+						payload = {
+							queryParams: queryParamsPayload
+						};
+
+						// set table api
+						this.userTablesServices = {
+							...this.userTablesServices,
+							newUsers: allApi,
+							payload1: payload
+						};
+					} else {
+						payload = {
+							queryParams: queryParamsPayload
+						};
+
+						// set table api
+						this.userTablesServices = {
+							...this.userTablesServices,
+							existingUsers: allApi,
+							payload2: payload
+						};
+					}
 
 					// set table api
-
 					this.userTablesServices = {
 						...this.userTablesServices,
-						newUsers: allApi,
-						existingUsers: allApi,
 						searchApi: searchAllApi,
-						payload: payload,
 						uniqueID: 'ID'
 					};
 					break;
@@ -78,20 +95,40 @@ export class UserService {
 					api = hotelGroupApi;
 
 					// set payload
-					payload = {
-						pathParams: {
-							groupId: this.appState && this.appState.groupId
-						},
-						queryParams: queryParamsPayload
-					};
+					if (userListType === UserListTypeEnum.APPLIED) {
+						payload = {
+							pathParams: {
+								groupId: this.appState && this.appState.groupId
+							},
+							queryParams: queryParamsPayload
+						};
+
+						// set table api
+						this.userTablesServices = {
+							...this.userTablesServices,
+							newUsers: hotelGroupApi,
+							payload1: payload
+						};
+					} else {
+						payload = {
+							pathParams: {
+								groupId: this.appState && this.appState.groupId
+							},
+							queryParams: queryParamsPayload
+						};
+
+						// set table api
+						this.userTablesServices = {
+							...this.userTablesServices,
+							existingUsers: hotelGroupApi,
+							payload2: payload
+						};
+					}
 
 					// set table api
 					this.userTablesServices = {
 						...this.userTablesServices,
-						newUsers: hotelGroupApi,
-						existingUsers: hotelGroupApi,
 						searchApi: searchHotelGroupApi,
-						payload: payload,
 						uniqueID: 'ID'
 					};
 					break;
@@ -100,21 +137,42 @@ export class UserService {
 					api = hotelApi;
 
 					// set payload
-					payload = {
-						pathParams: {
-							groupId: this.appState && this.appState.groupId,
-							hotelId: this.appState && this.appState.hotelId
-						},
-						queryParams: queryParamsPayload
-					};
+					if (userListType === UserListTypeEnum.APPLIED) {
+						payload = {
+							pathParams: {
+								groupId: this.appState && this.appState.groupId,
+								hotelId: this.appState && this.appState.hotelId
+							},
+							queryParams: queryParamsPayload
+						};
+
+						// set table api
+						this.userTablesServices = {
+							...this.userTablesServices,
+							newUsers: hotelApi,
+							payload1: payload
+						};
+					} else {
+						payload = {
+							pathParams: {
+								groupId: this.appState && this.appState.groupId,
+								hotelId: this.appState && this.appState.hotelId
+							},
+							queryParams: queryParamsPayload
+						};
+
+						// set table api
+						this.userTablesServices = {
+							...this.userTablesServices,
+							existingUsers: hotelApi,
+							payload2: payload
+						};
+					}
 
 					// set table api
 					this.userTablesServices = {
 						...this.userTablesServices,
-						newUsers: hotelApi,
-						existingUsers: hotelApi,
 						searchApi: searchHotelApi,
-						payload: payload,
 						uniqueID: 'ID'
 					};
 					break;
