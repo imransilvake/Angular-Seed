@@ -94,32 +94,6 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	}
 
 	/**
-	 * initialize table
-	 */
-	public initializeTable(dataSource?: any) {
-		const d = dataSource ? dataSource.data : this.tableData.data;
-		if (d) {
-			// set data to table
-			this.dataSource = new MatTableDataSource<any>([]);
-
-			// update table data
-			this.mapData(d, !!dataSource);
-
-			// add pagination
-			this.dataSource.paginator = this.paginator;
-
-			// add sorting
-			this.dataSource.sort = this.sort;
-
-			// set page info
-			this.setTableInformation();
-		} else {
-			// set data to table
-			this.dataSource = new MatTableDataSource<any>([]);
-		}
-	}
-
-	/**
 	 * validate variable type
 	 *
 	 * @param value
@@ -151,109 +125,34 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	}
 
 	/**
-	 * get page data on page change
-	 *
-	 * @param pageInfo
+	 * initialize table
 	 */
-	public onChangePagination(pageInfo) {
-		const prevPageIndex = pageInfo.previousPageIndex;
-		const pageIndex = pageInfo.pageIndex;
+	public initializeTable(dataSource?: any) {
+		const d = dataSource ? dataSource.data : this.tableData.data;
+		if (d) {
+			// set data to table
+			this.dataSource = new MatTableDataSource<any>([]);
 
-		// set page info
-		this.setTableInformation(pageIndex);
+			// update table data
+			this.mapData(d, !!dataSource);
 
-		// validate next click
-		if (pageInfo.pageIndex > prevPageIndex) {
-			// start animation
-			this.loading = true;
+			// add pagination
+			this.dataSource.paginator = this.paginator;
 
-			// payload
-			const payload = {
-				...this.tableResources.payload,
-				queryParams: {
-					...this.tableResources.payload.queryParams,
-					offset: pageIndex ? (pageIndex * this.tablePageSize) + 1 : 0,
-					limit: this.tablePageSize
-				}
-			};
+			// add sorting
+			this.dataSource.sort = this.sort;
 
-			// load next data
-			this.loadNextData(this.tableResources.api, payload, pageIndex);
-		}
-	}
-
-	/**
-	 * filter table content
-	 *
-	 * @param inputValue
-	 */
-	private applyFilter(inputValue: string) {
-		// start animation
-		this.loading = true;
-
-		// payload
-		const payload = {
-			...this.tableResources.payload,
-			queryParams: {
-				...this.tableResources.payload.queryParams,
-				offset: 0,
-				limit: this.tablePageSize
+			// update table data
+			if (dataSource) {
+				this.tableData = dataSource;
 			}
-		};
 
-		// case: text search
-		if (inputValue) {
-			const payloadWithInput = {
-				...payload,
-				queryParams: {
-					...payload.queryParams,
-					term: inputValue.toLowerCase()
-				}
-			};
-
-			// load next data
-			this.loadNextData(this.tableResources.searchApi, payloadWithInput, -1);
+			// set page info
+			this.setTableInformation();
 		} else {
-			const payloadUpdate = {
-				...payload,
-				queryParams: {
-					...payload.queryParams,
-					limit: this.tablePageSize + 1
-				}
-			};
-
-			// load next data
-			this.loadNextData(this.tableResources.api, payloadUpdate, 0);
+			// set data to table
+			this.dataSource = new MatTableDataSource<any>([]);
 		}
-
-		// move to first page.
-		if (this.dataSource.paginator) {
-			this.dataSource.paginator.firstPage();
-		}
-	}
-
-	/**
-	 * load next data
-	 *
-	 * @param pageIndex
-	 * @param api
-	 * @param payload
-	 */
-	private loadNextData(api: any, payload: any, pageIndex?: number) {
-		this._proxyService
-			.getAPI(api, payload)
-			.pipe(takeUntil(this._ngUnSubscribe))
-			.subscribe(res => {
-				// stop animation
-				this.loading = false;
-
-				// case: text search
-				if (pageIndex === -1) {
-					this.initializeTable(res);
-				} else {
-					this.mapData(res.data);
-				}
-			});
 	}
 
 	/**
@@ -357,5 +256,111 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 		const from = (pageSize * pageIndex) + 1;
 		const to = (pageSize * (pageIndex + 1) > total) ? total : pageSize * (pageIndex + 1);
 		this.tableInfo = total > 0 ? `${from} - ${to} of ${total}` : null;
+	}
+
+	/**
+	 * get page data on page change
+	 *
+	 * @param pageInfo
+	 */
+	public onChangeNextPage(pageInfo) {
+		const prevPageIndex = pageInfo.previousPageIndex;
+		const pageIndex = pageInfo.pageIndex;
+
+		// set page info
+		this.setTableInformation(pageIndex);
+
+		// validate next click
+		if (pageInfo.pageIndex > prevPageIndex) {
+			// start animation
+			this.loading = true;
+
+			// payload
+			const payload = {
+				...this.tableResources.payload,
+				queryParams: {
+					...this.tableResources.payload.queryParams,
+					offset: pageIndex ? (pageIndex * this.tablePageSize) + 1 : 0,
+					limit: this.tablePageSize
+				}
+			};
+
+			// load next data
+			this.loadNextData(this.tableResources.api, payload, pageIndex);
+		}
+	}
+
+	/**
+	 * filter table content
+	 *
+	 * @param inputValue
+	 */
+	private applyFilter(inputValue: string) {
+		// start animation
+		this.loading = true;
+
+		// payload
+		const payload = {
+			...this.tableResources.payload,
+			queryParams: {
+				...this.tableResources.payload.queryParams,
+				offset: 0,
+				limit: this.tablePageSize
+			}
+		};
+
+		// case: text search
+		if (inputValue) {
+			const payloadWithInput = {
+				...payload,
+				queryParams: {
+					...payload.queryParams,
+					term: inputValue.toLowerCase()
+				}
+			};
+
+			// load next data
+			this.loadNextData(this.tableResources.searchApi, payloadWithInput, -1);
+		} else {
+			const payloadUpdate = {
+				...payload,
+				queryParams: {
+					...payload.queryParams,
+					limit: this.tablePageSize + 1
+				}
+			};
+
+			// load next data
+			this.loadNextData(this.tableResources.api, payloadUpdate, 0);
+		}
+
+		// move to first page.
+		if (this.dataSource.paginator) {
+			this.dataSource.paginator.firstPage();
+		}
+	}
+
+	/**
+	 * load next data
+	 *
+	 * @param pageIndex
+	 * @param api
+	 * @param payload
+	 */
+	private loadNextData(api: any, payload: any, pageIndex?: number) {
+		this._proxyService
+			.getAPI(api, payload)
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => {
+				// stop animation
+				this.loading = false;
+
+				// case: text search
+				if (pageIndex === -1) {
+					this.initializeTable(res);
+				} else {
+					this.mapData(res.data);
+				}
+			});
 	}
 }
