@@ -12,7 +12,11 @@
 
 		&:last-child {
 			.mat-sort-header-container {
-				justify-content: flex-end;
+				button {
+					&.mat-sort-header-button {
+						justify-content: flex-end;
+					}
+				}
 			}
 		}
 	}
