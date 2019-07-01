@@ -208,7 +208,11 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 			};
 
 			// load next data
-			this.loadNextData(this.tableResources.api, payload, pageIndex);
+			this.loadNextData(
+				this.search.value ? this.tableResources.searchApi : this.tableResources.api,
+				payload,
+				pageIndex
+			);
 		}
 	}
 
