@@ -1,80 +1,36 @@
-<div class="ham-user-default">
-	<!-- New Users -->
-	<div class="ham-new-users" *ngIf="userNewRegistrationsList">
-		<app-table
-			tableTitle="Received Registrations"
-			i18n-tableTitle="@@Management_User_NewUsers_Table_Title"
-			tableFilterInputName="user-new-table-filter"
-			i18n-tableFilterInputName="@@Management_User_NewUsers_Table_Input_Name"
-			tableFilterInputPlaceHolder="Search"
-			i18n-tableFilterInputPlaceHolder="@@Management_User_NewUsers_Table_Input_Filter_PlaceHolder"
-			[tableData]="userNewRegistrationsList"
-			[tableColumns]="['Image', 'Name', 'Email', 'Reg. Date']"
-			[tableSorting]="[false, true, true, false, false]"
-			[tableAdditionalColumns]="['Action']"
-			[tableTemplateRef]="[action]"
-			[tableResources]="newUsersTable"
-			(rowData)="onClickRowActionButtons($event)">
-			<!-- Action -->
-			<ng-template #action>
-				<button
-					*ngIf="currentRole === roleAdmin || currentRole === roleGroupManager || currentRole === roleHotelManager"
-					mat-button
-					class="ham-button ham-button-2 ham-table-button-1"
-					(click)="onClickEditNewUser()"
-					i18n="@@Management_User_NewUsers_Table_Edit">
-					Edit
-				</button>
-				<button
-					mat-button
-					class="ham-button ham-button-2 ham-table-button-2"
-					(click)="onClickDeleteNewUser()"
-					i18n="@@Management_User_NewUsers_Table_Decline">
-					Decline
-				</button>
-			</ng-template>
-		</app-table>
-	</div>
-
-	<!-- Button: Create New User -->
-	<div class="ham-button-wrapper" *ngIf="currentRole === roleAdmin || currentRole === roleGroupManager || currentRole === roleHotelManager">
-		<button mat-button class="ham-button ham-button-1" i18n="@@Management_User_Create_NewUser" (click)="onClickCreateNewUser()">
-			Create New User
+<div class="ham-broadcast-default">
+	<!-- Button: Create New Broadcast -->
+	<div class="ham-button-wrapper" *ngIf="currentRole === roleAdmin">
+		<button mat-button class="ham-button ham-button-1" i18n="@@Management_Broadcast_Create_NewBroadcast" (click)="onClickCreateNewBroadcast()">
+			Create New Broadcast
 		</button>
 	</div>
 
-	<!-- Existing Users -->
-	<div class="ham-existing-users" *ngIf="userExistingUsersList">
+	<!-- Broadcast List -->
+	<div class="ham-existing-users" *ngIf="broadcastList">
 		<app-table
 			tableTitle="Existing Users"
-			i18n-tableTitle="@@Management_User_ExistingUsers_Table_Title"
+			i18n-tableTitle="@@Management_Broadcast_Table_Title"
 			tableFilterInputName="user-existing-table-filter"
-			i18n-tableFilterInputName="@@Management_User_ExistingUsers_Table_Input_Name"
+			i18n-tableFilterInputName="@@Management_Broadcast_Table_Input_Name"
 			tableFilterInputPlaceHolder="Search"
-			i18n-tableFilterInputPlaceHolder="@@Management_User_ExistingUsers_Table_Input_Filter_PlaceHolder"
-			[tableData]="userExistingUsersList"
-			[tableColumns]="['Image', 'Name', 'Email', 'Last Login', 'Creator', 'Role', 'Hotels']"
-			[tableSorting]="[false, true, true, false, true, true, false, false]"
+			i18n-tableFilterInputPlaceHolder="@@Management_Broadcast_Table_Input_Filter_PlaceHolder"
+			[tableData]="broadcastList"
+			[tableColumns]="['Date', 'Creator', 'Title']"
+			[tableSorting]="[true, false, false, false]"
 			[tableAdditionalColumns]="['Action']"
 			[tableTemplateRef]="[action]"
-			[tableResources]="existingUsersTable"
+			[tableResources]="broadcastTable"
 			(rowData)="onClickRowActionButtons($event)">
 			<!-- Action -->
 			<ng-template #action>
 				<button
-					*ngIf="currentRole === roleAdmin || currentRole === roleGroupManager || currentRole === roleHotelManager"
+					*ngIf="currentRole === roleAdmin"
 					mat-button
 					class="ham-button ham-button-2 ham-table-button-1"
-					(click)="onClickEditExistingUser()"
-					i18n="@@Management_User_ExistingUsers_Table_Edit">
+					(click)="onClickResendBroadcast()"
+					i18n="@@Management_Broadcast_Table_Resend">
 					Edit
-				</button>
-				<button
-					mat-button
-					class="ham-button ham-button-2 ham-table-button-2"
-					(click)="onClickDeleteExistingUser()"
-					i18n="@@Management_User_ExistingUsers_Table_Delete">
-					Delete
 				</button>
 			</ng-template>
 		</app-table>

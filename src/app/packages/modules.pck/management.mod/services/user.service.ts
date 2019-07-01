@@ -68,7 +68,7 @@ export class UserService {
 							queryParams: queryParamsPayload
 						};
 
-						// set table api
+						// set table resources
 						this.userTablesServices = {
 							...this.userTablesServices,
 							newUsers: allApi,
@@ -79,7 +79,7 @@ export class UserService {
 							queryParams: queryParamsPayload
 						};
 
-						// set table api
+						// set table resources
 						this.userTablesServices = {
 							...this.userTablesServices,
 							existingUsers: allApi,
@@ -87,7 +87,7 @@ export class UserService {
 						};
 					}
 
-					// set table api
+					// set table resources
 					this.userTablesServices = {
 						...this.userTablesServices,
 						searchApi: searchAllApi,
@@ -108,7 +108,7 @@ export class UserService {
 							queryParams: queryParamsPayload
 						};
 
-						// set table api
+						// set table resources
 						this.userTablesServices = {
 							...this.userTablesServices,
 							newUsers: hotelGroupApi,
@@ -122,7 +122,7 @@ export class UserService {
 							queryParams: queryParamsPayload
 						};
 
-						// set table api
+						// set table resources
 						this.userTablesServices = {
 							...this.userTablesServices,
 							existingUsers: hotelGroupApi,
@@ -130,7 +130,7 @@ export class UserService {
 						};
 					}
 
-					// set table api
+					// set table resources
 					this.userTablesServices = {
 						...this.userTablesServices,
 						searchApi: searchHotelGroupApi,
@@ -152,7 +152,7 @@ export class UserService {
 							queryParams: queryParamsPayload
 						};
 
-						// set table api
+						// set table resources
 						this.userTablesServices = {
 							...this.userTablesServices,
 							newUsers: hotelApi,
@@ -167,7 +167,7 @@ export class UserService {
 							queryParams: queryParamsPayload
 						};
 
-						// set table api
+						// set table resources
 						this.userTablesServices = {
 							...this.userTablesServices,
 							existingUsers: hotelApi,
@@ -175,7 +175,7 @@ export class UserService {
 						};
 					}
 
-					// set table api
+					// set table resources
 					this.userTablesServices = {
 						...this.userTablesServices,
 						searchApi: searchHotelApi,

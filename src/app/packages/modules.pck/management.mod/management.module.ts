@@ -46,7 +46,7 @@ import { BroadcastService } from './services/broadcast.service';
 		HotelManagerAppComponent,
 		UserDefaultComponent,
 		UserFormComponent,
-		//BroadcastDefaultComponent
+		BroadcastDefaultComponent
 	],
 	providers: [
 		UserService,

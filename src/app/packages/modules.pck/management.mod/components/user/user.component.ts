@@ -78,7 +78,7 @@ export class UserComponent implements OnDestroy {
 		// set app state
 		this._userService.appState = this._sidebarService.appState;
 
-		// refresh user services
+		// refresh services
 		forkJoin({
 			newUsers: this._userService.userFetchList(this.id, UserListTypeEnum.APPLIED),
 			existingUsers: this._userService.userFetchList(this.id, UserListTypeEnum.CONFIRMED)

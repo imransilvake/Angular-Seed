@@ -1,7 +1,17 @@
-<div class="ham-system-broadcast-management">
+<div class="ham-broadcast-management">
 	<!-- Head -->
 	<app-head
 		pageTitle="Broadcast"
 		i18n-pageTitle="@@Management_System_Broadcast_Title">
 	</app-head>
+
+	<!-- Details -->
+	<div class="ham-details">
+		<!-- View: Default -->
+		<ng-container>
+			<app-broadcast-default
+				(changeBroadcastView)="pageView = $event.view; id = $event.id; data = $event.data; openBroadcastFormModal();">
+			</app-broadcast-default>
+		</ng-container>
+	</div>
 </div>

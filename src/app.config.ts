@@ -75,7 +75,10 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 		User_Form_Create_User_Hotel: { serviceUrl: '/ham/auth/createuser/group/:groupId/hotel/:hotelId' },
 		User_Form_Confirm_User: { serviceUrl: '/ham/auth/confirmuser' },
 		User_Form_Confirm_User_Group: { serviceUrl: '/ham/auth/confirmuser/group/:groupId' },
-		User_Form_Confirm_User_Hotel: { serviceUrl: '/ham/auth/confirmuser/group/:groupId/hotel/:hotelId' }
+		User_Form_Confirm_User_Hotel: { serviceUrl: '/ham/auth/confirmuser/group/:groupId/hotel/:hotelId' },
+
+		Broadcast_Default_List_All: { serviceUrl: '/notification/broadcast/list' },
+		Broadcast_Form_Create_All: { serviceUrl: '/notification/broadcast/create' }
 	}
 };
 

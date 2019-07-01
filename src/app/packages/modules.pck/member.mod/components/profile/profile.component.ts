@@ -49,7 +49,7 @@ export class ProfileComponent implements OnDestroy {
 		// set app state
 		this._memberService.appState = this._sidebarService.appState;
 
-		// refresh member services
+		// refresh services
 		forkJoin({
 			memberProfile: this._memberService.memberFetchProfile()
 		}).pipe(takeUntil(this._ngUnSubscribe)).subscribe(res => {

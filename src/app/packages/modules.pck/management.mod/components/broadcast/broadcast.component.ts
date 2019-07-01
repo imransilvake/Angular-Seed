@@ -2,7 +2,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { filter, takeUntil } from 'rxjs/operators';
 import { NavigationEnd, Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { forkJoin, Subject } from 'rxjs';
 import { MatDialog } from '@angular/material';
 
 // app
@@ -75,5 +75,17 @@ export class BroadcastComponent implements OnDestroy {
 
 		// set app state
 		this._broadcastService.appState = this._sidebarService.appState;
+
+		// refresh services
+		forkJoin({
+			broadcastList: this._broadcastService.broadcastFetchList(this.id)
+		}).pipe(takeUntil(this._ngUnSubscribe)).subscribe(res => {
+			const result = {
+				broadcastList: res.broadcastList
+			};
+
+			// emit result
+			this._broadcastService.broadcastDataEmitter.next(result);
+		});
 	}
 }

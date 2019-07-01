@@ -54,7 +54,7 @@ export class ClientComponent implements OnDestroy {
 		// set app state
 		this._clientService.appState = this._sidebarService.appState;
 
-		// refresh client services
+		// refresh services
 		forkJoin({
 			hotelGroupList: this._clientService.clientFetchHotelGroupList(this.id),
 			licenseSystemData: this._clientService.clientFetchLicenseSystem(this.id),

@@ -65,7 +65,7 @@ export class ClientService {
 						queryParams: queryParamsPayload
 					};
 
-					// set table api
+					// set table resources
 					this.clientTablesServices = {
 						...this.clientTablesServices,
 						hotelsByGroup: allApi,
@@ -85,7 +85,7 @@ export class ClientService {
 						queryParams: queryParamsPayload
 					};
 
-					// set table api
+					// set table resources
 					this.clientTablesServices = {
 						...this.clientTablesServices,
 						hotelsByGroup: hotelGroupApi,
@@ -106,7 +106,7 @@ export class ClientService {
 						queryParams: queryParamsPayload
 					};
 
-					// set table api
+					// set table resources
 					this.clientTablesServices = {
 						...this.clientTablesServices,
 						hotelsByGroup: hotelApi,

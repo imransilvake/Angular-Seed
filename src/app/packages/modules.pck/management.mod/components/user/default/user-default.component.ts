@@ -208,7 +208,7 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 	 *
 	 * @param row
 	 */
-	public onClickRowActionButtons(row?: any) {
+	public onClickRowActionButtons(row: any) {
 		// delete / decline user
 		if (this.buttonType > 2) {
 			// set text
