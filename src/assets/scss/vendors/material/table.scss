@@ -1,5 +1,15 @@
 .ham-table {
 	.mat-header-cell {
+		.mat-sort-header-container {
+			button {
+				&.mat-sort-header-button {
+					height: 38px;
+					padding-left: 10px !important;
+					width: 100%;
+				}
+			}
+		}
+
 		&:last-child {
 			.mat-sort-header-container {
 				justify-content: flex-end;

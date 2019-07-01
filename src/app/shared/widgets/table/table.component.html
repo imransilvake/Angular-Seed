@@ -17,7 +17,7 @@
 		<table mat-table [className]="'mat-table ham-table'" [dataSource]="dataSource" matSort [matSortDisabled]="!tableApplySorting">
 			<!-- Column Templates -->
 			<ng-container *ngFor="let column of tableColumns; let idx = index;" matColumnDef="{{ column }}">
-				<th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="!tableSorting[idx]">{{ column }}</th>
+				<th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="!tableSorting[idx]" (click)="onClickSortByColumn(column)">{{ column }}</th>
 				<td mat-cell *matCellDef="let element">
 					<!-- Column: Photo -->
 					<ng-container *ngIf="column === 'Image'">

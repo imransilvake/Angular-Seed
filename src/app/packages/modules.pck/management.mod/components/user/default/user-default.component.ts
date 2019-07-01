@@ -63,13 +63,15 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 					api: this._userService.userTablesServices.newUsers,
 					payload: this._userService.userTablesServices.payload1,
 					searchApi: this._userService.userTablesServices.searchApi,
-					uniqueID: this._userService.userTablesServices.uniqueID
+					uniqueID: this._userService.userTablesServices.uniqueID,
+					sortDefaultColumn: this._userService.userTablesServices.sortDefaultColumn
 				};
 				this.existingUsersTable = {
 					api: this._userService.userTablesServices.existingUsers,
 					payload: this._userService.userTablesServices.payload2,
 					searchApi: this._userService.userTablesServices.searchApi,
-					uniqueID: this._userService.userTablesServices.uniqueID
+					uniqueID: this._userService.userTablesServices.uniqueID,
+					sortDefaultColumn: this._userService.userTablesServices.sortDefaultColumn
 				};
 
 				// set tables data
@@ -116,7 +118,7 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 
 				if (userListType === UserListTypeEnum.APPLIED) {
 					// date
-					date = user.CreateDate ? HelperService.getUTC(this._userService.currentUser.profile.language, user.CreateDate) : '-';
+					date = user.CreateDate ? HelperService.getDateTime(this._userService.currentUser.profile.language, user.CreateDate) : '-';
 
 					// object properties
 					uniqueProperties = {
@@ -124,7 +126,7 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 					};
 				} else {
 					// date
-					date = user.LoginDate ? HelperService.getUTC(this._userService.currentUser.profile.language, user.LoginDate) : '-';
+					date = user.LoginDate ? HelperService.getDateTime(this._userService.currentUser.profile.language, user.LoginDate) : '-';
 
 					// hotels
 					if (user && user.HotelIDs && typeof user.HotelIDs !== 'string') {

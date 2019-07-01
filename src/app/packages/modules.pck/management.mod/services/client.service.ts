@@ -57,9 +57,6 @@ export class ClientService {
 			let api;
 			switch (this.appState.type) {
 				case AppStateEnum.ALL:
-					// set table api
-					this.clientTablesServices = { ...this.clientTablesServices, hotelsByGroup: allApi };
-
 					// set api
 					api = allApi;
 
@@ -67,11 +64,16 @@ export class ClientService {
 					payload = {
 						queryParams: queryParamsPayload
 					};
+
+					// set table api
+					this.clientTablesServices = {
+						...this.clientTablesServices,
+						hotelsByGroup: allApi,
+						payload: payload,
+						uniqueID: 'Id'
+					};
 					break;
 				case AppStateEnum.GROUP:
-					// set table api
-					this.clientTablesServices = { ...this.clientTablesServices, hotelsByGroup: hotelGroupApi };
-
 					// set api
 					api = hotelGroupApi;
 
@@ -82,11 +84,16 @@ export class ClientService {
 						},
 						queryParams: queryParamsPayload
 					};
+
+					// set table api
+					this.clientTablesServices = {
+						...this.clientTablesServices,
+						hotelsByGroup: hotelGroupApi,
+						payload: payload,
+						uniqueID: 'Id'
+					};
 					break;
 				case AppStateEnum.HOTEL:
-					// set table api
-					this.clientTablesServices = { ...this.clientTablesServices, hotelsByGroup: hotelApi };
-
 					// set api
 					api = hotelApi;
 
@@ -97,6 +104,14 @@ export class ClientService {
 							hotelId: this.appState && this.appState.hotelId
 						},
 						queryParams: queryParamsPayload
+					};
+
+					// set table api
+					this.clientTablesServices = {
+						...this.clientTablesServices,
+						hotelsByGroup: hotelApi,
+						payload: payload,
+						uniqueID: 'Id'
 					};
 					break;
 			}

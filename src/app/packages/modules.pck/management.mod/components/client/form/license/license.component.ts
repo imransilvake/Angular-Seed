@@ -212,7 +212,7 @@ export class LicenseComponent implements OnInit, OnDestroy {
 
 		// payload
 		const formPayload: LicenseSystemInterface = {
-			GroupID: this.systemIdentifier.value,
+			GroupID: this.systemIdentifier.value.toUpperCase(),
 			Name: this.company.value,
 			Address: {
 				...this.formFields.value.Address,

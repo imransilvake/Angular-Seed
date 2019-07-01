@@ -91,7 +91,8 @@ export class UserService {
 					this.userTablesServices = {
 						...this.userTablesServices,
 						searchApi: searchAllApi,
-						uniqueID: 'ID'
+						uniqueID: 'ID',
+						sortDefaultColumn: 'CreateDate'
 					};
 					break;
 				case AppStateEnum.GROUP:
@@ -133,7 +134,8 @@ export class UserService {
 					this.userTablesServices = {
 						...this.userTablesServices,
 						searchApi: searchHotelGroupApi,
-						uniqueID: 'ID'
+						uniqueID: 'ID',
+						sortDefaultColumn: 'CreateDate'
 					};
 					break;
 				case AppStateEnum.HOTEL:
@@ -177,7 +179,8 @@ export class UserService {
 					this.userTablesServices = {
 						...this.userTablesServices,
 						searchApi: searchHotelApi,
-						uniqueID: 'ID'
+						uniqueID: 'ID',
+						sortDefaultColumn: 'CreateDate'
 					};
 					break;
 			}

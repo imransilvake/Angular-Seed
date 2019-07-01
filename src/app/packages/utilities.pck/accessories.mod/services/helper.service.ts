@@ -164,14 +164,14 @@ export class HelperService {
 	}
 
 	/**
-	 * multilingual utc time
+	 * multilingual date time
 	 *
 	 * @param lang
 	 * @param date
 	 * @param dateFormat
 	 */
-	public static getUTC(lang: string, date: any, dateFormat?: string) {
+	public static getDateTime(lang: string, date: any, dateFormat?: string) {
 		const format = dateFormat ? dateFormat : 'DD. MMMM YYYY, hh:mm:ss';
-		return moment().locale(lang).utc(date).format(format);
+		return moment(date).locale(lang).format(format);
 	}
 }

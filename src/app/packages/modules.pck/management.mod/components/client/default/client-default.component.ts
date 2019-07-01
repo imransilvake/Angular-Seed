@@ -7,7 +7,6 @@ import { Subject } from 'rxjs';
 import { AppViewTypeEnum } from '../../../enums/app-view-type.enum';
 import { ClientService } from '../../../services/client.service';
 import { ClientViewInterface } from '../../../interfaces/client-view.interface';
-import { UtilityService } from '../../../../../utilities.pck/accessories.mod/services/utility.service';
 import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum';
 
 @Component({
@@ -28,10 +27,7 @@ export class ClientDefaultComponent implements OnInit, OnDestroy {
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
-	constructor(
-		private _clientService: ClientService,
-		private _utilityService: UtilityService
-	) {
+	constructor(private _clientService: ClientService) {
 	}
 
 	ngOnInit() {
@@ -43,7 +39,12 @@ export class ClientDefaultComponent implements OnInit, OnDestroy {
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
 				// set table api
-				this.clientsTable = this._clientService.clientTablesServices.hotelsByGroup;
+				this.clientsTable = {
+					api: this._clientService.clientTablesServices.hotelsByGroup,
+					searchApi: this._clientService.clientTablesServices.hotelsByGroup,
+					payload: this._clientService.clientTablesServices.payload,
+					uniqueID: this._clientService.clientTablesServices.uniqueID
+				};
 
 				// set table data
 				if (res && res.hotelGroupList) {
@@ -52,16 +53,6 @@ export class ClientDefaultComponent implements OnInit, OnDestroy {
 
 					// set table data
 					this.clientGroupHotelsList = res.hotelGroupList;
-
-					// set country name
-					this.clientGroupHotelsList.data = res.hotelGroupList.data.map(hotel => {
-						return hotel.Country.length === 2 && {
-							...hotel,
-							Country: this._utilityService.countryList.filter(
-								country => country.id === hotel.Country
-							)[0].text
-						};
-					});
 				}
 			});
 	}

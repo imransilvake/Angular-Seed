@@ -43,7 +43,7 @@ export class ProfileCoverComponent implements OnInit, OnDestroy {
 			.subscribe(res => {
 				if (res && res.memberProfile) {
 					// set last login
-					this.loginTime = HelperService.getUTC(
+					this.loginTime = HelperService.getDateTime(
 						this.currentUser.profile.language,
 						res.memberProfile.LoginDate,
 						'DD. MMMM YYYY'

@@ -43,6 +43,8 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	public dataSource;
 	public loading = false;
 	public tableInfo;
+	public sortColumn;
+	public sortOrder;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
@@ -140,8 +142,8 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 			// add pagination
 			this.dataSource.paginator = this.paginator;
 
-			// add sorting
-			this.dataSource.sort = this.sort;
+			// add client side sorting
+			// this.dataSource.sort = this.sort;
 
 			// update table data
 			if (dataSource) {
@@ -160,6 +162,57 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	}
 
 	/**
+	 * get page data on page change
+	 *
+	 * @param pageInfo
+	 */
+	public onChangeNextPage(pageInfo) {
+		const prevPageIndex = pageInfo.previousPageIndex;
+		const pageIndex = pageInfo.pageIndex;
+
+		// set page info
+		this.setTableInformation(pageIndex);
+
+		// validate next click
+		if (pageInfo.pageIndex > prevPageIndex) {
+			// start animation
+			this.loading = true;
+
+			// set search
+			let searchData = {};
+			if (this.search.value) {
+				searchData = {
+					searchKey: this.search.value.toLowerCase()
+				}
+			}
+
+			// set sort data
+			let sortData = {};
+			if (this.sortColumn) {
+				sortData = {
+					column: this.sortColumn,
+					sort: this.sortOrder ? this.sortOrder : 'desc'
+				}
+			}
+
+			// payload
+			const payload = {
+				...this.tableResources.payload,
+				queryParams: {
+					...this.tableResources.payload.queryParams,
+					offset: pageIndex ? (pageIndex * this.tablePageSize) + 1 : 0,
+					limit: this.tablePageSize,
+					...searchData,
+					...sortData
+				}
+			};
+
+			// load next data
+			this.loadNextData(this.tableResources.api, payload, pageIndex);
+		}
+	}
+
+	/**
 	 * map user
 	 *
 	 * @param data
@@ -171,6 +224,17 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 				const id = this.tableResources.uniqueID;
 				if (!this.dataSource.data.some(row => row[id] === item[id])) {
 					let newItem = item;
+
+					// Country
+					if (item.hasOwnProperty('Country')) {
+						newItem = {
+							...newItem,
+							Country: this._utilityService.countryList.filter(
+								country => country.id === item.Country
+							)[0].text
+						};
+					}
+
 					// Image
 					if (item.hasOwnProperty('Image')) {
 						if (item.Image && item.Image.length > 10) {
@@ -215,7 +279,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
 					// Create Date
 					if (item.hasOwnProperty('CreateDate')) {
-						const date = item.CreateDate ? HelperService.getUTC(this._authService.currentUserState.profile.language, item.CreateDate) : '-';
+						const date = item.CreateDate ? HelperService.getDateTime(this._authService.currentUserState.profile.language, item.CreateDate) : '-';
 						newItem = {
 							...newItem,
 							'Reg. Date': date
@@ -224,7 +288,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
 					// Login Date
 					if (item.hasOwnProperty('LoginDate')) {
-						const date = item.LoginDate ? HelperService.getUTC(this._authService.currentUserState.profile.language, item.LoginDate) : '-';
+						const date = item.LoginDate ? HelperService.getDateTime(this._authService.currentUserState.profile.language, item.LoginDate) : '-';
 						newItem = {
 							...newItem,
 							'Last Login': date
@@ -265,38 +329,6 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	}
 
 	/**
-	 * get page data on page change
-	 *
-	 * @param pageInfo
-	 */
-	public onChangeNextPage(pageInfo) {
-		const prevPageIndex = pageInfo.previousPageIndex;
-		const pageIndex = pageInfo.pageIndex;
-
-		// set page info
-		this.setTableInformation(pageIndex);
-
-		// validate next click
-		if (pageInfo.pageIndex > prevPageIndex) {
-			// start animation
-			this.loading = true;
-
-			// payload
-			const payload = {
-				...this.tableResources.payload,
-				queryParams: {
-					...this.tableResources.payload.queryParams,
-					offset: pageIndex ? (pageIndex * this.tablePageSize) + 1 : 0,
-					limit: this.tablePageSize
-				}
-			};
-
-			// load next data
-			this.loadNextData(this.tableResources.api, payload, pageIndex);
-		}
-	}
-
-	/**
 	 * filter table content
 	 *
 	 * @param inputValue
@@ -305,13 +337,23 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 		// start animation
 		this.loading = true;
 
+		// set sort data
+		let sortData = {};
+		if (this.sortColumn) {
+			sortData = {
+				column: this.tableResources.sortDefaultColumn,
+				sort: 'desc'
+			}
+		}
+
 		// payload
 		const payload = {
 			...this.tableResources.payload,
 			queryParams: {
 				...this.tableResources.payload.queryParams,
 				offset: 0,
-				limit: this.tablePageSize
+				limit: this.tablePageSize + 1,
+				...sortData
 			}
 		};
 
@@ -321,24 +363,78 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 				...payload,
 				queryParams: {
 					...payload.queryParams,
-					term: inputValue.toLowerCase()
+					searchKey: inputValue.toLowerCase()
 				}
 			};
 
 			// load next data
 			this.loadNextData(this.tableResources.searchApi, payloadWithInput, -1);
 		} else {
-			const payloadUpdate = {
-				...payload,
-				queryParams: {
-					...payload.queryParams,
-					limit: this.tablePageSize + 1
-				}
-			};
-
 			// load next data
-			this.loadNextData(this.tableResources.api, payloadUpdate, 0);
+			this.loadNextData(this.tableResources.api, payload, 0);
 		}
+
+		// move to first page.
+		if (this.dataSource.paginator) {
+			this.dataSource.paginator.firstPage();
+		}
+	}
+
+	/**
+	 * sort by column name
+	 *
+	 * @param column
+	 */
+	private onClickSortByColumn(column: string) {
+		let sortOrder;
+		let columnName;
+		if (column === 'Last Login') {
+			columnName = 'LoginDate';
+		} else if (column === 'Hotels(HGA)' || column === 'Hotels(HSA)') {
+			columnName = 'TotalHotels';
+		} else if (column === 'Users(HGA)' || column === 'Users(HSA)') {
+			columnName = 'TotalUsers';
+		}
+
+		// reset when new sorting column is clicked
+		if (this.sortColumn !== columnName) {
+			this.sortColumn = '';
+			this.sortOrder = '';
+		}
+
+		// sorting logic
+		if (this.sortOrder === 'desc' || !columnName) {
+			this.sortColumn = this.tableResources.sortDefaultColumn;
+			this.sortOrder = '';
+			sortOrder = 'desc';
+		} else {
+			this.sortColumn = columnName;
+			this.sortOrder = (!this.sortOrder) ? 'asc' : 'desc';
+			sortOrder = this.sortOrder;
+		}
+
+		// set sorting data
+		let sortData = {};
+		if (this.sortColumn) {
+			sortData = {
+				column: this.sortColumn,
+				sort: sortOrder
+			}
+		}
+
+		// payload
+		const payload = {
+			...this.tableResources.payload,
+			queryParams: {
+				...this.tableResources.payload.queryParams,
+				offset: 0,
+				limit: this.tablePageSize + 1,
+				...sortData
+			}
+		};
+
+		// load next data
+		this.loadNextData(this.tableResources.api, payload, 0);
 
 		// move to first page.
 		if (this.dataSource.paginator) {
