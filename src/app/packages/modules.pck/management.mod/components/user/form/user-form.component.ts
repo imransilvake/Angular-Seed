@@ -414,7 +414,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
 			};
 
 			// service
-			this._userService.userUpdate(formPayload, this._dialogRef, this.data && this.data.Role);
+			this._userService.userUpdate(formPayload, this._dialogRef, this.data && this.data.Type);
 		}
 	}
 

@@ -171,7 +171,7 @@ export class HelperService {
 	 * @param dateFormat
 	 */
 	public static getDateTime(lang: string, date: any, dateFormat?: string) {
-		const format = dateFormat ? dateFormat : 'DD. MMMM YYYY, hh:mm:ss';
+		const format = dateFormat ? dateFormat : 'DD. MMMM YYYY, HH:mm:ss';
 		return moment(date).locale(lang).format(format);
 	}
 }
