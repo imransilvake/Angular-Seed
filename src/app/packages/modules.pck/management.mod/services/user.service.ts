@@ -3,6 +3,8 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { BehaviorSubject, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { I18n } from '@ngx-translate/i18n-polyfill';
+import { FormGroup } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
 
 // app
 import { AppOptions, AppServices } from '../../../../../app.config';
@@ -46,7 +48,9 @@ export class UserService {
 		const queryParamsPayload = {
 			offset: 0,
 			limit: AppOptions.tablePageSizeLimit,
-			state: userListType
+			state: userListType,
+			column: 'CreateDate',
+			sort: 'desc'
 		};
 
 		// validate app state
@@ -240,9 +244,10 @@ export class UserService {
 	 * create new user
 	 *
 	 * @param formPayload
+	 * @param formFields
 	 * @param dialogRef
 	 */
-	public userCreate(formPayload: UserInterface, dialogRef: any) {
+	public userCreate(formPayload: UserInterface, formFields: FormGroup, dialogRef: any) {
 		const role = this.appState.role;
 		let api;
 		let payload;
@@ -304,6 +309,19 @@ export class UserService {
 				this._dialogService
 					.showDialog(dialogPayload)
 					.subscribe(() => dialogRef.close(true));
+			}, (err: HttpErrorResponse) => {
+				if (err.error.detail.code === 'UsernameExistsException') {
+					const message = this._i18n({
+						value: 'Description: Username Exists Exception',
+						id: 'Management_User_Form_Error_UsernameExistsException_Description'
+					});
+
+					// set field to show error message
+					formFields.get('email').setErrors({ backendError: true, text: message });
+
+					// message
+					this.errorMessage.emit(message);
+				}
 			});
 	}
 

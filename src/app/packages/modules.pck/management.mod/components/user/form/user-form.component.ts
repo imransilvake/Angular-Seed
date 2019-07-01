@@ -233,6 +233,17 @@ export class UserFormComponent implements OnInit, OnDestroy {
 		this._userService.formLoadingState
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(() => this.loading = false);
+
+		// listen: error message
+		this._userService.errorMessage
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => {
+				// update loading state
+				this.loading = false;
+
+				// error message
+				this.errorMessage = res;
+			});
 	}
 
 	ngOnDestroy() {
@@ -395,7 +406,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
 			};
 
 			// service
-			this._userService.userCreate(formPayload, this._dialogRef);
+			this._userService.userCreate(formPayload, this.formFields, this._dialogRef);
 		} else {
 			formPayload = {
 				ID: this.data.ID,
