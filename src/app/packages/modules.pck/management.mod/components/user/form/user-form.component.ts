@@ -308,7 +308,9 @@ export class UserFormComponent implements OnInit, OnDestroy {
 				// pre-select hotels
 				if (this.data && this.data.HotelIDs) {
 					const hotelIds = this.data.HotelIDs;
-					const hotels = this.hotelList.filter(hotel => hotelIds.includes(hotel.id));
+					const hotels = this.hotelList.filter(hotel =>
+						typeof hotelIds !== 'string' ? hotelIds.includes(hotel.id) : hotel.id === hotelIds
+					);
 					this.hotels.setValue(hotels);
 				}
 			});
@@ -348,11 +350,13 @@ export class UserFormComponent implements OnInit, OnDestroy {
 				// pre-select hotels
 				if (this.data && this.data.HotelIDs) {
 					const hotelIds = this.data.HotelIDs;
-					const groupId = hotelIds[0].split('_')[0];
+					const groupId = typeof hotelIds !== 'string' ? hotelIds[0].split('_')[0] : hotelIds.split('_')[0];
 					let selectedItems = [];
 					for (let i = 0; i < this.hotelListGroup.length; i++) {
 						if (this.hotelListGroup[i].name === groupId) {
-							selectedItems = this.hotelListGroup[i].items.filter(hotel => hotelIds.includes(hotel.id))
+							selectedItems = this.hotelListGroup[i].items.filter(hotel =>
+								typeof hotelIds !== 'string' ? hotelIds.includes(hotel.id) : hotel.id === hotelIds
+							)
 						}
 					}
 					this.hotels.setValue(selectedItems);
