@@ -183,7 +183,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 			if (this.search.value) {
 				searchData = {
 					searchKey: this.search.value.toLowerCase()
-				}
+				};
 			}
 
 			// set sort data
@@ -192,7 +192,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 				sortData = {
 					column: this.sortColumn,
 					sort: this.sortOrder ? this.sortOrder : 'desc'
-				}
+				};
 			}
 
 			// payload
@@ -347,7 +347,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 			sortData = {
 				column: this.tableResources.sortDefaultColumn,
 				sort: 'desc'
-			}
+			};
 		}
 
 		// payload
@@ -423,7 +423,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 			sortData = {
 				column: this.sortColumn,
 				sort: sortOrder
-			}
+			};
 		}
 
 		// payload

@@ -31,7 +31,7 @@ export class BroadcastService {
 
 		// validate app state
 		if (!id) {
-			let payload = {
+			const payload = {
 				queryParams: queryParamsPayload
 			};
 

@@ -171,7 +171,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
 			// check user selected role and pre-select role
 			if (this.data.Role) {
 				const roleId = this.data.Role.replace(' ', '_').toUpperCase();
-				const role = this.roleList.filter(role => role.id === roleId);
+				const role = this.roleList.filter(r => r.id === roleId);
 				this.role.setValue(...role);
 
 				// current role: not admin and group manager
@@ -344,7 +344,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
 					return {
 						name: hotel[0],
 						items: hotel[1]
-					}
+					};
 				});
 
 				// pre-select hotels
@@ -356,7 +356,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
 						if (this.hotelListGroup[i].name === groupId) {
 							selectedItems = this.hotelListGroup[i].items.filter(hotel =>
 								typeof hotelIds !== 'string' ? hotelIds.includes(hotel.id) : hotel.id === hotelIds
-							)
+							);
 						}
 					}
 					this.hotels.setValue(selectedItems);
@@ -380,7 +380,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
 		} else if (this.currentRole === this.roleGroupManager && this.role.value.id === this.roleGroupManager) {
 			groupId = this._userService.appState.groupId;
 			hotelIds = 'ANY';
-		} else if(this.currentRole === this.roleAdmin && this.role.value.id === this.roleGroupManager) {
+		} else if (this.currentRole === this.roleAdmin && this.role.value.id === this.roleGroupManager) {
 			groupId = this.hotels.value && this.hotels.value[0].id.split('_')[0];
 			hotelIds = 'ANY';
 		} else {
