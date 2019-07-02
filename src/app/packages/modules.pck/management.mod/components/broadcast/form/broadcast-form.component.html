@@ -3,7 +3,7 @@
 	<header class="ham-head">
 		<!-- Top -->
 		<div class="ham-top">
-			<h4 i18n="@@Management_Broadcast_Form_Title">Create / Resend Broadcast</h4>
+			<h4 i18n="@@Management_Broadcast_Form_Title">{{formTitle}} Broadcast</h4>
 			<a (click)="onClickCloseModal()">
 				<mat-icon class="ham-icon">cancel</mat-icon>
 			</a>
@@ -66,7 +66,6 @@
 		</div>
 
 		<div class="cd-row ham-padding-0">
-			<!-- Label -->
 			<h6 class="ham-color-label" i18n="@@Management_Broadcast_Form_Color_Label">Color</h6>
 			<div class="cd-col">
 				<mat-radio-group class="mat-radio-group-2" [formControl]="color">
@@ -74,6 +73,32 @@
 					<mat-radio-button value="#ffc107"></mat-radio-button>
 					<mat-radio-button value="#e74c3c"></mat-radio-button>
 				</mat-radio-group>
+			</div>
+		</div>
+
+		<div class="cd-row ham-label ham-padding-0">
+			<h6 class="ham-color-label" i18n="@@Management_Broadcast_Form_Date_Label">Show Until*</h6>
+		</div>
+		<div class="cd-row ham-padding-1">
+			<div class="cd-col cd-col-pm-t-6">
+				<app-datepicker
+					[inputId]="'management-broadcast-date-id'"
+					[inputType]="'text'"
+					[inputName]="'date'"
+					inputPlaceHolder="Date"
+					i18n-inputPlaceHolder="@@Management_User_Form_Date_PlaceHolder"
+					[minDate]="minDate"
+					[control]="date">
+				</app-datepicker>
+			</div>
+			<div class="cd-col cd-col-pm-t-6 cd-col-m-top">
+				<app-input
+					[inputId]="'management-broadcast-time-id'"
+					[inputType]="'time'"
+					[inputName]="'time'"
+					[inputPlaceHolder]="'hh:mm'"
+					[control]="time">
+				</app-input>
 			</div>
 		</div>
 

@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 // app
-import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum';
+import * as moment from 'moment';
 import { UserService } from '../../../services/user.service';
 import { ProxyService } from '../../../../../core.pck/proxy.mod/services/proxy.service';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
@@ -22,7 +22,8 @@ export class BroadcastFormComponent implements OnInit, OnDestroy {
 	public faIcons = [faSpinner];
 	public formFields;
 	public currentRole;
-	public roleAdmin: UserRoleEnum = UserRoleEnum[UserRoleEnum.ADMIN];
+	public minDate = moment(moment()).add(1, 'days').toDate();
+	public formTitle = 'Create';
 	public errorMessage;
 	public loading = false;
 
@@ -50,6 +51,13 @@ export class BroadcastFormComponent implements OnInit, OnDestroy {
 			]),
 			color: new FormControl('#71c578', [
 				Validators.required
+			]),
+			date:  new FormControl({ value: '', disabled: true }, [
+				Validators.required
+			]),
+			time:  new FormControl('', [
+				Validators.required,
+				ValidationService.timeValidator
 			])
 		});
 	}
@@ -57,6 +65,9 @@ export class BroadcastFormComponent implements OnInit, OnDestroy {
 	ngOnInit() {
 		// fill form with data
 		if (this.data) {
+			// change form title
+			this.formTitle = 'Resend';
+
 			// title
 			this.title.setValue(this.data.Title);
 
@@ -106,6 +117,14 @@ export class BroadcastFormComponent implements OnInit, OnDestroy {
 		return this.formFields.get('color');
 	}
 
+	get date() {
+		return this.formFields.get('date');
+	}
+
+	get time() {
+		return this.formFields.get('time');
+	}
+
 	get isFormValid() {
 		return this.formFields.valid;
 	}
@@ -114,7 +133,8 @@ export class BroadcastFormComponent implements OnInit, OnDestroy {
 	 * on submit form
 	 */
 	public onSubmitForm() {
-		console.log(this.formFields.value);
+		const formFields = this.formFields.getRawValue();
+		console.log(formFields);
 	}
 
 	/**

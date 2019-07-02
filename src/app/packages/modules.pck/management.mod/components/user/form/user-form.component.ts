@@ -45,6 +45,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
 	public hotelList: SelectDefaultInterface[] = [];
 	public hotelListGroup: SelectGroupInterface[] = [];
 	public selectedHotels = [];
+	public formTitle = 'Create';
 	public errorMessage;
 	public loading = false;
 
@@ -145,6 +146,9 @@ export class UserFormComponent implements OnInit, OnDestroy {
 
 		// fill form with data
 		if (this.data) {
+			// change form title
+			this.formTitle = 'Edit';
+
 			// language
 			if (this.data.Language) {
 				const language = this.languageList.filter(item => item.id === this.data.Language.toLowerCase());

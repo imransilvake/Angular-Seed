@@ -6,6 +6,7 @@ import { SharedModule } from '../../../shared/shared.module';
 import { InputComponent } from './components/input/input.component';
 import { SelectComponent } from './components/select/select.component';
 import { AutocompleteComponent } from './components/autocomplete/autocomplete.component';
+import { DatepickerComponent } from './components/datepicker/datepicker.component';
 
 @NgModule({
 	imports: [
@@ -14,12 +15,14 @@ import { AutocompleteComponent } from './components/autocomplete/autocomplete.co
 	declarations: [
 		InputComponent,
 		SelectComponent,
-		AutocompleteComponent
+		AutocompleteComponent,
+		DatepickerComponent
 	],
 	exports: [
 		InputComponent,
 		SelectComponent,
-		AutocompleteComponent
+		AutocompleteComponent,
+		DatepickerComponent
 	]
 })
 

@@ -10,7 +10,8 @@ export const patterns: any = {
 	text: /^[A-Za-z]+$/,
 	password: /^.{8,256}$/,
 	email: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-	url: /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
+	url: /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g,
+	time: /^(0[0-9]|1[0-9]|2[0-3]|[0-9]):[0-5][0-9]$/
 };
 
 @Injectable({ providedIn: 'root' })
@@ -124,5 +125,20 @@ export class ValidationService {
 		}
 
 		return { invalidUrl: true };
+	}
+
+	/**
+	 * time validator
+	 *
+	 * @param control
+	 */
+	static timeValidator(control: FormControl) {
+		const value = control.value;
+
+		if (value && value.match(patterns.time)) {
+			return null;
+		}
+
+		return { invalidTime: true };
 	}
 }

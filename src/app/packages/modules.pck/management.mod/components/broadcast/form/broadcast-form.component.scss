@@ -65,6 +65,10 @@
 				}
 			}
 
+			&.ham-label {
+				margin-bottom: 0;
+			}
+
 			.ham-color-label {
 				color: cd-palette($cd-color, 1004);
 				display: block;

@@ -6,11 +6,13 @@ import {
 	MatButtonToggleModule,
 	MatCheckboxModule,
 	MatChipsModule,
+	MatDatepickerModule,
 	MatDialogModule,
 	MatFormFieldModule,
 	MatIconModule,
 	MatInputModule,
 	MatMenuModule,
+	MatNativeDateModule,
 	MatPaginatorModule,
 	MatProgressBarModule,
 	MatProgressSpinnerModule,
@@ -48,7 +50,9 @@ import {
 		MatChipsModule,
 		MatRadioModule,
 		MatProgressSpinnerModule,
-		MatToolbarModule
+		MatToolbarModule,
+		MatDatepickerModule,
+		MatNativeDateModule
 	],
 	exports: [
 		MatButtonModule,
@@ -72,7 +76,9 @@ import {
 		MatChipsModule,
 		MatRadioModule,
 		MatProgressSpinnerModule,
-		MatToolbarModule
+		MatToolbarModule,
+		MatDatepickerModule,
+		MatNativeDateModule
 	]
 })
 
