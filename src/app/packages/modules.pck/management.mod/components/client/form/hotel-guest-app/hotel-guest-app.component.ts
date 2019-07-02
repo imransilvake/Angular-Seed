@@ -163,6 +163,9 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
 				if (res) {
+					// start loading animation
+					this._loadingAnimationService.startLoadingAnimation();
+
 					// override value
 					const value = this.hgaState.value;
 
@@ -182,9 +185,6 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 					// set override state
 					this.hgaState.setValue(!this.hgaState.value);
 				}
-
-				// stop loading animation
-				this._loadingAnimationService.stopLoadingAnimation();
 			});
 	}
 

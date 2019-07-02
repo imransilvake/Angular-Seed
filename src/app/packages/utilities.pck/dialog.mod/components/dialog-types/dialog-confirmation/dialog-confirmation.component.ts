@@ -4,7 +4,6 @@ import { MatDialogRef } from '@angular/material';
 
 // app
 import { DialogComponent } from '../../dialog.component';
-import { LoadingAnimationService } from '../../../../loading-animation.mod/services/loading-animation.service';
 
 @Component({
 	selector: 'app-dialog-confirmation',
@@ -15,10 +14,7 @@ import { LoadingAnimationService } from '../../../../loading-animation.mod/servi
 export class DialogConfirmationComponent {
 	@Input() data: any;
 
-	constructor(
-		private _loadingAnimationService: LoadingAnimationService,
-		public dialogRef: MatDialogRef<DialogComponent>
-	) {
+	constructor(public dialogRef: MatDialogRef<DialogComponent>) {
 	}
 
 	/**
@@ -27,12 +23,6 @@ export class DialogConfirmationComponent {
 	 * @param {boolean} status
 	 */
 	public onClickCloseDialog(status?: boolean) {
-		if (status) {
-			// start loading animation
-			this._loadingAnimationService.startLoadingAnimation();
-		}
-
-		// close modal
 		this.dialogRef.close(status);
 	}
 }

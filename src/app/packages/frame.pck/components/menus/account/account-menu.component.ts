@@ -1,6 +1,5 @@
 // angular
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -34,7 +33,6 @@ export class AccountMenuComponent implements OnInit, OnDestroy {
 		private _loadingAnimationService: LoadingAnimationService,
 		private _authService: AuthService,
 		private _memberService: MemberService,
-		private _router: Router,
 		private _dialogService: DialogService,
 		private _i18n: I18n
 	) {
@@ -105,6 +103,9 @@ export class AccountMenuComponent implements OnInit, OnDestroy {
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
 				if (res) {
+					// start loading animation
+					this._loadingAnimationService.startLoadingAnimation();
+
 					// logout
 					this._authService.logoutUser();
 				}

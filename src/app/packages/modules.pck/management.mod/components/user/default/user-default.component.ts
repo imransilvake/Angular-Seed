@@ -13,7 +13,6 @@ import { UtilityService } from '../../../../../utilities.pck/accessories.mod/ser
 import { HelperService } from '../../../../../utilities.pck/accessories.mod/services/helper.service';
 import { DialogTypeEnum } from '../../../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { DialogService } from '../../../../../utilities.pck/dialog.mod/services/dialog.service';
-import { LoadingAnimationService } from '../../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { UserViewInterface } from '../../../interfaces/user-view.interface';
 import { AppViewTypeEnum } from '../../../enums/app-view-type.enum';
 import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum';
@@ -45,8 +44,7 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 		private _proxyService: ProxyService,
 		private _utilityService: UtilityService,
 		private _i18n: I18n,
-		private _dialogService: DialogService,
-		private _loadingAnimationService: LoadingAnimationService
+		private _dialogService: DialogService
 	) {
 	}
 
@@ -287,9 +285,6 @@ export class UserDefaultComponent implements OnInit, OnDestroy {
 						};
 					}
 				}
-
-				// stop loading animation
-				this._loadingAnimationService.stopLoadingAnimation();
 			});
 	}
 
