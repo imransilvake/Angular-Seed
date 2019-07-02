@@ -37,15 +37,43 @@
 					[typeTextArea]="true"
 					[textareaMinRows]="5"
 					[showLabel]="true"
-					labelName="Title*"
-					i18n-labelName="@@Management_User_Form_Title_Label"
-					[inputId]="'management-broadcast-title-id'"
+					labelName="Broadcast Text*"
+					i18n-labelName="@@Management_User_Form_Text_Label"
+					[inputId]="'management-broadcast-text-id'"
 					[inputType]="'text'"
-					[inputName]="'title'"
-					inputPlaceHolder="Title"
-					i18n-inputPlaceHolder="@@Management_User_Form_Title_PlaceHolder"
+					[inputName]="'text'"
+					inputPlaceHolder="Broadcast Text"
+					i18n-inputPlaceHolder="@@Management_User_Form_Text_PlaceHolder"
 					[control]="description">
 				</app-input>
+			</div>
+		</div>
+
+		<div class="cd-row ham-padding-0">
+			<div class="cd-col">
+				<app-input
+					[showLabel]="true"
+					labelName="Link"
+					i18n-labelName="@@Management_User_Form_Link_Label"
+					[inputId]="'management-broadcast-link-id'"
+					[inputType]="'text'"
+					[inputName]="'link'"
+					inputPlaceHolder="Link"
+					i18n-inputPlaceHolder="@@Management_User_Form_Link_PlaceHolder"
+					[control]="link">
+				</app-input>
+			</div>
+		</div>
+
+		<div class="cd-row ham-padding-0">
+			<!-- Label -->
+			<h6 class="ham-color-label" i18n="@@Management_Broadcast_Form_Color_Label">Color</h6>
+			<div class="cd-col">
+				<mat-radio-group class="mat-radio-group-2" [formControl]="color">
+					<mat-radio-button value="#71c578"></mat-radio-button>
+					<mat-radio-button value="#ffc107"></mat-radio-button>
+					<mat-radio-button value="#e74c3c"></mat-radio-button>
+				</mat-radio-group>
 			</div>
 		</div>
 

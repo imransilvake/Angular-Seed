@@ -9,7 +9,8 @@ import * as zxcvbn from 'zxcvbn';
 export const patterns: any = {
 	text: /^[A-Za-z]+$/,
 	password: /^.{8,256}$/,
-	email: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+	email: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+	url: /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
 };
 
 @Injectable({ providedIn: 'root' })
@@ -108,5 +109,20 @@ export class ValidationService {
 		}
 
 		return { invalidOption: true };
+	}
+
+	/**
+	 * url validator
+	 *
+	 * @param control
+	 */
+	static urlValidator(control: FormControl) {
+		const value = control.value;
+
+		if (value && value.match(patterns.url)) {
+			return null;
+		}
+
+		return { invalidUrl: true };
 	}
 }

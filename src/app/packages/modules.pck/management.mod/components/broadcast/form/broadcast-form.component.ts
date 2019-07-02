@@ -10,6 +10,7 @@ import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum
 import { UserService } from '../../../services/user.service';
 import { ProxyService } from '../../../../../core.pck/proxy.mod/services/proxy.service';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { ValidationService } from '../../../../../core.pck/fields.mod/services/validation.service';
 
 @Component({
 	selector: 'app-broadcast-form',
@@ -43,6 +44,12 @@ export class BroadcastFormComponent implements OnInit, OnDestroy {
 			description: new FormControl('', [
 				Validators.required,
 				Validators.maxLength(5000)
+			]),
+			link: new FormControl('', [
+				ValidationService.urlValidator
+			]),
+			color: new FormControl('#71c578', [
+				Validators.required
 			])
 		});
 	}
@@ -91,6 +98,14 @@ export class BroadcastFormComponent implements OnInit, OnDestroy {
 		return this.formFields.get('description');
 	}
 
+	get link() {
+		return this.formFields.get('link');
+	}
+
+	get color() {
+		return this.formFields.get('color');
+	}
+
 	get isFormValid() {
 		return this.formFields.valid;
 	}
@@ -99,7 +114,7 @@ export class BroadcastFormComponent implements OnInit, OnDestroy {
 	 * on submit form
 	 */
 	public onSubmitForm() {
-
+		console.log(this.formFields.value);
 	}
 
 	/**
