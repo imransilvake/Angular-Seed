@@ -6,6 +6,8 @@ import { takeUntil } from 'rxjs/operators';
 // app
 import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum';
 import { BroadcastService } from '../../../services/broadcast.service';
+import { UserViewInterface } from '../../../interfaces/user-view.interface';
+import { AppViewTypeEnum } from '../../../enums/app-view-type.enum';
 
 @Component({
 	selector: 'app-broadcast-default',
@@ -20,7 +22,7 @@ export class BroadcastDefaultComponent implements OnInit {
 	public broadcastTable;
 	public currentRole: UserRoleEnum;
 	public roleAdmin: UserRoleEnum = UserRoleEnum[UserRoleEnum.ADMIN];
-	public buttonType;
+	public buttonType = 0;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
@@ -37,15 +39,20 @@ export class BroadcastDefaultComponent implements OnInit {
 		this._broadcastService.broadcastDataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
-				console.log(res);
+				// set tables resources
+				this.broadcastTable = {
+					api: this._broadcastService.broadcastTablesServices.api,
+					searchApi: this._broadcastService.broadcastTablesServices.api,
+					payload: this._broadcastService.broadcastTablesServices.payload,
+					uniqueID: this._broadcastService.broadcastTablesServices.uniqueID,
+					sortDefaultColumn: this._broadcastService.broadcastTablesServices.sortDefaultColumn
+				};
+
+				// set tables data
+				if (res && res.broadcastList) {
+					this.broadcastList = res.broadcastList;
+				}
 			});
-	}
-
-	/**
-	 * create new broadcast
-	 */
-	public onClickCreateNewBroadcast() {
-
 	}
 
 	/**
@@ -63,7 +70,25 @@ export class BroadcastDefaultComponent implements OnInit {
 	public onClickRowActionButtons(row: any) {
 		// resend broadcast
 		if (this.buttonType === 1) {
-			console.log(row);
+			// reset
+			this.buttonType = 0;
+
+			// change page view
+			this.changePageView(row);
 		}
+	}
+
+	/**
+	 * change page view
+	 *
+	 * @param data
+	 */
+	public changePageView(data?: any) {
+		// payload
+		const payload: UserViewInterface = {
+			view: AppViewTypeEnum.FORM,
+			data: data ? data : null
+		};
+		this.changeBroadcastView.emit(payload);
 	}
 }

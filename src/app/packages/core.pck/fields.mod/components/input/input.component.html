@@ -27,7 +27,7 @@
 		</div>
 
 		<!-- Input -->
-		<div class="ham-input">
+		<div class="ham-input" *ngIf="!typeTextArea">
 			<input
 				matInput
 				[formControl]="control"
@@ -37,6 +37,7 @@
 				[value]="control.value"
 				[placeholder]="inputPlaceHolder"
 				[autocomplete]="autocomplete"
+				[class.ham-space]="control.value"
 				(focus)="inputFocused=true"
 				(focusout)="inputFocused=false">
 
@@ -55,6 +56,33 @@
 				matSuffix
 				(click)="hidePassword = !hidePassword">
 				{{hidePassword ? 'visibility_off' : 'visibility'}}
+			</mat-icon>
+		</div>
+
+		<!-- Text Area -->
+		<div class="ham-textarea" *ngIf="typeTextArea">
+			<textarea
+				matInput
+				cdkTextareaAutosize
+				[formControl]="control"
+				[id]="inputId"
+				[name]="inputName"
+				[type]="hidePassword ? 'password' : inputType"
+				[value]="control.value"
+				[placeholder]="inputPlaceHolder"
+				[cdkAutosizeMinRows]="textareaMinRows"
+				[cdkAutosizeMaxRows]="textareaMaxRows"
+				[class.ham-space]="control.value"
+				(focus)="inputFocused=true"
+				(focusout)="inputFocused=false">
+			</textarea>
+
+			<!-- Close Icon -->
+			<mat-icon
+				*ngIf="control.value"
+				class="ham-icon ham-close"
+				(click)="control.setValue('')">
+				close
 			</mat-icon>
 		</div>
 	</div>

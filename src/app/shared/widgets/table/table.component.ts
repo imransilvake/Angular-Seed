@@ -3,7 +3,7 @@ import { Component, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, OnIni
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { debounceTime, takeUntil } from 'rxjs/operators';
 
 // app
 import { ProxyService } from '../../../packages/core.pck/proxy.mod/services/proxy.service';
@@ -68,7 +68,10 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
 		// filter search results
 		this.search.valueChanges
-			.pipe(takeUntil(this._ngUnSubscribe))
+			.pipe(
+				debounceTime(250),
+				takeUntil(this._ngUnSubscribe)
+			)
 			.subscribe(res => this.applyFilter(res));
 	}
 
@@ -299,6 +302,15 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 						};
 					}
 
+					// Send Date
+					if (item.hasOwnProperty('Date')) {
+						const date = item.Date ? HelperService.getDateTime(this._authService.currentUserState.profile.language, item.Date) : '-';
+						newItem = {
+							...newItem,
+							'Date': date
+						};
+					}
+
 					// Creator
 					if (item.hasOwnProperty('LoginDate')) {
 						newItem = {
@@ -398,6 +410,8 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 			columnName = 'TotalHotels';
 		} else if (column === 'Users(HGA)' || column === 'Users(HSA)') {
 			columnName = 'TotalUsers';
+		} else if (column === 'Date') {
+			columnName = 'SendDate';
 		}
 
 		// reset when new sorting column is clicked

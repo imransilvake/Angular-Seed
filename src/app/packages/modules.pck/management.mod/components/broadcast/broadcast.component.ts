@@ -10,9 +10,10 @@ import { AppViewTypeEnum } from '../../enums/app-view-type.enum';
 import { BroadcastService } from '../../services/broadcast.service';
 import { AuthService } from '../../../authorization.mod/services/auth.service';
 import { SidebarService } from '../../../../frame.pck/services/sidebar.service';
+import { BroadcastFormComponent } from './form/broadcast-form.component';
 
 @Component({
-	selector: 'app-system-broadcast',
+	selector: 'app-broadcast',
 	templateUrl: './broadcast.component.html',
 })
 
@@ -44,7 +45,7 @@ export class BroadcastComponent implements OnDestroy {
 	 */
 	public openBroadcastFormModal() {
 		// open modal
-		const modal = this._dialog.open(null, {
+		const modal = this._dialog.open(BroadcastFormComponent, {
 			disableClose: true,
 			width: '700px',
 			data: this.data

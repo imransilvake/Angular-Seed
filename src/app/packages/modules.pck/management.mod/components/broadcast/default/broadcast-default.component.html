@@ -1,17 +1,17 @@
 <div class="ham-broadcast-default">
 	<!-- Button: Create New Broadcast -->
 	<div class="ham-button-wrapper" *ngIf="currentRole === roleAdmin">
-		<button mat-button class="ham-button ham-button-1" i18n="@@Management_Broadcast_Create_NewBroadcast" (click)="onClickCreateNewBroadcast()">
+		<button mat-button class="ham-button ham-button-1" i18n="@@Management_Broadcast_Create_NewBroadcast" (click)="changePageView()">
 			Create New Broadcast
 		</button>
 	</div>
 
 	<!-- Broadcast List -->
-	<div class="ham-existing-users" *ngIf="broadcastList">
+	<div class="ham-broadcast-list" *ngIf="broadcastList">
 		<app-table
-			tableTitle="Existing Users"
+			tableTitle="Broadcast List"
 			i18n-tableTitle="@@Management_Broadcast_Table_Title"
-			tableFilterInputName="user-existing-table-filter"
+			tableFilterInputName="broadcast-table-filter"
 			i18n-tableFilterInputName="@@Management_Broadcast_Table_Input_Name"
 			tableFilterInputPlaceHolder="Search"
 			i18n-tableFilterInputPlaceHolder="@@Management_Broadcast_Table_Input_Filter_PlaceHolder"
@@ -30,7 +30,7 @@
 					class="ham-button ham-button-2 ham-table-button-1"
 					(click)="onClickResendBroadcast()"
 					i18n="@@Management_Broadcast_Table_Resend">
-					Edit
+					Resend
 				</button>
 			</ng-template>
 		</app-table>

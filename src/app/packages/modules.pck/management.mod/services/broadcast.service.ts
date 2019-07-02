@@ -39,7 +39,8 @@ export class BroadcastService {
 			this.broadcastTablesServices = {
 				api: api,
 				payload: payload,
-				uniqueID: 'Id'
+				uniqueID: 'Id',
+				sortDefaultColumn: 'SendDate'
 			};
 
 			// service

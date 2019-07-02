@@ -24,6 +24,7 @@ import { UserDefaultComponent } from './components/user/default/user-default.com
 import { UserFormComponent } from './components/user/form/user-form.component';
 import { BroadcastDefaultComponent } from './components/broadcast/default/broadcast-default.component';
 import { BroadcastService } from './services/broadcast.service';
+import { BroadcastFormComponent } from './components/broadcast/form/broadcast-form.component';
 
 @NgModule({
 	imports: [
@@ -46,7 +47,8 @@ import { BroadcastService } from './services/broadcast.service';
 		HotelManagerAppComponent,
 		UserDefaultComponent,
 		UserFormComponent,
-		BroadcastDefaultComponent
+		BroadcastDefaultComponent,
+		BroadcastFormComponent
 	],
 	providers: [
 		UserService,
@@ -54,7 +56,8 @@ import { BroadcastService } from './services/broadcast.service';
 		BroadcastService
 	],
 	entryComponents: [
-		UserFormComponent
+		UserFormComponent,
+		BroadcastFormComponent
 	]
 })
 

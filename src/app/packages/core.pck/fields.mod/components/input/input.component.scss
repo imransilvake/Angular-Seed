@@ -61,12 +61,12 @@
 			}
 		}
 
-		.ham-input {
+		.ham-input, .ham-textarea {
 			direction: ltr;
 			position: relative;
 			width: 100%;
 
-			input {
+			input, textarea {
 				background-color: transparent;
 				border: none;
 				box-shadow: none;
@@ -77,6 +77,10 @@
 				outline: 0;
 				padding: 12px;
 				width: 100%;
+
+				&.ham-space {
+					padding-right: 32px;
+				}
 
 				&:disabled {
 					cursor: default;
