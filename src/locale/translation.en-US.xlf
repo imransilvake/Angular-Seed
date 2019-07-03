@@ -238,6 +238,14 @@
 					<context context-type="linenumber">53</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="Frame_Hotel_Group_List_PlaceHolder" datatype="html">
+				<source>Select Hotel / Group</source>
+				<target>Choose hotel / hotel group</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/frame.pck/components/sidebar/primary/primary-sidebar.component.html</context>
+					<context context-type="linenumber">7</context>
+				</context-group>
+			</trans-unit>
 			<trans-unit id="Widget_Password_Strength_Title" datatype="html">
 				<source>Password Strength:</source>
 				<target>Password Strength:</target>
@@ -286,6 +294,16 @@
 						app/shared/widgets/password-strength/password-strength.component.html
 					</context>
 					<context context-type="linenumber">19</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Table_No_Data" datatype="html">
+				<source>
+					No Data is available.
+				</source>
+				<target>No data is available.</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/shared/widgets/table/table.component.html</context>
+					<context context-type="linenumber">78</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Pages_404_Link" datatype="html">
@@ -341,7 +359,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Register_Form_HotelList_PlaceHolder" datatype="html">
 				<source>Select Hotel</source>
-				<target>Please select hotel</target>
+				<target>Select hotel</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/register/register.component.html
@@ -351,7 +369,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Register_Form_Salutation_PlaceHolder" datatype="html">
 				<source>Select Salutation</source>
-				<target>Please select salutation</target>
+				<target>Select salutation</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/register/register.component.html
@@ -411,7 +429,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Register_Form_Email_PlaceHolder" datatype="html">
 				<source>Email</source>
-				<target>Please enter email address</target>
+				<target>Enter email address</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/register/register.component.html
@@ -431,7 +449,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Register_Form_Password_PlaceHolder" datatype="html">
 				<source>Password</source>
-				<target>Please enter password</target>
+				<target>Enter password</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/register/register.component.html
@@ -525,7 +543,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Login_Form_Username_PlaceHolder" datatype="html">
 				<source>Username</source>
-				<target>Please enter user name</target>
+				<target>Enter user name</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/login/login.component.html
@@ -545,7 +563,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Login_Form_Password_PlaceHolder" datatype="html">
 				<source>Password</source>
-				<target>Please enter password</target>
+				<target>Enter password</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/login/login.component.html
@@ -691,7 +709,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_ForgotPassword_Form_Email_PlaceHolder" datatype="html">
 				<source>Email</source>
-				<target>Please enter email address</target>
+				<target>Enter email address</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.html
@@ -775,7 +793,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_ResetPassword_Form_New_Password_PlaceHolder" datatype="html">
 				<source>New Password</source>
-				<target>Please enter new password</target>
+				<target>Enter new password</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/reset-password/reset-password.component.html
@@ -795,7 +813,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_ResetPassword_Form_Confirm_New_Password_PlaceHolder" datatype="html">
 				<source>Confirm New Password</source>
-				<target>Please enter new password</target>
+				<target>Confirm password</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/reset-password/reset-password.component.html
@@ -815,7 +833,7 @@
 			</trans-unit>
 			<trans-unit id="Member_Profile_Title" datatype="html">
 				<source>User Profile</source>
-				<target>User Profile</target>
+				<target>User profile</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/member.mod/components/profile/profile.component.html
@@ -843,7 +861,7 @@
 			</trans-unit>
 			<trans-unit id="Member_Profile_UpdateProfile_Form_Salutation_PlaceHolder" datatype="html">
 				<source>Select Salutation</source>
-				<target>Please select salutation</target>
+				<target>Select salutation</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/update-profile/update-profile.component.html</context>
 					<context context-type="linenumber">23</context>
@@ -891,7 +909,7 @@
 			</trans-unit>
 			<trans-unit id="Member_Profile_UpdateProfile_Form_Email_PlaceHolder" datatype="html">
 				<source>Email</source>
-				<target>Please enter email address</target>
+				<target>Enter email address</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/update-profile/update-profile.component.html</context>
 					<context context-type="linenumber">69</context>
@@ -963,7 +981,7 @@
 			</trans-unit>
 			<trans-unit id="Member_Profile_ChangePassword_Form_Current_Password_PlaceHolder" datatype="html">
 				<source>Current Password</source>
-				<target>Please enter current password</target>
+				<target>Enter current password</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/change-password/change-password.component.html</context>
 					<context context-type="linenumber">21</context>
@@ -979,7 +997,7 @@
 			</trans-unit>
 			<trans-unit id="Member_Profile_ChangePassword_Form_New_Password_PlaceHolder" datatype="html">
 				<source>New Password</source>
-				<target>Please enter new password</target>
+				<target>Enter new password</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/change-password/change-password.component.html</context>
 					<context context-type="linenumber">41</context>
@@ -987,7 +1005,7 @@
 			</trans-unit>
 			<trans-unit id="Member_Profile_ChangePassword_Form_Confirm_New_Password_Label" datatype="html">
 				<source>Confirm New Password*</source>
-				<target>Confirm new password</target>
+				<target>Confirm password</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/change-password/change-password.component.html</context>
 					<context context-type="linenumber">49</context>
@@ -995,7 +1013,7 @@
 			</trans-unit>
 			<trans-unit id="Member_Profile_ChangePassword_Form_Confirm_New_Password_PlaceHolder" datatype="html">
 				<source>Confirm New Password</source>
-				<target>Please enter new password</target>
+				<target>Enter new password</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/change-password/change-password.component.html</context>
 					<context context-type="linenumber">56</context>
@@ -1128,7 +1146,7 @@
 				</source>
 				<target>
 					<x id="START_TAG_LABEL" ctype="x-label" equiv-text="&lt;label&gt;"/>
-					[Select file]
+					Select file
 					<x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input/&gt;"/>
 					<x id="CLOSE_TAG_LABEL" ctype="x-label" equiv-text="&lt;/label&gt;"/>
 				</target>
@@ -1155,7 +1173,7 @@
 			</trans-unit>
 			<trans-unit id="Member_Profile_ProfileCover_Change_Image" datatype="html">
 				<source>[Change Image]</source>
-				<target>[Change image]</target>
+				<target>Change image</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/profile-cover/profile-cover.component.html</context>
 					<context context-type="linenumber">14</context>
@@ -1621,6 +1639,972 @@
 						src/app/packages/modules.pck/authorization.mod/services/auth.service.ts
 					</context>
 					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_Title" datatype="html">
+				<source>Client Management</source>
+				<target>Client Management</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/client.component.html</context>
+					<context context-type="linenumber">4</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_Create_Hotel_Group" datatype="html">
+				<source>
+					Create New Hotel / Group
+				</source>
+				<target>Create a new hotel / hotel group</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/default/client-default.component.html</context>
+					<context context-type="linenumber">4</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_Table_Edit" datatype="html">
+				<source>Edit</source>
+				<target>Edit</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/default/client-default.component.html</context>
+					<context context-type="linenumber">27</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_Table_Title" datatype="html">
+				<source>Hotels / Hotelgroups</source>
+				<target>Hotels and hotel groups</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/default/client-default.component.html</context>
+					<context context-type="linenumber">12</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_Table_Input_Name" datatype="html">
+				<source>client-table-filter</source>
+				<target>Name of the Hotel / Hotel group</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/default/client-default.component.html</context>
+					<context context-type="linenumber">14</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_Table_Input_Filter_PlaceHolder" datatype="html">
+				<source>Search</source>
+				<target>Search</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/default/client-default.component.html</context>
+					<context context-type="linenumber">16</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_Access_Denied" datatype="html">
+				<source>Access Denied!</source>
+				<target>Access denied</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/default/client-default.component.html</context>
+					<context context-type="linenumber">34</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_Form_License_Label" datatype="html">
+				<source>Licenses</source>
+				<target>Licenses</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/client-form.component.html</context>
+					<context context-type="linenumber">16</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_Form_SystemData_Label" datatype="html">
+				<source>System Data</source>
+				<target>Master data</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/client-form.component.html</context>
+					<context context-type="linenumber">27</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_Form_HotelGuestApp_Label" datatype="html">
+				<source>HotelGuest/App</source>
+				<target>HotelGuest/APP</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/client-form.component.html</context>
+					<context context-type="linenumber">38</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_Form_HotelStaffApp_Label" datatype="html">
+				<source>HotelStaff/App</source>
+				<target>HotelStaff/APP</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/client-form.component.html</context>
+					<context context-type="linenumber">49</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_Form_HotelAppManager_Label" datatype="html">
+				<source>HotelAppManager</source>
+				<target>HotelAppManager</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/client-form.component.html</context>
+					<context context-type="linenumber">60</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_System_Broadcast_Title" datatype="html">
+				<source>Broadcast</source>
+				<target>System Broadcast</target>
+				<target>System Broadcast</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/broadcast/broadcast.component.html</context>
+					<context context-type="linenumber">4</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_User_Form_Title" datatype="html">
+				<source>Create / Edit User</source>
+				<target>Create / Edit User</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/form/user-form.component.html</context>
+					<context context-type="linenumber">6</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_User_Form_Language_Label" datatype="html">
+				<source>Language*</source>
+				<target>Language</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/form/user-form.component.html</context>
+					<context context-type="linenumber">22</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_User_Form_Language_PlaceHolder" datatype="html">
+				<source>Select Language</source>
+				<target>Select language</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/form/user-form.component.html</context>
+					<context context-type="linenumber">26</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_User_Form_Salutation_Label" datatype="html">
+				<source>Salutation*</source>
+				<target>Salutation*</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/form/user-form.component.html</context>
+					<context context-type="linenumber">36</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_User_Form_Salutation_PlaceHolder" datatype="html">
+				<source>Select Salutation</source>
+				<target>Choose ...</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/form/user-form.component.html</context>
+					<context context-type="linenumber">40</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_User_Form_FirstName_Label" datatype="html">
+				<source>First Name*</source>
+				<target>First name*</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/form/user-form.component.html</context>
+					<context context-type="linenumber">52</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_User_Form_FirstName_PlaceHolder" datatype="html">
+				<source>First Name</source>
+				<target>Enter first name</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/form/user-form.component.html</context>
+					<context context-type="linenumber">57</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_User_Form_LastName_Label" datatype="html">
+				<source>Last Name*</source>
+				<target>Last name*</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/form/user-form.component.html</context>
+					<context context-type="linenumber">65</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_User_Form_LastName_PlaceHolder" datatype="html">
+				<source>Last Name</source>
+				<target>Enter last name</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/form/user-form.component.html</context>
+					<context context-type="linenumber">70</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_User_Form_Email_Label" datatype="html">
+				<source>Email*</source>
+				<target>Email (user name)*</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/form/user-form.component.html</context>
+					<context context-type="linenumber">81</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_User_Form_Email_PlaceHolder" datatype="html">
+				<source>Email</source>
+				<target>Enter email address</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/form/user-form.component.html</context>
+					<context context-type="linenumber">86</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_User_Form_Role_Label" datatype="html">
+				<source>Role*</source>
+				<target>Role*</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/form/user-form.component.html</context>
+					<context context-type="linenumber">97</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_User_Form_Role_PlaceHolder" datatype="html">
+				<source>Select Role</source>
+				<target>Choose role</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/form/user-form.component.html</context>
+					<context context-type="linenumber">101</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_User_Form_Hotel_Label" datatype="html">
+				<source>Hotel(s)*</source>
+				<target>Hotel(s)*</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/form/user-form.component.html</context>
+					<context context-type="linenumber">113</context>
+				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/form/user-form.component.html</context>
+					<context context-type="linenumber">126</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_User_Form_Hotel_PlaceHolder" datatype="html">
+				<source>Select Hotel(s)</source>
+				<target>Choose hotel(s)</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/form/user-form.component.html</context>
+					<context context-type="linenumber">117</context>
+				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/form/user-form.component.html</context>
+					<context context-type="linenumber">130</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_User_Form_Note" datatype="html">
+				<source>Note</source>
+				<target>Once created, the user will be notified by email to complete their account within 48 hours.</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/form/user-form.component.html</context>
+					<context context-type="linenumber">140</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_User_Form_Cancel_Button" datatype="html">
+				<source>Cancel</source>
+				<target>Cancel</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/form/user-form.component.html</context>
+					<context context-type="linenumber">151</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_User_Form_Save_Button" datatype="html">
+				<source>Save</source>
+				<target>Create</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/form/user-form.component.html</context>
+					<context context-type="linenumber">154</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_User_Title" datatype="html">
+				<source>User Management</source>
+				<target>User Management</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/user.component.html</context>
+					<context context-type="linenumber">4</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_Form_Company_Label" datatype="html">
+				<source>Company*</source>
+				<target>Company name</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
+					<context context-type="linenumber">8</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_Form_Company_PlaceHolder" datatype="html">
+				<source>Company</source>
+				<target>Enter company name</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
+					<context context-type="linenumber">13</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_Form_SystemIdentifier_Label" datatype="html">
+				<source>Sys-Identifier*</source>
+				<target>System ID</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
+					<context context-type="linenumber">22</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_Form_SystemIdentifier_PlaceHolder" datatype="html">
+				<source>Sys-Identifier</source>
+				<target>Enter System ID</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
+					<context context-type="linenumber">27</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_Form_Address1_Label" datatype="html">
+				<source>Address1*</source>
+				<target>Address 1</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
+					<context context-type="linenumber">40</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_Form_Address1_PlaceHolder" datatype="html">
+				<source>Address1</source>
+				<target>Enter address</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
+					<context context-type="linenumber">45</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_Form_Address2_Label" datatype="html">
+				<source>Address2</source>
+				<target>Address 2</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
+					<context context-type="linenumber">54</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_Form_Address2_PlaceHolder" datatype="html">
+				<source>Address2</source>
+				<target>Enter address</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
+					<context context-type="linenumber">59</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_Form_Zip_Label" datatype="html">
+				<source>Zip*</source>
+				<target>ZIP</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
+					<context context-type="linenumber">70</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_Form_Zip_PlaceHolder" datatype="html">
+				<source>Zip</source>
+				<target>Enter ZIP</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
+					<context context-type="linenumber">75</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_Form_City_Label" datatype="html">
+				<source>City*</source>
+				<target>City</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
+					<context context-type="linenumber">84</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_Form_City_PlaceHolder" datatype="html">
+				<source>City</source>
+				<target>Enter city</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
+					<context context-type="linenumber">89</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_Form_Country_Label" datatype="html">
+				<source>Country*</source>
+				<target>Country</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
+					<context context-type="linenumber">101</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_Form_Country_PlaceHolder" datatype="html">
+				<source>Select Country</source>
+				<target>Choose ...</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
+					<context context-type="linenumber">104</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_Form_HGA_Title" datatype="html">
+				<source>HotelGuest/App</source>
+				<target>HotelGuest/APP License</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
+					<context context-type="linenumber">115</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_Form_HGA_NumberOfHotels_Label" datatype="html">
+				<source>Number of Hotels</source>
+				<target>Number of hotels</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
+					<context context-type="linenumber">122</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_Form_HGA_NumberOfHotels_PlaceHolder" datatype="html">
+				<source>Number of Hotels</source>
+				<target>Choose ...</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
+					<context context-type="linenumber">125</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_Form_HGA_NumberOfUsers_Label" datatype="html">
+				<source>Number of Users</source>
+				<target>Number of users</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
+					<context context-type="linenumber">135</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_Form_HGA_NumberOfUsers_PlaceHolder" datatype="html">
+				<source>Number of Users</source>
+				<target>Choose ...</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
+					<context context-type="linenumber">140</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_Form_HSA_Title" datatype="html">
+				<source>HotelStaff/App</source>
+				<target>HotelStaff/APP License</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
+					<context context-type="linenumber">147</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_Form_HSA_NumberOfHotels_Label" datatype="html">
+				<source>Number of Hotels</source>
+				<target>Number of hotels</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
+					<context context-type="linenumber">154</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_Form_HSA_NumberOfHotels_PlaceHolder" datatype="html">
+				<source>Number of Hotels</source>
+				<target>Choose ...</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
+					<context context-type="linenumber">157</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_Form_HSA_NumberOfUsers_Label" datatype="html">
+				<source>Number of Users</source>
+				<target>Number of users</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
+					<context context-type="linenumber">167</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_Form_HSA_NumberOfUsers_PlaceHolder" datatype="html">
+				<source>Number of Users</source>
+				<target>Choose ...</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
+					<context context-type="linenumber">172</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_Form_HSA_NumberOfUserBlocks_Label" datatype="html">
+				<source>Number of User Blocks</source>
+				<target>Number of additional user blocks</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
+					<context context-type="linenumber">183</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_Form_HSA_NumberOfUserBlocks_PlaceHolder" datatype="html">
+				<source>Number of User Blocks</source>
+				<target>Choose ...</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
+					<context context-type="linenumber">186</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_Form_Cancel_Button" datatype="html">
+				<source>Cancel</source>
+				<target>Cancel</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
+					<context context-type="linenumber">203</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_Form_Save_Button" datatype="html">
+				<source>Save</source>
+				<target>Save</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
+					<context context-type="linenumber">204</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_SystemData_Form_Reservation_Title" datatype="html">
+				<source>Allow guests with a valid reservation only</source>
+				<target>Allow guests with a valid reservation only</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/system-data/system-data.component.html</context>
+					<context context-type="linenumber">8</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_SystemData_Form_Reservation_Note" datatype="html">
+				<source>Note</source>
+				<target>If activated, only guests with a valid reservation number have access to the services of the HotelGuest/APP.
+					Other guests with an installed iOS or Android App on their devices are not able to use the services.</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/system-data/system-data.component.html</context>
+					<context context-type="linenumber">9</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_SystemData_Form_TargetGroup_Title" datatype="html">
+				<source>Seperate target groups between member and guests with a valid reservation</source>
+				<target>Separate target groups between member and guests with a valid reservation</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/system-data/system-data.component.html</context>
+					<context context-type="linenumber">15</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_SystemData_Form_TargetGroup_Note" datatype="html">
+				<source>Note</source>
+				<target>If activated, all guest notifications and services in the HotelAppManager are provided with a selection box to target messages and services to different target groups.</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/system-data/system-data.component.html</context>
+					<context context-type="linenumber">16</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_SystemData_Form_PrimaryLanguage_Label" datatype="html">
+				<source>Primary Language</source>
+				<target>Primary language</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/system-data/system-data.component.html</context>
+					<context context-type="linenumber">26</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_SystemData_Form_PrimaryLanguage_PlaceHolder" datatype="html">
+				<source>Primary Language</source>
+				<target>Choose ...</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/system-data/system-data.component.html</context>
+					<context context-type="linenumber">29</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_SystemData_Form_SecondaryLanguage_Label" datatype="html">
+				<source>Secondary Language</source>
+				<target>Secondary language</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/system-data/system-data.component.html</context>
+					<context context-type="linenumber">40</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_SystemData_Form_SecondaryLanguage_PlaceHolder" datatype="html">
+				<source>Secondary Language</source>
+				<target>Choose ...</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/system-data/system-data.component.html</context>
+					<context context-type="linenumber">43</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_SystemData_Form_Language_Note" datatype="html">
+				<source>Note</source>
+				<target>The HotelGuestApp can be operated bilingually if required. In this case, the guest will see contents depending on their profile or browser settings. Activating this function ensures that all content related fields within the HotelAppManager are bilingual entered and forwarded.</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/system-data/system-data.component.html</context>
+					<context context-type="linenumber">53</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_SystemData_Form_Endpoint_Label" datatype="html">
+				<source>Endpoint for hotels and regions</source>
+				<target>Endpoint URL for hotels and regions</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/system-data/system-data.component.html</context>
+					<context context-type="linenumber">64</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_SystemData_Form_Endpoint_PlaceHolder" datatype="html">
+				<source>Endpoint</source>
+				<target>Enter endpoint URL</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/system-data/system-data.component.html</context>
+					<context context-type="linenumber">69</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_SystemData_Form_APIUsername_Label" datatype="html">
+				<source>API username</source>
+				<target>API username</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/system-data/system-data.component.html</context>
+					<context context-type="linenumber">87</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_SystemData_Form_APIUsername_PlaceHolder" datatype="html">
+				<source>API username</source>
+				<target>Enter API username</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/system-data/system-data.component.html</context>
+					<context context-type="linenumber">92</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_SystemData_Form_APIPassword_Label" datatype="html">
+				<source>API password</source>
+				<target>API password</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/system-data/system-data.component.html</context>
+					<context context-type="linenumber">101</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_SystemData_Form_APIPassword_PlaceHolder" datatype="html">
+				<source>API password</source>
+				<target>Enter API password</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/system-data/system-data.component.html</context>
+					<context context-type="linenumber">108</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_SystemData_Form_Token_Label" datatype="html">
+				<source>Token</source>
+				<target>Token</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/system-data/system-data.component.html</context>
+					<context context-type="linenumber">119</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_SystemData_Form_Token_PlaceHolder" datatype="html">
+				<source>Token</source>
+				<target>Enter token</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/system-data/system-data.component.html</context>
+					<context context-type="linenumber">124</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_SystemData_Form_Credentials_Note" datatype="html">
+				<source>Note</source>
+				<target>A valid API endpoint for loading hotels and regions must be specified and the intervals at which the data is updated by the external system must be defined. Without a correct API endpoint, the HotelGuest/APP will not work properly.</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/system-data/system-data.component.html</context>
+					<context context-type="linenumber">133</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_SystemData_Form_Cancel_Button" datatype="html">
+				<source>Cancel</source>
+				<target>Cancel</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/system-data/system-data.component.html</context>
+					<context context-type="linenumber">145</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_SystemData_Form_Save_Button" datatype="html">
+				<source>Save</source>
+				<target>Save</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/system-data/system-data.component.html</context>
+					<context context-type="linenumber">146</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HGA_Toggle" datatype="html">
+				<source>HotelManager can activate / deactivate licensed modules too</source>
+				<target>Hotel manager can activate / deactivate licensed modules</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/hotel-guest-app/hotel-guest-app.component.html</context>
+					<context context-type="linenumber">3</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HGA_Column_License" datatype="html">
+				<source>License</source>
+				<target>Licensed</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/hotel-guest-app/hotel-guest-app.component.html</context>
+					<context context-type="linenumber">12</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HGA_Column_Active" datatype="html">
+				<source>Active</source>
+				<target>Active</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/hotel-guest-app/hotel-guest-app.component.html</context>
+					<context context-type="linenumber">13</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HGA_Column_Module" datatype="html">
+				<source>Module</source>
+				<target>Module name</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/hotel-guest-app/hotel-guest-app.component.html</context>
+					<context context-type="linenumber">14</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HGA_Column_Description" datatype="html">
+				<source>Description</source>
+				<target>Modul description</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/hotel-guest-app/hotel-guest-app.component.html</context>
+					<context context-type="linenumber">15</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HGA_Column_Preferred" datatype="html">
+				<source>Preferred</source>
+				<target>prominent</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/hotel-guest-app/hotel-guest-app.component.html</context>
+					<context context-type="linenumber">17</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HGA_Form_Params" datatype="html">
+				<source>
+					Params
+				</source>
+				<target>Parameter</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/hotel-guest-app/hotel-guest-app.component.html</context>
+					<context context-type="linenumber">52</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_Form_No_module_Available" datatype="html">
+				<source>No Module available!</source>
+				<target>No Module available</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/hotel-guest-app/hotel-guest-app.component.html</context>
+					<context context-type="linenumber">75</context>
+				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/hotel-staff-app/hotel-staff-app.component.html</context>
+					<context context-type="linenumber">58</context>
+				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/hotel-manager-app/hotel-manager-app.component.html</context>
+					<context context-type="linenumber">58</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_Form_No_Access_Available" datatype="html">
+				<source>Access Denied!</source>
+				<target>Access denied</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/hotel-guest-app/hotel-guest-app.component.html</context>
+					<context context-type="linenumber">83</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HGA_Form_Cancel_Button" datatype="html">
+				<source>Cancel
+				</source>
+				<target>Cancel</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/hotel-guest-app/hotel-guest-app.component.html</context>
+					<context context-type="linenumber">97</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HGA_Form_Save_Button" datatype="html">
+				<source>Save
+				</source>
+				<target>Save</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/hotel-guest-app/hotel-guest-app.component.html</context>
+					<context context-type="linenumber">103</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HSA_Column_License" datatype="html">
+				<source>License</source>
+				<target>Licensed</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/hotel-staff-app/hotel-staff-app.component.html</context>
+					<context context-type="linenumber">6</context>
+				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/hotel-manager-app/hotel-manager-app.component.html</context>
+					<context context-type="linenumber">6</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HSA_Column_Active" datatype="html">
+				<source>Active</source>
+				<target>Active</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/hotel-staff-app/hotel-staff-app.component.html</context>
+					<context context-type="linenumber">7</context>
+				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/hotel-manager-app/hotel-manager-app.component.html</context>
+					<context context-type="linenumber">7</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HSA_Column_Module" datatype="html">
+				<source>Module</source>
+				<target>Module name</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/hotel-staff-app/hotel-staff-app.component.html</context>
+					<context context-type="linenumber">8</context>
+				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/hotel-manager-app/hotel-manager-app.component.html</context>
+					<context context-type="linenumber">8</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HSA_Column_Description" datatype="html">
+				<source>Description</source>
+				<target>Modul description</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/hotel-staff-app/hotel-staff-app.component.html</context>
+					<context context-type="linenumber">9</context>
+				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/hotel-manager-app/hotel-manager-app.component.html</context>
+					<context context-type="linenumber">9</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HSA_Form_Params" datatype="html">
+				<source>
+					Params
+				</source>
+				<target>Parameter</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/hotel-staff-app/hotel-staff-app.component.html</context>
+					<context context-type="linenumber">44</context>
+				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/hotel-manager-app/hotel-manager-app.component.html</context>
+					<context context-type="linenumber">44</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HSA_Form_Cancel_Button" datatype="html">
+				<source>Cancel
+				</source>
+				<target>Cancel</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/hotel-staff-app/hotel-staff-app.component.html</context>
+					<context context-type="linenumber">72</context>
+				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/hotel-manager-app/hotel-manager-app.component.html</context>
+					<context context-type="linenumber">72</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HSA_Form_Save_Button" datatype="html">
+				<source>Save
+				</source>
+				<target>Save</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/hotel-staff-app/hotel-staff-app.component.html</context>
+					<context context-type="linenumber">78</context>
+				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/hotel-manager-app/hotel-manager-app.component.html</context>
+					<context context-type="linenumber">78</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_User_NewUsers_Table_Edit" datatype="html">
+				<source>
+					Edit
+				</source>
+				<target>Edit</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/default/user-default.component.html</context>
+					<context context-type="linenumber">23</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_User_NewUsers_Table_Decline" datatype="html">
+				<source>
+					Decline
+				</source>
+				<target>Reject</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/default/user-default.component.html</context>
+					<context context-type="linenumber">30</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_User_NewUsers_Table_Title" datatype="html">
+				<source>Received Registrations</source>
+				<target>Received registration requests</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/default/user-default.component.html</context>
+					<context context-type="linenumber">5</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_User_Create_NewUser" datatype="html">
+				<source>
+					Create New User
+				</source>
+				<target>Create user</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/default/user-default.component.html</context>
+					<context context-type="linenumber">39</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_User_ExistingUsers_Table_Edit" datatype="html">
+				<source>
+					Edit
+				</source>
+				<target>Edit</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/default/user-default.component.html</context>
+					<context context-type="linenumber">67</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_User_ExistingUsers_Table_Delete" datatype="html">
+				<source>
+					Delete
+				</source>
+				<target>Delete</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/default/user-default.component.html</context>
+					<context context-type="linenumber">74</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_User_ExistingUsers_Table_Title" datatype="html">
+				<source>Existing Users</source>
+				<target>Registered users</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/default/user-default.component.html</context>
+					<context context-type="linenumber">47</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_User_ExistingUsers_Table_Input_Name" datatype="html">
+				<source>user-existing-table-filter</source>
+				<target>Name</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/default/user-default.component.html</context>
+					<context context-type="linenumber">49</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_User_ExistingUsers_Table_Input_Filter_PlaceHolder" datatype="html">
+				<source>Search</source>
+				<target>Search</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/default/user-default.component.html</context>
+					<context context-type="linenumber">51</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Broadcast_Create_NewBroadcast" datatype="html">
+				<source>
+					Create New Broadcast
+				</source>
+				<target>New system message</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/broadcast/default/broadcast-default.component.html</context>
+					<context context-type="linenumber">4</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Broadcast_Table_Resend" datatype="html">
+				<source>
+					Edit
+				</source>
+				<target>Resend</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/broadcast/default/broadcast-default.component.html</context>
+					<context context-type="linenumber">32</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Broadcast_Table_Title" datatype="html">
+				<source>Existing Users</source>
+				<target>Sent system messages</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/broadcast/default/broadcast-default.component.html</context>
+					<context context-type="linenumber">12</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Broadcast_Table_Input_Name" datatype="html">
+				<source>user-existing-table-filter</source>
+				<target>Filter</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/broadcast/default/broadcast-default.component.html</context>
+					<context context-type="linenumber">14</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Broadcast_Table_Input_Filter_PlaceHolder" datatype="html">
+				<source>Search</source>
+				<target>Search</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/broadcast/default/broadcast-default.component.html</context>
+					<context context-type="linenumber">16</context>
 				</context-group>
 			</trans-unit>
 		</body>
