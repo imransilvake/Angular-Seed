@@ -13,7 +13,7 @@ import { DashboardComponent } from './packages/modules.pck/dashboard.component';
 const ROUTES: Routes = [
 	{
 		path: '',
-		redirectTo: ROUTING.authorization.login,
+		redirectTo: ROUTING.authorization.routes.login,
 		pathMatch: 'full'
 	},
 	{
@@ -32,7 +32,7 @@ const ROUTES: Routes = [
 				path: '',
 				children: [
 					{
-						path: ROUTING.dashboard,
+						path: ROUTING.pages.dashboard,
 						component: DashboardComponent
 					},
 					{

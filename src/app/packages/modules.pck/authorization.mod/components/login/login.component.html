@@ -61,7 +61,7 @@
 					<!-- Remember Me -->
 					<div class="cd-col ham-sby-remember">
 						<mat-checkbox class="ham-checkbox-1" [formControl]="rememberMe" i18n="@@Auth_Login_Form_Remember_Text">Remember Me</mat-checkbox>
-						<a class="ham-remember-color" [routerLink]="['/' + routing.authorization.forgot]" i18n="@@Auth_Login_Form_Forget_Password_Link_Text">Forget Password?</a>
+						<a class="ham-remember-color" [routerLink]="['/' + routing.authorization.routes.forgot]" i18n="@@Auth_Login_Form_Forget_Password_Link_Text">Forget Password?</a>
 					</div>
 
 					<!-- Button -->
@@ -75,7 +75,7 @@
 
 					<!-- Note -->
 					<div class="cd-col">
-						<p i18n="@@Auth_Login_Form_Note">Don't have an account? <a [routerLink]="['/' + routing.authorization.register]">Register</a></p>
+						<p i18n="@@Auth_Login_Form_Note">Don't have an account? <a [routerLink]="['/' + routing.authorization.routes.register]">Register</a></p>
 					</div>
 				</div>
 			</form>

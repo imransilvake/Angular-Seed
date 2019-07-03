@@ -19,10 +19,10 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 		private _authService: AuthService
 	) {
 		this.authRoutes = [
-			ROUTING.authorization.register,
-			ROUTING.authorization.login,
-			ROUTING.authorization.reset,
-			ROUTING.authorization.forgot
+			ROUTING.authorization.routes.register,
+			ROUTING.authorization.routes.login,
+			ROUTING.authorization.routes.reset,
+			ROUTING.authorization.routes.forgot
 		];
 	}
 
@@ -42,12 +42,12 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 							case 'OK':
 								if (this.authRoutes.includes(currentPath)) {
 									// navigate to dashboard
-									this._router.navigate([ROUTING.dashboard]).then();
+									this._router.navigate([ROUTING.pages.dashboard]).then();
 								}
 								break;
 							case 'FAIL':
 								const path = currentPath.split('?');
-								if (!this.authRoutes.includes(path[0]) || currentPath === ROUTING.authorization.reset && !path[1]) {
+								if (!this.authRoutes.includes(path[0]) || currentPath === ROUTING.authorization.routes.reset && !path[1]) {
 									// logout user
 									this._authService.logoutUser();
 								}

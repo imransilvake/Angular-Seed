@@ -11,19 +11,19 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 // routes
 export const AUTHORIZATION_ROUTES: Routes = [
 	{
-		path: ROUTING.authorization.register,
+		path: ROUTING.authorization.routes.register,
 		component: RegisterComponent
 	},
 	{
-		path: ROUTING.authorization.login,
+		path: ROUTING.authorization.routes.login,
 		component: LoginComponent
 	},
 	{
-		path: ROUTING.authorization.forgot,
+		path: ROUTING.authorization.routes.forgot,
 		component: ForgotPasswordComponent
 	},
 	{
-		path: ROUTING.authorization.reset,
+		path: ROUTING.authorization.routes.reset,
 		component: ResetPasswordComponent
 	}
 ];

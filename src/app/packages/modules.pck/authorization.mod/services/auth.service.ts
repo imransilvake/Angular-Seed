@@ -97,7 +97,7 @@ export class AuthService {
 				this._dialogService
 					.showDialog(data)
 					.subscribe(() =>
-						this._router.navigate([ROUTING.authorization.login]).then()
+						this._router.navigate([ROUTING.authorization.routes.login]).then()
 					);
 			}, (err: HttpErrorResponse) => {
 				if (err.error.detail.code === 'UsernameExistsException') {
@@ -163,7 +163,7 @@ export class AuthService {
 						// navigate to defined url
 						// stop loading animation
 						this._router
-							.navigate([ROUTING.dashboard])
+							.navigate([ROUTING.pages.dashboard])
 							.then(() => {
 								// stop loading animation
 								this._loadingAnimationService.stopLoadingAnimation();
@@ -293,7 +293,7 @@ export class AuthService {
 				this._dialogService
 					.showDialog(dialogPayload)
 					.subscribe(() =>
-						this._router.navigate([ROUTING.authorization.login]).then()
+						this._router.navigate([ROUTING.authorization.routes.login]).then()
 					);
 			}, (err: HttpErrorResponse) => {
 				let message;
@@ -387,7 +387,7 @@ export class AuthService {
 				this._dialogService
 					.showDialog(dialogPayload)
 					.subscribe(() =>
-						this._router.navigate([ROUTING.authorization.login]).then()
+						this._router.navigate([ROUTING.authorization.routes.login]).then()
 					);
 			}, (err: HttpErrorResponse) => {
 				let message;
@@ -479,7 +479,7 @@ export class AuthService {
 
 		// navigate to login
 		this._router
-			.navigate([ROUTING.authorization.login])
+			.navigate([ROUTING.authorization.routes.login])
 			.then(() => this._loadingAnimationService.stopLoadingAnimation());
 	}
 }

@@ -1,14 +1,15 @@
 export const EnvironmentRoutes = {
-	dashboard: 'dashboard',
 	pages: {
-		maintenance: 'maintenance'
+		dashboard: 'dashboard'
 	},
 	authorization: {
-		login: 'auth/login',
-		register: 'auth/register',
-		forgot: 'auth/forgot',
-		reset: 'auth/reset',
-		lock: 'auth/lock'
+		title: 'authorization',
+		routes: {
+			login: 'auth/login',
+			register: 'auth/register',
+			forgot: 'auth/forgot',
+			reset: 'auth/reset'
+		}
 	},
 	member: {
 		title: 'member',
@@ -22,6 +23,12 @@ export const EnvironmentRoutes = {
 			user: 'management/user',
 			client: 'management/client',
 			broadcast: 'management/broadcast'
+		}
+	},
+	notifications: {
+		title: 'notifications',
+		routes: {
+			overview: 'notifications/overview'
 		}
 	}
 };

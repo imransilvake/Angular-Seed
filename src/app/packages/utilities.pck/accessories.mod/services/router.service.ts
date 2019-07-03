@@ -20,10 +20,10 @@ export class RouterService {
 	private lastRoute;
 	private currentUrl;
 	private authRoutes = [
-		`/${ ROUTING.authorization.register }`,
-		`/${ ROUTING.authorization.login }`,
-		`/${ ROUTING.authorization.reset }`,
-		`/${ ROUTING.authorization.forgot }`
+		`/${ ROUTING.authorization.routes.register }`,
+		`/${ ROUTING.authorization.routes.login }`,
+		`/${ ROUTING.authorization.routes.reset }`,
+		`/${ ROUTING.authorization.routes.forgot }`
 	];
 
 	constructor(
@@ -62,7 +62,7 @@ export class RouterService {
 	 * @param event
 	 */
 	private setPreviousUrl(event) {
-		this.lastRoute = this.authRoutes.includes(this.currentUrl) || this.currentUrl === '/' ? ROUTING.dashboard : this.currentUrl;
+		this.lastRoute = this.authRoutes.includes(this.currentUrl) || this.currentUrl === '/' ? ROUTING.pages.dashboard : this.currentUrl;
 		this.currentUrl = event.url;
 	}
 }

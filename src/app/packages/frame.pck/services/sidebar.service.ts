@@ -58,7 +58,17 @@ export class SidebarService {
 				children: [
 					{
 						name: 'Home',
-						url: `/${ ROUTING.dashboard }`,
+						url: `/${ ROUTING.pages.dashboard }`,
+					}
+				]
+			},
+			{
+				name: 'Notifications',
+				icon: faHome,
+				children: [
+					{
+						name: 'Overview',
+						url: `/${ ROUTING.pages.dashboard }`,
 					}
 				]
 			},
