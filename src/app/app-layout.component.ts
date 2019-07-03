@@ -4,8 +4,12 @@ import { merge, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 // app
+import * as SessionActions from './packages/core.pck/session.mod/store/actions/session.actions';
 import { ScrollTopService } from './packages/utilities.pck/accessories.mod/services/scroll-top.service';
 import { HelperService } from './packages/utilities.pck/accessories.mod/services/helper.service';
+import { SessionsEnum } from './packages/core.pck/session.mod/enums/sessions.enum';
+import { Store } from '@ngrx/store';
+import { SessionInterface } from './packages/core.pck/session.mod/interfaces/session.interface';
 
 @Component({
 	selector: 'app-layout',
@@ -22,9 +26,15 @@ export class AppLayoutComponent implements AfterViewInit, OnDestroy {
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
-	constructor(private _scrollTopService: ScrollTopService) {
+	constructor(
+		private _scrollTopService: ScrollTopService,
+		private _store: Store<{ SessionInterface: SessionInterface }>
+	) {
 		// detect current view
 		this.isViewDesktop = HelperService.isDesktopView;
+
+		// session: start authentication
+		this._store.dispatch(new SessionActions.SessionCounterStart(SessionsEnum.SESSION_AUTHENTICATION));
 	}
 
 	ngAfterViewInit() {
@@ -48,6 +58,9 @@ export class AppLayoutComponent implements AfterViewInit, OnDestroy {
 		// remove subscriptions
 		this._ngUnSubscribe.next();
 		this._ngUnSubscribe.complete();
+
+		// session: stop authentication
+		this._store.dispatch(new SessionActions.SessionCounterExit(SessionsEnum.SESSION_AUTHENTICATION));
 	}
 
 	/**

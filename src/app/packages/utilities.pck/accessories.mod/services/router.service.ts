@@ -3,8 +3,16 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
+// store
+import { Store } from '@ngrx/store';
+
 // app
+import * as SessionActions from '../../../core.pck/session.mod/store/actions/session.actions';
 import { ROUTING } from '../../../../../environments/environment';
+import { SessionService } from '../../../core.pck/session.mod/services/session.service';
+import { SessionsEnum } from '../../../core.pck/session.mod/enums/sessions.enum';
+import { SessionInterface } from '../../../core.pck/session.mod/interfaces/session.interface';
+import { AuthService } from '../../../modules.pck/authorization.mod/services/auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class RouterService {
@@ -18,7 +26,12 @@ export class RouterService {
 		`/${ ROUTING.authorization.forgot }`
 	];
 
-	constructor(private _router: Router) {
+	constructor(
+		private _router: Router,
+		private _sessionService: SessionService,
+		private _store: Store<{ SessionInterface: SessionInterface }>,
+		private _authService: AuthService
+	) {
 		this.currentUrl = this._router.url;
 		this._router.events
 			.pipe(filter(event => event instanceof NavigationEnd))
@@ -28,6 +41,11 @@ export class RouterService {
 
 				// set previous url
 				this.setPreviousUrl(event);
+
+				// session: reset authentication
+				if (_authService.currentUserState) {
+					this._store.dispatch(new SessionActions.SessionCounterReset(SessionsEnum.SESSION_AUTHENTICATION));
+				}
 			});
 	}
 

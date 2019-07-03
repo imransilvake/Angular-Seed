@@ -4,12 +4,14 @@ import { AppServicesInterface } from './app/packages/core.pck/proxy.mod/interfac
 // general
 export const AppOptions = {
 	secretKey: 'ham',
-	notificationSessionTime: 3600 * 1000,
 	languages: {
 		en: 'en',
 		de: 'de',
 		fr: 'fr',
 		es: 'es'
+	},
+	sessionTime: {
+		auth: 3601 * 1000
 	},
 	rememberMeValidityInDays: 90,
 	tablePageSizeLimit: 21
