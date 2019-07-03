@@ -325,7 +325,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
 	 */
 	public getAllGroupHotels() {
 		this._proxyService
-			.getAPI(AppServices['Utilities']['HotelListAll'])
+			.getAPI(AppServices['Utilities']['Hotels_List_All'])
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
 				// map response

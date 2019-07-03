@@ -179,7 +179,7 @@ export class UtilityService {
 	 * all hotels
 	 */
 	public getHotelList() {
-		return this._proxyService.getAPI(AppServices['Utilities']['HotelList']);
+		return this._proxyService.getAPI(AppServices['Utilities']['Hotels_List']);
 	}
 
 	/**
@@ -189,7 +189,7 @@ export class UtilityService {
 	 */
 	public getHotelListByGroup(payload: any) {
 		if (payload) {
-			return this._proxyService.getAPI(AppServices['Utilities']['HotelListGroup'], payload);
+			return this._proxyService.getAPI(AppServices['Utilities']['Hotels_List_Group'], payload);
 		} else {
 			return of(null);
 		}

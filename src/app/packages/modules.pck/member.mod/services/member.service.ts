@@ -50,7 +50,7 @@ export class MemberService {
 
 		// service
 		return this._proxyService
-			.getAPI(AppServices['Member']['Fetch_Profile'], { queryParams: payload })
+			.getAPI(AppServices['Member']['Profile_List'], { queryParams: payload })
 			.pipe(map(res => res));
 	}
 
@@ -68,7 +68,7 @@ export class MemberService {
 
 		// service
 		this._proxyService
-			.postAPI(AppServices['Member']['Update_Profile'], { bodyParams: payload })
+			.postAPI(AppServices['Member']['Profile_Update'], { bodyParams: payload })
 			.subscribe(() => {
 				// stop loading animation
 				this._loadingAnimationService.stopLoadingAnimation();
@@ -125,7 +125,7 @@ export class MemberService {
 
 		// service
 		this._proxyService
-			.postAPI(AppServices['Member']['Change_Password'], { bodyParams: payload })
+			.postAPI(AppServices['Member']['Profile_Change_Password'], { bodyParams: payload })
 			.subscribe(() => {
 				// payload
 				const dialogPayload = {
@@ -203,7 +203,7 @@ export class MemberService {
 		};
 
 		// service
-		this._proxyService.postAPI(AppServices['Utilities']['Change_Profile_Image'], { bodyParams: payload })
+		this._proxyService.postAPI(AppServices['Utilities']['Profile_Image_Change'], { bodyParams: payload })
 			.subscribe(res => {
 				if (res) {
 					// payload

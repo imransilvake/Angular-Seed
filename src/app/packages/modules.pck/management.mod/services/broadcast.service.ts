@@ -31,7 +31,7 @@ export class BroadcastService {
 	 * fetch broadcast list
 	 */
 	public broadcastFetchList(id: string) {
-		const api = AppServices['Management']['Broadcast_Default_List_All'];
+		const api = AppServices['Management']['Broadcast_List_All'];
 		const queryParamsPayload = {
 			offset: 0,
 			limit: AppOptions.tablePageSizeLimit,

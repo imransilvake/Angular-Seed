@@ -115,7 +115,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	 */
 	async getImageSrc(imageName) {
 		const response = await this._proxyService
-			.postAPI(AppServices['Utilities']['Fetch_Profile_Image'], { bodyParams: { image: imageName } })
+			.postAPI(AppServices['Utilities']['Profile_Image_Fetch'], { bodyParams: { image: imageName } })
 			.toPromise();
 
 		return typeof response.image === 'string' ? response.image : null;

@@ -39,12 +39,12 @@ export class UserService {
 	 * @param userListType
 	 */
 	public userFetchList(id: string, userListType: string) {
-		const allApi = AppServices['Management']['User_Default_List'];
-		const hotelGroupApi = AppServices['Management']['User_Default_List_Hotel_Group'];
-		const hotelApi = AppServices['Management']['User_Default_List_Hotel'];
-		const searchAllApi = AppServices['Management']['User_Default_Search'];
-		const searchHotelGroupApi = AppServices['Management']['User_Default_Search_Group'];
-		const searchHotelApi = AppServices['Management']['User_Default_Search_Hotel'];
+		const allApi = AppServices['Management']['User_List_All'];
+		const hotelGroupApi = AppServices['Management']['User_List_Group'];
+		const hotelApi = AppServices['Management']['User_List_Hotel'];
+		const searchAllApi = AppServices['Management']['User_List_Search_All'];
+		const searchHotelGroupApi = AppServices['Management']['User_List_Search_Group'];
+		const searchHotelApi = AppServices['Management']['User_List_Search_Hotel'];
 		const queryParamsPayload = {
 			offset: 0,
 			limit: AppOptions.tablePageSizeLimit,
@@ -211,11 +211,11 @@ export class UserService {
 		switch (this.appState.type) {
 			case AppStateEnum.ALL:
 				// set api
-				api = AppServices['Management']['User_Default_List_Remove_User'];
+				api = AppServices['Management']['User_List_Remove_All'];
 				break;
 			case AppStateEnum.GROUP:
 				// set api
-				api = AppServices['Management']['User_Default_List_Remove_User_Group'];
+				api = AppServices['Management']['User_List_Remove_Group'];
 
 				// set payload
 				payload = {
@@ -227,7 +227,7 @@ export class UserService {
 				break;
 			case AppStateEnum.HOTEL:
 				// set api
-				api = AppServices['Management']['User_Default_List_Remove_User_Hotel'];
+				api = AppServices['Management']['User_List_Remove_Hotel'];
 
 				payload = {
 					...payload,
@@ -257,7 +257,7 @@ export class UserService {
 		switch (role) {
 			case UserRoleEnum[UserRoleEnum.ADMIN]:
 				// set api
-				api = AppServices['Management']['User_Form_Create_User'];
+				api = AppServices['Management']['User_Form_Create_All'];
 
 				// set payload
 				payload = {
@@ -266,7 +266,7 @@ export class UserService {
 				break;
 			case UserRoleEnum[UserRoleEnum.GROUP_MANAGER]:
 				// set api
-				api = AppServices['Management']['User_Form_Create_User_Group'];
+				api = AppServices['Management']['User_Form_Create_Group'];
 
 				// set payload
 				payload = {
@@ -278,7 +278,7 @@ export class UserService {
 				break;
 			case UserRoleEnum[UserRoleEnum.HOTEL_MANAGER]:
 				// set api
-				api = AppServices['Management']['User_Form_Create_User_Hotel'];
+				api = AppServices['Management']['User_Form_Create_Hotel'];
 
 				// set payload
 				payload = {
@@ -343,9 +343,9 @@ export class UserService {
 			case UserRoleEnum[UserRoleEnum.ADMIN]:
 				// set api
 				if (updateUser) {
-					api = AppServices['Management']['User_Form_Update_User'];
+					api = AppServices['Management']['User_Form_Update_All'];
 				} else {
-					api = AppServices['Management']['User_Form_Confirm_User'];
+					api = AppServices['Management']['User_Form_Confirm_All'];
 				}
 
 				// set payload
@@ -356,9 +356,9 @@ export class UserService {
 			case UserRoleEnum[UserRoleEnum.GROUP_MANAGER]:
 				// set api
 				if (updateUser) {
-					api = AppServices['Management']['User_Form_Update_User_Group'];
+					api = AppServices['Management']['User_Form_Update_Group'];
 				} else {
-					api = AppServices['Management']['User_Form_Confirm_User_Group'];
+					api = AppServices['Management']['User_Form_Confirm_Group'];
 				}
 
 				// set payload
@@ -372,9 +372,9 @@ export class UserService {
 			case UserRoleEnum[UserRoleEnum.HOTEL_MANAGER]:
 				// set api
 				if (updateUser) {
-					api = AppServices['Management']['User_Form_Update_User_Hotel'];
+					api = AppServices['Management']['User_Form_Update_Hotel'];
 				} else {
-					api = AppServices['Management']['User_Form_Confirm_User_Hotel'];
+					api = AppServices['Management']['User_Form_Confirm_Hotel'];
 				}
 
 				// set payload

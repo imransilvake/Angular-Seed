@@ -43,9 +43,9 @@ export class ClientService {
 	 * @param id
 	 */
 	public clientFetchHotelGroupList(id: string) {
-		const allApi = AppServices['Management']['Client_Default_List'];
-		const hotelGroupApi = AppServices['Management']['Client_Default_List_Hotel_Group'];
-		const hotelApi = AppServices['Management']['Client_Default_List_Hotel'];
+		const allApi = AppServices['Management']['Client_List_All'];
+		const hotelGroupApi = AppServices['Management']['Client_List_Group'];
+		const hotelApi = AppServices['Management']['Client_List_Hotel'];
 		const queryParamsPayload = {
 			offset: 0,
 			limit: AppOptions.tablePageSizeLimit
@@ -132,7 +132,7 @@ export class ClientService {
 	 */
 	public clientFetchLicenseSystem(id: string) {
 		return !id || this.appState.role !== UserRoleEnum[UserRoleEnum.ADMIN] ? of(null) : this._proxyService
-			.getAPI(AppServices['Management']['Client_Form_License_HotelGroup_Fetch'], {
+			.getAPI(AppServices['Management']['Client_Form_License_And_System'], {
 				pathParams: { groupId: id }
 			})
 			.pipe(map(res => res));
@@ -210,7 +210,7 @@ export class ClientService {
 	 */
 	public clientValidateLicenseIdentifier(formPayload: LicenseIdentifierInterface, formFields: FormGroup) {
 		this._proxyService
-			.postAPI(AppServices['Management']['Client_Form_License_HotelGroup_Validate'], { bodyParams: formPayload })
+			.postAPI(AppServices['Management']['Client_Form_Validate_License_Group'], { bodyParams: formPayload })
 			.subscribe(() => this.errorMessage.emit(), (err: HttpErrorResponse) => {
 				if (err.error.detail.code === 'InvalidGroupID') {
 					const message = this._i18n({
@@ -236,7 +236,7 @@ export class ClientService {
 	 */
 	public clientValidateSystemEndpoint(validateFormPayload: SystemEndpointInterface, formFields: FormGroup, licenseData: LicenseSystemInterface) {
 		this._proxyService
-			.postAPI(AppServices['Management']['Client_Form_System_HotelGroup_Validate'], { bodyParams: validateFormPayload })
+			.postAPI(AppServices['Management']['Client_Form_Validate_System_Endpoint'], { bodyParams: validateFormPayload })
 			.subscribe(res => {
 				// stop loading animation
 				this._loadingAnimationService.stopLoadingAnimation();
@@ -307,7 +307,7 @@ export class ClientService {
 	 */
 	public clientUpdateLicenseAndSystem(formPayload: LicenseSystemInterface) {
 		this._proxyService
-			.postAPI(AppServices['Management']['Client_Form_License_System_HotelGroup_Update'], { bodyParams: formPayload })
+			.postAPI(AppServices['Management']['Client_Form_Update_License_And_System_Group'], { bodyParams: formPayload })
 			.subscribe(() => {
 				// stop loading animation
 				this._loadingAnimationService.stopLoadingAnimation();
@@ -347,7 +347,7 @@ export class ClientService {
 	public clientFetchOverrideHGA(id: string) {
 		if (this.appState.role !== UserRoleEnum[UserRoleEnum.HOTEL_MANAGER]) {
 			return this._proxyService
-				.getAPI(AppServices['Management']['Client_Form_HGA_Override_All_Fetch'], {
+				.getAPI(AppServices['Management']['Client_Form_HGA_Override_All'], {
 					pathParams: {
 						groupId: this.appState.role === UserRoleEnum[UserRoleEnum.ADMIN] ? id : this.appState.groupId,
 						appId: ClientAppTypeEnum.HGA
@@ -356,7 +356,7 @@ export class ClientService {
 				.pipe(map(res => res));
 		} else {
 			return this._proxyService
-				.getAPI(AppServices['Management']['Client_Form_HGA_Override_Hotel_Fetch'], {
+				.getAPI(AppServices['Management']['Client_Form_HGA_Override_Hotel'], {
 					pathParams: {
 						groupId: this.appState.role === UserRoleEnum[UserRoleEnum.ADMIN] ? id : this.appState.groupId,
 						hotelId: this.appState.hotelId,
@@ -374,7 +374,7 @@ export class ClientService {
 	 */
 	public clientUpdateOverrideHGA(formPayload: HgaOverrideInterface) {
 		this._proxyService
-			.postAPI(AppServices['Management']['Client_Form_HGA_Override_Update'], {
+			.postAPI(AppServices['Management']['Client_Form_HGA_Override_Group'], {
 				bodyParams: formPayload,
 				pathParams: { groupId: formPayload.GroupID }
 			})
@@ -395,7 +395,7 @@ export class ClientService {
 			const isHotel = this.appState && (this.appState.hotelId !== this.appState.groupId);
 			if (isHotel) {
 				return this._proxyService
-					.getAPI(AppServices['Management']['Client_Form_App_Hotel_Fetch'], {
+					.getAPI(AppServices['Management']['Client_Form_App_List_Hotel'], {
 						pathParams: {
 							groupId: id,
 							hotelId: this.appState && this.appState.hotelId,
@@ -417,7 +417,7 @@ export class ClientService {
 					}));
 			} else {
 				return this._proxyService
-					.getAPI(AppServices['Management']['Client_Form_App_HotelGroup_Fetch'], {
+					.getAPI(AppServices['Management']['Client_Form_App_List_Group'], {
 						pathParams: {
 							groupId: id,
 							appId: clientAppType
@@ -474,7 +474,7 @@ export class ClientService {
 		const isHotel = this.appState.hotelId && (this.appState.hotelId !== this.appState.groupId);
 		if (isHotel) {
 			this._proxyService
-				.postAPI(AppServices['Management']['Client_Form_App_Hotel_Update'], {
+				.postAPI(AppServices['Management']['Client_Form_App_Update_Hotel'], {
 					pathParams: {
 						groupId: id,
 						hotelId: this.appState.hotelId
@@ -507,7 +507,7 @@ export class ClientService {
 				});
 		} else {
 			this._proxyService
-				.postAPI(AppServices['Management']['Client_Form_App_HotelGroup_Update'], {
+				.postAPI(AppServices['Management']['Client_Form_App_Update_Group'], {
 					pathParams: { groupId: id },
 					bodyParams: formPayload
 				})

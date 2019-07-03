@@ -139,7 +139,7 @@ export class AuthService {
 					const imageResponse = !userInfo.picture ?
 						of(null) :
 						this._proxyService
-							.postAPI(AppServices['Utilities']['Fetch_Profile_Image'], { bodyParams: imagePayload });
+							.postAPI(AppServices['Utilities']['Profile_Image_Fetch'], { bodyParams: imagePayload });
 
 					// image service response
 					imageResponse.subscribe(resp => {

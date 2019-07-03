@@ -3,7 +3,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 
 // app
-import { faBell, faDatabase, faExternalLinkAlt, faHome } from '@fortawesome/free-solid-svg-icons';
+import { faDatabase, faEnvelopeOpenText, faExternalLinkAlt, faHome } from '@fortawesome/free-solid-svg-icons';
 import { ROUTING } from '../../../../environments/environment';
 import { SidebarInterface } from '../interfaces/sidebar.interface';
 import { SelectGroupInterface } from '../../core.pck/fields.mod/interfaces/select-group.interface';
@@ -64,7 +64,7 @@ export class SidebarService {
 			},
 			{
 				name: 'Notifications',
-				icon: faBell,
+				icon: faEnvelopeOpenText,
 				children: [
 					{
 						name: 'Overview',
@@ -111,11 +111,11 @@ export class SidebarService {
 		switch (role) {
 			case UserRoleEnum[UserRoleEnum.ADMIN]:
 				// set api
-				api = AppServices['Utilities']['HotelListAll'];
+				api = AppServices['Utilities']['Hotels_List_All'];
 				break;
 			case UserRoleEnum[UserRoleEnum.GROUP_MANAGER]:
 				// set api
-				api = AppServices['Utilities']['HotelListGroup'];
+				api = AppServices['Utilities']['Hotels_List_Group'];
 
 				// set payload
 				payload = {
@@ -124,7 +124,7 @@ export class SidebarService {
 				break;
 			default:
 				// set api
-				api = AppServices['Utilities']['HotelListGroup'];
+				api = AppServices['Utilities']['Hotels_List_Group'];
 
 				// set payload
 				payload = {
