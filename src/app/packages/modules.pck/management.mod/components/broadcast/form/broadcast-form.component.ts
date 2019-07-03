@@ -173,7 +173,7 @@ export class BroadcastFormComponent implements OnInit, OnDestroy {
 			.subscribe((res) => {
 				if (res) {
 					// concatenate date and time
-					let dateStr = formFields.date,
+					const dateStr = formFields.date,
 						timeStr = formFields.time,
 						date = moment(dateStr),
 						time = moment(timeStr, 'HH:mm');

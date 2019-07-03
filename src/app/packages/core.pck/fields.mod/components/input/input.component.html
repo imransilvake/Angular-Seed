@@ -38,6 +38,7 @@
 				[placeholder]="inputPlaceHolder"
 				[autocomplete]="autocomplete"
 				[class.ham-space]="control.value"
+				[class.ham-time]="inputType === 'time'"
 				(focus)="inputFocused=true"
 				(focusout)="inputFocused=false">
 
