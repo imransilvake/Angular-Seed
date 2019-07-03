@@ -3,7 +3,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 
 // app
-import { faDatabase, faExternalLinkAlt, faHome } from '@fortawesome/free-solid-svg-icons';
+import { faBell, faDatabase, faExternalLinkAlt, faHome } from '@fortawesome/free-solid-svg-icons';
 import { ROUTING } from '../../../../environments/environment';
 import { SidebarInterface } from '../interfaces/sidebar.interface';
 import { SelectGroupInterface } from '../../core.pck/fields.mod/interfaces/select-group.interface';
@@ -64,11 +64,11 @@ export class SidebarService {
 			},
 			{
 				name: 'Notifications',
-				icon: faHome,
+				icon: faBell,
 				children: [
 					{
 						name: 'Overview',
-						url: `/${ ROUTING.pages.dashboard }`,
+						url: `/${ ROUTING.notifications.routes.overview }`,
 					}
 				]
 			},
