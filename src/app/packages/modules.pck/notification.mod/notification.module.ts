@@ -8,7 +8,9 @@ import { FrameModule } from '../../frame.pck/frame.module';
 import { WidgetsModule } from '../../../shared/widgets/widgets.module';
 import { SharedModule } from '../../../shared/shared.module';
 import { FieldsModule } from '../../core.pck/fields.mod/fields.module';
-import { NotificationListComponent } from './components/notification-list.component';
+import { NotificationComponent } from './components/notification.component';
+import { NotificationListComponent } from './components/list/notification-list.component';
+import { NotificationService } from './services/notification.service';
 
 @NgModule({
 	imports: [
@@ -19,9 +21,12 @@ import { NotificationListComponent } from './components/notification-list.compon
 		FieldsModule
 	],
 	declarations: [
+		NotificationComponent,
 		NotificationListComponent
 	],
-	providers: [ ]
+	providers: [
+		NotificationService
+	]
 })
 
 export class NotificationModule {

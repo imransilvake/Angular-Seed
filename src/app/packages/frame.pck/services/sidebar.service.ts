@@ -18,6 +18,7 @@ import { UserRoleEnum } from '../../modules.pck/authorization.mod/enums/user-rol
 export class SidebarService {
 	public hotelGroupListEvent: EventEmitter<boolean> = new EventEmitter(false);
 	public hotelGroupListRoutes = [
+		`/${ ROUTING.notifications.routes.overview }`,
 		`/${ ROUTING.management.routes.user }`,
 		`/${ ROUTING.management.routes.client }`
 	];
@@ -69,6 +70,7 @@ export class SidebarService {
 					{
 						name: 'Overview',
 						url: `/${ ROUTING.notifications.routes.overview }`,
+						externalIcon: faExternalLinkAlt
 					}
 				]
 			},

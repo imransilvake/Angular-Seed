@@ -2,7 +2,7 @@
 import { Routes } from '@angular/router';
 
 // app
-import { NotificationListComponent } from './components/notification-list.component';
+import { NotificationComponent } from './components/notification.component';
 
 export const NOTIFICATION_ROUTES: Routes = [
 	{
@@ -10,11 +10,11 @@ export const NOTIFICATION_ROUTES: Routes = [
 		children: [
 			{
 				path: 'overview',
-				component: NotificationListComponent,
+				component: NotificationComponent,
 				data: {
 					breadcrumb: {
-						en: 'Notification',
-						de: 'Benachrichtigung'
+						en: 'Notifications',
+						de: 'Benachrichtigungen'
 					}
 				}
 			}

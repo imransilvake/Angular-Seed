@@ -29,6 +29,8 @@ export class BroadcastService {
 
 	/**
 	 * fetch broadcast list
+	 *
+	 * @param id
 	 */
 	public broadcastFetchList(id: string) {
 		const api = AppServices['Management']['Broadcast_List_All'];

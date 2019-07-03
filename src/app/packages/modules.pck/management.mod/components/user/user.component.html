@@ -8,10 +8,8 @@
 	<!-- Details -->
 	<div class="ham-details">
 		<!-- View: Default -->
-		<ng-container>
-			<app-user-default
-				(changeUserView)="pageView = $event.view; id = $event.id; data = $event.data; openUserFormModal();">
-			</app-user-default>
-		</ng-container>
+		<app-user-default
+			(changeUserView)="pageView = $event.view; id = $event.id; data = $event.data; openUserFormModal();">
+		</app-user-default>
 	</div>
 </div>
