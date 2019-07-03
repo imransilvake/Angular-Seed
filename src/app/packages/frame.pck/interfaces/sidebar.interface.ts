@@ -4,5 +4,6 @@ export interface SidebarInterface {
 	icon?: any;
 	externalIcon?: any;
 	url?: string;
+	enabled?: boolean;
 	children?: SidebarInterface[];
 }

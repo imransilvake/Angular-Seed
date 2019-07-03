@@ -25,7 +25,6 @@ import { DialogService } from '../../../../../utilities.pck/dialog.mod/services/
 export class BroadcastFormComponent implements OnInit, OnDestroy {
 	public faIcons = [faSpinner];
 	public formFields;
-	public currentRole;
 	public minDate = moment(moment()).add(1, 'days').toDate();
 	public formTitle = 'Create';
 	public errorMessage;

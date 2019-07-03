@@ -14,10 +14,9 @@ import { AuthService } from '../../modules.pck/authorization.mod/services/auth.s
 import { ProxyService } from '../../core.pck/proxy.mod/services/proxy.service';
 import { UserRoleEnum } from '../../modules.pck/authorization.mod/enums/user-role.enum';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class SidebarService {
-	hotelGroupListEvent: EventEmitter<boolean> = new EventEmitter(false);
-
+	public hotelGroupListEvent: EventEmitter<boolean> = new EventEmitter(false);
 	public hotelGroupListRoutes = [
 		`/${ ROUTING.management.routes.user }`,
 		`/${ ROUTING.management.routes.client }`
@@ -51,7 +50,7 @@ export class SidebarService {
 	/**
 	 * get sidebar menu list
 	 */
-	public static getSidebarMenuList() {
+	public getSidebarMenuList() {
 		const sidebarMenuList: SidebarInterface[] = [
 			{
 				name: 'Dashboard',

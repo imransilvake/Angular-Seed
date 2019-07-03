@@ -43,6 +43,7 @@
 			matTreeNodePadding>
 			<h6 class="ham-label" *ngIf="node.section">{{node.section}}</h6>
 			<a class="ham-blank"
+			   *ngIf="filterMenuListByRole(node.name)"
 			   [target]="node.externalIcon ? '_blank' : null"
 			   target="_blank"
 			   mat-button

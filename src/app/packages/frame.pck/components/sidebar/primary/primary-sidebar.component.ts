@@ -15,6 +15,7 @@ import { AppViewStateInterface } from '../../../interfaces/app-view-state.interf
 import { AuthService } from '../../../../modules.pck/authorization.mod/services/auth.service';
 import { AppStateEnum } from '../../../enums/app-state.enum';
 import { RouterService } from '../../../../utilities.pck/accessories.mod/services/router.service';
+import { UserRoleEnum } from '../../../../modules.pck/authorization.mod/enums/user-role.enum';
 
 @Component({
 	selector: 'app-sidebar-primary',
@@ -30,6 +31,8 @@ export class PrimarySidebarComponent implements OnInit, OnDestroy {
 	public sidebarMenuList = new MatTreeNestedDataSource<SidebarInterface>();
 	public hotelGroupSelectType = SelectTypeEnum.GROUP_CUSTOM;
 	public hotelGroupList;
+	public currentRole;
+	public roleAdmin: UserRoleEnum = UserRoleEnum[UserRoleEnum.ADMIN];
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
@@ -40,7 +43,7 @@ export class PrimarySidebarComponent implements OnInit, OnDestroy {
 		private _routerService: RouterService
 	) {
 		// set side menu
-		this.sidebarMenuList.data = SidebarService.getSidebarMenuList();
+		this.sidebarMenuList.data = this._sidebarService.getSidebarMenuList();
 		this.treeControl.dataNodes = this.sidebarMenuList.data;
 
 		// form group
@@ -50,6 +53,9 @@ export class PrimarySidebarComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
+		// set current role
+		this.currentRole = this._sidebarService.appState.role;
+
 		// listen: update hotel by groups dropdown on route view change
 		this._sidebarService.hotelGroupListEvent
 			.pipe(takeUntil(this._ngUnSubscribe))
@@ -178,5 +184,14 @@ export class PrimarySidebarComponent implements OnInit, OnDestroy {
 				this.hotelByGroupList.disable();
 			}
 		}
+	}
+
+	/**
+	 * filter menu list based on role
+	 *
+	 * @param page
+	 */
+	public filterMenuListByRole(page: string) {
+		return page !== 'Broadcast' || page === 'Broadcast' && this.currentRole === this.roleAdmin;
 	}
 }

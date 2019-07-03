@@ -54,7 +54,6 @@ export class SessionService {
 	private handleSessions(session: any) {
 		switch (session) {
 			case SessionsEnum.SESSION_AUTHENTICATION:
-				console.log('start');
 				this.handleAuthenticationSession(AppOptions.sessionTime.auth);
 				break;
 			case SessionsEnum.SESSION_ALL:
@@ -71,7 +70,6 @@ export class SessionService {
 	private resetSessions(session: any) {
 		switch (session) {
 			case SessionsEnum.SESSION_AUTHENTICATION:
-				console.log('reset', session);
 				this.authentication.next(void 0);
 				break;
 			case SessionsEnum.SESSION_ALL:

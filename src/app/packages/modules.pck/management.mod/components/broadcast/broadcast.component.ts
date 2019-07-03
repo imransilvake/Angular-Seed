@@ -11,6 +11,7 @@ import { BroadcastService } from '../../services/broadcast.service';
 import { AuthService } from '../../../authorization.mod/services/auth.service';
 import { SidebarService } from '../../../../frame.pck/services/sidebar.service';
 import { BroadcastFormComponent } from './form/broadcast-form.component';
+import { UserRoleEnum } from '../../../authorization.mod/enums/user-role.enum';
 
 @Component({
 	selector: 'app-broadcast',
@@ -21,6 +22,8 @@ export class BroadcastComponent implements OnDestroy {
 	public pageView: AppViewTypeEnum = AppViewTypeEnum.DEFAULT;
 	public id;
 	public data;
+	public currentRole;
+	public roleAdmin: UserRoleEnum = UserRoleEnum[UserRoleEnum.ADMIN];
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
@@ -31,13 +34,19 @@ export class BroadcastComponent implements OnDestroy {
 		private _sidebarService: SidebarService,
 		private _dialog: MatDialog
 	) {
-		// listen: router event
-		this.router.events
-			.pipe(
-				takeUntil(this._ngUnSubscribe),
-				filter(event => event instanceof NavigationEnd)
-			)
-			.subscribe(() => this.triggerServices());
+		// set current user role
+		this.currentRole = this._authService.currentUserState.profile['cognito:groups'][0];
+
+		// role: admin
+		if (this.currentRole === this.roleAdmin) {
+			// listen: router event
+			this.router.events
+				.pipe(
+					takeUntil(this._ngUnSubscribe),
+					filter(event => event instanceof NavigationEnd)
+				)
+				.subscribe(() => this.triggerServices());
+		}
 	}
 
 	/**

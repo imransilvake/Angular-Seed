@@ -5,6 +5,13 @@
 	white-space: nowrap;
 }
 
+// access denied message
+.ham-access-denied {
+	p {
+		color: cd-palette($cd-color, 1009);
+	}
+}
+
 // form - auth
 .ham-wrapper-1 {
 	background-color: cd-palette($cd-background, 2001);

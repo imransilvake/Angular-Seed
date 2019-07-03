@@ -17,6 +17,7 @@ import { HeadComponent } from './components/content/head/head.component';
 import { BreadcrumbModule } from '../utilities.pck/breadcrumb.mod/breadcrumb.module';
 import { EmergencyService } from './services/emergency.service';
 import { FieldsModule } from '../core.pck/fields.mod/fields.module';
+import { SidebarService } from './services/sidebar.service';
 
 @NgModule({
 	imports: [
@@ -45,7 +46,8 @@ import { FieldsModule } from '../core.pck/fields.mod/fields.module';
 		HeadComponent
 	],
 	providers: [
-		EmergencyService
+		EmergencyService,
+		SidebarService
 	]
 })
 
