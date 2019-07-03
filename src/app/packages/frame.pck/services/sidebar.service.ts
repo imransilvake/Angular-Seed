@@ -50,7 +50,7 @@ export class SidebarService {
 	/**
 	 * get sidebar menu list
 	 */
-	public getSidebarMenuList() {
+	public static getSidebarMenuList() {
 		const sidebarMenuList: SidebarInterface[] = [
 			{
 				name: 'Dashboard',

@@ -43,7 +43,7 @@ export class PrimarySidebarComponent implements OnInit, OnDestroy {
 		private _routerService: RouterService
 	) {
 		// set side menu
-		this.sidebarMenuList.data = this._sidebarService.getSidebarMenuList();
+		this.sidebarMenuList.data = SidebarService.getSidebarMenuList();
 		this.treeControl.dataNodes = this.sidebarMenuList.data;
 
 		// form group

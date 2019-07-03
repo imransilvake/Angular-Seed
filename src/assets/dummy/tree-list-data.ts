@@ -8,7 +8,7 @@ const sidebarMenuList: SidebarInterface[] = [
 		section: 'Dashboard',
 		name: 'Home',
 		icon: faHome,
-		url: `/${ROUTING.dashboard}`
+		url: `/${ROUTING.pages.dashboard}`
 	},
 	{
 		section: 'Modules',

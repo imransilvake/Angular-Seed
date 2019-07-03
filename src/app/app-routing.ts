@@ -40,6 +40,10 @@ const ROUTES: Routes = [
 						loadChildren: () => import('./packages/modules.pck/member.mod/member.module').then(m => m.MemberModule)
 					},
 					{
+						path: ROUTING.notifications.title,
+						loadChildren: () => import('./packages/modules.pck/notification.mod/notification.module').then(m => m.NotificationModule)
+					},
+					{
 						path: ROUTING.management.title,
 						loadChildren: () => import('./packages/modules.pck/management.mod/management.module').then(m => m.ManagementModule)
 					}
