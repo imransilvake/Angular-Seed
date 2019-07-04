@@ -27,7 +27,6 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 		Profile_Image_Fetch: { serviceUrl: '/getimage' },
 		Profile_Image_Change: { serviceUrl: '/imageupload' }
 	},
-
 	Auth: {
 		Register: { serviceUrl: '/ham/auth/signup' },
 		Login: { serviceUrl: '/ham/auth/authenticate' },
