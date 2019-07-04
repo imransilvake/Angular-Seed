@@ -18,12 +18,12 @@ import { AppViewTypeEnum } from '../../../enums/app-view-type.enum';
 import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum';
 
 @Component({
-	selector: 'app-user-default',
-	templateUrl: './user-default.component.html',
-	styleUrls: ['./user-default.component.scss']
+	selector: 'app-user-list',
+	templateUrl: './user-list.component.html',
+	styleUrls: ['./user-list.component.scss']
 })
 
-export class UserDefaultComponent implements OnInit, OnDestroy {
+export class UserListComponent implements OnInit, OnDestroy {
 	@Output() changeUserView: EventEmitter<any> = new EventEmitter();
 
 	public userNewRegistrationsList;

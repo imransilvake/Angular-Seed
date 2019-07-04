@@ -10,12 +10,12 @@ import { UserViewInterface } from '../../../interfaces/user-view.interface';
 import { AppViewTypeEnum } from '../../../enums/app-view-type.enum';
 
 @Component({
-	selector: 'app-broadcast-default',
-	templateUrl: './broadcast-default.component.html',
-	styleUrls: ['./broadcast-default.component.scss']
+	selector: 'app-broadcast-list',
+	templateUrl: './broadcast-list.component.html',
+	styleUrls: ['./broadcast-list.component.scss']
 })
 
-export class BroadcastDefaultComponent implements OnInit {
+export class BroadcastListComponent implements OnInit {
 	@Output() changeBroadcastView: EventEmitter<any> = new EventEmitter();
 
 	public broadcastList;

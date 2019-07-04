@@ -14,12 +14,12 @@ import { UpdateProfileInterface } from '../../../interfaces/update-profile.inter
 import { UtilityService } from '../../../../../utilities.pck/accessories.mod/services/utility.service';
 
 @Component({
-	selector: 'app-update-profile',
-	templateUrl: './update-profile.component.html',
-	styleUrls: ['./update-profile.component.scss']
+	selector: 'app-profile-update',
+	templateUrl: './profile-update.component.html',
+	styleUrls: ['./profile-update.component.scss']
 })
 
-export class UpdateProfileComponent implements OnInit, OnDestroy {
+export class ProfileUpdateComponent implements OnInit, OnDestroy {
 	public formFields;
 	public profileSalutationSelectType = SelectTypeEnum.DEFAULT;
 	public salutationList: SelectDefaultInterface[] = [];

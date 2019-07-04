@@ -7,11 +7,11 @@
 
 	<!-- Details -->
 	<div class="ham-details">
-		<!-- View: Default -->
+		<!-- View: List -->
 		<ng-container *ngIf="pageView === 0">
-			<app-client-default
+			<app-client-list
 				(changeClientView)="pageView = $event.view; id = $event.id; groupName = $event.name; triggerServices();">
-			</app-client-default>
+			</app-client-list>
 		</ng-container>
 
 		<!-- View: Form -->

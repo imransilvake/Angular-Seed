@@ -1,4 +1,4 @@
-<div class="ham-broadcast-default">
+<div class="ham-broadcast-list">
 	<!-- Button: Create New Broadcast -->
 	<div class="ham-button-wrapper" *ngIf="currentRole === roleAdmin">
 		<button mat-button class="ham-button ham-button-1" i18n="@@Management_Broadcast_Create_NewBroadcast" (click)="changePageView()">
@@ -7,7 +7,7 @@
 	</div>
 
 	<!-- Broadcast List -->
-	<div class="ham-broadcast-list" *ngIf="broadcastList">
+	<div class="ham-list" *ngIf="broadcastList">
 		<app-table
 			tableTitle="Broadcast List"
 			i18n-tableTitle="@@Management_Broadcast_Table_Title"

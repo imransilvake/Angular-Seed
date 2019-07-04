@@ -7,9 +7,9 @@
 
 	<!-- Details -->
 	<div class="ham-details">
-		<!-- View: Default -->
-		<app-user-default
+		<!-- View: List -->
+		<app-user-list
 			(changeUserView)="pageView = $event.view; id = $event.id; data = $event.data; openUserFormModal();">
-		</app-user-default>
+		</app-user-list>
 	</div>
 </div>

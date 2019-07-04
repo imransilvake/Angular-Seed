@@ -10,12 +10,12 @@ import { ClientViewInterface } from '../../../interfaces/client-view.interface';
 import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum';
 
 @Component({
-	selector: 'app-client-default',
-	templateUrl: './client-default.component.html',
-	styleUrls: ['./client-default.component.scss']
+	selector: 'app-client-list',
+	templateUrl: './client-list.component.html',
+	styleUrls: ['./client-list.component.scss']
 })
 
-export class ClientDefaultComponent implements OnInit, OnDestroy {
+export class ClientListComponent implements OnInit, OnDestroy {
 	@Output() changeClientView: EventEmitter<any> = new EventEmitter();
 
 	public currentRole: UserRoleEnum;

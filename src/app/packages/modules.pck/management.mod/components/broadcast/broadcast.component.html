@@ -7,10 +7,10 @@
 
 	<!-- Details -->
 	<div class="ham-details" *ngIf="currentRole === roleAdmin">
-		<!-- View: Default -->
-		<app-broadcast-default
+		<!-- View: List -->
+		<app-broadcast-list
 			(changeBroadcastView)="pageView = $event.view; id = $event.id; data = $event.data; openBroadcastFormModal();">
-		</app-broadcast-default>
+		</app-broadcast-list>
 	</div>
 
 	<!-- Access Denied -->

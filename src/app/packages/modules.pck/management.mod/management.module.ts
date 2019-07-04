@@ -11,7 +11,7 @@ import { UserComponent } from './components/user/user.component';
 import { WidgetsModule } from '../../../shared/widgets/widgets.module';
 import { SharedModule } from '../../../shared/shared.module';
 import { ClientService } from './services/client.service';
-import { ClientDefaultComponent } from './components/client/default/client-default.component';
+import { ClientListComponent } from './components/client/list/client-list.component';
 import { ClientFormComponent } from './components/client/form/client-form.component';
 import { LicenseComponent } from './components/client/form/license/license.component';
 import { FieldsModule } from '../../core.pck/fields.mod/fields.module';
@@ -20,9 +20,9 @@ import { HotelGuestAppComponent } from './components/client/form/hotel-guest-app
 import { HotelStaffAppComponent } from './components/client/form/hotel-staff-app/hotel-staff-app.component';
 import { HotelManagerAppComponent } from './components/client/form/hotel-manager-app/hotel-manager-app.component';
 import { UserService } from './services/user.service';
-import { UserDefaultComponent } from './components/user/default/user-default.component';
+import { UserListComponent } from './components/user/list/user-list.component';
 import { UserFormComponent } from './components/user/form/user-form.component';
-import { BroadcastDefaultComponent } from './components/broadcast/default/broadcast-default.component';
+import { BroadcastListComponent } from './components/broadcast/list/broadcast-list.component';
 import { BroadcastService } from './services/broadcast.service';
 import { BroadcastFormComponent } from './components/broadcast/form/broadcast-form.component';
 
@@ -36,7 +36,7 @@ import { BroadcastFormComponent } from './components/broadcast/form/broadcast-fo
 	],
 	declarations: [
 		ClientComponent,
-		ClientDefaultComponent,
+		ClientListComponent,
 		ClientFormComponent,
 		BroadcastComponent,
 		UserComponent,
@@ -45,9 +45,9 @@ import { BroadcastFormComponent } from './components/broadcast/form/broadcast-fo
 		HotelGuestAppComponent,
 		HotelStaffAppComponent,
 		HotelManagerAppComponent,
-		UserDefaultComponent,
+		UserListComponent,
 		UserFormComponent,
-		BroadcastDefaultComponent,
+		BroadcastListComponent,
 		BroadcastFormComponent
 	],
 	providers: [

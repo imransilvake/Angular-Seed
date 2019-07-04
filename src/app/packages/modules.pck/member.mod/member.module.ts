@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { ProfileComponent } from './components/profile/profile.component';
 import { MEMBER_ROUTES } from './member-routing';
 import { FrameModule } from '../../frame.pck/frame.module';
-import { UpdateProfileComponent } from './components/profile/update-profile/update-profile.component';
+import { ProfileUpdateComponent } from './components/profile/profile-update/profile-update.component';
 import { WidgetsModule } from '../../../shared/widgets/widgets.module';
 import { FieldsModule } from '../../core.pck/fields.mod/fields.module';
 import { SharedModule } from '../../../shared/shared.module';
@@ -25,7 +25,7 @@ import { ProfileUploadImageComponent } from './components/profile/profile-cover/
 	],
 	declarations: [
 		ProfileComponent,
-		UpdateProfileComponent,
+		ProfileUpdateComponent,
 		ChangePasswordComponent,
 		HotelsListComponent,
 		ProfileCoverComponent,
