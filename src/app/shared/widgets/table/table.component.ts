@@ -230,6 +230,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 			data.forEach(item => {
 				const id = this.tableResources.uniqueID;
 				if (!this.dataSource.data.some(row => row[id] === item[id])) {
+					const language = this._authService.currentUserState.profile.language;
 					let newItem = item;
 
 					// Country
@@ -286,7 +287,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
 					// Create Date
 					if (item.hasOwnProperty('CreateDate')) {
-						const date = item.CreateDate ? HelperService.getDateTime(this._authService.currentUserState.profile.language, item.CreateDate) : '-';
+						const date = item.CreateDate ? HelperService.getDateTime(language, item.CreateDate) : '-';
 						newItem = {
 							...newItem,
 							'Reg. Date': date
@@ -295,7 +296,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
 					// Login Date
 					if (item.hasOwnProperty('LoginDate')) {
-						const date = item.LoginDate ? HelperService.getDateTime(this._authService.currentUserState.profile.language, item.LoginDate) : '-';
+						const date = item.LoginDate ? HelperService.getDateTime(language, item.LoginDate) : '-';
 						newItem = {
 							...newItem,
 							'Last Login': date
@@ -304,7 +305,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
 					// Send Date
 					if (item.hasOwnProperty('Date')) {
-						const date = item.Date ? HelperService.getDateTime(this._authService.currentUserState.profile.language, item.Date) : '-';
+						const date = item.Date ? HelperService.getDateTime(language, item.Date) : '-';
 						newItem = {
 							...newItem,
 							'Date': date
@@ -316,6 +317,15 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 						newItem = {
 							...newItem,
 							Creator: item.Creator ? item.Creator : '-'
+						};
+					}
+
+					// Received
+					if (item.hasOwnProperty('Received')) {
+						const date = item.Received ? HelperService.getDateTime(language, item.Received) : '-';
+						newItem = {
+							...newItem,
+							Received: date
 						};
 					}
 

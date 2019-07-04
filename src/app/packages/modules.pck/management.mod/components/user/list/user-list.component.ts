@@ -107,7 +107,7 @@ export class UserListComponent implements OnInit, OnDestroy {
 				this.userExistingUsersList = [];
 			}
 		} else {
-			const mapNewUsersData = users && users.data.map(user => {
+			const mappedData = users && users.data.map(user => {
 				const image = user.Image === null && user.Name ? HelperService.getFirstLetter(user.Name).toUpperCase() : user.Image;
 				const role = user.Type ? HelperService.capitalizeString(user.Type.replace(/_/g, ' ').toLowerCase()) : '-';
 				const hotels = [];
@@ -155,9 +155,9 @@ export class UserListComponent implements OnInit, OnDestroy {
 
 			// set users list based on user list type
 			if (userListType === UserListTypeEnum.APPLIED) {
-				this.userNewRegistrationsList = { ...users, data: mapNewUsersData };
+				this.userNewRegistrationsList = { ...users, data: mappedData };
 			} else {
-				this.userExistingUsersList = { ...users, data: mapNewUsersData };
+				this.userExistingUsersList = { ...users, data: mappedData };
 			}
 		}
 	}

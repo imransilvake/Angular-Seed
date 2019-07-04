@@ -20,7 +20,7 @@ export class NotificationService {
 	}
 
 	/**
-	 * fetch broadcast list
+	 * fetch notification list
 	 */
 	public notificationFetchList() {
 		// validate app state
@@ -31,7 +31,7 @@ export class NotificationService {
 				limit: AppOptions.tablePageSizeLimit,
 				user: this.currentUser.profile.email,
 				type: 'ALL',
-				date: '07/03/2019'
+				date: '07/04/2019'
 			};
 
 			const payload = {

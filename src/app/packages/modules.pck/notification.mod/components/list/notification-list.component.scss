@@ -1,4 +1,12 @@
 @import 'main';
 
 .ham-notification-list {
+	.cd-row {
+		.cd-col {
+			.ham-note {
+				color: cd-palette($cd-color, 1009);
+				text-align: center;
+			}
+		}
+	}
 }

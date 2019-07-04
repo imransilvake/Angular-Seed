@@ -1,3 +1,49 @@
 <div class="ham-notification-list">
-	Hello World
+	<!-- Hotel -->
+	<ng-container *ngIf="hotelAppState">
+		<!-- New Users -->
+		<div class="ham-new-users" *ngIf="notificationList">
+			<app-table
+				tableTitle="Notifications"
+				i18n-tableTitle="@@Notifications_Table_Title"
+				[tableShowFilterInput]="false"
+				[tableData]="notificationList"
+				[tableApplySorting]="false"
+				[tableColumns]="['Message', 'Received', 'Type']"
+				[tableSorting]="[false, false, false, false]"
+				[tableAdditionalColumns]="['Action']"
+				[tableTemplateRef]="[action]"
+				[tableResources]="notificationTable"
+				(rowData)="onClickRowActionButtons($event)">
+				<!-- Action -->
+				<ng-template #action>
+					<button
+						mat-button
+						class="ham-button ham-button-2 ham-table-button-1"
+						(click)="onClickRecognize()"
+						i18n="@@Notifications_Table_Recognize">
+						Recognize
+					</button>
+					<button
+						mat-button
+						class="ham-button ham-button-2 ham-table-button-2"
+						(click)="onClickVisit()"
+						i18n="@@Notifications_Table_Visit">
+						Visit
+					</button>
+				</ng-template>
+			</app-table>
+		</div>
+	</ng-container>
+
+	<!-- All / Group -->
+	<ng-container *ngIf="!hotelAppState">
+		<div class="cd-row ham-padding-0">
+			<div class="cd-col">
+				<div class="ham-wrapper-2 ham-problem">
+					<p class="ham-note">Please Select an Hotel!</p>
+				</div>
+			</div>
+		</div>
+	</ng-container>
 </div>
