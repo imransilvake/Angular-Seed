@@ -174,4 +174,14 @@ export class HelperService {
 		const format = dateFormat ? dateFormat : 'DD. MMMM YYYY, HH:mm:ss';
 		return moment(date).locale(lang).format(format);
 	}
+
+	/**
+	 * from now
+	 *
+	 * @param lang
+	 * @param date
+	 */
+	public static dateFromNow(lang: string, date: any) {
+		return moment(date).locale(lang).fromNow();
+	}
 }

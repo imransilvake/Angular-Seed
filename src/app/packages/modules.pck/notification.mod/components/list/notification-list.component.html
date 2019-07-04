@@ -9,11 +9,12 @@
 				[tableShowFilterInput]="false"
 				[tableData]="notificationList"
 				[tableApplySorting]="false"
-				[tableColumns]="['Message', 'Received', 'Type']"
-				[tableSorting]="[false, false, false, false]"
+				[tableColumns]="['Clear', 'Message', 'Received', 'Type']"
+				[tableSorting]="[true, false, false, false, false]"
 				[tableAdditionalColumns]="['Action']"
 				[tableTemplateRef]="[action]"
 				[tableResources]="notificationTable"
+				(rowClear)="rowClear.emit()"
 				(rowData)="onClickRowActionButtons($event)">
 				<!-- Action -->
 				<ng-template #action>
@@ -24,13 +25,14 @@
 						i18n="@@Notifications_Table_Recognize">
 						Recognize
 					</button>
-					<button
+					<a
 						mat-button
-						class="ham-button ham-button-2 ham-table-button-2"
-						(click)="onClickVisit()"
+						class="ham-button ham-button-2 ham-table-button-2 ham-grey"
+						[routerLink]="['/' + routing.management.routes.user]"
+						target="_blank"
 						i18n="@@Notifications_Table_Visit">
 						Visit
-					</button>
+					</a>
 				</ng-template>
 			</app-table>
 		</div>

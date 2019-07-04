@@ -1,11 +1,13 @@
 // angular
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
 
 // app
 import { NotificationService } from '../../services/notification.service';
 import { AppStateEnum } from '../../../../frame.pck/enums/app-state.enum';
+import { ROUTING } from '../../../../../../environments/environment';
 
 @Component({
 	selector: 'app-notification-list',
@@ -14,14 +16,20 @@ import { AppStateEnum } from '../../../../frame.pck/enums/app-state.enum';
 })
 
 export class NotificationListComponent implements OnInit, OnDestroy {
+	@Output() rowClear: EventEmitter<boolean> = new EventEmitter(false);
+
+	public routing = ROUTING;
 	public hotelAppState = true;
 	public notificationList = [];
 	public notificationTable;
+	public buttonType;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
-		private _notificationService: NotificationService) {
+		private _router: Router,
+		private _notificationService: NotificationService
+	) {
 	}
 
 	ngOnInit() {
@@ -36,12 +44,13 @@ export class NotificationListComponent implements OnInit, OnDestroy {
 					// set tables resources
 					this.notificationTable = {
 						api: this._notificationService.notificationTablesServices.api,
+						clearApi: this._notificationService.notificationTablesServices.clearApi,
 						payload: this._notificationService.notificationTablesServices.payload,
 						uniqueID: this._notificationService.notificationTablesServices.uniqueID
 					};
 
 					// set tables data
-					this.mapUsers(res.notificationList);
+					this.notificationList = res.notificationList;
 				}
 			});
 	}
@@ -53,45 +62,25 @@ export class NotificationListComponent implements OnInit, OnDestroy {
 	}
 
 	/**
-	 * map notifications list
-	 *
-	 * @param notificationList
+	 * recognize notification
 	 */
-	public mapUsers(notificationList: any) {
-		if (notificationList && notificationList.data.length === 0) {
-			this.notificationList = [];
-		} else {
-			const mappedData = notificationList && notificationList.data.map(notification => {
-				return {
-					Id: notification.Id,
-					Message: notification.Message.Title,
-					Received: notification.Received,
-					Type: notification.Type
-				};
-			});
-
-			// update map data
-			this.notificationList = { ...notificationList, data: mappedData };
-		}
+	public onClickRecognize() {
+		this.buttonType = 1;
 	}
 
 	/**
-	 * new / old action
+	 * recognize / visit action
 	 *
 	 * @param row
 	 */
 	public onClickRowActionButtons(row: any) {
-	}
+		// recognize row
+		if (this.buttonType === 1) {
+			// reset button type
+			this.buttonType = 0;
 
-	/**
-	 * recognize notification
-	 */
-	public onClickRecognize() {
-	}
-
-	/**
-	 * recognize visit
-	 */
-	public onClickVisit() {
+			// service
+			this._notificationService.recognizeNotification(row, this.rowClear);
+		}
 	}
 }

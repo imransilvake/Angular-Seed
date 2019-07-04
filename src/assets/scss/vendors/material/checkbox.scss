@@ -14,9 +14,6 @@
 
 	&.ham-checkbox-2 {
 		.mat-checkbox-inner-container {
-			height: 20px;
-			width: 20px;
-
 			.mat-checkbox-frame {
 				border-color: cd-palette($cd-border, 3004);
 				border-radius: 50%;
@@ -34,6 +31,27 @@
 					border: 1px solid cd-palette($cd-border, 3004, .1);
 				}
 			}
+		}
+	}
+
+	&.ham-checkbox-3 {
+		.mat-checkbox-frame {
+			border: 1px solid cd-palette($cd-border, 3001);
+			border-radius: 0;
+		}
+
+		&.mat-checkbox-checked {
+			.mat-checkbox-background {
+				background-color: cd-palette($cd-background, 2003);
+				border: 1px solid cd-palette($cd-border, 3001);
+			}
+		}
+	}
+
+	&.ham-s1 {
+		.mat-checkbox-inner-container {
+			height: 20px;
+			width: 20px;
 		}
 	}
 

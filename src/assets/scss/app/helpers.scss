@@ -80,8 +80,16 @@
 }
 
 .ham-table-button-2 {
-	background-color: cd-palette($cd-background, 2009);
-	border: 1px solid cd-palette($cd-border, 3009) !important;
 	color: cd-palette($cd-color, 1001);
 	margin: 5px 0 5px 5px !important;
+
+	&.ham-red {
+		background-color: cd-palette($cd-background, 2009);
+		border: 1px solid cd-palette($cd-border, 3009) !important;
+	}
+
+	&.ham-grey {
+		color: cd-palette($cd-color, 1004);
+		border: 1px solid cd-palette($cd-border, 3004) !important;
+	}
 }

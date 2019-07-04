@@ -4,6 +4,7 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
+import { I18n } from '@ngx-translate/i18n-polyfill';
 
 // app
 import { ProxyService } from '../../../packages/core.pck/proxy.mod/services/proxy.service';
@@ -11,6 +12,8 @@ import { AppOptions, AppServices } from '../../../../app.config';
 import { HelperService } from '../../../packages/utilities.pck/accessories.mod/services/helper.service';
 import { UtilityService } from '../../../packages/utilities.pck/accessories.mod/services/utility.service';
 import { AuthService } from '../../../packages/modules.pck/authorization.mod/services/auth.service';
+import { DialogTypeEnum } from '../../../packages/utilities.pck/dialog.mod/enums/dialog-type.enum';
+import { DialogService } from '../../../packages/utilities.pck/dialog.mod/services/dialog.service';
 
 @Component({
 	selector: 'app-table',
@@ -19,6 +22,7 @@ import { AuthService } from '../../../packages/modules.pck/authorization.mod/ser
 })
 
 export class TableComponent implements OnInit, OnChanges, OnDestroy {
+	@Output() rowClear: EventEmitter<boolean> = new EventEmitter();
 	@Output() rowData: EventEmitter<any> = new EventEmitter();
 
 	@Input() tableTitle;
@@ -45,13 +49,16 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	public tableInfo;
 	public sortColumn;
 	public sortOrder;
+	public clearRows = [];
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
 		private _proxyService: ProxyService,
 		private _utilityService: UtilityService,
-		private _authService: AuthService
+		private _authService: AuthService,
+		private _dialogService: DialogService,
+		private _i18n: I18n
 	) {
 		// form group
 		this.formFields = new FormGroup({
@@ -66,7 +73,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 		// initialize table
 		this.initializeTable();
 
-		// filter search results
+		// listen: filter search results
 		this.search.valueChanges
 			.pipe(
 				debounceTime(250),
@@ -80,6 +87,15 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 		// when component input is changed
 		if (this.dataSource && this.dataSource.paginator) {
 			this.dataSource.paginator.firstPage();
+		}
+
+		// reset clear rows
+		if (this.clearRows.length > 0) {
+			// clear list
+			this.clearRows = [];
+
+			// stop loading
+			this.loading = false;
 		}
 
 		// re-initialize table
@@ -178,7 +194,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
 		// validate next click
 		if (pageInfo.pageIndex > prevPageIndex) {
-			// start animation
+			// start loading
 			this.loading = true;
 
 			// set search
@@ -216,6 +232,75 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 				payload,
 				pageIndex
 			);
+		}
+	}
+
+	/**
+	 * on change checked/unchecked clear per row
+	 *
+	 * @param element
+	 */
+	public onChangeClearRow(element) {
+		const result = this.clearRows && this.clearRows.some(r => r.Id === element.Id);
+		if (!result) {
+			const payload = {
+				Id: element.Id,
+				State: element.State,
+				ConfirmUser: this._authService.currentUserState.profile.email
+			};
+			this.clearRows.push(payload);
+		} else {
+			this.clearRows = this.clearRows && this.clearRows.filter(r => r.Id !== element.Id);
+		}
+	}
+
+	/**
+	 * confirm rows
+	 */
+	public confirmClearRows() {
+		if (this.clearRows && this.clearRows.length > 0) {
+			// payload
+			const data = {
+				type: DialogTypeEnum.CONFIRMATION,
+				payload: {
+					icon: 'dialog_confirmation',
+					title: this._i18n({ value: 'Title: Clear Row Confirmation', id: 'Table_Clear_Row_Title' }),
+					message: this._i18n({ value: 'Description: Clear Row Confirmation', id: 'Table_Clear_Row_Description' }),
+					buttonTexts: [
+						this._i18n({
+							value: 'Button - OK',
+							id: 'Common_Button_OK'
+						}),
+						this._i18n({
+							value: 'Button - Cancel',
+							id: 'Common_Button_Cancel'
+						})
+					]
+				}
+			};
+
+			// listen: dialog service
+			this._dialogService
+				.showDialog(data)
+				.pipe(takeUntil(this._ngUnSubscribe))
+				.subscribe(status => {
+					if (status) {
+						// start loading
+						this.loading = true;
+
+						const api = this.tableResources.clearApi;
+						const payload = {
+							pathParams: this.tableResources.payload.pathParams,
+							bodyParams: this.clearRows
+						};
+
+						// service
+						this._proxyService
+							.postAPI(api, payload)
+							.pipe(takeUntil(this._ngUnSubscribe))
+							.subscribe(() => this.rowClear.emit());
+					}
+				});
 		}
 	}
 
@@ -322,10 +407,28 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
 					// Received
 					if (item.hasOwnProperty('Received')) {
-						const date = item.Received ? HelperService.getDateTime(language, item.Received) : '-';
+						const date = item.Received ? HelperService.dateFromNow(language, item.Received) : '-';
 						newItem = {
 							...newItem,
 							Received: date
+						};
+					}
+
+					// Confirm Date
+					if (item.hasOwnProperty('ConfirmDate')) {
+						const date = item.ConfirmDate ? HelperService.dateFromNow(language, item.ConfirmDate) : '-';
+						newItem = {
+							...newItem,
+							ConfirmDate: date
+						};
+					}
+
+					// Message
+					if (item.hasOwnProperty('Message')) {
+						const messageTitle = item.Message ? item.Message.Title : '-';
+						newItem = {
+							...newItem,
+							Message: messageTitle
 						};
 					}
 
@@ -360,7 +463,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	 * @param inputValue
 	 */
 	private applyFilter(inputValue: string) {
-		// start animation
+		// start loading
 		this.loading = true;
 
 		// set sort data
@@ -412,6 +515,10 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	 * @param column
 	 */
 	private onClickSortByColumn(column: string) {
+		if (column === 'Clear') {
+			return false;
+		}
+
 		let sortOrder;
 		let columnName;
 		if (column === 'Last Login') {
@@ -482,7 +589,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 			.getAPI(api, payload)
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
-				// stop animation
+				// stop loading
 				this.loading = false;
 
 				// when input is changed

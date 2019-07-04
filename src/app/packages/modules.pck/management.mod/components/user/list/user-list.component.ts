@@ -7,10 +7,8 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
 // app
 import { UserService } from '../../../services/user.service';
 import { MemberService } from '../../../../member.mod/services/member.service';
-import { UserListTypeEnum } from '../../../enums/user-list-type.enum';
 import { ProxyService } from '../../../../../core.pck/proxy.mod/services/proxy.service';
 import { UtilityService } from '../../../../../utilities.pck/accessories.mod/services/utility.service';
-import { HelperService } from '../../../../../utilities.pck/accessories.mod/services/helper.service';
 import { DialogTypeEnum } from '../../../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { DialogService } from '../../../../../utilities.pck/dialog.mod/services/dialog.service';
 import { UserViewInterface } from '../../../interfaces/user-view.interface';
@@ -76,12 +74,12 @@ export class UserListComponent implements OnInit, OnDestroy {
 				if (res && (res.newUsers || res.existingUsers)) {
 					// map new users list
 					if (res.newUsers) {
-						this.mapUsers(res.newUsers, UserListTypeEnum.APPLIED);
+						this.userNewRegistrationsList = res.newUsers;
 					}
 
 					// map existing users list
 					if (res.existingUsers) {
-						this.mapUsers(res.existingUsers, UserListTypeEnum.CONFIRMED);
+						this.userExistingUsersList = res.existingUsers;
 					}
 				}
 			});
@@ -91,75 +89,6 @@ export class UserListComponent implements OnInit, OnDestroy {
 		// remove subscriptions
 		this._ngUnSubscribe.next();
 		this._ngUnSubscribe.complete();
-	}
-
-	/**
-	 * map new/existing users list
-	 *
-	 * @param users
-	 * @param userListType
-	 */
-	public mapUsers(users: any, userListType: string) {
-		if (users.data.length === 0) {
-			if (userListType === UserListTypeEnum.APPLIED) {
-				this.userNewRegistrationsList = [];
-			} else {
-				this.userExistingUsersList = [];
-			}
-		} else {
-			const mappedData = users && users.data.map(user => {
-				const image = user.Image === null && user.Name ? HelperService.getFirstLetter(user.Name).toUpperCase() : user.Image;
-				const role = user.Type ? HelperService.capitalizeString(user.Type.replace(/_/g, ' ').toLowerCase()) : '-';
-				const hotels = [];
-				let date;
-				let uniqueProperties = {};
-
-				if (userListType === UserListTypeEnum.APPLIED) {
-					// date
-					date = user.CreateDate ? HelperService.getDateTime(this._userService.currentUser.profile.language, user.CreateDate) : '-';
-
-					// object properties
-					uniqueProperties = {
-						'Reg. Date': date
-					};
-				} else {
-					// date
-					date = user.LoginDate ? HelperService.getDateTime(this._userService.currentUser.profile.language, user.LoginDate) : '-';
-
-					// hotels
-					if (user && user.HotelIDs && typeof user.HotelIDs !== 'string') {
-						user.HotelIDs.forEach(hotel => {
-							if (hotel.split('_')[1]) {
-								hotels.push(this._utilityService.hotelList[hotel]);
-							}
-						});
-					}
-
-					// object properties
-					uniqueProperties = {
-						Id: user.ID,
-						'Last Login': date,
-						Role: role,
-						Hotels: hotels && hotels.length ? hotels.join(', ') : 'ALL',
-						Creator: user.Creator ? user.Creator : '-'
-					};
-				}
-
-				// prepare table row
-				return {
-					...user,
-					...uniqueProperties,
-					Image: image === null ? 'UN' : image
-				};
-			});
-
-			// set users list based on user list type
-			if (userListType === UserListTypeEnum.APPLIED) {
-				this.userNewRegistrationsList = { ...users, data: mappedData };
-			} else {
-				this.userExistingUsersList = { ...users, data: mappedData };
-			}
-		}
 	}
 
 	/**
@@ -202,7 +131,7 @@ export class UserListComponent implements OnInit, OnDestroy {
 	}
 
 	/**
-	 * new / old action
+	 * delete / decline action
 	 *
 	 * @param row
 	 */

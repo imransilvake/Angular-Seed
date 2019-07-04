@@ -60,7 +60,13 @@
 
 					<!-- Remember Me -->
 					<div class="cd-col ham-sby-remember">
-						<mat-checkbox class="ham-checkbox-1" [formControl]="rememberMe" i18n="@@Auth_Login_Form_Remember_Text">Remember Me</mat-checkbox>
+						<mat-checkbox
+							class="ham-checkbox-1"
+							[formControl]="rememberMe"
+							i18n="@@Auth_Login_Form_Remember_Text"
+							[disableRipple]="true">
+							Remember Me
+						</mat-checkbox>
 						<a class="ham-remember-color" [routerLink]="['/' + routing.authorization.routes.forgot]" i18n="@@Auth_Login_Form_Forget_Password_Link_Text">Forget Password?</a>
 					</div>
 

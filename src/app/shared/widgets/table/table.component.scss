@@ -41,6 +41,10 @@
 					color: cd-palette($cd-color, 1004);
 					padding-left: 10px;
 
+					&.ham-notifications {
+						color: cd-palette($cd-color, 1001);
+					}
+
 					&:last-child {
 						text-align: right;
 					}
@@ -67,6 +71,28 @@
 					border-top: 1px solid cd-palette($cd-border, 3004, .3);
 					color: cd-palette($cd-color, 1001);
 					padding-left: 0;
+
+					.ham-clear-head {
+						align-items: center;
+						display: flex;
+
+						.ham-checkbox {
+							margin-right: 8px;
+						}
+
+						.ham-clear {
+							border: 1px solid cd-palette($cd-border, 3010);
+							color: cd-palette($cd-color, 1010);
+							font-size: cd-fontSize(s13);
+							padding: 0 4px;
+							cursor: pointer;
+
+							&.ham-disabled {
+								border: 1px solid cd-palette($cd-border, 3004);
+								color: cd-palette($cd-color, 1004);
+							}
+						}
+					}
 				}
 			}
 		}

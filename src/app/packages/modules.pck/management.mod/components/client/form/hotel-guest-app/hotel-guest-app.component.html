@@ -57,7 +57,8 @@
 							<!-- Preferred -->
 							<div class="ham-preferred" [class.cd-hidden]="(mIndex + iIndex) === 0">
 								<mat-checkbox
-									class="ham-checkbox-2"
+									class="ham-checkbox-2 ham-s1"
+									[disableRipple]="true"
 									(change)="onChangePreferred(mIndex, iIndex)"
 									[formControl]="modules.controls[getModuleIndex(mIndex, iIndex)].get('Preferred')">
 								</mat-checkbox>
