@@ -1,0 +1,126 @@
+<div class="ham-broadcast-form ham-wrapper-2">
+	<!-- Header -->
+	<header class="ham-head">
+		<!-- Top -->
+		<div class="ham-top">
+			<h4 i18n="@@Management_Broadcast_Form_Title">{{formTitle}} Broadcast</h4>
+			<a (click)="onClickCloseModal()">
+				<mat-icon class="ham-icon">cancel</mat-icon>
+			</a>
+		</div>
+	</header>
+
+	<!-- Divider -->
+	<app-divider></app-divider>
+
+	<!-- Form -->
+	<form class="ham-block ham-form" (ngSubmit)="onSubmitForm()">
+		<div class="cd-row ham-padding-0">
+			<div class="cd-col">
+				<app-input
+					[showLabel]="true"
+					labelName="Title*"
+					i18n-labelName="@@Management_User_Form_Title_Label"
+					[inputId]="'management-broadcast-title-id'"
+					[inputType]="'text'"
+					[inputName]="'title'"
+					inputPlaceHolder="Title"
+					i18n-inputPlaceHolder="@@Management_User_Form_Title_PlaceHolder"
+					[control]="title">
+				</app-input>
+			</div>
+		</div>
+
+		<div class="cd-row ham-padding-0">
+			<div class="cd-col">
+				<app-input
+					[typeTextArea]="true"
+					[textareaMinRows]="5"
+					[showLabel]="true"
+					labelName="Broadcast Text*"
+					i18n-labelName="@@Management_User_Form_Text_Label"
+					[inputId]="'management-broadcast-text-id'"
+					[inputType]="'text'"
+					[inputName]="'text'"
+					inputPlaceHolder="Broadcast Text"
+					i18n-inputPlaceHolder="@@Management_User_Form_Text_PlaceHolder"
+					[control]="description">
+				</app-input>
+			</div>
+		</div>
+
+		<div class="cd-row ham-padding-0">
+			<div class="cd-col">
+				<app-input
+					[showLabel]="true"
+					labelName="Link"
+					i18n-labelName="@@Management_User_Form_Link_Label"
+					[inputId]="'management-broadcast-link-id'"
+					[inputType]="'text'"
+					[inputName]="'link'"
+					inputPlaceHolder="Link"
+					i18n-inputPlaceHolder="@@Management_User_Form_Link_PlaceHolder"
+					[control]="link">
+				</app-input>
+			</div>
+		</div>
+
+		<div class="cd-row ham-padding-0">
+			<h6 class="ham-color-label" i18n="@@Management_Broadcast_Form_Color_Label">Color</h6>
+			<div class="cd-col">
+				<mat-radio-group class="mat-radio-group-2" [formControl]="color">
+					<mat-radio-button value="#71c578"></mat-radio-button>
+					<mat-radio-button value="#ffc107"></mat-radio-button>
+					<mat-radio-button value="#e74c3c"></mat-radio-button>
+				</mat-radio-group>
+			</div>
+		</div>
+
+		<div class="cd-row ham-label ham-padding-0">
+			<h6 class="ham-color-label" i18n="@@Management_Broadcast_Form_Date_Label">Show Until*</h6>
+		</div>
+		<div class="cd-row ham-padding-1">
+			<div class="cd-col cd-col-pm-t-6">
+				<app-datepicker
+					[inputId]="'management-broadcast-date-id'"
+					[inputType]="'text'"
+					[inputName]="'date'"
+					inputPlaceHolder="Date"
+					i18n-inputPlaceHolder="@@Management_User_Form_Date_PlaceHolder"
+					[minDate]="minDate"
+					[control]="date">
+				</app-datepicker>
+			</div>
+			<div class="cd-col cd-col-pm-t-6 cd-col-m-top">
+				<app-input
+					[inputId]="'management-broadcast-time-id'"
+					[inputType]="'time'"
+					[inputName]="'time'"
+					[inputPlaceHolder]="'hh:mm'"
+					[control]="time">
+				</app-input>
+			</div>
+		</div>
+
+		<!-- Note -->
+		<div class="ham-description">
+			<p i18n="@@Management_Broadcast_Form_Note">Note</p>
+		</div>
+
+		<!-- Divider -->
+		<app-divider></app-divider>
+
+		<div class="cd-row ham-padding-1 ham-buttons">
+			<div class="cd-col cd-col-pm-s-6">
+				<p>{{errorMessage}}</p>
+			</div>
+			<div class="cd-col cd-col-pm-s-6 cd-right-align">
+				<button mat-button type="button" class="ham-button ham-button-1" (click)="onClickCloseModal()" i18n="@@Management_Broadcast_Form_Cancel_Button">Cancel</button>
+				<button mat-button type="submit" class="ham-button ham-button-1" [disabled]="!isFormValid || loading">
+					<fa-icon class="fa-icon" [icon]="faIcons[0]" [spin]="true" *ngIf="loading"></fa-icon>
+					<span i18n="@@Management_Broadcast_Form_Save_Button" *ngIf="!loading">Save</span>
+				</button>
+			</div>
+		</div>
+	</form>
+</div>

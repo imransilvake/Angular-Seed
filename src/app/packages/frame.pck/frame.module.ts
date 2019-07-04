@@ -3,41 +3,52 @@ import { NgModule } from '@angular/core';
 
 // app
 import { SharedModule } from '../../shared/shared.module';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { E404Component } from './components/errors/e404/e404.component';
+import { E404Component } from './components/pages/e404.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NotificationModule } from '../utilities.pck/notification.mod/notification.module';
 import { ScrollTopComponent } from './components/scroll-top/scroll-top.component';
 import { PrimarySidebarComponent } from './components/sidebar/primary/primary-sidebar.component';
-import { SidebarService } from './services/sidebar.service';
 import { NotificationMenuComponent } from './components/menus/notification/notification-menu.component';
 import { AccountMenuComponent } from './components/menus/account/account-menu.component';
 import { SecondarySidebarComponent } from './components/sidebar/secondary/secondary-sidebar.component';
+import { WidgetsModule } from '../../shared/widgets/widgets.module';
+import { HeadComponent } from './components/content/head/head.component';
+import { BreadcrumbModule } from '../utilities.pck/breadcrumb.mod/breadcrumb.module';
+import { EmergencyService } from './services/emergency.service';
+import { FieldsModule } from '../core.pck/fields.mod/fields.module';
+import { SidebarService } from './services/sidebar.service';
 
 @NgModule({
 	imports: [
 		SharedModule,
-		NotificationModule
+		WidgetsModule,
+		NotificationModule,
+		BreadcrumbModule,
+		FieldsModule
 	],
 	declarations: [
-		DashboardComponent,
 		E404Component,
 		HeaderComponent,
 		FooterComponent,
 		ScrollTopComponent,
 		PrimarySidebarComponent,
+		SecondarySidebarComponent,
 		NotificationMenuComponent,
 		AccountMenuComponent,
-		SecondarySidebarComponent
+		HeadComponent
 	],
 	exports: [
 		HeaderComponent,
 		FooterComponent,
 		ScrollTopComponent,
-		PrimarySidebarComponent
+		PrimarySidebarComponent,
+		HeadComponent
 	],
-	providers: [SidebarService]
+	providers: [
+		EmergencyService,
+		SidebarService
+	]
 })
 
 export class FrameModule {

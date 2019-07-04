@@ -1,0 +1,80 @@
+<div class="ham-user-list">
+	<!-- New Users -->
+	<div class="ham-new-users" *ngIf="userNewRegistrationsList">
+		<app-table
+			tableTitle="Received Registrations"
+			i18n-tableTitle="@@Management_User_NewUsers_Table_Title"
+			[tableShowFilterInput]="false"
+			[tableData]="userNewRegistrationsList"
+			[tableApplySorting]="false"
+			[tableColumns]="['Image', 'Name', 'Email', 'Reg. Date']"
+			[tableSorting]="[false, false, false, false, false]"
+			[tableAdditionalColumns]="['Action']"
+			[tableTemplateRef]="[action]"
+			[tableResources]="newUsersTable"
+			(rowData)="onClickRowActionButtons($event)">
+			<!-- Action -->
+			<ng-template #action>
+				<button
+					*ngIf="currentRole === roleAdmin || currentRole === roleGroupManager || currentRole === roleHotelManager"
+					mat-button
+					class="ham-button ham-button-2 ham-table-button-1"
+					(click)="onClickEditNewUser()"
+					i18n="@@Management_User_NewUsers_Table_Edit">
+					Edit
+				</button>
+				<button
+					mat-button
+					class="ham-button ham-button-2 ham-table-button-2"
+					(click)="onClickDeleteNewUser()"
+					i18n="@@Management_User_NewUsers_Table_Decline">
+					Decline
+				</button>
+			</ng-template>
+		</app-table>
+	</div>
+
+	<!-- Button: Create New User -->
+	<div class="ham-button-wrapper" *ngIf="currentRole === roleAdmin || currentRole === roleGroupManager || currentRole === roleHotelManager">
+		<button mat-button class="ham-button ham-button-1" i18n="@@Management_User_Create_NewUser" (click)="onClickCreateNewUser()">
+			Create New User
+		</button>
+	</div>
+
+	<!-- Existing Users -->
+	<div class="ham-existing-users" *ngIf="userExistingUsersList">
+		<app-table
+			tableTitle="Existing Users"
+			i18n-tableTitle="@@Management_User_ExistingUsers_Table_Title"
+			tableFilterInputName="user-existing-table-filter"
+			i18n-tableFilterInputName="@@Management_User_ExistingUsers_Table_Input_Name"
+			tableFilterInputPlaceHolder="Search"
+			i18n-tableFilterInputPlaceHolder="@@Management_User_ExistingUsers_Table_Input_Filter_PlaceHolder"
+			[tableData]="userExistingUsersList"
+			[tableColumns]="['Image', 'Name', 'Email', 'Last Login', 'Creator', 'Role', 'Hotels']"
+			[tableSorting]="[false, false, false, true, false, false, false, false]"
+			[tableAdditionalColumns]="['Action']"
+			[tableTemplateRef]="[action]"
+			[tableResources]="existingUsersTable"
+			(rowData)="onClickRowActionButtons($event)">
+			<!-- Action -->
+			<ng-template #action>
+				<button
+					*ngIf="currentRole === roleAdmin || currentRole === roleGroupManager || currentRole === roleHotelManager"
+					mat-button
+					class="ham-button ham-button-2 ham-table-button-1"
+					(click)="onClickEditExistingUser()"
+					i18n="@@Management_User_ExistingUsers_Table_Edit">
+					Edit
+				</button>
+				<button
+					mat-button
+					class="ham-button ham-button-2 ham-table-button-2"
+					(click)="onClickDeleteExistingUser()"
+					i18n="@@Management_User_ExistingUsers_Table_Delete">
+					Delete
+				</button>
+			</ng-template>
+		</app-table>
+	</div>
+</div>

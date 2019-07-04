@@ -1,0 +1,75 @@
+@import 'main';
+
+.ham-license {
+	margin-top: 10px;
+
+	.cd-row {
+		&:not(:last-child) {
+			margin-bottom: 20px;
+		}
+
+		.cd-col {
+			&.cd-col-top {
+				margin-top: 20px;
+			}
+		}
+
+		&.ham-buttons {
+			align-items: center;
+			display: flex;
+			justify-content: space-between;
+
+			.cd-col {
+				p {
+					color: cd-palette($cd-color, 1009);
+				}
+
+				button {
+					margin-top: 10px;
+
+					&:first-child {
+						margin-right: 10px;
+					}
+				}
+			}
+		}
+	}
+
+	// media
+	@include cd-media(desktop, smartphone) {
+		.cd-row {
+			.cd-col {
+				padding: 0;
+
+				&.cd-col-m-top {
+					margin-top: 20px;
+				}
+			}
+		}
+	}
+
+	@include cd-media(desktop, mini) {
+		.cd-row {
+			&.ham-buttons {
+				display: block;
+
+				.cd-col {
+					display:flex;
+					flex-direction: column-reverse;
+
+					button {
+						width: 100%;
+
+						&:first-child {
+							margin-right: 0;
+						}
+
+						&:last-child {
+							margin-top: 10px;
+						}
+					}
+				}
+			}
+		}
+	}
+}

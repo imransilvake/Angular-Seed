@@ -1,0 +1,22 @@
+@import 'main';
+
+.ham-user-list {
+	.ham-button-wrapper {
+		margin-bottom: 20px;
+		margin-top: 40px;
+		text-align: right;
+	}
+
+	.ham-existing-users {
+		margin-top: 20px;
+	}
+
+	// media
+	@include cd-media(desktop, mini) {
+		.ham-button-wrapper {
+			button {
+				width: 100%;
+			}
+		}
+	}
+}

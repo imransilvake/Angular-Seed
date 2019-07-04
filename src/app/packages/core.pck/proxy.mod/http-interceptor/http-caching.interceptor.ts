@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { tap } from 'rxjs/operators';
-import { of } from 'rxjs/internal/observable/of';
 import { AsyncSubject } from 'rxjs/internal/AsyncSubject';
 
 // app
@@ -18,9 +17,8 @@ export class HttpCachingInterceptor implements HttpInterceptor {
 	/**
 	 * http caching interceptor (get requests)
 	 *
-	 * @param {HttpRequest<any>} req
-	 * @param {HttpHandler} next
-	 * @returns {Observable<any> | Observable<HttpEvent<any>>}
+	 * @param req
+	 * @param next
 	 */
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 		// before doing anything, it's important to only cache GET requests.
@@ -29,29 +27,33 @@ export class HttpCachingInterceptor implements HttpInterceptor {
 			return next.handle(req);
 		}
 
-		// return cached response if exists
-		const cachedResponse = this._storageService.get(req.urlWithParams, StorageTypeEnum.MEMORY) || null;
-		if (cachedResponse) {
-			return of(cachedResponse);
-		}
-
-		// no cached response exists. Go to the server for the response (data).
+		// initialize values
 		const subject = new AsyncSubject<HttpEvent<any>>();
-		next.handle(req)
-			.pipe(
-				tap(event => {
-					// there may be other events besides the response
-					if (event instanceof HttpResponse) {
-						// put data in memory
-						this._storageService.put(req.urlWithParams, event.body, StorageTypeEnum.MEMORY);
+		const cachedResponse = this._storageService.get(req.urlWithParams, StorageTypeEnum.MEMORY) || null;
 
-						// send event
-						subject.next(event);
-						subject.complete();
-					}
-				})
-			)
-			.subscribe();
+		// return cached response if exists
+		if (cachedResponse) {
+			// send event
+			subject.next(cachedResponse);
+			subject.complete();
+		} else {
+			// no cached response exists. Go to the server for the response (data).
+			next.handle(req)
+				.pipe(
+					tap(event => {
+						// there may be other events besides the response
+						if (event instanceof HttpResponse) {
+							// put data in memory
+							this._storageService.put(req.urlWithParams, event, StorageTypeEnum.MEMORY);
+
+							// send event
+							subject.next(event);
+							subject.complete();
+						}
+					})
+				)
+				.subscribe();
+		}
 
 		return subject;
 	}

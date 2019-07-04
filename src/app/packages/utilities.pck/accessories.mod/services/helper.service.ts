@@ -5,8 +5,10 @@ import { debounceTime } from 'rxjs/operators';
 import { merge } from 'rxjs/internal/observable/merge';
 
 // app
+import * as jwt_decode from 'jwt-decode';
+import * as CryptoJS from 'crypto-js';
+import * as moment from 'moment';
 declare const document: any;
-declare const event: Event;
 
 @Injectable({ providedIn: 'root' })
 export class HelperService {
@@ -31,20 +33,9 @@ export class HelperService {
 	}
 
 	/**
-	 * detect device: app or browser
-	 *
-	 * @returns {boolean}
-	 */
-	public get isApp(): boolean {
-		return document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
-	}
-
-	/**
 	 * detect view: app or desktop
-	 *
-	 * @returns {boolean}
 	 */
-	public static get isDesktopView(): boolean {
+	static get isDesktopView() {
 		return window && window.innerWidth >= 768;
 	}
 
@@ -93,16 +84,94 @@ export class HelperService {
 	}
 
 	/**
-	 * detect: key press
+	 * decode jwt token
+	 *
+	 * @param token
 	 */
-	public static detectKeyPress() {
-		return fromEvent(document, 'keyup').pipe(debounceTime(200));
+	public static decodeJWTToken(token) {
+		try {
+			return jwt_decode(token);
+		} catch (e) {
+			return null;
+		}
+	}
+
+	/**
+	 * hash the password
+	 *
+	 * @param password
+	 */
+	public static hashPassword(password: string) {
+		return CryptoJS.SHA3(password).toString();
 	}
 
 	/**
 	 * stop propagation
 	 */
-	public static stopPropagation() {
-		event.stopPropagation();
+	public static stopPropagation($event) {
+		$event.stopPropagation();
+	}
+
+	/**
+	 * prevent default
+	 */
+	public static preventDefault($event) {
+		$event.preventDefault();
+	}
+
+	/**
+	 * stop propagation from active element
+	 *
+	 * @param event
+	 */
+	public static stopPropagationFromActiveElement(event: any) {
+		if (event && event.target && event.target.childNodes) {
+			event.target.childNodes.forEach(element => {
+				if (element && element.className && element.className.indexOf('ham-active') !== -1) {
+					HelperService.stopPropagation(event);
+				}
+			});
+		}
+	}
+
+	/**
+	 * make first letter uppercase of each word in a string
+	 *
+	 * @param value
+	 */
+	public static capitalizeString(value: string) {
+		return value.replace(/\w\S*/g, (txt) => {
+			return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+		});
+	}
+
+	/**
+	 * get first letter of each word in a string
+	 *
+	 * @param value
+	 */
+	public static getFirstLetter(value: string) {
+		return value.match(/\b\w/g).join('');
+	}
+
+	/**
+	 * flat nested arrays
+	 *
+	 * @param array
+	 */
+	public static flatNestedArrays(array: any) {
+		return [].concat(...array);
+	}
+
+	/**
+	 * multilingual date time
+	 *
+	 * @param lang
+	 * @param date
+	 * @param dateFormat
+	 */
+	public static getDateTime(lang: string, date: any, dateFormat?: string) {
+		const format = dateFormat ? dateFormat : 'DD. MMMM YYYY, HH:mm:ss';
+		return moment(date).locale(lang).format(format);
 	}
 }

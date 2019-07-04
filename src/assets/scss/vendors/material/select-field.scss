@@ -1,11 +1,24 @@
 // select field
 .mat-select {
+	&.ham-selected {
+		.mat-select-trigger {
+			.mat-select-value {
+				color: cd-palette($cd-color, 1001);
+
+				span {
+					color: cd-palette($cd-color, 1001);
+				}
+			}
+		}
+	}
+
 	.mat-select-trigger {
 		height: 40px;
 		padding: 10px 12px;
 
 		.mat-select-value {
 			box-shadow: none;
+			color: cd-palette($cd-color, 1004);
 			cursor: pointer;
 
 			span {
@@ -26,9 +39,12 @@
 	.mat-select-panel {
 		border-radius: 2px;
 
-		// when info show in select-box
-		&.ham-select-panel-with-info {
-			margin-left: -19px;
+		.ham-group-label {
+			padding: 0 10px;
+
+			.mat-option-text {
+				font-weight: cd-fontWeight(500);
+			}
 		}
 	}
 }

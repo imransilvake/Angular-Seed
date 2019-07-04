@@ -6,31 +6,24 @@ import { ROUTING } from '../../../../environments/environment';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
-import { LockScreenComponent } from './components/lock-screen/lock-screen.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
-import { AuthResetPasswordGuard } from './guards/auth-reset-password.guard';
 
 // routes
 export const AUTHORIZATION_ROUTES: Routes = [
 	{
-		path: ROUTING.authorization.register,
+		path: ROUTING.authorization.routes.register,
 		component: RegisterComponent
 	},
 	{
-		path: ROUTING.authorization.login,
+		path: ROUTING.authorization.routes.login,
 		component: LoginComponent
 	},
 	{
-		path: ROUTING.authorization.forgot,
+		path: ROUTING.authorization.routes.forgot,
 		component: ForgotPasswordComponent
 	},
 	{
-		path: ROUTING.authorization.reset,
-		component: ResetPasswordComponent,
-		canActivate: [AuthResetPasswordGuard]
-	},
-	{
-		path: ROUTING.authorization.lock,
-		component: LockScreenComponent
+		path: ROUTING.authorization.routes.reset,
+		component: ResetPasswordComponent
 	}
 ];

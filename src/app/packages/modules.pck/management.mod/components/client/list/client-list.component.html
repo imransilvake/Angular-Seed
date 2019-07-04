@@ -1,0 +1,36 @@
+<div class="ham-client-list" *ngIf="clientGroupHotelsList">
+	<!-- Button -->
+	<div class="ham-button-wrapper" *ngIf="currentRole === roleAdmin">
+		<button mat-button class="ham-button ham-button-1" i18n="@@Management_Client_Create_Hotel_Group" (click)="onClickFetchRow()">
+			Create New Hotel / Group
+		</button>
+	</div>
+
+	<!-- Group Hotels List -->
+	<div class="ham-hotels-list" *ngIf="overrideState || currentRole !== roleHotelManager">
+		<app-table
+			tableTitle="Hotels / Hotelgroups"
+			i18n-tableTitle="@@Management_Client_Table_Title"
+			tableFilterInputName="client-table-filter"
+			i18n-tableFilterInputName="@@Management_Client_Table_Input_Name"
+			tableFilterInputPlaceHolder="Search"
+			i18n-tableFilterInputPlaceHolder="@@Management_Client_Table_Input_Filter_PlaceHolder"
+			[tableData]="clientGroupHotelsList"
+			[tableColumns]="['Name', 'Country', 'HotelGuest/App', 'Hotels(HGA)', 'Users(HGA)', 'HotelStaff/App', 'Hotels(HSA)', 'Users(HSA)']"
+			[tableSorting]="[false, false, false, true, true, false, true, true, false]"
+			[tableAdditionalColumns]="['Action']"
+			[tableTemplateRef]="[action]"
+			[tableResources]="clientsTable"
+			(rowData)="onClickFetchRow($event)">
+			<!-- Action -->
+			<ng-template #action>
+				<button mat-button class="ham-button ham-button-2" i18n="@@Management_Client_Table_Edit">Edit</button>
+			</ng-template>
+		</app-table>
+	</div>
+
+	<!-- Access Denied -->
+	<div class="ham-wrapper-2 ham-access-denied cd-center-align" *ngIf="!overrideState && currentRole === roleHotelManager">
+		<p i18n="@@Common_No_Access_Available">Access Denied!</p>
+	</div>
+</div>

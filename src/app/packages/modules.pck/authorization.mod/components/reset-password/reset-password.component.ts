@@ -1,74 +1,71 @@
 // angular
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { I18n } from '@ngx-translate/i18n-polyfill';
+import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-
-// store
-import { Store } from '@ngrx/store';
 
 // app
 import { ROUTING } from '../../../../../../environments/environment';
 import { ValidationService } from '../../../../core.pck/fields.mod/services/validation.service';
 import { LoadingAnimationService } from '../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
-import { DialogService } from '../../../../utilities.pck/dialog.mod/services/dialog.service';
-import { ErrorHandlerInterface } from '../../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 import { AuthResetInterface } from '../../interfaces/auth-reset.interface';
-import { DialogTypeEnum } from '../../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { AuthService } from '../../services/auth.service';
+import { HelperService } from '../../../../utilities.pck/accessories.mod/services/helper.service';
+import { AuthLoginInterface } from '../../interfaces/auth-login.interface';
+import { AppOptions } from '../../../../../../app.config';
 
 @Component({
 	selector: 'app-reset-password',
 	templateUrl: './reset-password.component.html',
-	styleUrls: ['../auth.component.scss']
+	styleUrls: ['../auth-common.component.scss']
 })
 
-export class ResetPasswordComponent implements OnDestroy {
+export class ResetPasswordComponent implements OnInit, OnDestroy {
 	public routing = ROUTING;
 	public formFields;
-	public userState;
-	public version = '1.0.0';
+	public queryParams;
+	public errorMessage;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
-		private _activatedRouter: ActivatedRoute,
+		private _route: ActivatedRoute,
 		private _loadingAnimationService: LoadingAnimationService,
-		private _dialogService: DialogService,
-		private _store: Store<ErrorHandlerInterface>,
-		private _authService: AuthService,
-		private _router: Router,
-		private _i18n: I18n
+		private _authService: AuthService
 	) {
-		// user state
-		this._activatedRouter.queryParams.subscribe(() => {
-			const currentNavigation = this._router.getCurrentNavigation();
-			this.userState = currentNavigation && currentNavigation.extras && currentNavigation.extras.state;
-		});
+		// listen: query params event
+		this._route.queryParams
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe((params) => this.queryParams = params);
 
-		// form fields
+		// form group
 		this.formFields = new FormGroup({
-			verificationCode: new FormControl('', [
-				Validators.required,
-				Validators.minLength(2)
-			]),
+			languageName: new FormControl(AppOptions.languages['de']),
 			password: new FormControl('', [
 				Validators.required,
-				ValidationService.passwordValidator
+				ValidationService.passwordValidator,
+				ValidationService.passwordStrengthValidator
 			]),
 			confirmPassword: new FormControl('', [
 				Validators.required,
 				ValidationService.passwordValidator,
+				ValidationService.passwordStrengthValidator,
 				ValidationService.confirmPasswordValidator
 			])
 		});
 
-		// listen to password change: update confirm password
+		// listen: to password change (update confirm password field)
 		this.password.valueChanges
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(() => this.confirmPassword.updateValueAndValidity());
+	}
+
+	ngOnInit() {
+		// listen: error message
+		this._authService.errorMessage
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => this.errorMessage = res);
 	}
 
 	ngOnDestroy() {
@@ -80,8 +77,8 @@ export class ResetPasswordComponent implements OnDestroy {
 	/**
 	 * getters
 	 */
-	get verificationCode() {
-		return this.formFields.get('verificationCode');
+	get languageName() {
+		return this.formFields.get('languageName');
 	}
 
 	get password() {
@@ -103,43 +100,30 @@ export class ResetPasswordComponent implements OnDestroy {
 		// start loading animation
 		this._loadingAnimationService.startLoadingAnimation();
 
-		// payload
-		const formPayload: AuthResetInterface = {
-			email: this.userState.email,
-			verificationCode: this.verificationCode.value,
-			password: this.password.value
-		};
+		// reset or login
+		if (this.queryParams && this.queryParams.autoLogin) {
+			// payload
+			const formPayload: AuthLoginInterface = {
+				username: this.queryParams && this.queryParams.user,
+				password: this.queryParams && this.queryParams.verification,
+				newPassword: HelperService.hashPassword(this.password.value)
+			};
 
-		// start reset password process
-		this._authService.authResetPassword(formPayload)
-			.pipe(takeUntil(this._ngUnSubscribe))
-			.subscribe(() => {
-				// stop loading animation
-				this._loadingAnimationService.stopLoadingAnimation();
+			// start login process
+			this._authService.authLogin(
+				formPayload,
+				this.formFields
+			);
+		} else {
+			// payload
+			const formPayload: AuthResetInterface = {
+				email: this.queryParams && this.queryParams.user,
+				verificationCode: this.queryParams && this.queryParams.verification,
+				password: HelperService.hashPassword(this.password.value)
+			};
 
-				// clear the form
-				this.formFields.reset();
-
-				// dialog payload
-				const data = {
-					type: DialogTypeEnum.NOTICE,
-					payload: {
-						title: this._i18n({ value: 'Title: Reset Password', id: 'Auth_Reset_Password_Form_Success_Title' }),
-						message: this._i18n({
-							value: 'Description: Reset Password',
-							id: 'Auth_Reset_Password_Form_Success_Description'
-						}),
-						buttonTexts: [this._i18n({ value: 'Button - OK', id: 'Common_Button_OK' })]
-					}
-				};
-
-				// dialog service
-				this._dialogService.showDialog(data)
-					.pipe(takeUntil(this._ngUnSubscribe))
-					.subscribe(() => {
-						// navigate to login route
-						this._router.navigate([ROUTING.authorization.login]).then();
-					});
-			});
+			// start reset password process
+			this._authService.authResetPassword(formPayload, this.formFields);
+		}
 	}
 }

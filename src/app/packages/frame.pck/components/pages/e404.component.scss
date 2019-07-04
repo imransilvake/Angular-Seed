@@ -1,0 +1,139 @@
+@import 'main';
+
+.ham-404-wrapper {
+	.cd-vh-center {
+		.ham-row {
+			max-width: 800px;
+			min-width: 800px;
+
+			.cd-col {
+				background-color: cd-palette($cd-background, 2002);
+				padding: 0;
+				position: relative;
+
+				&.cd-padding {
+					padding: 25px 25px 25px 12.5px;
+				}
+
+				.bg-inner {
+					align-items: flex-start;
+					background-image: url('/assets/images/pages/bg_inner_404.png');
+					background-repeat: no-repeat;
+					background-size: cover;
+					display: flex;
+					height: 180px;
+					justify-content: center;
+					padding: 20px;
+
+					.ham-logo {
+						max-width: 335px;
+						width: 100%;
+					}
+				}
+
+				.ham-text {
+					padding: 25px 12.5px 25px 25px;
+					position: absolute;
+
+					&.ham-top {
+						top: 0;
+					}
+
+					&.ham-bottom {
+						bottom: 0;
+					}
+				}
+
+				.img-404-wrapper {
+					display: flex;
+					justify-content: flex-end;
+
+					.img-404 {
+						max-height: 220px;
+						max-width: 150px;
+						width: 100%;
+					}
+				}
+
+				h1 {
+					color: cd-palette($cd-color, 1001);
+					font-weight: cd-fontWeight(400);
+					text-transform: uppercase;
+				}
+
+				h4 {
+					color: cd-palette($cd-color, 1014);
+					font-size: cd-fontSize(s21);
+					font-weight: cd-fontWeight(100);
+				}
+
+				a {
+					color: cd-palette($cd-color, 1014);
+					text-decoration: underline;
+				}
+			}
+		}
+
+		// media
+		@include cd-media(desktop, tablet) {
+			margin: 40px auto;
+			position: static;
+			transform: none;
+			width: 90%;
+
+			.ham-row {
+				max-width: 100%;
+				min-width: 100%;
+			}
+		}
+
+		@include cd-media(desktop, smartphone) {
+			margin: 0 auto;
+			width: 100%;
+
+			.cd-row {
+				.cd-col {
+					h1 {
+						font-size: cd-fontSize(se2);
+					}
+
+					h4 {
+						font-size: cd-fontSize(s19);
+					}
+				}
+			}
+
+			@include cd-media(desktop, mini) {
+				.cd-row {
+					.cd-col {
+						&.cd-padding {
+							padding: 0 25px 25px;
+						}
+
+						.bg-inner {
+							background-size: auto;
+							height: 150px;
+						}
+
+						.ham-text {
+							padding: 25px;
+							position: static;
+						}
+
+						.img-404-wrapper {
+							justify-content: flex-start;
+
+							.img-404 {
+								transform: scaleX(-1);
+							}
+						}
+
+						a {
+							font-size: cd-fontSize(s16);
+						}
+					}
+				}
+			}
+		}
+	}
+}

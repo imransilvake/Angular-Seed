@@ -23,11 +23,11 @@ Please follow the link for the documentation: [GUIDE](./GUIDE.md)
 
 #### Development
 - [X] Loading Animation
-- [X] Notification: `success`, `error`, `info`, `warning`
-- [X] Dialog: `confirmation`
-- [X] Error Handler: `common`, `system`
-- [X] Storage: `local`, `session`, `memory`
-- [X] Proxy: `getAPI`, `postAPI`
+- [X] Notification: `success, error, info, warning`
+- [X] Dialog: `confirmation, notice`
+- [X] Error Handler: `common, system`
+- [X] Storage: `local, session, memory`
+- [X] Proxy: `getAPI, postAPI`
 
 
 ## Libraries and Frameworks
@@ -43,6 +43,9 @@ Please follow the link for the documentation: [GUIDE](./GUIDE.md)
 - [X] [Moment](https://momentjs.com/)
 - [X] [HammerJS](https://hammerjs.github.io/)
 - [X] [Fontawesome](https://fontawesome.com/)
+- [X] [Password Strength (zxcvbn)](https://github.com/dropbox/zxcvbn)
+- [X] [JWT Decode](https://github.com/auth0/jwt-decode)
+- [X] [CryptoJS](https://github.com/brix/crypto-js)
 
 
 ## Environments

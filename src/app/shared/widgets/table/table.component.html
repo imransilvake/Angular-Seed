@@ -1,0 +1,101 @@
+<section class="ham-table-wrapper ham-wrapper-2">
+	<div class="ham-top">
+		<!-- Table Title -->
+		<h2 class="ham-title">{{ tableTitle }}</h2>
+
+		<!-- Input Filter -->
+		<app-input
+			*ngIf="tableShowFilterInput"
+			[inputName]="tableFilterInputName"
+			[inputPlaceHolder]="tableFilterInputPlaceHolder"
+			[control]="search">
+		</app-input>
+	</div>
+
+	<!-- Table -->
+	<div class="ham-table">
+		<table mat-table [className]="'mat-table ham-table'" [dataSource]="dataSource" matSort [matSortDisabled]="!tableApplySorting">
+			<!-- Column Templates -->
+			<ng-container *ngFor="let column of tableColumns; let idx = index;" matColumnDef="{{ column }}">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="!tableSorting[idx]" (click)="onClickSortByColumn(column)">{{ column }}</th>
+				<td mat-cell *matCellDef="let element">
+					<!-- Column: Photo -->
+					<ng-container *ngIf="column === 'Image'">
+						<img
+							class="ham-image"
+							*ngIf="element[column] && validateType(element[column]) !== 'string' && element[column] | async"
+							[src]="element[column] | async" alt="table-photo"/>
+						<p
+							class="ham-no-image"
+							*ngIf="!element[column] || validateType(element[column]) === 'string'">
+							{{element[column]}}
+						</p>
+					</ng-container>
+
+					<!-- Column: Rest -->
+					<ng-container *ngIf="column !== 'Image'">
+						<ng-container [ngSwitch]="validateType(element[column])">
+							<!-- Undefined -->
+							<ng-container *ngSwitchCase="'undefined'">-</ng-container>
+
+							<!-- Boolean -->
+							<ng-container *ngSwitchCase="'boolean'">
+								<mat-checkbox
+									class="ham-checkbox-2"
+									[(ngModel)]="element[column]"
+									[disabled]="true">
+								</mat-checkbox>
+							</ng-container>
+
+							<!-- Text -->
+							<ng-container *ngSwitchDefault>
+								{{ element[column] }}
+							</ng-container>
+						</ng-container>
+					</ng-container>
+				</td>
+			</ng-container>
+
+			<!-- Additional Columns Templates -->
+			<ng-container *ngFor="let column of tableAdditionalColumns; let idx=index" matColumnDef="{{ column }}">
+				<th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="!tableSorting[tableSorting.length - 1]">{{ column }}</th>
+				<td mat-cell *matCellDef>
+					<ng-container *ngTemplateOutlet="tableTemplateRef[idx]"></ng-container>
+				</td>
+			</ng-container>
+
+			<!-- Row Templates -->
+			<tr mat-header-row *matHeaderRowDef="allColumns"></tr>
+			<tr mat-row *matRowDef="let row; columns: allColumns" (click)="onClickRow(row)"></tr>
+		</table>
+
+		<!-- Spinner -->
+		<div class="ham-spinner" *ngIf="loading">
+			<mat-spinner class="ham-spinner-1" [diameter]="50"></mat-spinner>
+		</div>
+
+		<!-- Info -->
+		<p class="ham-no-data" i18n="@@Management_Table_No_Data" *ngIf="dataSource && dataSource.data.length === 0">
+			No Data is available.
+		</p>
+	</div>
+
+	<!-- Info & Pagination -->
+	<div class="ham-pagination-wrapper" [ngStyle]="{ 'display' : dataSource && dataSource.data.length === 0 ? 'none' : 'block' }">
+		<mat-toolbar>
+			<mat-toolbar-row class="mat-toolbar-row">
+				<!-- Info -->
+				<p>{{ tableInfo }}</p>
+
+				<!-- Pagination -->
+				<mat-paginator
+					(page)="onChangeNextPage($event)"
+					[pageSize]="tablePageSize"
+					[className]="'ham-pagination'"
+					[hidePageSize]="true"
+					[showFirstLastButtons]="true">
+				</mat-paginator>
+			</mat-toolbar-row>
+		</mat-toolbar>
+	</div>
+</section>

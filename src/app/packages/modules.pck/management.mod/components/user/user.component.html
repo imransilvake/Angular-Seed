@@ -1,0 +1,15 @@
+<div class="ham-user-management">
+	<!-- Head -->
+	<app-head
+		pageTitle="User Management"
+		i18n-pageTitle="@@Management_User_Title">
+	</app-head>
+
+	<!-- Details -->
+	<div class="ham-details">
+		<!-- View: List -->
+		<app-user-list
+			(changeUserView)="pageView = $event.view; id = $event.id; data = $event.data; openUserFormModal();">
+		</app-user-list>
+	</div>
+</div>

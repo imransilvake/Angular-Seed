@@ -1,9 +1,9 @@
 // app
 import { SessionTypeEnum } from '../enums/session-type.enum';
-import { SessionPayloadInterface } from './session-payload.interface';
+import { SessionsEnum } from '../enums/sessions.enum';
 
 // session interface
 export interface SessionInterface {
 	type: SessionTypeEnum;
-	payload?: SessionPayloadInterface;
+	payload?: SessionsEnum;
 }

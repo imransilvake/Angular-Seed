@@ -1,0 +1,87 @@
+// text ellipses
+.ham-ellipses {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+// access denied message
+.ham-access-denied {
+	p {
+		color: cd-palette($cd-color, 1009);
+	}
+}
+
+// form - auth
+.ham-wrapper-1 {
+	background-color: cd-palette($cd-background, 2001);
+	background-repeat: no-repeat;
+	background-size: cover;
+	bottom: 0;
+	left: 0;
+	overflow-y: auto;
+	position: fixed;
+	right: 0;
+	top: 0;
+}
+
+// form - general
+.ham-wrapper-2 {
+	background-color: cd-palette($cd-background, 2003);
+	padding: 15px;
+}
+
+// form - individual
+.ham-padding-0 {
+	> .cd-col {
+		padding: 0;
+	}
+}
+
+// form - side-by-side
+.ham-padding-1 {
+	> .cd-col {
+		&:first-child {
+			padding-left: 0;
+		}
+
+		&:last-child {
+			padding-right: 0;
+		}
+	}
+}
+
+// form - button
+.ham-button {
+	&:disabled {
+		background-color: cd-palette($cd-background, 2004);
+		opacity: .7;
+	}
+}
+
+.ham-button-1 {
+	background-color: cd-palette($cd-background, 2010);
+	border-radius: 2px;
+	margin-top: 5px;
+}
+
+.ham-button-2 {
+	background-color: cd-palette($cd-background, 2003);
+	border: 1px solid cd-palette($cd-border, 3008) !important;
+	border-radius: 2px;
+	color: cd-palette($cd-color, 1008);
+	line-height: 30px !important;
+	margin-top: 5px;
+}
+
+// table - button
+.ham-table-button-1 {
+	margin-top: 5px !important;
+}
+
+.ham-table-button-2 {
+	background-color: cd-palette($cd-background, 2009);
+	border: 1px solid cd-palette($cd-border, 3009) !important;
+	color: cd-palette($cd-color, 1001);
+	margin: 5px 0 5px 5px !important;
+}

@@ -1,0 +1,20 @@
+<div class="ham-broadcast-management">
+	<!-- Head -->
+	<app-head
+		pageTitle="Broadcast"
+		i18n-pageTitle="@@Management_System_Broadcast_Title">
+	</app-head>
+
+	<!-- Details -->
+	<div class="ham-details" *ngIf="currentRole === roleAdmin">
+		<!-- View: List -->
+		<app-broadcast-list
+			(changeBroadcastView)="pageView = $event.view; id = $event.id; data = $event.data; openBroadcastFormModal();">
+		</app-broadcast-list>
+	</div>
+
+	<!-- Access Denied -->
+	<div class="ham-wrapper-2 ham-access-denied cd-center-align" *ngIf="currentRole !== roleAdmin">
+		<p i18n="@@Common_No_Access_Available">Access Denied!</p>
+	</div>
+</div>

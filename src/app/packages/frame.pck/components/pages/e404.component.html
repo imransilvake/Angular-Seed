@@ -1,0 +1,27 @@
+<section class="ham-404-wrapper ham-wrapper-1" [ngStyle]="{'background-image': imageUrl}">
+	<div class="cd-vh-center">
+		<div class="cd-row ham-row">
+			<div class="cd-col">
+				<div class="bg-inner">
+					<img class="ham-logo" [src]="'assets/svg/logo_black.svg'" alt="logo">
+				</div>
+			</div>
+			<div class="cd-row ham-row">
+				<div class="cd-col cd-col-pm-m-12 cd-col-pm-s-6">
+					<div class="ham-text ham-top">
+						<h1>404 ERROR</h1>
+						<h4>Unfortunately this page doesn't exist!</h4>
+					</div>
+					<div class="ham-text ham-bottom">
+						<a i18n="@@Pages_404_Link" [routerLink]="['/' + routing.pages.dashboard]">Back to start page</a>
+					</div>
+				</div>
+				<div class="cd-col cd-col-pm-m-12 cd-col-pm-s-6 cd-padding">
+					<div class="img-404-wrapper">
+						<img class="img-404" [src]="'assets/images/pages/404_img.png'" alt="404">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

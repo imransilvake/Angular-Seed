@@ -1,0 +1,41 @@
+@import 'main';
+
+.ham-content-head {
+	margin-bottom: 20px;
+
+	.ham-top {
+		align-items: center;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.ham-page-hints {
+		background-color: cd-palette($cd-background, 2005, .8);
+		border-radius: 3px;
+		margin-top: 20px;
+		padding: 15px;
+		position: relative;
+
+		.ham-close {
+			cursor: pointer;
+			position: absolute;
+			right: 5px;
+			top: 5px;
+
+			&:hover {
+				opacity: .8;
+			}
+		}
+
+		h4 {
+			font-weight: cd-fontWeight(600);
+		}
+	}
+
+	// media
+	@include cd-media(desktop, mini) {
+		.ham-top {
+			display: block;
+		}
+	}
+}

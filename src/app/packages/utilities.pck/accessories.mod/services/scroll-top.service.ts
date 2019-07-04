@@ -9,11 +9,8 @@ import { HelperService } from './helper.service';
 export class ScrollTopService {
 	public scrollEvent: EventEmitter<any> = new EventEmitter();
 
-	constructor() {
-	}
-
 	/**
-	 * scroll to top listener
+	 * listener: scroll to top
 	 */
 	public scrollTopListener() {
 		HelperService.detectScroll()

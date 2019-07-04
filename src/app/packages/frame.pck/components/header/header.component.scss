@@ -1,9 +1,16 @@
 @import 'main';
 
 .ham-header {
-	background-color: cd-palette($cd-background, 2003);
 	box-shadow: 1px 1px 15px cd-palette($cd-shadow, 4006, .4);
-	color: cd-palette($cd-color, 1004);
+
+	&:not(.ham-emergency) {
+		background-color: cd-palette($cd-background, 2003);
+		color: cd-palette($cd-color, 1004);
+	}
+
+	&.ham-emergency {
+		background-color: cd-palette($cd-background, 2016);
+	}
 
 	.cd-row {
 		padding: 15px 0;
@@ -16,13 +23,12 @@
 				padding-right: 0;
 
 				.ham-logo {
-					border-right: 1px solid cd-palette($cd-border, 3002);
-					margin-right: 5px;
 					min-width: 225px;
 					width: 225px;
 
-					img {
-						display: block;
+					.ham-logo-black {
+						background-color: cd-palette($cd-background, 2001);
+						padding: 5px;
 					}
 
 					h4 {
@@ -66,11 +72,17 @@
 								transform: scale(0);
 							}
 						}
+
+						&.ham-icon-emergency {
+							&::before, &::after, div {
+								background-color: cd-palette($cd-background, 2001);
+							}
+						}
 					}
 
 					button {
-						margin: 0;
-						min-width: 50px;
+						margin: 0 0 0 15px;
+						min-width: 48px;
 						padding: 0;
 					}
 				}
@@ -80,6 +92,17 @@
 				justify-content: flex-end;
 				padding-left: 0;
 				padding-right: 5px;
+
+				button {
+					color: cd-palette($cd-color, 1004);
+					min-width: 48px;
+
+					&.ham-emergency-btn {
+						background-color: cd-palette($cd-background, 2013);
+						color: cd-palette($cd-color, 1001);
+						margin-right: 10px;
+					}
+				}
 			}
 		}
 	}
@@ -90,9 +113,8 @@
 			.cd-col {
 				&:first-child {
 					.ham-logo {
-						border: none;
 						min-width: auto;
-						width: 160px;
+						width: 200px;
 					}
 
 					.ham-icons {
@@ -103,6 +125,18 @@
 				&:last-child {
 					.ham-full-screen {
 						display: none;
+					}
+				}
+			}
+		}
+	}
+
+	@include cd-media(desktop, mini) {
+		.cd-row {
+			.cd-col {
+				&:first-child {
+					.ham-logo {
+						width: 60px;
 					}
 				}
 			}

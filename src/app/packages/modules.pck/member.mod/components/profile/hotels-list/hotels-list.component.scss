@@ -1,0 +1,13 @@
+@import 'main';
+
+.ham-assigned-hotels {
+	.ham-hotels-list {
+		list-style: none;
+
+		li {
+			p {
+				color: cd-palette($cd-color, 1004);
+			}
+		}
+	}
+}

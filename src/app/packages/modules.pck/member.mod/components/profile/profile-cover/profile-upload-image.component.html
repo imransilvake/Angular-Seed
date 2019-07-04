@@ -1,0 +1,62 @@
+<section class="ham-upload-image">
+	<!-- Header -->
+	<header class="ham-head">
+		<!-- Top -->
+		<div class="ham-top">
+			<h4 i18n="@@Member_Profile_ProfileCover_Upload_Image_Title">Upload Image</h4>
+			<a (click)="onClickCloseModal()">
+				<mat-icon class="ham-icon">cancel</mat-icon>
+			</a>
+		</div>
+
+		<!-- Divider -->
+		<app-divider></app-divider>
+
+		<!-- Bottom -->
+		<div class="ham-bottom">
+			<p i18n="@@Member_Profile_ProfileCover_Upload_Image_FileSize"><span>Max FileSize:</span> 1MB</p>
+			<p i18n="@@Member_Profile_ProfileCover_Upload_Image_Formats"><span>Formats:</span> JPG, PNG</p>
+		</div>
+	</header>
+
+	<!-- Content -->
+	<div class="ham-content">
+		<div class="ham-area" (drop)="onDrop($event)" (dragover)="onDragOver($event)">
+			<!-- Dummy Area -->
+			<div class="ham-dummy" *ngIf="!previewSrc">
+				<p i18n="@@Member_Profile_ProfileCover_Upload_Image_Drag_Image">Drag Image Here</p>
+			</div>
+
+			<!-- Preview -->
+			<img class="ham-preview" *ngIf="previewSrc" [src]="previewSrc" alt="preview-image"/>
+		</div>
+
+		<!-- Select Option -->
+		<p i18n="@@Member_Profile_ProfileCover_Upload_Image_Select_File" class="ham-select-image">
+			<label [htmlFor]="'fileUpload'">
+				[Select Image]
+				<input
+					class="cd-hide"
+					#file
+					[id]="'fileUpload'"
+					[type]="'file'"
+					[accept]="'image/*'"
+					(change)="setFilePreview(file.files[0])"/>
+			</label>
+		</p>
+
+		<!-- Errors -->
+		<div class="ham-error" *ngIf="errorMessage">
+			<p>{{errorMessage}}</p>
+		</div>
+	</div>
+
+	<!-- Footer -->
+	<footer class="ham-foot">
+		<button i18n="@@Member_Profile_ProfileCover_Upload_Image_Cancel_Button" mat-button type="button" class="ham-button ham-button-1" (click)="onClickCloseModal()">Cancel</button>
+		<button mat-button type="button" class="ham-button ham-button-1" (click)="onClickSaveImage()" [disabled]="!previewSrc || (previewSrc && loading)">
+			<fa-icon [icon]="faIcons[0]" [spin]="true" *ngIf="loading"></fa-icon>
+			<span i18n="@@Member_Profile_ProfileCover_Upload_Image_Save_Button" *ngIf="!loading">Save</span>
+		</button>
+	</footer>
+</section>

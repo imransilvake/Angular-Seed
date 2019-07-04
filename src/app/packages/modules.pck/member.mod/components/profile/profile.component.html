@@ -1,0 +1,28 @@
+<div class="ham-profile">
+	<!-- Head -->
+	<app-head
+		pageTitle="User Profile"
+		i18n-pageTitle="@@Member_Profile_Title">
+	</app-head>
+
+	<!-- Details -->
+	<div class="ham-details">
+		<!-- Profile Cover -->
+		<div class="cd-row ham-padding-0">
+			<app-profile-cover></app-profile-cover>
+		</div>
+
+		<!-- Profile Update & Change Password -->
+		<div class="cd-row ham-padding-1">
+			<div class="cd-col cd-col-pm-t-6">
+				<app-profile-update></app-profile-update>
+			</div>
+			<div class="cd-col cd-col-pm-t-6 cd-col-m-top">
+				<app-change-password></app-change-password>
+			</div>
+		</div>
+
+		<!-- Assigned Hotels -->
+		<app-hotels-list></app-hotels-list>
+	</div>
+</div>

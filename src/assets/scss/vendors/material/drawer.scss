@@ -4,12 +4,13 @@
 	// sidebar
 	.ham-root-drawer {
 		background-color: cd-palette($cd-background, 2003);
-		bottom: auto !important;
+		bottom: 0;
 		height: 100%;
 		margin-top: 1px;
 		min-width: 240px;
+		padding-bottom: 68px;
 		position: fixed !important;
-		top: auto !important;
+		top: 0;
 		transform: none !important;
 		transition: min-width 215ms;
 

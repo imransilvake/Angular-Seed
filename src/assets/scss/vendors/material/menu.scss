@@ -1,7 +1,8 @@
 .mat-menu-panel {
 	background-color: cd-palette($cd-background, 2003);
-	box-shadow: 1px 1px 15px cd-palette($cd-shadow, 4002, .4);
-	min-width: 250px !important;
+	box-shadow: 1px 1px 15px cd-palette($cd-shadow, 4006, .4);
+	min-width: 270px !important;
+	width: 270px;
 
 	.mat-menu-content {
 		border: none;
@@ -9,6 +10,10 @@
 
 		button {
 			color: cd-palette($cd-color, 1004);
+
+			&:hover {
+				color: cd-palette($cd-color, 1001);
+			}
 		}
 
 		.ham-head-1 {
@@ -25,11 +30,99 @@
 
 			.ham-title {
 				color: cd-palette($cd-color, 1004);
+				text-transform: capitalize;
 			}
 
 			p {
 				margin-top: -3px;
 			}
+		}
+
+		.ham-btn-icon {
+			&.ham-active {
+				background-color: cd-palette($cd-background, 2002);
+				color: cd-palette($cd-color, 1001);
+				cursor: default;
+				pointer-events: none;
+			}
+		}
+	}
+
+	&.ham-notification-mat-menu {
+		button {
+			&:last-child {
+				height: 35px;
+				line-height: inherit;
+				min-height: 35px;
+				text-align: center;
+
+				.ham-icon {
+					color: cd-palette($cd-color, 1004);
+				}
+			}
+
+			.cd-row {
+				align-items: center;
+
+				.cd-col {
+					display: inline-grid;
+
+					&:first-child {
+						padding: 0;
+					}
+
+					&:nth-of-type(2) {
+						padding: 0 12px;
+					}
+
+					&:last-child {
+						padding: 0;
+					}
+
+					p {
+						color: cd-palette($cd-color, 1004);
+						font-size: cd-fontSize(s12);
+
+						&.ham-type {
+							border-radius: 5px;
+							color: cd-palette($cd-color, 1000);
+							font-size: cd-fontSize(s10);
+							height: 18px;
+							line-height: 18px;
+							padding: 0 2px;
+							text-align: center;
+							text-transform: uppercase;
+						}
+
+						&.ham-yellow {
+							background-color: cd-palette($cd-background, 2005);
+						}
+
+						&.ham-red {
+							background-color: cd-palette($cd-background, 2009);
+						}
+
+						&.ham-blue {
+							background-color: cd-palette($cd-background, 2013);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// media
+	@include cd-media(mobile, smartphone) {
+		margin-right: 20px;
+	}
+
+	@include cd-media(desktop, mini) {
+		&.ham-account-mat-menu {
+			margin-right: 20px;
+		}
+
+		&.ham-notification-mat-menu {
+			margin-right: -30px;
 		}
 	}
 }

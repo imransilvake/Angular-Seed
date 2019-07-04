@@ -61,12 +61,12 @@
 			}
 		}
 
-		.ham-input {
+		.ham-input, .ham-textarea {
 			direction: ltr;
 			position: relative;
 			width: 100%;
 
-			input {
+			input, textarea {
 				background-color: transparent;
 				border: none;
 				box-shadow: none;
@@ -77,6 +77,19 @@
 				outline: 0;
 				padding: 12px;
 				width: 100%;
+
+				&.ham-time {
+					padding: 10px;
+				}
+
+				&.ham-space {
+					padding-right: 32px;
+				}
+
+				&:disabled {
+					cursor: default;
+					opacity: .5;
+				}
 
 				&::placeholder {
 					color: cd-palette($cd-color, 1004);
@@ -95,10 +108,19 @@
 					transition: background-color 5000s ease-in-out 0s;
 				}
 
+				&::-webkit-credentials-auto-fill-button,
+				&::-webkit-caps-lock-indicator,
+				&::-webkit-contacts-auto-fill-button {
+					pointer-events: none;
+					position: absolute;
+					right: 0;
+					visibility: hidden;
+				}
+
 				@keyframes autofill {
 					100% {
 						background-color: transparent;
-						color: inherit;
+						color: cd-palette($cd-color, 1001);
 					}
 				}
 			}
@@ -121,12 +143,6 @@
 					width: 20px;
 				}
 			}
-		}
-
-		// disabled
-		&.ham-disabled {
-			cursor: default;
-			opacity: .7;
 		}
 
 		// focused

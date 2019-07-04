@@ -1,12 +1,17 @@
 // angular
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 
 // app
-import { RequestHeaders } from '../../../../../app.config';
+import { LocalStorageItems, RequestHeaders, SessionStorageItems } from '../../../../../app.config';
+import { StorageService } from '../../storage.mod/services/storage.service';
+import { StorageTypeEnum } from '../../storage.mod/enums/storage-type.enum';
 
 @Injectable({ providedIn: 'root' })
 export class HttpOptionsService {
+	constructor(private _storageService: StorageService) {
+	}
+
 	/**
 	 * returns important headers for the request
 	 *
@@ -17,11 +22,15 @@ export class HttpOptionsService {
 		const headerValues: { [s: string]: string } = (postBodyParams) ? RequestHeaders.post : RequestHeaders.get;
 		let headers = new HttpHeaders();
 
+		// request headers defined in app config file
 		if (Object.keys(headerValues).length !== 0) {
 			Object.keys(headerValues).forEach((key) => {
 				headers = headers.set(key, headerValues[key]);
 			});
 		}
+
+		// add access token to the headers
+		headers = this.addAccessToken(headers);
 
 		return headers;
 	}
@@ -109,7 +118,7 @@ export class HttpOptionsService {
 	 * @param pathParams
 	 * @param url
 	 */
-	public addPathParams(url: string, pathParams: Object): string {
+	public static addPathParams(url: string, pathParams: Object): string {
 		if (pathParams) {
 			for (const param in pathParams) {
 				if (pathParams.hasOwnProperty(param)) {
@@ -119,5 +128,24 @@ export class HttpOptionsService {
 		}
 
 		return url;
+	}
+
+	/**
+	 * add access token to the headers
+	 *
+	 * @param headers
+	 */
+	private addAccessToken(headers: HttpHeaders) {
+		// current user
+		const userState =
+			this._storageService.get(LocalStorageItems.userState, StorageTypeEnum.PERSISTANT) ||
+			this._storageService.get(SessionStorageItems.userState, StorageTypeEnum.SESSION);
+
+		// add access token
+		if (userState) {
+			return headers.set('Authorization', userState.credentials.accessToken.toString());
+		}
+
+		return headers;
 	}
 }

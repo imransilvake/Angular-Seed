@@ -1,0 +1,27 @@
+<div class="ham-client-management">
+	<!-- Head -->
+	<app-head
+		pageTitle="Client Management"
+		i18n-pageTitle="@@Management_Client_Title">
+	</app-head>
+
+	<!-- Details -->
+	<div class="ham-details">
+		<!-- View: List -->
+		<ng-container *ngIf="pageView === 0">
+			<app-client-list
+				(changeClientView)="pageView = $event.view; id = $event.id; groupName = $event.name; triggerServices();">
+			</app-client-list>
+		</ng-container>
+
+		<!-- View: Form -->
+		<ng-container *ngIf="pageView === 1">
+			<app-client-form
+				[id]="id"
+				[groupName]="groupName"
+				(changeClientView)="pageView = $event.view; id = null; groupName = null; triggerServices();"
+				(updateViewOnNewGroup)="id = $event.id; triggerServices();">
+			</app-client-form>
+		</ng-container>
+	</div>
+</div>

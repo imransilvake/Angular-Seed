@@ -27,6 +27,7 @@ import { MaterialModule } from './packages/vendors.pck/material.mod/material.mod
 import { NotificationModule } from './packages/utilities.pck/notification.mod/notification.module';
 import { AuthorizationModule } from './packages/modules.pck/authorization.mod/authorization.module';
 import { AppLayoutComponent } from './app-layout.component';
+import { DashboardComponent } from './packages/modules.pck/dashboard.component';
 
 // i18n using polyfills
 // provided by webpack
@@ -38,14 +39,21 @@ declare const require;
 		BrowserModule,
 		HttpClientModule,
 		BrowserAnimationsModule,
-		RouterModule.forRoot(APP_ROUTES),
+		RouterModule.forRoot(APP_ROUTES, { onSameUrlNavigation: 'reload' }),
 
 		// store
 		StoreModule.forRoot({
 			loadingAnimation: loadingAnimationReducer,
 			notification: notificationReducer,
 			errorHandler: errorHandlerReducer,
-			sessionHandler: sessionReducer
+			session: sessionReducer
+		}, {
+			runtimeChecks: {
+				strictStateImmutability: true,
+				strictActionImmutability: true,
+				strictStateSerializability: true,
+				strictActionSerializability: true
+			}
 		}),
 		StoreDevtoolsModule.instrument({ maxAge: 10 }),
 
@@ -65,14 +73,18 @@ declare const require;
 		FrameModule,
 		AuthorizationModule
 	],
-	declarations: [AppComponent, AppLayoutComponent],
+	declarations: [
+		AppComponent,
+		AppLayoutComponent,
+		DashboardComponent
+	],
 	providers: [
 		I18n,
 		{
 			provide: TRANSLATIONS,
 			useFactory: (locale) => {
 				locale = locale || 'de';
-				return require(`raw-loader!../locale/translation.${locale}.xlf`);
+				return require(`raw-loader!../locale/translation.${ locale }.xlf`);
 			},
 			deps: [LOCALE_ID]
 		},

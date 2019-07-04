@@ -1,9 +1,11 @@
 <div class="ham-input-field" *ngIf="control">
+	<!-- Label -->
 	<label *ngIf="showLabel" [htmlFor]="inputId">{{labelName}}</label>
+
+	<!-- Info & Input -->
 	<div
 		class="ham-input-wrapper"
 		[class.ham-invalid]="control.invalid && control.touched"
-		[class.ham-disabled]="inputDisabled"
 		[class.ham-focused]="inputFocused"
 		[class.ham-layout-flex]="layoutStyleType === 1"
 		[class.ham-direction]="layoutStyleData?.changeDirection">
@@ -11,8 +13,9 @@
 		<div class="ham-info cd-hide" *ngIf="layoutStyleData">
 			<button
 				mat-button
-				type="submit" [disabled]="!layoutStyleData?.status || !layoutStyleData?.button"
+				type="submit"
 				class="ham-btn-icon"
+				[disabled]="!layoutStyleData?.status || !layoutStyleData?.button"
 				[class.ham-simple]="!layoutStyleData?.button">
 				<ng-container *ngIf="layoutStyleData?.button">
 					<fa-icon *ngIf="layoutStyleData?.icon" [icon]="layoutStyleData.icon"></fa-icon>
@@ -24,7 +27,7 @@
 		</div>
 
 		<!-- Input -->
-		<div class="ham-input">
+		<div class="ham-input" *ngIf="!typeTextArea">
 			<input
 				matInput
 				[formControl]="control"
@@ -33,10 +36,12 @@
 				[type]="hidePassword ? 'password' : inputType"
 				[value]="control.value"
 				[placeholder]="inputPlaceHolder"
-				[attr.disabled]="inputDisabled"
 				[autocomplete]="autocomplete"
+				[class.ham-space]="control.value"
+				[class.ham-time]="inputType === 'time'"
 				(focus)="inputFocused=true"
 				(focusout)="inputFocused=false">
+
 			<!-- Close Icon -->
 			<mat-icon
 				*ngIf="control.value"
@@ -52,6 +57,33 @@
 				matSuffix
 				(click)="hidePassword = !hidePassword">
 				{{hidePassword ? 'visibility_off' : 'visibility'}}
+			</mat-icon>
+		</div>
+
+		<!-- Text Area -->
+		<div class="ham-textarea" *ngIf="typeTextArea">
+			<textarea
+				matInput
+				cdkTextareaAutosize
+				[formControl]="control"
+				[id]="inputId"
+				[name]="inputName"
+				[type]="hidePassword ? 'password' : inputType"
+				[value]="control.value"
+				[placeholder]="inputPlaceHolder"
+				[cdkAutosizeMinRows]="textareaMinRows"
+				[cdkAutosizeMaxRows]="textareaMaxRows"
+				[class.ham-space]="control.value"
+				(focus)="inputFocused=true"
+				(focusout)="inputFocused=false">
+			</textarea>
+
+			<!-- Close Icon -->
+			<mat-icon
+				*ngIf="control.value"
+				class="ham-icon ham-close"
+				(click)="control.setValue('')">
+				close
 			</mat-icon>
 		</div>
 	</div>
@@ -76,14 +108,29 @@
 					It must have at most {{control.errors.usernameRequiredLength}} characters long
 				</ng-container>
 			</p>
+			<p *ngSwitchCase="'text'" i18n="@@Fields_Input_Error_Text">
+				Only alphabetic characters are allowed!
+			</p>
 			<p *ngSwitchCase="'password'" i18n="@@Fields_Input_Error_Password">
-				Password min. 8 characters, 1 capital letter, 1 special character and 1 number
+				Password min. 8 characters required!
+			</p>
+			<p *ngSwitchCase="'passwordStrength'" i18n="@@Fields_Input_Error_Password_Strength">
+				Password is too weak!
 			</p>
 			<p *ngSwitchCase="'email'" i18n="@@Fields_Input_Error_Email">
 				Please enter a valid email address
 			</p>
 			<p *ngSwitchCase="'confirmPassword'" i18n="@@Fields_Input_Error_Password_Mismatch">
 				The two passwords are not identical.
+			</p>
+			<p *ngSwitchCase="'invalidUrl'">
+				Invalid Link!
+			</p>
+			<p *ngSwitchCase="'invalidTime'" i18n="@@Fields_Datepicker_Error_Invalid_Time">
+				Invalid Time!
+			</p>
+			<p *ngSwitchCase="'backendError'">
+				Invalid Field!
 			</p>
 			<p i18n="@@Fields_Input_Error_Default" *ngSwitchDefault>
 				Unknown error occurred

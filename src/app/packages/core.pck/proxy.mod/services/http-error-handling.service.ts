@@ -1,7 +1,6 @@
 // angular
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { throwError } from 'rxjs/internal/observable/throwError';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 
 // store
@@ -14,13 +13,12 @@ import { HttpApiTypeEnum } from '../enums/http-api-type.enum';
 import { NotificationPayloadInterface } from '../../../utilities.pck/notification.mod/interfaces/notification-payload.interface';
 import { NotificationInterface } from '../../../utilities.pck/notification.mod/interfaces/notification.interface';
 import { ErrorHandlerPayloadInterface } from '../../../utilities.pck/error-handler.mod/interfaces/error-handler-payload.interface';
-import { AuthService } from '../../../modules.pck/authorization.mod/services/auth.service';
+import { ErrorHandlerInterface } from '../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 
 @Injectable({ providedIn: 'root' })
 export class HttpErrorHandlingService {
 	constructor(
-		private _authService: AuthService,
-		private _store: Store<NotificationInterface>,
+		private _store: Store<{ NotificationInterface: NotificationInterface, ErrorHandlerInterface: ErrorHandlerInterface }>,
 		private _i18n: I18n
 	) {
 	}
@@ -28,30 +26,51 @@ export class HttpErrorHandlingService {
 	/**
 	 * http error handling
 	 *
-	 * @param {HttpErrorResponse} error
-	 * @param {string} apiType
-	 * @returns {}
+	 * @param error
+	 * @param apiType
 	 */
 	public handleErrors(error: HttpErrorResponse, apiType: string) {
-		let returnError: any;
+		if (this.handleGeneralErrors(error)) {
+			switch (apiType) {
+				case HttpApiTypeEnum.GET:
+					return this.handleGetErrors(error);
+				case HttpApiTypeEnum.POST:
+					return this.handlePostErrors(error);
+			}
+		}
+	}
 
-		switch (apiType) {
-			case HttpApiTypeEnum.GET:
-				returnError = this.handleGetErrors(error);
-				break;
-			case HttpApiTypeEnum.POST:
-				returnError = this.handlePostErrors(error);
-				break;
+	/**
+	 * handle general errors
+	 *
+	 * @param response
+	 */
+	private handleGeneralErrors(response) {
+		let payload: ErrorHandlerPayloadInterface;
+		if (!navigator.onLine) {
+			// system error
+			payload = {
+				icon: 'error_icon',
+				title: this._i18n({
+					value: 'Title: Internet Connection Exception',
+					id: 'Error_Internet_Connection_Title'
+				}),
+				message: this._i18n({
+					value: 'Description: Internet Connection Exception',
+					id: 'Error_Internet_Connection_Description'
+				})
+			};
+			this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
+			return false;
 		}
 
-		return returnError;
+		return true;
 	}
 
 	/**
 	 * handle get api errors
 	 *
 	 * @param response
-	 * @returns {Observable<never>}
 	 */
 	private handleGetErrors(response) {
 		let backendError: string;
@@ -59,11 +78,9 @@ export class HttpErrorHandlingService {
 		// check error type.
 		if (response) {
 			if (response.error instanceof ErrorEvent) {
-				backendError = `An error occurred, <span>code:</span>${ response.status }, <span>Message:</span> ${ response.statusText }`;
-				console.error('An error occurred:', response.message);
+				backendError = `An error occurred: <b>code:</b>${ response.status }, <b>Message:</b> ${ response.statusText }`;
 			} else {
-				backendError = `Backend Error, <span>code:</span> ${ response.status }, <span>Message:</span> ${ response.statusText }`;
-				console.error(`Backend returned code ${ response.status }, Message: ${ response.message }`);
+				backendError = `Get Method Error: <b>code:</b> ${ response.status }, <b>Message:</b> ${ response.statusText }`;
 			}
 		}
 
@@ -76,130 +93,37 @@ export class HttpErrorHandlingService {
 			this._store.dispatch(new NotificationActions.NotificationError(payload));
 		}
 
-		// return an observable with a user-facing error message.
-		return throwError('Something bad happened; please try again later or contact the developer.');
+		// return response
+		return response;
 	}
 
 	/**
 	 * handle post api errors
 	 *
 	 * @param response
-	 * @returns {Observable<never>}
 	 */
 	private handlePostErrors(response) {
 		let payload: ErrorHandlerPayloadInterface;
-		switch (response.error.code) {
-			case 'InvalidParameterException':
+		switch (response.status) {
+			case 0:
+			case 403:
 				payload = {
+					icon: 'error_icon',
 					title: this._i18n({
-						value: 'Title: Invalid Parameter Exception',
-						id: 'Error_InvalidParameterException_Title'
+						value: 'Title: Unknown Error Exception',
+						id: 'Error_UnknownErrorException_Title'
 					}),
 					message: this._i18n({
-						value: 'Description: Invalid Parameter Exception',
-						id: 'Error_InvalidParameterException_Description'
+						value: 'Description: Unknown Error Exception',
+						id: 'Error_UnknownErrorException_Description'
 					}),
 					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 				};
-
-				// error dispatch
 				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
 				break;
-			case 'UserNotFoundException':
-				payload = {
-					title: this._i18n({
-						value: 'Title: User Not Found Exception',
-						id: 'Error_UserNotFoundException_Title'
-					}),
-					message: this._i18n({
-						value: 'Description: User Not Found Exception',
-						id: 'Error_UserNotFoundException_Description'
-					}),
-					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-				};
-
-				// error dispatch
-				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
-				break;
-			case 'UsernameExistsException':
-				payload = {
-					title: this._i18n({
-						value: 'Title: User Exists Exception',
-						id: 'Error_UsernameExistsException_Title'
-					}),
-					message: this._i18n({
-						value: 'Description: User Exists Exception',
-						id: 'Error_UsernameExistsException_Description'
-					}),
-					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-				};
-
-				// error dispatch
-				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
-				break;
-			case 'UserNotConfirmedException':
-				payload = {
-					title: this._i18n({
-						value: 'Title: User Not Confirmed Exception',
-						id: 'Error_UserNotConfirmedException_Title'
-					}),
-					message: this._i18n({
-						value: 'Description: User Not Confirmed Exception',
-						id: 'Error_UserNotConfirmedException_Description'
-					}),
-					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-				};
-
-				// error dispatch
-				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
-				break;
-			case 'CodeMismatchException':
-				payload = {
-					title: this._i18n({
-						value: 'Title: Verification Code Exception',
-						id: 'Error_CodeMismatchException_Title'
-					}),
-					message: this._i18n({
-						value: 'Description: Verification Code Exception',
-						id: 'Error_CodeMismatchException_Description'
-					}),
-					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-				};
-
-				// error dispatch
-				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
-				break;
-			case 'NotAuthorizedException':
-				payload = {
-					title: this._i18n({
-						value: 'Title: User Not Authorized Exception',
-						id: 'Error_NotAuthorizedException_Title'
-					}),
-					message: this._i18n({
-						value: 'Description: User Not Authorized Exception',
-						id: 'Error_NotAuthorizedException_Description'
-					}),
-					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-				};
-
-				// error dispatch
-				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
-				break;
-			default:
-				payload = {
-					title: this._i18n({
-						value: 'Title: Error Generic',
-						id: 'Error_Generic_Title'
-					}),
-					message: this._i18n({
-						value: 'Description: Error Generic',
-						id: 'Error_Generic_Description'
-					}),
-					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-				};
-
-				// error dispatch
-				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
 		}
+
+		// return response
+		return response;
 	}
 }

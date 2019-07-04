@@ -1,71 +1,68 @@
 // angular
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Router } from '@angular/router';
-
-// store
-import { Store } from '@ngrx/store';
 
 // app
 import { ROUTING } from '../../../../../../environments/environment';
 import { ValidationService } from '../../../../core.pck/fields.mod/services/validation.service';
-import { HotelListService } from '../../services/hotel-list.service';
-import { faHotel } from '@fortawesome/free-solid-svg-icons';
 import { SelectTypeEnum } from '../../../../core.pck/fields.mod/enums/select-type.enum';
 import { SelectDefaultInterface } from '../../../../core.pck/fields.mod/interfaces/select-default-interface';
-import { SelectStyleEnum } from '../../../../core.pck/fields.mod/enums/select-style.enum';
 import { LoadingAnimationService } from '../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { AuthRegisterInterface } from '../../interfaces/auth-register.interface';
-import { DialogService } from '../../../../utilities.pck/dialog.mod/services/dialog.service';
-import { DialogTypeEnum } from '../../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
-import { ErrorHandlerInterface } from '../../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 import { AuthService } from '../../services/auth.service';
+import { HelperService } from '../../../../utilities.pck/accessories.mod/services/helper.service';
+import { AutocompleteTypeEnum } from '../../../../core.pck/fields.mod/enums/autocomplete-type.enum';
+import { UtilityService } from '../../../../utilities.pck/accessories.mod/services/utility.service';
 
 @Component({
 	selector: 'app-register',
 	templateUrl: './register.component.html',
-	styleUrls: ['../auth.component.scss']
+	styleUrls: ['../auth-common.component.scss']
 })
 
 export class RegisterComponent implements OnInit, OnDestroy {
 	public routing = ROUTING;
 	public formFields;
-	public registerHotelNameSelectType = SelectTypeEnum.DEFAULT;
-	public registerHotelNameSelectStyleType = SelectStyleEnum.INFO;
-	public registerHotelNameIcons = [faHotel];
+	public registerHotelNameAutocompleteType = AutocompleteTypeEnum.DEFAULT;
+	public registerSalutationSelectType = SelectTypeEnum.DEFAULT;
 	public hotelList: SelectDefaultInterface[] = [];
-	public version = '1.0.0';
+	public salutationList: SelectDefaultInterface[] = [];
+	public errorMessage;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
 		private _loadingAnimationService: LoadingAnimationService,
-		private _dialogService: DialogService,
-		private _store: Store<ErrorHandlerInterface>,
 		private _authService: AuthService,
-		private _hotelListService: HotelListService,
-		private _router: Router,
-		private _i18n: I18n
+		private _utilityService: UtilityService
 	) {
-		// form fields
+		// form group
 		this.formFields = new FormGroup({
-			hotelName: new FormControl('', [
+			hotelId: new FormControl('', [
+				Validators.required,
+				ValidationService.autocompleteOptionValidator,
+			]),
+			salutation: new FormControl('', [
 				Validators.required
 			]),
 			firstName: new FormControl('', [
 				Validators.required,
-				Validators.minLength(2)
+				Validators.minLength(2),
+				ValidationService.textValidator,
+				Validators.maxLength(125)
 			]),
 			lastName: new FormControl('', [
 				Validators.required,
-				Validators.minLength(2)
+				Validators.minLength(2),
+				ValidationService.textValidator,
+				Validators.maxLength(125)
 			]),
 			password: new FormControl('', [
 				Validators.required,
-				ValidationService.passwordValidator
+				ValidationService.passwordValidator,
+				ValidationService.passwordStrengthValidator
 			]),
 			email: new FormControl('', [
 				Validators.required,
@@ -75,8 +72,19 @@ export class RegisterComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
-		// set hotel list
-		this.hotelList = this._hotelListService.getHotelList();
+		// listen: hotel list event
+		this._utilityService
+			.getHotelList()
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => this.hotelList = res);
+
+		// salutation
+		this.salutationList = this._utilityService.getSalutationList();
+
+		// listen: error message
+		this._authService.errorMessage
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => this.errorMessage = res);
 	}
 
 	ngOnDestroy() {
@@ -88,8 +96,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
 	/**
 	 * getters
 	 */
-	get hotelName() {
-		return this.formFields.get('hotelName');
+	get hotelId() {
+		return this.formFields.get('hotelId');
+	}
+
+	get salutation() {
+		return this.formFields.get('salutation');
 	}
 
 	get firstName() {
@@ -119,41 +131,22 @@ export class RegisterComponent implements OnInit, OnDestroy {
 		// start loading animation
 		this._loadingAnimationService.startLoadingAnimation();
 
+		// get browser language
+		const language = navigator.languages && navigator.languages.length > 0 ? navigator.languages[0] : navigator.language;
+		const browserLanguage = language.split('-')[0];
+
 		// payload
 		const formPayload: AuthRegisterInterface = {
+			lang: browserLanguage,
+			hotelId: this.hotelId.value.id,
+			salutation: this.salutation.value.id,
 			email: this.email.value,
 			firstName: this.firstName.value,
 			lastName: this.lastName.value,
-			password: this.password.value
+			password: HelperService.hashPassword(this.password.value)
 		};
 
 		// start registration process
-		this._authService.authRegister(formPayload)
-			.pipe(takeUntil(this._ngUnSubscribe))
-			.subscribe(() => {
-				// clear the form
-				this.formFields.reset();
-
-				// stop loading animation
-				this._loadingAnimationService.stopLoadingAnimation();
-
-				// dialog payload
-				const data = {
-					type: DialogTypeEnum.NOTICE,
-					payload: {
-						title: this._i18n({ value: 'Title: Success', id: 'Auth_Register_Form_Success_Title' }),
-						message: this._i18n({ value: 'Description: Success', id: 'Auth_Register_Form_Success_Description' }),
-						buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-					}
-				};
-
-				// dialog service
-				this._dialogService.showDialog(data)
-					.pipe(takeUntil(this._ngUnSubscribe))
-					.subscribe(() => {
-						// navigate to login route
-						this._router.navigate([ROUTING.authorization.login]).then();
-					});
-			});
+		this._authService.authRegister(formPayload, this.formFields);
 	}
 }

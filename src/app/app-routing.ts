@@ -2,23 +2,23 @@
 import { Routes } from '@angular/router';
 
 // app
-import { FRAME_ROUTES } from './packages/frame.pck/frame-routing';
 import { AUTHORIZATION_ROUTES } from './packages/modules.pck/authorization.mod/authorization-routing';
 import { AppLayoutComponent } from './app-layout.component';
-import { AuthOverviewComponent } from './packages/modules.pck/authorization.mod/components/auth-overview/auth-overview.component';
+import { AuthComponent } from './packages/modules.pck/authorization.mod/components/auth.component';
 import { ROUTING } from '../environments/environment';
-import { E404Component } from './packages/frame.pck/components/errors/e404/e404.component';
+import { E404Component } from './packages/frame.pck/components/pages/e404.component';
 import { AuthUserStatusGuard } from './packages/modules.pck/authorization.mod/guards/auth-user-status.guard';
+import { DashboardComponent } from './packages/modules.pck/dashboard.component';
 
 const ROUTES: Routes = [
 	{
 		path: '',
-		redirectTo: ROUTING.authorization.login,
+		redirectTo: ROUTING.authorization.routes.login,
 		pathMatch: 'full'
 	},
 	{
 		path: '',
-		component: AuthOverviewComponent,
+		component: AuthComponent,
 		children: [
 			...AUTHORIZATION_ROUTES
 		],
@@ -28,7 +28,28 @@ const ROUTES: Routes = [
 		path: '',
 		component: AppLayoutComponent,
 		children: [
-			...FRAME_ROUTES
+			{
+				path: '',
+				children: [
+					{
+						path: ROUTING.pages.dashboard,
+						component: DashboardComponent
+					},
+					{
+						path: ROUTING.member.title,
+						loadChildren: () => import('./packages/modules.pck/member.mod/member.module').then(m => m.MemberModule)
+					},
+					{
+						path: ROUTING.notifications.title,
+						loadChildren: () => import('./packages/modules.pck/notification.mod/notification.module').then(m => m.NotificationModule)
+					},
+					{
+						path: ROUTING.management.title,
+						loadChildren: () => import('./packages/modules.pck/management.mod/management.module').then(m => m.ManagementModule)
+					}
+				],
+				canActivateChild: [AuthUserStatusGuard]
+			}
 		],
 		canActivate: [AuthUserStatusGuard]
 	},

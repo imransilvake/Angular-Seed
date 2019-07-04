@@ -3,6 +3,9 @@
 		<div class="cd-col">
 			<!-- Common -->
 			<app-error-common [data]="data" *ngIf="data.type === 0"></app-error-common>
+
+			<!-- System -->
+			<app-error-system [data]="data" *ngIf="data.type === 1"></app-error-system>
 		</div>
 	</div>
 </section>

@@ -27,9 +27,15 @@ export function sessionReducer(state: SessionInterface = defaultState, action: S
 				type: SessionTypeEnum.SESSION_COUNTER_START,
 				payload: action.payload
 			});
+		case SessionActions.SESSION_COUNTER_RESET:
+			return newState(state, {
+				type: SessionTypeEnum.SESSION_COUNTER_RESET,
+				payload: action.payload
+			});
 		case SessionActions.SESSION_COUNTER_EXIT:
 			return newState(state, {
-				type: SessionTypeEnum.SESSION_COUNTER_EXIT
+				type: SessionTypeEnum.SESSION_COUNTER_EXIT,
+				payload: action.payload
 			});
 		default:
 			return state;

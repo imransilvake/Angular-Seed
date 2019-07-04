@@ -1,0 +1,12 @@
+<section class="ham-error-common" *ngIf="data && data.payload">
+	<header class="ham-header">
+		<img class="modal-icon" [src]="'assets/svg/utilities/' + data.payload.icon + '.svg'" alt="icon">
+		<h4>{{ data.payload.title }}</h4>
+	</header>
+	<div class="ham-content">
+		<p>{{ data.payload.message }}</p>
+	</div>
+	<footer class="ham-footer">
+		<button mat-button (click)="onClickCloseDialog()">{{ data.payload.buttonTexts[0] }}</button>
+	</footer>
+</section>

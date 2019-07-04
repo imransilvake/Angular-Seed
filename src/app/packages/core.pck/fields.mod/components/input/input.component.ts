@@ -13,6 +13,8 @@ import { InputStyleInterface } from '../../interfaces/input-style.interface';
 })
 
 export class InputComponent implements OnInit {
+	@Input() typeTextArea = false;
+
 	@Input() layoutStyleType: InputStyleEnum = InputStyleEnum.DEFAULT;
 	@Input() layoutStyleData: InputStyleInterface;
 
@@ -21,7 +23,6 @@ export class InputComponent implements OnInit {
 	@Input() showLabel = false;
 	@Input() labelName;
 
-	@Input() inputDisabled = false;
 	@Input() inputId = 'ham-input';
 	@Input() inputName;
 	@Input() inputType = 'text';
@@ -35,6 +36,9 @@ export class InputComponent implements OnInit {
 	@Input() hintText;
 
 	@Input() inputFocused = false;
+
+	@Input() textareaMinRows;
+	@Input() textareaMaxRows = 5;
 
 	ngOnInit() {
 		// case: show password on click

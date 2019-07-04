@@ -9,15 +9,29 @@
 		.mat-tree-node {
 			display: block;
 
-			&.ham-node {
-				button {
+			a {
+				border-radius: 0;
+				height: 48px;
+				width: 100%;
+
+				&.ham-blank {
+					.ham-btn-icon {
+						align-items: center;
+						display: flex;
+						justify-content: space-between;
+						width: 100%;
+					}
+				}
+
+				.mat-button-wrapper {
 					align-items: center;
 					display: flex;
+					height: 48px;
 					justify-content: space-between;
+				}
 
-					.mat-icon {
-						margin: 0;
-					}
+				.mat-icon {
+					margin: 0;
 				}
 			}
 

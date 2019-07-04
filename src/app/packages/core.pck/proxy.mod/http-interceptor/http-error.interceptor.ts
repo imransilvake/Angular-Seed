@@ -1,6 +1,6 @@
 // angular
 import { Injectable } from '@angular/core';
-import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpResponse } from '@angular/common/http';
+import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
 
@@ -16,9 +16,8 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 	/**
 	 * http error handling interceptor
 	 *
-	 * @param {HttpRequest<any>} req
-	 * @param {HttpHandler} next
-	 * @returns {Observable<HttpEvent<any>>}
+	 * @param req
+	 * @param next
 	 */
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 		const started = moment().valueOf();
@@ -28,17 +27,16 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 			.pipe(
 				tap(
 					// Succeeds when there is a response; ignore other events
-					event => status = event instanceof HttpResponse ? 'succeeded' : 'other events',
+					(event: HttpEvent<any>) => status = event instanceof HttpResponse ? 'succeeded' : 'other events',
 
 					// Operation failed; error is an HttpErrorResponse
-					error => this._httpErrorHandlingService.handleErrors(error, req.method)
+					(error: HttpErrorResponse) => this._httpErrorHandlingService.handleErrors(error, req.method)
 				),
 
 				// Logging
 				finalize(() => {
 					const elapsed = moment().subtract(started, 'milliseconds');
 					const message = `${ req.method } "${ req.urlWithParams }" ${ status } in ${ elapsed } ms.`;
-					// console.info(message);
 				})
 			);
 	}

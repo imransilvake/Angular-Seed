@@ -1,41 +1,26 @@
 <div class="cd-vh-center ham-auth-common">
 	<div class="cd-row ham-row">
+		<!-- Info -->
 		<div class="cd-col cd-col-pm-d-6 ham-col">
-			<!-- Info -->
-			<div class="ham-bg-wrapper">
-				<div class="ham-details ham-top">
-					<img class="ham-logo" src="/assets/svg/logo_black.svg" alt="bg-inner">
-					<h1 i18n="@@Auth_Login_Info_Title">Title</h1>
-					<p i18n="@@Auth_Login_Info_Description">Description</p>
-				</div>
-				<div class="ham-details ham-bottom">
-					<div class="cd-row">
-						<div class="cd-col cd-col-pd-m-6 cd-col-pd-s-6 cd-col-pd-d-6 cd-col-pd-w-6">
-							<p i18n="@@Auth_Login_Info_Version">Version: {{version}}</p>
-						</div>
-						<div class="cd-col cd-col-pd-m-6 cd-col-pd-s-6 cd-col-pd-d-6 cd-col-pd-w-6">
-							<img class="ts-logo-poweredby" src="/assets/svg/logo_powered_by.svg" alt="powered-by">
-						</div>
-					</div>
-				</div>
-			</div>
+			<app-auth-info
+				translateTitle="Title"
+				i18n-translateTitle="@@Auth_Login_Info_Title"
+				translateDescription="Description"
+				i18n-translateDescription="@@Auth_Login_Info_Description"
+				translateVersion="Version"
+				i18n-translateVersion="@@Auth_Login_Info_Version">
+			</app-auth-info>
 		</div>
+
+		<!-- Form -->
 		<div class="cd-col cd-col-pm-d-6 ham-col">
-			<!-- Form -->
-			<form class="ham-form" (ngSubmit)="onSubmitForm()" (keyup.enter)="isFormValid && onSubmitForm()">
+			<form class="ham-form" (ngSubmit)="onSubmitForm()">
 				<h3 i18n="@@Auth_Login_Form_Title">Login</h3>
 				<div class="cd-row">
 					<div class="cd-col">
 						<app-select
 							[selectType]="loginHotelNameSelectType"
-							[layoutStyleType]="loginHotelNameSelectStyleType"
-							[layoutStyleData]="{
-								status: false,
-								button: true,
-								icon: loginHotelNameIcons[0]
-							}"
-							[selectId]="'select-language-id'"
-							[selectClassPanel]="'ham-select-panel-with-info'"
+							[selectId]="'login-language-id'"
 							selectPlaceHolder="Language"
 							i18n-selectPlaceHolder="@@Auth_Login_Form_Language_PlaceHolder"
 							[dataDefault]="languageList"
@@ -49,11 +34,11 @@
 							labelName="Username*"
 							i18n-labelName="@@Auth_Login_Form_Username_Label"
 							[inputId]="'login-username-id'"
-							[inputType]="'text'"
+							[inputType]="'email'"
 							[inputName]="'username'"
 							inputPlaceHolder="Username"
 							i18n-inputPlaceHolder="@@Auth_Login_Form_Username_PlaceHolder"
-							[control]="username">
+							[control]="email">
 						</app-input>
 					</div>
 
@@ -75,19 +60,22 @@
 
 					<!-- Remember Me -->
 					<div class="cd-col ham-sby-remember">
-						<mat-checkbox class="ham-type-1" i18n="@@Auth_Login_Form_Remember_Text" (change)="rememberMe = $event">Remember Me</mat-checkbox>
-						<a [routerLink]="['/' + routing.authorization.forgot]" i18n="@@Auth_Login_Form_Forget_Password_Link_Text">Forget Password?</a>
+						<mat-checkbox class="ham-checkbox-1" [formControl]="rememberMe" i18n="@@Auth_Login_Form_Remember_Text">Remember Me</mat-checkbox>
+						<a class="ham-remember-color" [routerLink]="['/' + routing.authorization.routes.forgot]" i18n="@@Auth_Login_Form_Forget_Password_Link_Text">Forget Password?</a>
 					</div>
 
 					<!-- Button -->
-					<div class="cd-col">
-						<button mat-button type="submit" [disabled]="!isFormValid" i18n="@@Auth_Login_Form_Submit_Button">Login</button>
+					<div class="cd-col ham-btn-error">
+						<div>
+							<button mat-button type="submit" class="ham-button ham-button-1" [disabled]="!isFormValid" i18n="@@Auth_Login_Form_Submit_Button">Login</button>
+						</div>
+
+						<p *ngIf="errorMessage">{{errorMessage}}</p>
 					</div>
 
 					<!-- Note -->
 					<div class="cd-col">
-						<p i18n="@@Auth_Login_Form_Note">Don't have an account? <a [routerLink]="['/' + routing.authorization.register]">Register</a>
-						</p>
+						<p i18n="@@Auth_Login_Form_Note">Don't have an account? <a [routerLink]="['/' + routing.authorization.routes.register]">Register</a></p>
 					</div>
 				</div>
 			</form>

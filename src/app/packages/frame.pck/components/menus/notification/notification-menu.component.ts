@@ -19,6 +19,6 @@ export class NotificationMenuComponent {
 	 * @param event
 	 */
 	public onClickStopPropagation(event) {
-		HelperService.stopPropagation();
+		HelperService.stopPropagation(event);
 	}
 }

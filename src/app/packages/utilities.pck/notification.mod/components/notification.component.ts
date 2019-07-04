@@ -32,7 +32,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
 		private _router: Router,
 		private _store: Store<NotificationInterface>
 	) {
-		// subscribe: router setting
+		// listen: router event
 		// clear notification message on route change
 		this._router.events
 			.pipe(takeUntil(this._ngUnSubscribe))
@@ -48,7 +48,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
-		// subscribe: notification
+		// listen: notification event
 		this._store.select('notification')
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe((res) => {
@@ -62,7 +62,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
 
 					// type: close by id
 					if (res.type === NotificationTypeEnum.CLOSE) {
-						this.messages = this.messages.filter(e => res.payload.id !== e.payload.id);
+						this.messages = this.messages.filter(e => res.payload.id !== e.payload.id || res.payload.closeId !== e.payload.closeId);
 					}
 
 					// type: close all
@@ -70,7 +70,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
 						this.messages = [];
 					}
 
-					// broadcast change in notification
+					// listen: notification change event
 					of(null)
 						.pipe(
 							takeUntil(this._ngUnSubscribe),

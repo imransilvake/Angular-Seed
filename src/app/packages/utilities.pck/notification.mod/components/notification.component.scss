@@ -2,7 +2,7 @@
 
 .ham-notification-wrapper {
 	&:not(:first-child) {
-		border-top: 1px solid cd-palette($cd-border, 3001, .9);
+		border-top: 1px solid cd-palette($cd-border, 3002);
 	}
 
 	.ham-message {
@@ -18,7 +18,7 @@
 		}
 
 		&.ham-warning {
-			background-color: cd-palette($cd-background, 2007);
+			background-color: cd-palette($cd-background, 2005);
 		}
 
 		&.ham-error {
