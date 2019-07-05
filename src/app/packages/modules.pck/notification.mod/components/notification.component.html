@@ -1,12 +1,12 @@
 <div class="ham-notifications">
 	<!-- Head -->
 	<app-head
-		pageTitle="Notifications"
+		pageTitle="Notifications Overview"
 		i18n-pageTitle="@@Management_Notification_Title">
 	</app-head>
 
 	<!-- Details -->
 	<div class="ham-details">
-		<app-notification-list (rowClear)="triggerServices()"></app-notification-list>
+		<app-notification-list (refresh)="data = $event; triggerServices();"></app-notification-list>
 	</div>
 </div>

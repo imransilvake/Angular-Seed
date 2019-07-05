@@ -15,6 +15,7 @@ import { SidebarService } from '../../../frame.pck/services/sidebar.service';
 })
 
 export class NotificationComponent implements OnDestroy {
+	public data;
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
@@ -50,7 +51,7 @@ export class NotificationComponent implements OnDestroy {
 
 		// refresh services
 		forkJoin({
-			notificationList: this._notificationService.notificationFetchList()
+			notificationList: this._notificationService.notificationFetchList(this.data)
 		}).pipe(takeUntil(this._ngUnSubscribe)).subscribe(res => {
 			const result = {
 				notificationList: res.notificationList,

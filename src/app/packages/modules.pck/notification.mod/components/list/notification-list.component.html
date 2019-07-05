@@ -1,8 +1,43 @@
 <div class="ham-notification-list">
-	<!-- Hotel -->
+	<!-- Notification List -->
 	<ng-container *ngIf="hotelAppState">
-		<!-- New Users -->
-		<div class="ham-new-users" *ngIf="notificationList">
+		<!-- Filters -->
+		<div class="ham-filters">
+			<!-- Date & Dropdown Filter -->
+			<div class="cd-row ham-padding-0">
+				<div class="cd-col ham-date">
+					<button mat-button type="button" (click)="onClickUpdateDate(-1)">
+						<mat-icon>keyboard_arrow_left</mat-icon>
+					</button>
+					<app-datepicker
+						[inputId]="'notifications-date-id'"
+						[inputType]="'text'"
+						[inputName]="'date'"
+						inputPlaceHolder="Date"
+						i18n-inputPlaceHolder="@@Notifications_Date_PlaceHolder"
+						[control]="date">
+					</app-datepicker>
+					<button mat-button type="button" (click)="onClickUpdateDate(1)">
+						<mat-icon>keyboard_arrow_right</mat-icon>
+					</button>
+				</div>
+				<div class="cd-col ham-filter">
+					<app-select
+						[selectType]="selectTypeDefault"
+						[selectId]="'notifications-filter-id'"
+						selectPlaceHolder="Select Language"
+						i18n-selectPlaceHolder="@@Notifications_Filter_PlaceHolder"
+						[dataDefault]="notificationFilters"
+						[control]="filter">
+					</app-select>
+				</div>
+			</div>
+
+			<!-- Clear All Button -->
+		</div>
+
+		<!-- Table -->
+		<div class="ham-notification" *ngIf="notificationList">
 			<app-table
 				tableTitle="Notifications"
 				i18n-tableTitle="@@Notifications_Table_Title"
@@ -14,7 +49,7 @@
 				[tableAdditionalColumns]="['Action']"
 				[tableTemplateRef]="[action]"
 				[tableResources]="notificationTable"
-				(rowClear)="rowClear.emit()"
+				(rowClear)="refresh.emit({ date: date.value, filter: filter.value.id })"
 				(rowData)="onClickRowActionButtons($event)">
 				<!-- Action -->
 				<ng-template #action>

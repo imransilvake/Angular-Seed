@@ -8,6 +8,7 @@ import { SelectDefaultInterface } from '../../../core.pck/fields.mod/interfaces/
 import { AppOptions, AppServices } from '../../../../../app.config';
 import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service';
 import { AuthService } from '../../../modules.pck/authorization.mod/services/auth.service';
+import { NotificationsFiltersEnums } from '../../../modules.pck/notification.mod/enums/notifications-filters.enums';
 
 @Injectable({ providedIn: 'root' })
 export class UtilityService {
@@ -193,5 +194,64 @@ export class UtilityService {
 		} else {
 			return of(null);
 		}
+	}
+
+	/**
+	 * notification filters list
+	 */
+	public getNotificationFilters() {
+		const notificationFiltersList: SelectDefaultInterface[] = [
+			{
+				id: NotificationsFiltersEnums.ALL,
+				text: this._i18n({
+					value: 'All notifications',
+					id: 'Notifications_Filters_All'
+				})
+			},
+			{
+				id:  NotificationsFiltersEnums.OPEN,
+				text: this._i18n({
+					value: 'Only open notifications',
+					id: 'Notifications_Filters_Open'
+				})
+			},
+			{
+				id:  NotificationsFiltersEnums.ADMIN,
+				text: this._i18n({
+					value: 'Only admin notifications',
+					id: 'Notifications_Filters_Admin'
+				})
+			},
+			{
+				id:  NotificationsFiltersEnums.REGISTRATIONS,
+				text: this._i18n({
+					value: 'Only registrations',
+					id: 'Notifications_Filters_Registrations'
+				})
+			},
+			{
+				id:  NotificationsFiltersEnums.ROOM,
+				text: this._i18n({
+					value: 'Only room notifications',
+					id: 'Notifications_Filters_Room'
+				})
+			},
+			{
+				id:  NotificationsFiltersEnums.REPAIR,
+				text: this._i18n({
+					value: 'Only repair notifications',
+					id: 'Notifications_Filters_Repair'
+				})
+			},
+			{
+				id:  NotificationsFiltersEnums.ALERT,
+				text: this._i18n({
+					value: 'Only alert notifications',
+					id: 'Notifications_Filters_Alert'
+				})
+			}
+		];
+
+		return notificationFiltersList;
 	}
 }

@@ -1,15 +1,17 @@
 // angular
 import { EventEmitter, Injectable } from '@angular/core';
 import { BehaviorSubject, of } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 
 // app
+import * as moment from 'moment';
 import { AppOptions, AppServices } from '../../../../../app.config';
 import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service';
 import { AppStateEnum } from '../../../frame.pck/enums/app-state.enum';
 import { DialogTypeEnum } from '../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { DialogService } from '../../../utilities.pck/dialog.mod/services/dialog.service';
+import { NotificationsFiltersEnums } from '../enums/notifications-filters.enums';
 
 @Injectable()
 export class NotificationService {
@@ -28,8 +30,22 @@ export class NotificationService {
 
 	/**
 	 * fetch notification list
+	 *
+	 * @param dataPayload
 	 */
-	public notificationFetchList() {
+	public notificationFetchList(dataPayload: any) {
+		// filter: open or others
+		let uniqueProperty = {};
+		if (dataPayload && dataPayload.filter === NotificationsFiltersEnums.OPEN) {
+			uniqueProperty = {
+				state: dataPayload.filter,
+			};
+		} else {
+			uniqueProperty = {
+				type: dataPayload && dataPayload.filter ? dataPayload.filter : 'ALL'
+			}
+		}
+
 		// validate app state
 		if (this.appState.type === AppStateEnum.HOTEL) {
 			const api = AppServices['Notifications']['Notifications_List_Hotel'];
@@ -38,8 +54,8 @@ export class NotificationService {
 				offset: 0,
 				limit: AppOptions.tablePageSizeLimit,
 				user: this.currentUser.profile.email,
-				type: 'ALL',
-				date: '07/04/2019'
+				date: dataPayload && dataPayload.date ? dataPayload.date : moment().toDate(),
+				...uniqueProperty
 			};
 
 			const payload = {
@@ -71,9 +87,10 @@ export class NotificationService {
 	 * recognize notification
 	 *
 	 * @param row
-	 * @param rowClearEmitter
+	 * @param refreshEmitter
+	 * @param payload
 	 */
-	public recognizeNotification(row: any, rowClearEmitter: any) {
+	public recognizeNotification(row: any, refreshEmitter: any, payload: any) {
 		const clearApi = AppServices['Notifications']['Notifications_Update_Hotel'];
 
 		// payload
@@ -118,7 +135,7 @@ export class NotificationService {
 					// service
 					this._proxyService
 						.postAPI(clearApi, payload)
-						.subscribe(() => rowClearEmitter.emit());
+						.subscribe(() => refreshEmitter.emit(payload));
 				}
 			});
 	}
