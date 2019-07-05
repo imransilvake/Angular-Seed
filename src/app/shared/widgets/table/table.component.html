@@ -18,14 +18,16 @@
 			<!-- Column Templates -->
 			<ng-container *ngFor="let column of tableColumns; let idx = index;" matColumnDef="{{ column }}">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="!tableSorting[idx]" (click)="onClickSortByColumn(column)">
-					<!-- Column: Multi-Selection -->
+					<!-- Column: Clear -->
 					<ng-container *ngIf="column === 'Clear'">
 						<div class="ham-clear-head">
 							<mat-checkbox
+								(click)="onClickCheckAllRows()"
 								class="ham-checkbox ham-checkbox-3 ham-s1"
-								[disableRipple]="true">
+								[disableRipple]="true"
+								[formControl]="clearAll">
 							</mat-checkbox>
-							<span class="ham-clear" [class.ham-disabled]="clearRows && clearRows.length === 0" (click)="confirmClearRows()">Clear</span>
+							<span class="ham-clear" [class.ham-disabled]="clearRows && clearRows.length === 0" (click)="onClickConfirmCheckedRows($event)">Clear</span>
 						</div>
 					</ng-container>
 
@@ -39,8 +41,9 @@
 					<ng-container *ngIf="column === 'Clear'">
 						<mat-checkbox
 							*ngIf="!(!!element['ConfirmDate'] && !!element['ConfirmUser'])"
+							[checked]="checkAllRows"
 							class="ham-checkbox ham-checkbox-3 ham-s1"
-							(change)="onChangeClearRow(element)"
+							(change)="onClickClearRow(element)"
 							[disableRipple]="true">
 						</mat-checkbox>
 					</ng-container>

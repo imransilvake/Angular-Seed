@@ -50,6 +50,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	public sortColumn;
 	public sortOrder;
 	public clearRows = [];
+	public checkAllRows = false;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
@@ -62,7 +63,8 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	) {
 		// form group
 		this.formFields = new FormGroup({
-			search: new FormControl('')
+			search: new FormControl(''),
+			clearAll: new FormControl(false)
 		});
 	}
 
@@ -96,6 +98,12 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
 			// stop loading
 			this.loading = false;
+
+			// uncheck clear column
+			this.clearAll.setValue(false);
+
+			// uncheck rows
+			this.checkAllRows = false;
 		}
 
 		// re-initialize table
@@ -113,6 +121,10 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	 */
 	get search() {
 		return this.formFields.get('search');
+	}
+
+	get clearAll() {
+		return this.formFields.get('clearAll');
 	}
 
 	/**
@@ -236,11 +248,12 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	}
 
 	/**
-	 * on change checked/unchecked clear per row
+	 * check / uncheck a single row
 	 *
 	 * @param element
 	 */
-	public onChangeClearRow(element) {
+	public onClickClearRow(element) {
+		// set / unset row checkbox
 		const result = this.clearRows && this.clearRows.some(r => r.Id === element.Id);
 		if (!result) {
 			const payload = {
@@ -252,12 +265,48 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 		} else {
 			this.clearRows = this.clearRows && this.clearRows.filter(r => r.Id !== element.Id);
 		}
+
+		// set / unset main checkbox
+		const all = this.dataSource.data && this.dataSource.data.filter(r => !(!!r.ConfirmUser && !!r.ConfirmDate));
+		if (this.clearRows.length === all.length) {
+			this.clearAll.setValue(true);
+			this.checkAllRows = true;
+		}
+
+		if (this.clearRows.length === 0) {
+			this.clearAll.setValue(false);
+			this.checkAllRows = false;
+		}
 	}
 
 	/**
-	 * confirm rows
+	 * check / uncheck all rows
 	 */
-	public confirmClearRows() {
+	public onClickCheckAllRows() {
+		this.checkAllRows = !this.checkAllRows;
+		if (!this.checkAllRows) {
+			this.clearRows = [];
+		} else {
+			this.clearRows = this.dataSource.data
+				.filter(r => !(!!r.ConfirmUser && !!r.ConfirmDate))
+				.map(r => {
+					return {
+						Id: r.Id,
+						State: r.State,
+						ConfirmUser: this._authService.currentUserState.profile.email
+					};
+				});
+		}
+	}
+
+	/**
+	 * confirm checked rows
+	 */
+	public onClickConfirmCheckedRows(event: any) {
+		// stop propagation
+		HelperService.stopPropagation(event);
+
+		// clear tick rows
 		if (this.clearRows && this.clearRows.length > 0) {
 			// payload
 			const data = {
@@ -453,7 +502,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 			const pageSize = this.tablePageSize;
 			const from = (pageSize * pageIndex) + 1;
 			const to = (pageSize * (pageIndex + 1) > total) ? total : pageSize * (pageIndex + 1);
-			this.tableInfo = total > 0 ? `${from} - ${to} of ${total}` : null;
+			this.tableInfo = total > 0 ? `${ from } - ${ to } of ${ total }` : null;
 		}
 	}
 
@@ -515,65 +564,63 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	 * @param column
 	 */
 	private onClickSortByColumn(column: string) {
-		if (column === 'Clear') {
-			return false;
-		}
-
-		let sortOrder;
-		let columnName;
-		if (column === 'Last Login') {
-			columnName = 'LoginDate';
-		} else if (column === 'Hotels(HGA)' || column === 'Hotels(HSA)') {
-			columnName = 'TotalHotels';
-		} else if (column === 'Users(HGA)' || column === 'Users(HSA)') {
-			columnName = 'TotalUsers';
-		} else if (column === 'Date') {
-			columnName = 'SendDate';
-		}
-
-		// reset when new sorting column is clicked
-		if (this.sortColumn !== columnName) {
-			this.sortColumn = '';
-			this.sortOrder = '';
-		}
-
-		// sorting logic
-		if (this.sortOrder === 'desc' || !columnName) {
-			this.sortColumn = this.tableResources.sortDefaultColumn;
-			this.sortOrder = '';
-			sortOrder = 'desc';
-		} else {
-			this.sortColumn = columnName;
-			this.sortOrder = (!this.sortOrder) ? 'asc' : 'desc';
-			sortOrder = this.sortOrder;
-		}
-
-		// set sorting data
-		let sortData = {};
-		if (this.sortColumn) {
-			sortData = {
-				column: this.sortColumn,
-				sort: sortOrder
-			};
-		}
-
-		// payload
-		const payload = {
-			...this.tableResources.payload,
-			queryParams: {
-				...this.tableResources.payload.queryParams,
-				offset: 0,
-				limit: this.tablePageSize + 1,
-				...sortData
+		if (column !== 'Clear') {
+			let sortOrder;
+			let columnName;
+			if (column === 'Last Login') {
+				columnName = 'LoginDate';
+			} else if (column === 'Hotels(HGA)' || column === 'Hotels(HSA)') {
+				columnName = 'TotalHotels';
+			} else if (column === 'Users(HGA)' || column === 'Users(HSA)') {
+				columnName = 'TotalUsers';
+			} else if (column === 'Date') {
+				columnName = 'SendDate';
 			}
-		};
 
-		// load next data
-		this.loadNextData(this.tableResources.api, payload, 0);
+			// reset when new sorting column is clicked
+			if (this.sortColumn !== columnName) {
+				this.sortColumn = '';
+				this.sortOrder = '';
+			}
 
-		// move to first page.
-		if (this.dataSource.paginator) {
-			this.dataSource.paginator.firstPage();
+			// sorting logic
+			if (this.sortOrder === 'desc' || !columnName) {
+				this.sortColumn = this.tableResources.sortDefaultColumn;
+				this.sortOrder = '';
+				sortOrder = 'desc';
+			} else {
+				this.sortColumn = columnName;
+				this.sortOrder = (!this.sortOrder) ? 'asc' : 'desc';
+				sortOrder = this.sortOrder;
+			}
+
+			// set sorting data
+			let sortData = {};
+			if (this.sortColumn) {
+				sortData = {
+					column: this.sortColumn,
+					sort: sortOrder
+				};
+			}
+
+			// payload
+			const payload = {
+				...this.tableResources.payload,
+				queryParams: {
+					...this.tableResources.payload.queryParams,
+					offset: 0,
+					limit: this.tablePageSize + 1,
+					...sortData
+				}
+			};
+
+			// load next data
+			this.loadNextData(this.tableResources.api, payload, 0);
+
+			// move to first page.
+			if (this.dataSource.paginator) {
+				this.dataSource.paginator.firstPage();
+			}
 		}
 	}
 
