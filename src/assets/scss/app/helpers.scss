@@ -89,7 +89,7 @@
 	}
 
 	&.ham-grey {
-		color: cd-palette($cd-color, 1004);
 		border: 1px solid cd-palette($cd-border, 3004) !important;
+		color: cd-palette($cd-color, 1004);
 	}
 }

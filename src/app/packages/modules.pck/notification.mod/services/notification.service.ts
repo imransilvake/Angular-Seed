@@ -38,12 +38,12 @@ export class NotificationService {
 		let uniqueProperty = {};
 		if (dataPayload && dataPayload.filter === NotificationsFiltersEnums.OPEN) {
 			uniqueProperty = {
-				state: dataPayload.filter,
+				state: dataPayload.filter
 			};
 		} else {
 			uniqueProperty = {
 				type: dataPayload && dataPayload.filter ? dataPayload.filter : 'ALL'
-			}
+			};
 		}
 
 		// validate app state
@@ -87,9 +87,9 @@ export class NotificationService {
 	 * clear all notifications
 	 *
 	 * @param refreshEmitter
-	 * @param payload
+	 * @param refreshPayload
 	 */
-	public notificationClearAll(refreshEmitter: any, payload: any) {
+	public notificationClearAll(refreshEmitter: any, refreshPayload: any) {
 		const clearAllApi = AppServices['Notifications']['Notifications_ClearAll_Hotel'];
 
 		// payload
@@ -132,7 +132,7 @@ export class NotificationService {
 					// service
 					this._proxyService
 						.postAPI(clearAllApi, payload)
-						.subscribe(() => refreshEmitter.emit(payload));
+						.subscribe(() => refreshEmitter.emit(refreshPayload));
 				}
 			});
 	}
@@ -142,9 +142,9 @@ export class NotificationService {
 	 *
 	 * @param row
 	 * @param refreshEmitter
-	 * @param payload
+	 * @param refreshPayload
 	 */
-	public notificationRecognize(row: any, refreshEmitter: any, payload: any) {
+	public notificationRecognize(row: any, refreshEmitter: any, refreshPayload: any) {
 		const clearApi = AppServices['Notifications']['Notifications_Update_Hotel'];
 
 		// payload
@@ -189,7 +189,7 @@ export class NotificationService {
 					// service
 					this._proxyService
 						.postAPI(clearApi, payload)
-						.subscribe(() => refreshEmitter.emit(payload));
+						.subscribe(() => refreshEmitter.emit(refreshPayload));
 				}
 			});
 	}
