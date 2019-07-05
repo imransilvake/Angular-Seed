@@ -42,7 +42,8 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 	},
 	Notifications: {
 		Notifications_List_Hotel: { serviceUrl: '/notification/list/group/:groupId/hotel/:hotelId' },
-		Notifications_Update_Hotel: { serviceUrl: '/notification/confirm/group/:groupId/hotel/:hotelId' }
+		Notifications_Update_Hotel: { serviceUrl: '/notification/confirm/group/:groupId/hotel/:hotelId' },
+		Notifications_ClearAll_Hotel: { serviceUrl: '/notification/clear/group/:groupId/hotel/:hotelId' }
 	},
 	Management: {
 		Client_List_All: { serviceUrl: '/management/hotelgroup/list' },

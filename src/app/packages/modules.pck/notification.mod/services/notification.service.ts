@@ -84,13 +84,67 @@ export class NotificationService {
 	}
 
 	/**
+	 * clear all notifications
+	 *
+	 * @param refreshEmitter
+	 * @param payload
+	 */
+	public notificationClearAll(refreshEmitter: any, payload: any) {
+		const clearAllApi = AppServices['Notifications']['Notifications_ClearAll_Hotel'];
+
+		// payload
+		const data = {
+			type: DialogTypeEnum.CONFIRMATION,
+			payload: {
+				icon: 'dialog_confirmation',
+				title: this._i18n({ value: 'Title: Clear All Confirmation', id: 'Notification_Clear_All_Title' }),
+				message: this._i18n({ value: 'Description: Clear All Confirmation', id: 'Notification_Clear_All_Description' }),
+				buttonTexts: [
+					this._i18n({
+						value: 'Button - OK',
+						id: 'Common_Button_OK'
+					}),
+					this._i18n({
+						value: 'Button - Cancel',
+						id: 'Common_Button_Cancel'
+					})
+				]
+			}
+		};
+
+		// listen: dialog service
+		this._dialogService
+			.showDialog(data)
+			.subscribe(status => {
+				if (status) {
+					const bodyParamsPayload = {
+						ConfirmUser: this.currentUser.profile.email
+					};
+
+					const payload = {
+						pathParams: {
+							groupId: this.appState.groupId,
+							hotelId: this.appState.hotelId
+						},
+						bodyParams: bodyParamsPayload
+					};
+
+					// service
+					this._proxyService
+						.postAPI(clearAllApi, payload)
+						.subscribe(() => refreshEmitter.emit(payload));
+				}
+			});
+	}
+
+	/**
 	 * recognize notification
 	 *
 	 * @param row
 	 * @param refreshEmitter
 	 * @param payload
 	 */
-	public recognizeNotification(row: any, refreshEmitter: any, payload: any) {
+	public notificationRecognize(row: any, refreshEmitter: any, payload: any) {
 		const clearApi = AppServices['Notifications']['Notifications_Update_Hotel'];
 
 		// payload

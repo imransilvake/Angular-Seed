@@ -139,6 +139,17 @@ export class NotificationListComponent implements OnInit, OnDestroy {
 		this.refresh.emit(payload);
 	}
 
+	public onClickClearAll() {
+		// payload use on refresh services
+		const payload = {
+			date: this.date.value,
+			filter: this.filter.value.id
+		};
+
+		// service
+		this._notificationService.notificationClearAll(this.refresh, payload);
+	}
+
 	/**
 	 * recognize notification
 	 */
@@ -164,7 +175,7 @@ export class NotificationListComponent implements OnInit, OnDestroy {
 			};
 
 			// service
-			this._notificationService.recognizeNotification(row, this.refresh, payload);
+			this._notificationService.notificationRecognize(row, this.refresh, payload);
 		}
 	}
 }
