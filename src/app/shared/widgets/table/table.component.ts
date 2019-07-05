@@ -354,7 +354,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	}
 
 	/**
-	 * map user
+	 * map data before passing it to the data source
 	 *
 	 * @param data
 	 * @param init
@@ -625,7 +625,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	}
 
 	/**
-	 * load next data
+	 * load next set of data
 	 *
 	 * @param pageIndex
 	 * @param api
