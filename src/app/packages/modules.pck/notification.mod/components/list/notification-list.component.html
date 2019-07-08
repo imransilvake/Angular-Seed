@@ -18,10 +18,11 @@
 									[inputName]="'date'"
 									inputPlaceHolder="Date"
 									i18n-inputPlaceHolder="@@Notifications_Date_PlaceHolder"
+									[maxDate]="maxDate"
 									[control]="date">
 								</app-datepicker>
 							</div>
-							<button mat-button type="button" (click)="onClickUpdateDate(1)">
+							<button mat-button type="button" *ngIf="isNextDate" (click)="onClickUpdateDate(1)">
 								<mat-icon>keyboard_arrow_right</mat-icon>
 							</button>
 						</div>

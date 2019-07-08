@@ -30,6 +30,8 @@ export class NotificationListComponent implements OnInit, OnDestroy {
 	public buttonType;
 	public formFields;
 	public notificationFilters;
+	public maxDate = moment().toDate();
+	public isNextDate = false;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
@@ -80,6 +82,12 @@ export class NotificationListComponent implements OnInit, OnDestroy {
 		this.date.valueChanges
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
+				const today = moment().format('MM-DD-YYYY');
+				const selected = moment(res).format('MM-DD-YYYY');
+
+				// disable click on selection of current day
+				this.isNextDate = today !== selected;
+
 				// payload use on refresh services
 				const payload = {
 					date: res,
