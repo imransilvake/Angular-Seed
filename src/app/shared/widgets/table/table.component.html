@@ -81,7 +81,11 @@
 
 								<!-- Text -->
 								<ng-container *ngSwitchDefault>
-									<span class="ham-td-bg" [ngStyle]="{ 'background-color': column === 'Type' ? element['Color'] : null }" [innerHTML]="element[column]"></span>
+									<span
+										[class.ham-td-bg]="column === 'Type'"
+										[ngStyle]="{ 'background-color': column === 'Type' ? element['Color'] : null }"
+										[innerHTML]="element[column]">
+									</span>
 								</ng-container>
 							</ng-container>
 						</ng-container>
