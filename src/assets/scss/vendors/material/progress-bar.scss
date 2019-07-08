@@ -29,7 +29,7 @@
 		&.ham-good {
 			.mat-progress-bar-fill {
 				&::after {
-					background-color: cd-palette($cd-background, 2013);
+					background-color: cd-palette($cd-background, 2006);
 				}
 			}
 		}
@@ -37,7 +37,7 @@
 		&.ham-strong {
 			.mat-progress-bar-fill {
 				&::after {
-					background-color: cd-palette($cd-background, 2008);
+					background-color: cd-palette($cd-background, 2007);
 				}
 			}
 		}

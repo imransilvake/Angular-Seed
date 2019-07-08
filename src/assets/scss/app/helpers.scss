@@ -60,16 +60,16 @@
 }
 
 .ham-button-1 {
-	background-color: cd-palette($cd-background, 2010);
+	background-color: cd-palette($cd-background, 2007);
 	border-radius: 2px;
 	margin-top: 5px;
 }
 
 .ham-button-2 {
 	background-color: cd-palette($cd-background, 2003);
-	border: 1px solid cd-palette($cd-border, 3008) !important;
+	border: 1px solid cd-palette($cd-border, 3007) !important;
 	border-radius: 2px;
-	color: cd-palette($cd-color, 1008);
+	color: cd-palette($cd-color, 1007);
 	line-height: 30px !important;
 	margin-top: 5px;
 }
@@ -92,4 +92,11 @@
 		border: 1px solid cd-palette($cd-border, 3004) !important;
 		color: cd-palette($cd-color, 1004);
 	}
+}
+
+
+// table - text with bg
+.ham-td-bg {
+	color: cd-palette($cd-color, 1001);
+	padding: 5px 6px;
 }

@@ -1,7 +1,7 @@
 @import 'main';
 
 .ham-header {
-	box-shadow: 1px 1px 15px cd-palette($cd-shadow, 4006, .4);
+	box-shadow: 1px 1px 15px cd-palette($cd-shadow, 4000, .4);
 
 	&:not(.ham-emergency) {
 		background-color: cd-palette($cd-background, 2003);
@@ -9,7 +9,7 @@
 	}
 
 	&.ham-emergency {
-		background-color: cd-palette($cd-background, 2016);
+		background-color: cd-palette($cd-background, 2010);
 	}
 
 	.cd-row {
@@ -98,7 +98,7 @@
 					min-width: 48px;
 
 					&.ham-emergency-btn {
-						background-color: cd-palette($cd-background, 2013);
+						background-color: cd-palette($cd-background, 2006);
 						color: cd-palette($cd-color, 1001);
 						margin-right: 10px;
 					}

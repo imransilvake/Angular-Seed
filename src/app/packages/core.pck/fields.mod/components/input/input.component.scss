@@ -27,7 +27,7 @@
 				display: block;
 
 				button {
-					background-color: cd-palette($cd-background, 2010);
+					background-color: cd-palette($cd-background, 2007);
 					border-radius: 0;
 					height: 41px;
 					margin-left: 0;
@@ -148,7 +148,7 @@
 		// focused
 		&.ham-focused {
 			&:not(.ham-invalid) {
-				border: 1px solid cd-palette($cd-border, 3010);
+				border: 1px solid cd-palette($cd-border, 3007);
 			}
 		}
 	}

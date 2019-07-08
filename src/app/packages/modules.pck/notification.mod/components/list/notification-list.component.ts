@@ -56,7 +56,7 @@ export class NotificationListComponent implements OnInit, OnDestroy {
 		this._notificationService.notificationDataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
-				if (res) {
+				if (res && res.notificationList) {
 					// validate hotel selection
 					this.hotelAppState = this._notificationService.appState.type === AppStateEnum.HOTEL;
 

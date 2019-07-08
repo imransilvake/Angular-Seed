@@ -1,6 +1,6 @@
 .mat-menu-panel {
 	background-color: cd-palette($cd-background, 2003);
-	box-shadow: 1px 1px 15px cd-palette($cd-shadow, 4006, .4);
+	box-shadow: 1px 1px 15px cd-palette($cd-shadow, 4000, .4);
 	min-width: 270px !important;
 	width: 270px;
 
@@ -103,7 +103,7 @@
 						}
 
 						&.ham-blue {
-							background-color: cd-palette($cd-background, 2013);
+							background-color: cd-palette($cd-background, 2006);
 						}
 					}
 				}

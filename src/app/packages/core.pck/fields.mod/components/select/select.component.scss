@@ -51,7 +51,7 @@
 		// focused
 		&.ham-focused {
 			&:not(.ham-invalid):not(.ham-disabled) {
-				border: 1px solid cd-palette($cd-border, 3010);
+				border: 1px solid cd-palette($cd-border, 3007);
 			}
 		}
 	}

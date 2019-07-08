@@ -8,9 +8,9 @@
 
 				.mat-radio-label-content {
 					background-color: cd-palette($cd-background, 2003);
-					border: 1px solid cd-palette($cd-border, 3010);
+					border: 1px solid cd-palette($cd-border, 3007);
 					border-radius: 3px;
-					color: cd-palette($cd-color, 1010);
+					color: cd-palette($cd-color, 1007);
 					font-size: cd-fontSize(s13);
 					margin-right: 10px;
 					padding: 6px 12px;
@@ -19,8 +19,8 @@
 
 			&.mat-radio-checked {
 				.mat-radio-label-content {
-					background-color: cd-palette($cd-background, 2010);
-					border: 1px solid cd-palette($cd-border, 3010);
+					background-color: cd-palette($cd-background, 2007);
+					border: 1px solid cd-palette($cd-border, 3007);
 					color: cd-palette($cd-color, 1001);
 				}
 			}
@@ -46,8 +46,8 @@
 
 				.mat-radio-label {
 					.mat-radio-label-content {
-						background-color: cd-palette($cd-background, 2010);
-						border: 1px solid cd-palette($cd-border, 3010);
+						background-color: cd-palette($cd-background, 2008);
+						border: 1px solid cd-palette($cd-border, 3008);
 					}
 				}
 			}

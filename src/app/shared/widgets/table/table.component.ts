@@ -361,7 +361,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	 */
 	private mapData(data, init?: boolean) {
 		if (data) {
-			data.forEach(item => {
+			data.forEach((item, index) => {
 				const id = this.tableResources.uniqueID;
 				if (!this.dataSource.data.some(row => row[id] === item[id])) {
 					const language = this._authService.currentUserState.profile.language;
@@ -395,11 +395,21 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 					}
 
 					// Role
-					if (item.hasOwnProperty('Type')) {
-						const role = item.Type ? HelperService.capitalizeString(item.Type.replace(/_/g, ' ').toLowerCase()) : '-';
+					if (item.hasOwnProperty('Role')) {
+						const role = item.Role ? HelperService.capitalizeString(item.Role.replace(/_/g, ' ').toLowerCase()) : '-';
 						newItem = {
 							...newItem,
 							Role: role
+						};
+					}
+
+					// Type
+					if (item.hasOwnProperty('Type')) {
+						const type = item.Type ? HelperService.capitalizeString(item.Type.replace(/_/g, ' ').toLowerCase()) : '-';
+						newItem = {
+							...newItem,
+							Type: `<span>${type}</span>`,
+							Color: data[index]['Message'] && data[index]['Message'].Colour
 						};
 					}
 
