@@ -97,17 +97,16 @@
 			<ng-container *ngFor="let column of tableAdditionalColumns; let idx=index" matColumnDef="{{ column }}">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="!tableSorting[tableSorting.length - 1]">{{ column }}</th>
 				<td mat-cell *matCellDef="let element">
-					<!-- Notification -->
+					<!-- Rest -->
 					<ng-container *ngIf="!(!!element['ConfirmDate'] && !!element['ConfirmUser'])">
-						<ng-container *ngTemplateOutlet="tableTemplateRef[idx]"></ng-container>
+						<ng-container *ngIf="column !== 'Visit' || column === 'Visit' && element['TypeRaw'] !== 'ALERT'">
+							<ng-container *ngTemplateOutlet="tableTemplateRef[idx]"></ng-container>
+						</ng-container>
 					</ng-container>
 
-					<!-- Rest -->
+					<!-- Notification | without buttons -->
 					<ng-container *ngIf="!!element['ConfirmDate'] && !!element['ConfirmUser']">
-						<p>
-							<span>{{ element['ConfirmDate'] }}</span>
-							(<span>{{ element['ConfirmUser'] }}</span>)
-						</p>
+						<p><span>{{ element['ConfirmDate'] }}</span>(<span>{{ element['ConfirmUser'] }}</span>)</p>
 					</ng-container>
 				</td>
 			</ng-container>

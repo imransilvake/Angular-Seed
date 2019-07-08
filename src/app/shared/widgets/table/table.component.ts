@@ -14,6 +14,7 @@ import { UtilityService } from '../../../packages/utilities.pck/accessories.mod/
 import { AuthService } from '../../../packages/modules.pck/authorization.mod/services/auth.service';
 import { DialogTypeEnum } from '../../../packages/utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { DialogService } from '../../../packages/utilities.pck/dialog.mod/services/dialog.service';
+import { NotificationsFiltersEnums } from '../../../packages/modules.pck/notification.mod/enums/notifications-filters.enums';
 
 @Component({
 	selector: 'app-table',
@@ -410,12 +411,13 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 						let color =  data[index]['Message'] && data[index]['Message'].Colour;
 
 						// type: REG
-						if (type && type === 'REG') {
+						if (type && type === NotificationsFiltersEnums.REGISTRATIONS) {
 							color = this.staticColors[0];
 						}
 
 						newItem = {
 							...newItem,
+							TypeRaw: type,
 							Type: `<span>${type}</span>`,
 							Color: color
 						};
