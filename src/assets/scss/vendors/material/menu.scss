@@ -49,11 +49,15 @@
 	}
 
 	&.ham-notification-mat-menu {
+		.mat-menu-content {
+			padding-bottom: 0;
+		}
+
 		button {
 			&:last-child {
-				height: 35px;
+				height: 40px;
 				line-height: inherit;
-				min-height: 35px;
+				min-height: 40px;
 				text-align: center;
 
 				.ham-icon {
@@ -106,6 +110,14 @@
 							background-color: cd-palette($cd-background, 2006);
 						}
 					}
+				}
+			}
+
+			&.ham-active {
+				background-color: cd-palette($cd-background, 2002);
+
+				.ham-icon {
+					color: cd-palette($cd-color, 1001);
 				}
 			}
 		}

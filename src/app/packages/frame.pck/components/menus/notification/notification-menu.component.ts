@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 
 // app
 import { HelperService } from '../../../../utilities.pck/accessories.mod/services/helper.service';
+import { ROUTING } from '../../../../../../environments/environment';
 
 @Component({
 	selector: 'app-menu-notification',
@@ -11,8 +12,7 @@ import { HelperService } from '../../../../utilities.pck/accessories.mod/service
 })
 
 export class NotificationMenuComponent {
-	constructor() {
-	}
+	public routing = ROUTING;
 
 	/**
 	 * stop propagation

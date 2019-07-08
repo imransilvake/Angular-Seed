@@ -51,7 +51,11 @@
 				</div>
 			</div>
 		</button>
-		<button mat-menu-item>
+		<button
+			mat-menu-item
+			type="button"
+			[routerLink]="['/' + routing.notifications.routes.overview]"
+			[routerLinkActive]="['ham-active']">
 			<mat-icon class="ham-icon">more_horiz</mat-icon>
 		</button>
 	</mat-menu>
