@@ -56,10 +56,10 @@ export class NotificationListComponent implements OnInit, OnDestroy {
 		this._notificationService.notificationDataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
-				if (res && res.notificationList) {
-					// validate hotel selection
-					this.hotelAppState = this._notificationService.appState.type === AppStateEnum.HOTEL;
+				// validate hotel selection
+				this.hotelAppState = this._notificationService.appState.type === AppStateEnum.HOTEL;
 
+				if (res && res.notificationList) {
 					// set tables resources
 					this.notificationTable = {
 						api: this._notificationService.notificationTablesServices.api,
@@ -70,6 +70,9 @@ export class NotificationListComponent implements OnInit, OnDestroy {
 
 					// set tables data
 					this.notificationList = res.notificationList;
+				} else {
+					// set empty data
+					this.notificationList = [];
 				}
 			});
 

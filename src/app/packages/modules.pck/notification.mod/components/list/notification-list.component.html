@@ -62,14 +62,14 @@
 					[tableData]="notificationList"
 					[tableApplySorting]="false"
 					[tableColumns]="['Clear', 'Message', 'Received', 'Type']"
-					[tableSorting]="[true, false, false, false, false]"
-					[tableAdditionalColumns]="['Action']"
-					[tableTemplateRef]="[action]"
+					[tableSorting]="[true, false, false, false, false, false]"
+					[tableAdditionalColumns]="['Recognize', 'Visit']"
+					[tableTemplateRef]="[recognize, visit]"
 					[tableResources]="notificationTable"
 					(rowClear)="refresh.emit({ date: date.value, filter: filter.value.id })"
 					(rowData)="onClickRowActionButtons($event)">
-					<!-- Action -->
-					<ng-template #action>
+					<!-- Recognize -->
+					<ng-template #recognize>
 						<button
 							mat-button
 							class="ham-button ham-button-2 ham-table-button-1"
@@ -77,6 +77,10 @@
 							i18n="@@Notifications_Table_Recognize">
 							Recognize
 						</button>
+					</ng-template>
+
+					<!-- Visit -->
+					<ng-template #visit>
 						<a
 							mat-button
 							class="ham-button ham-button-2 ham-table-button-2 ham-grey"

@@ -29,6 +29,7 @@ export class BroadcastFormComponent implements OnInit, OnDestroy {
 	public formTitle = 'Create';
 	public errorMessage;
 	public loading = false;
+	public staticColors = ['#3e9d2e', '#d2a41a', '#e74c3c'];
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
@@ -54,7 +55,7 @@ export class BroadcastFormComponent implements OnInit, OnDestroy {
 			link: new FormControl('', [
 				ValidationService.urlValidator
 			]),
-			color: new FormControl('#71c578', [
+			color: new FormControl(this.staticColors[0], [
 				Validators.required
 			]),
 			date: new FormControl({ value: '', disabled: true }, [

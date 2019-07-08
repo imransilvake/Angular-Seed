@@ -42,7 +42,7 @@ export class NotificationComponent implements OnDestroy {
 	/**
 	 * trigger all components services
 	 */
-	private triggerServices() {
+	public triggerServices() {
 		// set current user state
 		this._notificationService.currentUser = this._authService.currentUserState;
 

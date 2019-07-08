@@ -51,6 +51,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	public sortOrder;
 	public clearRows = [];
 	public checkAllRows = false;
+	public staticColors = ['#3b7fc4'];
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
@@ -405,11 +406,18 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
 					// Type
 					if (item.hasOwnProperty('Type')) {
-						const type = item.Type ? HelperService.capitalizeString(item.Type.replace(/_/g, ' ').toLowerCase()) : '-';
+						const type = item.Type;
+						let color =  data[index]['Message'] && data[index]['Message'].Colour;
+
+						// type: REG
+						if (type && type === 'REG') {
+							color = this.staticColors[0];
+						}
+
 						newItem = {
 							...newItem,
 							Type: `<span>${type}</span>`,
-							Color: data[index]['Message'] && data[index]['Message'].Colour
+							Color: color
 						};
 					}
 
@@ -484,7 +492,19 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
 					// Message
 					if (item.hasOwnProperty('Message')) {
-						const messageTitle = item.Message ? item.Message.Title : '-';
+						let messageTitle = item.Message ? item.Message.Title : '-';
+						const type = data && data[index]['Type'];
+
+						// type: REG
+						if (type && type === 'REG') {
+							messageTitle = this._i18n({
+								value: `New Registration from '{{myVar}}'`,
+								id: 'Table_Notification_Message_Title'
+							}, {
+								myVar: data[index]['SendUser']
+							});
+						}
+
 						newItem = {
 							...newItem,
 							Message: messageTitle
