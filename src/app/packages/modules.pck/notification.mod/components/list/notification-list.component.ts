@@ -9,7 +9,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
 import { ROUTING } from '../../../../../../environments/environment';
 import { NotificationService } from '../../services/notification.service';
-import { AppStateEnum } from '../../../../frame.pck/enums/app-state.enum';
 import { SelectTypeEnum } from '../../../../core.pck/fields.mod/enums/select-type.enum';
 import { UtilityService } from '../../../../utilities.pck/accessories.mod/services/utility.service';
 
@@ -24,7 +23,6 @@ export class NotificationListComponent implements OnInit, OnDestroy {
 
 	public selectTypeDefault = SelectTypeEnum.DEFAULT;
 	public routing = ROUTING;
-	public hotelAppState = true;
 	public notificationList = [];
 	public notificationTable;
 	public buttonType;
@@ -58,9 +56,6 @@ export class NotificationListComponent implements OnInit, OnDestroy {
 		this._notificationService.notificationDataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
-				// validate hotel selection
-				this.hotelAppState = this._notificationService.appState.type === AppStateEnum.HOTEL;
-
 				if (res && res.notificationList) {
 					// set tables resources
 					this.notificationTable = {

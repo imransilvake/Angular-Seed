@@ -20,7 +20,6 @@ import { DialogService } from '../../../utilities.pck/dialog.mod/services/dialog
 import { ErrorHandlerPayloadInterface } from '../../../utilities.pck/error-handler.mod/interfaces/error-handler-payload.interface';
 import { ErrorHandlerInterface } from '../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 import { ChangePasswordInterface } from '../interfaces/change-password.interface';
-import { AppStateEnum } from '../../../frame.pck/enums/app-state.enum';
 
 @Injectable({ providedIn: 'root' })
 export class MemberService {

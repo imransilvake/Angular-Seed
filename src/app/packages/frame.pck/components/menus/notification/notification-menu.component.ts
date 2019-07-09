@@ -4,7 +4,6 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 // app
-import * as moment from 'moment';
 import { HelperService } from '../../../../utilities.pck/accessories.mod/services/helper.service';
 import { ROUTING } from '../../../../../../environments/environment';
 import { AuthService } from '../../../../modules.pck/authorization.mod/services/auth.service';
@@ -19,6 +18,7 @@ import { MenuService } from '../../../services/menu.service';
 
 export class NotificationMenuComponent implements OnInit, OnDestroy {
 	public routing = ROUTING;
+	public notificationsList;
 	public totalNotifications = 0;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
@@ -58,23 +58,21 @@ export class NotificationMenuComponent implements OnInit, OnDestroy {
 		// reset to 0
 		this.totalNotifications = 0;
 
-		// current time in utc
-		const currentTime = HelperService.getUTCDate(moment());
-
-		// payload
-		const appState = this._sidebarService.appState;
-		const payload = {
-			pathParams: {
-				groupId: appState.groupId,
-				hotelId: appState.hotelId
-			},
-			bodyParams: {
-				RequestedDate: currentTime,
-				UserName: this._authService.currentUserState.profile.email
-			}
-		};
-
 		// service: update LRT
-		this._menuService.updateNotificationLRT(payload, currentTime);
+		this._menuService.updateNotificationLRTOnBackend();
+
+		// service: get notifications list
+		this._menuService.openNotificationsList()
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => this.notificationsList = res);
+	}
+
+	/**
+	 * convert utc to from now
+	 *
+	 * @param date
+	 */
+	public getUTCToFromNow(date: any) {
+		return HelperService.getDateFromNow(this._authService.currentUserState.profile.language, date);
 	}
 }

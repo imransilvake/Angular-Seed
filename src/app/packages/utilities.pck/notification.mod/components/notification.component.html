@@ -1,6 +1,9 @@
 <ng-container *ngIf="messages && messages">
 	<section class="ham-notification-wrapper" *ngFor="let message of messages; let idx=index;">
-		<div [attr.class]="'cd-center-align ham-message ' + getMessageType(message.type)" *ngIf="message.payload">
+		<div
+			[attr.class]="'cd-center-align ham-message ' + getMessageType(message.type)"
+			*ngIf="message.payload"
+			[ngStyle]="{ 'background-color': message.payload.color }">
 			<!-- Text with Read More -->
 			<app-read-more
 				*ngIf="message.payload.text"

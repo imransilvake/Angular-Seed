@@ -55,7 +55,7 @@ export class NotificationComponent implements OnInit, OnDestroy {
 				// validate res
 				if (res && res.type !== null) {
 					// if unique element then push to arrays
-					if (this.messages.length === 0 || !(this.messages.some(e => e.payload.text === res.payload.text))) {
+					if (this.messages.length === 0 || !(this.messages.some(e => e.payload.text === res.payload.text && e.payload.date === res.payload.date))) {
 						this.messages.push(res);
 						this.keepAfterNavigationChange.push(res.payload.keepAfterNavigationChange);
 					}

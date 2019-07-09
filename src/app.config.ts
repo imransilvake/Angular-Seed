@@ -43,6 +43,7 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 	},
 	Notifications: {
 		Notifications_List_Hotel: { serviceUrl: '/notification/list/group/:groupId/hotel/:hotelId' },
+		Notifications_Alert_Hotel: { serviceUrl: '/notification/alert/group/:groupId/hotel/:hotelId' },
 		Notifications_Update_Hotel: { serviceUrl: '/notification/confirm/group/:groupId/hotel/:hotelId' },
 		Notifications_ClearAll_Hotel: { serviceUrl: '/notification/clear/group/:groupId/hotel/:hotelId' },
 
@@ -100,8 +101,7 @@ export const LocalStorageItems = {
 // session-storage items
 export const SessionStorageItems = {
 	userState: 'ham-session-us',
-	appState: 'ham-session-as',
-	notificationState: 'ham-session-ns'
+	appState: 'ham-session-as'
 };
 
 // headers for a request to backend

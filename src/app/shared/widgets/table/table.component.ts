@@ -500,10 +500,10 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 						// type: REG
 						if (type && type === 'REG') {
 							messageTitle = this._i18n({
-								value: `New Registration from '{{myVar}}'`,
+								value: `New Registration from '{{name}}'`,
 								id: 'Table_Notification_Message_Title'
 							}, {
-								myVar: data[index]['SendUser']
+								name: data[index]['SendUser']
 							});
 						}
 

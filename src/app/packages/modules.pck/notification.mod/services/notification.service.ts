@@ -8,7 +8,6 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
 import * as moment from 'moment';
 import { AppOptions, AppServices } from '../../../../../app.config';
 import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service';
-import { AppStateEnum } from '../../../frame.pck/enums/app-state.enum';
 import { DialogTypeEnum } from '../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { DialogService } from '../../../utilities.pck/dialog.mod/services/dialog.service';
 import { NotificationsFiltersEnums } from '../enums/notifications-filters.enums';
@@ -46,41 +45,36 @@ export class NotificationService {
 			};
 		}
 
-		// validate app state
-		if (this.appState.type === AppStateEnum.HOTEL) {
-			const api = AppServices['Notifications']['Notifications_List_Hotel'];
-			const clearApi = AppServices['Notifications']['Notifications_Update_Hotel'];
-			const queryParamsPayload = {
-				offset: 0,
-				limit: AppOptions.tablePageSizeLimit,
-				user: this.currentUser.profile.email,
-				date: dataPayload && dataPayload.date ? dataPayload.date : moment().toDate(),
-				...uniqueProperty
-			};
+		const api = AppServices['Notifications']['Notifications_List_Hotel'];
+		const clearApi = AppServices['Notifications']['Notifications_Update_Hotel'];
+		const queryParamsPayload = {
+			offset: 0,
+			limit: AppOptions.tablePageSizeLimit,
+			user: this.currentUser.profile.email,
+			date: dataPayload && dataPayload.date ? dataPayload.date : moment().toDate(),
+			...uniqueProperty
+		};
 
-			const payload = {
-				pathParams: {
-					groupId: this.appState.groupId,
-					hotelId: this.appState.hotelId
-				},
-				queryParams: queryParamsPayload
-			};
+		const payload = {
+			pathParams: {
+				groupId: this.appState.groupId,
+				hotelId: (this.appState.hotelId === this.appState.groupId || this.appState.hotelId === 'ANY') ? 'All' : this.appState.hotelId,
+			},
+			queryParams: queryParamsPayload
+		};
 
-			// set table resources
-			this.notificationTablesServices = {
-				api: api,
-				clearApi: clearApi,
-				payload: payload,
-				uniqueID: 'Id'
-			};
+		// set table resources
+		this.notificationTablesServices = {
+			api: api,
+			clearApi: clearApi,
+			payload: payload,
+			uniqueID: 'Id'
+		};
 
-			// service
-			return this._proxyService
-				.getAPI(api, payload)
-				.pipe(map(res => res));
-		} else {
-			return of(null);
-		}
+		// service
+		return this._proxyService
+			.getAPI(api, payload)
+			.pipe(map(res => res));
 	}
 
 	/**

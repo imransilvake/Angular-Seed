@@ -1,8 +1,8 @@
 .mat-menu-panel {
 	background-color: cd-palette($cd-background, 2003);
 	box-shadow: 1px 1px 15px cd-palette($cd-shadow, 4000, .4);
-	min-width: 270px !important;
-	width: 270px;
+	min-width: 320px !important;
+	width: 320px;
 
 	.mat-menu-content {
 		border: none;
@@ -76,7 +76,7 @@
 					}
 
 					&:nth-of-type(2) {
-						padding: 0 12px;
+						padding: 0 10px;
 					}
 
 					&:last-child {
@@ -129,6 +129,9 @@
 	}
 
 	@include cd-media(desktop, mini) {
+		min-width: 270px !important;
+		width: 270px;
+
 		&.ham-account-mat-menu {
 			margin-right: 20px;
 		}

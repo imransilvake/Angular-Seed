@@ -188,7 +188,7 @@ export class AuthService {
 									groupId: groupId,
 									email: formPayload.username
 								};
-								this.updateNotificationLRT(lrtPayload);
+								this.updateNotificationLRTOnWeb(lrtPayload);
 							});
 					});
 				}
@@ -511,11 +511,11 @@ export class AuthService {
 	}
 
 	/**
-	 * update last request time
+	 * update last request time on web storage
 	 *
 	 * @param payload
 	 */
-	private updateNotificationLRT(payload: any) {
+	private updateNotificationLRTOnWeb(payload: any) {
 		// validate last request time
 		let lastRequestTime = this.currentUserState.profile['custom:last_request_time'];
 		if (!lastRequestTime) {
@@ -525,8 +525,8 @@ export class AuthService {
 		}
 
 		// update last request time to browser storage
-		const storageType = this.currentUserState.rememberMe ? StorageTypeEnum.PERSISTANT : StorageTypeEnum.SESSION;
-		const storageItemNotification = this.currentUserState.rememberMe ? LocalStorageItems.notificationState : SessionStorageItems.notificationState;
+		const storageType = StorageTypeEnum.PERSISTANT;
+		const storageItemNotification = LocalStorageItems.notificationState;
 		this._storageService.put(storageItemNotification, lastRequestTime, storageType);
 	}
 }
