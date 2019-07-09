@@ -476,7 +476,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
 					// Received
 					if (item.hasOwnProperty('Received')) {
-						const date = item.Received ? HelperService.dateFromNow(language, item.Received) : '-';
+						const date = item.Received ? HelperService.getDateFromNow(language, item.Received) : '-';
 						newItem = {
 							...newItem,
 							Received: date
@@ -485,7 +485,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
 					// Confirm Date
 					if (item.hasOwnProperty('ConfirmDate')) {
-						const date = item.ConfirmDate ? HelperService.dateFromNow(language, item.ConfirmDate) : '-';
+						const date = item.ConfirmDate ? HelperService.getDateFromNow(language, item.ConfirmDate) : '-';
 						newItem = {
 							...newItem,
 							ConfirmDate: date

@@ -49,7 +49,7 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 								const path = currentPath.split('?');
 								if (!this.authRoutes.includes(path[0]) || currentPath === ROUTING.authorization.routes.reset && !path[1]) {
 									// logout user
-									this._authService.logoutUser();
+									this._authService.authLogoutUser();
 								}
 								break;
 						}
@@ -64,7 +64,7 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 					return true;
 				}),
 				catchError(() => {
-					this._authService.clearSessions();
+					this._authService.authClearSessions();
 					return of(true);
 				})
 			);
@@ -84,7 +84,7 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 					if (res.status) {
 						if (res.status === 'FAIL') {
 							// logout user
-							this._authService.logoutUser();
+							this._authService.authLogoutUser();
 						}
 					} else {
 						// get current user state
@@ -97,7 +97,7 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 					return true;
 				}),
 				catchError(() => {
-					this._authService.clearSessions();
+					this._authService.authClearSessions();
 					return of(true);
 				})
 			);

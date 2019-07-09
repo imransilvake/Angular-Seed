@@ -176,12 +176,21 @@ export class HelperService {
 	}
 
 	/**
-	 * from now
+	 * multilingual from now
 	 *
 	 * @param lang
 	 * @param date
 	 */
-	public static dateFromNow(lang: string, date: any) {
+	public static getDateFromNow(lang: string, date: any) {
 		return moment(date).locale(lang).fromNow();
+	}
+
+	/**
+	 * utc date
+	 *
+	 * @param date
+	 */
+	public static getUTCDate(date: any) {
+		return date.utc().format();
 	}
 }

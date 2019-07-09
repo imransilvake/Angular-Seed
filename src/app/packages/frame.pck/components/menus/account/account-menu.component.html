@@ -17,15 +17,11 @@
 			<app-divider></app-divider>
 
 			<!-- Items -->
-			<button mat-menu-item class="ham-btn-icon">
-				<fa-icon [icon]="faIcons[0]"></fa-icon>
-				<span>Messages</span>
-			</button>
 			<button
 				mat-menu-item class="ham-btn-icon"
 				[routerLink]="['/' + routing.member.routes.profile]"
 				[routerLinkActive]="['ham-active']">
-				<fa-icon [icon]="faIcons[1]"></fa-icon>
+				<fa-icon [icon]="faIcons[0]"></fa-icon>
 				<span>Profile</span>
 			</button>
 
@@ -34,7 +30,7 @@
 
 			<!-- Items -->
 			<button mat-menu-item class="ham-btn-icon" (click)="onClickLogout()">
-				<fa-icon [icon]="faIcons[2]"></fa-icon>
+				<fa-icon [icon]="faIcons[1]"></fa-icon>
 				<span>Logout</span>
 			</button>
 		</div>

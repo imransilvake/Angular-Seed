@@ -11,7 +11,8 @@ export const AppOptions = {
 		es: 'es'
 	},
 	sessionTime: {
-		auth: 3601 * 1000
+		auth: 3601 * 1000,
+		notification: 30 * 1000
 	},
 	rememberMeValidityInDays: 90,
 	tablePageSizeLimit: 21
@@ -43,7 +44,10 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 	Notifications: {
 		Notifications_List_Hotel: { serviceUrl: '/notification/list/group/:groupId/hotel/:hotelId' },
 		Notifications_Update_Hotel: { serviceUrl: '/notification/confirm/group/:groupId/hotel/:hotelId' },
-		Notifications_ClearAll_Hotel: { serviceUrl: '/notification/clear/group/:groupId/hotel/:hotelId' }
+		Notifications_ClearAll_Hotel: { serviceUrl: '/notification/clear/group/:groupId/hotel/:hotelId' },
+
+		Notifications_Status : { serviceUrl: '/notification/status/group/:groupId/hotel/:hotelId' },
+		Notifications_Update_LRT : { serviceUrl: '/notification/savetime/group/:groupId/hotel/:hotelId' }
 	},
 	Management: {
 		Client_List_All: { serviceUrl: '/management/hotelgroup/list' },
@@ -89,17 +93,15 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 // local-storage items
 export const LocalStorageItems = {
 	userState: 'ham-local-us',
-	lockState: 'ham-local-ls'
+	appState: 'ham-local-as',
+	notificationState: 'ham-local-ns'
 };
 
 // session-storage items
 export const SessionStorageItems = {
-	userState: 'ham-session-us'
-};
-
-// neutral-storage items
-export const NeutralStorageItems = {
-	appState: 'ham-local-as'
+	userState: 'ham-session-us',
+	appState: 'ham-session-as',
+	notificationState: 'ham-session-ns'
 };
 
 // headers for a request to backend

@@ -3,12 +3,14 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@ang
 import { merge, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
+// store
+import { Store } from '@ngrx/store';
+
 // app
 import * as SessionActions from './packages/core.pck/session.mod/store/actions/session.actions';
 import { ScrollTopService } from './packages/utilities.pck/accessories.mod/services/scroll-top.service';
 import { HelperService } from './packages/utilities.pck/accessories.mod/services/helper.service';
 import { SessionsEnum } from './packages/core.pck/session.mod/enums/sessions.enum';
-import { Store } from '@ngrx/store';
 import { SessionInterface } from './packages/core.pck/session.mod/interfaces/session.interface';
 
 @Component({
@@ -33,8 +35,9 @@ export class AppLayoutComponent implements AfterViewInit, OnDestroy {
 		// detect current view
 		this.isViewDesktop = HelperService.isDesktopView;
 
-		// session: start authentication
+		// session: start authentication & notifications
 		this._store.dispatch(new SessionActions.SessionCounterStart(SessionsEnum.SESSION_AUTHENTICATION));
+		this._store.dispatch(new SessionActions.SessionCounterStart(SessionsEnum.SESSION_NOTIFICATIONS));
 	}
 
 	ngAfterViewInit() {
@@ -59,8 +62,9 @@ export class AppLayoutComponent implements AfterViewInit, OnDestroy {
 		this._ngUnSubscribe.next();
 		this._ngUnSubscribe.complete();
 
-		// session: stop authentication
+		// session: stop authentication & notifications
 		this._store.dispatch(new SessionActions.SessionCounterExit(SessionsEnum.SESSION_AUTHENTICATION));
+		this._store.dispatch(new SessionActions.SessionCounterExit(SessionsEnum.SESSION_NOTIFICATIONS));
 	}
 
 	/**

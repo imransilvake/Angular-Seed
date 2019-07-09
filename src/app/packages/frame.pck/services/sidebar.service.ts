@@ -8,7 +8,7 @@ import { ROUTING } from '../../../../environments/environment';
 import { SidebarInterface } from '../interfaces/sidebar.interface';
 import { SelectGroupInterface } from '../../core.pck/fields.mod/interfaces/select-group.interface';
 import { StorageTypeEnum } from '../../core.pck/storage.mod/enums/storage-type.enum';
-import { AppServices, NeutralStorageItems } from '../../../../app.config';
+import { AppServices, LocalStorageItems, SessionStorageItems } from '../../../../app.config';
 import { StorageService } from '../../core.pck/storage.mod/services/storage.service';
 import { AuthService } from '../../modules.pck/authorization.mod/services/auth.service';
 import { ProxyService } from '../../core.pck/proxy.mod/services/proxy.service';
@@ -36,16 +36,19 @@ export class SidebarService {
 	 * @param data
 	 */
 	set appState(data) {
-		const storagePlace = this._authService.currentUserState.rememberMe ? StorageTypeEnum.PERSISTANT : StorageTypeEnum.SESSION;
-		this._storageService.put(NeutralStorageItems.appState, data, storagePlace);
+		const storageItem = this._authService.currentUserState.rememberMe ? LocalStorageItems.appState : SessionStorageItems.appState;
+		const storageType = this._authService.currentUserState.rememberMe ? StorageTypeEnum.PERSISTANT : StorageTypeEnum.SESSION;
+		this._storageService.put(storageItem, data, storageType);
 	}
 
 	/**
 	 * get app state
 	 */
 	get appState() {
-		const storagePlace = this._authService.currentUserState.rememberMe ? StorageTypeEnum.PERSISTANT : StorageTypeEnum.SESSION;
-		return this._storageService.get(NeutralStorageItems.appState, storagePlace);
+		return (
+			this._storageService.get(LocalStorageItems.appState, StorageTypeEnum.PERSISTANT) ||
+			this._storageService.get(SessionStorageItems.appState, StorageTypeEnum.SESSION)
+		);
 	}
 
 	/**

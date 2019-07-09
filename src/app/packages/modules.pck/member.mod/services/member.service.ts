@@ -147,7 +147,7 @@ export class MemberService {
 					.showDialog(dialogPayload)
 					.subscribe(() => {
 						// logout user
-						this._authService.logoutUser();
+						this._authService.authLogoutUser();
 					});
 			}, (err: HttpErrorResponse) => {
 				let errorPayload: ErrorHandlerPayloadInterface;

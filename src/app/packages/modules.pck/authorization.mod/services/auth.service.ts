@@ -12,7 +12,7 @@ import { Store } from '@ngrx/store';
 // app
 import * as moment from 'moment';
 import * as SessionActions from '../../../core.pck/session.mod/store/actions/session.actions';
-import { AppOptions, AppServices, LocalStorageItems, NeutralStorageItems, SessionStorageItems } from '../../../../../app.config';
+import { AppOptions, AppServices, LocalStorageItems, SessionStorageItems } from '../../../../../app.config';
 import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service';
 import { AuthForgotInterface } from '../interfaces/auth-forgot.interface';
 import { AuthRegisterInterface } from '../interfaces/auth-register.interface';
@@ -32,6 +32,7 @@ import { UserRoleEnum } from '../enums/user-role.enum';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+	public notificationLRT: EventEmitter<number> = new EventEmitter();
 	public errorMessage: EventEmitter<string> = new EventEmitter();
 
 	constructor(
@@ -172,32 +173,22 @@ export class AuthService {
 								const groupId = this.currentUserState.profile['custom:hotel_group_id'];
 								const hotelIds = this.currentUserState.profile['custom:hotelId'].split(',');
 								const role = this.currentUserState.profile['cognito:groups'][0];
-								let type;
 
-								// set type
-								switch (role) {
-									case UserRoleEnum[UserRoleEnum.ADMIN]:
-										type = 0;
-										break;
-									case UserRoleEnum[UserRoleEnum.GROUP_MANAGER]:
-										type = 1;
-										break;
-									default:
-										type = 2;
-										break;
-								}
-
-								// app state payload
-								const appStatePayload: AppViewStateInterface = {
+								// init app state
+								const asPayload = {
 									hotelId: hotelIds[0],
 									groupId: groupId,
-									role: role,
-									type: type
+									role: role
 								};
+								this.initAppState(asPayload);
 
-								// save to browser storage
-								const storagePlace = this.currentUserState.rememberMe ? StorageTypeEnum.PERSISTANT : StorageTypeEnum.SESSION;
-								this._storageService.put(NeutralStorageItems.appState, appStatePayload, storagePlace);
+								// update last request time
+								const lrtPayload = {
+									hotelId: hotelIds[0],
+									groupId: groupId,
+									email: formPayload.username
+								};
+								this.updateNotificationLRT(lrtPayload);
 							});
 					});
 				}
@@ -445,7 +436,7 @@ export class AuthService {
 	/**
 	 * logout user
 	 */
-	public logoutUser() {
+	public authLogoutUser() {
 		this.authenticateUser()
 			.subscribe(() => {
 				if (this.currentUserState) {
@@ -461,18 +452,19 @@ export class AuthService {
 						.subscribe();
 				}
 
-				// clear all sessions
-				this._store.dispatch(new SessionActions.SessionCounterExit(SessionsEnum.SESSION_ALL));
+				// clear sessions
+				this._store.dispatch(new SessionActions.SessionCounterExit(SessionsEnum.SESSION_AUTHENTICATION));
+				this._store.dispatch(new SessionActions.SessionCounterExit(SessionsEnum.SESSION_NOTIFICATIONS));
 
 				// clear sessions
-				this.clearSessions();
+				this.authClearSessions();
 			});
 	}
 
 	/**
 	 * clear sessions
 	 */
-	public clearSessions() {
+	public authClearSessions() {
 		// clear data
 		StorageService.clearAllLocalStorageItems();
 		StorageService.clearAllSessionStorageItems();
@@ -481,5 +473,78 @@ export class AuthService {
 		this._router
 			.navigate([ROUTING.authorization.routes.login])
 			.then(() => this._loadingAnimationService.stopLoadingAnimation());
+	}
+
+	/**
+	 * init app state
+	 *
+	 * @param payload
+	 */
+	private initAppState(payload: any) {
+		let type;
+
+		// set type
+		switch (payload.role) {
+			case UserRoleEnum[UserRoleEnum.ADMIN]:
+				type = 0;
+				break;
+			case UserRoleEnum[UserRoleEnum.GROUP_MANAGER]:
+				type = 1;
+				break;
+			default:
+				type = 2;
+				break;
+		}
+
+		// app state payload
+		const appStatePayload: AppViewStateInterface = {
+			hotelId: payload.hotelId,
+			groupId: payload.groupId,
+			role: payload.role,
+			type: type
+		};
+
+		// save to browser storage
+		const storageItem = this.currentUserState.rememberMe ? LocalStorageItems.appState : SessionStorageItems.appState;
+		const storageType = this.currentUserState.rememberMe ? StorageTypeEnum.PERSISTANT : StorageTypeEnum.SESSION;
+		this._storageService.put(storageItem, appStatePayload, storageType);
+	}
+
+	/**
+	 * update last request time
+	 *
+	 * @param payload
+	 */
+	private updateNotificationLRT(payload: any) {
+		// validate last request time
+		let lastRequestTime = this.currentUserState.profile['custom:last_request_time'];
+		if (!lastRequestTime) {
+			lastRequestTime = HelperService.getUTCDate(moment());
+		}
+
+		// payload
+		const lrtStatusPayload = {
+			pathParams: {
+				groupId: payload.groupId,
+				hotelId: payload.hotelId
+			},
+			queryParams: {
+				date: lastRequestTime,
+				user: payload.email
+			}
+		};
+
+		// service
+		this._proxyService
+			.getAPI(AppServices['Notifications']['Notifications_Status'], lrtStatusPayload)
+			.subscribe(res => {
+				// update total notifications
+				this.notificationLRT.emit(res.total);
+
+				// update last request time to browser storage
+				const storageType = this.currentUserState.rememberMe ? StorageTypeEnum.PERSISTANT : StorageTypeEnum.SESSION;
+				const storageItemNotification = this.currentUserState.rememberMe ? LocalStorageItems.notificationState : SessionStorageItems.notificationState;
+				this._storageService.put(storageItemNotification, lastRequestTime, storageType);
+			});
 	}
 }

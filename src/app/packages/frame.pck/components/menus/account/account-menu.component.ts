@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 
 // app
 import { HelperService } from '../../../../utilities.pck/accessories.mod/services/helper.service';
-import { faEnvelope, faPowerOff, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faPowerOff, faUser } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../../../../modules.pck/authorization.mod/services/auth.service';
 import { ROUTING } from '../../../../../../environments/environment';
 import { DialogTypeEnum } from '../../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
@@ -22,7 +22,7 @@ import { MemberService } from '../../../../modules.pck/member.mod/services/membe
 
 export class AccountMenuComponent implements OnInit, OnDestroy {
 	public routing = ROUTING;
-	public faIcons = [faEnvelope, faUser, faPowerOff];
+	public faIcons = [faUser, faPowerOff];
 	public currentUser;
 	public userName;
 	public userNameLetters;
@@ -107,7 +107,7 @@ export class AccountMenuComponent implements OnInit, OnDestroy {
 					this._loadingAnimationService.startLoadingAnimation();
 
 					// logout
-					this._authService.logoutUser();
+					this._authService.authLogoutUser();
 				}
 			});
 	}
