@@ -147,7 +147,7 @@ export class SessionService {
 		this.notificationsExit = this.notifications
 			.pipe(
 				startWith(''),
-				switchMap(() => timer(seconds, seconds))
+				switchMap(() => timer(0, seconds))
 			)
 			.subscribe(() => {
 				// app state
@@ -162,7 +162,7 @@ export class SessionService {
 				const payload = {
 					pathParams: {
 						groupId: appState.groupId,
-						hotelId: appState.hotelId
+						hotelId: (appState.hotelId === appState.groupId || appState.hotelId === 'ANY') ? 'All' : appState.hotelId,
 					},
 					queryParams: {
 						date: lastRequestTime,

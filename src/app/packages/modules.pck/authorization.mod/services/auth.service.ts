@@ -184,7 +184,7 @@ export class AuthService {
 
 								// update last request time
 								const lrtPayload = {
-									hotelId: hotelIds[0],
+									hotelId: hotelIds[0] === 'ANY' ? 'All' : hotelIds[0],
 									groupId: groupId,
 									email: formPayload.username
 								};
@@ -519,32 +519,14 @@ export class AuthService {
 		// validate last request time
 		let lastRequestTime = this.currentUserState.profile['custom:last_request_time'];
 		if (!lastRequestTime) {
-			lastRequestTime = HelperService.getUTCDate(moment());
+			lastRequestTime = HelperService.getUTCDate(
+				moment().subtract(1, 'year')
+			);
 		}
 
-		// payload
-		const lrtStatusPayload = {
-			pathParams: {
-				groupId: payload.groupId,
-				hotelId: payload.hotelId
-			},
-			queryParams: {
-				date: lastRequestTime,
-				user: payload.email
-			}
-		};
-
-		// service
-		this._proxyService
-			.getAPI(AppServices['Notifications']['Notifications_Status'], lrtStatusPayload)
-			.subscribe(res => {
-				// update total notifications
-				this.notificationLRT.emit(res.total);
-
-				// update last request time to browser storage
-				const storageType = this.currentUserState.rememberMe ? StorageTypeEnum.PERSISTANT : StorageTypeEnum.SESSION;
-				const storageItemNotification = this.currentUserState.rememberMe ? LocalStorageItems.notificationState : SessionStorageItems.notificationState;
-				this._storageService.put(storageItemNotification, lastRequestTime, storageType);
-			});
+		// update last request time to browser storage
+		const storageType = this.currentUserState.rememberMe ? StorageTypeEnum.PERSISTANT : StorageTypeEnum.SESSION;
+		const storageItemNotification = this.currentUserState.rememberMe ? LocalStorageItems.notificationState : SessionStorageItems.notificationState;
+		this._storageService.put(storageItemNotification, lastRequestTime, storageType);
 	}
 }

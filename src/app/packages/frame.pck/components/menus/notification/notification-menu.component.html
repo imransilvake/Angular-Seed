@@ -2,7 +2,8 @@
 	<button
 		class="ham-btn-icon"
 		mat-button
-		[matMenuTriggerFor]="menu">
+		[matMenuTriggerFor]="menu"
+		(onMenuOpen)="onNotificationMenuOpen()">
 		<mat-icon>notifications_none</mat-icon>
 		<app-badge [type]="2" [count]="totalNotifications"></app-badge>
 	</button>

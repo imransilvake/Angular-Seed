@@ -12,7 +12,7 @@ export const AppOptions = {
 	},
 	sessionTime: {
 		auth: 3601 * 1000,
-		notification: 30 * 1000
+		notification: 60 * 1000
 	},
 	rememberMeValidityInDays: 90,
 	tablePageSizeLimit: 21
