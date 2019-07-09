@@ -8,11 +8,8 @@ import * as moment from 'moment';
 import { HelperService } from '../../../../utilities.pck/accessories.mod/services/helper.service';
 import { ROUTING } from '../../../../../../environments/environment';
 import { AuthService } from '../../../../modules.pck/authorization.mod/services/auth.service';
-import { StorageTypeEnum } from '../../../../core.pck/storage.mod/enums/storage-type.enum';
-import { AppServices, LocalStorageItems, SessionStorageItems } from '../../../../../../app.config';
-import { StorageService } from '../../../../core.pck/storage.mod/services/storage.service';
-import { ProxyService } from '../../../../core.pck/proxy.mod/services/proxy.service';
 import { SidebarService } from '../../../services/sidebar.service';
+import { MenuService } from '../../../services/menu.service';
 
 @Component({
 	selector: 'app-menu-notification',
@@ -28,9 +25,8 @@ export class NotificationMenuComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private _authService: AuthService,
-		private _storageService: StorageService,
-		private _proxyService: ProxyService,
-		private _sidebarService: SidebarService
+		private _sidebarService: SidebarService,
+		private _menuService: MenuService
 	) {
 	}
 
@@ -78,14 +74,7 @@ export class NotificationMenuComponent implements OnInit, OnDestroy {
 			}
 		};
 
-		// service
-		this._proxyService
-			.postAPI(AppServices['Notifications']['Notifications_Update_LRT'], payload)
-			.subscribe(() => {
-				// update current time in web storage
-				const storageType = this._authService.currentUserState.rememberMe ? StorageTypeEnum.PERSISTANT : StorageTypeEnum.SESSION;
-				const storageItemNotification = this._authService.currentUserState.rememberMe ? LocalStorageItems.notificationState : SessionStorageItems.notificationState;
-				this._storageService.put(storageItemNotification, currentTime, storageType);
-			});
+		// service: update LRT
+		this._menuService.updateNotificationLRT(payload, currentTime);
 	}
 }

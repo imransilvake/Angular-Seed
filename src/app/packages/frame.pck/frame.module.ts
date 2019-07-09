@@ -18,6 +18,7 @@ import { BreadcrumbModule } from '../utilities.pck/breadcrumb.mod/breadcrumb.mod
 import { EmergencyService } from './services/emergency.service';
 import { FieldsModule } from '../core.pck/fields.mod/fields.module';
 import { SidebarService } from './services/sidebar.service';
+import { MenuService } from './services/menu.service';
 
 @NgModule({
 	imports: [
@@ -47,7 +48,8 @@ import { SidebarService } from './services/sidebar.service';
 	],
 	providers: [
 		EmergencyService,
-		SidebarService
+		SidebarService,
+		MenuService
 	]
 })
 
