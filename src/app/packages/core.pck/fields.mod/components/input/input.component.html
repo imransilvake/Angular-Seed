@@ -44,7 +44,7 @@
 
 			<!-- Close Icon -->
 			<mat-icon
-				*ngIf="control.value"
+				*ngIf="control.value && !control.disabled"
 				class="ham-icon ham-close"
 				(click)="control.setValue('')">
 				close

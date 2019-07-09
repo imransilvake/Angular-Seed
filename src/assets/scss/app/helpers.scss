@@ -62,14 +62,16 @@
 .ham-button-1 {
 	background-color: cd-palette($cd-background, 2007);
 	border-radius: 2px;
+	height: 36px;
 	margin-top: 5px;
 }
 
 .ham-button-2 {
 	background-color: cd-palette($cd-background, 2003);
-	border: 1px solid cd-palette($cd-border, 3007) !important;
 	border-radius: 2px;
+	border: 1px solid cd-palette($cd-border, 3007) !important;
 	color: cd-palette($cd-color, 1007);
+	height: 36px;
 	line-height: 30px !important;
 	margin-top: 5px;
 }

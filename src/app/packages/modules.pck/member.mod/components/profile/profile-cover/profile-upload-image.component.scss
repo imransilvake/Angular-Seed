@@ -51,10 +51,13 @@
 
 		.ham-select-image {
 			color: cd-palette($cd-color, 1004);
-			cursor: pointer;
 			margin-top: 10px;
 			text-align: center;
 			text-decoration: underline;
+
+			label {
+				cursor: pointer;
+			}
 		}
 
 		.ham-error {
