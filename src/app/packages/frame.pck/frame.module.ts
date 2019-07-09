@@ -19,6 +19,7 @@ import { EmergencyService } from './services/emergency.service';
 import { FieldsModule } from '../core.pck/fields.mod/fields.module';
 import { SidebarService } from './services/sidebar.service';
 import { MenuService } from './services/menu.service';
+import { PageHintService } from './services/page-hint.service';
 
 @NgModule({
 	imports: [
@@ -49,7 +50,8 @@ import { MenuService } from './services/menu.service';
 	providers: [
 		EmergencyService,
 		SidebarService,
-		MenuService
+		MenuService,
+		PageHintService
 	]
 })
 

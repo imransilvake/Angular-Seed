@@ -26,7 +26,9 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 		Hotels_List_All: { serviceUrl: '/hotels/list/all' },
 		Hotels_List_Group: { serviceUrl: '/hotels/list/group/:groupId' },
 		Profile_Image_Fetch: { serviceUrl: '/getimage' },
-		Profile_Image_Change: { serviceUrl: '/imageupload' }
+		Profile_Image_Change: { serviceUrl: '/imageupload' },
+		Page_Hints_List: { serviceUrl: '/config/pagehints/status' },
+		Page_Hints_Update: { serviceUrl: '/config/pagehints/save' }
 	},
 	Auth: {
 		Register: { serviceUrl: '/ham/auth/signup' },
