@@ -89,7 +89,7 @@ export class UserComponent implements OnDestroy {
 			};
 
 			// emit result
-			this._userService.userDataEmitter.next(result);
+			this._userService.dataEmitter.next(result);
 		});
 	}
 }

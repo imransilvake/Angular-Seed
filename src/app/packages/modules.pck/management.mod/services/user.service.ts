@@ -20,8 +20,8 @@ import { UserListTypeEnum } from '../enums/user-list-type.enum';
 export class UserService {
 	public currentUser;
 	public appState;
-	public userTablesServices;
-	public userDataEmitter: BehaviorSubject<any> = new BehaviorSubject(0);
+	public tableServices;
+	public dataEmitter: BehaviorSubject<any> = new BehaviorSubject(0);
 	public errorMessage: EventEmitter<string> = new EventEmitter();
 	public formLoadingState: EventEmitter<boolean> = new EventEmitter();
 
@@ -69,8 +69,8 @@ export class UserService {
 						};
 
 						// set table resources
-						this.userTablesServices = {
-							...this.userTablesServices,
+						this.tableServices = {
+							...this.tableServices,
 							newUsers: allApi,
 							payload1: payload
 						};
@@ -80,16 +80,16 @@ export class UserService {
 						};
 
 						// set table resources
-						this.userTablesServices = {
-							...this.userTablesServices,
+						this.tableServices = {
+							...this.tableServices,
 							existingUsers: allApi,
 							payload2: payload
 						};
 					}
 
 					// set table resources
-					this.userTablesServices = {
-						...this.userTablesServices,
+					this.tableServices = {
+						...this.tableServices,
 						searchApi: searchAllApi,
 						uniqueID: 'ID',
 						sortDefaultColumn: 'CreateDate'
@@ -109,8 +109,8 @@ export class UserService {
 						};
 
 						// set table resources
-						this.userTablesServices = {
-							...this.userTablesServices,
+						this.tableServices = {
+							...this.tableServices,
 							newUsers: hotelGroupApi,
 							payload1: payload
 						};
@@ -123,16 +123,16 @@ export class UserService {
 						};
 
 						// set table resources
-						this.userTablesServices = {
-							...this.userTablesServices,
+						this.tableServices = {
+							...this.tableServices,
 							existingUsers: hotelGroupApi,
 							payload2: payload
 						};
 					}
 
 					// set table resources
-					this.userTablesServices = {
-						...this.userTablesServices,
+					this.tableServices = {
+						...this.tableServices,
 						searchApi: searchHotelGroupApi,
 						uniqueID: 'ID',
 						sortDefaultColumn: 'CreateDate'
@@ -153,8 +153,8 @@ export class UserService {
 						};
 
 						// set table resources
-						this.userTablesServices = {
-							...this.userTablesServices,
+						this.tableServices = {
+							...this.tableServices,
 							newUsers: hotelApi,
 							payload1: payload
 						};
@@ -168,16 +168,16 @@ export class UserService {
 						};
 
 						// set table resources
-						this.userTablesServices = {
-							...this.userTablesServices,
+						this.tableServices = {
+							...this.tableServices,
 							existingUsers: hotelApi,
 							payload2: payload
 						};
 					}
 
 					// set table resources
-					this.userTablesServices = {
-						...this.userTablesServices,
+					this.tableServices = {
+						...this.tableServices,
 						searchApi: searchHotelApi,
 						uniqueID: 'ID',
 						sortDefaultColumn: 'CreateDate'

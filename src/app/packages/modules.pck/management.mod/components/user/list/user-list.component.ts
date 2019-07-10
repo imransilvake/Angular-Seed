@@ -51,23 +51,23 @@ export class UserListComponent implements OnInit, OnDestroy {
 		this.currentRole = this._userService.appState.role;
 
 		// listen: fetch new users & old user accounts list
-		this._userService.userDataEmitter
+		this._userService.dataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
 				// set tables resources
 				this.newUsersTable = {
-					api: this._userService.userTablesServices.newUsers,
-					payload: this._userService.userTablesServices.payload1,
-					searchApi: this._userService.userTablesServices.searchApi,
-					uniqueID: this._userService.userTablesServices.uniqueID,
-					sortDefaultColumn: this._userService.userTablesServices.sortDefaultColumn
+					api: this._userService.tableServices.newUsers,
+					payload: this._userService.tableServices.payload1,
+					searchApi: this._userService.tableServices.searchApi,
+					uniqueID: this._userService.tableServices.uniqueID,
+					sortDefaultColumn: this._userService.tableServices.sortDefaultColumn
 				};
 				this.existingUsersTable = {
-					api: this._userService.userTablesServices.existingUsers,
-					payload: this._userService.userTablesServices.payload2,
-					searchApi: this._userService.userTablesServices.searchApi,
-					uniqueID: this._userService.userTablesServices.uniqueID,
-					sortDefaultColumn: this._userService.userTablesServices.sortDefaultColumn
+					api: this._userService.tableServices.existingUsers,
+					payload: this._userService.tableServices.payload2,
+					searchApi: this._userService.tableServices.searchApi,
+					uniqueID: this._userService.tableServices.uniqueID,
+					sortDefaultColumn: this._userService.tableServices.sortDefaultColumn
 				};
 
 				// set tables data
