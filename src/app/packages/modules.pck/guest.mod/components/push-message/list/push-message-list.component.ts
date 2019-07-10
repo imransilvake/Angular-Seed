@@ -1,5 +1,5 @@
 // angular
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
 	selector: 'app-push-message-list',
@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class PushMessageListComponent implements OnInit {
+	@Output() changePushMessageView: EventEmitter<any> = new EventEmitter();
+
 	constructor() {
 	}
 

@@ -12,6 +12,8 @@
 	<!-- Details -->
 	<div class="ham-details">
 		<!-- View: List -->
-		<app-push-message-list></app-push-message-list>
+		<app-push-message-list
+			(changePushMessageView)="pageView = $event.view; id = $event.id; triggerServices();">
+		</app-push-message-list>
 	</div>
 </div>
