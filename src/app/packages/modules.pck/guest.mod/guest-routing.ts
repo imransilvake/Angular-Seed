@@ -2,7 +2,8 @@
 import { Routes } from '@angular/router';
 
 // app
-import { OfferListComponent } from './components/offer/list/offer-list.component';
+import { OfferComponent } from './components/offer/offer.component';
+import { PushMessageComponent } from './components/push-message/push-message.component';
 
 // routes
 export const GUEST_ROUTES: Routes = [
@@ -11,7 +12,7 @@ export const GUEST_ROUTES: Routes = [
 		children: [
 			{
 				path: 'offer',
-				component: OfferListComponent,
+				component: OfferComponent,
 				data: {
 					breadcrumb: {
 						en: 'Guest Offer',
@@ -21,7 +22,7 @@ export const GUEST_ROUTES: Routes = [
 			},
 			{
 				path: 'push-message',
-				component: null,
+				component: PushMessageComponent,
 				data: {
 					breadcrumb: {
 						en: 'Guest Push Message',
