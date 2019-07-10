@@ -15,8 +15,8 @@ import { DialogService } from '../../../utilities.pck/dialog.mod/services/dialog
 export class BroadcastService {
 	public currentUser;
 	public appState;
-	public broadcastTablesServices;
-	public broadcastDataEmitter: BehaviorSubject<any> = new BehaviorSubject(0);
+	public tableServices;
+	public dataEmitter: BehaviorSubject<any> = new BehaviorSubject(0);
 	public errorMessage: EventEmitter<string> = new EventEmitter();
 	public formLoadingState: EventEmitter<boolean> = new EventEmitter();
 
@@ -48,7 +48,7 @@ export class BroadcastService {
 			};
 
 			// set table resources
-			this.broadcastTablesServices = {
+			this.tableServices = {
 				api: api,
 				payload: payload,
 				uniqueID: 'Id',

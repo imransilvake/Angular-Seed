@@ -36,16 +36,16 @@ export class BroadcastListComponent implements OnInit {
 		this.currentRole = this._broadcastService.appState.role;
 
 		// listen: fetch broadcast list
-		this._broadcastService.broadcastDataEmitter
+		this._broadcastService.dataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
 				// set tables resources
 				this.broadcastTable = {
-					api: this._broadcastService.broadcastTablesServices.api,
-					searchApi: this._broadcastService.broadcastTablesServices.api,
-					payload: this._broadcastService.broadcastTablesServices.payload,
-					uniqueID: this._broadcastService.broadcastTablesServices.uniqueID,
-					sortDefaultColumn: this._broadcastService.broadcastTablesServices.sortDefaultColumn
+					api: this._broadcastService.tableServices.api,
+					searchApi: this._broadcastService.tableServices.api,
+					payload: this._broadcastService.tableServices.payload,
+					uniqueID: this._broadcastService.tableServices.uniqueID,
+					sortDefaultColumn: this._broadcastService.tableServices.sortDefaultColumn
 				};
 
 				// set tables data

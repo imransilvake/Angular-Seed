@@ -95,7 +95,7 @@ export class BroadcastComponent implements OnDestroy {
 			};
 
 			// emit result
-			this._broadcastService.broadcastDataEmitter.next(result);
+			this._broadcastService.dataEmitter.next(result);
 		});
 	}
 }
