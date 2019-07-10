@@ -17,18 +17,25 @@ export const EnvironmentRoutes = {
 			profile: 'member/profile'
 		}
 	},
-	management: {
-		title: 'management',
+	guest: {
+		title: 'guest',
 		routes: {
-			user: 'management/user',
-			client: 'management/client',
-			broadcast: 'management/broadcast'
+			offer: 'guest/offer',
+			pushMessage: 'guest/push-message'
 		}
 	},
 	notifications: {
 		title: 'notifications',
 		routes: {
 			overview: 'notifications/overview'
+		}
+	},
+	management: {
+		title: 'management',
+		routes: {
+			user: 'management/user',
+			client: 'management/client',
+			broadcast: 'management/broadcast'
 		}
 	}
 };

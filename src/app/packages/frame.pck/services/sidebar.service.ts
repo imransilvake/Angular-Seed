@@ -3,7 +3,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 
 // app
-import { faDatabase, faEnvelopeOpenText, faExternalLinkAlt, faHome } from '@fortawesome/free-solid-svg-icons';
+import { faDatabase, faEnvelopeOpenText, faExternalLinkAlt, faHome, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { ROUTING } from '../../../../environments/environment';
 import { SidebarInterface } from '../interfaces/sidebar.interface';
 import { SelectGroupInterface } from '../../core.pck/fields.mod/interfaces/select-group.interface';
@@ -63,6 +63,22 @@ export class SidebarService {
 					{
 						name: 'Home',
 						url: `/${ ROUTING.pages.dashboard }`,
+					}
+				]
+			},
+			{
+				name: 'Guest',
+				icon: faUsers,
+				children: [
+					{
+						name: 'Offer',
+						url: `/${ ROUTING.guest.routes.offer }`,
+						externalIcon: faExternalLinkAlt
+					},
+					{
+						name: 'Push Message',
+						url: `/${ ROUTING.guest.routes.pushMessage }`,
+						externalIcon: faExternalLinkAlt
 					}
 				]
 			},
