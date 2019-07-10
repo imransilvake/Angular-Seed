@@ -116,7 +116,7 @@ export class LicenseComponent implements OnInit, OnDestroy {
 			});
 
 		// listen: get license & system data
-		this._clientService.clientDataEmitter
+		this._clientService.dataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
 				if (res && res.licenseSystemData) {

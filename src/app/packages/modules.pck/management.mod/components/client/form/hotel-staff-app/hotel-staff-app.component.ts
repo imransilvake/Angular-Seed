@@ -46,7 +46,7 @@ export class HotelStaffAppComponent implements OnInit {
 		this.currentRole = this._clientService.appState.role;
 
 		// listen: get modules
-		this._clientService.clientDataEmitter
+		this._clientService.dataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
 				// set license state

@@ -24,8 +24,8 @@ import { AppStateEnum } from '../../../frame.pck/enums/app-state.enum';
 @Injectable()
 export class ClientService {
 	public appState;
-	public clientTablesServices;
-	public clientDataEmitter: BehaviorSubject<any> = new BehaviorSubject(0);
+	public tableServices;
+	public dataEmitter: BehaviorSubject<any> = new BehaviorSubject(0);
 	public errorMessage: EventEmitter<string> = new EventEmitter();
 	public newlyCreatedGroupId: EventEmitter<string> = new EventEmitter();
 
@@ -66,8 +66,8 @@ export class ClientService {
 					};
 
 					// set table resources
-					this.clientTablesServices = {
-						...this.clientTablesServices,
+					this.tableServices = {
+						...this.tableServices,
 						hotelsByGroup: allApi,
 						payload: payload,
 						uniqueID: 'Id'
@@ -86,8 +86,8 @@ export class ClientService {
 					};
 
 					// set table resources
-					this.clientTablesServices = {
-						...this.clientTablesServices,
+					this.tableServices = {
+						...this.tableServices,
 						hotelsByGroup: hotelGroupApi,
 						payload: payload,
 						uniqueID: 'Id'
@@ -107,8 +107,8 @@ export class ClientService {
 					};
 
 					// set table resources
-					this.clientTablesServices = {
-						...this.clientTablesServices,
+					this.tableServices = {
+						...this.tableServices,
 						hotelsByGroup: hotelApi,
 						payload: payload,
 						uniqueID: 'Id'

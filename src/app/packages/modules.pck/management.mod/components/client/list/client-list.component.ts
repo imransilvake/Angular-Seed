@@ -35,15 +35,15 @@ export class ClientListComponent implements OnInit, OnDestroy {
 		this.currentRole = this._clientService.appState && this._clientService.appState.role;
 
 		// listen: get client hotels
-		this._clientService.clientDataEmitter
+		this._clientService.dataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
 				// set table api
 				this.clientsTable = {
-					api: this._clientService.clientTablesServices.hotelsByGroup,
-					searchApi: this._clientService.clientTablesServices.hotelsByGroup,
-					payload: this._clientService.clientTablesServices.payload,
-					uniqueID: this._clientService.clientTablesServices.uniqueID
+					api: this._clientService.tableServices.hotelsByGroup,
+					searchApi: this._clientService.tableServices.hotelsByGroup,
+					payload: this._clientService.tableServices.payload,
+					uniqueID: this._clientService.tableServices.uniqueID
 				};
 
 				// set table data

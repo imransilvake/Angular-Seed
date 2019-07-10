@@ -73,7 +73,7 @@ export class ClientComponent implements OnDestroy {
 			};
 
 			// emit result
-			this._clientService.clientDataEmitter.next(result);
+			this._clientService.dataEmitter.next(result);
 		});
 	}
 }
