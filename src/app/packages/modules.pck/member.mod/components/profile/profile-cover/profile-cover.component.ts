@@ -36,7 +36,7 @@ export class ProfileCoverComponent implements OnInit, OnDestroy {
 		this.currentUser = this._memberService.currentUser; // get current user state
 
 		// listen: profile data event
-		this._memberService.memberDataEmitter
+		this._memberService.dataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
 				if (res && res.memberProfile) {

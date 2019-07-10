@@ -62,7 +62,7 @@ export class ProfileUpdateComponent implements OnInit, OnDestroy {
 		this.salutationList = this._utilityService.getSalutationList();
 
 		// listen: profile data event
-		this._memberService.memberDataEmitter
+		this._memberService.dataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
 				if (res && res.memberProfile) {

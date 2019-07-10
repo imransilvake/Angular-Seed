@@ -58,7 +58,7 @@ export class ProfileComponent implements OnDestroy {
 			};
 
 			// emit result
-			this._memberService.memberDataEmitter.next(result);
+			this._memberService.dataEmitter.next(result);
 		});
 	}
 }

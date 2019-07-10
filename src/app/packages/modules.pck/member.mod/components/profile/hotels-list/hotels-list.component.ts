@@ -25,7 +25,7 @@ export class HotelsListComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		// listen: profile data event
-		this._memberService.memberDataEmitter
+		this._memberService.dataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
 				if (res && res.memberProfile) {

@@ -25,7 +25,7 @@ import { ChangePasswordInterface } from '../interfaces/change-password.interface
 export class MemberService {
 	public currentUser;
 	public appState;
-	public memberDataEmitter: BehaviorSubject<any> = new BehaviorSubject(0);
+	public dataEmitter: BehaviorSubject<any> = new BehaviorSubject(0);
 	public profileImageUpdate: EventEmitter<boolean> = new EventEmitter();
 
 	constructor(
