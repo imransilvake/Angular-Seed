@@ -3,7 +3,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { HttpErrorResponse } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { BehaviorSubject, of } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 // store
 import { Store } from '@ngrx/store';
@@ -57,8 +57,9 @@ export class MemberService {
 	 * update user profile
 	 *
 	 * @param formPayload
+	 * @param refreshEmitter
 	 */
-	public memberUpdateProfile(formPayload: UpdateProfileInterface) {
+	public memberUpdateProfile(formPayload: UpdateProfileInterface, refreshEmitter: any) {
 		// payload
 		const payload = {
 			...formPayload,
@@ -87,7 +88,9 @@ export class MemberService {
 				};
 
 				// dialog service
-				this._dialogService.showDialog(dialogPayload).subscribe();
+				this._dialogService
+					.showDialog(dialogPayload)
+					.subscribe(() => refreshEmitter.emit());
 			}, (err: HttpErrorResponse) => {
 				if (err.error.detail.code === 'NotAuthorizedException') {
 					const errorPayload: ErrorHandlerPayloadInterface = {

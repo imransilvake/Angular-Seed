@@ -34,14 +34,16 @@ export class ProfileCoverComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		this.currentUser = this._memberService.currentUser; // get current user state
-		this.userName = HelperService.capitalizeString(this.currentUser.profile.name); // get user name
-		this.userNameLetters = HelperService.getFirstLetter(this.userName); // get first letters of name
 
 		// listen: profile data event
 		this._memberService.memberDataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
 				if (res && res.memberProfile) {
+					// set name
+					this.userName = HelperService.capitalizeString(res.memberProfile.Name);
+					this.userNameLetters = HelperService.getFirstLetter(this.userName); // get first letters of name
+
 					// set last login
 					this.loginTime = HelperService.getDateTime(
 						this.currentUser.profile.language,

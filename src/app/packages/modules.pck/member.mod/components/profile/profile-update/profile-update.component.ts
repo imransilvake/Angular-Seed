@@ -1,5 +1,5 @@
 // angular
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -20,6 +20,8 @@ import { UtilityService } from '../../../../../utilities.pck/accessories.mod/ser
 })
 
 export class ProfileUpdateComponent implements OnInit, OnDestroy {
+	@Output() refresh: EventEmitter<any> = new EventEmitter();
+
 	public formFields;
 	public profileSalutationSelectType = SelectTypeEnum.DEFAULT;
 	public salutationList: SelectDefaultInterface[] = [];
@@ -65,7 +67,9 @@ export class ProfileUpdateComponent implements OnInit, OnDestroy {
 			.subscribe(res => {
 				if (res && res.memberProfile) {
 					// salutation
-					const salutation = this.salutationList.filter(item => item.id === res.memberProfile.Gender.toUpperCase());
+					const salutation = this.salutationList.filter(
+						item => item.id === res.memberProfile.Gender.toUpperCase()
+					);
 
 					// update form
 					this.salutation.setValue(...salutation);
@@ -121,6 +125,6 @@ export class ProfileUpdateComponent implements OnInit, OnDestroy {
 		};
 
 		// update user profile
-		this._memberService.memberUpdateProfile(formPayload);
+		this._memberService.memberUpdateProfile(formPayload, this.refresh);
 	}
 }
