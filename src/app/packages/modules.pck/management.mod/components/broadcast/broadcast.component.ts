@@ -6,7 +6,7 @@ import { forkJoin, Subject } from 'rxjs';
 import { MatDialog } from '@angular/material';
 
 // app
-import { AppViewTypeEnum } from '../../enums/app-view-type.enum';
+import { AppViewTypeEnum } from '../../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
 import { BroadcastService } from '../../services/broadcast.service';
 import { AuthService } from '../../../authorization.mod/services/auth.service';
 import { SidebarService } from '../../../../frame.pck/services/sidebar.service';

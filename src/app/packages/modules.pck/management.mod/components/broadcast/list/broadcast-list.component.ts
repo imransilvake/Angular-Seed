@@ -7,7 +7,7 @@ import { takeUntil } from 'rxjs/operators';
 import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum';
 import { BroadcastService } from '../../../services/broadcast.service';
 import { UserViewInterface } from '../../../interfaces/user-view.interface';
-import { AppViewTypeEnum } from '../../../enums/app-view-type.enum';
+import { AppViewTypeEnum } from '../../../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
 
 @Component({
 	selector: 'app-broadcast-list',

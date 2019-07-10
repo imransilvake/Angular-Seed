@@ -7,7 +7,7 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
 
 // app
 import { ClientViewInterface } from '../../../../interfaces/client-view.interface';
-import { AppViewTypeEnum } from '../../../../enums/app-view-type.enum';
+import { AppViewTypeEnum } from '../../../../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
 import { ClientService } from '../../../../services/client.service';
 import { HelperService } from '../../../../../../utilities.pck/accessories.mod/services/helper.service';
 import { DialogService } from '../../../../../../utilities.pck/dialog.mod/services/dialog.service';

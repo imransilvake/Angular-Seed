@@ -1,5 +1,5 @@
 // app
-import { AppViewTypeEnum } from '../enums/app-view-type.enum';
+import { AppViewTypeEnum } from '../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
 
 // user view interface
 export interface UserViewInterface {

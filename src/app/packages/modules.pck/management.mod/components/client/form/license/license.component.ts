@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
 import { SelectTypeEnum } from '../../../../../../core.pck/fields.mod/enums/select-type.enum';
 import { ClientService } from '../../../../services/client.service';
 import { ClientViewInterface } from '../../../../interfaces/client-view.interface';
-import { AppViewTypeEnum } from '../../../../enums/app-view-type.enum';
+import { AppViewTypeEnum } from '../../../../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
 import { UtilityService } from '../../../../../../utilities.pck/accessories.mod/services/utility.service';
 import { LoadingAnimationService } from '../../../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { LicenseSystemInterface } from '../../../../interfaces/license-system.interface';

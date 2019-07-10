@@ -12,7 +12,7 @@ import { UtilityService } from '../../../../../utilities.pck/accessories.mod/ser
 import { DialogTypeEnum } from '../../../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { DialogService } from '../../../../../utilities.pck/dialog.mod/services/dialog.service';
 import { UserViewInterface } from '../../../interfaces/user-view.interface';
-import { AppViewTypeEnum } from '../../../enums/app-view-type.enum';
+import { AppViewTypeEnum } from '../../../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
 import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum';
 
 @Component({

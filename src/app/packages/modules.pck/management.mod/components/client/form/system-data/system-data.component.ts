@@ -6,7 +6,7 @@ import { skip, takeUntil } from 'rxjs/operators';
 
 // app
 import { ClientViewInterface } from '../../../../interfaces/client-view.interface';
-import { AppViewTypeEnum } from '../../../../enums/app-view-type.enum';
+import { AppViewTypeEnum } from '../../../../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
 import { SelectTypeEnum } from '../../../../../../core.pck/fields.mod/enums/select-type.enum';
 import { UtilityService } from '../../../../../../utilities.pck/accessories.mod/services/utility.service';
 import { SelectDefaultInterface } from '../../../../../../core.pck/fields.mod/interfaces/select-default-interface';

@@ -8,7 +8,7 @@ import { takeUntil } from 'rxjs/operators';
 import { HelperService } from '../../../../../../utilities.pck/accessories.mod/services/helper.service';
 import { ClientService } from '../../../../services/client.service';
 import { ClientViewInterface } from '../../../../interfaces/client-view.interface';
-import { AppViewTypeEnum } from '../../../../enums/app-view-type.enum';
+import { AppViewTypeEnum } from '../../../../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
 import { LoadingAnimationService } from '../../../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { ClientAppTypeEnum } from '../../../../enums/client-app-type.enum';
 import { UserRoleEnum } from '../../../../../authorization.mod/enums/user-role.enum';

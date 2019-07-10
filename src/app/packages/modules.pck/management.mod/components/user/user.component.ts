@@ -9,7 +9,7 @@ import { MatDialog } from '@angular/material';
 import { UserService } from '../../services/user.service';
 import { AuthService } from '../../../authorization.mod/services/auth.service';
 import { SidebarService } from '../../../../frame.pck/services/sidebar.service';
-import { AppViewTypeEnum } from '../../enums/app-view-type.enum';
+import { AppViewTypeEnum } from '../../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
 import { UserListTypeEnum } from '../../enums/user-list-type.enum';
 import { UserFormComponent } from './form/user-form.component';
 

@@ -4,7 +4,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 // app
-import { AppViewTypeEnum } from '../../../enums/app-view-type.enum';
+import { AppViewTypeEnum } from '../../../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
 import { ClientService } from '../../../services/client.service';
 import { ClientViewInterface } from '../../../interfaces/client-view.interface';
 import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum';
