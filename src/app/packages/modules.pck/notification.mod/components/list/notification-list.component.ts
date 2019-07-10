@@ -53,16 +53,16 @@ export class NotificationListComponent implements OnInit, OnDestroy {
 		this.filter.setValue(this.notificationFilters[0]);
 
 		// listen: fetch notifications list
-		this._notificationService.notificationDataEmitter
+		this._notificationService.dataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
 				if (res && res.notificationList) {
 					// set tables resources
 					this.notificationTable = {
-						api: this._notificationService.notificationTablesServices.api,
-						clearApi: this._notificationService.notificationTablesServices.clearApi,
-						payload: this._notificationService.notificationTablesServices.payload,
-						uniqueID: this._notificationService.notificationTablesServices.uniqueID
+						api: this._notificationService.tableServices.api,
+						clearApi: this._notificationService.tableServices.clearApi,
+						payload: this._notificationService.tableServices.payload,
+						uniqueID: this._notificationService.tableServices.uniqueID
 					};
 
 					// set tables data

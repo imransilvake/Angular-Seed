@@ -58,7 +58,7 @@ export class NotificationComponent implements OnDestroy {
 			};
 
 			// emit result
-			this._notificationService.notificationDataEmitter.next(result);
+			this._notificationService.dataEmitter.next(result);
 		});
 	}
 }

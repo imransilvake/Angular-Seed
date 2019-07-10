@@ -16,8 +16,8 @@ import { NotificationsFiltersEnums } from '../enums/notifications-filters.enums'
 export class NotificationService {
 	public currentUser;
 	public appState;
-	public notificationTablesServices;
-	public notificationDataEmitter: BehaviorSubject<any> = new BehaviorSubject(0);
+	public tableServices;
+	public dataEmitter: BehaviorSubject<any> = new BehaviorSubject(0);
 	public errorMessage: EventEmitter<string> = new EventEmitter();
 
 	constructor(
@@ -64,7 +64,7 @@ export class NotificationService {
 		};
 
 		// set table resources
-		this.notificationTablesServices = {
+		this.tableServices = {
 			api: api,
 			clearApi: clearApi,
 			payload: payload,
