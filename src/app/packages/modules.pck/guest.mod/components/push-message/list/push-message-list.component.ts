@@ -68,7 +68,7 @@ export class PushMessageListComponent implements OnInit {
 	 */
 	public mapPeriodicGuestNotifications(response: any) {
 		const language = this._pushMessageService.currentUser.profile.language;
-		return response && response.data.map(item => {
+		return response && response.data && response.data.map(item => {
 			let newItem = item;
 
 			// Title
