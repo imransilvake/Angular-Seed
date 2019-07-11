@@ -71,8 +71,10 @@ export class UserService {
 						// set table resources
 						this.tableServices = {
 							...this.tableServices,
-							newUsers: allApi,
-							payload1: payload
+							new: {
+								api: allApi,
+								payload: payload
+							}
 						};
 					} else {
 						payload = {
@@ -82,8 +84,10 @@ export class UserService {
 						// set table resources
 						this.tableServices = {
 							...this.tableServices,
-							existingUsers: allApi,
-							payload2: payload
+							existing: {
+								api: allApi,
+								payload: payload
+							}
 						};
 					}
 
@@ -111,8 +115,10 @@ export class UserService {
 						// set table resources
 						this.tableServices = {
 							...this.tableServices,
-							newUsers: hotelGroupApi,
-							payload1: payload
+							new: {
+								api: hotelGroupApi,
+								payload: payload
+							}
 						};
 					} else {
 						payload = {
@@ -125,8 +131,10 @@ export class UserService {
 						// set table resources
 						this.tableServices = {
 							...this.tableServices,
-							existingUsers: hotelGroupApi,
-							payload2: payload
+							existing: {
+								api: hotelGroupApi,
+								payload: payload
+							}
 						};
 					}
 
@@ -155,8 +163,10 @@ export class UserService {
 						// set table resources
 						this.tableServices = {
 							...this.tableServices,
-							newUsers: hotelApi,
-							payload1: payload
+							new: {
+								api: hotelApi,
+								payload: payload
+							}
 						};
 					} else {
 						payload = {
@@ -170,8 +180,10 @@ export class UserService {
 						// set table resources
 						this.tableServices = {
 							...this.tableServices,
-							existingUsers: hotelApi,
-							payload2: payload
+							existing: {
+								api: hotelApi,
+								payload: payload
+							}
 						};
 					}
 

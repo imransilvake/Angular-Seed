@@ -54,33 +54,35 @@ export class UserListComponent implements OnInit, OnDestroy {
 		this._userService.dataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
-				// set tables resources
-				this.newUsersTable = {
-					api: this._userService.tableServices.newUsers,
-					payload: this._userService.tableServices.payload1,
-					searchApi: this._userService.tableServices.searchApi,
-					uniqueID: this._userService.tableServices.uniqueID,
-					sortDefaultColumn: this._userService.tableServices.sortDefaultColumn
-				};
-				this.existingUsersTable = {
-					api: this._userService.tableServices.existingUsers,
-					payload: this._userService.tableServices.payload2,
-					searchApi: this._userService.tableServices.searchApi,
-					uniqueID: this._userService.tableServices.uniqueID,
-					sortDefaultColumn: this._userService.tableServices.sortDefaultColumn
-				};
+				// set tables data
+				if (res && res.newUsers) {
+					// set tables resources
+					this.newUsersTable = {
+						api: this._userService.tableServices.new.api,
+						searchApi: this._userService.tableServices.searchApi,
+						payload: this._userService.tableServices.new.payload,
+						uniqueID: this._userService.tableServices.uniqueID,
+						sortDefaultColumn: this._userService.tableServices.sortDefaultColumn
+					};
+
+					// map new users list
+					this.userNewRegistrationsList = res.newUsers;
+
+				}
 
 				// set tables data
-				if (res && (res.newUsers || res.existingUsers)) {
-					// map new users list
-					if (res.newUsers) {
-						this.userNewRegistrationsList = res.newUsers;
-					}
+				if (res && res.existingUsers) {
+					// set tables resources
+					this.existingUsersTable = {
+						api: this._userService.tableServices.existing.api,
+						searchApi: this._userService.tableServices.searchApi,
+						payload: this._userService.tableServices.existing.payload,
+						uniqueID: this._userService.tableServices.uniqueID,
+						sortDefaultColumn: this._userService.tableServices.sortDefaultColumn
+					};
 
 					// map existing users list
-					if (res.existingUsers) {
-						this.userExistingUsersList = res.existingUsers;
-					}
+					this.userExistingUsersList = res.existingUsers;
 				}
 			});
 	}
