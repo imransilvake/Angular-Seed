@@ -10,15 +10,10 @@
 	<!-- Tabs -->
 	<div class="ham-tabs">
 		<mat-tab-group class="ham-tabs-1" [@.disabled]="true">
-			<mat-tab
-				label="English"
-				i18n-label="@@Guest_Push_Notification_Form_Tab">
-				Hello
-			</mat-tab>
-			<mat-tab
-				label="German"
-				i18n-label="@@Guest_Push_Notification_Form_Tab">
-				Hellow
+			<mat-tab *ngFor="let tab of tabsList" [label]="tab.text">
+
+
+
 			</mat-tab>
 		</mat-tab-group>
 	</div>

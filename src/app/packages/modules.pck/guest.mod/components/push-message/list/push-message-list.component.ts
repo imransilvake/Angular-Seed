@@ -1,5 +1,5 @@
 // angular
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
@@ -15,7 +15,7 @@ import { GuestPushMessageViewInterface } from '../../../interfaces/guest-push-me
 	styleUrls: ['./push-message-list.component.scss']
 })
 
-export class PushMessageListComponent implements OnInit {
+export class PushMessageListComponent implements OnInit, OnDestroy {
 	@Output() changePushMessageView: EventEmitter<any> = new EventEmitter();
 	@Output() refresh: EventEmitter<any> = new EventEmitter();
 
@@ -74,6 +74,12 @@ export class PushMessageListComponent implements OnInit {
 			});
 	}
 
+	ngOnDestroy() {
+		// remove subscriptions
+		this._ngUnSubscribe.next();
+		this._ngUnSubscribe.complete();
+	}
+
 	/**
 	 * delete periodic notification
 	 */
@@ -96,7 +102,7 @@ export class PushMessageListComponent implements OnInit {
 	public onClickRowActionButtons(row: any) {
 		// delete notification
 		if (this.buttonType === 1) {
-			this._pushMessageService.deletePeriodicNotification(row, this.refresh);
+			this._pushMessageService.guestDeletePeriodicNotification(row, this.refresh);
 		}
 
 		// edit / copy notification
@@ -117,6 +123,7 @@ export class PushMessageListComponent implements OnInit {
 		// payload
 		const payload: GuestPushMessageViewInterface = {
 			view: AppViewTypeEnum.FORM,
+			id: data ? data.ID : null,
 			data: data ? data : null
 		};
 		this.changePushMessageView.emit(payload);

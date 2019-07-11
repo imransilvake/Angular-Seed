@@ -14,7 +14,7 @@
 		<!-- View: List -->
 		<ng-container *ngIf="pageView === 0">
 			<app-push-message-list
-				(changePushMessageView)="pageView = $event.view; id = $event.id; triggerServices();"
+				(changePushMessageView)="pageView = $event.view; id = $event.id; data = $event.data; triggerServices();"
 				(refresh)="triggerServices()">
 			</app-push-message-list>
 		</ng-container>
@@ -22,7 +22,9 @@
 		<!-- View: Form -->
 		<ng-container *ngIf="pageView === 1">
 			<app-push-message-form
-				(changePushMessageView)="pageView = $event.view; id = null; triggerServices();">
+				[id]="id"
+				[data]="data"
+				(changePushMessageView)="pageView = $event.view; id = null; data = null; triggerServices();">
 			</app-push-message-form>
 		</ng-container>
 	</div>

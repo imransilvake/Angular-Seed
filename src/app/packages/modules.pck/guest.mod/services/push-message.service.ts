@@ -11,6 +11,7 @@ import { GuestTypeEnum } from '../enums/guest-type.enum';
 import { GuestNotificationTypeEnum } from '../enums/guest-notification-type.enum';
 import { DialogTypeEnum } from '../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { DialogService } from '../../../utilities.pck/dialog.mod/services/dialog.service';
+import { AppViewTypeEnum } from '../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
 
 @Injectable()
 export class PushMessageService {
@@ -102,7 +103,7 @@ export class PushMessageService {
 	 * @param row
 	 * @param refreshEmitter
 	 */
-	public deletePeriodicNotification(row: any, refreshEmitter: any) {
+	public guestDeletePeriodicNotification(row: any, refreshEmitter: any) {
 		// dialog payload
 		const data = {
 			type: DialogTypeEnum.CONFIRMATION,
@@ -145,5 +146,28 @@ export class PushMessageService {
 						.subscribe(() => refreshEmitter.emit());
 				}
 			});
+	}
+
+	/**
+	 * form languages
+	 *
+	 * @param pageView
+	 */
+	public guestFormLanguages(pageView: AppViewTypeEnum) {
+		if (pageView === AppViewTypeEnum.DEFAULT) {
+			return of(null);
+		}
+
+		// payload
+		const payload = {
+			pathParams: {
+				groupId: this.appState.groupId
+			}
+		};
+
+		// service
+		return this._proxyService
+			.getAPI(AppServices['Guest']['Guest_Notifications_Form_Group'], payload)
+			.pipe(map(res => res));
 	}
 }

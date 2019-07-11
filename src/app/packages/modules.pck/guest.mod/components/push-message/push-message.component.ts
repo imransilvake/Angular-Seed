@@ -19,6 +19,7 @@ import { GuestNotificationTypeEnum } from '../../enums/guest-notification-type.e
 export class PushMessageComponent implements OnDestroy {
 	public pageView: AppViewTypeEnum = AppViewTypeEnum.DEFAULT;
 	public id;
+	public data;
 	public isHotel = false;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
@@ -63,10 +64,12 @@ export class PushMessageComponent implements OnDestroy {
 			forkJoin({
 				periodicGuestNotifications: this._pushMessageService.guestNotificationsFetch(this.id, GuestNotificationTypeEnum.PERIODIC),
 				recentGuestNotifications: this._pushMessageService.guestNotificationsFetch(this.id, GuestNotificationTypeEnum.RECENT),
+				formLanguages: this._pushMessageService.guestFormLanguages(this.pageView)
 			}).pipe(takeUntil(this._ngUnSubscribe)).subscribe(res => {
 				const result = {
 					periodicGuestNotifications: res.periodicGuestNotifications,
-					recentGuestNotifications: res.recentGuestNotifications
+					recentGuestNotifications: res.recentGuestNotifications,
+					formLanguages: res.formLanguages
 				};
 
 				// emit result
