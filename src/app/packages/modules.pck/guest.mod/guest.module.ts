@@ -12,6 +12,7 @@ import { OfferComponent } from './components/offer/offer.component';
 import { FrameModule } from '../../frame.pck/frame.module';
 import { PushMessageComponent } from './components/push-message/push-message.component';
 import { PushMessageListComponent } from './components/push-message/list/push-message-list.component';
+import { PushMessageService } from './services/push-message.service';
 
 @NgModule({
 	imports: [
@@ -28,6 +29,7 @@ import { PushMessageListComponent } from './components/push-message/list/push-me
 		PushMessageListComponent
 	],
 	providers: [
+		PushMessageService
 	]
 })
 

@@ -43,6 +43,9 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 		Profile_Update: { serviceUrl: '/profile/update' },
 		Profile_Change_Password: { serviceUrl: '/profile/changepassword' }
 	},
+	Guest: {
+		Guest_Notifications_Hotel: { serviceUrl: '/notification/guest/list/group/:groupId/hotel/:hotelId' }
+	},
 	Notifications: {
 		Notifications_List_Hotel: { serviceUrl: '/notification/list/group/:groupId/hotel/:hotelId' },
 		Notifications_Alert_Hotel: { serviceUrl: '/notification/alert/group/:groupId/hotel/:hotelId' },

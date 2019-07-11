@@ -9,6 +9,7 @@ import { AppOptions, AppServices } from '../../../../../app.config';
 import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service';
 import { AuthService } from '../../../modules.pck/authorization.mod/services/auth.service';
 import { NotificationsFiltersEnums } from '../../../modules.pck/notification.mod/enums/notifications-filters.enums';
+import { GuestPeriodsEnum } from '../../../modules.pck/guest.mod/enums/guest-periods.enum';
 
 @Injectable({ providedIn: 'root' })
 export class UtilityService {
@@ -209,42 +210,42 @@ export class UtilityService {
 				})
 			},
 			{
-				id:  NotificationsFiltersEnums.OPEN,
+				id: NotificationsFiltersEnums.OPEN,
 				text: this._i18n({
 					value: 'Only open notifications',
 					id: 'Notifications_Filters_Open'
 				})
 			},
 			{
-				id:  NotificationsFiltersEnums.ADMIN,
+				id: NotificationsFiltersEnums.ADMIN,
 				text: this._i18n({
 					value: 'Only admin notifications',
 					id: 'Notifications_Filters_Admin'
 				})
 			},
 			{
-				id:  NotificationsFiltersEnums.REGISTRATIONS,
+				id: NotificationsFiltersEnums.REGISTRATIONS,
 				text: this._i18n({
 					value: 'Only registrations',
 					id: 'Notifications_Filters_Registrations'
 				})
 			},
 			{
-				id:  NotificationsFiltersEnums.ROOM,
+				id: NotificationsFiltersEnums.ROOM,
 				text: this._i18n({
 					value: 'Only room notifications',
 					id: 'Notifications_Filters_Room'
 				})
 			},
 			{
-				id:  NotificationsFiltersEnums.REPAIR,
+				id: NotificationsFiltersEnums.REPAIR,
 				text: this._i18n({
 					value: 'Only repair notifications',
 					id: 'Notifications_Filters_Repair'
 				})
 			},
 			{
-				id:  NotificationsFiltersEnums.ALERT,
+				id: NotificationsFiltersEnums.ALERT,
 				text: this._i18n({
 					value: 'Only alert notifications',
 					id: 'Notifications_Filters_Alert'
@@ -253,5 +254,50 @@ export class UtilityService {
 		];
 
 		return notificationFiltersList;
+	}
+
+	/**
+	 * guest periods list
+	 */
+	public getGuestPeriods() {
+		const notificationPeriodsList: SelectDefaultInterface[] = [
+			{
+				id: GuestPeriodsEnum.ADHOC,
+				text: this._i18n({
+					value: 'Adhoc',
+					id: 'Guest_Periods_Adhoc'
+				})
+			},
+			{
+				id: GuestPeriodsEnum.FIRST_LOGIN,
+				text: this._i18n({
+					value: 'First Login',
+					id: 'Guest_Periods_First_Login'
+				})
+			},
+			{
+				id: GuestPeriodsEnum.MIDDLE_STAY,
+				text: this._i18n({
+					value: 'Middle Stay',
+					id: 'Guest_Periods_Middle_Stay'
+				})
+			},
+			{
+				id: GuestPeriodsEnum.DAY_BEFORE_CHECKOUT,
+				text: this._i18n({
+					value: 'Day Before Checkout',
+					id: 'Guest_Periods_Day_Before_Checkout'
+				})
+			},
+			{
+				id: GuestPeriodsEnum.DAY_AFTER_CHECKIN,
+				text: this._i18n({
+					value: 'Day Before Checkout',
+					id: 'Guest_Periods_Day_After_Checkout'
+				})
+			}
+		];
+
+		return notificationPeriodsList;
 	}
 }

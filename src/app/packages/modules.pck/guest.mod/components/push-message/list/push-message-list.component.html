@@ -1,3 +1,39 @@
-<p>
-	Push Message works!
-</p>
+<div class="ham-push-message-list">
+	<!-- Button: Create New Push Notification -->
+	<div class="ham-button-wrapper">
+		<button mat-button class="ham-button ham-button-1" i18n="@@Guest_Push_Notification_Create_NewNotification" (click)="changePageView()">
+			Create New Notification
+		</button>
+	</div>
+
+	<!-- Push Notification List -->
+	<div class="ham-list" *ngIf="pushNotificationList">
+		<app-table
+			tableTitle="Periodically Guest Notification"
+			i18n-tableTitle="@@Guest_Push_Notification_Table_Title"
+			[tableShowFilterInput]="false"
+			[tableData]="pushNotificationList"
+			[tableColumns]="['Status', 'Title', 'Period', 'Validity', 'Target Group', 'Hotels']"
+			[tableSorting]="[false, false, false, false, false, false, false]"
+			[tableAdditionalColumns]="['Action']"
+			[tableTemplateRef]="[action]"
+			[tableResources]="pushNotificationTable"
+			(rowData)="onClickRowActionButtons($event)">
+			<!-- Action -->
+			<ng-template #action>
+				<button
+					mat-button
+					class="ham-button ham-button-2 ham-table-button-1"
+					i18n="@@Guest_Push_Notification_Table_Edit">
+					Edit
+				</button>
+				<button
+					mat-button
+					class="ham-button ham-button-2 ham-table-button-2 ham-red"
+					i18n="@@Guest_Push_Notification_Table_Delete">
+					Delete
+				</button>
+			</ng-template>
+		</app-table>
+	</div>
+</div>

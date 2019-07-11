@@ -20,7 +20,9 @@ export class SidebarService {
 	public hotelGroupListRoutes = [
 		`/${ ROUTING.notifications.routes.overview }`,
 		`/${ ROUTING.management.routes.user }`,
-		`/${ ROUTING.management.routes.client }`
+		`/${ ROUTING.management.routes.client }`,
+		`/${ ROUTING.guest.routes.offer }`,
+		`/${ ROUTING.guest.routes.pushMessage }`
 	];
 
 	constructor(

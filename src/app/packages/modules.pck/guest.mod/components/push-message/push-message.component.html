@@ -10,10 +10,15 @@
 	</app-head>
 
 	<!-- Details -->
-	<div class="ham-details">
+	<div class="ham-details" *ngIf="isHotel">
 		<!-- View: List -->
 		<app-push-message-list
 			(changePushMessageView)="pageView = $event.view; id = $event.id; triggerServices();">
 		</app-push-message-list>
+	</div>
+
+	<!-- Error Message: Select Hotel -->
+	<div class="ham-wrapper-2 ham-problem cd-center-align" *ngIf="!isHotel">
+		<p i18n="@@Common_Select_Hotel">Please Select an hotel!</p>
 	</div>
 </div>

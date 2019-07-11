@@ -18,6 +18,7 @@ import { PushMessageService } from '../../services/push-message.service';
 export class PushMessageComponent implements OnDestroy {
 	public pageView: AppViewTypeEnum = AppViewTypeEnum.DEFAULT;
 	public id;
+	public isHotel = false;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
@@ -46,22 +47,30 @@ export class PushMessageComponent implements OnDestroy {
 	 * trigger all components services
 	 */
 	public triggerServices() {
-		// disable dropdown on form view
-		this._sidebarService.hotelGroupListEvent.emit(this.pageView === AppViewTypeEnum.DEFAULT);
+		// set current user state
+		this._pushMessageService.currentUser = this._authService.currentUserState;
 
 		// set app state
 		this._pushMessageService.appState = this._sidebarService.appState;
 
-		// refresh services
-		forkJoin({
+		// validate hotel selection
+		this.isHotel = this._sidebarService.appState.hotelId.split('_')[1];
 
-		}).pipe(takeUntil(this._ngUnSubscribe)).subscribe(res => {
-			const result = {
+		// only available when hotel is selected
+		if (this.isHotel) {
+			// refresh services
+			forkJoin({
+				periodicGuestNotifications: this._pushMessageService.guestPeriodicNotificationsFetch(this.id),
+				recentGuestNotifications: this._pushMessageService.guestRecentNotificationsFetch(this.id),
+			}).pipe(takeUntil(this._ngUnSubscribe)).subscribe(res => {
+				const result = {
+					periodicGuestNotifications: res.periodicGuestNotifications,
+					recentGuestNotifications: res.recentGuestNotifications
+				};
 
-			};
-
-			// emit result
-			this._pushMessageService.dataEmitter.next(result);
-		});
+				// emit result
+				this._pushMessageService.dataEmitter.next(result);
+			});
+		}
 	}
 }
