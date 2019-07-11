@@ -23,12 +23,14 @@
 			<ng-template #action>
 				<button
 					mat-button
+					(click)="onClickEditNotification()"
 					class="ham-button ham-button-2 ham-table-button-1"
 					i18n="@@Guest_Push_Notification_Table_Edit">
 					Edit
 				</button>
 				<button
 					mat-button
+					(click)="onClickDeletePeriodicNotification()"
 					class="ham-button ham-button-2 ham-table-button-2 ham-red"
 					i18n="@@Guest_Push_Notification_Table_Delete">
 					Delete
@@ -54,6 +56,7 @@
 			<ng-template #action>
 				<button
 					mat-button
+					(click)="onClickEditNotification()"
 					class="ham-button ham-button-2 ham-table-button-1"
 					i18n="@@Guest_Push_Notification_Table_Copy">
 					Copy

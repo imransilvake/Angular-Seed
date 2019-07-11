@@ -6,6 +6,8 @@ import { Subject } from 'rxjs';
 // app
 import { PushMessageService } from '../../../services/push-message.service';
 import { UtilityService } from '../../../../../utilities.pck/accessories.mod/services/utility.service';
+import { UserViewInterface } from '../../../../management.mod/interfaces/user-view.interface';
+import { AppViewTypeEnum } from '../../../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
 
 @Component({
 	selector: 'app-push-message-list',
@@ -15,12 +17,14 @@ import { UtilityService } from '../../../../../utilities.pck/accessories.mod/ser
 
 export class PushMessageListComponent implements OnInit {
 	@Output() changePushMessageView: EventEmitter<any> = new EventEmitter();
+	@Output() refresh: EventEmitter<any> = new EventEmitter();
 
 	public periodicNotificationList;
 	public recentNotificationList;
 	public periodicNotificationTable;
 	public recentNotificationTable;
 	public guestPeriodsList;
+	private buttonType;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
@@ -71,12 +75,37 @@ export class PushMessageListComponent implements OnInit {
 	}
 
 	/**
-	 * recognize / visit action
+	 * delete periodic notification
+	 */
+	public onClickDeletePeriodicNotification() {
+		this.buttonType = 1;
+	}
+
+	/**
+	 * edit periodic notification
+	 */
+	public onClickEditNotification() {
+		this.buttonType = 2;
+	}
+
+	/**
+	 * action buttons
 	 *
 	 * @param row
 	 */
 	public onClickRowActionButtons(row: any) {
-		console.log(row);
+		// delete notification
+		if (this.buttonType === 1) {
+			this._pushMessageService.deletePeriodicNotification(row, this.refresh);
+		}
+
+		// edit / copy notification
+		if (this.buttonType === 2) {
+			this.changePageView(row);
+		}
+
+		// reset
+		this.buttonType = -1;
 	}
 
 	/**
@@ -85,6 +114,11 @@ export class PushMessageListComponent implements OnInit {
 	 * @param data
 	 */
 	public changePageView(data?: any) {
-		console.log(data);
+		// payload
+		const payload: UserViewInterface = {
+			view: AppViewTypeEnum.FORM,
+			data: data ? data : null
+		};
+		this.changePushMessageView.emit(payload);
 	}
 }

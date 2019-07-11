@@ -63,7 +63,7 @@ export class BroadcastListComponent implements OnInit {
 	}
 
 	/**
-	 * broadcast row
+	 * action buttons
 	 *
 	 * @param row
 	 */

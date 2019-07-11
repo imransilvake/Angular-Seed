@@ -164,7 +164,7 @@ export class NotificationListComponent implements OnInit, OnDestroy {
 	}
 
 	/**
-	 * recognize / visit action
+	 * action buttons
 	 *
 	 * @param row
 	 */

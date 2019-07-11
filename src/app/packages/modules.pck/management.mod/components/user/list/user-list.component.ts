@@ -6,9 +6,6 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
 
 // app
 import { UserService } from '../../../services/user.service';
-import { MemberService } from '../../../../member.mod/services/member.service';
-import { ProxyService } from '../../../../../core.pck/proxy.mod/services/proxy.service';
-import { UtilityService } from '../../../../../utilities.pck/accessories.mod/services/utility.service';
 import { DialogTypeEnum } from '../../../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { DialogService } from '../../../../../utilities.pck/dialog.mod/services/dialog.service';
 import { UserViewInterface } from '../../../interfaces/user-view.interface';
@@ -38,9 +35,6 @@ export class UserListComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private _userService: UserService,
-		private _memberService: MemberService,
-		private _proxyService: ProxyService,
-		private _utilityService: UtilityService,
 		private _i18n: I18n,
 		private _dialogService: DialogService
 	) {
@@ -133,7 +127,7 @@ export class UserListComponent implements OnInit, OnDestroy {
 	}
 
 	/**
-	 * delete / decline action
+	 * action buttons
 	 *
 	 * @param row
 	 */
@@ -160,6 +154,9 @@ export class UserListComponent implements OnInit, OnDestroy {
 			// change page view
 			this.changePageView(row);
 		}
+
+		// reset
+		this.buttonType = -1;
 	}
 
 	/**

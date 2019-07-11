@@ -12,9 +12,17 @@
 	<!-- Details -->
 	<div class="ham-details" *ngIf="isHotel">
 		<!-- View: List -->
-		<app-push-message-list
-			(changePushMessageView)="pageView = $event.view; id = $event.id; triggerServices();">
-		</app-push-message-list>
+		<ng-container *ngIf="pageView === 0">
+			<app-push-message-list
+				(changePushMessageView)="pageView = $event.view; id = $event.id; triggerServices();"
+				(refresh)="triggerServices()">
+			</app-push-message-list>
+		</ng-container>
+
+		<!-- View: Form -->
+		<ng-container *ngIf="pageView === 1">
+			form works
+		</ng-container>
 	</div>
 
 	<!-- Error Message: Select Hotel -->

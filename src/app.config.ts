@@ -44,7 +44,8 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 		Profile_Change_Password: { serviceUrl: '/profile/changepassword' }
 	},
 	Guest: {
-		Guest_Notifications_Hotel: { serviceUrl: '/notification/guest/list/group/:groupId/hotel/:hotelId' }
+		Guest_Notifications_List_Hotel: { serviceUrl: '/notification/guest/list/group/:groupId/hotel/:hotelId' },
+		Guest_Notifications_Remove_Hotel: { serviceUrl: '/notification/guest/delete/group/:groupId/hotel/:hotelId' }
 	},
 	Notifications: {
 		Notifications_List_Hotel: { serviceUrl: '/notification/list/group/:groupId/hotel/:hotelId' },
@@ -124,9 +125,9 @@ export const RequestHeaders = {
 export const RESTAPIConfig = {
 	get: {
 		retry: 3,
-		timeout: 360 * 1000 // 6 minutes
+		timeout: 10 * 1000 // 10 seconds
 	},
 	post: {
-		timeout: 120 * 1000 // 2 minutes
+		timeout: 20 * 1000 // 20 seconds
 	}
 };
