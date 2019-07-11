@@ -515,6 +515,50 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 						};
 					}
 
+					// Sent Date
+					if (item.hasOwnProperty('SendDate')) {
+						const date = item.SendDate ? HelperService.getDateTime(language, item.SendDate) : '-';
+						newItem = {
+							...newItem,
+							Sent: date
+						}
+					}
+
+					// Target Group
+					if (item.hasOwnProperty('Targets')) {
+						const targets = item.Targets ? item.Targets.join(', ') : '-';
+						newItem = {
+							...newItem,
+							'Target Group': targets
+						};
+					}
+
+					// Period
+					if (item.hasOwnProperty('Trigger')) {
+						const period = item.Trigger ? this._utilityService.getGuestPeriods().filter(period => period.id === item.Trigger)[0].text : '-';
+						newItem = {
+							...newItem,
+							Period: period
+						};
+					}
+
+					// Validity
+					if (item.hasOwnProperty('ExpDate')) {
+						const date = item.ExpDate ? HelperService.getDateTime(language, item.ExpDate) : '-';
+						newItem = {
+							...newItem,
+							Validity: date
+						}
+					}
+
+					// Title
+					if (item.hasOwnProperty('Title')) {
+						newItem = {
+							...newItem,
+							Title: item.Title[language]
+						}
+					}
+
 					// update data source
 					if (!init) {
 						this.dataSource.data = [...this.dataSource.data, newItem];
@@ -607,7 +651,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 				columnName = 'TotalHotels';
 			} else if (column === 'Users(HGA)' || column === 'Users(HSA)') {
 				columnName = 'TotalUsers';
-			} else if (column === 'Date') {
+			} else if (column === 'Date' || column === 'SendDate') {
 				columnName = 'SendDate';
 			}
 

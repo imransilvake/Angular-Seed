@@ -5,7 +5,6 @@ import { Subject } from 'rxjs';
 
 // app
 import { PushMessageService } from '../../../services/push-message.service';
-import { HelperService } from '../../../../../utilities.pck/accessories.mod/services/helper.service';
 import { UtilityService } from '../../../../../utilities.pck/accessories.mod/services/utility.service';
 
 @Component({
@@ -51,10 +50,7 @@ export class PushMessageListComponent implements OnInit {
 					};
 
 					// set tables data
-					this.periodicNotificationList = {
-						...res.periodicGuestNotifications,
-						data: this.mapGuestNotificationsData(res.periodicGuestNotifications)
-					};
+					this.periodicNotificationList = res.periodicGuestNotifications;
 				}
 
 				// recently sent guest notifications
@@ -69,70 +65,9 @@ export class PushMessageListComponent implements OnInit {
 					};
 
 					// set tables data
-					this.recentNotificationList = {
-						...res.recentGuestNotifications,
-						data: this.mapGuestNotificationsData(res.recentGuestNotifications)
-					};
+					this.recentNotificationList = res.recentGuestNotifications;
 				}
 			});
-	}
-
-	/**
-	 * map guest notifications data
-	 *
-	 * @param response
-	 */
-	public mapGuestNotificationsData(response: any) {
-		const language = this._pushMessageService.currentUser.profile.language;
-		return response && response.data && response.data.map(item => {
-			let newItem = item;
-
-			// Title
-			if (item.hasOwnProperty('Title')) {
-				newItem = {
-					...newItem,
-					Title: item.Title[language]
-				}
-			}
-
-			// Validity
-			if (item.hasOwnProperty('ExpDate')) {
-				const date = item.ExpDate ? HelperService.getDateTime(language, item.ExpDate) : '-';
-				newItem = {
-					...newItem,
-					Validity: date
-				}
-			}
-
-			// Target Group
-			if (item.hasOwnProperty('Targets')) {
-				const targets = item.Targets ? item.Targets.join(', ') : '-';
-				newItem = {
-					...newItem,
-					'Target Group': targets
-				};
-			}
-
-			// Period
-			if (item.hasOwnProperty('Trigger')) {
-				const period = item.Trigger ? this.guestPeriodsList.filter(period => period.id === item.Trigger)[0].text : '-';
-				newItem = {
-					...newItem,
-					Period: period
-				};
-			}
-
-			// Sent Date
-			if (item.hasOwnProperty('SendDate')) {
-				const date = item.SendDate ? HelperService.getDateTime(language, item.SendDate) : '-';
-				newItem = {
-					...newItem,
-					Sent: date
-				}
-			}
-
-			return newItem;
-		});
 	}
 
 	/**

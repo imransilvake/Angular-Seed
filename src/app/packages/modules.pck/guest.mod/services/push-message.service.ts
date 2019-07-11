@@ -77,7 +77,7 @@ export class PushMessageService {
 						api: api,
 						payload: payload,
 						uniqueID: 'ID',
-						sortDefaultColumn: 'CreateDate'
+						sortDefaultColumn: 'SendDate'
 					}
 				};
 				break;
