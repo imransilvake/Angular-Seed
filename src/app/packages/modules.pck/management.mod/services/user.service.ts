@@ -336,14 +336,14 @@ export class UserService {
 	 * @param dialogRef
 	 * @param updateUser
 	 */
-	public userUpdate(formPayload: UserInterface, dialogRef: any, updateUser: boolean) {
+	public userUpdate(formPayload: UserInterface, dialogRef: any, updateUser: string) {
 		const role = this.appState.role;
 		let api;
 		let payload;
 		switch (role) {
 			case UserRoleEnum[UserRoleEnum.ADMIN]:
 				// set api
-				if (updateUser) {
+				if (updateUser && updateUser !== '-') {
 					api = AppServices['Management']['User_Form_Update_All'];
 				} else {
 					api = AppServices['Management']['User_Form_Confirm_All'];
@@ -356,7 +356,7 @@ export class UserService {
 				break;
 			case UserRoleEnum[UserRoleEnum.GROUP_MANAGER]:
 				// set api
-				if (updateUser) {
+				if (updateUser && updateUser !== '-') {
 					api = AppServices['Management']['User_Form_Update_Group'];
 				} else {
 					api = AppServices['Management']['User_Form_Confirm_Group'];
@@ -372,7 +372,7 @@ export class UserService {
 				break;
 			case UserRoleEnum[UserRoleEnum.HOTEL_MANAGER]:
 				// set api
-				if (updateUser) {
+				if (updateUser && updateUser !== '-') {
 					api = AppServices['Management']['User_Form_Update_Hotel'];
 				} else {
 					api = AppServices['Management']['User_Form_Confirm_Hotel'];

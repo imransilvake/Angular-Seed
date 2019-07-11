@@ -354,7 +354,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
 				// pre-select hotels
 				if (this.data && this.data.HotelIDs) {
 					const hotelIds = this.data.HotelIDs;
-					const groupId = typeof hotelIds !== 'string' ? hotelIds[0].split('_')[0] : hotelIds.split('_')[0];
+					const groupId = typeof hotelIds !== 'string' ? hotelIds[0].split('_')[0] : hotelIds;
 					let selectedItems = [];
 					for (let i = 0; i < this.hotelListGroup.length; i++) {
 						if (this.hotelListGroup[i].name === groupId) {
@@ -385,7 +385,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
 			groupId = this._userService.appState.groupId;
 			hotelIds = 'ANY';
 		} else if (this.currentRole === this.roleAdmin && this.role.value.id === this.roleGroupManager) {
-			groupId = this.hotels.value && this.hotels.value[0].id.split('_')[0];
+			groupId = this.hotels.value.length > 0 ? this.hotels.value && this.hotels.value[0].id.split('_')[0] : this.data.GroupID;
 			hotelIds = 'ANY';
 		} else {
 			const hotels = this.hotels.value.map(hotel => hotel.id);
@@ -422,7 +422,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
 			};
 
 			// service
-			this._userService.userUpdate(formPayload, this._dialogRef, this.data && this.data.Type);
+			this._userService.userUpdate(formPayload, this._dialogRef, this.data && this.data.Role);
 		}
 	}
 
