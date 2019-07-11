@@ -354,7 +354,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
 				// pre-select hotels
 				if (this.data && this.data.HotelIDs) {
 					const hotelIds = this.data.HotelIDs;
-					const groupId = typeof hotelIds !== 'string' ? hotelIds[0].split('_')[0] : hotelIds;
+					const groupId = typeof hotelIds !== 'string' ? hotelIds[0].split('_')[0] : hotelIds.split('_')[0];
 					let selectedItems = [];
 					for (let i = 0; i < this.hotelListGroup.length; i++) {
 						if (this.hotelListGroup[i].name === groupId) {

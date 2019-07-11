@@ -65,6 +65,9 @@
 						<!-- Status -->
 						<ng-container *ngSwitchCase="'Status'">
 							{{ element['State'] }}
+							<ng-container *ngIf="element['State'] === 'EXPIRED'"></ng-container>
+							<ng-container *ngIf="element['State'] === 'ACTIVE'"></ng-container>
+							<ng-container *ngIf="element['State'] === 'PAUSED'"></ng-container>
 						</ng-container>
 
 						<!-- Rest -->
