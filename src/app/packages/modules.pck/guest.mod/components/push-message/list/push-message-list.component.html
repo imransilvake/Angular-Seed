@@ -1,23 +1,23 @@
 <div class="ham-push-message-list">
-	<!-- Button: Create New Push Notification -->
+	<!-- Button: Create New Notification -->
 	<div class="ham-button-wrapper">
 		<button mat-button class="ham-button ham-button-1" i18n="@@Guest_Push_Notification_Create_NewNotification" (click)="changePageView()">
 			Create New Notification
 		</button>
 	</div>
 
-	<!-- Push Notification List -->
-	<div class="ham-list" *ngIf="pushNotificationList">
+	<!-- Periodic Notification List -->
+	<div class="ham-periodic-list" *ngIf="periodicNotificationList">
 		<app-table
 			tableTitle="Periodically Guest Notification"
-			i18n-tableTitle="@@Guest_Push_Notification_Table_Title"
+			i18n-tableTitle="@@Guest_Push_Periodic_Notification_Table_Title"
 			[tableShowFilterInput]="false"
-			[tableData]="pushNotificationList"
+			[tableData]="periodicNotificationList"
 			[tableColumns]="['Status', 'Title', 'Period', 'Validity', 'Target Group', 'Hotels']"
 			[tableSorting]="[false, false, false, false, false, false, false]"
 			[tableAdditionalColumns]="['Action']"
 			[tableTemplateRef]="[action]"
-			[tableResources]="pushNotificationTable"
+			[tableResources]="periodicNotificationTable"
 			(rowData)="onClickRowActionButtons($event)">
 			<!-- Action -->
 			<ng-template #action>
@@ -32,6 +32,31 @@
 					class="ham-button ham-button-2 ham-table-button-2 ham-red"
 					i18n="@@Guest_Push_Notification_Table_Delete">
 					Delete
+				</button>
+			</ng-template>
+		</app-table>
+	</div>
+
+	<!-- Recently Sent Notification List -->
+	<div class="ham-recent-list" *ngIf="recentNotificationList">
+		<app-table
+			tableTitle="Recently Sent Guest Notification"
+			i18n-tableTitle="@@Guest_Push_Recent_Notification_Table_Title"
+			[tableShowFilterInput]="false"
+			[tableData]="recentNotificationList"
+			[tableColumns]="['Title', 'Period', 'Sent', 'Target Group', 'Hotels']"
+			[tableSorting]="[false, false, false, false, false, false]"
+			[tableAdditionalColumns]="['Action']"
+			[tableTemplateRef]="[action]"
+			[tableResources]="recentNotificationTable"
+			(rowData)="onClickRowActionButtons($event)">
+			<!-- Action -->
+			<ng-template #action>
+				<button
+					mat-button
+					class="ham-button ham-button-2 ham-table-button-1"
+					i18n="@@Guest_Push_Notification_Table_Copy">
+					Copy
 				</button>
 			</ng-template>
 		</app-table>

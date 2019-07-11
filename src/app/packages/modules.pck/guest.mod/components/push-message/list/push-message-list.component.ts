@@ -17,8 +17,10 @@ import { UtilityService } from '../../../../../utilities.pck/accessories.mod/ser
 export class PushMessageListComponent implements OnInit {
 	@Output() changePushMessageView: EventEmitter<any> = new EventEmitter();
 
-	public pushNotificationList;
-	public pushNotificationTable;
+	public periodicNotificationList;
+	public recentNotificationList;
+	public periodicNotificationTable;
+	public recentNotificationTable;
 	public guestPeriodsList;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
@@ -40,33 +42,47 @@ export class PushMessageListComponent implements OnInit {
 				// periodic guest notifications
 				if (res && res.periodicGuestNotifications) {
 					// set tables resources
-					this.pushNotificationTable = {
-						api: this._pushMessageService.tableServices.api,
-						searchApi: this._pushMessageService.tableServices.api,
-						payload: this._pushMessageService.tableServices.payload,
-						uniqueID: this._pushMessageService.tableServices.uniqueID,
-						sortDefaultColumn: this._pushMessageService.tableServices.sortDefaultColumn
+					this.periodicNotificationTable = {
+						api: this._pushMessageService.tableServices.periodic.api,
+						searchApi: this._pushMessageService.tableServices.periodic.api,
+						payload: this._pushMessageService.tableServices.periodic.payload,
+						uniqueID: this._pushMessageService.tableServices.periodic.uniqueID,
+						sortDefaultColumn: this._pushMessageService.tableServices.periodic.sortDefaultColumn
 					};
 
 					// set tables data
-					this.pushNotificationList = {
+					this.periodicNotificationList = {
 						...res.periodicGuestNotifications,
-						data: this.mapPeriodicGuestNotifications(res.periodicGuestNotifications)
+						data: this.mapGuestNotificationsData(res.periodicGuestNotifications)
 					};
 				}
 
 				// recently sent guest notifications
 				if (res && res.recentGuestNotifications) {
+					// set tables resources
+					this.recentNotificationTable = {
+						api: this._pushMessageService.tableServices.recent.api,
+						searchApi: this._pushMessageService.tableServices.recent.api,
+						payload: this._pushMessageService.tableServices.recent.payload,
+						uniqueID: this._pushMessageService.tableServices.recent.uniqueID,
+						sortDefaultColumn: this._pushMessageService.tableServices.recent.sortDefaultColumn
+					};
+
+					// set tables data
+					this.recentNotificationList = {
+						...res.recentGuestNotifications,
+						data: this.mapGuestNotificationsData(res.recentGuestNotifications)
+					};
 				}
 			});
 	}
 
 	/**
-	 * map periodic guest notifications data
+	 * map guest notifications data
 	 *
 	 * @param response
 	 */
-	public mapPeriodicGuestNotifications(response: any) {
+	public mapGuestNotificationsData(response: any) {
 		const language = this._pushMessageService.currentUser.profile.language;
 		return response && response.data && response.data.map(item => {
 			let newItem = item;
@@ -104,6 +120,15 @@ export class PushMessageListComponent implements OnInit {
 					...newItem,
 					Period: period
 				};
+			}
+
+			// Sent Date
+			if (item.hasOwnProperty('SendDate')) {
+				const date = item.SendDate ? HelperService.getDateTime(language, item.SendDate) : '-';
+				newItem = {
+					...newItem,
+					Sent: date
+				}
 			}
 
 			return newItem;

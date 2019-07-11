@@ -9,6 +9,7 @@ import { AppViewTypeEnum } from '../../../../utilities.pck/accessories.mod/enums
 import { AuthService } from '../../../authorization.mod/services/auth.service';
 import { SidebarService } from '../../../../frame.pck/services/sidebar.service';
 import { PushMessageService } from '../../services/push-message.service';
+import { GuestNotificationTypeEnum } from '../../enums/guest-notification-type.enum';
 
 @Component({
 	selector: 'app-push-message',
@@ -60,8 +61,8 @@ export class PushMessageComponent implements OnDestroy {
 		if (this.isHotel) {
 			// refresh services
 			forkJoin({
-				periodicGuestNotifications: this._pushMessageService.guestPeriodicNotificationsFetch(this.id),
-				recentGuestNotifications: this._pushMessageService.guestRecentNotificationsFetch(this.id),
+				periodicGuestNotifications: this._pushMessageService.guestNotificationsFetch(this.id, GuestNotificationTypeEnum.PERIODIC),
+				recentGuestNotifications: this._pushMessageService.guestNotificationsFetch(this.id, GuestNotificationTypeEnum.RECENT),
 			}).pipe(takeUntil(this._ngUnSubscribe)).subscribe(res => {
 				const result = {
 					periodicGuestNotifications: res.periodicGuestNotifications,

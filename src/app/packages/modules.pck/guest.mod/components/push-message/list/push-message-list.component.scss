@@ -7,6 +7,10 @@
 		text-align: right;
 	}
 
+	.ham-recent-list {
+		margin-top: 20px;
+	}
+
 	// media
 	@include cd-media(desktop, mini) {
 		.ham-button-wrapper {

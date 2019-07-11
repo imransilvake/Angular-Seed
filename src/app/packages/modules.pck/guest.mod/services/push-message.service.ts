@@ -2,11 +2,11 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { BehaviorSubject, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-
 // app
 import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service';
 import { AppOptions, AppServices } from '../../../../../app.config';
 import { GuestTypeEnum } from '../enums/guest-type.enum';
+import { GuestNotificationTypeEnum } from '../enums/guest-notification-type.enum';
 
 @Injectable()
 export class PushMessageService {
@@ -20,11 +20,12 @@ export class PushMessageService {
 	}
 
 	/**
-	 * fetch periodic guest notifications
+	 * fetch periodic / recently sent guest notifications
 	 *
 	 * @param id
+	 * @param type
 	 */
-	public guestPeriodicNotificationsFetch(id: number) {
+	public guestNotificationsFetch(id: number, type: GuestNotificationTypeEnum) {
 		if (id) {
 			return of(null);
 		}
@@ -33,7 +34,7 @@ export class PushMessageService {
 		const api = AppServices['Guest']['Guest_Notifications_Hotel'];
 
 		// payload
-		const payload = {
+		let payload: any = {
 			pathParams: {
 				groupId: this.appState.groupId,
 				hotelId: this.appState.hotelId
@@ -47,29 +48,43 @@ export class PushMessageService {
 			}
 		};
 
-		// set table resources
-		this.tableServices = {
-			api: api,
-			payload: payload,
-			uniqueID: 'ID',
-			sortDefaultColumn: 'CreateDate'
-		};
+		switch (type) {
+			case GuestNotificationTypeEnum.PERIODIC:
+				// set table resources
+				this.tableServices = {
+					...this.tableServices,
+					periodic : {
+						api: api,
+						payload: payload,
+						uniqueID: 'ID',
+						sortDefaultColumn: 'CreateDate'
+					}
+				};
+				break;
+			case GuestNotificationTypeEnum.RECENT:
+				payload = {
+					...payload,
+					queryParams: {
+						...payload.queryParams,
+						trigger: 'ADHOC'
+					}
+				};
+
+				// set table resources
+				this.tableServices = {
+					...this.tableServices,
+					recent : {
+						api: api,
+						payload: payload,
+						uniqueID: 'ID',
+						sortDefaultColumn: 'CreateDate'
+					}
+				};
+				break;
+		}
 
 		// service
 		return this._proxyService.getAPI(api, payload)
 			.pipe(map(res => res));
-	}
-
-	/**
-	 * fetch recently sent guest notifications
-	 *
-	 * @param id
-	 */
-	public guestRecentNotificationsFetch(id: number) {
-		if (id) {
-			return of(null);
-		}
-
-		return of(null);
 	}
 }
