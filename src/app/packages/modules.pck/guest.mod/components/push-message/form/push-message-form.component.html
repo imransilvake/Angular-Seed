@@ -1,3 +1,25 @@
-<p>
-	push-message-form works!
-</p>
+<div class="ham-push-message-form ham-wrapper-2">
+	<div class="ham-top">
+		<!-- Title -->
+		<h4>Hello world</h4>
+
+		<!-- Close Button -->
+		<mat-icon (click)="onClickCloseForm()">close</mat-icon>
+	</div>
+
+	<!-- Tabs -->
+	<div class="ham-tabs">
+		<mat-tab-group class="ham-tabs-1" [@.disabled]="true">
+			<mat-tab
+				label="English"
+				i18n-label="@@Guest_Push_Notification_Form_Tab">
+				Hello
+			</mat-tab>
+			<mat-tab
+				label="German"
+				i18n-label="@@Guest_Push_Notification_Form_Tab">
+				Hellow
+			</mat-tab>
+		</mat-tab-group>
+	</div>
+</div>

@@ -1,0 +1,17 @@
+@import 'main';
+
+.ham-push-message-form {
+	.ham-top {
+		align-items: center;
+		display: flex;
+		justify-content: space-between;
+
+		h4 {
+			height: 36px;
+		}
+	}
+
+	.ham-tabs {
+		margin-top: 30px;
+	}
+}
