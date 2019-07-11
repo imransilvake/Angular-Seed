@@ -5,6 +5,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { I18n } from '@ngx-translate/i18n-polyfill';
+import { Router } from '@angular/router';
 
 // app
 import { ProxyService } from '../../../packages/core.pck/proxy.mod/services/proxy.service';
@@ -16,6 +17,7 @@ import { DialogTypeEnum } from '../../../packages/utilities.pck/dialog.mod/enums
 import { DialogService } from '../../../packages/utilities.pck/dialog.mod/services/dialog.service';
 import { NotificationsFiltersEnums } from '../../../packages/modules.pck/notification.mod/enums/notifications-filters.enums';
 import { faBan, faPauseCircle, faPlayCircle } from '@fortawesome/free-solid-svg-icons';
+import { ROUTING } from '../../../../environments/environment';
 
 @Component({
 	selector: 'app-table',
@@ -59,6 +61,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
+		private _router: Router,
 		private _proxyService: ProxyService,
 		private _utilityService: UtilityService,
 		private _authService: AuthService,
@@ -459,7 +462,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 						};
 					}
 
-					// Send Date
+					// Date
 					if (item.hasOwnProperty('Date')) {
 						const date = item.Date ? HelperService.getDateTime(language, item.Date) : '-';
 						newItem = {
@@ -469,7 +472,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 					}
 
 					// Creator
-					if (item.hasOwnProperty('LoginDate')) {
+					if (item.hasOwnProperty('Creator')) {
 						newItem = {
 							...newItem,
 							Creator: item.Creator ? item.Creator : '-'
@@ -554,7 +557,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 					}
 
 					// Title
-					if (item.hasOwnProperty('Title')) {
+					if (item.hasOwnProperty('Title') && this._router.url === `/${ ROUTING.guest.routes.pushMessage }`) {
 						newItem = {
 							...newItem,
 							Title: item.Title[language]
