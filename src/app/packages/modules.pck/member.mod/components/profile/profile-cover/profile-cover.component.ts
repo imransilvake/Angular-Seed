@@ -45,11 +45,7 @@ export class ProfileCoverComponent implements OnInit, OnDestroy {
 					this.userNameLetters = HelperService.getFirstLetter(this.userName); // get first letters of name
 
 					// set last login
-					this.loginTime = HelperService.getDateTime(
-						this.currentUser.profile.language,
-						res.memberProfile.LoginDate,
-						'DD. MMMM YYYY'
-					);
+					this.loginTime = HelperService.getDate(this.currentUser.profile.language, res.memberProfile.LoginDate);
 
 					// set user type
 					this.userType = res.memberProfile.Type;

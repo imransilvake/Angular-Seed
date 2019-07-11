@@ -164,6 +164,18 @@ export class HelperService {
 	}
 
 	/**
+	 * multilingual date
+	 *
+	 * @param lang
+	 * @param date
+	 * @param dateFormat
+	 */
+	public static getDate(lang: string, date: any, dateFormat?: string) {
+		const format = dateFormat ? dateFormat : 'DD. MMMM YYYY';
+		return moment(date).locale(lang).format(format);
+	}
+
+	/**
 	 * multilingual date time
 	 *
 	 * @param lang
