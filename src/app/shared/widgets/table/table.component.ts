@@ -544,10 +544,12 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
 					// Validity
 					if (item.hasOwnProperty('ExpDate')) {
-						const date = item.ExpDate ? HelperService.getDate(language, item.ExpDate) : '-';
+						const createDate = data[index].CreateDate ? HelperService.getDate(language, data[index].CreateDate) : '-';
+						const expDate = item.ExpDate ? HelperService.getDate(language, item.ExpDate) : '-';
+
 						newItem = {
 							...newItem,
-							Validity: date
+							Validity: `${createDate} - ${expDate}`
 						}
 					}
 
