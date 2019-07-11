@@ -15,6 +15,7 @@ import { AuthService } from '../../../packages/modules.pck/authorization.mod/ser
 import { DialogTypeEnum } from '../../../packages/utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { DialogService } from '../../../packages/utilities.pck/dialog.mod/services/dialog.service';
 import { NotificationsFiltersEnums } from '../../../packages/modules.pck/notification.mod/enums/notifications-filters.enums';
+import { faBan, faPauseCircle, faPlayCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
 	selector: 'app-table',
@@ -43,6 +44,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	@ViewChild(MatSort, { static: true }) sort: MatSort;
 	@ViewChild('filterInput', { static: false }) filterInput: ElementRef;
 
+	public faIcons = [faPlayCircle, faPauseCircle, faBan];
 	public allColumns = [];
 	public formFields;
 	public dataSource;

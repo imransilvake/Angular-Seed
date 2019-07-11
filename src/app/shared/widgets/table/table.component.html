@@ -64,10 +64,15 @@
 
 						<!-- Status -->
 						<ng-container *ngSwitchCase="'Status'">
-							{{ element['State'] }}
-							<ng-container *ngIf="element['State'] === 'EXPIRED'"></ng-container>
-							<ng-container *ngIf="element['State'] === 'ACTIVE'"></ng-container>
-							<ng-container *ngIf="element['State'] === 'PAUSED'"></ng-container>
+							<ng-container *ngIf="element['State'] === 'ACTIVE'">
+								<fa-icon class="ham-icon ham-green" [icon]="faIcons[0]"></fa-icon>
+							</ng-container>
+							<ng-container *ngIf="element['State'] === 'INACTIVE'">
+								<fa-icon class="ham-icon ham-orange" [icon]="faIcons[1]"></fa-icon>
+							</ng-container>
+							<ng-container *ngIf="element['State'] === 'EXPIRED'">
+								<fa-icon class="ham-icon ham-grey" [icon]="faIcons[2]"></fa-icon>
+							</ng-container>
 						</ng-container>
 
 						<!-- Rest -->

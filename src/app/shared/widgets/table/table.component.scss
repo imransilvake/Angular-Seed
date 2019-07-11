@@ -64,6 +64,22 @@
 						font-size: 11px;
 						justify-content: center;
 					}
+
+					.ham-icon {
+						font-size: cd-fontSize(s26);
+
+						&.ham-green {
+							color: cd-palette($cd-color, 1008);
+						}
+
+						&.ham-orange {
+							color: cd-palette($cd-color, 1011);
+						}
+
+						&.ham-grey {
+							color: cd-palette($cd-color, 1004);
+						}
+					}
 				}
 
 				th {
