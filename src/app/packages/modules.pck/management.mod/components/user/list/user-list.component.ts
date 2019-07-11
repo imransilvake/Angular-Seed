@@ -6,8 +6,6 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
 
 // app
 import { UserService } from '../../../services/user.service';
-import { DialogTypeEnum } from '../../../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
-import { DialogService } from '../../../../../utilities.pck/dialog.mod/services/dialog.service';
 import { UserViewInterface } from '../../../interfaces/user-view.interface';
 import { AppViewTypeEnum } from '../../../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
 import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum';
@@ -20,6 +18,7 @@ import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum
 
 export class UserListComponent implements OnInit, OnDestroy {
 	@Output() changeUserView: EventEmitter<any> = new EventEmitter();
+	@Output() refresh: EventEmitter<any> = new EventEmitter();
 
 	public userNewRegistrationsList;
 	public userExistingUsersList;
@@ -35,8 +34,7 @@ export class UserListComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private _userService: UserService,
-		private _i18n: I18n,
-		private _dialogService: DialogService
+		private _i18n: I18n
 	) {
 	}
 
@@ -148,8 +146,8 @@ export class UserListComponent implements OnInit, OnDestroy {
 				};
 			}
 
-			// perform action
-			this.deleteOrDeclineUser(row, this.buttonType, text);
+			// service
+			this._userService.userRemove(this.buttonType, row, text, this.refresh);
 		} else {
 			// change page view
 			this.changePageView(row);
@@ -157,63 +155,6 @@ export class UserListComponent implements OnInit, OnDestroy {
 
 		// reset
 		this.buttonType = -1;
-	}
-
-	/**
-	 * delete or decline user
-	 *
-	 * @param row
-	 * @param state
-	 * @param text
-	 */
-	public deleteOrDeclineUser(row: any, state: number, text: any) {
-		// dialog payload
-		const data = {
-			type: DialogTypeEnum.CONFIRMATION,
-			payload: {
-				...text,
-				icon: 'dialog_confirmation',
-				buttonTexts: [
-					this._i18n({
-						value: 'Button - OK',
-						id: 'Common_Button_OK'
-					}),
-					this._i18n({
-						value: 'Button - Cancel',
-						id: 'Common_Button_Cancel'
-					}),
-				]
-			}
-		};
-
-		// listen: dialog service
-		this._dialogService
-			.showDialog(data)
-			.pipe(takeUntil(this._ngUnSubscribe))
-			.subscribe(res => {
-				// delete / decline
-				if (res) {
-					// service
-					this._userService.userRemove(this.buttonType, row);
-
-					// remove row from client side
-					if (this.buttonType === 3) {
-						const listData = this.userNewRegistrationsList.data.filter(listRow => listRow.ID !== row.ID);
-						this.userNewRegistrationsList = {
-							...this.userNewRegistrationsList,
-							data: listData,
-							total: this.userNewRegistrationsList.total - 1
-						};
-					} else {
-						const listData = this.userExistingUsersList.data.filter(listRow => listRow.ID !== row.ID);
-						this.userExistingUsersList = {
-							...this.userExistingUsersList,
-							data: listData,
-							total: this.userExistingUsersList.total - 1
-						};
-					}
-				}
-			});
 	}
 
 	/**

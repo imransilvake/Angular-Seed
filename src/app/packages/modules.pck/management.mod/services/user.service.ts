@@ -211,49 +211,81 @@ export class UserService {
 	 *
 	 * @param type
 	 * @param row
+	 * @param text
+	 * @param refreshEmitter
 	 */
-	public userRemove(type: number, row: any) {
-		// payload
-		let payload: any = {
-			bodyParams: {
-				email: row.Email,
-				ID: row.ID
+	public userRemove(type: number, row: any, text: any, refreshEmitter: any) {
+		// dialog payload
+		const data = {
+			type: DialogTypeEnum.CONFIRMATION,
+			payload: {
+				...text,
+				icon: 'dialog_confirmation',
+				buttonTexts: [
+					this._i18n({
+						value: 'Button - OK',
+						id: 'Common_Button_OK'
+					}),
+					this._i18n({
+						value: 'Button - Cancel',
+						id: 'Common_Button_Cancel'
+					}),
+				]
 			}
 		};
-		let api;
-		switch (this.appState.type) {
-			case AppStateEnum.ALL:
-				// set api
-				api = AppServices['Management']['User_List_Remove_All'];
-				break;
-			case AppStateEnum.GROUP:
-				// set api
-				api = AppServices['Management']['User_List_Remove_Group'];
 
-				// set payload
-				payload = {
-					...payload,
-					pathParams: {
-						groupId: this.appState && this.appState.groupId
+		// listen: dialog service
+		this._dialogService
+			.showDialog(data)
+			.subscribe(res => {
+				// delete / decline
+				if (res) {
+					// payload
+					let payload: any = {
+						bodyParams: {
+							email: row.Email,
+							ID: row.ID
+						}
+					};
+
+					let api;
+					switch (this.appState.type) {
+						case AppStateEnum.ALL:
+							// set api
+							api = AppServices['Management']['User_List_Remove_All'];
+							break;
+						case AppStateEnum.GROUP:
+							// set api
+							api = AppServices['Management']['User_List_Remove_Group'];
+
+							// set payload
+							payload = {
+								...payload,
+								pathParams: {
+									groupId: this.appState && this.appState.groupId
+								}
+							};
+							break;
+						case AppStateEnum.HOTEL:
+							// set api
+							api = AppServices['Management']['User_List_Remove_Hotel'];
+
+							payload = {
+								...payload,
+								pathParams: {
+									groupId: this.appState && this.appState.groupId,
+									hotelId: this.appState && this.appState.hotelId
+								}
+							};
+							break;
 					}
-				};
-				break;
-			case AppStateEnum.HOTEL:
-				// set api
-				api = AppServices['Management']['User_List_Remove_Hotel'];
 
-				payload = {
-					...payload,
-					pathParams: {
-						groupId: this.appState && this.appState.groupId,
-						hotelId: this.appState && this.appState.hotelId
-					}
-				};
-				break;
-		}
-
-		// service
-		this._proxyService.postAPI(api, payload).subscribe();
+					// service
+					this._proxyService
+						.postAPI(api, payload)
+						.subscribe(() => refreshEmitter.emit());
+				}
+			});
 	}
 
 	/**
