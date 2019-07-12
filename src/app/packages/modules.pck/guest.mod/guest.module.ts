@@ -14,6 +14,7 @@ import { PushMessageComponent } from './components/push-message/push-message.com
 import { PushMessageListComponent } from './components/push-message/list/push-message-list.component';
 import { PushMessageService } from './services/push-message.service';
 import { PushMessageFormComponent } from './components/push-message/form/push-message-form.component';
+import { PushMessageFormElementsComponent } from './components/push-message/form/push-message-form-elements.component';
 
 @NgModule({
 	imports: [
@@ -28,7 +29,8 @@ import { PushMessageFormComponent } from './components/push-message/form/push-me
 		OfferListComponent,
 		PushMessageComponent,
 		PushMessageListComponent,
-		PushMessageFormComponent
+		PushMessageFormComponent,
+		PushMessageFormElementsComponent
 	],
 	providers: [
 		PushMessageService

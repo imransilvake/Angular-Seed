@@ -1,7 +1,7 @@
 <div class="ham-push-message-form ham-wrapper-2">
 	<div class="ham-top">
 		<!-- Title -->
-		<h4>Hello world</h4>
+		<h4>Form</h4>
 
 		<!-- Close Button -->
 		<mat-icon (click)="onClickCloseForm()">close</mat-icon>
@@ -9,12 +9,46 @@
 
 	<!-- Tabs -->
 	<div class="ham-tabs">
-		<mat-tab-group class="ham-tabs-1" [@.disabled]="true">
-			<mat-tab *ngFor="let tab of tabsList" [label]="tab.text">
+		<form class="ham-block ham-form" (ngSubmit)="onSubmitForm()">
+			<!-- Elements -->
+			<ng-container *ngIf="formArray.length > 1">
+				<mat-tab-group class="ham-tabs-1" [@.disabled]="true">
+					<mat-tab *ngFor="let tab of formArray; let idx=index;" [label]="tabsList[idx].text">
+						<app-push-message-form-elements
+							[minDate]="minDate"
+							[staticColors]="staticColors"
+							[tab]="tab"
+							[formArray]="formArray">
+						</app-push-message-form-elements>
+					</mat-tab>
+				</mat-tab-group>
+			</ng-container>
 
+			<ng-container *ngIf="formArray.length <= 1">
+				<form class="ham-block ham-form" (ngSubmit)="onSubmitForm()">
+					<app-push-message-form-elements
+						[minDate]="minDate"
+						[staticColors]="staticColors"
+						[formArray]="formArray">
+					</app-push-message-form-elements>
+				</form>
+			</ng-container>
 
-
-			</mat-tab>
-		</mat-tab-group>
+			<!-- Submit -->
+			<div class="cd-row ham-padding-1 ham-buttons">
+				<div class="cd-col cd-col-pm-s-6">
+					Hello
+				</div>
+				<div class="cd-col cd-col-pm-s-6 cd-right-align">
+					<button mat-button type="button" class="ham-button ham-button-1" (click)="onClickCloseForm()"
+							i18n="@@Guest_Push_Message_Form_Cancel_Button">Cancel
+					</button>
+					<button mat-button type="submit" class="ham-button ham-button-1" [disabled]="!isFormValid || loading">
+						<fa-icon class="fa-icon" [icon]="faIcons[0]" [spin]="true" *ngIf="loading"></fa-icon>
+						<span i18n="@@Guest_Push_Message_Form_Save_Button" *ngIf="!loading">Save</span>
+					</button>
+				</div>
+			</div>
+		</form>
 	</div>
 </div>

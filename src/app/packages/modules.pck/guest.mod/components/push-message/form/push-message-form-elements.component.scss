@@ -1,0 +1,47 @@
+@import 'main';
+
+.ham-push-message-form-elements {
+	margin-top: 10px;
+
+	.cd-row {
+		&:not(:last-child) {
+			margin-bottom: 20px;
+		}
+
+		.cd-col {
+			&.cd-col-top {
+				margin-top: 20px;
+			}
+		}
+
+		&.ham-label {
+			margin-bottom: 0;
+		}
+
+		.ham-color-label {
+			color: cd-palette($cd-color, 1004);
+			display: block;
+			font-size: cd-fontSize(s13);
+			margin-bottom: 5px;
+		}
+	}
+
+	.ham-description {
+		p {
+			color: cd-palette($cd-color, 1004);
+		}
+	}
+
+	// media
+	@include cd-media(desktop, smartphone) {
+		.cd-row {
+			.cd-col {
+				padding: 0;
+
+				&.cd-col-m-top {
+					margin-top: 20px;
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,96 @@
+<div class="ham-push-message-form-elements" *ngIf="tab || formArray[0]">
+	<div class="cd-row ham-padding-0">
+		<div class="cd-col">
+			<app-input
+				[showLabel]="true"
+				labelName="Title*"
+				i18n-labelName="@@Guest_Push_Message_Form_Title_Label"
+				[inputId]="'guest-push-notification-title-id'"
+				[inputType]="'text'"
+				[inputName]="'title'"
+				inputPlaceHolder="Title"
+				i18n-inputPlaceHolder="@@Guest_Push_Message_Form_Title_PlaceHolder"
+				[control]="tab === null ? formArray[0].controls['title'] : tab.controls['title']">
+			</app-input>
+		</div>
+	</div>
+
+	<div class="cd-row ham-padding-0">
+		<div class="cd-col">
+			<app-input
+				[typeTextArea]="true"
+				[textareaMinRows]="5"
+				[showLabel]="true"
+				labelName="Notification Text*"
+				i18n-labelName="@@Guest_Push_Message_Form_Text_Label"
+				[inputId]="'guest-push-notification-text-id'"
+				[inputType]="'text'"
+				[inputName]="'text'"
+				inputPlaceHolder="Notification Text"
+				i18n-inputPlaceHolder="@@Guest_Push_Message_Form_Text_PlaceHolder"
+				[control]="tab === null ? formArray[0].controls['description'] : tab.controls['description']">
+			</app-input>
+		</div>
+	</div>
+
+	<div class="cd-row ham-padding-0">
+		<div class="cd-col">
+			<app-input
+				[showLabel]="true"
+				labelName="Link"
+				i18n-labelName="@@Guest_Push_Message_Form_Link_Label"
+				[inputId]="'guest-push-notification-link-id'"
+				[inputType]="'text'"
+				[inputName]="'link'"
+				inputPlaceHolder="Link"
+				i18n-inputPlaceHolder="@@Guest_Push_Message_Form_Link_PlaceHolder"
+				[control]="tab === null ? formArray[0].controls['link'] : tab.controls['link']">
+			</app-input>
+		</div>
+	</div>
+
+	<div class="cd-row ham-padding-0">
+		<h6 class="ham-color-label" i18n="@@Guest_Push_Message_Form_Color_Label">Color</h6>
+		<div class="cd-col">
+			<mat-radio-group class="mat-radio-group-2" [formControl]="tab === null ? formArray[0].controls['color'] : tab.controls['color']">
+				<mat-radio-button [value]="staticColors[0]"></mat-radio-button>
+				<mat-radio-button [value]="staticColors[1]"></mat-radio-button>
+				<mat-radio-button [value]="staticColors[2]"></mat-radio-button>
+			</mat-radio-group>
+		</div>
+	</div>
+
+	<div class="cd-row ham-label ham-padding-0">
+		<h6 class="ham-color-label" i18n="@@Guest_Push_Message_Form_Date_Label">One Time</h6>
+	</div>
+	<div class="cd-row ham-padding-1">
+		<div class="cd-col cd-col-pm-t-6">
+			<app-datepicker
+				[inputId]="'guest-push-notification-date-id'"
+				[inputType]="'text'"
+				[inputName]="'date'"
+				inputPlaceHolder="Date"
+				i18n-inputPlaceHolder="@@Guest_Push_Message_Form_Date_PlaceHolder"
+				[minDate]="minDate"
+				[control]="tab === null ? formArray[0].controls['date'] : tab.controls['date']">
+			</app-datepicker>
+		</div>
+		<div class="cd-col cd-col-pm-t-6 cd-col-m-top">
+			<app-input
+				[inputId]="'guest-push-notification-time-id'"
+				[inputType]="'time'"
+				[inputName]="'time'"
+				[inputPlaceHolder]="'hh:mm'"
+				[control]="tab === null ? formArray[0].controls['time'] : tab.controls['time']">
+			</app-input>
+		</div>
+	</div>
+
+	<!-- Note -->
+	<div class="ham-description">
+		<p i18n="@@Guest_Push_Message_Form_Note">Note</p>
+	</div>
+
+	<!-- Divider -->
+	<app-divider></app-divider>
+</div>

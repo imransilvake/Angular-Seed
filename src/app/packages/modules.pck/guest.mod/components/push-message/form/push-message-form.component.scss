@@ -13,5 +13,60 @@
 
 	.ham-tabs {
 		margin-top: 30px;
+
+		.ham-form {
+			.ham-buttons {
+				margin-top: 20px;
+
+				p {
+					color: cd-palette($cd-color, 1009);
+				}
+
+				button {
+					&:first-child {
+						background-color: cd-palette($cd-background, 2007);
+					}
+
+					&:last-child {
+						margin-left: 10px;
+					}
+
+					span, .fa-icon {
+						vertical-align: unset;
+					}
+				}
+			}
+		}
+	}
+
+	@include cd-media(desktop, mini) {
+		.ham-tabs {
+			.ham-form {
+				.ham-buttons {
+					display: block;
+
+					.cd-col {
+						display:flex;
+						flex-direction: column-reverse;
+
+						p {
+							margin-bottom: 10px;
+						}
+
+						button {
+							width: 100%;
+
+							&:first-child {
+								margin-top: 10px;
+							}
+
+							&:last-child {
+								margin-left: 0;
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 }
