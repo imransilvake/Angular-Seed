@@ -123,6 +123,10 @@
 						color: cd-palette($cd-color, 1001);
 					}
 				}
+
+				&::-webkit-clear-button {
+					display: none;
+				}
 			}
 
 			// icon: password show

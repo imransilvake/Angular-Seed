@@ -63,36 +63,71 @@
 	<!-- Divider -->
 	<app-divider></app-divider>
 
-	<div class="cd-row ham-label ham-padding-0">
-		<h6 class="ham-color-label" i18n="@@Guest_Push_Message_Form_Date_Label">One Time</h6>
-	</div>
-	<div class="cd-row ham-padding-1">
-		<div class="cd-col cd-col-pm-t-6">
-			<app-datepicker
-				[inputId]="'guest-push-notification-date-id'"
-				[inputType]="'text'"
-				[inputName]="'date'"
-				inputPlaceHolder="Date"
-				i18n-inputPlaceHolder="@@Guest_Push_Message_Form_Date_PlaceHolder"
-				[minDate]="minDate"
-				[control]="tab === null ? formArray[0].controls['date'] : tab.controls['date']">
-			</app-datepicker>
-		</div>
-		<div class="cd-col cd-col-pm-t-6 cd-col-m-top">
-			<app-input
-				[inputId]="'guest-push-notification-time-id'"
-				[inputType]="'time'"
-				[inputName]="'time'"
-				[inputPlaceHolder]="'hh:mm'"
-				[control]="tab === null ? formArray[0].controls['time'] : tab.controls['time']">
-			</app-input>
-		</div>
-	</div>
+	<!-- Single Selection -->
+	<mat-radio-group (change)="onChangeDateTimeAndPeriodically($event)">
+		<div class="ham-custom-wrapper">
+			<div class="cd-row ham-label ham-padding-0">
+				<h6 class="ham-color-label" i18n="@@Guest_Push_Message_Form_Date_Label">One Time</h6>
+			</div>
+			<div class="cd-row ham-padding-1">
+				<!-- Date & Time -->
+				<div class="cd-col cd-col-pm-t-6">
+					<div class="ham-field">
+						<mat-radio-button [checked]="true" [value]="'date'"></mat-radio-button>
+						<div class="ham-date-time">
+							<div class="ham-date" [class.ham-disabled]="dateTimeButton">
+								<app-datepicker
+									[inputId]="'guest-push-notification-date-id'"
+									[inputType]="'text'"
+									[inputName]="'date'"
+									inputPlaceHolder="Date"
+									i18n-inputPlaceHolder="@@Guest_Push_Message_Form_Date_PlaceHolder"
+									[minDate]="minDate"
+									[control]="tab === null ? formArray[0].controls['date'] : tab.controls['date']">
+								</app-datepicker>
+							</div>
+							<div class="ham-time">
+								<app-input
+									[inputId]="'guest-push-notification-time-id'"
+									[inputType]="'time'"
+									[inputName]="'time'"
+									[inputPlaceHolder]="'hh:mm'"
+									[control]="tab === null ? formArray[0].controls['time'] : tab.controls['time']">
+								</app-input>
+							</div>
+						</div>
+						<div class="ham-now">
+							<button
+								mat-button
+								type="button"
+								class="ham-button ham-button-1"
+								i18n="@@Guest_Push_Message_Form_Date_Button_Now"
+								(click)="onClickSetDateTimeNow()"
+								[disabled]="dateTimeButton">
+								Now
+							</button>
+						</div>
+					</div>
 
-	<!-- Note -->
-	<div class="ham-description">
-		<p i18n="@@Guest_Push_Message_Form_Note">Note</p>
-	</div>
+					<div class="ham-description">
+						<p i18n="@@Guest_Push_Message_Form_Date_Hint">Hint Text</p>
+					</div>
+				</div>
+
+				<!-- Periodically -->
+				<div class="cd-col cd-col-pm-t-6 cd-col-m-top">
+					<mat-radio-button [value]="'periodic'"></mat-radio-button>
+				</div>
+			</div>
+		</div>
+	</mat-radio-group>
+
+	<!-- Target Groups -->
+
+
+	<!-- Periodically -->
+
+	<!-- Hotels -->
 
 	<!-- Divider -->
 	<app-divider></app-divider>

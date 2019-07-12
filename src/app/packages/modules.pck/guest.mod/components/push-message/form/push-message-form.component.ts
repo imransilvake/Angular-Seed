@@ -114,7 +114,9 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 					Validators.minLength(3),
 					Validators.maxLength(2000)
 				]),
-				link: new FormControl(''),
+				link: new FormControl('', [
+					ValidationService.urlValidator
+				]),
 				color: new FormControl(this.staticColors[0], [
 					Validators.required
 				]),
