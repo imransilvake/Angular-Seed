@@ -123,6 +123,13 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 				date: new FormControl({ value: '', disabled: true }),
 				time: new FormControl('', [
 					ValidationService.timeValidator
+				]),
+				periodically: new FormControl(''),
+				hotels: new FormControl('', [
+					Validators.required
+				]),
+				targetGroups: new FormControl('', [
+					Validators.required
 				])
 			})
 		);

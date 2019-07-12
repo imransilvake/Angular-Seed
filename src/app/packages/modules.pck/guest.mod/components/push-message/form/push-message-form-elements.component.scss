@@ -27,6 +27,8 @@
 	}
 
 	.ham-custom-wrapper {
+		margin-bottom: 20px;
+
 		.cd-row {
 			.cd-col {
 				.ham-field {
@@ -47,6 +49,10 @@
 							}
 						}
 					}
+
+					.ham-periodic {
+						width: 100%;
+					}
 				}
 
 				.ham-description {
@@ -54,6 +60,7 @@
 
 					p {
 						color: cd-palette($cd-color, 1004);
+						font-size: cd-fontSize(s12);
 					}
 				}
 			}
@@ -74,6 +81,10 @@
 							.ham-date {
 								width: 100%;
 							}
+						}
+
+						.ham-periodic {
+							margin: 12px 0;
 						}
 					}
 				}

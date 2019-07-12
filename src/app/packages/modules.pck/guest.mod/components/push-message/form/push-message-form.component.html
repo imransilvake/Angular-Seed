@@ -15,6 +15,8 @@
 				<mat-tab-group class="ham-tabs-1" [@.disabled]="true" (selectedTabChange)="onChangeTab($event)">
 					<mat-tab *ngFor="let tab of formArray; let idx=index;" [label]="tabsList[idx].text">
 						<app-push-message-form-elements
+							[language]="tabsList[idx].id"
+							[data]="data"
 							[minDate]="minDate"
 							[staticColors]="staticColors"
 							[tab]="tab"
@@ -28,6 +30,8 @@
 			<ng-container *ngIf="formArray.length <= 1">
 				<form class="ham-block ham-form" (ngSubmit)="onSubmitForm()">
 					<app-push-message-form-elements
+						[language]="'en'"
+						[data]="data"
 						[minDate]="minDate"
 						[staticColors]="staticColors"
 						[formArray]="formArray"

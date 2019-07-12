@@ -10,6 +10,7 @@ import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service
 import { AuthService } from '../../../modules.pck/authorization.mod/services/auth.service';
 import { NotificationsFiltersEnums } from '../../../modules.pck/notification.mod/enums/notifications-filters.enums';
 import { GuestPeriodsEnum } from '../../../modules.pck/guest.mod/enums/guest-periods.enum';
+import { GuestTargetGroupsEnum } from '../../../modules.pck/guest.mod/enums/guest-target-groups.enum';
 
 @Injectable({ providedIn: 'root' })
 export class UtilityService {
@@ -299,5 +300,36 @@ export class UtilityService {
 		];
 
 		return notificationPeriodsList;
+	}
+
+	/**
+	 * guest periods list
+	 */
+	public getTargetGroups() {
+		const targetGroupsList: SelectDefaultInterface[] = [
+			{
+				id: GuestTargetGroupsEnum.ALL,
+				text: this._i18n({
+					value: 'All guests',
+					id: 'Guest_Target_Groups_All'
+				})
+			},
+			{
+				id: GuestTargetGroupsEnum.CLASSIC,
+				text: this._i18n({
+					value: 'Member only',
+					id: 'Guest_Target_Groups_Members_Only'
+				})
+			},
+			{
+				id: GuestTargetGroupsEnum.PREMIUM,
+				text: this._i18n({
+					value: 'Standard guests only',
+					id: 'Guest_Target_Groups_Standard_Guest_Only'
+				})
+			}
+		];
+
+		return targetGroupsList;
 	}
 }

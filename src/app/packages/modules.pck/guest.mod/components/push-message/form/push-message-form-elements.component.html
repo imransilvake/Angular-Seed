@@ -44,7 +44,7 @@
 				[inputName]="'link'"
 				inputPlaceHolder="Link"
 				i18n-inputPlaceHolder="@@Guest_Push_Message_Form_Link_PlaceHolder"
-				[control]="tab === null ? formArray[0].controls['link'] : tab.controls['link']">
+				[control]="formArray[0].controls['link']">
 			</app-input>
 		</div>
 	</div>
@@ -52,7 +52,7 @@
 	<div class="cd-row ham-padding-0">
 		<h6 class="ham-color-label" i18n="@@Guest_Push_Message_Form_Color_Label">Color</h6>
 		<div class="cd-col">
-			<mat-radio-group class="mat-radio-group-2" [formControl]="tab === null ? formArray[0].controls['color'] : tab.controls['color']">
+			<mat-radio-group class="mat-radio-group-2" [formControl]="formArray[0].controls['color']">
 				<mat-radio-button [value]="staticColors[0]"></mat-radio-button>
 				<mat-radio-button [value]="staticColors[1]"></mat-radio-button>
 				<mat-radio-button [value]="staticColors[2]"></mat-radio-button>
@@ -64,14 +64,15 @@
 	<app-divider></app-divider>
 
 	<!-- Single Selection -->
-	<mat-radio-group (change)="onChangeDateTimeAndPeriodically($event)">
+	<mat-radio-group class="mat-radio-group-3" (change)="onChangeDateTimeAndPeriodically($event)">
 		<div class="ham-custom-wrapper">
-			<div class="cd-row ham-label ham-padding-0">
-				<h6 class="ham-color-label" i18n="@@Guest_Push_Message_Form_Date_Label">One Time</h6>
-			</div>
 			<div class="cd-row ham-padding-1">
 				<!-- Date & Time -->
 				<div class="cd-col cd-col-pm-t-6">
+					<div class="cd-row ham-label ham-padding-0">
+						<h6 class="ham-color-label" i18n="@@Guest_Push_Message_Form_Date_Label">One Time</h6>
+					</div>
+
 					<div class="ham-field">
 						<mat-radio-button [checked]="true" [value]="'date'"></mat-radio-button>
 						<div class="ham-date-time">
@@ -83,7 +84,7 @@
 									inputPlaceHolder="Date"
 									i18n-inputPlaceHolder="@@Guest_Push_Message_Form_Date_PlaceHolder"
 									[minDate]="minDate"
-									[control]="tab === null ? formArray[0].controls['date'] : tab.controls['date']">
+									[control]="formArray[0].controls['date']">
 								</app-datepicker>
 							</div>
 							<div class="ham-time">
@@ -92,7 +93,7 @@
 									[inputType]="'time'"
 									[inputName]="'time'"
 									[inputPlaceHolder]="'hh:mm'"
-									[control]="tab === null ? formArray[0].controls['time'] : tab.controls['time']">
+									[control]="formArray[0].controls['time']">
 								</app-input>
 							</div>
 						</div>
@@ -116,18 +117,67 @@
 
 				<!-- Periodically -->
 				<div class="cd-col cd-col-pm-t-6 cd-col-m-top">
-					<mat-radio-button [value]="'periodic'"></mat-radio-button>
+					<div class="cd-row ham-label ham-padding-0">
+						<h6 class="ham-color-label" i18n="@@Guest_Push_Message_Form_Periodic_Label">Periodically</h6>
+					</div>
+
+					<div class="ham-field">
+						<mat-radio-button [value]="'periodic'"></mat-radio-button>
+						<div class="ham-periodic">
+							<app-select
+								[selectType]="selectTypeDefault"
+								[selectId]="'guest-push-notification-periodically-id'"
+								selectPlaceHolder="Periodically"
+								i18n-selectPlaceHolder="@@Guest_Push_Message_Form_Periodic_PlaceHolder"
+								[dataDefault]="guestPeriodsList"
+								[control]="formArray[0].controls['periodically']">
+							</app-select>
+						</div>
+					</div>
+
+					<div class="ham-description">
+						<p i18n="@@Guest_Push_Message_Form_Periodic_Hint">Hint Text</p>
+					</div>
 				</div>
 			</div>
 		</div>
 	</mat-radio-group>
 
-	<!-- Target Groups -->
-
-
-	<!-- Periodically -->
-
-	<!-- Hotels -->
+	<!-- Target Groups & Hotels -->
+	<div class="cd-row ham-padding-1">
+		<div class="cd-col cd-col-pm-t-6">
+			<app-select
+				[showLabel]="true"
+				labelName="Target Groups*"
+				i18n-labelName="@@Guest_Push_Message_Form_Target_Groups_Label"
+				[selectType]="selectTypeDefault"
+				[selectId]="'guest-push-notification-target-groups-id'"
+				selectPlaceHolder="Target Group"
+				i18n-selectPlaceHolder="@@Guest_Push_Message_Form_Target_Groups_PlaceHolder"
+				[dataDefault]="targetGroupsList"
+				[showHint]="true"
+				hintText="Hint Text"
+				i18n-hintText="Guest_Push_Message_Form_Target_Groups_Hint"
+				[control]="formArray[0].controls['targetGroups']">
+			</app-select>
+		</div>
+		<div class="cd-col cd-col-pm-t-6 cd-col-m-top">
+			<app-select
+				[showLabel]="true"
+				labelName="Hotel(s)*"
+				i18n-labelName="@@Guest_Push_Message_Form_Hotels_Label"
+				[selectType]="selectTypeDefault"
+				[selectId]="'guest-push-notification-hotels-id'"
+				selectPlaceHolder="Hotel(s)"
+				i18n-selectPlaceHolder="@@Guest_Push_Message_Form_Hotels_PlaceHolder"
+				[dataDefault]="hotelsList"
+				[showHint]="true"
+				hintText="Hint Text"
+				i18n-hintText="Guest_Push_Message_Form_Hotels_Hint"
+				[control]="formArray[0].controls['hotels']">
+			</app-select>
+		</div>
+	</div>
 
 	<!-- Divider -->
 	<app-divider></app-divider>
