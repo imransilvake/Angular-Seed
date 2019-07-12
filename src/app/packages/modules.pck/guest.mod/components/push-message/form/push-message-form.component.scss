@@ -39,6 +39,19 @@
 		}
 	}
 
+	// media
+	@include cd-media(desktop, smartphone) {
+		.ham-tabs {
+			.ham-form {
+				.ham-buttons {
+					.cd-col {
+						padding: 0;
+					}
+				}
+			}
+		}
+	}
+
 	@include cd-media(desktop, mini) {
 		.ham-tabs {
 			.ham-form {
