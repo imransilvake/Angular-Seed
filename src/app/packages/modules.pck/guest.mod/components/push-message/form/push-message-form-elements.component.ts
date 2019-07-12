@@ -23,6 +23,7 @@ export class PushMessageFormElementsComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		// listen: title field
 		if (this.tab || this.formArray[0]) {
 			const title = (this.tab === null) ? this.formArray[0].controls['title'] : this.tab.controls['title'];
 			title.valueChanges
