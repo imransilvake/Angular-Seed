@@ -46,6 +46,7 @@ export class PushMessageFormElementsComponent implements OnInit {
 
 		// listen: get hotels
 		this._utilityService.getHotelList()
+			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => this.hotelsList = res);
 
 		// form data
@@ -53,6 +54,7 @@ export class PushMessageFormElementsComponent implements OnInit {
 			const title = (this.tab === null) ? this.formArray[0].controls['title'] : this.tab.controls['title'];
 			const text = (this.tab === null) ? this.formArray[0].controls['description'] : this.tab.controls['description'];
 			const link = this.formArray[0].controls['link'];
+			const color = this.formArray[0].controls['color'];
 
 			// listen: title field
 			title.valueChanges
@@ -65,6 +67,7 @@ export class PushMessageFormElementsComponent implements OnInit {
 				title.setValue(this.data.Title);
 				text.setValue(this.data.Text[this.language]);
 				link.setValue(this.data.Data.Link);
+				color.setValue(this.data.Data.Colour);
 			}
 		}
 	}

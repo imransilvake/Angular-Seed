@@ -117,9 +117,7 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 				link: new FormControl('', [
 					ValidationService.urlValidator
 				]),
-				color: new FormControl(this.staticColors[0], [
-					Validators.required
-				]),
+				color: new FormControl(this.staticColors[0]),
 				date: new FormControl({ value: '', disabled: true }),
 				time: new FormControl('', [
 					ValidationService.timeValidator

@@ -52,7 +52,7 @@
 	<div class="cd-row ham-padding-0">
 		<h6 class="ham-color-label" i18n="@@Guest_Push_Message_Form_Color_Label">Color</h6>
 		<div class="cd-col">
-			<mat-radio-group class="mat-radio-group-2" [formControl]="formArray[0].controls['color']">
+			<mat-radio-group class="mat-radio-group-2" [(ngModel)]="tab === null ? formArray[0].controls['color'] : tab.controls['color']">
 				<mat-radio-button [value]="staticColors[0]"></mat-radio-button>
 				<mat-radio-button [value]="staticColors[1]"></mat-radio-button>
 				<mat-radio-button [value]="staticColors[2]"></mat-radio-button>
@@ -158,7 +158,7 @@
 				[showHint]="true"
 				hintText="Hint Text"
 				i18n-hintText="Guest_Push_Message_Form_Target_Groups_Hint"
-				[control]="formArray[0].controls['targetGroups']">
+				[control]="tab === null ? formArray[0].controls['targetGroups'] : tab.controls['targetGroups']">
 			</app-select>
 		</div>
 		<div class="cd-col cd-col-pm-t-6 cd-col-m-top">
@@ -174,7 +174,7 @@
 				[showHint]="true"
 				hintText="Hint Text"
 				i18n-hintText="Guest_Push_Message_Form_Hotels_Hint"
-				[control]="formArray[0].controls['hotels']">
+				[control]="tab === null ? formArray[0].controls['hotels'] : tab.controls['hotels']">
 			</app-select>
 		</div>
 	</div>
