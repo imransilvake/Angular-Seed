@@ -1,5 +1,7 @@
 // app
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
 	selector: 'app-push-message-form-elements',
@@ -8,14 +10,30 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 
 export class PushMessageFormElementsComponent implements OnInit {
+	@Output() changeFormTitle: EventEmitter<any> = new EventEmitter();
+
 	@Input() tab = null;
 	@Input() formArray;
 	@Input() minDate;
 	@Input() staticColors;
 
+	private _ngUnSubscribe: Subject<void> = new Subject<void>();
+
 	constructor() {
 	}
 
 	ngOnInit() {
+		if (this.tab || this.formArray[0]) {
+			const title = (this.tab === null) ? this.formArray[0].controls['title'] : this.tab.controls['title'];
+			title.valueChanges
+				.pipe(takeUntil(this._ngUnSubscribe))
+				.subscribe(res => this.changeFormTitle.emit(res));
+		}
+	}
+
+	ngOnDestroy() {
+		// remove subscriptions
+		this._ngUnSubscribe.next();
+		this._ngUnSubscribe.complete();
 	}
 }

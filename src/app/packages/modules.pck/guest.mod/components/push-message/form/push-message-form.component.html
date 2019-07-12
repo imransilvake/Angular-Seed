@@ -1,7 +1,7 @@
 <div class="ham-push-message-form ham-wrapper-2">
 	<div class="ham-top">
 		<!-- Title -->
-		<h4>Form</h4>
+		<h4>{{ title }}</h4>
 
 		<!-- Close Button -->
 		<mat-icon (click)="onClickCloseForm()">close</mat-icon>
@@ -12,13 +12,14 @@
 		<form class="ham-block ham-form" (ngSubmit)="onSubmitForm()">
 			<!-- Elements -->
 			<ng-container *ngIf="formArray.length > 1">
-				<mat-tab-group class="ham-tabs-1" [@.disabled]="true">
+				<mat-tab-group class="ham-tabs-1" [@.disabled]="true" (selectedTabChange)="onChangeTab($event)">
 					<mat-tab *ngFor="let tab of formArray; let idx=index;" [label]="tabsList[idx].text">
 						<app-push-message-form-elements
 							[minDate]="minDate"
 							[staticColors]="staticColors"
 							[tab]="tab"
-							[formArray]="formArray">
+							[formArray]="formArray"
+							(changeFormTitle)="title = $event">
 						</app-push-message-form-elements>
 					</mat-tab>
 				</mat-tab-group>
@@ -29,7 +30,8 @@
 					<app-push-message-form-elements
 						[minDate]="minDate"
 						[staticColors]="staticColors"
-						[formArray]="formArray">
+						[formArray]="formArray"
+						(changeFormTitle)="title = $event">
 					</app-push-message-form-elements>
 				</form>
 			</ng-container>

@@ -30,6 +30,7 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 	public systemInfo;
 	public tabsList = [];
 	public minDate = moment(moment()).add(1, 'days').toDate();
+	public title = 'Form';
 	public errorMessage;
 	public loading = false;
 	public staticColors = ['#3e9d2e', '#d2a41a', '#e74c3c'];
@@ -140,5 +141,15 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 			view: AppViewTypeEnum.DEFAULT
 		};
 		this.changePushMessageView.emit(payload);
+	}
+
+	/**
+	 * on tab change
+	 *
+	 * @param tabEvent
+	 */
+	public onChangeTab(tabEvent: any) {
+		const titleValue = this.formArray[tabEvent.index].controls['title'].value;
+		this.title = titleValue ? titleValue : 'Form';
 	}
 }
