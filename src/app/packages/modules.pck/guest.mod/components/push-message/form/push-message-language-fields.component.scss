@@ -1,0 +1,15 @@
+@import 'main';
+
+.ham-push-message-language-fields {
+	margin-top: 10px;
+
+	.cd-row {
+		margin-bottom: 20px;
+
+		.cd-col {
+			&.cd-col-top {
+				margin-top: 20px;
+			}
+		}
+	}
+}

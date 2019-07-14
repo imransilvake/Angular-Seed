@@ -15,6 +15,70 @@
 		margin-top: 30px;
 
 		.ham-form {
+			.cd-row {
+				&:not(:last-child) {
+					margin-bottom: 20px;
+				}
+
+				.cd-col {
+					&.cd-col-top {
+						margin-top: 20px;
+					}
+				}
+
+				&.ham-label {
+					margin-bottom: 0;
+				}
+
+				.ham-color-label {
+					color: cd-palette($cd-color, 1004);
+					display: block;
+					font-size: cd-fontSize(s13);
+					margin-bottom: 5px;
+				}
+			}
+
+			.ham-custom-wrapper {
+				margin-bottom: 20px;
+
+				.cd-row {
+					.cd-col {
+						.ham-field {
+							align-items: center;
+							display: flex;
+
+							.ham-date-time {
+								align-items: center;
+								display: flex;
+								margin-right: 10px;
+
+								.ham-date {
+									margin-right: 10px;
+
+									&.ham-disabled {
+										pointer-events: none;
+										user-select: none;
+									}
+								}
+							}
+
+							.ham-periodic {
+								width: 100%;
+							}
+						}
+
+						.ham-description {
+							margin-top: 10px;
+
+							p {
+								color: cd-palette($cd-color, 1004);
+								font-size: cd-fontSize(s12);
+							}
+						}
+					}
+				}
+			}
+
 			.ham-buttons {
 				margin-top: 20px;
 
@@ -40,9 +104,47 @@
 	}
 
 	// media
+	@include cd-media(desktop, tablet) {
+		.ham-tabs {
+			.ham-form {
+				.ham-custom-wrapper {
+					.cd-row {
+						.cd-col {
+							.ham-field {
+								display: block;
+
+								.ham-date-time {
+									margin: 12px 0;
+
+									.ham-date {
+										width: 100%;
+									}
+								}
+
+								.ham-periodic {
+									margin: 12px 0;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
 	@include cd-media(desktop, smartphone) {
 		.ham-tabs {
 			.ham-form {
+				.cd-row {
+					.cd-col {
+						padding: 0;
+
+						&.cd-col-m-top {
+							margin-top: 20px;
+						}
+					}
+				}
+
 				.ham-buttons {
 					.cd-col {
 						padding: 0;
@@ -75,6 +177,20 @@
 
 							&:last-child {
 								margin-left: 0;
+							}
+						}
+					}
+				}
+
+				.ham-custom-wrapper {
+					.cd-row {
+						.cd-col {
+							.ham-field {
+								.ham-now {
+									button {
+										width: 100%;
+									}
+								}
 							}
 						}
 					}

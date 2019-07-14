@@ -1,0 +1,35 @@
+<div class="ham-push-message-language-fields" *ngIf="multiLanguageFields">
+	<div class="cd-row ham-padding-0">
+		<div class="cd-col">
+			<app-input
+				[showLabel]="true"
+				labelName="Title*"
+				i18n-labelName="@@Guest_Push_Message_Form_Title_Label"
+				[inputId]="'guest-push-notification-title-id'"
+				[inputType]="'text'"
+				[inputName]="'title'"
+				inputPlaceHolder="Title"
+				i18n-inputPlaceHolder="@@Guest_Push_Message_Form_Title_PlaceHolder"
+				[control]="multiLanguageFields.controls['title']">
+			</app-input>
+		</div>
+	</div>
+
+	<div class="cd-row ham-padding-0">
+		<div class="cd-col">
+			<app-input
+				[typeTextArea]="true"
+				[textareaMinRows]="5"
+				[showLabel]="true"
+				labelName="Notification Text*"
+				i18n-labelName="@@Guest_Push_Message_Form_Text_Label"
+				[inputId]="'guest-push-notification-text-id'"
+				[inputType]="'text'"
+				[inputName]="'text'"
+				inputPlaceHolder="Notification Text"
+				i18n-inputPlaceHolder="@@Guest_Push_Message_Form_Text_PlaceHolder"
+				[control]="multiLanguageFields.controls['description']">
+			</app-input>
+		</div>
+	</div>
+</div>

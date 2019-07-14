@@ -12,6 +12,8 @@ import { GuestPushMessageViewInterface } from '../../../interfaces/guest-push-me
 import { PushMessageService } from '../../../services/push-message.service';
 import { UtilityService } from '../../../../../utilities.pck/accessories.mod/services/utility.service';
 import { ValidationService } from '../../../../../core.pck/fields.mod/services/validation.service';
+import { SelectTypeEnum } from '../../../../../core.pck/fields.mod/enums/select-type.enum';
+import { SelectDefaultInterface } from '../../../../../core.pck/fields.mod/interfaces/select-default-interface';
 
 @Component({
 	selector: 'app-push-message-form',
@@ -34,6 +36,11 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 	public errorMessage;
 	public loading = false;
 	public staticColors = ['#3e9d2e', '#d2a41a', '#e74c3c'];
+	public dateTimeButton = false;
+	public selectTypeDefault = SelectTypeEnum.DEFAULT;
+	public guestPeriodsList: SelectDefaultInterface[] = [];
+	public hotelsList: SelectDefaultInterface[] = [];
+	public targetGroupsList: SelectDefaultInterface[] = [];
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
@@ -44,11 +51,38 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 	) {
 		// form group
 		this.formFields = new FormGroup({
-			languages: this._formBuilder.array([])
+			languages: this._formBuilder.array([]),
+			link: new FormControl('', [
+				ValidationService.urlValidator
+			]),
+			color: new FormControl(this.staticColors[0]),
+			date: new FormControl({ value: '', disabled: true }),
+			time: new FormControl('', [
+				ValidationService.timeValidator
+			]),
+			periodically: new FormControl({ value: '', disabled: true }),
+			hotels: new FormControl('', [
+				Validators.required
+			]),
+			targetGroups: new FormControl('', [
+				Validators.required
+			])
 		});
 	}
 
 	ngOnInit() {
+		// get periods list
+		this.guestPeriodsList = this._utilityService.getGuestPeriods();
+		this.guestPeriodsList.shift();
+
+		// target groups list
+		this.targetGroupsList = this._utilityService.getTargetGroups();
+
+		// listen: get hotels
+		this._utilityService.getHotelList()
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => this.hotelsList = res);
+
 		// languages
 		this.systemLanguages = this._utilityService.getSystemLanguageList();
 
@@ -66,7 +100,7 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 					if (this.systemInfo && this.systemInfo['System'] && this.systemInfo['System'].Languages.length > 1) {
 						this.systemInfo['System'].Languages.forEach(language => {
 							// add form groups dynamically
-							this.addFormGroups();
+							this.addLanguageSpecificFields();
 
 							// add tabs
 							this.tabsList.push(
@@ -75,7 +109,21 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 						});
 					} else {
 						// add form groups dynamically
-						this.addFormGroups();
+						this.addLanguageSpecificFields();
+					}
+
+					// update form with existing data
+					if (this.data) {
+						const link = this.formFields.controls['link'];
+						const color = this.formFields.controls['color'];
+						const targetGroups = this.formFields.controls['targetGroups'];
+						const selected = this.targetGroupsList.filter(
+							target => target.id === this.data['Target Group']
+						);
+
+						link.setValue(this.data.Data.Link);
+						color.setValue(this.data.Data.Colour);
+						targetGroups.setValue(...selected);
 					}
 				}
 			});
@@ -101,7 +149,7 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 	/**
 	 * add forms groups for each language
 	 */
-	public addFormGroups() {
+	public addLanguageSpecificFields() {
 		(<FormArray>this.formFields.controls['languages']).push(
 			new FormGroup({
 				title: new FormControl('', [
@@ -113,21 +161,6 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 					Validators.required,
 					Validators.minLength(3),
 					Validators.maxLength(2000)
-				]),
-				link: new FormControl('', [
-					ValidationService.urlValidator
-				]),
-				color: new FormControl(this.staticColors[0]),
-				date: new FormControl({ value: '', disabled: true }),
-				time: new FormControl('', [
-					ValidationService.timeValidator
-				]),
-				periodically: new FormControl(''),
-				hotels: new FormControl('', [
-					Validators.required
-				]),
-				targetGroups: new FormControl('', [
-					Validators.required
 				])
 			})
 		);
@@ -158,5 +191,37 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 	public onChangeTab(tabEvent: any) {
 		const titleValue = this.formArray[tabEvent.index].controls['title'].value;
 		this.title = titleValue ? titleValue : 'Form';
+	}
+
+	/**
+	 * on change date time and periodically
+	 *
+	 * @param radioEvent
+	 */
+	public onChangeDateTimeAndPeriodically(radioEvent: any) {
+		const time = this.formFields.controls['time'];
+		const periodically = this.formFields.controls['periodically'];
+
+		if (radioEvent.value === 'date') {
+			time.enable();
+			periodically.disable();
+			this.dateTimeButton = false;
+		}
+
+		if (radioEvent.value === 'periodic') {
+			time.disable();
+			periodically.enable();
+			this.dateTimeButton = true;
+		}
+	}
+
+	/**
+	 * set current date and time
+	 */
+	public onClickSetDateTimeNow() {
+		const date = this.formFields.controls['date'];
+		const time = this.formFields.controls['time'];
+		date.setValue(moment().toDate());
+		time.setValue(moment().format('HH:mm'));
 	}
 }
