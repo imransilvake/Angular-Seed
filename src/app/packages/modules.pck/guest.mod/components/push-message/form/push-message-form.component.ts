@@ -117,13 +117,23 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 						const link = this.formFields.controls['link'];
 						const color = this.formFields.controls['color'];
 						const targetGroups = this.formFields.controls['targetGroups'];
-						const selected = this.targetGroupsList.filter(
+						const hotels = this.formFields.controls['hotels'];
+						const selectedGroups = this.targetGroupsList.filter(
 							target => target.id === this.data['Target Group']
 						);
+						const selectedHotels = [];
+						for (let i = 0; i < this.data.HotelIDs.length; i++) {
+							selectedHotels.push(
+								...this.hotelsList.filter(
+								target => target.id === this.data.HotelIDs[i]
+								)
+							);
+						}
 
 						link.setValue(this.data.Data.Link);
 						color.setValue(this.data.Data.Colour);
-						targetGroups.setValue(...selected);
+						targetGroups.setValue(...selectedGroups);
+						hotels.setValue(selectedHotels);
 					}
 				}
 			});
