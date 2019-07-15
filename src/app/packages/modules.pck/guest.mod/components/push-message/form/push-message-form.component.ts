@@ -286,7 +286,8 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 			Access: this.access.value
 		};
 
-		console.log(formPayload);
+		// service
+		this._pushMessageService.guestUpdatePushMessage(formPayload, !!this.data, this.changePushMessageView);
 	}
 
 	/**

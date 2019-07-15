@@ -12,6 +12,9 @@ import { GuestNotificationTypeEnum } from '../enums/guest-notification-type.enum
 import { DialogTypeEnum } from '../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { DialogService } from '../../../utilities.pck/dialog.mod/services/dialog.service';
 import { AppViewTypeEnum } from '../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
+import { PushMessageInterface } from '../interfaces/push-message.interface';
+import { LoadingAnimationService } from '../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
+import { GuestPushMessageViewInterface } from '../interfaces/guest-push-message-view.interface';
 
 @Injectable()
 export class PushMessageService {
@@ -24,7 +27,8 @@ export class PushMessageService {
 	constructor(
 		private _proxyService: ProxyService,
 		private _i18n: I18n,
-		private _dialogService: DialogService
+		private _dialogService: DialogService,
+		private _loadingAnimationService: LoadingAnimationService
 	) {
 	}
 
@@ -153,7 +157,7 @@ export class PushMessageService {
 	 *
 	 * @param pageView
 	 */
-	public guestFormLanguages(pageView: AppViewTypeEnum) {
+	public guestFormLanguagesFetch(pageView: AppViewTypeEnum) {
 		if (pageView === AppViewTypeEnum.DEFAULT) {
 			return of(null);
 		}
@@ -169,5 +173,70 @@ export class PushMessageService {
 		return this._proxyService
 			.getAPI(AppServices['Guest']['Guest_Notifications_Form_Group'], payload)
 			.pipe(map(res => res));
+	}
+
+	/**
+	 * create / update push message
+	 *
+	 * @param formPayload
+	 * @param isEditForm
+	 * @param changePageView
+	 */
+	public guestUpdatePushMessage(formPayload: PushMessageInterface, isEditForm: boolean, changePageView: any) {
+		// start loading animation
+		this._loadingAnimationService.startLoadingAnimation();
+
+		// api
+		const api = AppServices['Guest']['Guest_Notifications_Form_Create_Hotel'];
+
+		// payload
+		let payload: any = {
+			pathParams: {
+				groupId: this.appState.groupId,
+				hotelId: this.appState.hotelId
+			},
+			bodyParams: { formPayload }
+		};
+
+		// service
+		this._proxyService.postAPI(api, payload)
+			.subscribe(() => {
+				// stop loading animation
+				this._loadingAnimationService.stopLoadingAnimation();
+
+				const text = isEditForm ? {
+					title: this._i18n({ value: 'Title: Push Message Updated', id: 'Guest_Push_Message_Form_Success_Updated_Title' }),
+					message: this._i18n({
+						value: 'Description: Notification Updated',
+						id: 'Guest_Push_Message_Form_Success_Updated_Description'
+					}),
+				} : {
+					title: this._i18n({ value: 'Title: Push Message Created', id: 'Guest_Push_Message_Form_Success_Created_Title' }),
+					message: this._i18n({
+						value: 'Description: Notification Created',
+						id: 'Guest_Push_Message_Form_Success_Created_Description'
+					}),
+				};
+
+				// payload
+				const dialogPayload = {
+					type: DialogTypeEnum.NOTICE,
+					payload: {
+						...text,
+						icon: 'dialog_tick',
+						buttonTexts: [this._i18n({ value: 'Button - OK', id: 'Common_Button_OK' })]
+					}
+				};
+
+				// listen: dialog service
+				this._dialogService
+					.showDialog(dialogPayload)
+					.subscribe(() => {
+						const payload: GuestPushMessageViewInterface = {
+							view: AppViewTypeEnum.DEFAULT
+						};
+						changePageView.emit(payload);
+					});
+			});
 	}
 }

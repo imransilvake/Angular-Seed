@@ -64,7 +64,7 @@ export class PushMessageComponent implements OnDestroy {
 			forkJoin({
 				periodicGuestNotifications: this._pushMessageService.guestNotificationsFetch(this.id, GuestNotificationTypeEnum.PERIODIC),
 				recentGuestNotifications: this._pushMessageService.guestNotificationsFetch(this.id, GuestNotificationTypeEnum.RECENT),
-				formLanguages: this._pushMessageService.guestFormLanguages(this.pageView)
+				formLanguages: this._pushMessageService.guestFormLanguagesFetch(this.pageView)
 			}).pipe(takeUntil(this._ngUnSubscribe)).subscribe(res => {
 				const result = {
 					periodicGuestNotifications: res.periodicGuestNotifications,

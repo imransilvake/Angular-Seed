@@ -2,12 +2,19 @@
 
 .ham-push-message-form {
 	.ham-top {
-		align-items: center;
-		display: flex;
-		justify-content: space-between;
+		position: relative;
 
 		h4 {
-			height: 36px;
+			min-height: 36px;
+			padding-right: 35px;
+			word-break: break-all;
+		}
+		
+		.ham-icon {
+			cursor: pointer;
+			position: absolute;
+			right: 0;
+			top: 0;
 		}
 	}
 
@@ -136,6 +143,12 @@
 	@include cd-media(desktop, tablet) {
 		.ham-tabs {
 			.ham-form {
+				.ham-state {
+					position: static;
+					margin-bottom: 10px;
+					text-align: right;
+				}
+
 				.ham-custom-wrapper {
 					.cd-row {
 						.cd-col {
@@ -186,6 +199,11 @@
 	@include cd-media(desktop, mini) {
 		.ham-tabs {
 			.ham-form {
+				.ham-state {
+					margin-bottom: 15px;
+					text-align: left;
+				}
+
 				.ham-buttons {
 					display: block;
 

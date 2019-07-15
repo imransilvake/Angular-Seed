@@ -47,6 +47,7 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 		Guest_Notifications_List_Hotel: { serviceUrl: '/notification/guest/list/group/:groupId/hotel/:hotelId' },
 		Guest_Notifications_Remove_Hotel: { serviceUrl: '/notification/guest/delete/group/:groupId/hotel/:hotelId' },
 		Guest_Notifications_Form_Group: { serviceUrl: '/config/group/:groupId' },
+		Guest_Notifications_Form_Create_Hotel: { serviceUrl: '/notification/guest/create/group/:groupId/hotel/:hotelId' }
 	},
 	Notifications: {
 		Notifications_List_Hotel: { serviceUrl: '/notification/list/group/:groupId/hotel/:hotelId' },
