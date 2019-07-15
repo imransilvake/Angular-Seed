@@ -242,8 +242,8 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 		const formData = this.formFields.getRawValue();
 
 		// title & description
-		let title = {};
-		let description = {};
+		const title = {};
+		const description = {};
 		if (this.tabsList && this.tabsList.length) {
 			for (let i = 0; i < this.tabsList.length; i++) {
 				title[this.tabsList[i].id] = formData.languages[i].title;
@@ -252,9 +252,9 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 		}
 
 		// date and time
-		let trigger = (this.dateTimeButton) ? 'ADHOC' : this.periodically.value.id;
+		const trigger = (this.dateTimeButton) ? 'ADHOC' : this.periodically.value.id;
 		let sendDate = null;
-		let expDate = null;
+		const expDate = null;
 		if (this.dateTimeButton) {
 			const dateStr = this.date.value,
 				timeStr = this.time.value,
@@ -285,7 +285,7 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 			HotelID: this.hotels.value.map(hotel => hotel.id),
 			Access: this.access.value
 		};
-		console.log(formData);
+
 		console.log(formPayload);
 	}
 
