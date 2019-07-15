@@ -34,9 +34,11 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 	public minDate = moment(moment()).add(1, 'days').toDate();
 	public title = 'Form';
 	public errorMessage;
+
 	public loading = false;
 	public staticColors = ['#3e9d2e', '#d2a41a', '#e74c3c'];
 	public dateTimeButton = false;
+
 	public selectTypeDefault = SelectTypeEnum.DEFAULT;
 	public guestPeriodsList: SelectDefaultInterface[] = [];
 	public hotelsList: SelectDefaultInterface[] = [];
@@ -66,22 +68,41 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 			]),
 			targetGroups: new FormControl('', [
 				Validators.required
-			])
+			]),
+			access: new FormControl(false)
 		});
 	}
 
 	ngOnInit() {
+		// listen: get hotels
+		this._utilityService.getHotelList()
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => {
+					// set hotels
+					this.hotelsList = res;
+
+					// pre-select hotels
+					if (this.data && this.data.HotelIDs) {
+						const hotels = this.formFields.controls['hotels'];
+						const selectedHotels = [];
+						for (let i = 0; i < this.data.HotelIDs.length; i++) {
+							selectedHotels.push(
+								...this.hotelsList.filter(
+									target => target.id === this.data.HotelIDs[i]
+								)
+							);
+						}
+						hotels.setValue(selectedHotels);
+					}
+				}
+			);
+
 		// get periods list
 		this.guestPeriodsList = this._utilityService.getGuestPeriods();
 		this.guestPeriodsList.shift();
 
 		// target groups list
 		this.targetGroupsList = this._utilityService.getTargetGroups();
-
-		// listen: get hotels
-		this._utilityService.getHotelList()
-			.pipe(takeUntil(this._ngUnSubscribe))
-			.subscribe(res => this.hotelsList = res);
 
 		// languages
 		this.systemLanguages = this._utilityService.getSystemLanguageList();
@@ -117,23 +138,20 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 						const link = this.formFields.controls['link'];
 						const color = this.formFields.controls['color'];
 						const targetGroups = this.formFields.controls['targetGroups'];
-						const hotels = this.formFields.controls['hotels'];
+						const periodically = this.formFields.controls['periodically'];
 						const selectedGroups = this.targetGroupsList.filter(
 							target => target.id === this.data['Target Group']
 						);
-						const selectedHotels = [];
-						for (let i = 0; i < this.data.HotelIDs.length; i++) {
-							selectedHotels.push(
-								...this.hotelsList.filter(
-								target => target.id === this.data.HotelIDs[i]
-								)
-							);
-						}
+						const selectedPeriod = this.guestPeriodsList.filter(
+							target => target.id === this.data['Trigger']
+						);
 
 						link.setValue(this.data.Data.Link);
 						color.setValue(this.data.Data.Colour);
 						targetGroups.setValue(...selectedGroups);
-						hotels.setValue(selectedHotels);
+						periodically.setValue(...selectedPeriod);
+
+						console.log(this.data);
 					}
 				}
 			});
@@ -180,7 +198,7 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 	 * on submit form
 	 */
 	public onSubmitForm() {
-		console.log(this.formFields);
+		console.log(this.formFields.getRawValue());
 	}
 
 	/**

@@ -82,6 +82,11 @@
 			.ham-buttons {
 				margin-top: 20px;
 
+				.ham-access {
+					align-items: center;
+					display: flex;
+				}
+
 				p {
 					color: cd-palette($cd-color, 1009);
 				}
@@ -163,6 +168,7 @@
 					.cd-col {
 						display:flex;
 						flex-direction: column-reverse;
+						margin-bottom: 10px;
 
 						p {
 							margin-bottom: 10px;
