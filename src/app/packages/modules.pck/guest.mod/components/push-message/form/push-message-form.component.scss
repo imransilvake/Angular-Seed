@@ -15,6 +15,30 @@
 		margin-top: 30px;
 
 		.ham-form {
+			position: relative;
+
+			.ham-state {
+				cursor: pointer;
+				height: 40px;
+				line-height: cd-lineHeight(1);
+				position: absolute;
+				right: 150px;
+				top: -5px;
+				z-index: cd-zIndex(float);
+
+				.ham-icon {
+					font-size: cd-fontSize(s40);
+
+					&.ham-green {
+						color: cd-palette($cd-color, 1007);
+					}
+
+					&.ham-orange {
+						color: cd-palette($cd-color, 1011);
+					}
+				}
+			}
+
 			.cd-row {
 				&:not(:last-child) {
 					margin-bottom: 20px;

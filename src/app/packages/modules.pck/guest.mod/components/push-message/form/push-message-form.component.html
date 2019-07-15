@@ -10,30 +10,22 @@
 	<!-- Tabs -->
 	<div class="ham-tabs">
 		<form class="ham-block ham-form" (ngSubmit)="onSubmitForm()">
-			<!-- Multi-Language Fields -->
-			<ng-container *ngIf="formArray.length > 1">
-				<mat-tab-group class="ham-tabs-1" [@.disabled]="true" (selectedTabChange)="onChangeTab($event)">
-					<mat-tab *ngFor="let tab of formArray; let idx=index;" [label]="tabsList[idx].text">
-						<app-push-message-language-fields
-							[language]="tabsList[idx].id"
-							[data]="data"
-							[multiLanguageFields]="tab"
-							(changeFormTitle)="title = $event">
-						</app-push-message-language-fields>
-					</mat-tab>
-				</mat-tab-group>
-			</ng-container>
+			<div class="ham-state" (click)="onClickToggleState()">
+				<fa-icon class="ham-icon ham-green" [icon]="faIcons[1]" *ngIf="isState"></fa-icon>
+				<fa-icon class="ham-icon ham-orange" [icon]="faIcons[2]" *ngIf="!isState"></fa-icon>
+			</div>
 
-			<ng-container *ngIf="formArray.length <= 1">
-				<form class="ham-block ham-form" (ngSubmit)="onSubmitForm()">
+			<!-- Multi-Language Fields | Tabs -->
+			<mat-tab-group class="ham-tabs-1" [@.disabled]="true" (selectedTabChange)="onChangeTab($event)">
+				<mat-tab *ngFor="let tab of formArray; let idx=index;" [label]="tabsList[idx].text">
 					<app-push-message-language-fields
-						[language]="'en'"
+						[language]="tabsList[idx].id"
 						[data]="data"
-						[multiLanguageFields]="formArray[0]"
+						[multiLanguageFields]="tab"
 						(changeFormTitle)="title = $event">
 					</app-push-message-language-fields>
-				</form>
-			</ng-container>
+				</mat-tab>
+			</mat-tab-group>
 
 			<!-- Common Fields -->
 			<div class="cd-row ham-padding-0">
@@ -76,9 +68,9 @@
 							</div>
 
 							<div class="ham-field">
-								<mat-radio-button [checked]="true" [value]="'date'"></mat-radio-button>
+								<mat-radio-button [checked]="dateTimeButton" [value]="'date'"></mat-radio-button>
 								<div class="ham-date-time">
-									<div class="ham-date" [class.ham-disabled]="dateTimeButton">
+									<div class="ham-date" [class.ham-disabled]="!dateTimeButton">
 										<app-datepicker
 											[inputId]="'guest-push-notification-date-id'"
 											[inputType]="'text'"
@@ -106,7 +98,7 @@
 										class="ham-button ham-button-1"
 										i18n="@@Guest_Push_Message_Form_Date_Button_Now"
 										(click)="onClickSetDateTimeNow()"
-										[disabled]="dateTimeButton">
+										[disabled]="!dateTimeButton">
 										Now
 									</button>
 								</div>
@@ -124,7 +116,7 @@
 							</div>
 
 							<div class="ham-field">
-								<mat-radio-button [value]="'periodic'"></mat-radio-button>
+								<mat-radio-button [checked]="!dateTimeButton" [value]="'periodic'"></mat-radio-button>
 								<div class="ham-periodic">
 									<app-select
 										[selectType]="selectTypeDefault"
@@ -189,6 +181,8 @@
 				<div class="cd-col cd-col-pm-s-6 ham-access">
 					<mat-slide-toggle
 						class="mat-slide-toggle-1"
+						[checked]="isAccess"
+						(change)="onClickToggleAccess()"
 						[formControl]="formFields.controls['access']">
 					</mat-slide-toggle>
 					<span i18n="@@Guest_Push_Message_Form_Access">HotelManager can edit and delete</span>
@@ -197,9 +191,8 @@
 					<button mat-button type="button" class="ham-button ham-button-1" (click)="onClickCloseForm()"
 							i18n="@@Guest_Push_Message_Form_Cancel_Button">Cancel
 					</button>
-					<button mat-button type="submit" class="ham-button ham-button-1" [disabled]="!isFormValid || loading">
-						<fa-icon class="fa-icon" [icon]="faIcons[0]" [spin]="true" *ngIf="loading"></fa-icon>
-						<span i18n="@@Guest_Push_Message_Form_Save_Button" *ngIf="!loading">Save</span>
+					<button mat-button type="submit" class="ham-button ham-button-1" [disabled]="!isFormValid">
+						<span i18n="@@Guest_Push_Message_Form_Save_Button">Save</span>
 					</button>
 				</div>
 			</div>

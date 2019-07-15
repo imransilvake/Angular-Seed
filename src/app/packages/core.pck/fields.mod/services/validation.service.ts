@@ -120,7 +120,7 @@ export class ValidationService {
 	static urlValidator(control: FormControl) {
 		const value = control.value;
 
-		if (value && value.match(patterns.url)) {
+		if (!value || value && value.match(patterns.url)) {
 			return null;
 		}
 
@@ -135,7 +135,7 @@ export class ValidationService {
 	static timeValidator(control: FormControl) {
 		const value = control.value;
 
-		if (value && value.match(patterns.time)) {
+		if (!value || value && value.match(patterns.time)) {
 			return null;
 		}
 

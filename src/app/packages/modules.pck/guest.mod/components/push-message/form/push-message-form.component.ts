@@ -6,7 +6,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 
 // app
 import * as moment from 'moment';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faPauseCircle, faPlayCircle, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { AppViewTypeEnum } from '../../../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
 import { GuestPushMessageViewInterface } from '../../../interfaces/guest-push-message-view.interface';
 import { PushMessageService } from '../../../services/push-message.service';
@@ -14,6 +14,7 @@ import { UtilityService } from '../../../../../utilities.pck/accessories.mod/ser
 import { ValidationService } from '../../../../../core.pck/fields.mod/services/validation.service';
 import { SelectTypeEnum } from '../../../../../core.pck/fields.mod/enums/select-type.enum';
 import { SelectDefaultInterface } from '../../../../../core.pck/fields.mod/interfaces/select-default-interface';
+import { PushMessageInterface } from '../../../interfaces/push-message.interface';
 
 @Component({
 	selector: 'app-push-message-form',
@@ -26,18 +27,19 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 	@Input() id;
 	@Input() data;
 
-	public faIcons = [faSpinner];
+	public faIcons = [faSpinner, faPlayCircle, faPauseCircle];
 	public formFields;
 	public systemLanguages;
 	public systemInfo;
 	public tabsList = [];
-	public minDate = moment(moment()).add(1, 'days').toDate();
+	public minDate = moment().toDate();
 	public title = 'Form';
 	public errorMessage;
 
-	public loading = false;
 	public staticColors = ['#3e9d2e', '#d2a41a', '#e74c3c'];
 	public dateTimeButton = false;
+	public isAccess = false;
+	public isState = false;
 
 	public selectTypeDefault = SelectTypeEnum.DEFAULT;
 	public guestPeriodsList: SelectDefaultInterface[] = [];
@@ -54,15 +56,15 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 		// form group
 		this.formFields = new FormGroup({
 			languages: this._formBuilder.array([]),
-			state: new FormControl(false),
+			state: new FormControl('INACTIVE'),
 			link: new FormControl('', [ValidationService.urlValidator]),
 			color: new FormControl(this.staticColors[0]),
-			date: new FormControl({ value: '', disabled: true }),
+			date: new FormControl(''),
 			time: new FormControl('', [ValidationService.timeValidator]),
-			periodically: new FormControl({ value: '', disabled: true }),
+			periodically: new FormControl(''),
 			hotels: new FormControl('', [Validators.required]),
 			targetGroups: new FormControl('', [Validators.required]),
-			access: new FormControl(false)
+			access: new FormControl('HOTEL')
 		});
 	}
 
@@ -75,8 +77,8 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 					this.hotelsList = res;
 
 					// pre-select hotels
+					this.hotels.setValue([]);
 					if (this.data && this.data.HotelIDs) {
-						const hotels = this.formFields.controls['hotels'];
 						const selectedHotels = [];
 						for (let i = 0; i < this.data.HotelIDs.length; i++) {
 							selectedHotels.push(
@@ -85,7 +87,7 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 								)
 							);
 						}
-						hotels.setValue(selectedHotels);
+						this.hotels.setValue(selectedHotels);
 					}
 				}
 			);
@@ -128,11 +130,6 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 
 					// update form with existing data
 					if (this.data) {
-						const link = this.formFields.controls['link'];
-						const color = this.formFields.controls['color'];
-						const targetGroups = this.formFields.controls['targetGroups'];
-						const periodically = this.formFields.controls['periodically'];
-						const access = this.formFields.controls['access'];
 						const selectedGroups = this.targetGroupsList.filter(
 							target => target.id === this.data['Target Group']
 						);
@@ -140,13 +137,26 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 							target => target.id === this.data['Trigger']
 						);
 
-						link.setValue(this.data.Data.Link);
-						color.setValue(this.data.Data.Colour);
-						targetGroups.setValue(...selectedGroups);
-						periodically.setValue(...selectedPeriod);
-						access.setValue(this.data.Access && this.data.Access.toLowerCase() === 'group');
+						this.link.setValue(this.data.Data.Link);
+						this.color.setValue(this.data.Data.Colour);
+						this.targetGroups.setValue(...selectedGroups);
+						this.periodically.setValue(...selectedPeriod);
+						this.access.setValue(this.data.Access);
+						this.isAccess = this.data.Access.toLowerCase() === 'group';
+						this.state.setValue(this.data.State);
+						this.isState = this.data.State.toLowerCase() === 'active';
 
-						console.log(this.data);
+						if (this.data.Trigger.toLowerCase() === 'adhoc') {
+							this.periodically.disable();
+							this.time.enable();
+							this.dateTimeButton = true;
+						} else {
+							this.periodically.enable();
+							this.time.disable();
+							this.dateTimeButton = false;
+						}
+					} else {
+						this.periodically.setValue(this.guestPeriodsList[0]);
 					}
 				}
 			});
@@ -163,6 +173,42 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 	 */
 	get formArray() {
 		return <FormArray>this.formFields.controls.languages.controls;
+	}
+
+	get state() {
+		return this.formFields.get('state');
+	}
+
+	get link() {
+		return this.formFields.get('link');
+	}
+
+	get color() {
+		return this.formFields.get('color');
+	}
+
+	get targetGroups() {
+		return this.formFields.get('targetGroups');
+	}
+
+	get periodically() {
+		return this.formFields.get('periodically');
+	}
+
+	get access() {
+		return this.formFields.get('access');
+	}
+
+	get hotels() {
+		return this.formFields.get('hotels');
+	}
+
+	get date() {
+		return this.formFields.get('date');
+	}
+
+	get time() {
+		return this.formFields.get('time');
 	}
 
 	get isFormValid() {
@@ -193,7 +239,54 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 	 * on submit form
 	 */
 	public onSubmitForm() {
-		console.log(this.formFields.getRawValue());
+		const formData = this.formFields.getRawValue();
+
+		// title & description
+		let title = {};
+		let description = {};
+		if (this.tabsList && this.tabsList.length) {
+			for (let i = 0; i < this.tabsList.length; i++) {
+				title[this.tabsList[i].id] = formData.languages[i].title;
+				description[this.tabsList[i].id] = formData.languages[i].description;
+			}
+		}
+
+		// date and time
+		let trigger = (this.dateTimeButton) ? 'ADHOC' : this.periodically.value.id;
+		let sendDate = null;
+		let expDate = null;
+		if (this.dateTimeButton) {
+			const dateStr = this.date.value,
+				timeStr = this.time.value,
+				date = moment(dateStr),
+				time = moment(timeStr, 'HH:mm');
+
+			date.set({
+				hour: time.get('hour'),
+				minute: time.get('minute'),
+				second: time.get('second')
+			});
+
+			// utc format
+			sendDate = date.utc().format();
+		}
+
+		const formPayload: PushMessageInterface = {
+			Type: 'NOTIFICATION',
+			State: this.state.value,
+			Title: title,
+			Text: description,
+			Link: this.link.value,
+			Colour: this.color.value,
+			Trigger: trigger,
+			SendDate: sendDate,
+			ExpDate: expDate,
+			Targets: [this.targetGroups.value.id],
+			HotelID: this.hotels.value.map(hotel => hotel.id),
+			Access: this.access.value
+		};
+		console.log(formData);
+		console.log(formPayload);
 	}
 
 	/**
@@ -222,19 +315,18 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 	 * @param radioEvent
 	 */
 	public onChangeDateTimeAndPeriodically(radioEvent: any) {
-		const time = this.formFields.controls['time'];
-		const periodically = this.formFields.controls['periodically'];
-
 		if (radioEvent.value === 'date') {
-			time.enable();
-			periodically.disable();
-			this.dateTimeButton = false;
+			this.date.enable();
+			this.time.enable();
+			this.periodically.disable();
+			this.dateTimeButton = true;
 		}
 
 		if (radioEvent.value === 'periodic') {
-			time.disable();
-			periodically.enable();
-			this.dateTimeButton = true;
+			this.date.disable();
+			this.time.disable();
+			this.periodically.enable();
+			this.dateTimeButton = false;
 		}
 	}
 
@@ -242,9 +334,31 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 	 * set current date and time
 	 */
 	public onClickSetDateTimeNow() {
-		const date = this.formFields.controls['date'];
-		const time = this.formFields.controls['time'];
-		date.setValue(moment().toDate());
-		time.setValue(moment().format('HH:mm'));
+		this.date.setValue(moment().toDate());
+		this.time.setValue(moment().format('HH:mm'));
+	}
+
+	/**
+	 * toggle state
+	 */
+	public onClickToggleState() {
+		// toggle state
+		this.isState = !this.isState;
+		const state = (this.isState) ? 'ACTIVE' : 'INACTIVE';
+
+		// update to form
+		this.state.setValue(state);
+	}
+
+	/**
+	 * toggle access
+	 */
+	public onClickToggleAccess() {
+		// toggle access
+		this.isAccess = !this.isAccess;
+		const access = (this.isAccess) ? 'GROUP' : 'HOTEL';
+
+		// update to form
+		this.access.setValue(access);
 	}
 }
