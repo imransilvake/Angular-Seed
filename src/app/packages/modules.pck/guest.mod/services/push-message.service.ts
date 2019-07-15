@@ -147,7 +147,26 @@ export class PushMessageService {
 					// service
 					this._proxyService
 						.postAPI(AppServices['Guest']['Guest_Notifications_Remove_Hotel'], payload)
-						.subscribe(() => refreshEmitter.emit());
+						.subscribe(() => {
+							// payload
+							const dialogPayload = {
+								type: DialogTypeEnum.NOTICE,
+								payload: {
+									title: this._i18n({ value: 'Title: Push Message Deleted', id: 'Guest_Push_Message_Form_Success_Deleted_Title' }),
+									message: this._i18n({
+										value: 'Description: Push Message Deleted',
+										id: 'Guest_Push_Message_Form_Success_Deleted_Description'
+									}),
+									icon: 'dialog_tick',
+									buttonTexts: [this._i18n({ value: 'Button - OK', id: 'Common_Button_OK' })]
+								}
+							};
+
+							// listen: dialog service
+							this._dialogService
+								.showDialog(dialogPayload)
+								.subscribe(() => refreshEmitter.emit());
+						});
 				}
 			});
 	}
@@ -195,7 +214,7 @@ export class PushMessageService {
 				groupId: this.appState.groupId,
 				hotelId: this.appState.hotelId
 			},
-			bodyParams: { formPayload }
+			bodyParams: formPayload
 		};
 
 		// service
