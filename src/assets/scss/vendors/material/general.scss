@@ -12,8 +12,10 @@
 			overflow: auto;
 			width: 100% !important;
 
-			.mat-dialog-container {
-				background-color: cd-palette($cd-background, 2002);
+			&.ham-custom-bg {
+				.mat-dialog-container {
+					background-color: cd-palette($cd-background, 2002);
+				}
 			}
 		}
 	}

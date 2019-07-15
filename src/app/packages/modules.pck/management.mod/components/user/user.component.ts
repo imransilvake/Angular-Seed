@@ -55,7 +55,8 @@ export class UserComponent implements OnDestroy {
 		const modal = this._dialog.open(UserFormComponent, {
 			disableClose: true,
 			width: '700px',
-			data: this.data
+			data: this.data,
+			panelClass: 'ham-custom-bg'
 		});
 
 		// modal after closed
