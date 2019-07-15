@@ -524,7 +524,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 						newItem = {
 							...newItem,
 							Sent: date
-						}
+						};
 					}
 
 					// Target Group
@@ -538,7 +538,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
 					// Period
 					if (item.hasOwnProperty('Trigger')) {
-						const period = item.Trigger ? this._utilityService.getGuestPeriods().filter(period => period.id === item.Trigger)[0].text : '-';
+						const period = item.Trigger ? this._utilityService.getGuestPeriods().filter(periodItem => periodItem.id === item.Trigger)[0].text : '-';
 						newItem = {
 							...newItem,
 							Period: period
@@ -553,7 +553,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 						newItem = {
 							...newItem,
 							Validity: `${createDate} - ${expDate}`
-						}
+						};
 					}
 
 					// Title
@@ -561,7 +561,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 						newItem = {
 							...newItem,
 							Title: item.Title[language]
-						}
+						};
 					}
 
 					// update data source

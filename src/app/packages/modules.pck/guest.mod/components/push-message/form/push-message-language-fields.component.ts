@@ -1,5 +1,5 @@
 // angular
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
@@ -9,7 +9,7 @@ import { Subject } from 'rxjs';
 	styleUrls: ['./push-message-language-fields.component.scss']
 })
 
-export class PushMessageLanguageFieldsComponent implements OnInit {
+export class PushMessageLanguageFieldsComponent implements OnInit, OnDestroy {
 	@Output() changeFormTitle: EventEmitter<any> = new EventEmitter();
 
 	@Input() language;
@@ -26,6 +26,8 @@ export class PushMessageLanguageFieldsComponent implements OnInit {
 			// update form with existing data
 			if (this.data) {
 				title.setValue(this.data.Title);
+				this.changeFormTitle.emit(this.data.Title);
+
 				text.setValue(this.data.Text[this.language]);
 			}
 

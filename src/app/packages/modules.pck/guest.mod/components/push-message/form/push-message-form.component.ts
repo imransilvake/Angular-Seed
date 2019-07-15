@@ -54,21 +54,14 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 		// form group
 		this.formFields = new FormGroup({
 			languages: this._formBuilder.array([]),
-			link: new FormControl('', [
-				ValidationService.urlValidator
-			]),
+			state: new FormControl(false),
+			link: new FormControl('', [ValidationService.urlValidator]),
 			color: new FormControl(this.staticColors[0]),
 			date: new FormControl({ value: '', disabled: true }),
-			time: new FormControl('', [
-				ValidationService.timeValidator
-			]),
+			time: new FormControl('', [ValidationService.timeValidator]),
 			periodically: new FormControl({ value: '', disabled: true }),
-			hotels: new FormControl('', [
-				Validators.required
-			]),
-			targetGroups: new FormControl('', [
-				Validators.required
-			]),
+			hotels: new FormControl('', [Validators.required]),
+			targetGroups: new FormControl('', [Validators.required]),
 			access: new FormControl(false)
 		});
 	}
@@ -139,6 +132,7 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 						const color = this.formFields.controls['color'];
 						const targetGroups = this.formFields.controls['targetGroups'];
 						const periodically = this.formFields.controls['periodically'];
+						const access = this.formFields.controls['access'];
 						const selectedGroups = this.targetGroupsList.filter(
 							target => target.id === this.data['Target Group']
 						);
@@ -150,6 +144,7 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 						color.setValue(this.data.Data.Colour);
 						targetGroups.setValue(...selectedGroups);
 						periodically.setValue(...selectedPeriod);
+						access.setValue(this.data.Access && this.data.Access.toLowerCase() === 'group');
 
 						console.log(this.data);
 					}
