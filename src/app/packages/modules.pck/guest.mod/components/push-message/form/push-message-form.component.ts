@@ -300,7 +300,9 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 			expDate = this.prepareUTCFromDateTime(this.periodicTime.controls['date'], this.periodicTime.controls['time']);
 		}
 
+		const id = (!!this.data) ? {ID: this.data.ID} : {};
 		const formPayload: PushMessageInterface = {
+			...id,
 			Type: 'NOTIFICATION',
 			State: this.state.value,
 			Title: title,

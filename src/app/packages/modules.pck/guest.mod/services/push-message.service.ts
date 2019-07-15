@@ -206,7 +206,7 @@ export class PushMessageService {
 		this._loadingAnimationService.startLoadingAnimation();
 
 		// api
-		const api = AppServices['Guest']['Guest_Notifications_Form_Create_Hotel'];
+		const api = isEditForm ? AppServices['Guest']['Guest_Notifications_Form_Update_Hotel'] : AppServices['Guest']['Guest_Notifications_Form_Create_Hotel'];
 
 		// payload
 		let payload: any = {

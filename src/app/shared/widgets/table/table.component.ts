@@ -560,7 +560,8 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 					if (item.hasOwnProperty('Title') && this._router.url === `/${ ROUTING.guest.routes.pushMessage }`) {
 						newItem = {
 							...newItem,
-							Title: item.Title[language]
+							Title: item.Title[language],
+							Titles: item.Title
 						};
 					}
 

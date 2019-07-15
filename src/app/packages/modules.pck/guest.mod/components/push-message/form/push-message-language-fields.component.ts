@@ -25,8 +25,8 @@ export class PushMessageLanguageFieldsComponent implements OnInit, OnDestroy {
 
 			// update form with existing data
 			if (this.data) {
-				title.setValue(this.data.Title);
-				this.changeFormTitle.emit(this.data.Title);
+				title.setValue(this.data.Titles[this.language]);
+				this.changeFormTitle.emit(this.data.Titles[this.language]);
 
 				text.setValue(this.data.Text[this.language]);
 			}
