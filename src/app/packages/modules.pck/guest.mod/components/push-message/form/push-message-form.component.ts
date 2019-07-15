@@ -53,14 +53,30 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 		private _utilityService: UtilityService,
 		private _formBuilder: FormBuilder
 	) {
+		// get periods list
+		this.guestPeriodsList = this._utilityService.getGuestPeriods();
+		this.guestPeriodsList.shift();
+
+		// target groups list
+		this.targetGroupsList = this._utilityService.getTargetGroups();
+
+		// languages
+		this.systemLanguages = this._utilityService.getSystemLanguageList();
+
 		// form group
 		this.formFields = new FormGroup({
 			languages: this._formBuilder.array([]),
 			state: new FormControl('INACTIVE'),
 			link: new FormControl('', [ValidationService.urlValidator]),
 			color: new FormControl(this.staticColors[0]),
-			date: new FormControl(''),
-			time: new FormControl('', [ValidationService.timeValidator]),
+			oneTime: new FormGroup({
+				date: new FormControl(''),
+				time: new FormControl('', [ValidationService.timeValidator])
+			}),
+			periodicTime: new FormGroup({
+				date: new FormControl(''),
+				time: new FormControl('', [ValidationService.timeValidator])
+			}),
 			periodically: new FormControl(''),
 			hotels: new FormControl('', [Validators.required]),
 			targetGroups: new FormControl('', [Validators.required]),
@@ -92,16 +108,6 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 				}
 			);
 
-		// get periods list
-		this.guestPeriodsList = this._utilityService.getGuestPeriods();
-		this.guestPeriodsList.shift();
-
-		// target groups list
-		this.targetGroupsList = this._utilityService.getTargetGroups();
-
-		// languages
-		this.systemLanguages = this._utilityService.getSystemLanguageList();
-
 		// listen: fetch form languages
 		this._pushMessageService.dataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
@@ -128,34 +134,67 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 						this.addLanguageSpecificFields();
 					}
 
-					// update form with existing data
+					// update existing data
 					if (this.data) {
-						const selectedGroups = this.targetGroupsList.filter(
-							target => target.id === this.data['Target Group']
-						);
-						const selectedPeriod = this.guestPeriodsList.filter(
-							target => target.id === this.data['Trigger']
-						);
-
+						// link, color
 						this.link.setValue(this.data.Data.Link);
 						this.color.setValue(this.data.Data.Colour);
-						this.targetGroups.setValue(...selectedGroups);
-						this.periodically.setValue(...selectedPeriod);
+
+						// access, state
 						this.access.setValue(this.data.Access);
 						this.isAccess = this.data.Access.toLowerCase() === 'group';
 						this.state.setValue(this.data.State);
 						this.isState = this.data.State.toLowerCase() === 'active';
 
+						// target groups and period
+						const selectedGroups = this.targetGroupsList.filter(target => target.id === this.data['Target Group']);
+						const selectedPeriod = this.guestPeriodsList.filter(target => target.id === this.data['Trigger']);
+
+						if (selectedGroups.length) {
+							this.targetGroups.setValue(...selectedGroups);
+						} else {
+							this.targetGroups.setValue(this.targetGroupsList[0]);
+						}
+
+						if (selectedPeriod.length) {
+							this.periodically.setValue(...selectedPeriod);
+						} else {
+							this.periodically.setValue(this.guestPeriodsList[0]);
+						}
+
+						// trigger
 						if (this.data.Trigger.toLowerCase() === 'adhoc') {
 							this.periodically.disable();
-							this.time.enable();
+							this.oneTime.controls['time'].enable();
+							this.periodicTime.controls['time'].disable();
 							this.dateTimeButton = true;
 						} else {
 							this.periodically.enable();
-							this.time.disable();
+							this.oneTime.controls['time'].disable();
+							this.periodicTime.controls['time'].enable();
 							this.dateTimeButton = false;
 						}
+
+						// send date
+						if (this.data.SendDate) {
+							const date = moment(this.data.SendDate).toDate();
+							const time = moment(this.data.SendDate).format('HH:mm');
+							this.oneTime.controls['date'].setValue(date);
+							this.oneTime.controls['time'].setValue(time);
+						}
+
+						// expire date
+						if (this.data.ExpDate) {
+							const date = moment(this.data.ExpDate).toDate();
+							const time = moment(this.data.ExpDate).format('HH:mm');
+							this.periodicTime.controls['date'].setValue(date);
+							this.periodicTime.controls['time'].setValue(time);
+						}
 					} else {
+						// send date
+						this.onClickSetDateTimeNow();
+
+						// set first value
 						this.periodically.setValue(this.guestPeriodsList[0]);
 					}
 				}
@@ -203,12 +242,12 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 		return this.formFields.get('hotels');
 	}
 
-	get date() {
-		return this.formFields.get('date');
+	get oneTime() {
+		return this.formFields.get('oneTime');
 	}
 
-	get time() {
-		return this.formFields.get('time');
+	get periodicTime() {
+		return this.formFields.get('periodicTime');
 	}
 
 	get isFormValid() {
@@ -254,21 +293,11 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 		// date and time
 		const trigger = (this.dateTimeButton) ? 'ADHOC' : this.periodically.value.id;
 		let sendDate = null;
-		const expDate = null;
+		let expDate = null;
 		if (this.dateTimeButton) {
-			const dateStr = this.date.value,
-				timeStr = this.time.value,
-				date = moment(dateStr),
-				time = moment(timeStr, 'HH:mm');
-
-			date.set({
-				hour: time.get('hour'),
-				minute: time.get('minute'),
-				second: time.get('second')
-			});
-
-			// utc format
-			sendDate = date.utc().format();
+			sendDate = this.prepareUTCFromDateTime(this.oneTime.controls['date'], this.oneTime.controls['time']);
+		} else {
+			expDate = this.prepareUTCFromDateTime(this.periodicTime.controls['date'], this.periodicTime.controls['time']);
 		}
 
 		const formPayload: PushMessageInterface = {
@@ -317,15 +346,19 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 	 */
 	public onChangeDateTimeAndPeriodically(radioEvent: any) {
 		if (radioEvent.value === 'date') {
-			this.date.enable();
-			this.time.enable();
+			this.oneTime.controls['date'].enable();
+			this.oneTime.controls['time'].enable();
+			this.periodicTime.controls['date'].disable();
+			this.periodicTime.controls['time'].disable();
 			this.periodically.disable();
 			this.dateTimeButton = true;
 		}
 
 		if (radioEvent.value === 'periodic') {
-			this.date.disable();
-			this.time.disable();
+			this.oneTime.controls['date'].disable();
+			this.oneTime.controls['time'].disable();
+			this.periodicTime.controls['date'].enable();
+			this.periodicTime.controls['time'].enable();
 			this.periodically.enable();
 			this.dateTimeButton = false;
 		}
@@ -335,8 +368,8 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 	 * set current date and time
 	 */
 	public onClickSetDateTimeNow() {
-		this.date.setValue(moment().toDate());
-		this.time.setValue(moment().format('HH:mm'));
+		this.oneTime.controls['date'].setValue(moment().toDate());
+		this.oneTime.controls['time'].setValue(moment().format('HH:mm'));
 	}
 
 	/**
@@ -361,5 +394,24 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 
 		// update to form
 		this.access.setValue(access);
+	}
+
+	/**
+	 * prepare utc from date and time
+	 */
+	private prepareUTCFromDateTime(date: any, time: any) {
+		const dateStr = date.value,
+			timeStr = time.value,
+			d = moment(dateStr),
+			t = moment(timeStr, 'HH:mm');
+
+		d.set({
+			hour: t.get('hour'),
+			minute: t.get('minute'),
+			second: t.get('second')
+		});
+
+		// utc format
+		return d.utc().format();
 	}
 }

@@ -39,7 +39,7 @@
 						[inputName]="'link'"
 						inputPlaceHolder="Link"
 						i18n-inputPlaceHolder="@@Guest_Push_Message_Form_Link_PlaceHolder"
-						[control]="formFields.controls['link']">
+						[control]="link">
 					</app-input>
 				</div>
 			</div>
@@ -47,7 +47,7 @@
 			<div class="cd-row ham-padding-0">
 				<h6 class="ham-color-label" i18n="@@Guest_Push_Message_Form_Color_Label">Color</h6>
 				<div class="cd-col">
-					<mat-radio-group class="mat-radio-group-2" [formControl]="formFields.controls['color']">
+					<mat-radio-group class="mat-radio-group-2" [formControl]="color">
 						<mat-radio-button [value]="staticColors[0]"></mat-radio-button>
 						<mat-radio-button [value]="staticColors[1]"></mat-radio-button>
 						<mat-radio-button [value]="staticColors[2]"></mat-radio-button>
@@ -78,7 +78,7 @@
 											inputPlaceHolder="Date"
 											i18n-inputPlaceHolder="@@Guest_Push_Message_Form_Date_PlaceHolder"
 											[minDate]="minDate"
-											[control]="formFields.controls['date']">
+											[control]="oneTime.controls['date']">
 										</app-datepicker>
 									</div>
 									<div class="ham-time">
@@ -87,7 +87,7 @@
 											[inputType]="'time'"
 											[inputName]="'time'"
 											[inputPlaceHolder]="'hh:mm'"
-											[control]="formFields.controls['time']">
+											[control]="oneTime.controls['time']">
 										</app-input>
 									</div>
 								</div>
@@ -124,8 +124,33 @@
 										selectPlaceHolder="Periodically"
 										i18n-selectPlaceHolder="@@Guest_Push_Message_Form_Periodic_PlaceHolder"
 										[dataDefault]="guestPeriodsList"
-										[control]="formFields.controls['periodically']">
+										[control]="periodically">
 									</app-select>
+								</div>
+							</div>
+
+							<div class="ham-field ham-periodic-date-time">
+								<div class="ham-date-time">
+									<div class="ham-date" [class.ham-disabled]="dateTimeButton">
+										<app-datepicker
+											[inputId]="'guest-push-notification-date-id'"
+											[inputType]="'text'"
+											[inputName]="'date'"
+											inputPlaceHolder="Date"
+											i18n-inputPlaceHolder="@@Guest_Push_Message_Form_Date_PlaceHolder"
+											[minDate]="minDate"
+											[control]="periodicTime.controls['date']">
+										</app-datepicker>
+									</div>
+									<div class="ham-time">
+										<app-input
+											[inputId]="'guest-push-notification-time-id'"
+											[inputType]="'time'"
+											[inputName]="'time'"
+											[inputPlaceHolder]="'hh:mm'"
+											[control]="periodicTime.controls['time']">
+										</app-input>
+									</div>
 								</div>
 							</div>
 
@@ -151,7 +176,7 @@
 						[showHint]="true"
 						hintText="Hint Text"
 						i18n-hintText="Guest_Push_Message_Form_Target_Groups_Hint"
-						[control]="formFields.controls['targetGroups']">
+						[control]="targetGroups">
 					</app-select>
 				</div>
 				<div class="cd-col cd-col-pm-t-6 cd-col-m-top">
@@ -168,7 +193,7 @@
 						[showHint]="true"
 						hintText="Hint Text"
 						i18n-hintText="Guest_Push_Message_Form_Hotels_Hint"
-						[control]="formFields.controls['hotels']">
+						[control]="hotels">
 					</app-select>
 				</div>
 			</div>
@@ -183,7 +208,7 @@
 						class="mat-slide-toggle-1"
 						[checked]="isAccess"
 						(change)="onClickToggleAccess()"
-						[formControl]="formFields.controls['access']">
+						[formControl]="access">
 					</mat-slide-toggle>
 					<span i18n="@@Guest_Push_Message_Form_Access">HotelManager can edit and delete</span>
 				</div>
