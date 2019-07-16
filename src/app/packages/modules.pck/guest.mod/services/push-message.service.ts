@@ -209,7 +209,7 @@ export class PushMessageService {
 		const api = isEditForm ? AppServices['Guest']['Guest_Notifications_Form_Update_Hotel'] : AppServices['Guest']['Guest_Notifications_Form_Create_Hotel'];
 
 		// payload
-		let payload: any = {
+		const payload: any = {
 			pathParams: {
 				groupId: this.appState.groupId,
 				hotelId: this.appState.hotelId
@@ -251,10 +251,10 @@ export class PushMessageService {
 				this._dialogService
 					.showDialog(dialogPayload)
 					.subscribe(() => {
-						const payload: GuestPushMessageViewInterface = {
+						const viewPayload: GuestPushMessageViewInterface = {
 							view: AppViewTypeEnum.DEFAULT
 						};
-						changePageView.emit(payload);
+						changePageView.emit(viewPayload);
 					});
 			});
 	}
