@@ -176,86 +176,90 @@ export class SessionService {
 				};
 
 				// service
-				this._proxyService
-					.getAPI(AppServices['Notifications']['Notifications_Status'], payload)
-					.subscribe(res => {
-						if (res) {
-							// update total notifications
-							this._authService.notificationLRT.emit(res.total);
+				if (lastRequestTime) {
+					this._proxyService
+						.getAPI(AppServices['Notifications']['Notifications_Status'], payload)
+						.subscribe(res => {
+							if (res) {
+								// update total notifications
+								this._authService.notificationLRT.emit(res.total);
 
-							// payload
-							const notificationPayload = {
-								pathParams: {
-									groupId: appState.groupId,
-									hotelId: (appState.hotelId === appState.groupId || appState.hotelId === 'ANY') ? 'All' : appState.hotelId,
-								},
-								queryParams: {
-									date: lastRequestTime,
-									user: this._authService.currentUserState.profile.email,
-									offset: 0,
-									limit: 20
+								// payload
+								const notificationPayload = {
+									pathParams: {
+										groupId: appState.groupId,
+										hotelId: (appState.hotelId === appState.groupId || appState.hotelId === 'ANY') ? 'All' : appState.hotelId,
+									},
+									queryParams: {
+										date: lastRequestTime,
+										user: this._authService.currentUserState.profile.email,
+										offset: 0,
+										limit: 20
+									}
+								};
+
+								// check admin
+								if (res.admin) {
+									const payloadUpdate = {
+										pathParams: notificationPayload.pathParams,
+										queryParams: {
+											...notificationPayload.queryParams,
+											type: NotificationsFiltersEnums.ADMIN
+										}
+									};
+
+									// service
+									this._proxyService
+										.getAPI(AppServices['Notifications']['Notifications_Alert_Hotel'], payloadUpdate)
+										.subscribe(response => {
+											if (response && response.data) {
+												response.data.forEach(notification => {
+													const storePayload: NotificationPayloadInterface = {
+														text: notification.Message.Text,
+														keepAfterNavigationChange: true,
+														hideCloseButton: true,
+														color: notification.Message.Colour,
+														date: notification.Received
+													};
+													this._store.dispatch(new NotificationActions.NotificationInfo(storePayload));
+												});
+											}
+										});
 								}
-							};
 
-							// check admin
-							if (res.admin) {
-								const payloadUpdate = {
-									pathParams: notificationPayload.pathParams,
-									queryParams: {
-										...notificationPayload.queryParams,
-										type: NotificationsFiltersEnums.ADMIN
-									}
-								};
-
-								// service
-								this._proxyService
-									.getAPI(AppServices['Notifications']['Notifications_Alert_Hotel'], payloadUpdate)
-									.subscribe(response => {
-										if (response && response.data) {
-											response.data.forEach(notification => {
-												const storePayload: NotificationPayloadInterface = {
-													text: notification.Message.Text,
-													keepAfterNavigationChange: true,
-													hideCloseButton: true,
-													color: notification.Message.Colour,
-													date: notification.Received
-												};
-												this._store.dispatch(new NotificationActions.NotificationInfo(storePayload));
-											});
+								// check alert
+								if (res.alert) {
+									const payloadUpdate = {
+										pathParams: notificationPayload.pathParams,
+										queryParams: {
+											...notificationPayload.queryParams,
+											type: NotificationsFiltersEnums.ALERT
 										}
-									});
-							}
+									};
 
-							// check alert
-							if (res.alert) {
-								const payloadUpdate = {
-									pathParams: notificationPayload.pathParams,
-									queryParams: {
-										...notificationPayload.queryParams,
-										type: NotificationsFiltersEnums.ALERT
-									}
-								};
-
-								// service
-								this._proxyService
-									.getAPI(AppServices['Notifications']['Notifications_Alert_Hotel'], payloadUpdate)
-									.subscribe(response => {
-										if (response && response.data) {
-											response.data.forEach(notification => {
-												const storePayload: NotificationPayloadInterface = {
-													text: notification.Message.Text,
-													keepAfterNavigationChange: true,
-													hideCloseButton: true,
-													color: notification.Message.Colour,
-													date: notification.Received
-												};
-												this._store.dispatch(new NotificationActions.NotificationInfo(storePayload));
-											});
-										}
-									});
+									// service
+									this._proxyService
+										.getAPI(AppServices['Notifications']['Notifications_Alert_Hotel'], payloadUpdate)
+										.subscribe(response => {
+											if (response && response.data) {
+												response.data.forEach(notification => {
+													const storePayload: NotificationPayloadInterface = {
+														text: notification.Message.Text,
+														keepAfterNavigationChange: true,
+														hideCloseButton: true,
+														color: notification.Message.Colour,
+														date: notification.Received
+													};
+													this._store.dispatch(new NotificationActions.NotificationInfo(storePayload));
+												});
+											}
+										});
+								}
 							}
-						}
-					});
+						});
+				} else {
+					console.warn('last request time is not saved on local storage');
+				}
 			});
 	}
 }
