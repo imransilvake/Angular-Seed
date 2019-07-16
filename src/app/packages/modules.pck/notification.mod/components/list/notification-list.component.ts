@@ -145,6 +145,9 @@ export class NotificationListComponent implements OnInit, OnDestroy {
 		this.refresh.emit(payload);
 	}
 
+	/**
+	 * clear all data
+	 */
 	public onClickClearAll() {
 		// payload use on refresh services
 		const payload = {
