@@ -3,7 +3,7 @@ import { Component, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, OnIni
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { debounceTime, takeUntil } from 'rxjs/operators';
+import { debounceTime, delay, takeUntil } from 'rxjs/operators';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { Router } from '@angular/router';
 
@@ -353,27 +353,11 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 						// service
 						this._proxyService
 							.postAPI(api, payload)
-							.pipe(takeUntil(this._ngUnSubscribe))
-							.subscribe(() => {
-								// payload
-								const confirmPayload = {
-									type: DialogTypeEnum.NOTICE,
-									payload: {
-										title: this._i18n({ value: 'Title: Notification Cleared', id: 'Table_Clear_Row_Cleared_Title' }),
-										message: this._i18n({
-											value: 'Description: Notification Cleared',
-											id: 'Table_Clear_Row_Cleared_Description'
-										}),
-										icon: 'dialog_tick',
-										buttonTexts: [this._i18n({ value: 'Button - OK', id: 'Common_Button_OK' })]
-									}
-								};
-
-								// listen: dialog service
-								this._dialogService
-									.showDialog(confirmPayload)
-									.subscribe(() => this.rowClear.emit());
-							});
+							.pipe(
+								takeUntil(this._ngUnSubscribe),
+								delay(1000)
+							)
+							.subscribe(() => this.rowClear.emit());
 					}
 				});
 		}

@@ -1,7 +1,7 @@
 // angular
 import { EventEmitter, Injectable } from '@angular/core';
-import { BehaviorSubject, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
+import { delay, map } from 'rxjs/operators';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 
 // app
@@ -126,6 +126,7 @@ export class NotificationService {
 					// service
 					this._proxyService
 						.postAPI(clearAllApi, payload)
+						.pipe(delay(1000))
 						.subscribe(() => refreshEmitter.emit(refreshPayload));
 				}
 			});
@@ -183,6 +184,7 @@ export class NotificationService {
 					// service
 					this._proxyService
 						.postAPI(clearApi, payload)
+						.pipe(delay(1000))
 						.subscribe(() => refreshEmitter.emit(refreshPayload));
 				}
 			});

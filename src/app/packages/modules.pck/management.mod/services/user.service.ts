@@ -1,7 +1,7 @@
 // angular
 import { EventEmitter, Injectable } from '@angular/core';
 import { BehaviorSubject, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { delay, map } from 'rxjs/operators';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { FormGroup } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -283,6 +283,7 @@ export class UserService {
 					// service
 					this._proxyService
 						.postAPI(api, payload)
+						.pipe(delay(1000))
 						.subscribe(() => refreshEmitter.emit());
 				}
 			});

@@ -2,7 +2,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { HttpErrorResponse } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { delay, map } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 
 // store
@@ -90,6 +90,7 @@ export class MemberService {
 				// dialog service
 				this._dialogService
 					.showDialog(dialogPayload)
+					.pipe(delay(1000))
 					.subscribe(() => refreshEmitter.emit());
 			}, (err: HttpErrorResponse) => {
 				if (err.error.detail.code === 'NotAuthorizedException') {

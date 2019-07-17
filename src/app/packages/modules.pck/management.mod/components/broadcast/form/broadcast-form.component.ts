@@ -53,6 +53,7 @@ export class BroadcastFormComponent implements OnInit, OnDestroy {
 				Validators.maxLength(5000)
 			]),
 			link: new FormControl('', [
+				Validators.required,
 				ValidationService.urlValidator
 			]),
 			color: new FormControl(this.staticColors[0], [
