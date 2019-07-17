@@ -179,16 +179,20 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 						if (this.data.SendDate) {
 							const date = moment(this.data.SendDate).toDate();
 							const time = moment(this.data.SendDate).format('HH:mm');
-							this.oneTime.controls['date'].setValue(date);
-							this.oneTime.controls['time'].setValue(time);
+							if (!moment(this.data.SendDate).isBefore(moment())) {
+								this.oneTime.controls['date'].setValue(date);
+								this.oneTime.controls['time'].setValue(time);
+							}
 						}
 
 						// expire date
 						if (this.data.ExpDate) {
 							const date = moment(this.data.ExpDate).toDate();
 							const time = moment(this.data.ExpDate).format('HH:mm');
-							this.periodicTime.controls['date'].setValue(date);
-							this.periodicTime.controls['time'].setValue(time);
+							if (!moment(this.data.ExpDate).isBefore(moment())) {
+								this.periodicTime.controls['date'].setValue(date);
+								this.periodicTime.controls['time'].setValue(time);
+							}
 						}
 					} else {
 						// send date
@@ -196,6 +200,12 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 
 						// set first value
 						this.periodically.setValue(this.guestPeriodsList[0]);
+
+						// set validation
+						this.periodicTime.controls['date'].setValidators([Validators.required]);
+						this.periodicTime.controls['time'].setValidators([Validators.required]);
+						this.periodicTime.controls['date'].updateValueAndValidity();
+						this.periodicTime.controls['time'].updateValueAndValidity();
 					}
 				}
 			});
@@ -348,21 +358,43 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 	 */
 	public onChangeDateTimeAndPeriodically(radioEvent: any) {
 		if (radioEvent.value === 'date') {
+			// set fields
 			this.oneTime.controls['date'].enable();
 			this.oneTime.controls['time'].enable();
 			this.periodicTime.controls['date'].disable();
 			this.periodicTime.controls['time'].disable();
 			this.periodically.disable();
 			this.dateTimeButton = true;
+
+			// set validators
+			this.oneTime.controls['date'].setValidators([Validators.required]);
+			this.oneTime.controls['time'].setValidators([Validators.required]);
+			this.oneTime.controls['date'].updateValueAndValidity();
+			this.oneTime.controls['time'].updateValueAndValidity();
+
+			// clear validators
+			this.periodicTime.controls['date'].clearValidators();
+			this.periodicTime.controls['time'].clearValidators();
 		}
 
 		if (radioEvent.value === 'periodic') {
+			// set fields
 			this.oneTime.controls['date'].disable();
 			this.oneTime.controls['time'].disable();
 			this.periodicTime.controls['date'].enable();
 			this.periodicTime.controls['time'].enable();
 			this.periodically.enable();
 			this.dateTimeButton = false;
+
+			// set validators
+			this.periodicTime.controls['date'].setValidators([Validators.required]);
+			this.periodicTime.controls['time'].setValidators([Validators.required]);
+			this.periodicTime.controls['date'].updateValueAndValidity();
+			this.periodicTime.controls['time'].updateValueAndValidity();
+
+			// clear validators
+			this.oneTime.controls['date'].clearValidators();
+			this.oneTime.controls['time'].clearValidators();
 		}
 	}
 
