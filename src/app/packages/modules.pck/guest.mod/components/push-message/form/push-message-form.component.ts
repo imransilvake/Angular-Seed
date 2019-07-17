@@ -183,6 +183,9 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 								this.oneTime.controls['date'].setValue(date);
 								this.oneTime.controls['time'].setValue(time);
 							}
+
+							// set validators
+							this.setSendDateValidators();
 						}
 
 						// expire date
@@ -193,6 +196,9 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 								this.periodicTime.controls['date'].setValue(date);
 								this.periodicTime.controls['time'].setValue(time);
 							}
+
+							// set validators
+							this.setExpDateValidators();
 						}
 					} else {
 						// send date
@@ -202,10 +208,7 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 						this.periodically.setValue(this.guestPeriodsList[0]);
 
 						// set validation
-						this.periodicTime.controls['date'].setValidators([Validators.required]);
-						this.periodicTime.controls['time'].setValidators([Validators.required]);
-						this.periodicTime.controls['date'].updateValueAndValidity();
-						this.periodicTime.controls['time'].updateValueAndValidity();
+						this.setExpDateValidators();
 					}
 				}
 			});
@@ -305,9 +308,9 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 		let sendDate = null;
 		let expDate = null;
 		if (this.dateTimeButton) {
-			sendDate = this.prepareUTCFromDateTime(this.oneTime.controls['date'], this.oneTime.controls['time']);
+			sendDate = PushMessageFormComponent.prepareUTCFromDateTime(this.oneTime.controls['date'], this.oneTime.controls['time']);
 		} else {
-			expDate = this.prepareUTCFromDateTime(this.periodicTime.controls['date'], this.periodicTime.controls['time']);
+			expDate = PushMessageFormComponent.prepareUTCFromDateTime(this.periodicTime.controls['date'], this.periodicTime.controls['time']);
 		}
 
 		const id = (!!this.data) ? {ID: this.data.ID} : {};
@@ -367,10 +370,7 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 			this.dateTimeButton = true;
 
 			// set validators
-			this.oneTime.controls['date'].setValidators([Validators.required]);
-			this.oneTime.controls['time'].setValidators([Validators.required]);
-			this.oneTime.controls['date'].updateValueAndValidity();
-			this.oneTime.controls['time'].updateValueAndValidity();
+			this.setSendDateValidators();
 
 			// clear validators
 			this.periodicTime.controls['date'].clearValidators();
@@ -387,10 +387,7 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 			this.dateTimeButton = false;
 
 			// set validators
-			this.periodicTime.controls['date'].setValidators([Validators.required]);
-			this.periodicTime.controls['time'].setValidators([Validators.required]);
-			this.periodicTime.controls['date'].updateValueAndValidity();
-			this.periodicTime.controls['time'].updateValueAndValidity();
+			this.setExpDateValidators();
 
 			// clear validators
 			this.oneTime.controls['date'].clearValidators();
@@ -433,7 +430,7 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 	/**
 	 * prepare utc from date and time
 	 */
-	private prepareUTCFromDateTime(date: any, time: any) {
+	private static prepareUTCFromDateTime(date: any, time: any) {
 		const dateStr = date.value,
 			timeStr = time.value,
 			d = moment(dateStr),
@@ -447,5 +444,25 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 
 		// utc format
 		return d.utc().format();
+	}
+
+	/**
+	 * set send date validators
+	 */
+	private setSendDateValidators() {
+		this.oneTime.controls['date'].setValidators([Validators.required]);
+		this.oneTime.controls['time'].setValidators([Validators.required]);
+		this.oneTime.controls['date'].updateValueAndValidity();
+		this.oneTime.controls['time'].updateValueAndValidity();
+	}
+
+	/**
+	 * set expiry date validators
+	 */
+	private setExpDateValidators() {
+		this.periodicTime.controls['date'].setValidators([Validators.required]);
+		this.periodicTime.controls['time'].setValidators([Validators.required]);
+		this.periodicTime.controls['date'].updateValueAndValidity();
+		this.periodicTime.controls['time'].updateValueAndValidity();
 	}
 }
