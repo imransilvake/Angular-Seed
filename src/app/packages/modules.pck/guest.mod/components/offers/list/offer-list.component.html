@@ -11,6 +11,7 @@
 		<app-table
 			tableTitle="Active Hotel Offers"
 			i18n-tableTitle="@@Guest_Offers_Table_Title"
+			[tableDragDisabled]="false"
 			[tableShowFilterInput]="false"
 			[tableData]="guestOffersList"
 			[tableColumns]="['Order', 'Status', 'Image', 'Title', 'Validity', 'Target Group', 'Hotels']"

@@ -20,6 +20,7 @@
 			[hidden]="loading"
 			[dataSource]="dataSource"
 			matSort [matSortDisabled]="!tableApplySorting"
+			[cdkDropListDisabled]="tableDragDisabled"
 			cdkDropList (cdkDropListDropped)="onListDrop($event)">
 			<!-- Column Templates -->
 			<ng-container *ngFor="let column of tableColumns; let idx = index;" matColumnDef="{{ column }}">
