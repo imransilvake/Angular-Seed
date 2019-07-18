@@ -1,5 +1,5 @@
 // angular
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
 import { I18n } from '@ngx-translate/i18n-polyfill';
@@ -22,7 +22,6 @@ export class PushMessageService {
 	public appState;
 	public tableServices;
 	public dataEmitter: BehaviorSubject<any> = new BehaviorSubject(0);
-	public errorMessage: EventEmitter<string> = new EventEmitter();
 
 	constructor(
 		private _proxyService: ProxyService,

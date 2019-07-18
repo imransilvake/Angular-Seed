@@ -34,7 +34,6 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 	public tabsList = [];
 	public minDate = moment().toDate();
 	public title = 'Form';
-	public errorMessage;
 
 	public staticColors = ['#3e9d2e', '#d2a41a', '#e74c3c'];
 	public dateTimeButton = false;
