@@ -90,7 +90,7 @@ export class MemberService {
 				// dialog service
 				this._dialogService
 					.showDialog(dialogPayload)
-					.pipe(delay(1000))
+					.pipe(delay(200))
 					.subscribe(() => refreshEmitter.emit());
 			}, (err: HttpErrorResponse) => {
 				if (err.error.detail.code === 'NotAuthorizedException') {
