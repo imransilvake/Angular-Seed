@@ -5,7 +5,6 @@ import { Subject } from 'rxjs';
 
 // app
 import { PushMessageService } from '../../../services/push-message.service';
-import { UtilityService } from '../../../../../utilities.pck/accessories.mod/services/utility.service';
 import { AppViewTypeEnum } from '../../../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
 import { GuestPushMessageViewInterface } from '../../../interfaces/guest-push-message-view.interface';
 
@@ -23,21 +22,14 @@ export class PushMessageListComponent implements OnInit, OnDestroy {
 	public recentNotificationList;
 	public periodicNotificationTable;
 	public recentNotificationTable;
-	public guestPeriodsList;
 	private buttonType;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
-	constructor(
-		private _pushMessageService: PushMessageService,
-		private _utilityService: UtilityService
-	) {
+	constructor(private _pushMessageService: PushMessageService) {
 	}
 
 	ngOnInit() {
-		// get periods list
-		this.guestPeriodsList = this._utilityService.getGuestPeriods();
-
 		// listen: fetch periodic & recently sent guest notifications
 		this._pushMessageService.dataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))

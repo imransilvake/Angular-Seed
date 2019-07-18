@@ -20,7 +20,7 @@ export const EnvironmentRoutes = {
 	guest: {
 		title: 'guest',
 		routes: {
-			offer: 'guest/offer',
+			offers: 'guest/offers',
 			pushMessage: 'guest/push-message'
 		}
 	},

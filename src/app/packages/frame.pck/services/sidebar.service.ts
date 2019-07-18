@@ -21,7 +21,7 @@ export class SidebarService {
 		`/${ ROUTING.notifications.routes.overview }`,
 		`/${ ROUTING.management.routes.user }`,
 		`/${ ROUTING.management.routes.client }`,
-		`/${ ROUTING.guest.routes.offer }`,
+		`/${ ROUTING.guest.routes.offers }`,
 		`/${ ROUTING.guest.routes.pushMessage }`
 	];
 
@@ -73,8 +73,8 @@ export class SidebarService {
 				icon: faUsers,
 				children: [
 					{
-						name: 'Offer',
-						url: `/${ ROUTING.guest.routes.offer }`,
+						name: 'Offers',
+						url: `/${ ROUTING.guest.routes.offers }`,
 						externalIcon: faExternalLinkAlt
 					},
 					{

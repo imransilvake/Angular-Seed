@@ -1,0 +1,29 @@
+<div class="ham-offers">
+	<!-- Head -->
+	<app-head
+		pageTitle="Guest Offers"
+		i18n-pageTitle="@@Management_System_Guest_Offers_Title"
+		pageHintTitle="Title: Guest Offers"
+		i18n-pageHintTitle="@@Page_Hint_Guest_Offers_Title"
+		pageHintText="Text: Guest Offers"
+		i18n-pageHintText="@@Page_Hint_Guest_Offers_Text">
+	</app-head>
+
+	<!-- Details -->
+	<div class="ham-details" *ngIf="isHotel">
+		<!-- View: List -->
+		<ng-container *ngIf="pageView === 0">
+			<app-offer-list></app-offer-list>
+		</ng-container>
+
+		<!-- View: Form -->
+		<ng-container *ngIf="pageView === 1">
+			Form Works!
+		</ng-container>
+	</div>
+
+	<!-- Error Message: Select Hotel -->
+	<div class="ham-wrapper-2 ham-problem cd-center-align" *ngIf="!isHotel">
+		<p i18n="@@Common_Select_Hotel">Please Select an hotel!</p>
+	</div>
+</div>
