@@ -34,7 +34,7 @@ export class GuestOfferService {
 		const api = AppServices['Guest']['Guest_Offer_And_Notifications_List_Hotel'];
 
 		// payload
-		let payload: any = {
+		const payload: any = {
 			pathParams: {
 				groupId: this.appState.groupId,
 				hotelId: this.appState.hotelId
