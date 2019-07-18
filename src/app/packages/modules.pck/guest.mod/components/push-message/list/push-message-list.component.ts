@@ -73,16 +73,16 @@ export class PushMessageListComponent implements OnInit, OnDestroy {
 	}
 
 	/**
-	 * delete periodic notification
+	 * edit periodic notification
 	 */
-	public onClickDeletePeriodicNotification() {
+	public onClickEditNotification() {
 		this.buttonType = 1;
 	}
 
 	/**
-	 * edit periodic notification
+	 * delete periodic notification
 	 */
-	public onClickEditNotification() {
+	public onClickDeletePeriodicNotification() {
 		this.buttonType = 2;
 	}
 
@@ -92,14 +92,14 @@ export class PushMessageListComponent implements OnInit, OnDestroy {
 	 * @param row
 	 */
 	public onClickRowActionButtons(row: any) {
-		// delete notification
+		// edit / copy notification
 		if (this.buttonType === 1) {
-			this._pushMessageService.guestDeletePeriodicNotification(row, this.refresh);
+			this.changePageView(row);
 		}
 
-		// edit / copy notification
+		// delete notification
 		if (this.buttonType === 2) {
-			this.changePageView(row);
+			this._pushMessageService.guestDeletePeriodicNotification(row, this.refresh);
 		}
 
 		// reset

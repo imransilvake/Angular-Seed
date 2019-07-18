@@ -59,12 +59,14 @@ export class OfferListComponent implements OnInit, OnDestroy {
 	 * edit guest hotel offer
 	 */
 	public onClickEditGuestHotelOffer() {
+		this.buttonType = 1;
 	}
 
 	/**
 	 * delete guest hotel offer
 	 */
 	public onClickDeleteGuestHotelOffer() {
+		this.buttonType = 2;
 	}
 
 	/**
@@ -73,7 +75,13 @@ export class OfferListComponent implements OnInit, OnDestroy {
 	 * @param row
 	 */
 	public onClickRowActionButtons(row: any) {
+		// edit hotel guest offer
+		if (this.buttonType === 1) {
+			this.changePageView(row);
+		}
 
+		// reset
+		this.buttonType = -1;
 	}
 
 	/**

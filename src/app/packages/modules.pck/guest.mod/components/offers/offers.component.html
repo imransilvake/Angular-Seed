@@ -13,7 +13,9 @@
 	<div class="ham-details" *ngIf="isHotel">
 		<!-- View: List -->
 		<ng-container *ngIf="pageView === 0">
-			<app-offer-list></app-offer-list>
+			<app-offer-list
+				(changeOffersView)="pageView = $event.view; id = $event.id; data = $event.data; triggerServices();">
+			</app-offer-list>
 		</ng-container>
 
 		<!-- View: Form -->
