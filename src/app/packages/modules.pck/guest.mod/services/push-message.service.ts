@@ -78,6 +78,7 @@ export class PushMessageService {
 					...payload,
 					queryParams: {
 						...payload.queryParams,
+						column: 'SendDate',
 						trigger: 'ADHOC'
 					}
 				};

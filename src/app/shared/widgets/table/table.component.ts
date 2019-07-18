@@ -573,6 +573,11 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 						};
 					}
 
+					// Order
+					if (item.hasOwnProperty('Order')) {
+
+					}
+
 					// module: guest
 					if (this._router.url === `/${ ROUTING.guest.routes.pushMessage }` || this._router.url === `/${ ROUTING.guest.routes.offers }`) {
 						// Title
@@ -694,7 +699,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 				columnName = 'TotalHotels';
 			} else if (column === 'Users(HGA)' || column === 'Users(HSA)') {
 				columnName = 'TotalUsers';
-			} else if (column === 'Date' || column === 'SendDate') {
+			} else if (column === 'Date' || column === 'Sent') {
 				columnName = 'SendDate';
 			}
 
@@ -705,13 +710,13 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 			}
 
 			// sorting logic
-			if (this.sortOrder === 'desc' || !columnName) {
+			if (this.sortOrder === 'asc' || !columnName) {
 				this.sortColumn = this.tableResources.sortDefaultColumn;
 				this.sortOrder = '';
 				sortOrder = 'desc';
 			} else {
 				this.sortColumn = columnName;
-				this.sortOrder = (!this.sortOrder) ? 'asc' : 'desc';
+				this.sortOrder = (!this.sortOrder) ? 'desc' : 'asc';
 				sortOrder = this.sortOrder;
 			}
 
