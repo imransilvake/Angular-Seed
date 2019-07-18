@@ -6,8 +6,11 @@ import { Subject } from 'rxjs';
 import { debounceTime, delay, takeUntil } from 'rxjs/operators';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { Router } from '@angular/router';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 // app
+import { ROUTING } from '../../../../environments/environment';
+import { faBan, faEllipsisV, faPauseCircle, faPlayCircle } from '@fortawesome/free-solid-svg-icons';
 import { ProxyService } from '../../../packages/core.pck/proxy.mod/services/proxy.service';
 import { AppOptions, AppServices } from '../../../../app.config';
 import { HelperService } from '../../../packages/utilities.pck/accessories.mod/services/helper.service';
@@ -16,8 +19,6 @@ import { AuthService } from '../../../packages/modules.pck/authorization.mod/ser
 import { DialogTypeEnum } from '../../../packages/utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { DialogService } from '../../../packages/utilities.pck/dialog.mod/services/dialog.service';
 import { NotificationsFiltersEnums } from '../../../packages/modules.pck/notification.mod/enums/notifications-filters.enums';
-import { faBan, faPauseCircle, faPlayCircle } from '@fortawesome/free-solid-svg-icons';
-import { ROUTING } from '../../../../environments/environment';
 
 @Component({
 	selector: 'app-table',
@@ -46,7 +47,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	@ViewChild(MatSort, { static: true }) sort: MatSort;
 	@ViewChild('filterInput', { static: false }) filterInput: ElementRef;
 
-	public faIcons = [faPlayCircle, faPauseCircle, faBan];
+	public faIcons = [faPlayCircle, faPauseCircle, faBan, faEllipsisV];
 	public allColumns = [];
 	public formFields;
 	public dataSource;
@@ -132,6 +133,23 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
 	get clearAll() {
 		return this.formFields.get('clearAll');
+	}
+
+	/**
+	 * drag/drop table rows
+	 *
+	 * @param event
+	 */
+	public onListDrop(event: CdkDragDrop<any>) {
+		// data replica
+		const data = this.dataSource.data;
+
+		// move items
+		moveItemInArray(data, event.previousIndex, event.currentIndex);
+
+		// update table
+		this.dataSource.data = [];
+		this.dataSource.data = data;
 	}
 
 	/**

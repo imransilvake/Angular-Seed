@@ -9,11 +9,13 @@ import { SharedModule } from '../shared.module';
 import { ReadMoreComponent } from './read-more/read-more.component';
 import { TableComponent } from './table/table.component';
 import { FieldsModule } from '../../packages/core.pck/fields.mod/fields.module';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
 	imports: [
 		SharedModule,
-		FieldsModule
+		FieldsModule,
+		DragDropModule
 	],
 	declarations: [
 		DividerComponent,
