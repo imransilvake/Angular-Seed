@@ -14,7 +14,8 @@
 		<!-- View: List -->
 		<ng-container *ngIf="pageView === 0">
 			<app-offer-list
-				(changeOffersView)="pageView = $event.view; id = $event.id; data = $event.data; triggerServices();">
+				(changeOffersView)="pageView = $event.view; id = $event.id; data = $event.data; triggerServices();"
+				(refresh)="triggerServices()">
 			</app-offer-list>
 		</ng-container>
 

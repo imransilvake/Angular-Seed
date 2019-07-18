@@ -43,7 +43,7 @@ export class PushMessageService {
 		}
 
 		// api
-		const api = AppServices['Guest']['Guest_Offer_And_Notifications_List_Hotel'];
+		const api = AppServices['Guest']['Guest_Offers_And_Notifications_List_Hotel'];
 
 		// payload
 		let payload: any = {
@@ -146,7 +146,7 @@ export class PushMessageService {
 
 					// service
 					this._proxyService
-						.postAPI(AppServices['Guest']['Guest_Notifications_Remove_Hotel'], payload)
+						.postAPI(AppServices['Guest']['Guest_Offers_And_Notifications_Remove_Hotel'], payload)
 						.pipe(delay(1000))
 						.subscribe(() => refreshEmitter.emit());
 				}
@@ -172,7 +172,7 @@ export class PushMessageService {
 
 		// service
 		return this._proxyService
-			.getAPI(AppServices['Guest']['Guest_Notifications_Form_Group'], payload)
+			.getAPI(AppServices['Guest']['Guest_Offers_And_Notifications_Form_Group'], payload)
 			.pipe(map(res => res));
 	}
 
@@ -188,7 +188,7 @@ export class PushMessageService {
 		this._loadingAnimationService.startLoadingAnimation();
 
 		// api
-		const api = isEditForm ? AppServices['Guest']['Guest_Notifications_Form_Update_Hotel'] : AppServices['Guest']['Guest_Notifications_Form_Create_Hotel'];
+		const api = isEditForm ? AppServices['Guest']['Guest_Offers_And_Notifications_Form_Update_Hotel'] : AppServices['Guest']['Guest_Offers_And_Notifications_Form_Create_Hotel'];
 
 		// payload
 		const payload: any = {

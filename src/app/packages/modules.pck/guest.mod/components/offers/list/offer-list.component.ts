@@ -17,6 +17,7 @@ import { GuestOfferService } from '../../../services/guest-offer.service';
 
 export class OfferListComponent implements OnInit, OnDestroy {
 	@Output() changeOffersView: EventEmitter<any> = new EventEmitter();
+	@Output() refresh: EventEmitter<any> = new EventEmitter();
 
 	public guestOffersList;
 	public guestOffersTable;
@@ -78,6 +79,11 @@ export class OfferListComponent implements OnInit, OnDestroy {
 		// edit hotel guest offer
 		if (this.buttonType === 1) {
 			this.changePageView(row);
+		}
+
+		// delete hotel guest offer
+		if (this.buttonType === 2) {
+			this._guestOfferService.guestRemoveOffer(row, this.refresh);
 		}
 
 		// reset
