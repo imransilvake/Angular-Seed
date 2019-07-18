@@ -144,6 +144,20 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	}
 
 	/**
+	 * validate extension
+	 *
+	 * @param value
+	 */
+	public validateExtension(value) {
+		if (value) {
+			const stringArray = value.split('.');
+			const extension = stringArray[stringArray.length - 1];
+			return extension === 'png' || extension === 'jpg' || extension === 'jpeg';
+		}
+		return false;
+	}
+
+	/**
 	 * async wait for image
 	 *
 	 * @param imageName
@@ -396,7 +410,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 								Image: imagePromise
 							};
 						} else {
-							const image = item.Image === null && item.Name ? HelperService.getFirstLetter(item.Name).toUpperCase() : item.Image;
+							const image = item.Image === null && item.Name ? HelperService.getFirstLetter(item.Name).toUpperCase() : 'N/A';
 							newItem = {
 								...newItem,
 								Image: image
@@ -559,13 +573,33 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 						};
 					}
 
-					// Title
-					if (item.hasOwnProperty('Title') && this._router.url === `/${ ROUTING.guest.routes.pushMessage }`) {
-						newItem = {
-							...newItem,
-							Title: item.Title[language],
-							Titles: item.Title
-						};
+					// module: guest
+					if (this._router.url === `/${ ROUTING.guest.routes.pushMessage }` || this._router.url === `/${ ROUTING.guest.routes.offers }`) {
+						// Title
+						if (item.hasOwnProperty('Title')) {
+							newItem = {
+								...newItem,
+								Title: item.Title[language],
+								Titles: item.Title
+							};
+						}
+
+						// Data
+						if (item.hasOwnProperty('Data')) {
+							const image = item.Data.Image;
+							if (image && image.length > 10) {
+								const imagePromise = this.getImageSrc(image);
+								newItem = {
+									...newItem,
+									Image: imagePromise
+								};
+							} else {
+								newItem = {
+									...newItem,
+									Image: image
+								};
+							}
+						}
 					}
 
 					// update data source

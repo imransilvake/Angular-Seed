@@ -13,10 +13,11 @@
 			i18n-tableTitle="@@Guest_Offers_Table_Title"
 			[tableShowFilterInput]="false"
 			[tableData]="guestOffersList"
-			[tableColumns]="['Order', 'Title', 'Validity', 'Target Group', 'Hotels']"
-			[tableSorting]="[false, false, false, false, false, false]"
+			[tableColumns]="['Order', 'Image', 'Title', 'Validity', 'Target Group', 'Hotels']"
+			[tableSorting]="[false, false, false, false, false, false, false]"
 			[tableAdditionalColumns]="['Action']"
 			[tableTemplateRef]="[action]"
+			[tablePageSize]="tablePageSizeWithoutLimit"
 			[tableResources]="guestOffersTable"
 			(rowData)="onClickRowActionButtons($event)">
 			<!-- Action -->

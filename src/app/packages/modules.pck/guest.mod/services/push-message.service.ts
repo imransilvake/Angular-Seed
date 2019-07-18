@@ -43,7 +43,7 @@ export class PushMessageService {
 		}
 
 		// api
-		const api = AppServices['Guest']['Guest_Notifications_List_Hotel'];
+		const api = AppServices['Guest']['Guest_Offer_And_Notifications_List_Hotel'];
 
 		// payload
 		let payload: any = {

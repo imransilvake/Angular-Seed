@@ -51,15 +51,25 @@
 
 						<!-- Image -->
 						<ng-container *ngSwitchCase="'Image'">
-							<img
-								class="ham-image"
-								*ngIf="element[column] && validateType(element[column]) !== 'string' && element[column] | async"
-								[src]="element[column] | async" alt="table-photo"/>
-							<p
-								class="ham-no-image"
-								*ngIf="!element[column] || validateType(element[column]) === 'string'">
-								{{element[column]}}
-							</p>
+							<ng-container [ngSwitch]="validateType(element[column])">
+								<ng-container *ngSwitchCase="'object'">
+									<img
+										class="ham-image"
+										*ngIf="element[column] && element[column] | async"
+										[src]="element[column] | async"
+										alt="table-photo"/>
+								</ng-container>
+								<ng-container *ngSwitchCase="'string'">
+									<img class="ham-image"
+										 *ngIf="element[column] && validateExtension(element[column])"
+										 [src]="'assets/images/guest/01.jpg'"
+										 alt="table-photo"/>
+									<p class="ham-no-image"
+									   *ngIf="!element[column] || !validateExtension(element[column])">
+										{{element[column]}}
+									</p>
+								</ng-container>
+							</ng-container>
 						</ng-container>
 
 						<!-- Status -->
