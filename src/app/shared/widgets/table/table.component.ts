@@ -151,6 +151,41 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 		// update table
 		this.dataSource.data = [];
 		this.dataSource.data = data;
+
+		let value = 0;
+		if (event.currentIndex === 0) {
+			const value1 = Number(data[event.currentIndex + 1].Sort);
+			const value2 = Number(data[event.currentIndex].Sort);
+			value = value1 + value2;
+		} else if ((data.length - 1) === event.currentIndex) {
+			const value1 = Number(data[event.currentIndex - 1].Sort);
+			const value2 = 0;
+			value = (value1 + value2) / 2;
+		} else {
+			const value1 = Number(data[event.currentIndex - 1].Sort);
+			const value2 = Number(data[event.currentIndex + 1].Sort);
+			value = (value1 + value2) / 2;
+		}
+
+		// payload
+		const payload = {
+			pathParams: {
+				...this.tableResources.payload.pathParams
+			},
+			queryParams: {
+				type: 'sort'
+			},
+			bodyParams:  {
+				ID: data[event.currentIndex].ID,
+				Sort: Math.floor(value)
+			}
+		};
+
+		// service
+		this._proxyService
+			.postAPI(this.tableResources.dragApi, payload)
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe();
 	}
 
 	/**

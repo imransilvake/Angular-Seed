@@ -37,6 +37,7 @@ export class GuestOfferService {
 
 		// api
 		const api = AppServices['Guest']['Guest_Offers_And_Notifications_List_Hotel'];
+		const updateApi = AppServices['Guest']['Guest_Offers_And_Notifications_Form_Update_Hotel'];
 
 		// payload
 		const payload: any = {
@@ -48,7 +49,7 @@ export class GuestOfferService {
 				offset: 0,
 				limit: AppOptions.tablePageSizeWithoutLimit,
 				type: GuestTypeEnum.OFFER,
-				column: 'CreateDate',
+				column: 'Sort',
 				sort: 'desc'
 			}
 		};
@@ -56,9 +57,10 @@ export class GuestOfferService {
 		// set table resources
 		this.tableServices = {
 			api: api,
+			dragApi: updateApi,
 			payload: payload,
 			uniqueID: 'ID',
-			sortDefaultColumn: 'CreateDate'
+			sortDefaultColumn: 'Sort'
 		};
 
 		// service

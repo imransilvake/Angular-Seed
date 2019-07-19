@@ -39,6 +39,7 @@ export class OfferListComponent implements OnInit, OnDestroy {
 					this.guestOffersTable = {
 						api: this._guestOfferService.tableServices.api,
 						searchApi: this._guestOfferService.tableServices.api,
+						dragApi: this._guestOfferService.tableServices.dragApi,
 						payload: this._guestOfferService.tableServices.payload,
 						uniqueID: this._guestOfferService.tableServices.uniqueID,
 						sortDefaultColumn: this._guestOfferService.tableServices.sortDefaultColumn
