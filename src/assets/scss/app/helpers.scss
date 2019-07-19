@@ -95,7 +95,6 @@
 	}
 }
 
-
 // table - text with bg
 .ham-td-bg {
 	color: cd-palette($cd-color, 1001);
@@ -104,3 +103,7 @@
 	padding: 5px 8px;
 	text-align: center;
 }
+
+// margins
+.ham-margin-top-10 { margin-top: 10px; }
+.ham-margin-top-20 { margin-top: 20px; }

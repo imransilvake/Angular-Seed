@@ -100,6 +100,23 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 							}
 						});
 					}
+
+					// update existing data
+					if (this.data) {
+						// access, state
+						this.access.setValue(this.data.Access);
+						this.isAccess = this.data.Access.toLowerCase() === 'group';
+						this.state.setValue(this.data.State);
+						this.isState = this.data.State.toLowerCase() === 'active';
+
+						// target groups
+						const selectedGroups = this.targetGroupsList.filter(target => target.id === this.data['Target Group']);
+						if (selectedGroups.length) {
+							this.targetGroups.setValue(...selectedGroups);
+						} else {
+							this.targetGroups.setValue(this.targetGroupsList[0]);
+						}
+					}
 				}
 			});
 

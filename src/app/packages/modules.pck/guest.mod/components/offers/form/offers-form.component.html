@@ -16,80 +16,94 @@
 			</div>
 
 			<!-- Multi-Language Fields | Tabs -->
-			<mat-tab-group class="ham-tabs-1" [@.disabled]="true" (selectedTabChange)="onChangeTab($event)">
-				<mat-tab *ngFor="let tab of formArray; let idx=index;" [label]="tabsList[idx].text">
-					<div class="cd-row ham-padding-0">
-						<div class="cd-col">
-							<app-input
-								[showLabel]="true"
-								labelName="Title*"
-								i18n-labelName="@@Guest_Offers_Form_Title_Label"
-								[inputId]="'guest-offers-title-id'"
-								[inputType]="'text'"
-								[inputName]="'title'"
-								inputPlaceHolder="Title"
-								i18n-inputPlaceHolder="@@Guest_Offers_Form_Title_PlaceHolder"
-								[control]="tab.controls['title']">
-							</app-input>
-						</div>
-					</div>
+			<div class="ham-tabs">
+				<mat-tab-group class="ham-tabs-1" [@.disabled]="true" (selectedTabChange)="onChangeTab($event)">
+					<mat-tab *ngFor="let tab of formArray; let idx=index;" [label]="tabsList[idx].text">
+						<div class="cd-row ham-padding-1 ham-margin-top-10">
+							<div class="cd-col cd-col-pm-t-6">
+								<div class="cd-row ham-padding-0">
+									<div class="cd-col">
+										<app-input
+											[showLabel]="true"
+											labelName="Title*"
+											i18n-labelName="@@Guest_Offers_Form_Title_Label"
+											[inputId]="'guest-offers-title-id'"
+											[inputType]="'text'"
+											[inputName]="'title'"
+											inputPlaceHolder="Title"
+											i18n-inputPlaceHolder="@@Guest_Offers_Form_Title_PlaceHolder"
+											[control]="tab.controls['title']">
+										</app-input>
+									</div>
 
-					<div class="cd-row ham-padding-0">
-						<div class="cd-col">
-							<app-input
-								[typeTextArea]="true"
-								[textareaMinRows]="5"
-								[showLabel]="true"
-								labelName="Notification Text*"
-								i18n-labelName="@@Guest_Offers_Form_Text_Label"
-								[inputId]="'guest-offers-text-id'"
-								[inputType]="'text'"
-								[inputName]="'text'"
-								inputPlaceHolder="Notification Text"
-								i18n-inputPlaceHolder="@@Guest_Offers_Form_Text_PlaceHolder"
-								[control]="tab.controls['description']">
-							</app-input>
+									<div class="cd-col cd-col-top">
+										<app-input
+											[typeTextArea]="true"
+											[textareaMinRows]="5"
+											[showLabel]="true"
+											labelName="Notification Text*"
+											i18n-labelName="@@Guest_Offers_Form_Text_Label"
+											[inputId]="'guest-offers-text-id'"
+											[inputType]="'text'"
+											[inputName]="'text'"
+											inputPlaceHolder="Notification Text"
+											i18n-inputPlaceHolder="@@Guest_Offers_Form_Text_PlaceHolder"
+											[control]="tab.controls['description']">
+										</app-input>
+									</div>
+								</div>
+							</div>
+							<div class="cd-col cd-col-pm-t-6 cd-col-m-top">
+								Demo
+							</div>
 						</div>
-					</div>
-				</mat-tab>
-			</mat-tab-group>
+					</mat-tab>
+				</mat-tab-group>
+			</div>
 
 			<!-- Divider -->
 			<app-divider></app-divider>
 
-			<div class="cd-row ham-padding-1">
+			<div class="cd-row ham-padding-1 ham-margin-top-10">
 				<div class="cd-col cd-col-pm-t-6">
-					<app-select
-						[showLabel]="true"
-						labelName="Target Groups*"
-						i18n-labelName="@@Guest_Offers_Form_Target_Groups_Label"
-						[selectType]="selectTypeDefault"
-						[selectId]="'guest-offers-target-groups-id'"
-						selectPlaceHolder="Target Group"
-						i18n-selectPlaceHolder="@@Guest_Offers_Form_Target_Groups_PlaceHolder"
-						[dataDefault]="targetGroupsList"
-						[showHint]="true"
-						hintText="Hint Text"
-						i18n-hintText="Guest_Offers_Form_Target_Groups_Hint"
-						[control]="targetGroups">
-					</app-select>
+					<div class="cd-row ham-padding-0">
+						<div class="cd-col">
+							<app-select
+								[showLabel]="true"
+								labelName="Target Groups*"
+								i18n-labelName="@@Guest_Offers_Form_Target_Groups_Label"
+								[selectType]="selectTypeDefault"
+								[selectId]="'guest-offers-target-groups-id'"
+								selectPlaceHolder="Target Group"
+								i18n-selectPlaceHolder="@@Guest_Offers_Form_Target_Groups_PlaceHolder"
+								[dataDefault]="targetGroupsList"
+								[showHint]="true"
+								hintText="Hint Text"
+								i18n-hintText="Guest_Offers_Form_Target_Groups_Hint"
+								[control]="targetGroups">
+							</app-select>
+						</div>
+						<div class="cd-col cd-col-top">
+							<app-select
+								[multipleSelection]="true"
+								[showLabel]="true"
+								labelName="Hotel(s)*"
+								i18n-labelName="@@Guest_Offers_Form_Hotels_Label"
+								[selectType]="selectTypeDefault"
+								[selectId]="'guest-offers-hotels-id'"
+								selectPlaceHolder="Hotel(s)"
+								i18n-selectPlaceHolder="@@Guest_Offers_Form_Hotels_PlaceHolder"
+								[dataDefault]="hotelsList"
+								[showHint]="true"
+								hintText="Hint Text"
+								i18n-hintText="Guest_Offers_Form_Hotels_Hint"
+								[control]="hotels">
+							</app-select>
+						</div>
+					</div>
 				</div>
-				<div class="cd-col cd-col-pm-t-6 cd-col-m-top">
-					<app-select
-						[multipleSelection]="true"
-						[showLabel]="true"
-						labelName="Hotel(s)*"
-						i18n-labelName="@@Guest_Offers_Form_Hotels_Label"
-						[selectType]="selectTypeDefault"
-						[selectId]="'guest-offers-hotels-id'"
-						selectPlaceHolder="Hotel(s)"
-						i18n-selectPlaceHolder="@@Guest_Offers_Form_Hotels_PlaceHolder"
-						[dataDefault]="hotelsList"
-						[showHint]="true"
-						hintText="Hint Text"
-						i18n-hintText="Guest_Offers_Form_Hotels_Hint"
-						[control]="hotels">
-					</app-select>
+				<div class="cd-col cd-col-pm-t-6">
+					Demo
 				</div>
 			</div>
 
