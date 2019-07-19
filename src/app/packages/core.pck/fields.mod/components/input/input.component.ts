@@ -1,6 +1,7 @@
 // angular
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 
 // app
 import { InputStyleEnum } from '../../enums/input-style.enum';
@@ -13,6 +14,9 @@ import { InputStyleInterface } from '../../interfaces/input-style.interface';
 })
 
 export class InputComponent implements OnInit {
+	public editor = ClassicEditor;
+
+	@Input() richEditor = false;
 	@Input() typeTextArea = false;
 
 	@Input() layoutStyleType: InputStyleEnum = InputStyleEnum.DEFAULT;

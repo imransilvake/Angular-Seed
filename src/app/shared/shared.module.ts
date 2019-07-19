@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { AccessoriesModule } from '../packages/utilities.pck/accessories.mod/accessories.module';
 import { MaterialModule } from '../packages/vendors.pck/material.mod/material.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
 	exports: [
@@ -17,7 +18,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 		RouterModule,
 		MaterialModule,
 		AccessoriesModule,
-		FontAwesomeModule
+		FontAwesomeModule,
+		CKEditorModule
 	]
 })
 

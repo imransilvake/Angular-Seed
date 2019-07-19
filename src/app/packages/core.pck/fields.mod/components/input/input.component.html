@@ -62,9 +62,11 @@
 
 		<!-- Text Area -->
 		<div class="ham-textarea" *ngIf="typeTextArea">
+			<!-- Simple -->
 			<textarea
 				matInput
 				cdkTextareaAutosize
+				*ngIf="!richEditor"
 				[formControl]="control"
 				[id]="inputId"
 				[name]="inputName"
@@ -77,6 +79,15 @@
 				(focus)="inputFocused=true"
 				(focusout)="inputFocused=false">
 			</textarea>
+
+			<!-- Rich -->
+			<ckeditor
+				*ngIf="richEditor"
+				class="ham-editor"
+				[formControl]="control"
+				[config]="{ toolbar: [ 'Bold', 'Italic', '|', 'Link', '|', 'Undo', 'Redo' ] }"
+				[editor]="editor" data="<p>Hello, world!</p>">
+			</ckeditor>
 
 			<!-- Close Icon -->
 			<mat-icon
