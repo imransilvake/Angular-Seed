@@ -18,12 +18,39 @@
 			<!-- Multi-Language Fields | Tabs -->
 			<mat-tab-group class="ham-tabs-1" [@.disabled]="true" (selectedTabChange)="onChangeTab($event)">
 				<mat-tab *ngFor="let tab of formArray; let idx=index;" [label]="tabsList[idx].text">
-					<app-push-message-language-fields
-						[language]="tabsList[idx].id"
-						[data]="data"
-						[multiLanguageFields]="tab"
-						(changeFormTitle)="title = $event">
-					</app-push-message-language-fields>
+					<div class="cd-row ham-padding-0">
+						<div class="cd-col">
+							<app-input
+								[showLabel]="true"
+								labelName="Title*"
+								i18n-labelName="@@Guest_Offers_Form_Title_Label"
+								[inputId]="'guest-offers-title-id'"
+								[inputType]="'text'"
+								[inputName]="'title'"
+								inputPlaceHolder="Title"
+								i18n-inputPlaceHolder="@@Guest_Offers_Form_Title_PlaceHolder"
+								[control]="tab.controls['title']">
+							</app-input>
+						</div>
+					</div>
+
+					<div class="cd-row ham-padding-0">
+						<div class="cd-col">
+							<app-input
+								[typeTextArea]="true"
+								[textareaMinRows]="5"
+								[showLabel]="true"
+								labelName="Notification Text*"
+								i18n-labelName="@@Guest_Offers_Form_Text_Label"
+								[inputId]="'guest-offers-text-id'"
+								[inputType]="'text'"
+								[inputName]="'text'"
+								inputPlaceHolder="Notification Text"
+								i18n-inputPlaceHolder="@@Guest_Offers_Form_Text_PlaceHolder"
+								[control]="tab.controls['description']">
+							</app-input>
+						</div>
+					</div>
 				</mat-tab>
 			</mat-tab-group>
 

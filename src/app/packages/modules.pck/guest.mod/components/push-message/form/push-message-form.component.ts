@@ -96,7 +96,7 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 					// tabs list
 					this.systemInfo = res.formLanguages;
 					if (this.systemInfo && this.systemInfo['System'] && this.systemInfo['System'].Languages.length > 1) {
-						this.systemInfo['System'].Languages.forEach(language => {
+						this.systemInfo['System'].Languages.forEach((language, index) => {
 							// add form groups dynamically
 							this.addLanguageSpecificFields();
 
@@ -104,10 +104,23 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 							this.tabsList.push(
 								...this.systemLanguages.filter(item => item.id === language)
 							);
+
+							// update existing data
+							if (this.data) {
+								// title, text
+								const title = this.formFields.controls['languages'].controls[index].controls['title'];
+								const text = this.formFields.controls['languages'].controls[index].controls['description'];
+
+								title.setValue(this.data.Titles[language]);
+								this.title = this.data.Titles[language];
+								text.setValue(this.data.Text[language]);
+
+								// listen: title field
+								title.valueChanges
+									.pipe(takeUntil(this._ngUnSubscribe))
+									.subscribe(res => this.title = res);
+							}
 						});
-					} else {
-						// add form groups dynamically
-						this.addLanguageSpecificFields();
 					}
 
 					// update existing data

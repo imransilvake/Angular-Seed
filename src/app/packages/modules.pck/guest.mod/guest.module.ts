@@ -14,7 +14,6 @@ import { PushMessageComponent } from './components/push-message/push-message.com
 import { PushMessageListComponent } from './components/push-message/list/push-message-list.component';
 import { PushMessageService } from './services/push-message.service';
 import { PushMessageFormComponent } from './components/push-message/form/push-message-form.component';
-import { PushMessageLanguageFieldsComponent } from './components/push-message/form/push-message-language-fields.component';
 import { GuestOffersService } from './services/guest-offers.service';
 import { OffersFormComponent } from './components/offers/form/offers-form.component';
 import { GuestService } from './services/guest.service';
@@ -33,7 +32,6 @@ import { GuestService } from './services/guest.service';
 		PushMessageComponent,
 		PushMessageListComponent,
 		PushMessageFormComponent,
-		PushMessageLanguageFieldsComponent,
 		OffersFormComponent
 	],
 	providers: [
