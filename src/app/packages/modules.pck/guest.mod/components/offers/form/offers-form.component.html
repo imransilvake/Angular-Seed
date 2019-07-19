@@ -7,8 +7,8 @@
 		<mat-icon class="ham-icon" (click)="onClickCloseForm()">close</mat-icon>
 	</div>
 
-	<!-- Tabs -->
-	<div class="ham-tabs">
+	<!-- Form -->
+	<div class="ham-form-wrapper">
 		<form class="ham-block ham-form" (ngSubmit)="onSubmitForm()">
 			<div class="ham-state" (click)="onClickToggleState()">
 				<fa-icon class="ham-icon ham-green" [icon]="faIcons[1]" *ngIf="isState"></fa-icon>
