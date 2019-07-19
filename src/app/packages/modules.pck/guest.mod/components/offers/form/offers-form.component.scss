@@ -55,6 +55,31 @@
 					&.cd-col-top {
 						margin-top: 20px;
 					}
+
+					.ham-validity {
+						display: flex;
+
+						.ham-date {
+							width: 50%;
+
+							&:first-child {
+								margin-right: 5px;
+							}
+
+							&:last-child {
+								margin-left: 5px;
+							}
+						}
+					}
+
+					.ham-description {
+						margin-top: 5px;
+
+						p {
+							color: cd-palette($cd-color, 1004);
+							font-size: cd-fontSize(s12);
+						}
+					}
 				}
 
 				&.ham-label {
@@ -143,6 +168,26 @@
 				.ham-state {
 					margin-bottom: 15px;
 					text-align: left;
+				}
+
+				.cd-row {
+					.cd-col {
+						.ham-validity {
+							display: block;
+
+							.ham-date {
+								width: 100%;
+
+								&:first-child {
+									margin: 0;
+								}
+
+								&:last-child {
+									margin: 5px 0 0;
+								}
+							}
+						}
+					}
 				}
 
 				.ham-buttons {

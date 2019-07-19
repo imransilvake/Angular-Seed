@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 // app
+import * as moment from 'moment';
 import { faPauseCircle, faPlayCircle, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { AppViewTypeEnum } from '../../../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
 import { GuestViewInterface } from '../../../interfaces/guest-view.interface';
@@ -29,6 +30,8 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 	public systemLanguages;
 	public systemInfo;
 	public tabsList = [];
+	public minDateFrom = moment().toDate();
+	public minDateTo;
 	public title = 'Form';
 
 	public isAccess = false;
@@ -56,7 +59,11 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 			state: new FormControl('INACTIVE'),
 			hotels: new FormControl('', [Validators.required]),
 			targetGroups: new FormControl('', [Validators.required]),
-			access: new FormControl('HOTEL')
+			access: new FormControl('HOTEL'),
+			validity: new FormGroup({
+				from: new FormControl(this.minDateFrom, [Validators.required]),
+				to: new FormControl('', [Validators.required])
+			})
 		});
 	}
 
@@ -123,24 +130,36 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 		this._utilityService.getHotelList()
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
-					// set hotels
-					this.hotelsList = res;
+				// set hotels
+				this.hotelsList = res;
 
-					// pre-select hotels
-					this.hotels.setValue([]);
-					if (this.data && this.data.HotelIDs) {
-						const selectedHotels = [];
-						for (let i = 0; i < this.data.HotelIDs.length; i++) {
-							selectedHotels.push(
-								...this.hotelsList.filter(
-									target => target.id === this.data.HotelIDs[i]
-								)
-							);
-						}
-						this.hotels.setValue(selectedHotels);
+				// pre-select hotels
+				this.hotels.setValue([]);
+				if (this.data && this.data.HotelIDs) {
+					const selectedHotels = [];
+					for (let i = 0; i < this.data.HotelIDs.length; i++) {
+						selectedHotels.push(
+							...this.hotelsList.filter(
+								target => target.id === this.data.HotelIDs[i]
+							)
+						);
 					}
+					this.hotels.setValue(selectedHotels);
 				}
-			);
+			});
+
+		// listen: validity from
+		this.validity.controls['from'].valueChanges
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => {
+				if (res) {
+					// reset date when from is after to.
+					if (moment(res).isAfter(this.validity.controls['to'].value)) {
+						this.validity.controls['to'].reset();
+					}
+					this.minDateTo = moment(res).toDate();
+				}
+			});
 	}
 
 	ngOnDestroy() {
@@ -160,16 +179,20 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 		return this.formFields.get('state');
 	}
 
+	get validity() {
+		return this.formFields.get('validity');
+	}
+
 	get targetGroups() {
 		return this.formFields.get('targetGroups');
 	}
 
-	get access() {
-		return this.formFields.get('access');
-	}
-
 	get hotels() {
 		return this.formFields.get('hotels');
+	}
+
+	get access() {
+		return this.formFields.get('access');
 	}
 
 	get isFormValid() {

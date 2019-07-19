@@ -48,6 +48,7 @@
 									</div>
 								</div>
 							</div>
+
 							<div class="cd-col cd-col-pm-t-6 cd-col-m-top">
 								Demo
 							</div>
@@ -59,10 +60,46 @@
 			<!-- Divider -->
 			<app-divider></app-divider>
 
+			<!-- Common Fields -->
 			<div class="cd-row ham-padding-1 ham-margin-top-10">
 				<div class="cd-col cd-col-pm-t-6">
 					<div class="cd-row ham-padding-0">
 						<div class="cd-col">
+							<div class="ham-label ham-padding-0">
+								<h6 class="ham-color-label" i18n="@@Guest_Offers_Form_Date_Label">Validity</h6>
+							</div>
+
+							<div class="ham-validity">
+								<div class="ham-date">
+									<app-datepicker
+										[inputId]="'guest-offers-date-from-id'"
+										[inputType]="'text'"
+										[inputName]="'dateFrom'"
+										inputPlaceHolder="From*"
+										i18n-inputPlaceHolder="@@Guest_Offers_Form_Date_From_PlaceHolder"
+										[minDate]="minDateFrom"
+										[control]="validity.controls['from']">
+									</app-datepicker>
+								</div>
+								<div class="ham-date">
+									<app-datepicker
+										[inputId]="'guest-offers-date-to-id'"
+										[inputType]="'text'"
+										[inputName]="'dateTo'"
+										inputPlaceHolder="To*"
+										i18n-inputPlaceHolder="@@Guest_Offers_Form_Date_To_PlaceHolder"
+										[minDate]="minDateTo"
+										[control]="validity.controls['to']">
+									</app-datepicker>
+								</div>
+							</div>
+
+							<div class="ham-description">
+								<p i18n="@@Guest_Offers_Form_Date_Hint">Hint Text</p>
+							</div>
+						</div>
+
+						<div class="cd-col cd-col-top">
 							<app-select
 								[showLabel]="true"
 								labelName="Target Groups*"
@@ -78,6 +115,7 @@
 								[control]="targetGroups">
 							</app-select>
 						</div>
+
 						<div class="cd-col cd-col-top">
 							<app-select
 								[multipleSelection]="true"
