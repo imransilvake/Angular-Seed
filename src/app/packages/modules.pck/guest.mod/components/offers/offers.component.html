@@ -21,7 +21,11 @@
 
 		<!-- View: Form -->
 		<ng-container *ngIf="pageView === 1">
-			Form Works!
+			<app-offers-form
+				[id]="id"
+				[data]="data"
+				(changeOffersView)="pageView = $event.view; id = null; data = null; triggerServices();">
+			</app-offers-form>
 		</ng-container>
 	</div>
 

@@ -1,0 +1,94 @@
+<div class="ham-offers-form ham-wrapper-2">
+	<div class="ham-top">
+		<!-- Title -->
+		<h4>{{ title }}</h4>
+
+		<!-- Close Button -->
+		<mat-icon class="ham-icon" (click)="onClickCloseForm()">close</mat-icon>
+	</div>
+
+	<!-- Tabs -->
+	<div class="ham-tabs">
+		<form class="ham-block ham-form" (ngSubmit)="onSubmitForm()">
+			<div class="ham-state" (click)="onClickToggleState()">
+				<fa-icon class="ham-icon ham-green" [icon]="faIcons[1]" *ngIf="isState"></fa-icon>
+				<fa-icon class="ham-icon ham-orange" [icon]="faIcons[2]" *ngIf="!isState"></fa-icon>
+			</div>
+
+			<!-- Multi-Language Fields | Tabs -->
+			<mat-tab-group class="ham-tabs-1" [@.disabled]="true" (selectedTabChange)="onChangeTab($event)">
+				<mat-tab *ngFor="let tab of formArray; let idx=index;" [label]="tabsList[idx].text">
+					<app-push-message-language-fields
+						[language]="tabsList[idx].id"
+						[data]="data"
+						[multiLanguageFields]="tab"
+						(changeFormTitle)="title = $event">
+					</app-push-message-language-fields>
+				</mat-tab>
+			</mat-tab-group>
+
+			<!-- Divider -->
+			<app-divider></app-divider>
+
+			<div class="cd-row ham-padding-1">
+				<div class="cd-col cd-col-pm-t-6">
+					<app-select
+						[showLabel]="true"
+						labelName="Target Groups*"
+						i18n-labelName="@@Guest_Offers_Form_Target_Groups_Label"
+						[selectType]="selectTypeDefault"
+						[selectId]="'guest-offers-target-groups-id'"
+						selectPlaceHolder="Target Group"
+						i18n-selectPlaceHolder="@@Guest_Offers_Form_Target_Groups_PlaceHolder"
+						[dataDefault]="targetGroupsList"
+						[showHint]="true"
+						hintText="Hint Text"
+						i18n-hintText="Guest_Offers_Form_Target_Groups_Hint"
+						[control]="targetGroups">
+					</app-select>
+				</div>
+				<div class="cd-col cd-col-pm-t-6 cd-col-m-top">
+					<app-select
+						[multipleSelection]="true"
+						[showLabel]="true"
+						labelName="Hotel(s)*"
+						i18n-labelName="@@Guest_Offers_Form_Hotels_Label"
+						[selectType]="selectTypeDefault"
+						[selectId]="'guest-offers-hotels-id'"
+						selectPlaceHolder="Hotel(s)"
+						i18n-selectPlaceHolder="@@Guest_Offers_Form_Hotels_PlaceHolder"
+						[dataDefault]="hotelsList"
+						[showHint]="true"
+						hintText="Hint Text"
+						i18n-hintText="Guest_Offers_Form_Hotels_Hint"
+						[control]="hotels">
+					</app-select>
+				</div>
+			</div>
+
+			<!-- Divider -->
+			<app-divider></app-divider>
+
+			<!-- Submit -->
+			<div class="cd-row ham-padding-1 ham-buttons">
+				<div class="cd-col cd-col-pm-s-6 ham-access">
+					<mat-slide-toggle
+						class="mat-slide-toggle-1"
+						[checked]="isAccess"
+						(change)="onClickToggleAccess()"
+						[formControl]="access">
+					</mat-slide-toggle>
+					<span i18n="@@Guest_Offers_Form_Access">HotelManager can edit and delete</span>
+				</div>
+				<div class="cd-col cd-col-pm-s-6 cd-right-align">
+					<button mat-button type="button" class="ham-button ham-button-1" (click)="onClickCloseForm()"
+							i18n="@@Guest_Offers_Form_Cancel_Button">Cancel
+					</button>
+					<button mat-button type="submit" class="ham-button ham-button-1" [disabled]="!isFormValid">
+						<span i18n="@@Guest_Offers_Form_Save_Button">Save</span>
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

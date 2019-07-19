@@ -12,7 +12,7 @@ import { DialogTypeEnum } from '../../../utilities.pck/dialog.mod/enums/dialog-t
 import { DialogService } from '../../../utilities.pck/dialog.mod/services/dialog.service';
 
 @Injectable()
-export class GuestOfferService {
+export class GuestOffersService {
 	public currentUser;
 	public appState;
 	public tableServices;

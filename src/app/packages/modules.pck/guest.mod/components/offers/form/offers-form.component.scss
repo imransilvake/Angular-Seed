@@ -1,0 +1,172 @@
+@import 'main';
+
+.ham-offers-form {
+	.ham-top {
+		position: relative;
+
+		h4 {
+			min-height: 36px;
+			padding-right: 35px;
+			word-break: break-all;
+		}
+
+		.ham-icon {
+			cursor: pointer;
+			position: absolute;
+			right: 0;
+			top: 0;
+		}
+	}
+
+	.ham-tabs {
+		margin-top: 30px;
+
+		.ham-form {
+			position: relative;
+
+			.ham-state {
+				cursor: pointer;
+				height: 40px;
+				line-height: cd-lineHeight(1);
+				position: absolute;
+				right: 150px;
+				top: -5px;
+				z-index: cd-zIndex(float);
+
+				.ham-icon {
+					font-size: cd-fontSize(s40);
+
+					&.ham-green {
+						color: cd-palette($cd-color, 1007);
+					}
+
+					&.ham-orange {
+						color: cd-palette($cd-color, 1011);
+					}
+				}
+			}
+
+			.cd-row {
+				&:not(:last-child) {
+					margin-bottom: 20px;
+				}
+
+				.cd-col {
+					&.cd-col-top {
+						margin-top: 20px;
+					}
+				}
+
+				&.ham-label {
+					margin-bottom: 0;
+				}
+
+				.ham-color-label {
+					color: cd-palette($cd-color, 1004);
+					display: block;
+					font-size: cd-fontSize(s13);
+					margin-bottom: 5px;
+				}
+			}
+
+			.ham-buttons {
+				margin-top: 20px;
+
+				.ham-access {
+					align-items: center;
+					display: flex;
+				}
+
+				p {
+					color: cd-palette($cd-color, 1009);
+				}
+
+				button {
+					&:first-child {
+						background-color: cd-palette($cd-background, 2007);
+					}
+
+					&:last-child {
+						margin-left: 10px;
+					}
+
+					span, .fa-icon {
+						vertical-align: unset;
+					}
+				}
+			}
+		}
+	}
+
+	// media
+	@include cd-media(desktop, tablet) {
+		.ham-tabs {
+			.ham-form {
+				.ham-state {
+					margin-bottom: 10px;
+					position: static;
+					text-align: right;
+				}
+			}
+		}
+	}
+
+	@include cd-media(desktop, smartphone) {
+		.ham-tabs {
+			.ham-form {
+				.cd-row {
+					.cd-col {
+						padding: 0;
+
+						&.cd-col-m-top {
+							margin-top: 20px;
+						}
+					}
+				}
+
+				.ham-buttons {
+					.cd-col {
+						padding: 0;
+					}
+				}
+			}
+		}
+	}
+
+	@include cd-media(desktop, mini) {
+		.ham-tabs {
+			.ham-form {
+				.ham-state {
+					margin-bottom: 15px;
+					text-align: left;
+				}
+
+				.ham-buttons {
+					display: block;
+
+					.cd-col {
+						display:flex;
+						flex-direction: column-reverse;
+						margin-bottom: 10px;
+
+						p {
+							margin-bottom: 10px;
+						}
+
+						button {
+							width: 100%;
+
+							&:first-child {
+								margin-top: 10px;
+							}
+
+							&:last-child {
+								margin-left: 0;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

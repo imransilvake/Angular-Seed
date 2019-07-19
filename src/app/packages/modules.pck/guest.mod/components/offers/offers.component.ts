@@ -8,7 +8,8 @@ import { filter, takeUntil } from 'rxjs/operators';
 import { AppViewTypeEnum } from '../../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
 import { AuthService } from '../../../authorization.mod/services/auth.service';
 import { SidebarService } from '../../../../frame.pck/services/sidebar.service';
-import { GuestOfferService } from '../../services/guest-offer.service';
+import { GuestOffersService } from '../../services/guest-offers.service';
+import { GuestService } from '../../services/guest.service';
 
 @Component({
 	selector: 'app-offers',
@@ -27,7 +28,8 @@ export class OffersComponent implements OnDestroy {
 		private router: Router,
 		private _authService: AuthService,
 		private _sidebarService: SidebarService,
-		private _guestOfferService: GuestOfferService
+		private _guestService: GuestService,
+		private _guestOffersService: GuestOffersService
 	) {
 		// listen: router event
 		this.router.events
@@ -49,10 +51,11 @@ export class OffersComponent implements OnDestroy {
 	 */
 	public triggerServices() {
 		// set current user state
-		this._guestOfferService.currentUser = this._authService.currentUserState;
+		this._guestOffersService.currentUser = this._authService.currentUserState;
 
 		// set app state
-		this._guestOfferService.appState = this._sidebarService.appState;
+		this._guestService.appState = this._sidebarService.appState;
+		this._guestOffersService.appState = this._sidebarService.appState;
 
 		// validate hotel selection
 		this.isHotel = this._sidebarService.appState.hotelId.split('_')[1];
@@ -61,14 +64,16 @@ export class OffersComponent implements OnDestroy {
 		if (this.isHotel) {
 			// refresh services
 			forkJoin({
-				activeHotelOffers: this._guestOfferService.guestHotelOffersFetch(this.id)
+				activeHotelOffers: this._guestOffersService.guestHotelOffersFetch(this.id),
+				formLanguages: this._guestService.guestFormLanguagesFetch(this.pageView)
 			}).pipe(takeUntil(this._ngUnSubscribe)).subscribe(res => {
 				const result = {
-					activeHotelOffers: res.activeHotelOffers
+					activeHotelOffers: res.activeHotelOffers,
+					formLanguages: res.formLanguages
 				};
 
 				// emit result
-				this._guestOfferService.dataEmitter.next(result);
+				this._guestOffersService.dataEmitter.next(result);
 			});
 		}
 	}

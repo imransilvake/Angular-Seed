@@ -15,7 +15,9 @@ import { PushMessageListComponent } from './components/push-message/list/push-me
 import { PushMessageService } from './services/push-message.service';
 import { PushMessageFormComponent } from './components/push-message/form/push-message-form.component';
 import { PushMessageLanguageFieldsComponent } from './components/push-message/form/push-message-language-fields.component';
-import { GuestOfferService } from './services/guest-offer.service';
+import { GuestOffersService } from './services/guest-offers.service';
+import { OffersFormComponent } from './components/offers/form/offers-form.component';
+import { GuestService } from './services/guest.service';
 
 @NgModule({
 	imports: [
@@ -31,10 +33,12 @@ import { GuestOfferService } from './services/guest-offer.service';
 		PushMessageComponent,
 		PushMessageListComponent,
 		PushMessageFormComponent,
-		PushMessageLanguageFieldsComponent
+		PushMessageLanguageFieldsComponent,
+		OffersFormComponent
 	],
 	providers: [
-		GuestOfferService,
+		GuestService,
+		GuestOffersService,
 		PushMessageService
 	]
 })

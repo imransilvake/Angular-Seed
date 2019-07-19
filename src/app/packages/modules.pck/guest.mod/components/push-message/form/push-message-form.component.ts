@@ -8,7 +8,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import * as moment from 'moment';
 import { faPauseCircle, faPlayCircle, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { AppViewTypeEnum } from '../../../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
-import { GuestPushMessageViewInterface } from '../../../interfaces/guest-push-message-view.interface';
+import { GuestViewInterface } from '../../../interfaces/guest-view.interface';
 import { PushMessageService } from '../../../services/push-message.service';
 import { UtilityService } from '../../../../../utilities.pck/accessories.mod/services/utility.service';
 import { ValidationService } from '../../../../../core.pck/fields.mod/services/validation.service';
@@ -84,29 +84,6 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
-		// listen: get hotels
-		this._utilityService.getHotelList()
-			.pipe(takeUntil(this._ngUnSubscribe))
-			.subscribe(res => {
-					// set hotels
-					this.hotelsList = res;
-
-					// pre-select hotels
-					this.hotels.setValue([]);
-					if (this.data && this.data.HotelIDs) {
-						const selectedHotels = [];
-						for (let i = 0; i < this.data.HotelIDs.length; i++) {
-							selectedHotels.push(
-								...this.hotelsList.filter(
-									target => target.id === this.data.HotelIDs[i]
-								)
-							);
-						}
-						this.hotels.setValue(selectedHotels);
-					}
-				}
-			);
-
 		// listen: fetch form languages
 		this._pushMessageService.dataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
@@ -211,6 +188,29 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 					}
 				}
 			});
+
+		// listen: get hotels
+		this._utilityService.getHotelList()
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => {
+					// set hotels
+					this.hotelsList = res;
+
+					// pre-select hotels
+					this.hotels.setValue([]);
+					if (this.data && this.data.HotelIDs) {
+						const selectedHotels = [];
+						for (let i = 0; i < this.data.HotelIDs.length; i++) {
+							selectedHotels.push(
+								...this.hotelsList.filter(
+									target => target.id === this.data.HotelIDs[i]
+								)
+							);
+						}
+						this.hotels.setValue(selectedHotels);
+					}
+				}
+			);
 	}
 
 	ngOnDestroy() {
@@ -337,7 +337,7 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 	 * close form
 	 */
 	public onClickCloseForm() {
-		const payload: GuestPushMessageViewInterface = {
+		const payload: GuestViewInterface = {
 			view: AppViewTypeEnum.DEFAULT
 		};
 		this.changePushMessageView.emit(payload);

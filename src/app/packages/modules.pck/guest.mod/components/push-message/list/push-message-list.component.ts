@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 // app
 import { PushMessageService } from '../../../services/push-message.service';
 import { AppViewTypeEnum } from '../../../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
-import { GuestPushMessageViewInterface } from '../../../interfaces/guest-push-message-view.interface';
+import { GuestViewInterface } from '../../../interfaces/guest-view.interface';
 
 @Component({
 	selector: 'app-push-message-list',
@@ -113,7 +113,7 @@ export class PushMessageListComponent implements OnInit, OnDestroy {
 	 */
 	public changePageView(data?: any) {
 		// payload
-		const payload: GuestPushMessageViewInterface = {
+		const payload: GuestViewInterface = {
 			view: AppViewTypeEnum.FORM,
 			id: data ? data.ID : null,
 			data: data ? data : null

@@ -4,10 +4,10 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 // app
-import { GuestPushMessageViewInterface } from '../../../interfaces/guest-push-message-view.interface';
+import { GuestViewInterface } from '../../../interfaces/guest-view.interface';
 import { AppViewTypeEnum } from '../../../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
 import { AppOptions } from '../../../../../../../app.config';
-import { GuestOfferService } from '../../../services/guest-offer.service';
+import { GuestOffersService } from '../../../services/guest-offers.service';
 
 @Component({
 	selector: 'app-offer-list',
@@ -26,7 +26,7 @@ export class OfferListComponent implements OnInit, OnDestroy {
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
-	constructor(private _guestOfferService: GuestOfferService) {
+	constructor(private _guestOfferService: GuestOffersService) {
 	}
 
 	ngOnInit() {
@@ -98,7 +98,7 @@ export class OfferListComponent implements OnInit, OnDestroy {
 	 */
 	public changePageView(data?: any) {
 		// payload
-		const payload: GuestPushMessageViewInterface = {
+		const payload: GuestViewInterface = {
 			view: AppViewTypeEnum.FORM,
 			id: data ? data.ID : null,
 			data: data ? data : null

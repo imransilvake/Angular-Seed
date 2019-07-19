@@ -14,7 +14,7 @@ import { DialogService } from '../../../utilities.pck/dialog.mod/services/dialog
 import { AppViewTypeEnum } from '../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
 import { PushMessageInterface } from '../interfaces/push-message.interface';
 import { LoadingAnimationService } from '../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
-import { GuestPushMessageViewInterface } from '../interfaces/guest-push-message-view.interface';
+import { GuestViewInterface } from '../interfaces/guest-view.interface';
 
 @Injectable()
 export class PushMessageService {
@@ -154,29 +154,6 @@ export class PushMessageService {
 	}
 
 	/**
-	 * form languages
-	 *
-	 * @param pageView
-	 */
-	public guestFormLanguagesFetch(pageView: AppViewTypeEnum) {
-		if (pageView === AppViewTypeEnum.DEFAULT) {
-			return of(null);
-		}
-
-		// payload
-		const payload = {
-			pathParams: {
-				groupId: this.appState.groupId
-			}
-		};
-
-		// service
-		return this._proxyService
-			.getAPI(AppServices['Guest']['Guest_Offers_And_Notifications_Form_Group'], payload)
-			.pipe(map(res => res));
-	}
-
-	/**
 	 * create / update push message
 	 *
 	 * @param formPayload
@@ -233,7 +210,7 @@ export class PushMessageService {
 				this._dialogService
 					.showDialog(dialogPayload)
 					.subscribe(() => {
-						const viewPayload: GuestPushMessageViewInterface = {
+						const viewPayload: GuestViewInterface = {
 							view: AppViewTypeEnum.DEFAULT
 						};
 						changePageView.emit(viewPayload);
