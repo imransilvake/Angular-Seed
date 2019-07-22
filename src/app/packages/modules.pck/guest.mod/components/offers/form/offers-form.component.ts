@@ -122,8 +122,8 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 						this.state.setValue(this.isState);
 
 						// barcode, redeem
-						this.barCode.setValue(this.data.Barcode);
-						this.redeem.setValue(this.data.Redeem);
+						this.barCode.setValue(this.data.Data.Barcode);
+						this.redeem.setValue(this.data.Data.Redeem);
 
 						// send date
 						if (this.data.SendDate) {
