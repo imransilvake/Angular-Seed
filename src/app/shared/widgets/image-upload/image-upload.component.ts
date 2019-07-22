@@ -16,6 +16,7 @@ import { takeUntil } from 'rxjs/operators';
 export class ImageUploadComponent implements OnInit, OnDestroy {
 	@Input() fileFormats = ['image/jpeg', 'image/jpg', 'image/png'];
 	@Input() maxFileSize = 1024;
+	@Input() dimensionSize = 1;
 	@Input() image;
 	@Output() preview: EventEmitter<any> = new EventEmitter();
 

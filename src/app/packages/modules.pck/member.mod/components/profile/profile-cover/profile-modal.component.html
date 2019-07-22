@@ -20,10 +20,12 @@
 	</header>
 
 	<!-- Content -->
-	<app-image-upload
-		[image]="previewSource"
-		(preview)="previewSource = $event">
-	</app-image-upload>
+	<div class="ham-content">
+		<app-image-upload
+			[image]="previewSource"
+			(preview)="previewSource = $event">
+		</app-image-upload>
+	</div>
 
 	<!-- Footer -->
 	<footer class="ham-foot">

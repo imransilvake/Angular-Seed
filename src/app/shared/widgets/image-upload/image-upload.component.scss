@@ -1,21 +1,17 @@
 @import 'main';
 
 .ham-image-upload {
-	margin: 20px 0;
 	text-align: center;
 
 	.ham-area {
 		border: 2px dashed cd-palette($cd-border, 3004);
 		cursor: grabbing;
-		height: 200px;
 		margin: 0 auto;
-		width: 200px;
 
 		.ham-dummy {
 			align-items: center;
 			background-color: cd-palette($cd-background, 2003);
 			display: flex;
-			height: 196px;
 			justify-content: center;
 
 			p {
@@ -24,9 +20,35 @@
 		}
 
 		.ham-preview {
-			max-height: 196px;
-			min-height: 196px;
 			object-fit: contain;
+		}
+
+		&.ham-size-0 {
+			height: 160px;
+			width: 160px;
+
+			.ham-dummy {
+				height: 156px;
+			}
+
+			.ham-preview {
+				max-height: 156px;
+				min-height: 156px;
+			}
+		}
+
+		&.ham-size-1 {
+			height: 200px;
+			width: 200px;
+
+			.ham-dummy {
+				height: 196px;
+			}
+
+			.ham-preview {
+				max-height: 196px;
+				min-height: 196px;
+			}
 		}
 	}
 

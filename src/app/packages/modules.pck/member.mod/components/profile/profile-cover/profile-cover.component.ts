@@ -74,9 +74,8 @@ export class ProfileCoverComponent implements OnInit, OnDestroy {
 		// open modal
 		this.dialog.open(ProfileModalComponent, {
 			width: '500px',
-			data: {
-				image: image
-			}
+			data: { image: image },
+			panelClass: 'ham-custom-bg'
 		});
 	}
 }

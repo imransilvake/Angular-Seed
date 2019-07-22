@@ -33,5 +33,6 @@
 		background-color: cd-palette($cd-background, 2003) !important;
 		border-color: cd-palette($cd-border, 3003) !important;
 		box-shadow: none !important;
+		min-height: 100px;
 	}
 }

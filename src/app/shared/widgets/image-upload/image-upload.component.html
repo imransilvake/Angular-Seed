@@ -1,5 +1,9 @@
 <div class="ham-image-upload">
-	<div class="ham-area" (drop)="onDrop($event)" (dragover)="onDragOver($event)">
+	<div class="ham-area"
+		 [class.ham-size-0]="dimensionSize === 0"
+		 [class.ham-size-1]="dimensionSize === 1"
+		 (drop)="onDrop($event)"
+		 (dragover)="onDragOver($event)">
 		<!-- Dummy Area -->
 		<div class="ham-dummy" *ngIf="!image">
 			<p i18n="@@Upload_Image_Drag_Image">Drag Image Here</p>

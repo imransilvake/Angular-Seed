@@ -10,7 +10,7 @@ import { MemberService } from '../../../services/member.service';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-	selector: 'app-profile-upload-image',
+	selector: 'app-profile-modal',
 	templateUrl: './profile-modal.component.html',
 	styleUrls: ['./profile-modal.component.scss']
 })
