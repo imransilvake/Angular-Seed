@@ -118,7 +118,7 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 								// listen: title field
 								title.valueChanges
 									.pipe(takeUntil(this._ngUnSubscribe))
-									.subscribe(title => this.title = title);
+									.subscribe(x => this.title = x);
 							}
 						});
 					}
