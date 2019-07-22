@@ -135,7 +135,14 @@
 				cursor: pointer;
 				position: absolute;
 				right: 6px;
-				top: 12px;
+
+				&:not(.ham-textarea) {
+					top: 12px;
+				}
+
+				&.ham-textarea {
+					top: 10px;
+				}
 
 				&.ham-eye {
 					right: 30px;

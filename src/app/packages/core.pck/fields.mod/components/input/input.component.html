@@ -93,6 +93,7 @@
 			<mat-icon
 				*ngIf="control.value"
 				class="ham-icon ham-close"
+				[class.ham-textarea]="typeTextArea"
 				(click)="control.setValue('')">
 				close
 			</mat-icon>

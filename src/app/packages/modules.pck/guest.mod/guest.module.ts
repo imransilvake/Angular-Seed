@@ -7,7 +7,7 @@ import { WidgetsModule } from '../../../shared/widgets/widgets.module';
 import { SharedModule } from '../../../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { GUEST_ROUTES } from './guest-routing';
-import { OfferListComponent } from './components/offers/list/offer-list.component';
+import { OffersListComponent } from './components/offers/list/offers-list.component';
 import { OffersComponent } from './components/offers/offers.component';
 import { FrameModule } from '../../frame.pck/frame.module';
 import { PushMessageComponent } from './components/push-message/push-message.component';
@@ -28,7 +28,7 @@ import { GuestService } from './services/guest.service';
 	],
 	declarations: [
 		OffersComponent,
-		OfferListComponent,
+		OffersListComponent,
 		PushMessageComponent,
 		PushMessageListComponent,
 		PushMessageFormComponent,

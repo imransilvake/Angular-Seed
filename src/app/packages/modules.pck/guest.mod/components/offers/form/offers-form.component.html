@@ -136,7 +136,29 @@
 					</div>
 				</div>
 				<div class="cd-col cd-col-pm-t-6">
-					Demo
+					<div class="ham-toggle-common">
+						<mat-slide-toggle
+							class="mat-slide-toggle-1"
+							[checked]="barCode.value"
+							[formControl]="barCode">
+						</mat-slide-toggle>
+						<div class="ham-detail">
+							<p i18n="@@Guest_Offers_Form_BarCode_Text">Create a personalized bar code</p>
+							<p i18n="@@Guest_Offers_Form_BarCode_Hint">Note Text</p>
+						</div>
+					</div>
+
+					<div class="ham-toggle-common">
+						<mat-slide-toggle
+							class="mat-slide-toggle-1"
+							[checked]="redeem.value"
+							[formControl]="redeem">
+						</mat-slide-toggle>
+						<div class="ham-detail">
+							<p i18n="@@Guest_Offers_Form_Redeem_Text">Create a redeem slider</p>
+							<p i18n="@@Guest_Offers_Form_Redeem_Hint">Note Text</p>
+						</div>
+					</div>
 				</div>
 			</div>
 

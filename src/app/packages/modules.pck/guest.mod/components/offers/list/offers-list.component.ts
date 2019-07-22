@@ -11,11 +11,11 @@ import { GuestOffersService } from '../../../services/guest-offers.service';
 
 @Component({
 	selector: 'app-offer-list',
-	templateUrl: './offer-list.component.html',
-	styleUrls: ['./offer-list.component.scss']
+	templateUrl: './offers-list.component.html',
+	styleUrls: ['./offers-list.component.scss']
 })
 
-export class OfferListComponent implements OnInit, OnDestroy {
+export class OffersListComponent implements OnInit, OnDestroy {
 	@Output() changeOffersView: EventEmitter<any> = new EventEmitter();
 	@Output() refresh: EventEmitter<any> = new EventEmitter();
 

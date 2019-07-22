@@ -80,6 +80,28 @@
 							font-size: cd-fontSize(s12);
 						}
 					}
+
+					.ham-toggle-common {
+						display: flex;
+						margin-bottom: 25px;
+
+						&:first-child {
+							margin-top: 15px;
+						}
+
+						&:last-child {
+							margin-bottom: 0;
+						}
+
+						.ham-detail {
+							p {
+								&:last-child {
+									color: cd-palette($cd-color, 1004);
+									font-size: cd-fontSize(s13);
+								}
+							}
+						}
+					}
 				}
 
 				&.ham-label {
@@ -149,6 +171,10 @@
 
 						&.cd-col-m-top {
 							margin-top: 20px;
+						}
+
+						.ham-toggle-common {
+							display: block;
 						}
 					}
 				}

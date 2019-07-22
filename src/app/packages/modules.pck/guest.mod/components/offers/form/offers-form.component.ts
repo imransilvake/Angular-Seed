@@ -63,7 +63,9 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 			validity: new FormGroup({
 				from: new FormControl(this.minDateFrom, [Validators.required]),
 				to: new FormControl('', [Validators.required])
-			})
+			}),
+			barCode: new FormControl(false),
+			redeem: new FormControl(false)
 		});
 	}
 
@@ -114,6 +116,10 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 						this.isAccess = this.data.Access.toLowerCase() === 'group';
 						this.state.setValue(this.data.State);
 						this.isState = this.data.State.toLowerCase() === 'active';
+
+						// barcode, redeem
+						this.barCode.setValue(this.data.Barcode);
+						this.redeem.setValue(this.data.Redeem);
 
 						// target groups
 						const selectedGroups = this.targetGroupsList.filter(target => target.id === this.data['Target Group']);
@@ -193,6 +199,14 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 
 	get access() {
 		return this.formFields.get('access');
+	}
+
+	get barCode() {
+		return this.formFields.get('barCode');
+	}
+
+	get redeem() {
+		return this.formFields.get('redeem');
 	}
 
 	get isFormValid() {
