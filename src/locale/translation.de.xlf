@@ -1146,7 +1146,7 @@
 					<context context-type="linenumber">18</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Member_Profile_ProfileCover_Upload_Image_Drag_Image" datatype="html">
+			<trans-unit id="Upload_Image_Drag_Image" datatype="html">
 				<source>Drag Image Here</source>
 				<target>Ziehe Bild hierhin</target>
 				<context-group purpose="location">
@@ -1154,7 +1154,7 @@
 					<context context-type="linenumber">27</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Member_Profile_ProfileCover_Upload_Image_Select_File" datatype="html">
+			<trans-unit id="Upload_Image_Select_File" datatype="html">
 				<source>
 					<x id="START_TAG_LABEL" ctype="x-label" equiv-text="&lt;label&gt;"/>
 					[Select Image]
@@ -1516,7 +1516,7 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Member_Profile_Upload_Image_Error_FileSize" datatype="html">
+			<trans-unit id="Upload_Image_Error_FileSize" datatype="html">
 				<source>Description: FileSize Error</source>
 				<target>Datei darf nicht größer als 1 MB sein</target>
 				<context-group purpose="location">
@@ -1524,7 +1524,7 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Member_Profile_Upload_Image_Error_Wrong_Format" datatype="html">
+			<trans-unit id="Upload_Image_Error_Wrong_Format" datatype="html">
 				<source>Description: Wrong Format Error</source>
 				<target>Datei hat ein ungültiges Format</target>
 				<context-group purpose="location">

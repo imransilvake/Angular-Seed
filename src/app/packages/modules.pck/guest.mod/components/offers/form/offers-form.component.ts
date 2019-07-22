@@ -96,21 +96,21 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 								...this.systemLanguages.filter(item => item.id === language)
 							);
 
+							// title, text
+							const title = this.formFields.controls['languages'].controls[index].controls['title'];
+							const text = this.formFields.controls['languages'].controls[index].controls['description'];
+
 							// update existing data
 							if (this.data) {
-								// title, text
-								const title = this.formFields.controls['languages'].controls[index].controls['title'];
-								const text = this.formFields.controls['languages'].controls[index].controls['description'];
-
 								title.setValue(this.data.Titles[language]);
 								this.title = this.data.Titles[language];
 								text.setValue(this.data.Text[language]);
-
-								// listen: title field
-								title.valueChanges
-									.pipe(takeUntil(this._ngUnSubscribe))
-									.subscribe(x => this.title = x);
 							}
+
+							// listen: title field
+							title.valueChanges
+								.pipe(takeUntil(this._ngUnSubscribe))
+								.subscribe(x => this.title = x);
 						});
 					}
 

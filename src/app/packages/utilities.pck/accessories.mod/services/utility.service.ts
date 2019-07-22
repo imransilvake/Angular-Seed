@@ -355,6 +355,6 @@ export class UtilityService {
 		}
 
 		// service
-		return this._proxyService.postAPI(AppServices['Utilities']['Profile_Image_Change'], { bodyParams: payload })
+		return this._proxyService.postAPI(AppServices['Utilities']['Profile_Image_Change'], { bodyParams: payload });
 	}
 }

@@ -88,14 +88,14 @@ export class ImageUploadComponent implements OnInit, OnDestroy {
 					this.preview.emit(null);
 					this.errorMessage = this._i18n({
 						value: 'Description: FileSize Error',
-						id: 'Member_Profile_Upload_Image_Error_FileSize'
+						id: 'Upload_Image_Error_FileSize'
 					});
 				}
 			} else {
 				this.preview.emit(null);
 				this.errorMessage = this._i18n({
 					value: 'Description: Wrong Format Error',
-					id: 'Member_Profile_Upload_Image_Error_Wrong_Format'
+					id: 'Upload_Image_Error_Wrong_Format'
 				});
 			}
 		}
