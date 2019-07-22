@@ -165,6 +165,15 @@
 					position: static;
 					text-align: right;
 				}
+
+				.ham-tabs {
+					.cd-col {
+						&.ham-image-upload {
+							margin-top: 30px;
+							padding-left: 0;
+						}
+					}
+				}
 			}
 		}
 	}
@@ -189,15 +198,6 @@
 				.ham-buttons {
 					.cd-col {
 						padding: 0;
-					}
-				}
-
-				.ham-tabs {
-					.cd-col {
-						&.ham-image-upload {
-							margin-top: 30px;
-							padding-left: 0;
-						}
 					}
 				}
 			}
