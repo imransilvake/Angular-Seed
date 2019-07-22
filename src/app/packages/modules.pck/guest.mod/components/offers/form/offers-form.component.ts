@@ -283,7 +283,7 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 			State: state,
 			Title: title,
 			Text: description,
-			Image: 'null',
+			Image: this.data && this.data.Image ? this.data.Image : 'null',
 			Barcode: !!this.barCode.value,
 			Redeem: !!this.redeem.value,
 			Trigger: GuestPeriodsEnum.ADHOC,

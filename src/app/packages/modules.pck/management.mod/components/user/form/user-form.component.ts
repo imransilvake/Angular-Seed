@@ -183,6 +183,9 @@ export class UserFormComponent implements OnInit, OnDestroy {
 					this.hotels.enable();
 				}
 			}
+		} else {
+			// select default value
+			this.languageName.setValue(this.languageList[0]);
 		}
 
 		// listen: on role change

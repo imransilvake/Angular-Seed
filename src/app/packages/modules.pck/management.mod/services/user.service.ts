@@ -339,6 +339,7 @@ export class UserService {
 
 		// service
 		this._proxyService.postAPI(api, payload)
+			.pipe(delay(1000))
 			.subscribe(() => {
 				// payload
 				const dialogPayload = {
@@ -436,6 +437,7 @@ export class UserService {
 
 		// service
 		this._proxyService.postAPI(api, payload)
+			.pipe(delay(1000))
 			.subscribe(() => {
 				// update loading state
 				this.formLoadingState.emit();

@@ -178,6 +178,7 @@ export class PushMessageService {
 
 		// service
 		this._proxyService.postAPI(api, payload)
+			.pipe(delay(1000))
 			.subscribe(() => {
 				// stop loading animation
 				this._loadingAnimationService.stopLoadingAnimation();
