@@ -501,7 +501,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
 					// Hotels
 					if (item.hasOwnProperty('HotelIDs')) {
-						const hotels = [];
+						let hotels = [];
 						if (item && item.HotelIDs && typeof item.HotelIDs !== 'string') {
 							item.HotelIDs.forEach(hotel => {
 								if (hotel.split('_')[1]) {
@@ -509,6 +509,10 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 								}
 							});
 						}
+
+						// remove hotel label
+						hotels = hotels && hotels.length && hotels.map(hotel => hotel.split(' - ')[1]);
+
 						newItem = {
 							...newItem,
 							Hotels: hotels && hotels.length ? hotels.join(', ') : 'ALL'

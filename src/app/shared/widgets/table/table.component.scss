@@ -39,6 +39,7 @@
 
 				td {
 					color: cd-palette($cd-color, 1004);
+					max-width: 100px;
 					padding-left: 10px;
 
 					&.ham-notifications {
