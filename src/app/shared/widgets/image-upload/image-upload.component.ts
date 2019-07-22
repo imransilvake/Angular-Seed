@@ -1,55 +1,41 @@
 // angular
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 
 // app
-import { MemberService } from '../../../services/member.service';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { HelperService } from '../../../../../utilities.pck/accessories.mod/services/helper.service';
+import { HelperService } from '../../../packages/utilities.pck/accessories.mod/services/helper.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
-	selector: 'app-profile-upload-image',
-	templateUrl: './profile-upload-image.component.html',
-	styleUrls: ['./profile-upload-image.component.scss']
+	selector: 'app-image-upload',
+	templateUrl: './image-upload.component.html',
+	styleUrls: ['./image-upload.component.scss']
 })
 
-export class ProfileUploadImageComponent implements OnInit, OnDestroy {
-	public faIcons = [faSpinner];
-	public fileFormats = ['image/jpeg', 'image/jpg', 'image/png'];
-	public maxFileSize = 1024;
-	public previewSrc;
-	public errorMessage;
-	public loading = false;
+export class ImageUploadComponent implements OnInit, OnDestroy {
+	@Input() fileFormats = ['image/jpeg', 'image/jpg', 'image/png'];
+	@Input() maxFileSize = 1024;
+	@Input() image;
+	@Output() preview: EventEmitter<any> = new EventEmitter();
 
+	public errorMessage;
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
-	constructor(
-		private _i18n: I18n,
-		private _memberService: MemberService,
-		public dialogRef: MatDialogRef<ProfileUploadImageComponent>) {
+	constructor(private _i18n: I18n) {
 	}
 
 	ngOnInit() {
-		// listen: on new image upload
-		this._memberService.profileImageUpdate
+		// listen: image preview
+		this.preview
 			.pipe(takeUntil(this._ngUnSubscribe))
-			.subscribe(() => this.loading = false);
+			.subscribe(res => this.image = res);
 	}
 
 	ngOnDestroy() {
 		// remove subscriptions
 		this._ngUnSubscribe.next();
 		this._ngUnSubscribe.complete();
-	}
-
-	/**
-	 * close modal
-	 */
-	public onClickCloseModal() {
-		this.dialogRef.close();
 	}
 
 	/**
@@ -95,35 +81,23 @@ export class ProfileUploadImageComponent implements OnInit, OnDestroy {
 					const reader = new FileReader();
 					reader.readAsDataURL(file);
 					reader.onload = () => {
-						this.previewSrc = reader.result;
+						this.preview.emit(reader.result);
 						this.errorMessage = null;
 					};
 				} else {
-					this.previewSrc = null;
+					this.preview.emit(null);
 					this.errorMessage = this._i18n({
 						value: 'Description: FileSize Error',
 						id: 'Member_Profile_Upload_Image_Error_FileSize'
 					});
-
 				}
 			} else {
-				this.previewSrc = null;
+				this.preview.emit(null);
 				this.errorMessage = this._i18n({
 					value: 'Description: Wrong Format Error',
 					id: 'Member_Profile_Upload_Image_Error_Wrong_Format'
 				});
 			}
 		}
-	}
-
-	/**
-	 * upload image to the database
-	 */
-	public onClickSaveImage() {
-		// show spinner and lock button
-		this.loading = true;
-
-		// service
-		this._memberService.memberChangeImage(this.previewSrc, this.dialogRef);
 	}
 }

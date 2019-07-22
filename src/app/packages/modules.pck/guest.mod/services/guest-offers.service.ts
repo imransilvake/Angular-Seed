@@ -14,6 +14,7 @@ import { OfferInterface } from '../interfaces/offer.interface';
 import { LoadingAnimationService } from '../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { GuestViewInterface } from '../interfaces/guest-view.interface';
 import { AppViewTypeEnum } from '../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
+import { UtilityService } from '../../../utilities.pck/accessories.mod/services/utility.service';
 
 @Injectable()
 export class GuestOffersService {
@@ -26,6 +27,7 @@ export class GuestOffersService {
 		private _proxyService: ProxyService,
 		private _i18n: I18n,
 		private _dialogService: DialogService,
+		private _utilityService: UtilityService,
 		private _loadingAnimationService: LoadingAnimationService
 	) {
 	}
@@ -129,10 +131,12 @@ export class GuestOffersService {
 	 * create / update guest offer
 	 *
 	 * @param formPayload
-	 * @param isEditForm
+	 * @param rowData
 	 * @param changePageView
 	 */
-	public guestUpdateOffer(formPayload: OfferInterface, isEditForm: boolean, changePageView: any) {
+	public guestUpdateOffer(formPayload: OfferInterface, rowData: any, changePageView: any) {
+		const isEditForm = !!rowData;
+
 		// start loading animation
 		this._loadingAnimationService.startLoadingAnimation();
 
@@ -140,7 +144,7 @@ export class GuestOffersService {
 		const api = isEditForm ? AppServices['Guest']['Guest_Offers_And_Notifications_Form_Update_Hotel'] : AppServices['Guest']['Guest_Offers_And_Notifications_Form_Create_Hotel'];
 
 		// payload
-		const payload: any = {
+		let payload: any = {
 			pathParams: {
 				groupId: this.appState.groupId,
 				hotelId: this.appState.hotelId
@@ -148,46 +152,67 @@ export class GuestOffersService {
 			bodyParams: formPayload
 		};
 
-		// service
-		this._proxyService.postAPI(api, payload)
-			.pipe(delay(1000))
-			.subscribe(() => {
-				// stop loading animation
-				this._loadingAnimationService.stopLoadingAnimation();
+		// extra payload for image upload
+		const extra = isEditForm && rowData.Data && rowData.Data.Image ? {
+			oldImage: rowData.Data.Image,
+			type: formPayload.Type
+		} : {
+			type: formPayload.Type
+		};
 
-				const text = isEditForm ? {
-					title: this._i18n({ value: 'Title: Offer Updated', id: 'Guest_Offers_Form_Success_Updated_Title' }),
-					message: this._i18n({
-						value: 'Description: Offer Updated',
-						id: 'Guest_Offers_Form_Success_Updated_Description'
-					}),
-				} : {
-					title: this._i18n({ value: 'Title: Offer Created', id: 'Guest_Offers_Form_Success_Created_Title' }),
-					message: this._i18n({
-						value: 'Description: Offer Created',
-						id: 'Guest_Offers_Form_Success_Created_Description'
-					}),
-				};
+		// upload image
+		const imageSource = formPayload.Image && formPayload.Image.length > 200 ? this._utilityService.uploadImage(formPayload.Image, extra) : of(null);
+		imageSource.subscribe((res) => {
+			// add image to payload
+			payload = res && res.name ? {
+				...payload,
+				bodyParams: {
+					...payload.bodyParams,
+					Image: res.name
+				}
+			} : payload;
 
-				// payload
-				const dialogPayload = {
-					type: DialogTypeEnum.NOTICE,
-					payload: {
-						...text,
-						icon: 'dialog_tick',
-						buttonTexts: [this._i18n({ value: 'Button - OK', id: 'Common_Button_OK' })]
-					}
-				};
+			// service: update data
+			this._proxyService.postAPI(api, payload)
+				.pipe(delay(1000))
+				.subscribe(() => {
+					// stop loading animation
+					this._loadingAnimationService.stopLoadingAnimation();
 
-				// listen: dialog service
-				this._dialogService
-					.showDialog(dialogPayload)
-					.subscribe(() => {
-						const viewPayload: GuestViewInterface = {
-							view: AppViewTypeEnum.DEFAULT
-						};
-						changePageView.emit(viewPayload);
-					});
-			});
+					const text = isEditForm ? {
+						title: this._i18n({ value: 'Title: Offer Updated', id: 'Guest_Offers_Form_Success_Updated_Title' }),
+						message: this._i18n({
+							value: 'Description: Offer Updated',
+							id: 'Guest_Offers_Form_Success_Updated_Description'
+						}),
+					} : {
+						title: this._i18n({ value: 'Title: Offer Created', id: 'Guest_Offers_Form_Success_Created_Title' }),
+						message: this._i18n({
+							value: 'Description: Offer Created',
+							id: 'Guest_Offers_Form_Success_Created_Description'
+						}),
+					};
+
+					// payload
+					const dialogPayload = {
+						type: DialogTypeEnum.NOTICE,
+						payload: {
+							...text,
+							icon: 'dialog_tick',
+							buttonTexts: [this._i18n({ value: 'Button - OK', id: 'Common_Button_OK' })]
+						}
+					};
+
+					// listen: dialog service
+					this._dialogService
+						.showDialog(dialogPayload)
+						.subscribe(() => {
+							const viewPayload: GuestViewInterface = {
+								view: AppViewTypeEnum.DEFAULT
+							};
+							changePageView.emit(viewPayload);
+						});
+				});
+		});
 	}
 }

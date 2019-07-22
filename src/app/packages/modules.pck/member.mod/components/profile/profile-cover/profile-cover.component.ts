@@ -8,7 +8,7 @@ import { MatDialog } from '@angular/material';
 import { AuthService } from '../../../../authorization.mod/services/auth.service';
 import { HelperService } from '../../../../../utilities.pck/accessories.mod/services/helper.service';
 import { MemberService } from '../../../services/member.service';
-import { ProfileUploadImageComponent } from './profile-upload-image.component';
+import { ProfileModalComponent } from './profile-modal.component';
 
 @Component({
 	selector: 'app-profile-cover',
@@ -68,8 +68,15 @@ export class ProfileCoverComponent implements OnInit, OnDestroy {
 	 * open upload image modal
 	 */
 	public onClickOpenImageModal() {
-		this.dialog.open(ProfileUploadImageComponent, {
-			width: '500px'
+		// set image
+		const image = this.currentUser.profile.image;
+
+		// open modal
+		this.dialog.open(ProfileModalComponent, {
+			width: '500px',
+			data: {
+				image: image
+			}
 		});
 	}
 }

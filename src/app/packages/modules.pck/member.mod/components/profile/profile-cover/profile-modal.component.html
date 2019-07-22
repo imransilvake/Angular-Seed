@@ -20,41 +20,15 @@
 	</header>
 
 	<!-- Content -->
-	<div class="ham-content">
-		<div class="ham-area" (drop)="onDrop($event)" (dragover)="onDragOver($event)">
-			<!-- Dummy Area -->
-			<div class="ham-dummy" *ngIf="!previewSrc">
-				<p i18n="@@Member_Profile_ProfileCover_Upload_Image_Drag_Image">Drag Image Here</p>
-			</div>
-
-			<!-- Preview -->
-			<img class="ham-preview" *ngIf="previewSrc" [src]="previewSrc" alt="preview-image"/>
-		</div>
-
-		<!-- Select Option -->
-		<p i18n="@@Member_Profile_ProfileCover_Upload_Image_Select_File" class="ham-select-image">
-			<label [htmlFor]="'fileUpload'">
-				[Select Image]
-				<input
-					class="cd-hide"
-					#file
-					[id]="'fileUpload'"
-					[type]="'file'"
-					[accept]="'image/*'"
-					(change)="setFilePreview(file.files[0])"/>
-			</label>
-		</p>
-
-		<!-- Errors -->
-		<div class="ham-error" *ngIf="errorMessage">
-			<p>{{errorMessage}}</p>
-		</div>
-	</div>
+	<app-image-upload
+		[image]="previewSource"
+		(preview)="previewSource = $event">
+	</app-image-upload>
 
 	<!-- Footer -->
 	<footer class="ham-foot">
 		<button i18n="@@Member_Profile_ProfileCover_Upload_Image_Cancel_Button" mat-button type="button" class="ham-button ham-button-1" (click)="onClickCloseModal()">Cancel</button>
-		<button mat-button type="button" class="ham-button ham-button-1" (click)="onClickSaveImage()" [disabled]="!previewSrc || (previewSrc && loading)">
+		<button mat-button type="button" class="ham-button ham-button-1" (click)="onClickSaveImage()" [disabled]="!previewSource || (previewSource && loading)">
 			<fa-icon [icon]="faIcons[0]" [spin]="true" *ngIf="loading"></fa-icon>
 			<span i18n="@@Member_Profile_ProfileCover_Upload_Image_Save_Button" *ngIf="!loading">Save</span>
 		</button>

@@ -1,0 +1,30 @@
+<div class="ham-image-upload">
+	<div class="ham-area" (drop)="onDrop($event)" (dragover)="onDragOver($event)">
+		<!-- Dummy Area -->
+		<div class="ham-dummy" *ngIf="!image">
+			<p i18n="@@Member_Profile_ProfileCover_Upload_Image_Drag_Image">Drag Image Here</p>
+		</div>
+
+		<!-- Preview -->
+		<img class="ham-preview" *ngIf="image" [src]="image" alt="image"/>
+	</div>
+
+	<!-- Select Option -->
+	<p i18n="@@Member_Profile_ProfileCover_Upload_Image_Select_File" class="ham-select-image">
+		<label [htmlFor]="'fileUpload'">
+			[Select Image]
+			<input
+				class="cd-hide"
+				#file
+				[id]="'fileUpload'"
+				[type]="'file'"
+				[accept]="'image/*'"
+				(change)="setFilePreview(file.files[0])"/>
+		</label>
+	</p>
+
+	<!-- Errors -->
+	<div class="ham-error" *ngIf="errorMessage">
+		<p>{{errorMessage}}</p>
+	</div>
+</div>

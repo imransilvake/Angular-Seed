@@ -37,6 +37,7 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 	public minDateFrom = moment().toDate();
 	public minDateTo = moment().toDate();
 	public title = 'Form';
+	public previewSource;
 
 	public isAccess = false;
 	public isState = false;
@@ -147,6 +148,13 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 							this.targetGroups.setValue(...selectedGroups);
 						} else {
 							this.targetGroups.setValue(this.targetGroupsList[0]);
+						}
+
+						// image
+						if (this.data.Image) {
+							this.data.Image.then(x => {
+								this.previewSource = x;
+							});
 						}
 					}
 				}
@@ -283,7 +291,7 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 			State: state,
 			Title: title,
 			Text: description,
-			Image: this.data && this.data.Image ? this.data.Image : 'null',
+			Image: this.previewSource,
 			Barcode: !!this.barCode.value,
 			Redeem: !!this.redeem.value,
 			Trigger: GuestPeriodsEnum.ADHOC,
@@ -295,7 +303,7 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 		};
 
 		// service
-		this._guestOfferService.guestUpdateOffer(formPayload, !!this.data, this.changeOffersView);
+		this._guestOfferService.guestUpdateOffer(formPayload, this.data, this.changeOffersView);
 	}
 
 	/**

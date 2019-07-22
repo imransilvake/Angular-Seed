@@ -457,7 +457,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
 					// Image
 					if (item.hasOwnProperty('Image')) {
-						if (item.Image && item.Image.length > 10) {
+						if (item.Image && item.Image.length > 20) {
 							const imagePromise = this.getImageSrc(item.Image);
 							newItem = {
 								...newItem,
@@ -650,7 +650,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 						// Data
 						if (item.hasOwnProperty('Data')) {
 							const image = item.Data.Image;
-							if (image && image.length > 10) {
+							if (image && image.length > 20) {
 								const imagePromise = this.getImageSrc(image);
 								newItem = {
 									...newItem,

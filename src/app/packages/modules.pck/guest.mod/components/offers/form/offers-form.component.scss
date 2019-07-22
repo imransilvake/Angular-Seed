@@ -118,6 +118,13 @@
 
 			.ham-tabs {
 				margin-bottom: 20px;
+
+				.cd-col {
+					&.ham-image-upload {
+						margin-top: 65px;
+						padding-left: 15px;
+					}
+				}
 			}
 
 			.ham-buttons {
@@ -182,6 +189,15 @@
 				.ham-buttons {
 					.cd-col {
 						padding: 0;
+					}
+				}
+
+				.ham-tabs {
+					.cd-col {
+						&.ham-image-upload {
+							margin-top: 30px;
+							padding-left: 0;
+						}
 					}
 				}
 			}

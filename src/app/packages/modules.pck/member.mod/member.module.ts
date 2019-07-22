@@ -13,7 +13,7 @@ import { SharedModule } from '../../../shared/shared.module';
 import { ChangePasswordComponent } from './components/profile/change-password/change-password.component';
 import { HotelsListComponent } from './components/profile/hotels-list/hotels-list.component';
 import { ProfileCoverComponent } from './components/profile/profile-cover/profile-cover.component';
-import { ProfileUploadImageComponent } from './components/profile/profile-cover/profile-upload-image.component';
+import { ProfileModalComponent } from './components/profile/profile-cover/profile-modal.component';
 
 @NgModule({
 	imports: [
@@ -29,10 +29,10 @@ import { ProfileUploadImageComponent } from './components/profile/profile-cover/
 		ChangePasswordComponent,
 		HotelsListComponent,
 		ProfileCoverComponent,
-		ProfileUploadImageComponent
+		ProfileModalComponent
 	],
 	entryComponents: [
-		ProfileUploadImageComponent
+		ProfileModalComponent
 	]
 })
 

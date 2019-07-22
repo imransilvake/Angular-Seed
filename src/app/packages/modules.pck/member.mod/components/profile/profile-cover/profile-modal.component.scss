@@ -1,0 +1,35 @@
+@import 'main';
+
+.ham-upload-image {
+	background-color: cd-palette($cd-background, 2002);
+	color: cd-palette($cd-color, 1001);
+	padding: 15px;
+
+	header {
+		.ham-top {
+			align-items: center;
+			display: flex;
+			justify-content: space-between;
+
+			a {
+				color: cd-palette($cd-color, 1001);
+				cursor: pointer;
+				height: 24px;
+			}
+		}
+	}
+
+	footer {
+		text-align: center;
+
+		button {
+			&:first-child {
+				background-color: cd-palette($cd-background, 2007);
+			}
+
+			&:last-child {
+				margin-left: 10px;
+			}
+		}
+	}
+}

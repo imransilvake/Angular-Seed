@@ -332,4 +332,29 @@ export class UtilityService {
 
 		return targetGroupsList;
 	}
+
+	/**
+	 * upload image to dynamoDB
+	 *
+	 * @param imageSrc
+	 * @param extra
+	 */
+	public uploadImage(imageSrc: string, extra?: any) {
+		// payload
+		let payload: any = {
+			accessToken: this.currentUser.credentials.accessToken,
+			image: imageSrc
+		};
+
+		// extra payload
+		if (extra) {
+			payload = {
+				...payload,
+				...extra
+			};
+		}
+
+		// service
+		return this._proxyService.postAPI(AppServices['Utilities']['Profile_Image_Change'], { bodyParams: payload })
+	}
 }

@@ -20,6 +20,7 @@ import { DialogService } from '../../../utilities.pck/dialog.mod/services/dialog
 import { ErrorHandlerPayloadInterface } from '../../../utilities.pck/error-handler.mod/interfaces/error-handler-payload.interface';
 import { ErrorHandlerInterface } from '../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 import { ChangePasswordInterface } from '../interfaces/change-password.interface';
+import { UtilityService } from '../../../utilities.pck/accessories.mod/services/utility.service';
 
 @Injectable({ providedIn: 'root' })
 export class MemberService {
@@ -32,6 +33,7 @@ export class MemberService {
 		private _loadingAnimationService: LoadingAnimationService,
 		private _proxyService: ProxyService,
 		private _authService: AuthService,
+		private _utilityService: UtilityService,
 		private _i18n: I18n,
 		private _dialogService: DialogService,
 		private _store: Store<{ ErrorHandler: ErrorHandlerInterface }>
@@ -199,14 +201,7 @@ export class MemberService {
 	 * @param dialog
 	 */
 	public memberChangeImage(imageSrc: string, dialog: any) {
-		// payload
-		const payload = {
-			accessToken: this.currentUser.credentials.accessToken,
-			image: imageSrc
-		};
-
-		// service
-		this._proxyService.postAPI(AppServices['Utilities']['Profile_Image_Change'], { bodyParams: payload })
+		this._utilityService.uploadImage(imageSrc)
 			.subscribe(res => {
 				if (res) {
 					// payload

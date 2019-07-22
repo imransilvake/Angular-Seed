@@ -17,10 +17,10 @@
 
 			<!-- Multi-Language Fields | Tabs -->
 			<div class="ham-tabs">
-				<mat-tab-group class="ham-tabs-1" [@.disabled]="true" (selectedTabChange)="onChangeTab($event)">
-					<mat-tab *ngFor="let tab of formArray; let idx=index;" [label]="tabsList[idx].text">
-						<div class="cd-row ham-padding-1 ham-margin-top-10">
-							<div class="cd-col cd-col-pm-t-6">
+				<div class="cd-row ham-padding-0 ham-margin-top-10">
+					<div class="cd-col cd-col-pm-t-6">
+						<mat-tab-group class="ham-tabs-1" [@.disabled]="true" (selectedTabChange)="onChangeTab($event)">
+							<mat-tab *ngFor="let tab of formArray; let idx=index;" [label]="tabsList[idx].text">
 								<div class="cd-row ham-padding-0">
 									<div class="cd-col">
 										<app-input
@@ -47,14 +47,16 @@
 										</app-input>
 									</div>
 								</div>
-							</div>
-
-							<div class="cd-col cd-col-pm-t-6 cd-col-m-top">
-								Demo
-							</div>
-						</div>
-					</mat-tab>
-				</mat-tab-group>
+							</mat-tab>
+						</mat-tab-group>
+					</div>
+					<div class="cd-col cd-col-pm-t-6 ham-image-upload">
+						<app-image-upload
+							[image]="previewSource"
+							(preview)="previewSource = $event">
+						</app-image-upload>
+					</div>
+				</div>
 			</div>
 
 			<!-- Divider -->

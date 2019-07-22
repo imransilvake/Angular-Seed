@@ -10,6 +10,7 @@ import { ReadMoreComponent } from './read-more/read-more.component';
 import { TableComponent } from './table/table.component';
 import { FieldsModule } from '../../packages/core.pck/fields.mod/fields.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ImageUploadComponent } from './image-upload/image-upload.component';
 
 @NgModule({
 	imports: [
@@ -22,14 +23,16 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 		BadgeComponent,
 		PasswordStrengthComponent,
 		ReadMoreComponent,
-		TableComponent
+		TableComponent,
+		ImageUploadComponent
 	],
 	exports: [
 		DividerComponent,
 		BadgeComponent,
 		PasswordStrengthComponent,
 		ReadMoreComponent,
-		TableComponent
+		TableComponent,
+		ImageUploadComponent
 	]
 })
 
