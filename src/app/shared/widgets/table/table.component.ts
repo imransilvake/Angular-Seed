@@ -204,6 +204,9 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	 */
 	public validateExtension(value) {
 		if (value) {
+			if (value === 'N/A') {
+				return true;
+			}
 			const stringArray = value.split('.');
 			const extension = stringArray[stringArray.length - 1];
 			return extension === 'png' || extension === 'jpg' || extension === 'jpeg';
@@ -649,7 +652,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
 						// Data
 						if (item.hasOwnProperty('Data')) {
-							const image = item.Data.Image;
+							const image = item.Data && item.Data.Image ? item.Data.Image : 'N/A';
 							if (image && image.length > 20) {
 								const imagePromise = this.getImageSrc(image);
 								newItem = {
