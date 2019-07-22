@@ -13,6 +13,10 @@ import { UtilityService } from '../../../../../utilities.pck/accessories.mod/ser
 import { SelectTypeEnum } from '../../../../../core.pck/fields.mod/enums/select-type.enum';
 import { SelectDefaultInterface } from '../../../../../core.pck/fields.mod/interfaces/select-default-interface';
 import { GuestOffersService } from '../../../services/guest-offers.service';
+import { GuestTypeEnum } from '../../../enums/guest-type.enum';
+import { OfferInterface } from '../../../interfaces/offer.interface';
+import { GuestPeriodsEnum } from '../../../enums/guest-periods.enum';
+import { HelperService } from '../../../../../utilities.pck/accessories.mod/services/helper.service';
 
 @Component({
 	selector: 'app-offers-form',
@@ -31,7 +35,7 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 	public systemInfo;
 	public tabsList = [];
 	public minDateFrom = moment().toDate();
-	public minDateTo;
+	public minDateTo = moment().toDate();
 	public title = 'Form';
 
 	public isAccess = false;
@@ -56,10 +60,10 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 		// form group
 		this.formFields = new FormGroup({
 			languages: this._formBuilder.array([]),
-			state: new FormControl('INACTIVE'),
+			state: new FormControl(false),
 			hotels: new FormControl('', [Validators.required]),
 			targetGroups: new FormControl('', [Validators.required]),
-			access: new FormControl('HOTEL'),
+			access: new FormControl(false),
 			validity: new FormGroup({
 				from: new FormControl(this.minDateFrom, [Validators.required]),
 				to: new FormControl('', [Validators.required])
@@ -112,14 +116,30 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 					// update existing data
 					if (this.data) {
 						// access, state
-						this.access.setValue(this.data.Access);
 						this.isAccess = this.data.Access.toLowerCase() === 'group';
-						this.state.setValue(this.data.State);
+						this.access.setValue(this.isAccess);
 						this.isState = this.data.State.toLowerCase() === 'active';
+						this.state.setValue(this.isState);
 
 						// barcode, redeem
 						this.barCode.setValue(this.data.Barcode);
 						this.redeem.setValue(this.data.Redeem);
+
+						// send date
+						if (this.data.SendDate) {
+							const date = moment(this.data.SendDate).toDate();
+							if (!moment(this.data.SendDate).isBefore(moment())) {
+								this.validity.controls['from'].setValue(date);
+							}
+						}
+
+						// expire date
+						if (this.data.ExpDate) {
+							const date = moment(this.data.ExpDate).toDate();
+							if (!moment(this.data.ExpDate).isBefore(moment())) {
+								this.validity.controls['to'].setValue(date);
+							}
+						}
 
 						// target groups
 						const selectedGroups = this.targetGroupsList.filter(target => target.id === this.data['Target Group']);
@@ -238,7 +258,44 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 	 */
 	public onSubmitForm() {
 		const formData = this.formFields.getRawValue();
-		console.log(formData);
+
+		// title & description
+		const title = {};
+		const description = {};
+		if (this.tabsList && this.tabsList.length) {
+			for (let i = 0; i < this.tabsList.length; i++) {
+				title[this.tabsList[i].id] = formData.languages[i].title;
+				description[this.tabsList[i].id] = formData.languages[i].description;
+			}
+		}
+
+		// state, access
+		const state = (this.state.value) ? 'ACTIVE' : 'INACTIVE';
+		const access = (this.access.value) ? 'GROUP' : 'HOTEL';
+
+		// id
+		const id = (!!this.data) ? {ID: this.data.ID} : {};
+
+		// form
+		const formPayload: OfferInterface = {
+			...id,
+			Type: GuestTypeEnum.OFFER,
+			State: state,
+			Title: title,
+			Text: description,
+			Image: 'null',
+			Barcode: !!this.barCode.value,
+			Redeem: !!this.redeem.value,
+			Trigger: GuestPeriodsEnum.ADHOC,
+			SendDate: HelperService.getUTCDate(moment(this.validity.controls['from'].value)),
+			ExpDate: HelperService.getUTCDate(moment(this.validity.controls['to'].value)),
+			Targets: [this.targetGroups.value.id],
+			HotelID: this.hotels.value.map(hotel => hotel.id),
+			Access: access
+		};
+
+		// service
+		this._guestOfferService.guestUpdateOffer(formPayload, !!this.data, this.changeOffersView);
 	}
 
 	/**
@@ -265,23 +322,7 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 	 * toggle state
 	 */
 	public onClickToggleState() {
-		// toggle state
 		this.isState = !this.isState;
-		const state = (this.isState) ? 'ACTIVE' : 'INACTIVE';
-
-		// update to form
-		this.state.setValue(state);
-	}
-
-	/**
-	 * toggle access
-	 */
-	public onClickToggleAccess() {
-		// toggle access
-		this.isAccess = !this.isAccess;
-		const access = (this.isAccess) ? 'GROUP' : 'HOTEL';
-
-		// update to form
-		this.access.setValue(access);
+		this.state.setValue(this.isState);
 	}
 }

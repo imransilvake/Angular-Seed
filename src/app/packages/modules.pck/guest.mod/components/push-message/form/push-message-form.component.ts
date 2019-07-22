@@ -15,6 +15,7 @@ import { ValidationService } from '../../../../../core.pck/fields.mod/services/v
 import { SelectTypeEnum } from '../../../../../core.pck/fields.mod/enums/select-type.enum';
 import { SelectDefaultInterface } from '../../../../../core.pck/fields.mod/interfaces/select-default-interface';
 import { PushMessageInterface } from '../../../interfaces/push-message.interface';
+import { GuestTypeEnum } from '../../../enums/guest-type.enum';
 
 @Component({
 	selector: 'app-push-message-form',
@@ -65,7 +66,7 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 		// form group
 		this.formFields = new FormGroup({
 			languages: this._formBuilder.array([]),
-			state: new FormControl('INACTIVE'),
+			state: new FormControl(false),
 			link: new FormControl('', [ValidationService.urlValidator]),
 			color: new FormControl(this.staticColors[0]),
 			oneTime: new FormGroup({
@@ -79,7 +80,7 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 			periodically: new FormControl(''),
 			hotels: new FormControl('', [Validators.required]),
 			targetGroups: new FormControl('', [Validators.required]),
-			access: new FormControl('HOTEL')
+			access: new FormControl(false)
 		});
 	}
 
@@ -130,10 +131,10 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 						this.color.setValue(this.data.Data.Colour);
 
 						// access, state
-						this.access.setValue(this.data.Access);
 						this.isAccess = this.data.Access.toLowerCase() === 'group';
-						this.state.setValue(this.data.State);
+						this.access.setValue(this.isAccess);
 						this.isState = this.data.State.toLowerCase() === 'active';
+						this.state.setValue(this.isState);
 
 						// target groups and period
 						const selectedGroups = this.targetGroupsList.filter(target => target.id === this.data['Target Group']);
@@ -325,11 +326,18 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 			expDate = PushMessageFormComponent.prepareUTCFromDateTime(this.periodicTime.controls['date'], this.periodicTime.controls['time']);
 		}
 
+		// state, access
+		const state = (this.state.value) ? 'ACTIVE' : 'INACTIVE';
+		const access = (this.access.value) ? 'GROUP' : 'HOTEL';
+
+		// id
 		const id = (!!this.data) ? {ID: this.data.ID} : {};
+
+		// form
 		const formPayload: PushMessageInterface = {
 			...id,
-			Type: 'NOTIFICATION',
-			State: this.state.value,
+			Type: GuestTypeEnum.NOTIFICATION,
+			State: state,
 			Title: title,
 			Text: description,
 			Link: this.link.value,
@@ -339,7 +347,7 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 			ExpDate: expDate,
 			Targets: [this.targetGroups.value.id],
 			HotelID: this.hotels.value.map(hotel => hotel.id),
-			Access: this.access.value
+			Access: access
 		};
 
 		// service
@@ -419,24 +427,8 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 	 * toggle state
 	 */
 	public onClickToggleState() {
-		// toggle state
 		this.isState = !this.isState;
-		const state = (this.isState) ? 'ACTIVE' : 'INACTIVE';
-
-		// update to form
-		this.state.setValue(state);
-	}
-
-	/**
-	 * toggle access
-	 */
-	public onClickToggleAccess() {
-		// toggle access
-		this.isAccess = !this.isAccess;
-		const access = (this.isAccess) ? 'GROUP' : 'HOTEL';
-
-		// update to form
-		this.access.setValue(access);
+		this.state.setValue(this.isState);
 	}
 
 	/**

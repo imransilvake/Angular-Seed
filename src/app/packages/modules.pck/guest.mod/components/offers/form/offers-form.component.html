@@ -170,14 +170,15 @@
 				<div class="cd-col cd-col-pm-s-6 ham-access">
 					<mat-slide-toggle
 						class="mat-slide-toggle-1"
-						[checked]="isAccess"
-						(change)="onClickToggleAccess()"
 						[formControl]="access">
 					</mat-slide-toggle>
 					<span i18n="@@Guest_Offers_Form_Access">HotelManager can edit and delete</span>
 				</div>
 				<div class="cd-col cd-col-pm-s-6 cd-right-align">
-					<button mat-button type="button" class="ham-button ham-button-1" (click)="onClickCloseForm()"
+					<button mat-button
+							type="button"
+							class="ham-button ham-button-1"
+							(click)="onClickCloseForm()"
 							i18n="@@Guest_Offers_Form_Cancel_Button">Cancel
 					</button>
 					<button mat-button type="submit" class="ham-button ham-button-1" [disabled]="!isFormValid">

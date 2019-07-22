@@ -10,6 +10,10 @@ import { GuestTypeEnum } from '../enums/guest-type.enum';
 import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service';
 import { DialogTypeEnum } from '../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { DialogService } from '../../../utilities.pck/dialog.mod/services/dialog.service';
+import { OfferInterface } from '../interfaces/offer.interface';
+import { LoadingAnimationService } from '../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
+import { GuestViewInterface } from '../interfaces/guest-view.interface';
+import { AppViewTypeEnum } from '../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
 
 @Injectable()
 export class GuestOffersService {
@@ -22,6 +26,7 @@ export class GuestOffersService {
 		private _proxyService: ProxyService,
 		private _i18n: I18n,
 		private _dialogService: DialogService,
+		private _loadingAnimationService: LoadingAnimationService
 	) {
 	}
 
@@ -117,6 +122,71 @@ export class GuestOffersService {
 						.pipe(delay(1000))
 						.subscribe(() => refreshEmitter.emit());
 				}
+			});
+	}
+
+	/**
+	 * create / update guest offer
+	 *
+	 * @param formPayload
+	 * @param isEditForm
+	 * @param changePageView
+	 */
+	public guestUpdateOffer(formPayload: OfferInterface, isEditForm: boolean, changePageView: any) {
+		// start loading animation
+		this._loadingAnimationService.startLoadingAnimation();
+
+		// api
+		const api = isEditForm ? AppServices['Guest']['Guest_Offers_And_Notifications_Form_Update_Hotel'] : AppServices['Guest']['Guest_Offers_And_Notifications_Form_Create_Hotel'];
+
+		// payload
+		const payload: any = {
+			pathParams: {
+				groupId: this.appState.groupId,
+				hotelId: this.appState.hotelId
+			},
+			bodyParams: formPayload
+		};
+
+		// service
+		this._proxyService.postAPI(api, payload)
+			.subscribe(() => {
+				// stop loading animation
+				this._loadingAnimationService.stopLoadingAnimation();
+
+				const text = isEditForm ? {
+					title: this._i18n({ value: 'Title: Offer Updated', id: 'Guest_Offers_Form_Success_Updated_Title' }),
+					message: this._i18n({
+						value: 'Description: Offer Updated',
+						id: 'Guest_Offers_Form_Success_Updated_Description'
+					}),
+				} : {
+					title: this._i18n({ value: 'Title: Offer Created', id: 'Guest_Offers_Form_Success_Created_Title' }),
+					message: this._i18n({
+						value: 'Description: Offer Created',
+						id: 'Guest_Offers_Form_Success_Created_Description'
+					}),
+				};
+
+				// payload
+				const dialogPayload = {
+					type: DialogTypeEnum.NOTICE,
+					payload: {
+						...text,
+						icon: 'dialog_tick',
+						buttonTexts: [this._i18n({ value: 'Button - OK', id: 'Common_Button_OK' })]
+					}
+				};
+
+				// listen: dialog service
+				this._dialogService
+					.showDialog(dialogPayload)
+					.subscribe(() => {
+						const viewPayload: GuestViewInterface = {
+							view: AppViewTypeEnum.DEFAULT
+						};
+						changePageView.emit(viewPayload);
+					});
 			});
 	}
 }
