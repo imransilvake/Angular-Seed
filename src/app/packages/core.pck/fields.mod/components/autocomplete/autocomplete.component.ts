@@ -34,6 +34,7 @@ export class AutocompleteComponent implements OnInit, OnDestroy {
 	@Input() showHint = false;
 	@Input() hintText;
 
+	@Input() autocompleteSuggestions = 'off-feature';
 	@Input() autocompleteFocused = false;
 
 	@Input() itemRemovable = false;
