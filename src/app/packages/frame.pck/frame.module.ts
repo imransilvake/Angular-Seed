@@ -49,7 +49,6 @@ import { PageHintService } from './services/page-hint.service';
 	],
 	providers: [
 		EmergencyService,
-		SidebarService,
 		MenuService,
 		PageHintService
 	]
