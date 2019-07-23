@@ -17,7 +17,6 @@ import { HeadComponent } from './components/content/head/head.component';
 import { BreadcrumbModule } from '../utilities.pck/breadcrumb.mod/breadcrumb.module';
 import { EmergencyService } from './services/emergency.service';
 import { FieldsModule } from '../core.pck/fields.mod/fields.module';
-import { SidebarService } from './services/sidebar.service';
 import { MenuService } from './services/menu.service';
 import { PageHintService } from './services/page-hint.service';
 
