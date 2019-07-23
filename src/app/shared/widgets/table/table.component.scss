@@ -51,12 +51,21 @@
 					}
 
 					.ham-image, .ham-no-image {
-						border: 1px solid cd-palette($cd-border, 3004, .3);
-						border-radius: 50%;
-						height: 35px;
-						padding: 2px;
 						text-align: center;
-						width: 35px;
+
+						&:not(.ham-cover) {
+							border: 1px solid cd-palette($cd-border, 3004, .3);
+							border-radius: 50%;
+							padding: 2px;
+							height: 35px;
+							width: 35px;
+						}
+
+						&.ham-cover {
+							height: 55px;
+							width: 55px;
+							padding: 5px;
+						}
 					}
 
 					.ham-no-image {

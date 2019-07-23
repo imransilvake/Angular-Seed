@@ -65,11 +65,10 @@
 						<ng-container *ngSwitchCase="'Image'">
 							<ng-container [ngSwitch]="validateType(element[column])">
 								<ng-container *ngSwitchCase="'object'">
-									<img
-										class="ham-image"
-										*ngIf="element[column] && element[column] | async"
-										[src]="element[column] | async"
-										alt="table-photo"/>
+									<img class="ham-image"
+										 *ngIf="element[column] && element[column] | async"
+										 [src]="element[column] | async"
+										 alt="table-photo"/>
 								</ng-container>
 								<ng-container *ngSwitchCase="'string'">
 									<img class="ham-image"
