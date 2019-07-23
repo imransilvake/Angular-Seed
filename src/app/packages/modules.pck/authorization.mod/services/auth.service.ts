@@ -410,8 +410,10 @@ export class AuthService {
 
 	/**
 	 * authenticate logged-in user
+	 *
+	 * @param payload
 	 */
-	public authenticateUser() {
+	public authenticateUser(payload?: any) {
 		const userState = this.currentUserState;
 		if (userState) {
 			const storageValidity = moment().diff(userState.timestamp, 'days');

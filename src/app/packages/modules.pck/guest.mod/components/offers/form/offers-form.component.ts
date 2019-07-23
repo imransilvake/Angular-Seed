@@ -151,7 +151,7 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 						}
 
 						// image
-						if (this.data.Image) {
+						if (this.data.Image && typeof this.data.Image === 'object') {
 							this.data.Image.then(x => {
 								this.previewSource = x;
 							});

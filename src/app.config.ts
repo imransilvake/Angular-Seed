@@ -11,7 +11,7 @@ export const AppOptions = {
 		es: 'es'
 	},
 	sessionTime: {
-		auth: 601 * 1000, // 10 minutes, 1 second
+		auth: 3300 * 1000, // 55 minutes
 		notification: 60 * 1000 // 1 minute
 	},
 	rememberMeValidityInDays: 90,

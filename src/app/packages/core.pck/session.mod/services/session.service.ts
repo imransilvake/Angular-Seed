@@ -118,8 +118,11 @@ export class SessionService {
 				switchMap(() => timer(seconds, seconds))
 			)
 			.subscribe(() => {
+				// payload
+				const payload = { source: 'notification' };
+
 				// authenticate user
-				this._authService.authenticateUser()
+				this._authService.authenticateUser(payload)
 					.subscribe(res => {
 						if (!res.status) {
 							// get current user state
