@@ -62,10 +62,12 @@
 						</ng-container>
 
 						<!-- Image -->
+						<!-- .ham-cover = Guest Offers -->
 						<ng-container *ngSwitchCase="'Image'">
 							<ng-container [ngSwitch]="validateType(element[column])">
 								<ng-container *ngSwitchCase="'object'">
 									<img class="ham-image"
+										 [class.ham-cover]="!!element['State'] && !!element['Access']"
 										 *ngIf="element[column] && element[column] | async"
 										 [src]="element[column] | async"
 										 alt="table-photo"/>
