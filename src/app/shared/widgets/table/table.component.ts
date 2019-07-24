@@ -571,7 +571,8 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 						const date = item.ConfirmDate ? HelperService.getDateFromNow(language, item.ConfirmDate) : '-';
 						newItem = {
 							...newItem,
-							ConfirmDate: date
+							ConfirmDate: date,
+							Notification: true
 						};
 					}
 
@@ -657,7 +658,8 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 								const imagePromise = this.getImageSrc(image);
 								newItem = {
 									...newItem,
-									Image: imagePromise
+									Image: imagePromise,
+									GuestOffers: true // .ham-cover
 								};
 							} else {
 								newItem = {

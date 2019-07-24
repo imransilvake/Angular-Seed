@@ -62,12 +62,11 @@
 						</ng-container>
 
 						<!-- Image -->
-						<!-- .ham-cover = Guest Offers -->
 						<ng-container *ngSwitchCase="'Image'">
 							<ng-container [ngSwitch]="validateType(element[column])">
 								<ng-container *ngSwitchCase="'object'">
 									<img class="ham-image"
-										 [class.ham-cover]="!!element['State'] && !!element['Access']"
+										 [class.ham-cover]="!!element['GuestOffers']"
 										 *ngIf="element[column] && element[column] | async"
 										 [src]="element[column] | async"
 										 alt="table-photo"/>
@@ -132,24 +131,24 @@
 			<ng-container *ngFor="let column of tableAdditionalColumns; let idx=index" matColumnDef="{{ column }}">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="!tableSorting[tableSorting.length - 1]">{{ column }}</th>
 				<td mat-cell *matCellDef="let element">
+					<!-- Notification | without buttons -->
+					<ng-container *ngIf="!!element['Notification'] && !!element['ConfirmUser']">
+						<p><span>{{ element['ConfirmDate'] }}</span> (<span>{{ element['ConfirmUser'] }}</span>)</p>
+					</ng-container>
+
 					<!-- Rest -->
-					<ng-container *ngIf="!(!!element['ConfirmDate'] && !!element['ConfirmUser'])">
+					<ng-container *ngIf="!(!!element['Notification'] && !!element['ConfirmUser'])">
+						<!-- Guest State -->
+						<ng-container *ngIf="!!element['GuestOffers'] && element['State'] !== 'EXPIRED'">
+							<ng-container *ngTemplateOutlet="tableTemplateRef[idx]"></ng-container>
+						</ng-container>
+
 						<!-- Rest -->
-						<ng-container *ngIf="!(!!element['State'] && !!element['Access'])">
+						<ng-container *ngIf="!(!!element['GuestOffers'])">
 							<ng-container *ngIf="column !== 'Visit' || column === 'Visit' && element['TypeRaw'] !== 'ALERT'">
 								<ng-container *ngTemplateOutlet="tableTemplateRef[idx]"></ng-container>
 							</ng-container>
 						</ng-container>
-
-						<!-- Guest State -->
-						<ng-container *ngIf="!!element['State'] && !!element['Access'] && element['State'] !== 'EXPIRED'">
-							<ng-container *ngTemplateOutlet="tableTemplateRef[idx]"></ng-container>
-						</ng-container>
-					</ng-container>
-
-					<!-- Notification | without buttons -->
-					<ng-container *ngIf="!!element['ConfirmDate'] && !!element['ConfirmUser']">
-						<p><span>{{ element['ConfirmDate'] }}</span> (<span>{{ element['ConfirmUser'] }}</span>)</p>
 					</ng-container>
 				</td>
 			</ng-container>
