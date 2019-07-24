@@ -22,8 +22,8 @@ export class BroadcastListComponent implements OnInit {
 	public broadcastTable;
 	public currentRole: UserRoleEnum;
 	public roleAdmin: UserRoleEnum = UserRoleEnum[UserRoleEnum.ADMIN];
-	public buttonType = 0;
 
+	private buttonType = -1;
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
@@ -70,12 +70,12 @@ export class BroadcastListComponent implements OnInit {
 	public onClickRowActionButtons(row: any) {
 		// resend broadcast
 		if (this.buttonType === 1) {
-			// reset
-			this.buttonType = 0;
-
 			// change page view
 			this.changePageView(row);
 		}
+
+		// reset
+		this.buttonType = -1;
 	}
 
 	/**

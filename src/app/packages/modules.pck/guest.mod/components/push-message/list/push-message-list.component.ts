@@ -7,6 +7,7 @@ import { Subject } from 'rxjs';
 import { PushMessageService } from '../../../services/push-message.service';
 import { AppViewTypeEnum } from '../../../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
 import { GuestViewInterface } from '../../../interfaces/guest-view.interface';
+import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum';
 
 @Component({
 	selector: 'app-push-message-list',
@@ -22,14 +23,19 @@ export class PushMessageListComponent implements OnInit, OnDestroy {
 	public recentNotificationList;
 	public periodicNotificationTable;
 	public recentNotificationTable;
-	private buttonType;
+	public currentRole;
+	public roleHouseKeeping: UserRoleEnum = UserRoleEnum[UserRoleEnum.HOUSEKEEPING];
 
+	private buttonType = -1;
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(private _pushMessageService: PushMessageService) {
 	}
 
 	ngOnInit() {
+		// set current role
+		this.currentRole = this._pushMessageService.appState.role;
+
 		// listen: fetch periodic & recently sent guest notifications
 		this._pushMessageService.dataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))

@@ -1,6 +1,6 @@
 <div class="ham-offers-list">
 	<!-- Button: Create New Hotel Offer -->
-	<div class="ham-button-wrapper">
+	<div class="ham-button-wrapper" *ngIf="currentRole !== roleHouseKeeping">
 		<button mat-button class="ham-button ham-button-1" i18n="@@Guest_Offers_Create_NewHotelOffer" (click)="changePageView()">
 			Create New Hotel Offer
 		</button>

@@ -25,12 +25,12 @@ export class NotificationListComponent implements OnInit, OnDestroy {
 	public routing = ROUTING;
 	public notificationList = [];
 	public notificationTable;
-	public buttonType;
 	public formFields;
 	public notificationFilters;
 	public maxDate = moment().toDate();
 	public isNextDate = false;
 
+	private buttonType = -1;
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
@@ -174,9 +174,6 @@ export class NotificationListComponent implements OnInit, OnDestroy {
 	public onClickRowActionButtons(row: any) {
 		// recognize row
 		if (this.buttonType === 1) {
-			// reset button type
-			this.buttonType = 0;
-
 			// payload use on refresh services
 			const payload = {
 				date: this.date.value,
@@ -186,5 +183,8 @@ export class NotificationListComponent implements OnInit, OnDestroy {
 			// service
 			this._notificationService.notificationRecognize(row, this.refresh, payload);
 		}
+
+		// reset
+		this.buttonType = -1;
 	}
 }

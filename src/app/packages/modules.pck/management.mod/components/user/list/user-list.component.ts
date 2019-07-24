@@ -24,12 +24,12 @@ export class UserListComponent implements OnInit, OnDestroy {
 	public userExistingUsersList;
 	public newUsersTable;
 	public existingUsersTable;
-	public buttonType;
 	public currentRole: UserRoleEnum;
 	public roleAdmin: UserRoleEnum = UserRoleEnum[UserRoleEnum.ADMIN];
 	public roleGroupManager: UserRoleEnum = UserRoleEnum[UserRoleEnum.GROUP_MANAGER];
 	public roleHotelManager: UserRoleEnum = UserRoleEnum[UserRoleEnum.HOTEL_MANAGER];
 
+	private buttonType = -1;
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(

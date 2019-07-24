@@ -8,6 +8,7 @@ import { GuestViewInterface } from '../../../interfaces/guest-view.interface';
 import { AppViewTypeEnum } from '../../../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
 import { AppOptions } from '../../../../../../../app.config';
 import { GuestOffersService } from '../../../services/guest-offers.service';
+import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum';
 
 @Component({
 	selector: 'app-offer-list',
@@ -22,14 +23,19 @@ export class OffersListComponent implements OnInit, OnDestroy {
 	public guestOffersList;
 	public guestOffersTable;
 	public tablePageSizeWithoutLimit = AppOptions.tablePageSizeWithoutLimit;
-	private buttonType;
+	public currentRole;
+	public roleHouseKeeping: UserRoleEnum = UserRoleEnum[UserRoleEnum.HOUSEKEEPING];
 
+	private buttonType = -1;
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(private _guestOfferService: GuestOffersService) {
 	}
 
 	ngOnInit() {
+		// set current role
+		this.currentRole = this._guestOfferService.appState.role;
+
 		// listen: fetch periodic & recently sent guest notifications
 		this._guestOfferService.dataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))

@@ -16,7 +16,7 @@ export const AppOptions = {
 	},
 	rememberMeValidityInDays: 90,
 	tablePageSizeLimit: 21,
-	tablePageSizeWithoutLimit: 1000,
+	tablePageSizeWithoutLimit: 1000
 };
 
 // services
