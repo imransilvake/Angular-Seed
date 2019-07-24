@@ -1,7 +1,7 @@
 <div class="ham-client-list" *ngIf="clientGroupHotelsList">
 	<!-- Button -->
 	<div class="ham-button-wrapper" *ngIf="currentRole === roleAdmin">
-		<button mat-button class="ham-button ham-button-1" i18n="@@Management_Client_Create_Hotel_Group" (click)="onClickFetchRow()">
+		<button mat-button class="ham-button ham-button-1" i18n="@@Management_Client_Create_Hotel_Group" (click)="onClickCreateHotelGroup()">
 			Create New Hotel / Group
 		</button>
 	</div>
@@ -21,10 +21,16 @@
 			[tableAdditionalColumns]="['Action']"
 			[tableTemplateRef]="[action]"
 			[tableResources]="clientsTable"
-			(rowData)="onClickFetchRow($event)">
+			(rowData)="onClickRowActionButtons($event)">
 			<!-- Action -->
 			<ng-template #action>
-				<button mat-button class="ham-button ham-button-2" i18n="@@Management_Client_Table_Edit">Edit</button>
+				<button
+					mat-button
+					class="ham-button ham-button-2"
+					(click)="onClickEditHotelGroup()"
+					i18n="@@Management_Client_Table_Edit">
+					Edit
+				</button>
 			</ng-template>
 		</app-table>
 	</div>

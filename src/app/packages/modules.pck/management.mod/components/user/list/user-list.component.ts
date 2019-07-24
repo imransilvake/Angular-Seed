@@ -148,7 +148,10 @@ export class UserListComponent implements OnInit, OnDestroy {
 
 			// service
 			this._userService.userRemove(this.buttonType, row, text, this.refresh);
-		} else {
+		}
+
+		// edit new / existing user
+		if (this.buttonType === 1 || this.buttonType === 2) {
 			// change page view
 			this.changePageView(row);
 		}

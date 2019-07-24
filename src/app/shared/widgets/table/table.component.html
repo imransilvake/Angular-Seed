@@ -135,14 +135,14 @@
 					<!-- Rest -->
 					<ng-container *ngIf="!(!!element['ConfirmDate'] && !!element['ConfirmUser'])">
 						<!-- Rest -->
-						<ng-container *ngIf="!(!!element['State'])">
+						<ng-container *ngIf="!(!!element['State'] && !!element['Access'])">
 							<ng-container *ngIf="column !== 'Visit' || column === 'Visit' && element['TypeRaw'] !== 'ALERT'">
 								<ng-container *ngTemplateOutlet="tableTemplateRef[idx]"></ng-container>
 							</ng-container>
 						</ng-container>
 
 						<!-- Guest State -->
-						<ng-container *ngIf="!!element['State'] && element['State'] !== 'EXPIRED'">
+						<ng-container *ngIf="!!element['State'] && !!element['Access'] && element['State'] !== 'EXPIRED'">
 							<ng-container *ngTemplateOutlet="tableTemplateRef[idx]"></ng-container>
 						</ng-container>
 					</ng-container>

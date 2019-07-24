@@ -25,6 +25,7 @@ export class ClientListComponent implements OnInit, OnDestroy {
 	public clientGroupHotelsList;
 	public clientsTable;
 
+	private buttonType = -1;
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(private _clientService: ClientService) {
@@ -64,32 +65,61 @@ export class ClientListComponent implements OnInit, OnDestroy {
 	}
 
 	/**
+	 * create hotel group
+	 */
+	public onClickCreateHotelGroup() {
+		this.buttonType = 0;
+
+		// change page view
+		this.changePageView({
+			id: null,
+			name: null
+		});
+	}
+
+	/**
+	 * edit hotel group
+	 */
+	public onClickEditHotelGroup() {
+		this.buttonType = 1;
+	}
+
+	/**
 	 * show client form
 	 *
 	 * @param row
 	 */
-	public onClickFetchRow(row?: any) {
-		if (row && row.Id) {
+	public onClickRowActionButtons(row: any) {
+		// edit hotel group
+		if (this.buttonType === 1) {
 			// group name
 			const groupName = this.clientGroupHotelsList.data
 				.filter(res => res.Id === row.Id)
 				.map(group => group.Name)[0];
 
-			// payload
-			const payload: ClientViewInterface = {
-				view: AppViewTypeEnum.FORM,
+			// change page view
+			this.changePageView({
 				id: row.Id,
 				name: groupName
-			};
-			this.changeClientView.emit(payload);
-		} else {
-			// payload
-			const payload: ClientViewInterface = {
-				view: AppViewTypeEnum.FORM,
-				id: null,
-				name: null
-			};
-			this.changeClientView.emit(payload);
+			});
 		}
+
+		// reset
+		this.buttonType = -1;
+	}
+
+	/**
+	 * change page view
+	 *
+	 * @param data
+	 */
+	public changePageView(data?: any) {
+		// payload
+		const payload: ClientViewInterface = {
+			view: AppViewTypeEnum.FORM,
+			id: data.id,
+			name: data.name
+		};
+		this.changeClientView.emit(payload);
 	}
 }
