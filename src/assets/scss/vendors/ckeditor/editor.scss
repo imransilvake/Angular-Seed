@@ -34,5 +34,11 @@
 		border-color: cd-palette($cd-border, 3003) !important;
 		box-shadow: none !important;
 		min-height: 100px;
+
+		blockquote {
+			background-color: cd-palette($cd-background, 2002) !important;
+			border-left: 4px solid cd-palette($cd-border, 3004) !important;
+			color: cd-palette($cd-color, 1001) !important;
+		}
 	}
 }

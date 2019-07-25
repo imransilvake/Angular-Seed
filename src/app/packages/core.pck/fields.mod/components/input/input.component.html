@@ -85,7 +85,9 @@
 				*ngIf="richEditor && editor"
 				class="ham-editor"
 				[formControl]="control"
-				[config]="{ toolbar: [ 'Bold', 'Italic', '|', 'Link', '|', 'Undo', 'Redo' ] }"
+				[config]="{
+					toolbar: [ 'Bold', 'Italic', 'BlockQuote', '|', 'Link', '|', 'Undo', 'Redo' ]
+				}"
 				[editor]="editor">
 			</ckeditor>
 
