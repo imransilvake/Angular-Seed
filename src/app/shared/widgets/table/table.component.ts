@@ -655,7 +655,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 					}
 
 					// module: guest
-					if (this._router.url === `/${ ROUTING.guest.routes.pushMessage }` || this._router.url === `/${ ROUTING.guest.routes.offers }`) {
+					if (this._router.url === `/${ ROUTING.content.routes.guestPushMessage }` || this._router.url === `/${ ROUTING.content.routes.guestOffers }`) {
 						// Title
 						if (item.hasOwnProperty('Title')) {
 							newItem = {

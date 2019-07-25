@@ -40,8 +40,8 @@ const ROUTES: Routes = [
 						loadChildren: () => import('./packages/modules.pck/member.mod/member.module').then(m => m.MemberModule)
 					},
 					{
-						path: ROUTING.guest.title,
-						loadChildren: () => import('./packages/modules.pck/guest.mod/guest.module').then(m => m.GuestModule)
+						path: ROUTING.content.title,
+						loadChildren: () => import('./packages/modules.pck/content.mod/content.module').then(m => m.ContentModule)
 					},
 					{
 						path: ROUTING.notifications.title,

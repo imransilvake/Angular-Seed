@@ -9,8 +9,8 @@ import { AppOptions, AppServices } from '../../../../../app.config';
 import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service';
 import { AuthService } from '../../../modules.pck/authorization.mod/services/auth.service';
 import { NotificationsFiltersEnums } from '../../../modules.pck/notification.mod/enums/notifications-filters.enums';
-import { GuestPeriodsEnum } from '../../../modules.pck/guest.mod/enums/guest-periods.enum';
-import { GuestTargetGroupsEnum } from '../../../modules.pck/guest.mod/enums/guest-target-groups.enum';
+import { GuestPeriodsEnum } from '../../../modules.pck/content.mod/enums/guest-periods.enum';
+import { GuestTargetGroupsEnum } from '../../../modules.pck/content.mod/enums/guest-target-groups.enum';
 import { takeUntil } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })

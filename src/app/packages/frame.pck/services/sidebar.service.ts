@@ -3,7 +3,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 
 // app
-import { faDatabase, faEnvelopeOpenText, faExternalLinkAlt, faHome, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faBook, faDatabase, faEnvelopeOpenText, faExternalLinkAlt, faHome } from '@fortawesome/free-solid-svg-icons';
 import { ROUTING } from '../../../../environments/environment';
 import { SidebarInterface } from '../interfaces/sidebar.interface';
 import { SelectGroupInterface } from '../../core.pck/fields.mod/interfaces/select-group.interface';
@@ -22,8 +22,8 @@ export class SidebarService {
 		`/${ ROUTING.notifications.routes.overview }`,
 		`/${ ROUTING.management.routes.user }`,
 		`/${ ROUTING.management.routes.client }`,
-		`/${ ROUTING.guest.routes.offers }`,
-		`/${ ROUTING.guest.routes.pushMessage }`
+		`/${ ROUTING.content.routes.guestOffers }`,
+		`/${ ROUTING.content.routes.guestPushMessage }`
 	];
 
 	constructor(
@@ -71,17 +71,17 @@ export class SidebarService {
 				]
 			},
 			{
-				name: 'Guest',
-				icon: faUsers,
+				name: 'Content',
+				icon: faBook,
 				children: [
 					{
-						name: 'Offers',
-						url: `/${ ROUTING.guest.routes.offers }`,
+						name: 'Guest Offers',
+						url: `/${ ROUTING.content.routes.guestOffers }`,
 						externalIcon: faExternalLinkAlt
 					},
 					{
-						name: 'Push Message',
-						url: `/${ ROUTING.guest.routes.pushMessage }`,
+						name: 'Guest Push Message',
+						url: `/${ ROUTING.content.routes.guestPushMessage }`,
 						externalIcon: faExternalLinkAlt
 					}
 				]

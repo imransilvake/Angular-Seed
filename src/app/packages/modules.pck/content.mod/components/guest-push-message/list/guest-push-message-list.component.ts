@@ -10,12 +10,12 @@ import { GuestViewInterface } from '../../../interfaces/guest-view.interface';
 import { HelperService } from '../../../../../utilities.pck/accessories.mod/services/helper.service';
 
 @Component({
-	selector: 'app-push-message-list',
-	templateUrl: './push-message-list.component.html',
-	styleUrls: ['./push-message-list.component.scss']
+	selector: 'app-guest-push-message-list',
+	templateUrl: './guest-push-message-list.component.html',
+	styleUrls: ['./guest-push-message-list.component.scss']
 })
 
-export class PushMessageListComponent implements OnInit, OnDestroy {
+export class GuestPushMessageListComponent implements OnInit, OnDestroy {
 	@Output() changePushMessageView: EventEmitter<any> = new EventEmitter();
 	@Output() refresh: EventEmitter<any> = new EventEmitter();
 

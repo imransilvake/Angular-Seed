@@ -1,23 +1,22 @@
 // angular
 import { Component, OnDestroy } from '@angular/core';
 import { forkJoin, Subject } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
 import { NavigationEnd, Router } from '@angular/router';
+import { filter, takeUntil } from 'rxjs/operators';
 
 // app
 import { AppViewTypeEnum } from '../../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
 import { AuthService } from '../../../authorization.mod/services/auth.service';
 import { SidebarService } from '../../../../frame.pck/services/sidebar.service';
-import { PushMessageService } from '../../services/push-message.service';
-import { GuestNotificationTypeEnum } from '../../enums/guest-notification-type.enum';
+import { GuestOffersService } from '../../services/guest-offers.service';
 import { GuestService } from '../../services/guest.service';
 
 @Component({
-	selector: 'app-push-message',
-	templateUrl: './push-message.component.html'
+	selector: 'app-guest-offers',
+	templateUrl: './guest-offers.component.html'
 })
 
-export class PushMessageComponent implements OnDestroy {
+export class GuestOffersComponent implements OnDestroy {
 	public pageView: AppViewTypeEnum = AppViewTypeEnum.DEFAULT;
 	public id;
 	public data;
@@ -30,7 +29,7 @@ export class PushMessageComponent implements OnDestroy {
 		private _authService: AuthService,
 		private _sidebarService: SidebarService,
 		private _guestService: GuestService,
-		private _pushMessageService: PushMessageService
+		private _guestOffersService: GuestOffersService
 	) {
 		// listen: router event
 		this.router.events
@@ -52,11 +51,11 @@ export class PushMessageComponent implements OnDestroy {
 	 */
 	public triggerServices() {
 		// set current user state
-		this._pushMessageService.currentUser = this._authService.currentUserState;
+		this._guestOffersService.currentUser = this._authService.currentUserState;
 
 		// set app state
 		this._guestService.appState = this._sidebarService.appState;
-		this._pushMessageService.appState = this._sidebarService.appState;
+		this._guestOffersService.appState = this._sidebarService.appState;
 
 		// validate hotel selection
 		this.isHotel = this._sidebarService.appState.hotelId.split('_')[1];
@@ -65,18 +64,16 @@ export class PushMessageComponent implements OnDestroy {
 		if (this.isHotel) {
 			// refresh services
 			forkJoin({
-				periodicGuestNotifications: this._pushMessageService.guestNotificationsFetch(this.id, GuestNotificationTypeEnum.PERIODIC),
-				recentGuestNotifications: this._pushMessageService.guestNotificationsFetch(this.id, GuestNotificationTypeEnum.RECENT),
+				activeHotelOffers: this._guestOffersService.guestHotelOffersFetch(this.id),
 				formLanguages: this._guestService.guestFormLanguagesFetch(this.pageView)
 			}).pipe(takeUntil(this._ngUnSubscribe)).subscribe(res => {
 				const result = {
-					periodicGuestNotifications: res.periodicGuestNotifications,
-					recentGuestNotifications: res.recentGuestNotifications,
+					activeHotelOffers: res.activeHotelOffers,
 					formLanguages: res.formLanguages
 				};
 
 				// emit result
-				this._pushMessageService.dataEmitter.next(result);
+				this._guestOffersService.dataEmitter.next(result);
 			});
 		}
 	}

@@ -12,7 +12,7 @@ import { GuestNotificationTypeEnum } from '../enums/guest-notification-type.enum
 import { DialogTypeEnum } from '../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { DialogService } from '../../../utilities.pck/dialog.mod/services/dialog.service';
 import { AppViewTypeEnum } from '../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
-import { PushMessageInterface } from '../interfaces/push-message.interface';
+import { GuestPushMessageInterface } from '../interfaces/guest-push-message.interface';
 import { LoadingAnimationService } from '../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { GuestViewInterface } from '../interfaces/guest-view.interface';
 
@@ -160,7 +160,7 @@ export class PushMessageService {
 	 * @param isEditForm
 	 * @param changePageView
 	 */
-	public guestUpdatePushMessage(formPayload: PushMessageInterface, isEditForm: boolean, changePageView: any) {
+	public guestUpdatePushMessage(formPayload: GuestPushMessageInterface, isEditForm: boolean, changePageView: any) {
 		// start loading animation
 		this._loadingAnimationService.startLoadingAnimation();
 

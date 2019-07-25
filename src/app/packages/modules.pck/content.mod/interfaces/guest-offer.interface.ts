@@ -1,11 +1,12 @@
-// push message interface
-export interface PushMessageInterface {
+// offers interface
+export interface GuestOfferInterface {
 	Type: string;
 	State: string;
 	Title: object;
 	Text: object;
-	Link: string;
-	Colour: string;
+	Image: string;
+	Barcode: boolean;
+	Redeem: boolean;
 	Trigger: string;
 	SendDate: string;
 	ExpDate: string;

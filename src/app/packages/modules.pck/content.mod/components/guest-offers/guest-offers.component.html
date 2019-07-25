@@ -13,19 +13,19 @@
 	<div class="ham-details" *ngIf="isHotel">
 		<!-- View: List -->
 		<ng-container *ngIf="pageView === 0">
-			<app-offer-list
+			<app-guest-offer-list
 				(changeOffersView)="pageView = $event.view; id = $event.id; data = $event.data; triggerServices();"
 				(refresh)="triggerServices()">
-			</app-offer-list>
+			</app-guest-offer-list>
 		</ng-container>
 
 		<!-- View: Form -->
 		<ng-container *ngIf="pageView === 1">
-			<app-offers-form
+			<app-guest-offers-form
 				[id]="id"
 				[data]="data"
 				(changeOffersView)="pageView = $event.view; id = null; data = null; triggerServices();">
-			</app-offers-form>
+			</app-guest-offers-form>
 		</ng-container>
 	</div>
 

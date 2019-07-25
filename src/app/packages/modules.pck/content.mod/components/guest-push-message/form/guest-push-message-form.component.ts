@@ -14,26 +14,26 @@ import * as ErrorHandlerActions from '../../../../../utilities.pck/error-handler
 import { faPauseCircle, faPlayCircle, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { AppViewTypeEnum } from '../../../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
 import { GuestViewInterface } from '../../../interfaces/guest-view.interface';
+import { PushMessageService } from '../../../services/push-message.service';
 import { UtilityService } from '../../../../../utilities.pck/accessories.mod/services/utility.service';
+import { ValidationService } from '../../../../../core.pck/fields.mod/services/validation.service';
 import { SelectTypeEnum } from '../../../../../core.pck/fields.mod/enums/select-type.enum';
 import { SelectDefaultInterface } from '../../../../../core.pck/fields.mod/interfaces/select-default-interface';
-import { GuestOffersService } from '../../../services/guest-offers.service';
+import { GuestPushMessageInterface } from '../../../interfaces/guest-push-message.interface';
 import { GuestTypeEnum } from '../../../enums/guest-type.enum';
-import { OfferInterface } from '../../../interfaces/offer.interface';
-import { GuestPeriodsEnum } from '../../../enums/guest-periods.enum';
 import { HelperService } from '../../../../../utilities.pck/accessories.mod/services/helper.service';
 import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum';
 import { SelectGroupInterface } from '../../../../../core.pck/fields.mod/interfaces/select-group.interface';
 import { ErrorHandlerInterface } from '../../../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 
 @Component({
-	selector: 'app-offers-form',
-	templateUrl: './offers-form.component.html',
-	styleUrls: ['./offers-form.component.scss']
+	selector: 'app-guest-push-message-form',
+	templateUrl: './guest-push-message-form.component.html',
+	styleUrls: ['./guest-push-message-form.component.scss']
 })
 
-export class OffersFormComponent implements OnInit, OnDestroy {
-	@Output() changeOffersView: EventEmitter<any> = new EventEmitter();
+export class GuestPushMessageFormComponent implements OnInit, OnDestroy {
+	@Output() changePushMessageView: EventEmitter<any> = new EventEmitter();
 	@Input() id;
 	@Input() data;
 
@@ -42,13 +42,15 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 	public systemLanguages;
 	public systemInfo;
 	public tabsList = [];
-	public minDateFrom = moment().toDate();
-	public minDateTo = moment().toDate();
+	public minDate = moment().toDate();
 	public title = 'Form';
-	public previewSource;
 
+	public staticColors = ['#3e9d2e', '#d2a41a', '#e74c3c'];
+	public dateTimeButton = false;
 	public isAccess = false;
 	public isState = false;
+
+	public guestPeriodsList: SelectDefaultInterface[] = [];
 	public selectTypeDefault = SelectTypeEnum.DEFAULT;
 	public selectTypeGroup = SelectTypeEnum.GROUP;
 	public hotelList: SelectDefaultInterface[] = [];
@@ -66,13 +68,17 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
-		private _guestOfferService: GuestOffersService,
+		private _pushMessageService: PushMessageService,
 		private _utilityService: UtilityService,
 		private _helperService: HelperService,
 		private _formBuilder: FormBuilder,
 		private _store: Store<{ ErrorHandlerInterface: ErrorHandlerInterface }>,
 		private _i18n: I18n
 	) {
+		// get periods list
+		this.guestPeriodsList = this._utilityService.getGuestPeriods();
+		this.guestPeriodsList.shift();
+
 		// target groups list
 		this.targetGroupsList = this._utilityService.getTargetGroups();
 
@@ -83,27 +89,32 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 		this.formFields = new FormGroup({
 			languages: this._formBuilder.array([]),
 			state: new FormControl(false),
+			link: new FormControl('', [ValidationService.urlValidator]),
+			color: new FormControl(this.staticColors[0]),
+			oneTime: new FormGroup({
+				date: new FormControl(''),
+				time: new FormControl('', [ValidationService.timeValidator])
+			}),
+			periodicTime: new FormGroup({
+				date: new FormControl(''),
+				time: new FormControl('', [ValidationService.timeValidator])
+			}),
+			periodically: new FormControl(''),
 			hotels: new FormControl('', [Validators.required]),
 			targetGroups: new FormControl('', [Validators.required]),
-			access: new FormControl(false),
-			validity: new FormGroup({
-				from: new FormControl(this.minDateFrom, [Validators.required]),
-				to: new FormControl('', [Validators.required])
-			}),
-			barCode: new FormControl(false),
-			redeem: new FormControl(false)
+			access: new FormControl(false)
 		});
 	}
 
 	ngOnInit() {
 		// set current role
-		this.currentRole = this._guestOfferService.appState.role;
+		this.currentRole = this._pushMessageService.appState.role;
 		if (this.currentRole) {
 			this.permissionLevel2 = this._helperService.permissionLevel2(this.currentRole);
 		}
 
 		// listen: fetch form languages
-		this._guestOfferService.dataEmitter
+		this._pushMessageService.dataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
 				// form languages
@@ -143,60 +154,80 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 
 					// update existing data
 					if (this.data) {
+						// link, color
+						this.link.setValue(this.data.Data.Link);
+						this.color.setValue(this.data.Data.Colour);
+
 						// access, state
 						this.isAccess = this.data.Access.toLowerCase() !== 'group';
 						this.access.setValue(this.isAccess);
 						this.isState = this.data.State.toLowerCase() === 'active';
 						this.state.setValue(this.isState);
 
-						// barcode, redeem
-						this.barCode.setValue(this.data.Data.Barcode);
-						this.redeem.setValue(this.data.Data.Redeem);
-
-						// send date
-						if (this.data.SendDate) {
-							const date = moment(this.data.SendDate).toDate();
-							if (!moment(this.data.SendDate).isBefore(moment())) {
-								this.validity.controls['from'].setValue(date);
-							}
-						}
-
-						// expire date
-						if (this.data.ExpDate) {
-							const date = moment(this.data.ExpDate).toDate();
-							if (!moment(this.data.ExpDate).isBefore(moment())) {
-								this.validity.controls['to'].setValue(date);
-							}
-						}
-
-						// target groups
+						// target groups and period
 						const selectedGroups = this.targetGroupsList.filter(target => target.id === this.data['Target Group']);
+						const selectedPeriod = this.guestPeriodsList.filter(target => target.id === this.data['Trigger']);
+
 						if (selectedGroups.length) {
 							this.targetGroups.setValue(...selectedGroups);
 						} else {
 							this.targetGroups.setValue(this.targetGroupsList[0]);
 						}
 
-						// image
-						if (this.data.Image && typeof this.data.Image === 'object') {
-							this.data.Image.then(x => {
-								this.previewSource = x;
-							});
+						if (selectedPeriod.length) {
+							this.periodically.setValue(...selectedPeriod);
+						} else {
+							this.periodically.setValue(this.guestPeriodsList[0]);
 						}
-					}
-				}
-			});
 
-		// listen: validity from
-		this.validity.controls['from'].valueChanges
-			.pipe(takeUntil(this._ngUnSubscribe))
-			.subscribe(res => {
-				if (res) {
-					// reset date when from is after to.
-					if (moment(res).isAfter(this.validity.controls['to'].value)) {
-						this.validity.controls['to'].reset();
+						// trigger
+						if (this.data.Trigger.toLowerCase() === 'adhoc') {
+							this.periodically.disable();
+							this.oneTime.controls['time'].enable();
+							this.periodicTime.controls['time'].disable();
+							this.dateTimeButton = true;
+						} else {
+							this.periodically.enable();
+							this.oneTime.controls['time'].disable();
+							this.periodicTime.controls['time'].enable();
+							this.dateTimeButton = false;
+						}
+
+						// send date
+						if (this.data.SendDate) {
+							const date = moment(this.data.SendDate).toDate();
+							const time = moment(this.data.SendDate).format('HH:mm');
+							if (!moment(this.data.SendDate).isBefore(moment())) {
+								this.oneTime.controls['date'].setValue(date);
+								this.oneTime.controls['time'].setValue(time);
+							}
+
+							// set validators
+							this.setSendDateValidators();
+						}
+
+						// expire date
+						if (this.data.ExpDate) {
+							const date = moment(this.data.ExpDate).toDate();
+							const time = moment(this.data.ExpDate).format('HH:mm');
+							if (!moment(this.data.ExpDate).isBefore(moment())) {
+								this.periodicTime.controls['date'].setValue(date);
+								this.periodicTime.controls['time'].setValue(time);
+							}
+
+							// set validators
+							this.setExpDateValidators();
+						}
+					} else {
+						// send date
+						this.onClickSetDateTimeNow();
+
+						// set first value
+						this.periodically.setValue(this.guestPeriodsList[0]);
+
+						// set validation
+						this.setExpDateValidators();
 					}
-					this.minDateTo = moment(res).toDate();
 				}
 			});
 
@@ -241,7 +272,7 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 			case this.roleGroupManager:
 				// payload
 				payload = {
-					pathParams: { groupId: this._guestOfferService.appState.groupId }
+					pathParams: { groupId: this._pushMessageService.appState.groupId }
 				};
 
 				// hotel list
@@ -250,9 +281,9 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 			case this.roleHotelManager:
 			case this.roleHotelSubManager:
 				// payload
-				const hotelIds = this._guestOfferService.currentUser.profile['custom:hotelId'].split(',');
+				const hotelIds = this._pushMessageService.currentUser.profile['custom:hotelId'].split(',');
 				payload = {
-					pathParams: { groupId: this._guestOfferService.appState.groupId },
+					pathParams: { groupId: this._pushMessageService.appState.groupId },
 					queryParams: { 'HotelIDs[]': hotelIds }
 				};
 
@@ -279,28 +310,36 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 		return this.formFields.get('state');
 	}
 
-	get validity() {
-		return this.formFields.get('validity');
+	get link() {
+		return this.formFields.get('link');
+	}
+
+	get color() {
+		return this.formFields.get('color');
 	}
 
 	get targetGroups() {
 		return this.formFields.get('targetGroups');
 	}
 
-	get hotels() {
-		return this.formFields.get('hotels');
+	get periodically() {
+		return this.formFields.get('periodically');
 	}
 
 	get access() {
 		return this.formFields.get('access');
 	}
 
-	get barCode() {
-		return this.formFields.get('barCode');
+	get hotels() {
+		return this.formFields.get('hotels');
 	}
 
-	get redeem() {
-		return this.formFields.get('redeem');
+	get oneTime() {
+		return this.formFields.get('oneTime');
+	}
+
+	get periodicTime() {
+		return this.formFields.get('periodicTime');
 	}
 
 	get isFormValid() {
@@ -343,38 +382,42 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 			}
 		}
 
+		// date and time
+		const trigger = (this.dateTimeButton) ? 'ADHOC' : this.periodically.value.id;
+		let sendDate = null;
+		let expDate = null;
+		if (this.dateTimeButton) {
+			sendDate = GuestPushMessageFormComponent.prepareUTCFromDateTime(this.oneTime.controls['date'], this.oneTime.controls['time']);
+		} else {
+			expDate = GuestPushMessageFormComponent.prepareUTCFromDateTime(this.periodicTime.controls['date'], this.periodicTime.controls['time']);
+		}
+
 		// state, access
 		const state = (this.state.value) ? 'ACTIVE' : 'INACTIVE';
-		let access = (this.access.value) ? 'HOTEL' : 'GROUP';
-
-		// permission level: 4
-		if (this._helperService.permissionLevel4(this.currentRole)) {
-			access = 'HOTEL';
-		}
+		const access = (this.access.value) ? 'HOTEL' : 'GROUP';
 
 		// id
 		const id = (!!this.data) ? {ID: this.data.ID} : {};
 
 		// form
-		const formPayload: OfferInterface = {
+		const formPayload: GuestPushMessageInterface = {
 			...id,
-			Type: GuestTypeEnum.OFFER,
+			Type: GuestTypeEnum.NOTIFICATION,
 			State: state,
 			Title: title,
 			Text: description,
-			Image: this.previewSource,
-			Barcode: !!this.barCode.value,
-			Redeem: !!this.redeem.value,
-			Trigger: GuestPeriodsEnum.ADHOC,
-			SendDate: HelperService.getUTCDate(moment(this.validity.controls['from'].value)),
-			ExpDate: HelperService.getUTCDate(moment(this.validity.controls['to'].value)),
+			Link: this.link.value,
+			Colour: this.color.value,
+			Trigger: trigger,
+			SendDate: sendDate,
+			ExpDate: expDate,
 			Targets: [this.targetGroups.value.id],
 			HotelID: this.hotels.value.map(hotel => hotel.id),
 			Access: access
 		};
 
 		// service
-		this._guestOfferService.guestUpdateOffer(formPayload, this.data, this.changeOffersView);
+		this._pushMessageService.guestUpdatePushMessage(formPayload, !!this.data, this.changePushMessageView);
 	}
 
 	/**
@@ -384,7 +427,7 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 		const payload: GuestViewInterface = {
 			view: AppViewTypeEnum.DEFAULT
 		};
-		this.changeOffersView.emit(payload);
+		this.changePushMessageView.emit(payload);
 	}
 
 	/**
@@ -398,11 +441,99 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 	}
 
 	/**
+	 * on change date time and periodically
+	 *
+	 * @param radioEvent
+	 */
+	public onChangeDateTimeAndPeriodically(radioEvent: any) {
+		if (radioEvent.value === 'date') {
+			// set fields
+			this.oneTime.controls['date'].enable();
+			this.oneTime.controls['time'].enable();
+			this.periodicTime.controls['date'].disable();
+			this.periodicTime.controls['time'].disable();
+			this.periodically.disable();
+			this.dateTimeButton = true;
+
+			// set validators
+			this.setSendDateValidators();
+
+			// clear validators
+			this.periodicTime.controls['date'].clearValidators();
+			this.periodicTime.controls['time'].clearValidators();
+		}
+
+		if (radioEvent.value === 'periodic') {
+			// set fields
+			this.oneTime.controls['date'].disable();
+			this.oneTime.controls['time'].disable();
+			this.periodicTime.controls['date'].enable();
+			this.periodicTime.controls['time'].enable();
+			this.periodically.enable();
+			this.dateTimeButton = false;
+
+			// set validators
+			this.setExpDateValidators();
+
+			// clear validators
+			this.oneTime.controls['date'].clearValidators();
+			this.oneTime.controls['time'].clearValidators();
+		}
+	}
+
+	/**
+	 * set current date and time
+	 */
+	public onClickSetDateTimeNow() {
+		this.oneTime.controls['date'].setValue(moment().toDate());
+		this.oneTime.controls['time'].setValue(moment().format('HH:mm'));
+	}
+
+	/**
 	 * toggle state
 	 */
 	public onClickToggleState() {
 		this.isState = !this.isState;
 		this.state.setValue(this.isState);
+	}
+
+	/**
+	 * prepare utc from date and time
+	 */
+	private static prepareUTCFromDateTime(date: any, time: any) {
+		const dateStr = date.value,
+			timeStr = time.value,
+			d = moment(dateStr),
+			t = moment(timeStr, 'HH:mm');
+
+		d.set({
+			hour: t.get('hour'),
+			minute: t.get('minute'),
+			second: t.get('second')
+		});
+
+		// utc format
+		return d.utc().format();
+	}
+
+	/**
+	 * set send date validators
+	 */
+	private setSendDateValidators() {
+		this.oneTime.controls['date'].setValidators([Validators.required]);
+		this.oneTime.controls['time'].setValidators([Validators.required]);
+		this.oneTime.controls['date'].updateValueAndValidity();
+		this.oneTime.controls['time'].updateValueAndValidity();
+	}
+
+	/**
+	 * set expiry date validators
+	 */
+	private setExpDateValidators() {
+		this.periodicTime.controls['date'].setValidators([Validators.required]);
+		this.periodicTime.controls['time'].setValidators([Validators.required]);
+		this.periodicTime.controls['date'].updateValueAndValidity();
+		this.periodicTime.controls['time'].updateValueAndValidity();
 	}
 
 	/**

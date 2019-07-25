@@ -10,7 +10,7 @@ import { GuestTypeEnum } from '../enums/guest-type.enum';
 import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service';
 import { DialogTypeEnum } from '../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { DialogService } from '../../../utilities.pck/dialog.mod/services/dialog.service';
-import { OfferInterface } from '../interfaces/offer.interface';
+import { GuestOfferInterface } from '../interfaces/guest-offer.interface';
 import { LoadingAnimationService } from '../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { GuestViewInterface } from '../interfaces/guest-view.interface';
 import { AppViewTypeEnum } from '../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
@@ -134,7 +134,7 @@ export class GuestOffersService {
 	 * @param rowData
 	 * @param changePageView
 	 */
-	public guestUpdateOffer(formPayload: OfferInterface, rowData: any, changePageView: any) {
+	public guestUpdateOffer(formPayload: GuestOfferInterface, rowData: any, changePageView: any) {
 		const isEditForm = !!rowData;
 
 		// start loading animation

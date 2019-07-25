@@ -17,11 +17,11 @@ export const EnvironmentRoutes = {
 			profile: 'member/profile'
 		}
 	},
-	guest: {
-		title: 'guest',
+	content: {
+		title: 'content',
 		routes: {
-			offers: 'guest/offers',
-			pushMessage: 'guest/push-message'
+			guestOffers: 'content/guest-offers',
+			guestPushMessage: 'content/guest-push-message'
 		}
 	},
 	notifications: {

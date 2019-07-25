@@ -13,19 +13,19 @@
 	<div class="ham-details" *ngIf="isHotel">
 		<!-- View: List -->
 		<ng-container *ngIf="pageView === 0">
-			<app-push-message-list
+			<app-guest-push-message-list
 				(changePushMessageView)="pageView = $event.view; id = $event.id; data = $event.data; triggerServices();"
 				(refresh)="triggerServices()">
-			</app-push-message-list>
+			</app-guest-push-message-list>
 		</ng-container>
 
 		<!-- View: Form -->
 		<ng-container *ngIf="pageView === 1">
-			<app-push-message-form
+			<app-guest-push-message-form
 				[id]="id"
 				[data]="data"
 				(changePushMessageView)="pageView = $event.view; id = null; data = null; triggerServices();">
-			</app-push-message-form>
+			</app-guest-push-message-form>
 		</ng-container>
 	</div>
 

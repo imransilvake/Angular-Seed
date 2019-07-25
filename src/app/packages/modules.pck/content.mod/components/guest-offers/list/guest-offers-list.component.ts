@@ -11,12 +11,12 @@ import { GuestOffersService } from '../../../services/guest-offers.service';
 import { HelperService } from '../../../../../utilities.pck/accessories.mod/services/helper.service';
 
 @Component({
-	selector: 'app-offer-list',
-	templateUrl: './offers-list.component.html',
-	styleUrls: ['./offers-list.component.scss']
+	selector: 'app-guest-offer-list',
+	templateUrl: './guest-offers-list.component.html',
+	styleUrls: ['./guest-offers-list.component.scss']
 })
 
-export class OffersListComponent implements OnInit, OnDestroy {
+export class GuestOffersListComponent implements OnInit, OnDestroy {
 	@Output() changeOffersView: EventEmitter<any> = new EventEmitter();
 	@Output() refresh: EventEmitter<any> = new EventEmitter();
 
