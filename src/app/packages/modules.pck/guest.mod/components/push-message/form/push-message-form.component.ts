@@ -25,7 +25,6 @@ import { HelperService } from '../../../../../utilities.pck/accessories.mod/serv
 import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum';
 import { SelectGroupInterface } from '../../../../../core.pck/fields.mod/interfaces/select-group.interface';
 import { ErrorHandlerInterface } from '../../../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
-import { ProxyService } from '../../../../../core.pck/proxy.mod/services/proxy.service';
 
 @Component({
 	selector: 'app-push-message-form',

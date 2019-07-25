@@ -422,7 +422,8 @@ export class AuthService {
 				const sessionValidityPayload = {
 					accessToken: userState.credentials.accessToken,
 					refreshToken: userState.credentials.refreshToken,
-					username: userState.profile.email
+					username: userState.profile.email,
+					...payload
 				};
 
 				// service: session validity

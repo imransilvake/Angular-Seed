@@ -8,6 +8,7 @@ import { AppViewTypeEnum } from '../../../../../utilities.pck/accessories.mod/en
 import { ClientService } from '../../../services/client.service';
 import { ClientViewInterface } from '../../../interfaces/client-view.interface';
 import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum';
+import { HelperService } from '../../../../../utilities.pck/accessories.mod/services/helper.service';
 
 @Component({
 	selector: 'app-client-list',
@@ -18,22 +19,33 @@ import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum
 export class ClientListComponent implements OnInit, OnDestroy {
 	@Output() changeClientView: EventEmitter<any> = new EventEmitter();
 
-	public currentRole: UserRoleEnum;
-	public roleAdmin: UserRoleEnum = UserRoleEnum[UserRoleEnum.ADMIN];
-	public roleHotelManager: UserRoleEnum = UserRoleEnum[UserRoleEnum.HOTEL_MANAGER];
 	public overrideState = false;
 	public clientGroupHotelsList;
 	public clientsTable;
 
+	public currentRole: UserRoleEnum;
+	public permissionLevel2 = false;
+	public permissionLevel3 = false;
+	public permissionLevel4 = false;
+	public roleAdmin: UserRoleEnum = UserRoleEnum[UserRoleEnum.ADMIN];
+
 	private buttonType = -1;
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
-	constructor(private _clientService: ClientService) {
+	constructor(
+		private _clientService: ClientService,
+		private _helperService: HelperService,
+	) {
 	}
 
 	ngOnInit() {
 		// set current user role
 		this.currentRole = this._clientService.appState && this._clientService.appState.role;
+		if (this.currentRole) {
+			this.permissionLevel2 = this._helperService.permissionLevel2(this.currentRole);
+			this.permissionLevel3 = this._helperService.permissionLevel3(this.currentRole);
+			this.permissionLevel4 = this._helperService.permissionLevel4(this.currentRole);
+		}
 
 		// listen: get client hotels
 		this._clientService.dataEmitter

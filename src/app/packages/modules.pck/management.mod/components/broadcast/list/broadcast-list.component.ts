@@ -8,6 +8,7 @@ import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum
 import { BroadcastService } from '../../../services/broadcast.service';
 import { UserViewInterface } from '../../../interfaces/user-view.interface';
 import { AppViewTypeEnum } from '../../../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
+import { HelperService } from '../../../../../utilities.pck/accessories.mod/services/helper.service';
 
 @Component({
 	selector: 'app-broadcast-list',
@@ -20,20 +21,26 @@ export class BroadcastListComponent implements OnInit {
 
 	public broadcastList;
 	public broadcastTable;
+
 	public currentRole: UserRoleEnum;
+	public permissionLevel3 = false;
 	public roleAdmin: UserRoleEnum = UserRoleEnum[UserRoleEnum.ADMIN];
 
 	private buttonType = -1;
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
-		private _broadcastService: BroadcastService
+		private _broadcastService: BroadcastService,
+		private _helperService: HelperService
 	) {
 	}
 
 	ngOnInit() {
 		// set current user role
 		this.currentRole = this._broadcastService.appState.role;
+		if (this.currentRole) {
+			this.permissionLevel3 = this._helperService.permissionLevel3(this.currentRole);
+		}
 
 		// listen: fetch broadcast list
 		this._broadcastService.dataEmitter

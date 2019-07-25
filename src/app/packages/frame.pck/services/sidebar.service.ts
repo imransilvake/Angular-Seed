@@ -13,6 +13,7 @@ import { StorageService } from '../../core.pck/storage.mod/services/storage.serv
 import { AuthService } from '../../modules.pck/authorization.mod/services/auth.service';
 import { ProxyService } from '../../core.pck/proxy.mod/services/proxy.service';
 import { UserRoleEnum } from '../../modules.pck/authorization.mod/enums/user-role.enum';
+import { HelperService } from '../../utilities.pck/accessories.mod/services/helper.service';
 
 @Injectable({ providedIn: 'root' })
 export class SidebarService {
@@ -28,6 +29,7 @@ export class SidebarService {
 	constructor(
 		private _authService: AuthService,
 		private _storageService: StorageService,
+		private _helperService: HelperService,
 		private _proxyService: ProxyService
 	) {
 	}
@@ -145,7 +147,8 @@ export class SidebarService {
 					pathParams: { groupId: groupId }
 				};
 				break;
-			default:
+			case UserRoleEnum[UserRoleEnum.HOTEL_MANAGER]:
+			case UserRoleEnum[UserRoleEnum.HOTEL_SUB_MANAGER]:
 				// set api
 				api = AppServices['Utilities']['Hotels_List_Group'];
 
@@ -176,13 +179,16 @@ export class SidebarService {
 					const mapped = response
 						.filter(hotel => hotel.hasOwnProperty('HotelID'))
 						.reduce((acc, hotel) => {
-							// role: HOTEL_MANAGER
-							if (role === UserRoleEnum[UserRoleEnum.HOTEL_MANAGER]) {
+							// role: HOTEL_MANAGER & HOTEL_SUB_MANAGER
+							if (this._helperService.permissionLevel4(role)) {
 								hotelByGroupList.push({
-									id: (role === UserRoleEnum[UserRoleEnum.HOTEL_MANAGER]) ? hotel.HotelID : hotel.GroupID,
-									name: (role === UserRoleEnum[UserRoleEnum.HOTEL_MANAGER]) ? hotel.Name : hotel.GroupID
+									id: (this._helperService.permissionLevel4(role)) ? hotel.HotelID : hotel.GroupID,
+									name: (this._helperService.permissionLevel4(role)) ? hotel.Name : hotel.GroupID
 								});
-							} else { // role: ADMIN & GROUP_MANAGER
+							}
+
+							// role: ADMIN & GROUP_MANAGER
+							if (this._helperService.permissionLevel2(role)) {
 								if (!acc.hasOwnProperty(hotel.GroupID)) {
 									acc[hotel.GroupID] = [];
 								}
@@ -195,7 +201,7 @@ export class SidebarService {
 						}, {});
 
 					// role: ADMIN & GROUP_MANAGER
-					if (role !== UserRoleEnum[UserRoleEnum.HOTEL_MANAGER]) {
+					if (this._helperService.permissionLevel2(role)) {
 						for (const key in mapped) {
 							if (mapped.hasOwnProperty(key)) {
 								hotelByGroupList.push({
@@ -205,7 +211,10 @@ export class SidebarService {
 								});
 							}
 						}
-					} else { // role: HOTEL_MANAGER
+					}
+
+					// role: HOTEL_MANAGER && HOTEL_SUB_MANAGER
+					if (this._helperService.permissionLevel4(role)) {
 						hotelByGroupList = Array
 							.from(new Set(hotelByGroupList.map(a => a.id)))
 							.map(id => hotelByGroupList.find(a => a.id === id));

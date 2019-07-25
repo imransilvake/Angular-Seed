@@ -20,6 +20,7 @@ import { ClientAppTypeEnum } from '../enums/client-app-type.enum';
 import { ClientAppInterface } from '../interfaces/client-app.interface';
 import { UserRoleEnum } from '../../authorization.mod/enums/user-role.enum';
 import { AppStateEnum } from '../../../frame.pck/enums/app-state.enum';
+import { HelperService } from '../../../utilities.pck/accessories.mod/services/helper.service';
 
 @Injectable()
 export class ClientService {
@@ -31,6 +32,7 @@ export class ClientService {
 
 	constructor(
 		private _proxyService: ProxyService,
+		private _helperService: HelperService,
 		private _i18n: I18n,
 		private _loadingAnimationService: LoadingAnimationService,
 		private _dialogService: DialogService
@@ -345,7 +347,8 @@ export class ClientService {
 	 * @param id
 	 */
 	public clientFetchOverrideHGA(id: string) {
-		if (this.appState.role !== UserRoleEnum[UserRoleEnum.HOTEL_MANAGER]) {
+		// role: ADMIN & GROUP_MANAGER
+		if (this._helperService.permissionLevel2(this.appState.role)) {
 			return this._proxyService
 				.getAPI(AppServices['Management']['Client_Form_HGA_Override_All'], {
 					pathParams: {
@@ -354,7 +357,10 @@ export class ClientService {
 					}
 				})
 				.pipe(map(res => res));
-		} else {
+		}
+
+		// role: HOTEL_MANAGER && HOTEL_SUB_MANAGER
+		if (this._helperService.permissionLevel4(this.appState.role)) {
 			return this._proxyService
 				.getAPI(AppServices['Management']['Client_Form_HGA_Override_Hotel'], {
 					pathParams: {

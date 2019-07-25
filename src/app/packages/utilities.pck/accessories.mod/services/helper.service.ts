@@ -252,4 +252,13 @@ export class HelperService {
 	public permissionLevel4(currentRole: string) {
 		return !!(currentRole === this.roleHotelManager || currentRole === this.roleHotelSubManager);
 	}
+
+	/**
+	 * permission level 5: Admin, GroupManager, HotelManager
+	 *
+	 * @param currentRole
+	 */
+	public permissionLevel5(currentRole: string) {
+		return !!(currentRole === this.roleAdmin || currentRole === this.roleGroupManager || currentRole === this.roleHotelManager);
+	}
 }

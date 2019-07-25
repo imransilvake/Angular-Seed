@@ -1,6 +1,6 @@
 <div class="ham-broadcast-list">
 	<!-- Button: Create New Broadcast -->
-	<div class="ham-button-wrapper" *ngIf="currentRole === roleAdmin">
+	<div class="ham-button-wrapper" *ngIf="permissionLevel3">
 		<button mat-button class="ham-button ham-button-1" i18n="@@Management_Broadcast_Create_NewBroadcast" (click)="changePageView()">
 			Create New Broadcast
 		</button>
@@ -25,7 +25,7 @@
 			<!-- Action -->
 			<ng-template #action>
 				<button
-					*ngIf="currentRole === roleAdmin"
+					*ngIf="permissionLevel3"
 					mat-button
 					class="ham-button ham-button-2 ham-table-button-1"
 					(click)="onClickResendBroadcast()"

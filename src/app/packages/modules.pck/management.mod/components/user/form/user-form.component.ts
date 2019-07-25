@@ -21,6 +21,7 @@ import { UserInterface } from '../../../interfaces/user.interface';
 import { SelectGroupInterface } from '../../../../../core.pck/fields.mod/interfaces/select-group.interface';
 import { ErrorHandlerInterface } from '../../../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { HelperService } from '../../../../../utilities.pck/accessories.mod/services/helper.service';
 
 @Component({
 	selector: 'app-user-form',
@@ -35,10 +36,6 @@ export class UserFormComponent implements OnInit, OnDestroy {
 	public selectTypeGroup = SelectTypeEnum.GROUP;
 	public languageList: SelectDefaultInterface[] = [];
 	public salutationList: SelectDefaultInterface[] = [];
-	public currentRole;
-	public roleAdmin: UserRoleEnum = UserRoleEnum[UserRoleEnum.ADMIN];
-	public roleGroupManager: UserRoleEnum = UserRoleEnum[UserRoleEnum.GROUP_MANAGER];
-	public roleHotelManager: UserRoleEnum = UserRoleEnum[UserRoleEnum.HOTEL_MANAGER];
 	public roleList: SelectDefaultInterface[] = [];
 	public hotelList: SelectDefaultInterface[] = [];
 	public hotelListGroup: SelectGroupInterface[] = [];
@@ -47,6 +44,11 @@ export class UserFormComponent implements OnInit, OnDestroy {
 	public errorMessage;
 	public loading = false;
 
+	public currentRole;
+	public roleAdmin: UserRoleEnum = UserRoleEnum[UserRoleEnum.ADMIN];
+	public roleGroupManager: UserRoleEnum = UserRoleEnum[UserRoleEnum.GROUP_MANAGER];
+	public roleHotelManager: UserRoleEnum = UserRoleEnum[UserRoleEnum.HOTEL_MANAGER];
+
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
@@ -54,6 +56,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
 		public _dialogRef: MatDialogRef<UserFormComponent>,
 		private _userService: UserService,
 		private _utilityService: UtilityService,
+		private _helperService: HelperService,
 		private _store: Store<{ ErrorHandlerInterface: ErrorHandlerInterface }>,
 		private _i18n: I18n
 	) {
