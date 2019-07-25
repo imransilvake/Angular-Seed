@@ -33,14 +33,17 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 	public flatModulesList = [];
 	public licenseActive = true;
 	public formValid = false;
+
 	public currentRole: UserRoleEnum;
-	public roleHotelManager: UserRoleEnum = UserRoleEnum[UserRoleEnum.HOTEL_MANAGER];
+	public permissionLevel2 = false;
+	public permissionLevel4 = false;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
 		private _clientService: ClientService,
 		private _dialogService: DialogService,
+		private _helperService: HelperService,
 		private _loadingAnimationService: LoadingAnimationService,
 		private _i18n: I18n
 	) {
@@ -51,6 +54,10 @@ export class HotelGuestAppComponent implements OnInit, OnDestroy {
 	ngOnInit() {
 		// set current role
 		this.currentRole = this._clientService.appState.role;
+		if (this.currentRole) {
+			this.permissionLevel2 = this._helperService.permissionLevel2(this.currentRole);
+			this.permissionLevel4 = this._helperService.permissionLevel4(this.currentRole);
+		}
 
 		// listen: get modules
 		this._clientService.dataEmitter
