@@ -5,22 +5,22 @@ import { takeUntil } from 'rxjs/operators';
 
 // app
 import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum';
-import { BroadcastService } from '../../../services/broadcast.service';
 import { UserViewInterface } from '../../../interfaces/user-view.interface';
 import { AppViewTypeEnum } from '../../../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
 import { HelperService } from '../../../../../utilities.pck/accessories.mod/services/helper.service';
+import { VersionService } from '../../../services/version.service';
 
 @Component({
-	selector: 'app-broadcast-list',
-	templateUrl: './broadcast-list.component.html',
-	styleUrls: ['./broadcast-list.component.scss']
+	selector: 'app-version-list',
+	templateUrl: './version-list.component.html',
+	styleUrls: ['./version-list.component.scss']
 })
 
-export class BroadcastListComponent implements OnInit {
-	@Output() changeBroadcastView: EventEmitter<any> = new EventEmitter();
+export class VersionListComponent implements OnInit {
+	@Output() changeVersionView: EventEmitter<any> = new EventEmitter();
 
-	public broadcastList;
-	public broadcastTable;
+	public versionList;
+	public versionTable;
 
 	public currentRole: UserRoleEnum;
 	public permissionLevel3 = false;
@@ -30,43 +30,43 @@ export class BroadcastListComponent implements OnInit {
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
-		private _broadcastService: BroadcastService,
+		private _versionService: VersionService,
 		private _helperService: HelperService
 	) {
 	}
 
 	ngOnInit() {
 		// set current user role
-		this.currentRole = this._broadcastService.appState.role;
+		this.currentRole = this._versionService.appState.role;
 		if (this.currentRole) {
 			this.permissionLevel3 = this._helperService.permissionLevel3(this.currentRole);
 		}
 
-		// listen: fetch broadcast list
-		this._broadcastService.dataEmitter
+		// listen: fetch version list
+		this._versionService.dataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
 				// set tables data
-				if (res && res.broadcastList) {
+				if (res && res.versionList) {
 					// set tables resources
-					this.broadcastTable = {
-						api: this._broadcastService.tableServices.api,
-						searchApi: this._broadcastService.tableServices.api,
-						payload: this._broadcastService.tableServices.payload,
-						uniqueID: this._broadcastService.tableServices.uniqueID,
-						sortDefaultColumn: this._broadcastService.tableServices.sortDefaultColumn
+					this.versionTable = {
+						api: this._versionService.tableServices.api,
+						searchApi: this._versionService.tableServices.api,
+						payload: this._versionService.tableServices.payload,
+						uniqueID: this._versionService.tableServices.uniqueID,
+						sortDefaultColumn: this._versionService.tableServices.sortDefaultColumn
 					};
 
-					// set broadcast list
-					this.broadcastList = res.broadcastList;
+					// set version list
+					this.versionList = res.versionList;
 				}
 			});
 	}
 
 	/**
-	 * resend broadcast
+	 * update version
 	 */
-	public onClickResendBroadcast() {
+	public onClickUpdateVersion() {
 		this.buttonType = 1;
 	}
 
@@ -76,7 +76,7 @@ export class BroadcastListComponent implements OnInit {
 	 * @param row
 	 */
 	public onClickRowActionButtons(row: any) {
-		// resend broadcast
+		// update version
 		if (this.buttonType === 1) {
 			// change page view
 			this.changePageView(row);
@@ -97,6 +97,6 @@ export class BroadcastListComponent implements OnInit {
 			view: AppViewTypeEnum.FORM,
 			data: data ? data : null
 		};
-		this.changeBroadcastView.emit(payload);
+		this.changeVersionView.emit(payload);
 	}
 }

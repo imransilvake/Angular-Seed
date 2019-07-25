@@ -34,7 +34,7 @@ export class GuestService {
 
 		// service
 		return this._proxyService
-			.getAPI(AppServices['Guest']['Guest_Offers_And_Notifications_Form_Group'], payload)
+			.getAPI(AppServices['Content']['Guest_Offers_And_Notifications_Form_Group'], payload)
 			.pipe(map(res => res));
 	}
 }

@@ -62,9 +62,8 @@ export class UserListComponent implements OnInit, OnDestroy {
 						sortDefaultColumn: this._userService.tableServices.sortDefaultColumn
 					};
 
-					// map new users list
+					// set new users list
 					this.userNewRegistrationsList = res.newUsers;
-
 				}
 
 				// set tables data
@@ -78,7 +77,7 @@ export class UserListComponent implements OnInit, OnDestroy {
 						sortDefaultColumn: this._userService.tableServices.sortDefaultColumn
 					};
 
-					// map existing users list
+					// set existing users list
 					this.userExistingUsersList = res.existingUsers;
 				}
 			});

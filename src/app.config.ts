@@ -44,7 +44,7 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 		Profile_Update: { serviceUrl: '/profile/update' },
 		Profile_Change_Password: { serviceUrl: '/profile/changepassword' }
 	},
-	Guest: {
+	Content: {
 		Guest_Offers_And_Notifications_List_Hotel: { serviceUrl: '/notification/guest/list/group/:groupId/hotel/:hotelId' },
 		Guest_Offers_And_Notifications_Remove_Hotel: { serviceUrl: '/notification/guest/delete/group/:groupId/hotel/:hotelId' },
 		Guest_Offers_And_Notifications_Form_Group: { serviceUrl: '/config/group/:groupId' },
@@ -97,7 +97,9 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 		User_Form_Confirm_Hotel: { serviceUrl: '/ham/auth/confirmuser/group/:groupId/hotel/:hotelId' },
 
 		Broadcast_List_All: { serviceUrl: '/notification/broadcast/list' },
-		Broadcast_Form_Create_All: { serviceUrl: '/notification/broadcast/create' }
+		Broadcast_Form_Create_All: { serviceUrl: '/notification/broadcast/create' },
+
+		Version_List_All: { serviceUrl: '/config/version' }
 	}
 };
 

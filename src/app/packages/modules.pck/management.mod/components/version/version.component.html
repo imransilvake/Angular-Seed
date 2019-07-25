@@ -1,0 +1,24 @@
+<div class="ham-version-management">
+	<!-- Head -->
+	<app-head
+		pageTitle="Version"
+		i18n-pageTitle="@@Management_System_Version_Title"
+		pageHintTitle="Title: Version"
+		i18n-pageHintTitle="@@Page_Hint_Version_Title"
+		pageHintText="Text: Version"
+		i18n-pageHintText="@@Page_Hint_Version_Text">
+	</app-head>
+
+	<!-- Details -->
+	<div class="ham-details" *ngIf="currentRole === roleAdmin">
+		<!-- View: List -->
+		<app-version-list
+			(changeVersionView)="pageView = $event.view; id = $event.id; data = $event.data;">
+		</app-version-list>
+	</div>
+
+	<!-- Access Denied -->
+	<div class="ham-wrapper-2 ham-problem cd-center-align" *ngIf="currentRole !== roleAdmin">
+		<p i18n="@@Common_No_Access_Available">Access Denied!</p>
+	</div>
+</div>

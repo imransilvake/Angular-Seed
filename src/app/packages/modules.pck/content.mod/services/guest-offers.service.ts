@@ -43,8 +43,8 @@ export class GuestOffersService {
 		}
 
 		// api
-		const api = AppServices['Guest']['Guest_Offers_And_Notifications_List_Hotel'];
-		const updateApi = AppServices['Guest']['Guest_Offers_And_Notifications_Form_Update_Hotel'];
+		const api = AppServices['Content']['Guest_Offers_And_Notifications_List_Hotel'];
+		const updateApi = AppServices['Content']['Guest_Offers_And_Notifications_Form_Update_Hotel'];
 
 		// payload
 		const payload: any = {
@@ -120,7 +120,7 @@ export class GuestOffersService {
 
 					// service
 					this._proxyService
-						.postAPI(AppServices['Guest']['Guest_Offers_And_Notifications_Remove_Hotel'], payload)
+						.postAPI(AppServices['Content']['Guest_Offers_And_Notifications_Remove_Hotel'], payload)
 						.pipe(delay(1000))
 						.subscribe(() => refreshEmitter.emit());
 				}
@@ -141,7 +141,7 @@ export class GuestOffersService {
 		this._loadingAnimationService.startLoadingAnimation();
 
 		// api
-		const api = isEditForm ? AppServices['Guest']['Guest_Offers_And_Notifications_Form_Update_Hotel'] : AppServices['Guest']['Guest_Offers_And_Notifications_Form_Create_Hotel'];
+		const api = isEditForm ? AppServices['Content']['Guest_Offers_And_Notifications_Form_Update_Hotel'] : AppServices['Content']['Guest_Offers_And_Notifications_Form_Create_Hotel'];
 
 		// payload
 		let payload: any = {

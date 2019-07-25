@@ -115,6 +115,11 @@ export class SidebarService {
 						name: 'Broadcast',
 						url: `/${ ROUTING.management.routes.broadcast }`,
 						externalIcon: faExternalLinkAlt
+					},
+					{
+						name: 'Version',
+						url: `/${ ROUTING.management.routes.version }`,
+						externalIcon: faExternalLinkAlt
 					}
 				]
 			}

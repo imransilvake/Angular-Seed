@@ -684,6 +684,18 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 						}
 					}
 
+					// module: management
+					if (this._router.url === `/${ ROUTING.management.routes.version }`) {
+						// Text
+						if (item.hasOwnProperty('Text')) {
+							newItem = {
+								...newItem,
+								Text: item.Text[language],
+								Texts: item.Text
+							};
+						}
+					}
+
 					// update data source
 					if (!init) {
 						this.dataSource.data = [...this.dataSource.data, newItem];

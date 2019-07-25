@@ -25,6 +25,9 @@ import { UserFormComponent } from './components/user/form/user-form.component';
 import { BroadcastListComponent } from './components/broadcast/list/broadcast-list.component';
 import { BroadcastService } from './services/broadcast.service';
 import { BroadcastFormComponent } from './components/broadcast/form/broadcast-form.component';
+import { VersionComponent } from './components/version/version.component';
+import { VersionService } from './services/version.service';
+import { VersionListComponent } from './components/version/list/version-list.component';
 
 @NgModule({
 	imports: [
@@ -48,12 +51,15 @@ import { BroadcastFormComponent } from './components/broadcast/form/broadcast-fo
 		UserListComponent,
 		UserFormComponent,
 		BroadcastListComponent,
-		BroadcastFormComponent
+		BroadcastFormComponent,
+		VersionComponent,
+		VersionListComponent
 	],
 	providers: [
 		UserService,
 		ClientService,
-		BroadcastService
+		BroadcastService,
+		VersionService
 	],
 	entryComponents: [
 		UserFormComponent,

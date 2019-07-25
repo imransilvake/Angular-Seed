@@ -5,6 +5,7 @@ import { Routes } from '@angular/router';
 import { ClientComponent } from './components/client/client.component';
 import { UserComponent } from './components/user/user.component';
 import { BroadcastComponent } from './components/broadcast/broadcast.component';
+import { VersionComponent } from './components/version/version.component';
 
 export const MANAGEMENT_ROUTES: Routes = [
 	{
@@ -37,6 +38,16 @@ export const MANAGEMENT_ROUTES: Routes = [
 					breadcrumb: {
 						en: 'Broadcast',
 						de: 'Übertragung'
+					}
+				},
+			},
+			{
+				path: 'version',
+				component: VersionComponent,
+				data: {
+					breadcrumb: {
+						en: 'Version',
+						de: 'Ausführung'
 					}
 				},
 			}

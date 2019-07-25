@@ -1,0 +1,35 @@
+<div class="ham-version-list">
+	<!-- Button: Create New Feature List -->
+	<div class="ham-button-wrapper" *ngIf="permissionLevel3">
+		<button mat-button class="ham-button ham-button-1" i18n="@@Management_Version_Create_NewFeatureList" (click)="changePageView()">
+			Create New Feature List
+		</button>
+	</div>
+
+	<!-- Version List -->
+	<div class="ham-list" *ngIf="versionList">
+		<app-table
+			tableTitle="Version List"
+			i18n-tableTitle="@@Management_Version_Table_Title"
+			[tableShowFilterInput]="false"
+			[tableData]="versionList"
+			[tableColumns]="['Release', 'Date', 'Text']"
+			[tableSorting]="[false, false, false, false]"
+			[tableAdditionalColumns]="['Action']"
+			[tableTemplateRef]="[action]"
+			[tableResources]="versionTable"
+			(rowData)="onClickRowActionButtons($event)">
+			<!-- Action -->
+			<ng-template #action>
+				<button
+					*ngIf="permissionLevel3"
+					mat-button
+					class="ham-button ham-button-2 ham-table-button-1"
+					(click)="onClickUpdateVersion()"
+					i18n="@@Management_Version_Table_Update">
+					Update
+				</button>
+			</ng-template>
+		</app-table>
+	</div>
+</div>
