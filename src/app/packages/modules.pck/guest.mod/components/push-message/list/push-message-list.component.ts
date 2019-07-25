@@ -7,7 +7,7 @@ import { Subject } from 'rxjs';
 import { PushMessageService } from '../../../services/push-message.service';
 import { AppViewTypeEnum } from '../../../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
 import { GuestViewInterface } from '../../../interfaces/guest-view.interface';
-import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum';
+import { HelperService } from '../../../../../utilities.pck/accessories.mod/services/helper.service';
 
 @Component({
 	selector: 'app-push-message-list',
@@ -23,18 +23,25 @@ export class PushMessageListComponent implements OnInit, OnDestroy {
 	public recentNotificationList;
 	public periodicNotificationTable;
 	public recentNotificationTable;
+
 	public currentRole;
-	public roleHouseKeeping: UserRoleEnum = UserRoleEnum[UserRoleEnum.HOUSEKEEPING];
+	public permissionLevel1 = false;
 
 	private buttonType = -1;
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
-	constructor(private _pushMessageService: PushMessageService) {
+	constructor(
+		private _pushMessageService: PushMessageService,
+		private _helperService: HelperService
+	) {
 	}
 
 	ngOnInit() {
 		// set current role
 		this.currentRole = this._pushMessageService.appState.role;
+		if (this.currentRole) {
+			this.permissionLevel1 = this._helperService.permissionLevel1(this.currentRole);
+		}
 
 		// listen: fetch periodic & recently sent guest notifications
 		this._pushMessageService.dataEmitter

@@ -73,6 +73,7 @@
 								</ng-container>
 								<ng-container *ngSwitchCase="'string'">
 									<img class="ham-image"
+										 [class.ham-cover]="!!element['Guest']"
 										 *ngIf="element[column] && validateExtension(element[column])"
 										 [src]="'assets/images/guest/01.jpg'"
 										 alt="table-photo"/>
@@ -139,8 +140,7 @@
 					<!-- Rest -->
 					<ng-container *ngIf="!(!!element['Notification'] && !!element['ConfirmUser'])">
 						<!-- Guest State -->
-						<ng-container *ngIf="!!element['Guest'] && (element['State'] !== 'EXPIRED' && (
-							(element['Access'] === 'HOTEL' && (currentRole === roleHotelManager || currentRole === roleHotelSubManager)) || (currentRole === roleAdmin || currentRole === roleGroupManager)))">
+						<ng-container *ngIf="!!element['Guest'] && (element['Access'] === 'HOTEL' && permissionLevel4) || permissionLevel2">
 							<ng-container *ngTemplateOutlet="tableTemplateRef[idx]"></ng-container>
 						</ng-container>
 

@@ -233,7 +233,7 @@
 			<!-- Submit -->
 			<div class="cd-row ham-padding-1 ham-buttons">
 				<div class="cd-col cd-col-pm-s-6 ham-access">
-					<ng-container *ngIf="currentRole === roleAdmin || currentRole === roleGroupManager">
+					<ng-container *ngIf="permissionLevel2">
 						<mat-slide-toggle
 							class="mat-slide-toggle-1"
 							[formControl]="access">

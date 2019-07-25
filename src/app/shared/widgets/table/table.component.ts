@@ -19,7 +19,6 @@ import { AuthService } from '../../../packages/modules.pck/authorization.mod/ser
 import { DialogTypeEnum } from '../../../packages/utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { DialogService } from '../../../packages/utilities.pck/dialog.mod/services/dialog.service';
 import { NotificationsFiltersEnums } from '../../../packages/modules.pck/notification.mod/enums/notifications-filters.enums';
-import { UserRoleEnum } from '../../../packages/modules.pck/authorization.mod/enums/user-role.enum';
 import { SidebarService } from '../../../packages/frame.pck/services/sidebar.service';
 
 @Component({
@@ -61,11 +60,10 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	public clearRows = [];
 	public checkAllRows = false;
 	public staticColors = ['#3b7fc4'];
+
 	public currentRole;
-	public roleAdmin: UserRoleEnum = UserRoleEnum[UserRoleEnum.ADMIN];
-	public roleGroupManager: UserRoleEnum = UserRoleEnum[UserRoleEnum.GROUP_MANAGER];
-	public roleHotelSubManager: UserRoleEnum = UserRoleEnum[UserRoleEnum.HOTEL_SUB_MANAGER];
-	public roleHotelManager: UserRoleEnum = UserRoleEnum[UserRoleEnum.HOTEL_MANAGER];
+	public permissionLevel2 = false;
+	public permissionLevel4 = false;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
@@ -73,6 +71,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 		private _router: Router,
 		private _proxyService: ProxyService,
 		private _utilityService: UtilityService,
+		private _helperService: HelperService,
 		private _authService: AuthService,
 		private _dialogService: DialogService,
 		private _sidebarService: SidebarService,
@@ -88,6 +87,10 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	ngOnInit() {
 		// set current role
 		this.currentRole = this._sidebarService.appState.role;
+		if (this.currentRole) {
+			this.permissionLevel2 = this._helperService.permissionLevel2(this.currentRole);
+			this.permissionLevel4 = this._helperService.permissionLevel4(this.currentRole);
+		}
 
 		// add additional columns
 		this.allColumns = this.tableColumns.concat(this.tableAdditionalColumns);

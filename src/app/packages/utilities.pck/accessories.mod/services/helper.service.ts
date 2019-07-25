@@ -5,6 +5,7 @@ import { debounceTime } from 'rxjs/operators';
 import { merge } from 'rxjs/internal/observable/merge';
 
 // app
+import { UserRoleEnum } from '../../../modules.pck/authorization.mod/enums/user-role.enum';
 import * as jwt_decode from 'jwt-decode';
 import * as CryptoJS from 'crypto-js';
 import * as moment from 'moment';
@@ -12,6 +13,11 @@ declare const document: any;
 
 @Injectable({ providedIn: 'root' })
 export class HelperService {
+	public roleAdmin: UserRoleEnum = UserRoleEnum[UserRoleEnum.ADMIN];
+	public roleGroupManager: UserRoleEnum = UserRoleEnum[UserRoleEnum.GROUP_MANAGER];
+	public roleHotelManager: UserRoleEnum = UserRoleEnum[UserRoleEnum.HOTEL_MANAGER];
+	public roleHotelSubManager: UserRoleEnum = UserRoleEnum[UserRoleEnum.HOTEL_SUB_MANAGER];
+
 	/**
 	 * toggle: overflow class on html and body element.
 	 *
@@ -204,5 +210,46 @@ export class HelperService {
 	 */
 	public static getUTCDate(date: any) {
 		return date.utc().format();
+	}
+
+	/**
+	 * permission level 1: Admin, GroupManager, HotelManager, HotelSubManager
+	 *
+	 * @param currentRole
+	 */
+	public permissionLevel1(currentRole: string) {
+		return !!(
+			currentRole === this.roleAdmin || currentRole === this.roleGroupManager ||
+			currentRole === this.roleHotelManager || currentRole === this.roleHotelSubManager
+		);
+	}
+
+	/**
+	 * permission level 2: Admin, GroupManager
+	 *
+	 * @param currentRole
+	 */
+	public permissionLevel2(currentRole: string) {
+		return !!(
+			currentRole === this.roleAdmin || currentRole === this.roleGroupManager
+		);
+	}
+
+	/**
+	 * permission level 3: Admin
+	 *
+	 * @param currentRole
+	 */
+	public permissionLevel3(currentRole: string) {
+		return !!(currentRole === this.roleAdmin);
+	}
+
+	/**
+	 * permission level 4: HotelManager, HotelSubManager
+	 *
+	 * @param currentRole
+	 */
+	public permissionLevel4(currentRole: string) {
+		return !!(currentRole === this.roleHotelManager || currentRole === this.roleHotelSubManager);
 	}
 }

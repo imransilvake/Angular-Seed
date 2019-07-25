@@ -16,7 +16,7 @@ import { SelectTypeEnum } from '../../../../../core.pck/fields.mod/enums/select-
 import { SelectDefaultInterface } from '../../../../../core.pck/fields.mod/interfaces/select-default-interface';
 import { PushMessageInterface } from '../../../interfaces/push-message.interface';
 import { GuestTypeEnum } from '../../../enums/guest-type.enum';
-import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum';
+import { HelperService } from '../../../../../utilities.pck/accessories.mod/services/helper.service';
 
 @Component({
 	selector: 'app-push-message-form',
@@ -48,14 +48,14 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 	public targetGroupsList: SelectDefaultInterface[] = [];
 
 	public currentRole;
-	public roleAdmin: UserRoleEnum = UserRoleEnum[UserRoleEnum.ADMIN];
-	public roleGroupManager: UserRoleEnum = UserRoleEnum[UserRoleEnum.GROUP_MANAGER];
+	public permissionLevel2 = false;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
 		private _pushMessageService: PushMessageService,
 		private _utilityService: UtilityService,
+		private _helperService: HelperService,
 		private _formBuilder: FormBuilder
 	) {
 		// get periods list
@@ -92,6 +92,9 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 	ngOnInit() {
 		// set current role
 		this.currentRole = this._pushMessageService.appState.role;
+		if (this.currentRole) {
+			this.permissionLevel2 = this._helperService.permissionLevel2(this.currentRole);
+		}
 
 		// listen: fetch form languages
 		this._pushMessageService.dataEmitter

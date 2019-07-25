@@ -17,7 +17,6 @@ import { GuestTypeEnum } from '../../../enums/guest-type.enum';
 import { OfferInterface } from '../../../interfaces/offer.interface';
 import { GuestPeriodsEnum } from '../../../enums/guest-periods.enum';
 import { HelperService } from '../../../../../utilities.pck/accessories.mod/services/helper.service';
-import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum';
 
 @Component({
 	selector: 'app-offers-form',
@@ -47,14 +46,14 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 	public targetGroupsList: SelectDefaultInterface[] = [];
 
 	public currentRole;
-	public roleAdmin: UserRoleEnum = UserRoleEnum[UserRoleEnum.ADMIN];
-	public roleGroupManager: UserRoleEnum = UserRoleEnum[UserRoleEnum.GROUP_MANAGER];
+	public permissionLevel2 = false;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
 		private _guestOfferService: GuestOffersService,
 		private _utilityService: UtilityService,
+		private _helperService: HelperService,
 		private _formBuilder: FormBuilder
 	) {
 		// target groups list
@@ -82,6 +81,9 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 	ngOnInit() {
 		// set current role
 		this.currentRole = this._guestOfferService.appState.role;
+		if (this.currentRole) {
+			this.permissionLevel2 = this._helperService.permissionLevel2(this.currentRole);
+		}
 
 		// listen: fetch form languages
 		this._guestOfferService.dataEmitter
@@ -287,7 +289,12 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 
 		// state, access
 		const state = (this.state.value) ? 'ACTIVE' : 'INACTIVE';
-		const access = (this.access.value) ? 'HOTEL' : 'GROUP';
+		let access = (this.access.value) ? 'HOTEL' : 'GROUP';
+
+		// permission level: 4
+		if (this._helperService.permissionLevel4(this.currentRole)) {
+			access = 'HOTEL';
+		}
 
 		// id
 		const id = (!!this.data) ? {ID: this.data.ID} : {};

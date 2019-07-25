@@ -1,6 +1,6 @@
 <div class="ham-push-message-list">
 	<!-- Button: Create New Notification -->
-	<div class="ham-button-wrapper" *ngIf="currentRole !== roleHouseKeeping">
+	<div class="ham-button-wrapper" *ngIf="permissionLevel1">
 		<button mat-button class="ham-button ham-button-1" i18n="@@Guest_Push_Notification_Create_NewNotification" (click)="changePageView()">
 			Create New Notification
 		</button>
