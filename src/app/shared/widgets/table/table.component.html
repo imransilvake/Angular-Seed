@@ -140,7 +140,7 @@
 					<!-- Rest -->
 					<ng-container *ngIf="!(!!element['Notification'] && !!element['ConfirmUser'])">
 						<!-- Guest State -->
-						<ng-container *ngIf="!!element['Guest'] && (element['Access'] === 'HOTEL' && permissionLevel4) || permissionLevel2">
+						<ng-container *ngIf="!!element['Guest'] && ((element['Access'] === 'HOTEL' && permissionLevel4) || permissionLevel2)">
 							<ng-container *ngTemplateOutlet="tableTemplateRef[idx]"></ng-container>
 						</ng-container>
 
