@@ -18,8 +18,6 @@ import { ValidationService } from '../../../../../core.pck/fields.mod/services/v
 import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum';
 import { UserService } from '../../../services/user.service';
 import { UserInterface } from '../../../interfaces/user.interface';
-import { ProxyService } from '../../../../../core.pck/proxy.mod/services/proxy.service';
-import { AppServices } from '../../../../../../../app.config';
 import { SelectGroupInterface } from '../../../../../core.pck/fields.mod/interfaces/select-group.interface';
 import { ErrorHandlerInterface } from '../../../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
@@ -54,7 +52,6 @@ export class UserFormComponent implements OnInit, OnDestroy {
 	constructor(
 		@Inject(MAT_DIALOG_DATA) public data: any,
 		public _dialogRef: MatDialogRef<UserFormComponent>,
-		private _proxyService: ProxyService,
 		private _userService: UserService,
 		private _utilityService: UtilityService,
 		private _store: Store<{ ErrorHandlerInterface: ErrorHandlerInterface }>,
@@ -221,11 +218,11 @@ export class UserFormComponent implements OnInit, OnDestroy {
 							icon: 'error_icon',
 							title: this._i18n({
 								value: 'Title: Wrong Group Selection Error Exception',
-								id: 'Error_Management_User_GroupSelection_Title'
+								id: 'Error_Common_GroupSelection_Title'
 							}),
 							message: this._i18n({
 								value: 'Description: Wrong Group Selection Error Exception',
-								id: 'Error_Management_User_GroupSelection_Description'
+								id: 'Error_Common_GroupSelection_Description'
 							}),
 							buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
 						};
@@ -327,8 +324,8 @@ export class UserFormComponent implements OnInit, OnDestroy {
 	 * get all group hotels
 	 */
 	public getAllGroupHotels() {
-		this._proxyService
-			.getAPI(AppServices['Utilities']['Hotels_List_All'])
+		this._utilityService
+			.getAllGroupHotels()
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
 				// map response

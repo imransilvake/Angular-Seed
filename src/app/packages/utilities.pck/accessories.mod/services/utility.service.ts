@@ -11,6 +11,7 @@ import { AuthService } from '../../../modules.pck/authorization.mod/services/aut
 import { NotificationsFiltersEnums } from '../../../modules.pck/notification.mod/enums/notifications-filters.enums';
 import { GuestPeriodsEnum } from '../../../modules.pck/guest.mod/enums/guest-periods.enum';
 import { GuestTargetGroupsEnum } from '../../../modules.pck/guest.mod/enums/guest-target-groups.enum';
+import { takeUntil } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class UtilityService {
@@ -356,5 +357,12 @@ export class UtilityService {
 
 		// service
 		return this._proxyService.postAPI(AppServices['Utilities']['Profile_Image_Change'], { bodyParams: payload });
+	}
+
+	/**
+	 * get all group hotels
+	 */
+	public getAllGroupHotels() {
+		return this._proxyService.getAPI(AppServices['Utilities']['Hotels_List_All']);
 	}
 }

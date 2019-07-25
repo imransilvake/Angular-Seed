@@ -8,7 +8,6 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
 
 // app
 import * as moment from 'moment';
-import { ProxyService } from '../../../../../core.pck/proxy.mod/services/proxy.service';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { ValidationService } from '../../../../../core.pck/fields.mod/services/validation.service';
 import { BroadcastInterface } from '../../../interfaces/broadcast.interface';
@@ -36,7 +35,6 @@ export class BroadcastFormComponent implements OnInit, OnDestroy {
 	constructor(
 		@Inject(MAT_DIALOG_DATA) public data: any,
 		public _dialogRef: MatDialogRef<BroadcastFormComponent>,
-		private _proxyService: ProxyService,
 		private _broadcastService: BroadcastService,
 		private _i18n: I18n,
 		private _dialogService: DialogService

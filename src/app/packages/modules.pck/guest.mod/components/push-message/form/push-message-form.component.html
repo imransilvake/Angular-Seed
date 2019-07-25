@@ -210,6 +210,24 @@
 				</div>
 				<div class="cd-col cd-col-pm-t-6 cd-col-m-top">
 					<app-select
+						*ngIf="currentRole === roleAdmin"
+						[multipleSelection]="true"
+						[showLabel]="true"
+						labelName="Hotel(s)*"
+						i18n-labelName="@@Guest_Push_Message_Form_Hotels_Label"
+						[selectType]="selectTypeGroup"
+						[selectId]="'guest-push-notification-hotels-id'"
+						selectPlaceHolder="Hotel(s)"
+						i18n-selectPlaceHolder="@@Guest_Push_Message_Form_Hotels_PlaceHolder"
+						[dataGroups]="hotelListGroup"
+						[showHint]="true"
+						hintText="Hint Text"
+						i18n-hintText="Guest_Push_Message_Form_Hotels_Hint"
+						[control]="hotels">
+					</app-select>
+
+					<app-select
+						*ngIf="currentRole !== roleAdmin"
 						[multipleSelection]="true"
 						[showLabel]="true"
 						labelName="Hotel(s)*"
@@ -218,7 +236,7 @@
 						[selectId]="'guest-push-notification-hotels-id'"
 						selectPlaceHolder="Hotel(s)"
 						i18n-selectPlaceHolder="@@Guest_Push_Message_Form_Hotels_PlaceHolder"
-						[dataDefault]="hotelsList"
+						[dataDefault]="hotelList"
 						[showHint]="true"
 						hintText="Hint Text"
 						i18n-hintText="Guest_Push_Message_Form_Hotels_Hint"

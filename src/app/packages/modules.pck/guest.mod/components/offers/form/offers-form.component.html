@@ -125,6 +125,20 @@
 
 						<div class="cd-col cd-col-top">
 							<app-select
+								*ngIf="currentRole === roleAdmin"
+								[multipleSelection]="true"
+								[showLabel]="true"
+								labelName="Hotel(s)*"
+								i18n-labelName="@@Guest_Offers_Form_Hotels_Label"
+								[selectType]="selectTypeGroup"
+								[selectId]="'management-user-hotel-id'"
+								selectPlaceHolder="Hotel(s)"
+								i18n-selectPlaceHolder="@@Guest_Offers_Form_Hotels_PlaceHolder"
+								[dataGroups]="hotelListGroup"
+								[control]="hotels">
+							</app-select>
+							<app-select
+								*ngIf="currentRole !== roleAdmin"
 								[multipleSelection]="true"
 								[showLabel]="true"
 								labelName="Hotel(s)*"
@@ -133,7 +147,7 @@
 								[selectId]="'guest-offers-hotels-id'"
 								selectPlaceHolder="Hotel(s)"
 								i18n-selectPlaceHolder="@@Guest_Offers_Form_Hotels_PlaceHolder"
-								[dataDefault]="hotelsList"
+								[dataDefault]="hotelList"
 								[showHint]="true"
 								hintText="Hint Text"
 								i18n-hintText="Guest_Offers_Form_Hotels_Hint"
