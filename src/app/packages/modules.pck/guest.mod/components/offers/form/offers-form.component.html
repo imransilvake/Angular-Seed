@@ -175,11 +175,13 @@
 			<!-- Submit -->
 			<div class="cd-row ham-padding-1 ham-buttons">
 				<div class="cd-col cd-col-pm-s-6 ham-access">
-					<mat-slide-toggle
-						class="mat-slide-toggle-1"
-						[formControl]="access">
-					</mat-slide-toggle>
-					<span i18n="@@Guest_Offers_Form_Access">HotelManager can edit and delete</span>
+					<ng-container *ngIf="currentRole === roleAdmin || currentRole === roleGroupManager">
+						<mat-slide-toggle
+							class="mat-slide-toggle-1"
+							[formControl]="access">
+						</mat-slide-toggle>
+						<span i18n="@@Guest_Offers_Form_Access">HotelManager can edit and delete</span>
+					</ng-container>
 				</div>
 				<div class="cd-col cd-col-pm-s-6 cd-right-align">
 					<button mat-button

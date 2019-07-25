@@ -16,6 +16,7 @@ import { SelectTypeEnum } from '../../../../../core.pck/fields.mod/enums/select-
 import { SelectDefaultInterface } from '../../../../../core.pck/fields.mod/interfaces/select-default-interface';
 import { PushMessageInterface } from '../../../interfaces/push-message.interface';
 import { GuestTypeEnum } from '../../../enums/guest-type.enum';
+import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum';
 
 @Component({
 	selector: 'app-push-message-form',
@@ -45,6 +46,10 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 	public guestPeriodsList: SelectDefaultInterface[] = [];
 	public hotelsList: SelectDefaultInterface[] = [];
 	public targetGroupsList: SelectDefaultInterface[] = [];
+
+	public currentRole;
+	public roleAdmin: UserRoleEnum = UserRoleEnum[UserRoleEnum.ADMIN];
+	public roleGroupManager: UserRoleEnum = UserRoleEnum[UserRoleEnum.GROUP_MANAGER];
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
@@ -85,6 +90,9 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
+		// set current role
+		this.currentRole = this._pushMessageService.appState.role;
+
 		// listen: fetch form languages
 		this._pushMessageService.dataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
@@ -131,7 +139,7 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 						this.color.setValue(this.data.Data.Colour);
 
 						// access, state
-						this.isAccess = this.data.Access.toLowerCase() === 'group';
+						this.isAccess = this.data.Access.toLowerCase() !== 'group';
 						this.access.setValue(this.isAccess);
 						this.isState = this.data.State.toLowerCase() === 'active';
 						this.state.setValue(this.isState);
@@ -328,7 +336,7 @@ export class PushMessageFormComponent implements OnInit, OnDestroy {
 
 		// state, access
 		const state = (this.state.value) ? 'ACTIVE' : 'INACTIVE';
-		const access = (this.access.value) ? 'GROUP' : 'HOTEL';
+		const access = (this.access.value) ? 'HOTEL' : 'GROUP';
 
 		// id
 		const id = (!!this.data) ? {ID: this.data.ID} : {};

@@ -17,6 +17,7 @@ import { GuestTypeEnum } from '../../../enums/guest-type.enum';
 import { OfferInterface } from '../../../interfaces/offer.interface';
 import { GuestPeriodsEnum } from '../../../enums/guest-periods.enum';
 import { HelperService } from '../../../../../utilities.pck/accessories.mod/services/helper.service';
+import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum';
 
 @Component({
 	selector: 'app-offers-form',
@@ -44,6 +45,10 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 	public selectTypeDefault = SelectTypeEnum.DEFAULT;
 	public hotelsList: SelectDefaultInterface[] = [];
 	public targetGroupsList: SelectDefaultInterface[] = [];
+
+	public currentRole;
+	public roleAdmin: UserRoleEnum = UserRoleEnum[UserRoleEnum.ADMIN];
+	public roleGroupManager: UserRoleEnum = UserRoleEnum[UserRoleEnum.GROUP_MANAGER];
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
@@ -75,6 +80,9 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
+		// set current role
+		this.currentRole = this._guestOfferService.appState.role;
+
 		// listen: fetch form languages
 		this._guestOfferService.dataEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
@@ -117,7 +125,7 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 					// update existing data
 					if (this.data) {
 						// access, state
-						this.isAccess = this.data.Access.toLowerCase() === 'group';
+						this.isAccess = this.data.Access.toLowerCase() !== 'group';
 						this.access.setValue(this.isAccess);
 						this.isState = this.data.State.toLowerCase() === 'active';
 						this.state.setValue(this.isState);
@@ -279,7 +287,7 @@ export class OffersFormComponent implements OnInit, OnDestroy {
 
 		// state, access
 		const state = (this.state.value) ? 'ACTIVE' : 'INACTIVE';
-		const access = (this.access.value) ? 'GROUP' : 'HOTEL';
+		const access = (this.access.value) ? 'HOTEL' : 'GROUP';
 
 		// id
 		const id = (!!this.data) ? {ID: this.data.ID} : {};

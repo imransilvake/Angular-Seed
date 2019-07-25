@@ -66,7 +66,7 @@
 							<ng-container [ngSwitch]="validateType(element[column])">
 								<ng-container *ngSwitchCase="'object'">
 									<img class="ham-image"
-										 [class.ham-cover]="!!element['GuestOffers']"
+										 [class.ham-cover]="!!element['Guest']"
 										 *ngIf="element[column] && element[column] | async"
 										 [src]="element[column] | async"
 										 alt="table-photo"/>
@@ -139,12 +139,13 @@
 					<!-- Rest -->
 					<ng-container *ngIf="!(!!element['Notification'] && !!element['ConfirmUser'])">
 						<!-- Guest State -->
-						<ng-container *ngIf="!!element['GuestOffers'] && element['State'] !== 'EXPIRED'">
+						<ng-container *ngIf="!!element['Guest'] && (element['State'] !== 'EXPIRED' && (
+							(element['Access'] === 'HOTEL' && (currentRole === roleHotelManager || currentRole === roleHotelSubManager)) || (currentRole === roleAdmin || currentRole === roleGroupManager)))">
 							<ng-container *ngTemplateOutlet="tableTemplateRef[idx]"></ng-container>
 						</ng-container>
 
 						<!-- Rest -->
-						<ng-container *ngIf="!(!!element['GuestOffers'])">
+						<ng-container *ngIf="!(!!element['Guest'])">
 							<ng-container *ngIf="column !== 'Visit' || column === 'Visit' && element['TypeRaw'] !== 'ALERT'">
 								<ng-container *ngTemplateOutlet="tableTemplateRef[idx]"></ng-container>
 							</ng-container>
