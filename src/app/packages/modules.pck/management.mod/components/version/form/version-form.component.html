@@ -72,7 +72,10 @@
 
 			<!-- Submit -->
 			<div class="cd-row ham-padding-1 ham-buttons">
-				<div class="cd-col cd-right-align">
+				<div class="cd-col cd-col-pm-s-6">
+					<p *ngIf="errorMessage">{{errorMessage}}</p>
+				</div>
+				<div class="cd-col cd-col-pm-s-6 cd-right-align">
 					<button mat-button type="button" class="ham-button ham-button-1" (click)="onClickCloseForm()"
 							i18n="@@Management_Version_Form_Cancel_Button">Cancel
 					</button>

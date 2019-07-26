@@ -11,17 +11,18 @@ export const patterns: any = {
 	password: /^.{8,256}$/,
 	email: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
 	url: /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g,
-	time: /^(0[0-9]|1[0-9]|2[0-3]|[0-9]):[0-5][0-9]$/
+	time: /^(0[0-9]|1[0-9]|2[0-3]|[0-9]):[0-5][0-9]$/,
+	version: /^\d+(\.\d+)*$$/
 };
 
 @Injectable({ providedIn: 'root' })
 export class ValidationService {
 	/**
-	 * text validator
+	 * alphabetic validator
 	 *
 	 * @param control
 	 */
-	static textValidator(control: FormControl) {
+	static alphabeticValidator(control: FormControl) {
 		const value = control.value;
 
 		if (value && value.match(patterns.text)) {
@@ -140,5 +141,20 @@ export class ValidationService {
 		}
 
 		return { invalidTime: true };
+	}
+
+	/**
+	 * version validator
+	 *
+	 * @param control
+	 */
+	static versionValidator(control: FormControl) {
+		const value = control.value;
+
+		if (value && value.match(patterns.version)) {
+			return null;
+		}
+
+		return { invalidVersion: true };
 	}
 }

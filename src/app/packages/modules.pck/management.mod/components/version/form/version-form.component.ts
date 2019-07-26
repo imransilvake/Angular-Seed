@@ -12,6 +12,7 @@ import { VersionService } from '../../../services/version.service';
 import { UtilityService } from '../../../../../utilities.pck/accessories.mod/services/utility.service';
 import { VersionInterface } from '../../../interfaces/version.interface';
 import { HelperService } from '../../../../../utilities.pck/accessories.mod/services/helper.service';
+import { ValidationService } from '../../../../../core.pck/fields.mod/services/validation.service';
 
 @Component({
 	selector: 'app-version-form',
@@ -30,6 +31,7 @@ export class VersionFormComponent implements OnInit, OnDestroy {
 	public systemLanguages;
 	public systemInfo;
 	public minDate = moment().toDate();
+	public errorMessage;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
@@ -44,7 +46,12 @@ export class VersionFormComponent implements OnInit, OnDestroy {
 		// form group
 		this.formFields = new FormGroup({
 			languages: this._formBuilder.array([]),
-			versionId: new FormControl('', [Validators.required]),
+			versionId: new FormControl('', [
+				Validators.required,
+				Validators.minLength(4),
+				Validators.maxLength(15),
+				ValidationService.versionValidator
+			]),
 			date: new FormControl(this.minDate, [Validators.required])
 		});
 	}
@@ -86,6 +93,7 @@ export class VersionFormComponent implements OnInit, OnDestroy {
 					if (this.data) {
 						// version
 						this.versionId.setValue(this.data.Release);
+						this.versionId.disable();
 						this.versionNr = this.data.Release;
 
 						// date
@@ -103,6 +111,11 @@ export class VersionFormComponent implements OnInit, OnDestroy {
 		this.versionId.valueChanges
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => this.versionNr = res);
+
+		// listen: error message
+		this._versionService.errorMessage
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => this.errorMessage = res);
 	}
 
 	ngOnDestroy() {
@@ -167,7 +180,7 @@ export class VersionFormComponent implements OnInit, OnDestroy {
 		};
 
 		// service
-		this._versionService.versionCreateAndUpdate(formPayload, !!this.data, this.changeVersionView);
+		this._versionService.versionCreateAndUpdate(formPayload, !!this.data, this.changeVersionView, this.formFields);
 	}
 
 	/**

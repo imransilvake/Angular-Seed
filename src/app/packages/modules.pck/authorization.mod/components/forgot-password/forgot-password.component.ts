@@ -33,13 +33,13 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
 			firstName: new FormControl('', [
 				Validators.required,
 				Validators.minLength(2),
-				ValidationService.textValidator,
+				ValidationService.alphabeticValidator,
 				Validators.maxLength(125)
 			]),
 			lastName: new FormControl('', [
 				Validators.required,
 				Validators.minLength(2),
-				ValidationService.textValidator,
+				ValidationService.alphabeticValidator,
 				Validators.maxLength(125)
 			]),
 			email: new FormControl('', [

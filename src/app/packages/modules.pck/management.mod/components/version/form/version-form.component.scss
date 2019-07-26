@@ -48,17 +48,24 @@
 			.ham-buttons {
 				margin-top: 20px;
 
-				button {
+				.cd-col {
 					&:first-child {
-						background-color: cd-palette($cd-background, 2007);
+						align-items: center;
+						display: flex;
 					}
 
-					&:last-child {
-						margin-left: 10px;
+					p {
+						color: cd-palette($cd-color, 1009);
 					}
 
-					span, .fa-icon {
-						vertical-align: unset;
+					button {
+						&:first-child {
+							background-color: cd-palette($cd-background, 2007);
+						}
+
+						&:last-child {
+							margin-left: 10px;
+						}
 					}
 				}
 			}
@@ -84,6 +91,38 @@
 				.ham-buttons {
 					.cd-col {
 						padding: 0;
+					}
+				}
+			}
+		}
+	}
+
+	@include cd-media(desktop, mini) {
+		.ham-form-wrapper {
+			.ham-form {
+				.ham-buttons {
+					display: block;
+
+					.cd-col {
+						display:flex;
+						flex-direction: column-reverse;
+
+						p {
+							margin-bottom: 15px;
+							text-align: center;
+						}
+
+						button {
+							width: 100%;
+
+							&:first-child {
+								margin-top: 10px;
+							}
+
+							&:last-child {
+								margin-left: 0;
+							}
+						}
 					}
 				}
 			}

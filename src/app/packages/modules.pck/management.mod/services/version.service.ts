@@ -3,6 +3,8 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { BehaviorSubject, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { I18n } from '@ngx-translate/i18n-polyfill';
+import { HttpErrorResponse } from '@angular/common/http';
+import { FormGroup } from '@angular/forms';
 
 // app
 import { AppServices } from '../../../../../app.config';
@@ -62,13 +64,15 @@ export class VersionService {
 	 * @param formPayload
 	 * @param isEditForm
 	 * @param changePageView
+	 * @param formFields
 	 */
-	public versionCreateAndUpdate(formPayload: VersionInterface, isEditForm, changePageView: any) {
+	public versionCreateAndUpdate(formPayload: VersionInterface, isEditForm, changePageView: any, formFields: FormGroup) {
 		// start loading animation
 		this._loadingAnimationService.startLoadingAnimation();
 
 		// text
 		let text = { };
+		let extraPayload = { };
 		if (isEditForm) {
 			text = {
 				title: this._i18n({ value: 'Title: Version Updated', id: 'Management_Version_Updated_Form_Success_Title' }),
@@ -77,6 +81,11 @@ export class VersionService {
 					id: 'Management_Version_Updated_Form_Success_Description'
 				})
 			};
+
+			extraPayload = {
+				type: 'update',
+				...formPayload
+			}
 		}
 		else {
 			text = {
@@ -86,10 +95,14 @@ export class VersionService {
 					id: 'Management_Version_Created_Form_Success_Description'
 				})
 			};
+
+			extraPayload = {
+				...formPayload
+			}
 		}
 
 		// service
-		this._proxyService.postAPI(AppServices['Management']['Version_Form_Create_All'], { bodyParams: formPayload })
+		this._proxyService.postAPI(AppServices['Management']['Version_Form_Create_All'], { bodyParams: extraPayload })
 			.subscribe(() => {
 				// stop loading animation
 				this._loadingAnimationService.stopLoadingAnimation();
@@ -113,6 +126,22 @@ export class VersionService {
 						};
 						changePageView.emit(viewPayload);
 					});
+			}, (err: HttpErrorResponse) => {
+				// stop loading animation
+				this._loadingAnimationService.stopLoadingAnimation();
+
+				if (err.error.detail.code === 'InvalidVersion') {
+					const message = this._i18n({
+						value: 'Description: Invalid Version ID Exception',
+						id: 'Management_Version_Error_Invalid_VersionID_Description'
+					});
+
+					// set field to show error message
+					formFields.get('versionId').setErrors({ invalidVersion: true });
+
+					// message
+					this.errorMessage.emit(message);
+				}
 			});
 	}
 }
