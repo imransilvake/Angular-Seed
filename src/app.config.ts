@@ -29,7 +29,8 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 		Profile_Image_Fetch: { serviceUrl: '/getimage' },
 		Profile_Image_Change: { serviceUrl: '/imageupload' },
 		Page_Hints_List: { serviceUrl: '/config/pagehints/status' },
-		Page_Hints_Update: { serviceUrl: '/config/pagehints/save' }
+		Page_Hints_Update: { serviceUrl: '/config/pagehints/save' },
+		System_Languages: { serviceUrl: '/config/group/:groupId' }
 	},
 	Auth: {
 		Register: { serviceUrl: '/ham/auth/signup' },
@@ -47,7 +48,6 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 	Content: {
 		Guest_Offers_And_Notifications_List_Hotel: { serviceUrl: '/notification/guest/list/group/:groupId/hotel/:hotelId' },
 		Guest_Offers_And_Notifications_Remove_Hotel: { serviceUrl: '/notification/guest/delete/group/:groupId/hotel/:hotelId' },
-		Guest_Offers_And_Notifications_Form_Group: { serviceUrl: '/config/group/:groupId' },
 		Guest_Offers_And_Notifications_Form_Create_Hotel: { serviceUrl: '/notification/guest/create/group/:groupId/hotel/:hotelId' },
 		Guest_Offers_And_Notifications_Form_Update_Hotel: { serviceUrl: '/notification/guest/update/group/:groupId/hotel/:hotelId' }
 	},

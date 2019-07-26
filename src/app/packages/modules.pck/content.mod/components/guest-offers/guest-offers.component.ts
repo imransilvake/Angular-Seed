@@ -9,7 +9,7 @@ import { AppViewTypeEnum } from '../../../../utilities.pck/accessories.mod/enums
 import { AuthService } from '../../../authorization.mod/services/auth.service';
 import { SidebarService } from '../../../../frame.pck/services/sidebar.service';
 import { GuestOffersService } from '../../services/guest-offers.service';
-import { GuestService } from '../../services/guest.service';
+import { UtilityService } from '../../../../utilities.pck/accessories.mod/services/utility.service';
 
 @Component({
 	selector: 'app-guest-offers',
@@ -28,7 +28,7 @@ export class GuestOffersComponent implements OnDestroy {
 		private router: Router,
 		private _authService: AuthService,
 		private _sidebarService: SidebarService,
-		private _guestService: GuestService,
+		private _utilityService: UtilityService,
 		private _guestOffersService: GuestOffersService
 	) {
 		// listen: router event
@@ -54,7 +54,6 @@ export class GuestOffersComponent implements OnDestroy {
 		this._guestOffersService.currentUser = this._authService.currentUserState;
 
 		// set app state
-		this._guestService.appState = this._sidebarService.appState;
 		this._guestOffersService.appState = this._sidebarService.appState;
 
 		// validate hotel selection
@@ -65,7 +64,7 @@ export class GuestOffersComponent implements OnDestroy {
 			// refresh services
 			forkJoin({
 				activeHotelOffers: this._guestOffersService.guestHotelOffersFetch(this.id),
-				formLanguages: this._guestService.guestFormLanguagesFetch(this.pageView)
+				formLanguages: this._utilityService.getSystemSelectedLanguages(this.pageView, this._guestOffersService.appState)
 			}).pipe(takeUntil(this._ngUnSubscribe)).subscribe(res => {
 				const result = {
 					activeHotelOffers: res.activeHotelOffers,

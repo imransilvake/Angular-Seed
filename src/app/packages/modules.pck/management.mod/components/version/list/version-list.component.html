@@ -25,9 +25,17 @@
 					*ngIf="permissionLevel3"
 					mat-button
 					class="ham-button ham-button-2 ham-table-button-1"
-					(click)="onClickUpdateVersion()"
-					i18n="@@Management_Version_Table_Update">
-					Update
+					(click)="onClickEditVersion()"
+					i18n="@@Management_Version_Table_Edit">
+					Edit
+				</button>
+				<button
+					*ngIf="permissionLevel3"
+					mat-button
+					class="ham-button ham-button-2 ham-table-button-2 ham-red"
+					(click)="onClickDeleteVersion()"
+					i18n="@@Management_Version_Table_Delete">
+					Delete
 				</button>
 			</ng-template>
 		</app-table>

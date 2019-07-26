@@ -47,6 +47,10 @@
 			}
 
 			.cd-row {
+				&:first-child {
+					margin-top: 10px;
+				}
+
 				&:not(:last-child) {
 					margin-bottom: 20px;
 				}

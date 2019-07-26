@@ -28,6 +28,7 @@ import { BroadcastFormComponent } from './components/broadcast/form/broadcast-fo
 import { VersionComponent } from './components/version/version.component';
 import { VersionService } from './services/version.service';
 import { VersionListComponent } from './components/version/list/version-list.component';
+import { VersionFormComponent } from './components/version/form/version-form.component';
 
 @NgModule({
 	imports: [
@@ -53,7 +54,8 @@ import { VersionListComponent } from './components/version/list/version-list.com
 		BroadcastListComponent,
 		BroadcastFormComponent,
 		VersionComponent,
-		VersionListComponent
+		VersionListComponent,
+		VersionFormComponent
 	],
 	providers: [
 		UserService,

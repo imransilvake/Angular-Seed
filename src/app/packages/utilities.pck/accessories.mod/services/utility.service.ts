@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 // app
 import { SelectDefaultInterface } from '../../../core.pck/fields.mod/interfaces/select-default-interface';
@@ -11,7 +12,7 @@ import { AuthService } from '../../../modules.pck/authorization.mod/services/aut
 import { NotificationsFiltersEnums } from '../../../modules.pck/notification.mod/enums/notifications-filters.enums';
 import { GuestPeriodsEnum } from '../../../modules.pck/content.mod/enums/guest-periods.enum';
 import { GuestTargetGroupsEnum } from '../../../modules.pck/content.mod/enums/guest-target-groups.enum';
-import { takeUntil } from 'rxjs/operators';
+import { AppViewTypeEnum } from '../enums/app-view-type.enum';
 
 @Injectable({ providedIn: 'root' })
 export class UtilityService {
@@ -364,5 +365,30 @@ export class UtilityService {
 	 */
 	public getAllGroupHotels() {
 		return this._proxyService.getAPI(AppServices['Utilities']['Hotels_List_All']);
+	}
+
+	/**
+	 * get system selected languages
+	 *
+	 * @param pageView
+	 * @param appState
+	 */
+	public getSystemSelectedLanguages(pageView: any, appState: any) {
+		if (pageView === AppViewTypeEnum.DEFAULT) {
+			return of(null);
+		}
+
+		// payload
+		const payload = {
+			pathParams: {
+				groupId: appState.groupId
+			}
+		};
+
+
+		// service
+		return this._proxyService
+			.getAPI(AppServices['Utilities']['System_Languages'], payload)
+			.pipe(map(res => res));
 	}
 }

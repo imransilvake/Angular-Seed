@@ -192,6 +192,12 @@ export class PrimarySidebarComponent implements OnInit, OnDestroy {
 	 * @param page
 	 */
 	public filterMenuListByRole(page: string) {
-		return page !== 'Broadcast' || page === 'Broadcast' && this.currentRole === this.roleAdmin;
+		switch (page) {
+			case 'Broadcast':
+			case 'Version':
+				return this.currentRole === this.roleAdmin;
+			default:
+				return true;
+		}
 	}
 }

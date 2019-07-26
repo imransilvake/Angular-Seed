@@ -10,6 +10,7 @@ import { AuthService } from '../../../authorization.mod/services/auth.service';
 import { SidebarService } from '../../../../frame.pck/services/sidebar.service';
 import { UserRoleEnum } from '../../../authorization.mod/enums/user-role.enum';
 import { VersionService } from '../../services/version.service';
+import { UtilityService } from '../../../../utilities.pck/accessories.mod/services/utility.service';
 
 @Component({
 	selector: 'app-version',
@@ -29,7 +30,8 @@ export class VersionComponent implements OnDestroy {
 		private router: Router,
 		private _versionService: VersionService,
 		private _authService: AuthService,
-		private _sidebarService: SidebarService
+		private _sidebarService: SidebarService,
+		private _utilityService: UtilityService,
 	) {
 		// set current user role
 		this.currentRole = this._authService.currentUserState.profile['cognito:groups'][0];
@@ -64,10 +66,12 @@ export class VersionComponent implements OnDestroy {
 
 		// refresh services
 		forkJoin({
-			versionList: this._versionService.versionFetchList(this.id)
+			versionList: this._versionService.versionFetchList(this.id),
+			formLanguages: this._utilityService.getSystemSelectedLanguages(this.pageView, this._versionService.appState)
 		}).pipe(takeUntil(this._ngUnSubscribe)).subscribe(res => {
 			const result = {
-				versionList: res.versionList
+				versionList: res.versionList,
+				formLanguages: res.formLanguages
 			};
 
 			// emit result

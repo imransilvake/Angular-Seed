@@ -12,9 +12,20 @@
 	<!-- Details -->
 	<div class="ham-details" *ngIf="currentRole === roleAdmin">
 		<!-- View: List -->
-		<app-version-list
-			(changeVersionView)="pageView = $event.view; id = $event.id; data = $event.data;">
-		</app-version-list>
+		<ng-container *ngIf="pageView === 0">
+			<app-version-list
+				(changeVersionView)="pageView = $event.view; id = $event.id; data = $event.data; triggerServices();">
+			</app-version-list>
+		</ng-container>
+
+		<!-- View: Form -->
+		<ng-container *ngIf="pageView === 1">
+			<app-version-form
+				[id]="id"
+				[data]="data"
+				(changeVersionView)="pageView = $event.view; id = null; data = null; triggerServices();">
+			</app-version-form>
+		</ng-container>
 	</div>
 
 	<!-- Access Denied -->

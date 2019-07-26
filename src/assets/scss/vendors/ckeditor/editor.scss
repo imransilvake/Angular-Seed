@@ -40,5 +40,13 @@
 			border-left: 4px solid cd-palette($cd-border, 3004) !important;
 			color: cd-palette($cd-color, 1001) !important;
 		}
+
+		ul, ol {
+			padding-left: 40px;
+
+			li {
+				font-size: cd-fontSize(s15);
+			}
+		}
 	}
 }

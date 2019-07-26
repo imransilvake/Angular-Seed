@@ -10,7 +10,7 @@ import { AuthService } from '../../../authorization.mod/services/auth.service';
 import { SidebarService } from '../../../../frame.pck/services/sidebar.service';
 import { PushMessageService } from '../../services/push-message.service';
 import { GuestNotificationTypeEnum } from '../../enums/guest-notification-type.enum';
-import { GuestService } from '../../services/guest.service';
+import { UtilityService } from '../../../../utilities.pck/accessories.mod/services/utility.service';
 
 @Component({
 	selector: 'app-push-message',
@@ -29,7 +29,7 @@ export class GuestPushMessageComponent implements OnDestroy {
 		private router: Router,
 		private _authService: AuthService,
 		private _sidebarService: SidebarService,
-		private _guestService: GuestService,
+		private _utilityService: UtilityService,
 		private _pushMessageService: PushMessageService
 	) {
 		// listen: router event
@@ -55,7 +55,6 @@ export class GuestPushMessageComponent implements OnDestroy {
 		this._pushMessageService.currentUser = this._authService.currentUserState;
 
 		// set app state
-		this._guestService.appState = this._sidebarService.appState;
 		this._pushMessageService.appState = this._sidebarService.appState;
 
 		// validate hotel selection
@@ -67,7 +66,7 @@ export class GuestPushMessageComponent implements OnDestroy {
 			forkJoin({
 				periodicGuestNotifications: this._pushMessageService.guestNotificationsFetch(this.id, GuestNotificationTypeEnum.PERIODIC),
 				recentGuestNotifications: this._pushMessageService.guestNotificationsFetch(this.id, GuestNotificationTypeEnum.RECENT),
-				formLanguages: this._guestService.guestFormLanguagesFetch(this.pageView)
+				formLanguages: this._utilityService.getSystemSelectedLanguages(this.pageView, this._pushMessageService.appState)
 			}).pipe(takeUntil(this._ngUnSubscribe)).subscribe(res => {
 				const result = {
 					periodicGuestNotifications: res.periodicGuestNotifications,

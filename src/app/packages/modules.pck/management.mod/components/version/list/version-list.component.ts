@@ -5,10 +5,10 @@ import { takeUntil } from 'rxjs/operators';
 
 // app
 import { UserRoleEnum } from '../../../../authorization.mod/enums/user-role.enum';
-import { UserViewInterface } from '../../../interfaces/user-view.interface';
 import { AppViewTypeEnum } from '../../../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
 import { HelperService } from '../../../../../utilities.pck/accessories.mod/services/helper.service';
 import { VersionService } from '../../../services/version.service';
+import { VersionViewInterface } from '../../../interfaces/version-view.interface';
 
 @Component({
 	selector: 'app-version-list',
@@ -64,10 +64,17 @@ export class VersionListComponent implements OnInit {
 	}
 
 	/**
-	 * update version
+	 * edit version
 	 */
-	public onClickUpdateVersion() {
+	public onClickEditVersion() {
 		this.buttonType = 1;
+	}
+
+	/**
+	 * delete version
+	 */
+	public onClickDeleteVersion() {
+		this.buttonType = 2;
 	}
 
 	/**
@@ -76,10 +83,15 @@ export class VersionListComponent implements OnInit {
 	 * @param row
 	 */
 	public onClickRowActionButtons(row: any) {
-		// update version
+		// edit version
 		if (this.buttonType === 1) {
 			// change page view
 			this.changePageView(row);
+		}
+
+		// delete version
+		if (this.buttonType === 2) {
+			console.log('ss');
 		}
 
 		// reset
@@ -93,7 +105,7 @@ export class VersionListComponent implements OnInit {
 	 */
 	public changePageView(data?: any) {
 		// payload
-		const payload: UserViewInterface = {
+		const payload: VersionViewInterface = {
 			view: AppViewTypeEnum.FORM,
 			data: data ? data : null
 		};
