@@ -23,7 +23,7 @@
 											[richEditor]="true"
 											[showLabel]="true"
 											labelName="Description / List of new Features*"
-											i18n-labelName="@@Management_Form_Text_Label"
+											i18n-labelName="@@Management_Version_Form_Text_Label"
 											[control]="tab.controls['description']">
 										</app-input>
 									</div>
@@ -38,12 +38,12 @@
 								<app-input
 									[showLabel]="true"
 									labelName="Version ID*"
-									i18n-labelName="@@Management_Form_Version_Label"
+									i18n-labelName="@@Management_Version_Form_Version_Label"
 									[inputId]="'version-id'"
 									[inputType]="'text'"
 									[inputName]="'versionId'"
 									inputPlaceHolder="Version ID"
-									i18n-inputPlaceHolder="@@Management_Form_Version_PlaceHolder"
+									i18n-inputPlaceHolder="@@Management_Version_Form_Version_PlaceHolder"
 									[control]="versionId">
 								</app-input>
 							</div>
@@ -52,18 +52,33 @@
 								<app-datepicker
 									[showLabel]="true"
 									labelName="Release Date*"
-									i18n-labelName="@@Management_Form_Release_Date_Label"
+									i18n-labelName="@@Management_Version_Form_Release_Date_Label"
 									[inputId]="'version-date-id'"
 									[inputType]="'text'"
 									[inputName]="'date'"
 									inputPlaceHolder="Release Date"
-									i18n-inputPlaceHolder="@@Management_Form_Release_Date_PlaceHolder"
+									i18n-inputPlaceHolder="@@Management_Version_Form_Release_Date_PlaceHolder"
 									[minDate]="minDate"
 									[control]="releaseDate">
 								</app-datepicker>
 							</div>
 						</div>
 					</div>
+				</div>
+			</div>
+
+			<!-- Divider -->
+			<app-divider></app-divider>
+
+			<!-- Submit -->
+			<div class="cd-row ham-padding-1 ham-buttons">
+				<div class="cd-col cd-right-align">
+					<button mat-button type="button" class="ham-button ham-button-1" (click)="onClickCloseForm()"
+							i18n="@@Management_Version_Form_Cancel_Button">Cancel
+					</button>
+					<button mat-button type="submit" class="ham-button ham-button-1" [disabled]="!isFormValid">
+						<span i18n="@@Management_Version_Form_Save_Button">Save</span>
+					</button>
 				</div>
 			</div>
 		</form>

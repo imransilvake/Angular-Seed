@@ -10,6 +10,8 @@ import { AppViewTypeEnum } from '../../../../../utilities.pck/accessories.mod/en
 import { VersionViewInterface } from '../../../interfaces/version-view.interface';
 import { VersionService } from '../../../services/version.service';
 import { UtilityService } from '../../../../../utilities.pck/accessories.mod/services/utility.service';
+import { VersionInterface } from '../../../interfaces/version.interface';
+import { HelperService } from '../../../../../utilities.pck/accessories.mod/services/helper.service';
 
 @Component({
 	selector: 'app-version-form',
@@ -74,17 +76,33 @@ export class VersionFormComponent implements OnInit, OnDestroy {
 
 							// update existing data
 							if (this.data) {
-								text.setValue(this.data.Text[language]);
+								// description
+								text.setValue(this.data.Texts[language]);
 							}
 						});
 					}
 
 					// update existing data
 					if (this.data) {
+						// version
+						this.versionId.setValue(this.data.Release);
+						this.versionNr = this.data.Release;
 
+						// date
+						if (this.data.Date) {
+							const date = moment(this.data.Date).toDate();
+							if (!moment(this.data.Date).isBefore(moment())) {
+								this.releaseDate.setValue(date);
+							}
+						}
 					}
 				}
 			});
+
+		// listen: version id
+		this.versionId.valueChanges
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => this.versionNr = res);
 	}
 
 	ngOnDestroy() {
@@ -108,6 +126,10 @@ export class VersionFormComponent implements OnInit, OnDestroy {
 		return this.formFields.get('date');
 	}
 
+	get isFormValid() {
+		return this.formFields.valid;
+	}
+
 	/**
 	 * add forms groups for each language
 	 */
@@ -127,7 +149,25 @@ export class VersionFormComponent implements OnInit, OnDestroy {
 	 * on submit form
 	 */
 	public onSubmitForm() {
+		const formData = this.formFields.getRawValue();
 
+		// description
+		const description = {};
+		if (this.tabsList && this.tabsList.length) {
+			for (let i = 0; i < this.tabsList.length; i++) {
+				description[this.tabsList[i].id] = formData.languages[i].description;
+			}
+		}
+
+		// form
+		const formPayload: VersionInterface = {
+			Date: HelperService.getUTCDate(moment(this.releaseDate.value)),
+			Release: this.versionId.value,
+			Text: description
+		};
+
+		// service
+		this._versionService.versionCreateAndUpdate(formPayload, !!this.data, this.changeVersionView);
 	}
 
 	/**

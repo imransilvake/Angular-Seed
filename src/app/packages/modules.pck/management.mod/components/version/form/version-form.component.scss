@@ -22,22 +22,43 @@
 		margin-top: 30px;
 
 		.ham-form {
-			.cd-row {
-				&:first-child {
-					margin-top: 10px;
-				}
-
-				&:not(:last-child) {
-					margin-bottom: 20px;
-				}
-
-				.cd-col {
-					&.cd-col-top {
-						margin-top: 20px;
+			.ham-tabs {
+				.cd-row {
+					&:first-child {
+						margin-bottom: 10px;
+						margin-top: 10px;
 					}
 
-					&.ham-inputs {
-						margin-top: 53px;
+					&:not(:last-child) {
+						margin-bottom: 20px;
+					}
+
+					.cd-col {
+						&.cd-col-top {
+							margin-top: 20px;
+						}
+
+						&.ham-inputs {
+							margin-top: 53px;
+						}
+					}
+				}
+			}
+
+			.ham-buttons {
+				margin-top: 20px;
+
+				button {
+					&:first-child {
+						background-color: cd-palette($cd-background, 2007);
+					}
+
+					&:last-child {
+						margin-left: 10px;
+					}
+
+					span, .fa-icon {
+						vertical-align: unset;
 					}
 				}
 			}
@@ -48,12 +69,14 @@
 	@include cd-media(desktop, tablet) {
 		.ham-form-wrapper {
 			.ham-form {
-				.cd-row {
-					.cd-col {
-						padding: 0;
+				.ham-tabs {
+					.cd-row {
+						.cd-col {
+							padding: 0;
 
-						&.ham-inputs {
-							margin-top: 20px;
+							&.ham-inputs {
+								margin-top: 0;
+							}
 						}
 					}
 				}

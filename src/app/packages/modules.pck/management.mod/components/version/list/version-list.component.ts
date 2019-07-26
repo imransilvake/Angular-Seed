@@ -9,6 +9,7 @@ import { AppViewTypeEnum } from '../../../../../utilities.pck/accessories.mod/en
 import { HelperService } from '../../../../../utilities.pck/accessories.mod/services/helper.service';
 import { VersionService } from '../../../services/version.service';
 import { VersionViewInterface } from '../../../interfaces/version-view.interface';
+import { AppOptions } from '../../../../../../../app.config';
 
 @Component({
 	selector: 'app-version-list',
@@ -19,6 +20,8 @@ import { VersionViewInterface } from '../../../interfaces/version-view.interface
 export class VersionListComponent implements OnInit {
 	@Output() changeVersionView: EventEmitter<any> = new EventEmitter();
 
+
+	public tablePageSizeWithoutLimit = AppOptions.tablePageSizeWithoutLimit;
 	public versionList;
 	public versionTable;
 

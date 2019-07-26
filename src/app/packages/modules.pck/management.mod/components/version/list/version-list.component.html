@@ -17,6 +17,7 @@
 			[tableSorting]="[false, false, false, false]"
 			[tableAdditionalColumns]="['Action']"
 			[tableTemplateRef]="[action]"
+			[tablePageSize]="tablePageSizeWithoutLimit"
 			[tableResources]="versionTable"
 			(rowData)="onClickRowActionButtons($event)">
 			<!-- Action -->

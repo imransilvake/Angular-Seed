@@ -99,7 +99,8 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 		Broadcast_List_All: { serviceUrl: '/notification/broadcast/list' },
 		Broadcast_Form_Create_All: { serviceUrl: '/notification/broadcast/create' },
 
-		Version_List_All: { serviceUrl: '/config/version' }
+		Version_List_All: { serviceUrl: '/config/version' },
+		Version_Form_Create_All: { serviceUrl: '/config/version/create' }
 	}
 };
 
