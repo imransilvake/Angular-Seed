@@ -39,8 +39,12 @@
 
 				td {
 					color: cd-palette($cd-color, 1004);
-					max-width: 100px;
+					min-width: 100px;
 					padding-left: 10px;
+
+					&.ham-hotels {
+						max-width: 100px;
+					}
 
 					&.ham-notifications {
 						color: cd-palette($cd-color, 1001);
