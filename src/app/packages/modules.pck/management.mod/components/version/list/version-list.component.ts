@@ -19,7 +19,7 @@ import { AppOptions } from '../../../../../../../app.config';
 
 export class VersionListComponent implements OnInit {
 	@Output() changeVersionView: EventEmitter<any> = new EventEmitter();
-
+	@Output() refresh: EventEmitter<any> = new EventEmitter();
 
 	public tablePageSizeWithoutLimit = AppOptions.tablePageSizeWithoutLimit;
 	public versionList;
@@ -94,7 +94,7 @@ export class VersionListComponent implements OnInit {
 
 		// delete version
 		if (this.buttonType === 2) {
-			console.log('ss');
+			this._versionService.deleteVersion(row, this.refresh);
 		}
 
 		// reset

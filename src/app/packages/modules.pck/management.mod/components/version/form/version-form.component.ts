@@ -84,7 +84,7 @@ export class VersionFormComponent implements OnInit, OnDestroy {
 							// update existing data
 							if (this.data) {
 								// description
-								text.setValue(this.data.Texts[language]);
+								text.setValue(this.data.Text[language]);
 							}
 						});
 					}

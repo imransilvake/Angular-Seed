@@ -14,7 +14,8 @@
 		<!-- View: List -->
 		<ng-container *ngIf="pageView === 0">
 			<app-version-list
-				(changeVersionView)="pageView = $event.view; id = $event.id; data = $event.data; triggerServices();">
+				(changeVersionView)="pageView = $event.view; id = $event.id; data = $event.data; triggerServices();"
+				(refresh)="triggerServices();">
 			</app-version-list>
 		</ng-container>
 

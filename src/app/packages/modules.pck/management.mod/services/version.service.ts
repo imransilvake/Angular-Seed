@@ -1,7 +1,7 @@
 // angular
 import { EventEmitter, Injectable } from '@angular/core';
 import { BehaviorSubject, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { delay, map } from 'rxjs/operators';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
@@ -141,6 +141,54 @@ export class VersionService {
 
 					// message
 					this.errorMessage.emit(message);
+				}
+			});
+	}
+
+	/**
+	 * delete version
+	 *
+	 * @param row
+	 * @param refreshEmitter
+	 */
+	public deleteVersion(row: any, refreshEmitter: any) {
+		// dialog payload
+		const data = {
+			type: DialogTypeEnum.CONFIRMATION,
+			payload: {
+				title: this._i18n({ value: 'Title: Delete Version Confirmation', id: 'Management_Version_Delete_Title' }),
+				message: this._i18n({ value: 'Description: Delete Version Confirmation', id: 'Management_Version_Delete_Description' }),
+				icon: 'dialog_confirmation',
+				buttonTexts: [
+					this._i18n({
+						value: 'Button - OK',
+						id: 'Common_Button_OK'
+					}),
+					this._i18n({
+						value: 'Button - Cancel',
+						id: 'Common_Button_Cancel'
+					}),
+				]
+			}
+		};
+
+		// dialog service
+		this._dialogService
+			.showDialog(data)
+			.subscribe((res) => {
+				if (res) {
+					// payload
+					const payload: any = {
+						bodyParams: {
+							Release: row.Release
+						}
+					};
+
+					// service
+					this._proxyService
+						.postAPI(AppServices['Management']['Version_List_Remove_All'], payload)
+						.pipe(delay(1000))
+						.subscribe(() => refreshEmitter.emit());
 				}
 			});
 	}
