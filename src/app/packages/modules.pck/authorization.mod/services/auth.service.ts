@@ -528,8 +528,8 @@ export class AuthService {
 		}
 
 		// update last request time to browser storage
-		const storageType = StorageTypeEnum.PERSISTANT;
-		const storageItemNotification = LocalStorageItems.notificationState;
+		const storageType = this.currentUserState.rememberMe ? StorageTypeEnum.PERSISTANT : StorageTypeEnum.SESSION;
+		const storageItemNotification = this.currentUserState.rememberMe ? LocalStorageItems.notificationState : SessionStorageItems.notificationState;
 		this._storageService.put(storageItemNotification, lastRequestTime, storageType);
 	}
 }

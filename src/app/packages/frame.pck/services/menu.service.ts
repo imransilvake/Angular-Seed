@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 
 // app
 import * as moment from 'moment';
-import { AppServices, LocalStorageItems } from '../../../../app.config';
+import { AppServices, LocalStorageItems, SessionStorageItems } from '../../../../app.config';
 import { StorageTypeEnum } from '../../core.pck/storage.mod/enums/storage-type.enum';
 import { ProxyService } from '../../core.pck/proxy.mod/services/proxy.service';
 import { AuthService } from '../../modules.pck/authorization.mod/services/auth.service';
@@ -77,8 +77,8 @@ export class MenuService {
 			.postAPI(AppServices['Notifications']['Notifications_Update_LRT'], payload)
 			.subscribe(() => {
 				// update current time in web storage
-				const storageType = StorageTypeEnum.PERSISTANT;
-				const storageItemNotification = LocalStorageItems.notificationState;
+				const storageType = this._authService.currentUserState.rememberMe ? StorageTypeEnum.PERSISTANT : StorageTypeEnum.SESSION;
+				const storageItemNotification = this._authService.currentUserState.rememberMe ? LocalStorageItems.notificationState : SessionStorageItems.notificationState;
 				this._storageService.put(storageItemNotification, currentTime, storageType);
 			});
 	}

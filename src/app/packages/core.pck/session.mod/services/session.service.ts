@@ -15,7 +15,7 @@ import { SessionTypeEnum } from '../enums/session-type.enum';
 import { ErrorHandlerInterface } from '../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 import { AuthService } from '../../../modules.pck/authorization.mod/services/auth.service';
 import { SessionsEnum } from '../enums/sessions.enum';
-import { AppOptions, AppServices, LocalStorageItems } from '../../../../../app.config';
+import { AppOptions, AppServices, LocalStorageItems, SessionStorageItems } from '../../../../../app.config';
 import { HelperService } from '../../../utilities.pck/accessories.mod/services/helper.service';
 import { ProxyService } from '../../proxy.mod/services/proxy.service';
 import { SidebarService } from '../../../frame.pck/services/sidebar.service';
@@ -162,8 +162,8 @@ export class SessionService {
 				const appState = this._sidebarService.appState;
 
 				// last request time
-				const storageType = StorageTypeEnum.PERSISTANT;
-				const storageItemNotification = LocalStorageItems.notificationState;
+				const storageType = this._authService.currentUserState.rememberMe ? StorageTypeEnum.PERSISTANT : StorageTypeEnum.SESSION;
+				const storageItemNotification = this._authService.currentUserState.rememberMe ? LocalStorageItems.notificationState : SessionStorageItems.notificationState;
 				const lastRequestTime = this._storageService.get(storageItemNotification, storageType);
 
 				// payload

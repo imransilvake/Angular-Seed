@@ -115,7 +115,8 @@ export const LocalStorageItems = {
 // session-storage items
 export const SessionStorageItems = {
 	userState: 'ham-session-us',
-	appState: 'ham-session-as'
+	appState: 'ham-session-as',
+	notificationState: 'ham-session-ns'
 };
 
 // headers for a request to backend
