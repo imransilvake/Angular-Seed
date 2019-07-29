@@ -19,17 +19,38 @@
 	}
 
 	.ham-form-wrapper {
-		margin-top: 30px;
+		&:not(.mt-20) {
+			margin-top: 30px;
+		}
+
+		&.mt-20 {
+			margin-top: 20px;
+		}
 
 		.ham-form {
 			position: relative;
 
 			.cd-row {
+				&:first-child {
+					margin-top: 10px;
+				}
+
 				&:not(:last-child) {
 					margin-bottom: 20px;
 				}
 
 				.cd-col {
+					.ham-label {
+						color: cd-palette($cd-color, 1004);
+						display: block;
+						font-size: cd-fontSize(s13);
+						margin-bottom: 5px;
+					}
+
+					.ham-italic {
+						font-style: italic;
+					}
+
 					&.cd-col-top {
 						margin-top: 20px;
 					}
@@ -45,8 +66,10 @@
 				}
 
 				button {
-					&:first-child {
-						background-color: cd-palette($cd-background, 2007);
+					&:not(:only-child) {
+						&:first-child {
+							background-color: cd-palette($cd-background, 2007);
+						}
 					}
 
 					&:last-child {

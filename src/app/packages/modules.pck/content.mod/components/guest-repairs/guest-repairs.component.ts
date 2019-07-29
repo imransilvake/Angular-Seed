@@ -63,10 +63,12 @@ export class GuestRepairsComponent implements OnDestroy {
 		if (this.isHotel) {
 			// refresh services
 			forkJoin({
-				repairCategories: this._guestRepairsService.guestRepairsFetch(this.id)
+				repairCategories: this._guestRepairsService.guestRepairsFetch(this.id),
+				formLanguages: this._utilityService.getSystemSelectedLanguages(this.pageView, this._guestRepairsService.appState)
 			}).pipe(takeUntil(this._ngUnSubscribe)).subscribe(res => {
 				const result = {
-					repairCategories: res.repairCategories
+					repairCategories: res.repairCategories,
+					formLanguages: res.formLanguages
 				};
 
 				// emit result

@@ -33,8 +33,10 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 	@Input() data;
 
 	public formFields;
+	public entryFormFields;
 	public systemLanguages;
-	public languageList = ['en'];
+	public systemInfo;
+	public languageList = [];
 	public title = 'Form';
 
 	public isAccess = false;
@@ -70,6 +72,11 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 			hotels: new FormControl('', [Validators.required]),
 			access: new FormControl(false)
 		});
+
+		// entry form group
+		this.entryFormFields = new FormGroup({
+			languages: this._formBuilder.array([])
+		});
 	}
 
 	ngOnInit() {
@@ -78,6 +85,31 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 		if (this.currentRole) {
 			this.permissionLevel2 = this._helperService.permissionLevel2(this.currentRole);
 		}
+
+		// listen: fetch form languages
+		this._guestRepairsService.dataEmitter
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => {
+				// form languages
+				if (res && res.formLanguages) {
+					// reset language list
+					this.languageList = [];
+
+					// languages list
+					this.systemInfo = res.formLanguages;
+					if (this.systemInfo && this.systemInfo['System'] && this.systemInfo['System'].Languages.length > 1) {
+						this.systemInfo['System'].Languages.forEach(language => {
+							// add form groups dynamically
+							this.addLanguageSpecificFields();
+
+							// add language
+							this.languageList.push(
+								...this.systemLanguages.filter(item => item.id === language)
+							);
+						});
+					}
+				}
+			});
 
 		// listen: on hotels change
 		this.hotels.valueChanges
@@ -150,7 +182,7 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 	/**
 	 * getters
 	 */
-	get formArray() {
+	get formLanguages() {
 		return <FormArray>this.formFields.controls.languages.controls;
 	}
 
@@ -166,21 +198,36 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 		return this.formFields.valid;
 	}
 
+	get entryFormLanguages() {
+		return <FormArray>this.entryFormFields.controls.languages.controls;
+	}
+
+	get isEntryFormValid() {
+		return this.entryFormFields.valid;
+	}
+
 	/**
 	 * add forms groups for each language
 	 */
 	public addLanguageSpecificFields() {
+		// form
 		(<FormArray>this.formFields.controls['languages']).push(
 			new FormGroup({
-				title: new FormControl('', [
+				field: new FormControl('', [
 					Validators.required,
 					Validators.minLength(3),
 					Validators.maxLength(64)
-				]),
-				description: new FormControl('', [
+				])
+			})
+		);
+
+		// entry form
+		(<FormArray>this.entryFormFields.controls['languages']).push(
+			new FormGroup({
+				field: new FormControl('', [
 					Validators.required,
 					Validators.minLength(3),
-					Validators.maxLength(2000)
+					Validators.maxLength(64)
 				])
 			})
 		);
@@ -195,6 +242,17 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 	}
 
 	/**
+	 * on submit entry form
+	 */
+	public onSubmitEntryForm() {
+		const formData = this.entryFormFields.getRawValue();
+		console.log(formData);
+
+		// reset
+		this.entryFormFields.reset();
+	}
+
+	/**
 	 * close form
 	 */
 	public onClickCloseForm() {
@@ -202,16 +260,6 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 			view: AppViewTypeEnum.DEFAULT
 		};
 		this.changeRepairsView.emit(payload);
-	}
-
-	/**
-	 * on tab change
-	 *
-	 * @param tabEvent
-	 */
-	public onChangeTab(tabEvent: any) {
-		const categoryValue = this.formArray[tabEvent.index].controls['category'].value;
-		this.title = categoryValue ? categoryValue : 'Form';
 	}
 
 	/**
