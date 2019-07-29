@@ -21,7 +21,11 @@
 
 		<!-- View: Form -->
 		<ng-container *ngIf="pageView === 1">
-			form
+			<app-guest-repairs-form
+				[id]="id"
+				[data]="data"
+				(changeRepairsView)="pageView = $event.view; id = null; data = null; triggerServices();">
+			</app-guest-repairs-form>
 		</ng-container>
 	</div>
 

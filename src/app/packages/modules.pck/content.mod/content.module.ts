@@ -19,6 +19,7 @@ import { GuestOffersFormComponent } from './components/guest-offers/form/guest-o
 import { GuestRepairsComponent } from './components/guest-repairs/guest-repairs.component';
 import { GuestRepairsService } from './services/guest-repairs.service';
 import { GuestRepairsListComponent } from './components/guest-repairs/list/guest-repairs-list.component';
+import { GuestRepairsFormComponent } from './components/guest-repairs/form/guest-repairs-form.component';
 
 @NgModule({
 	imports: [
@@ -36,7 +37,8 @@ import { GuestRepairsListComponent } from './components/guest-repairs/list/guest
 		GuestPushMessageFormComponent,
 		GuestOffersFormComponent,
 		GuestRepairsComponent,
-		GuestRepairsListComponent
+		GuestRepairsListComponent,
+		GuestRepairsFormComponent
 	],
 	providers: [
 		GuestOffersService,

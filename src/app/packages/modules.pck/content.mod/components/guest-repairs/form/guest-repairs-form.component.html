@@ -1,0 +1,87 @@
+<div class="ham-repairs-form ham-wrapper-2" *ngIf="languageList && languageList.length > 0">
+	<div class="ham-top">
+		<!-- Title -->
+		<h4>{{ title }}</h4>
+
+		<!-- Close Button -->
+		<mat-icon class="ham-icon" (click)="onClickCloseForm()">close</mat-icon>
+	</div>
+
+	<!-- Form -->
+	<div class="ham-form-wrapper">
+		<form class="ham-block ham-form" (ngSubmit)="onSubmitForm()">
+			<div class="cd-row ham-padding-0">
+				<div class="cd-col">
+					1
+				</div>
+				<div class="cd-col">
+					2
+				</div>
+			</div>
+
+			<div class="cd-row ham-padding-1">
+				<div class="cd-col cd-col-pm-t-6">
+					<app-select
+						*ngIf="currentRole === roleAdmin"
+						[multipleSelection]="true"
+						[showLabel]="true"
+						labelName="Hotel(s)*"
+						i18n-labelName="@@Guest_Repairs_Form_Hotels_Label"
+						[selectType]="selectTypeGroup"
+						[selectId]="'guest-repairs-hotel-id-group'"
+						selectPlaceHolder="Hotel(s)"
+						i18n-selectPlaceHolder="@@Guest_Repairs_Form_Hotels_Hint"
+						[dataGroups]="hotelListGroup"
+						[showHint]="true"
+						hintText="Hint Text"
+						i18n-hintText="Guest_Repairs_Form_Hotels_Hint"
+						[control]="hotels">
+					</app-select>
+					<app-select
+						*ngIf="currentRole !== roleAdmin"
+						[multipleSelection]="true"
+						[showLabel]="true"
+						labelName="Hotel(s)*"
+						i18n-labelName="@@Guest_Repairs_Form_Hotels_Label"
+						[selectType]="selectTypeDefault"
+						[selectId]="'guest-repairs-hotels-id-default'"
+						selectPlaceHolder="Hotel(s)"
+						i18n-selectPlaceHolder="@@Guest_Repairs_Form_Hotels_PlaceHolder"
+						[dataDefault]="hotelList"
+						[showHint]="true"
+						hintText="Hint Text"
+						i18n-hintText="Guest_Repairs_Form_Hotels_Hint"
+						[control]="hotels">
+					</app-select>
+				</div>
+			</div>
+
+			<!-- Divider -->
+			<app-divider></app-divider>
+
+			<!-- Submit -->
+			<div class="cd-row ham-padding-1 ham-buttons">
+				<div class="cd-col cd-col-pm-s-6 ham-access">
+					<ng-container *ngIf="permissionLevel2">
+						<mat-slide-toggle
+							class="mat-slide-toggle-1"
+							[formControl]="access">
+						</mat-slide-toggle>
+						<span i18n="@@Guest_Repairs_Form_Access">HotelManager can edit and delete</span>
+					</ng-container>
+				</div>
+				<div class="cd-col cd-col-pm-s-6 cd-right-align">
+					<button mat-button
+							type="button"
+							class="ham-button ham-button-1"
+							(click)="onClickCloseForm()"
+							i18n="@@Guest_Repairs_Form_Cancel_Button">Cancel
+					</button>
+					<button mat-button type="submit" class="ham-button ham-button-1" [disabled]="!isFormValid">
+						<span i18n="@@Guest_Repairs_Form_Save_Button">Save</span>
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
