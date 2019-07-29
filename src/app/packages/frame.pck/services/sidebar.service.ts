@@ -23,7 +23,8 @@ export class SidebarService {
 		`/${ ROUTING.management.routes.user }`,
 		`/${ ROUTING.management.routes.client }`,
 		`/${ ROUTING.content.routes.guestOffers }`,
-		`/${ ROUTING.content.routes.guestPushMessage }`
+		`/${ ROUTING.content.routes.guestPushMessage }`,
+		`/${ ROUTING.content.routes.guestRepairs }`
 	];
 
 	constructor(
@@ -82,6 +83,11 @@ export class SidebarService {
 					{
 						name: 'Guest Push Message',
 						url: `/${ ROUTING.content.routes.guestPushMessage }`,
+						externalIcon: faExternalLinkAlt
+					},
+					{
+						name: 'Guest Repairs',
+						url: `/${ ROUTING.content.routes.guestRepairs }`,
 						externalIcon: faExternalLinkAlt
 					}
 				]

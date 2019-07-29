@@ -21,7 +21,8 @@ export const EnvironmentRoutes = {
 		title: 'content',
 		routes: {
 			guestOffers: 'content/guest-offers',
-			guestPushMessage: 'content/guest-push-message'
+			guestPushMessage: 'content/guest-push-message',
+			guestRepairs: 'content/guest-repairs'
 		}
 	},
 	notifications: {

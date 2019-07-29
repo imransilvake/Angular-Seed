@@ -16,6 +16,8 @@ import { PushMessageService } from './services/push-message.service';
 import { GuestPushMessageFormComponent } from './components/guest-push-message/form/guest-push-message-form.component';
 import { GuestOffersService } from './services/guest-offers.service';
 import { GuestOffersFormComponent } from './components/guest-offers/form/guest-offers-form.component';
+import { GuestRepairsComponent } from './components/guest-repairs/guest-repairs.component';
+import { GuestRepairsService } from './services/guest-repairs.service';
 
 @NgModule({
 	imports: [
@@ -31,11 +33,13 @@ import { GuestOffersFormComponent } from './components/guest-offers/form/guest-o
 		GuestPushMessageComponent,
 		GuestPushMessageListComponent,
 		GuestPushMessageFormComponent,
-		GuestOffersFormComponent
+		GuestOffersFormComponent,
+		GuestRepairsComponent
 	],
 	providers: [
 		GuestOffersService,
-		PushMessageService
+		PushMessageService,
+		GuestRepairsService
 	]
 })
 
