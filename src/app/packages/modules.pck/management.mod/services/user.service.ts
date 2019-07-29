@@ -15,6 +15,7 @@ import { UserRoleEnum } from '../../authorization.mod/enums/user-role.enum';
 import { DialogTypeEnum } from '../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { DialogService } from '../../../utilities.pck/dialog.mod/services/dialog.service';
 import { UserListTypeEnum } from '../enums/user-list-type.enum';
+import { AuthService } from '../../authorization.mod/services/auth.service';
 
 @Injectable()
 export class UserService {
@@ -28,7 +29,8 @@ export class UserService {
 	constructor(
 		private _proxyService: ProxyService,
 		private _i18n: I18n,
-		private _dialogService: DialogService
+		private _dialogService: DialogService,
+		private _authService: AuthService
 	) {
 	}
 
@@ -459,7 +461,15 @@ export class UserService {
 				// dialog service
 				this._dialogService
 					.showDialog(dialogPayload)
-					.subscribe(() => dialogRef.close(true));
+					.subscribe(() => {
+						// close modal
+						dialogRef.close(true);
+
+						// on role update of logged-in user
+						if (this.currentUser.profile.email === formPayload.email) {
+							this._authService.authLogoutUser();
+						}
+					});
 			});
 	}
 }
