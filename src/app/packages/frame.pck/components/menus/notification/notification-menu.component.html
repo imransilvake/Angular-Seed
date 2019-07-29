@@ -28,9 +28,8 @@
 				</div>
 				<div class="cd-col cd-col-pm-m-3 cd-col-pm-s-3">
 					<p
-						class="ham-ellipses ham-type ham-yellow"
-						[class.ham-yellow]="notification.Type === 'ADMIN'"
-						[class.ham-red]="notification.Type === 'ALERT'"
+						class="ham-ellipses ham-type"
+						[ngStyle]="{ 'background-color' : notification && notification.Message && notification.Message.Colour }"
 						[class.ham-blue]="notification.Type === 'REG'">
 						{{ notification.Type }}
 					</p>

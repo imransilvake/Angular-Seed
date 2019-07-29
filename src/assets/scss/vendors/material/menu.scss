@@ -81,6 +81,7 @@
 
 					&:last-child {
 						padding: 0;
+						text-align: right;
 					}
 
 					p {
@@ -89,21 +90,13 @@
 
 						&.ham-type {
 							border-radius: 5px;
-							color: cd-palette($cd-color, 1000);
+							color: cd-palette($cd-color, 1001);
 							font-size: cd-fontSize(s10);
 							height: 18px;
 							line-height: 18px;
 							padding: 0 2px;
 							text-align: center;
 							text-transform: uppercase;
-						}
-
-						&.ham-yellow {
-							background-color: cd-palette($cd-background, 2005);
-						}
-
-						&.ham-red {
-							background-color: cd-palette($cd-background, 2009);
 						}
 
 						&.ham-blue {
