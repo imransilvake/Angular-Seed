@@ -13,7 +13,10 @@
 	<div class="ham-details" *ngIf="isHotel">
 		<!-- View: List -->
 		<ng-container *ngIf="pageView === 0">
-			list
+			<app-guest-repairs-list
+				(changeRepairsView)="pageView = $event.view; id = $event.id; data = $event.data; triggerServices();"
+				(refresh)="triggerServices()">
+			</app-guest-repairs-list>
 		</ng-container>
 
 		<!-- View: Form -->

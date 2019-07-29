@@ -21,4 +21,14 @@ export class GuestRepairsService {
 
 		return of(null);
 	}
+
+	/**
+	 * delete guest offer
+	 *
+	 * @param row
+	 * @param refreshEmitter
+	 */
+	public guestRemoveRepair(row: any, refreshEmitter: any) {
+		console.log(row);
+	}
 }
