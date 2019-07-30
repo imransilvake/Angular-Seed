@@ -77,8 +77,17 @@ export class UserListComponent implements OnInit, OnDestroy {
 						sortDefaultColumn: this._userService.tableServices.sortDefaultColumn
 					};
 
+					// filter out logged-in user
+					let list = res.existingUsers && res.existingUsers.data;
+					if (list && list.length > 0) {
+						list = list.filter(u => u.Email !== this._userService.currentUser.profile.email);
+					}
+
 					// set existing users list
-					this.userExistingUsersList = res.existingUsers;
+					this.userExistingUsersList = {
+						...res.existingUsers,
+						data: list
+					};
 				}
 			});
 	}

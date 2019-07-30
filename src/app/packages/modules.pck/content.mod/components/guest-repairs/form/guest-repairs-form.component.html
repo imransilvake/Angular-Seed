@@ -1,5 +1,5 @@
 <div class="ham-repairs-form" *ngIf="languageList && languageList.length > 0">
-	<!-- Form -->
+	<!-- Category Form -->
 	<div class="ham-form-wrapper ham-wrapper-2">
 		<div class="ham-top">
 			<!-- Title -->
@@ -17,9 +17,9 @@
 						Repair Category ({{languageList[idx].id}}):*
 					</span>
 					<app-input
-						[inputId]="'guest-repairs-category-id'"
+						[inputId]="'guest-repairs-category-id-' + idx"
 						[inputType]="'text'"
-						[inputName]="'category'"
+						[inputName]="'category' + idx"
 						inputPlaceHolder="Repair Category"
 						i18n-inputPlaceHolder="@@Guest_Repairs_Form_Title_PlaceHolder"
 						[control]="language.controls['field']">
@@ -42,7 +42,7 @@
 						[dataGroups]="hotelListGroup"
 						[showHint]="true"
 						hintText="Hint Text"
-						i18n-hintText="Guest_Repairs_Form_Hotels_Hint"
+						i18n-hintText="@@Guest_Repairs_Form_Hotels_Hint"
 						[control]="hotels">
 					</app-select>
 					<app-select
@@ -58,7 +58,7 @@
 						[dataDefault]="hotelList"
 						[showHint]="true"
 						hintText="Hint Text"
-						i18n-hintText="Guest_Repairs_Form_Hotels_Hint"
+						i18n-hintText="@@Guest_Repairs_Form_Hotels_Hint"
 						[control]="hotels">
 					</app-select>
 				</div>
@@ -93,12 +93,66 @@
 		</form>
 	</div>
 
+	<!-- Entries List -->
+	<div class="ham-form-wrapper mt-20 ham-wrapper-2">
+		<div class="ham-list">
+			<h6 class="ham-label ham-italic" i18n="@@Guest_Repairs_Form_Entry_Note">The list of entered entries here is automatically sorted alphabetically in the output.</h6>
+			<article class="ham-article">
+				<h5 class="ham-title">Entry 1:</h5>
+				<div class="ham-content">
+					<p><span>EN: </span>WiFi is not working properly</p>
+					<p><span>DE: </span>WLAN funkioniert nicht in dem Zimmer</p>
+				</div>
+				<div class="ham-buttons">
+					<button
+						mat-button
+						class="ham-button ham-button-2 ham-table-button-1"
+						i18n="@@Guest_Repairs_List_Edit">
+						Edit
+					</button>
+					<button
+						mat-button
+						class="ham-button ham-button-2 ham-table-button-2 ham-red"
+						i18n="@@Guest_Repairs_List_Delete">
+						Delete
+					</button>
+				</div>
+			</article>
+			<article class="ham-article">
+				<h5 class="ham-title">Entry 1:</h5>
+				<div class="ham-content">
+					<p><span>EN: </span>WiFi is not working properly</p>
+					<p><span>DE: </span>WLAN funkioniert nicht in dem Zimmer</p>
+				</div>
+				<div class="ham-buttons">
+					<button
+						mat-button
+						class="ham-button ham-button-2 ham-table-button-1"
+						i18n="@@Guest_Repairs_List_Edit">
+						Edit
+					</button>
+					<button
+						mat-button
+						class="ham-button ham-button-2 ham-table-button-2 ham-red"
+						i18n="@@Guest_Repairs_List_Delete">
+						Delete
+					</button>
+				</div>
+			</article>
+		</div>
+	</div>
+
 	<!-- Entry Form -->
 	<div class="ham-form-wrapper mt-20 ham-wrapper-2">
+		<div class="ham-top">
+			<!-- Title -->
+			<h4 i18n="@@Guest_Repairs_Form_Entry_Title">Add Entry</h4>
+		</div>
+
+		<!-- Form -->
 		<form class="ham-block ham-form" (ngSubmit)="onSubmitEntryForm()">
 			<div class="cd-row ham-padding-0">
 				<div class="cd-col">
-					<h6 class="ham-label ham-italic">The list of entered entries here is automatically sorted alphabetically in the output.</h6>
 					<div class="ham-entry-form">
 						<div class="cd-row ham-padding-0" *ngFor="let language of entryFormLanguages; let idx=index;">
 							<div class="cd-col cd-col-pm-t-9 cd-col-pm-d-6">
@@ -106,10 +160,10 @@
 									New Entry ({{languageList[idx].id}}):*
 								</span>
 								<app-input
-									[inputId]="'guest-repairs-entry-id'"
+									[inputId]="'guest-repairs-entry-id-' + idx"
 									[inputType]="'text'"
-									[inputName]="'entry'"
-									inputPlaceHolder="New Entry"
+									[inputName]="'entry' + idx"
+									inputPlaceHolder="Enter Entry"
 									i18n-inputPlaceHolder="@@Guest_Repairs_Form_Entry_PlaceHolder"
 									[control]="language.controls['field']">
 								</app-input>
@@ -128,7 +182,7 @@
 									class="ham-button ham-button-1"
 									i18n="@@Guest_Repairs_Form_Entry_Button"
 									[disabled]="!isEntryFormValid">
-									Add Entry
+									Save
 								</button>
 							</div>
 						</div>
