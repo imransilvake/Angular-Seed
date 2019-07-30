@@ -25,9 +25,9 @@
 									[showLabel]="true"
 									labelName="Title*"
 									i18n-labelName="@@Guest_Push_Message_Form_Title_Label"
-									[inputId]="'guest-push-notification-title-id'"
+									[inputId]="'guest-push-notification-title-id-' + idx"
 									[inputType]="'text'"
-									[inputName]="'title'"
+									[inputName]="'title' + idx"
 									inputPlaceHolder="Title"
 									i18n-inputPlaceHolder="@@Guest_Push_Message_Form_Title_PlaceHolder"
 									[control]="tab.controls['title']">
@@ -43,9 +43,9 @@
 									[showLabel]="true"
 									labelName="Notification Description*"
 									i18n-labelName="@@Guest_Push_Message_Form_Text_Label"
-									[inputId]="'guest-push-notification-text-id'"
+									[inputId]="'guest-push-notification-text-id-' + idx"
 									[inputType]="'text'"
-									[inputName]="'text'"
+									[inputName]="'text' + idx"
 									inputPlaceHolder="Notification Description"
 									i18n-inputPlaceHolder="@@Guest_Push_Message_Form_Text_PlaceHolder"
 									[control]="tab.controls['description']">
