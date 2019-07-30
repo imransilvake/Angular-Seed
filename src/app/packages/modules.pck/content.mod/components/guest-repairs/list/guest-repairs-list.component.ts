@@ -51,7 +51,6 @@ export class GuestRepairsListComponent implements OnInit, OnDestroy {
 					// set tables resources
 					this.guestRepairsTable = {
 						api: this._guestRepairsService.tableServices.api,
-						searchApi: this._guestRepairsService.tableServices.api,
 						dragApi: this._guestRepairsService.tableServices.dragApi,
 						payload: this._guestRepairsService.tableServices.payload,
 						uniqueID: this._guestRepairsService.tableServices.uniqueID,

@@ -49,7 +49,10 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 		Guest_Offers_And_Notifications_List_Hotel: { serviceUrl: '/notification/guest/list/group/:groupId/hotel/:hotelId' },
 		Guest_Offers_And_Notifications_Remove_Hotel: { serviceUrl: '/notification/guest/delete/group/:groupId/hotel/:hotelId' },
 		Guest_Offers_And_Notifications_Form_Create_Hotel: { serviceUrl: '/notification/guest/create/group/:groupId/hotel/:hotelId' },
-		Guest_Offers_And_Notifications_Form_Update_Hotel: { serviceUrl: '/notification/guest/update/group/:groupId/hotel/:hotelId' }
+		Guest_Offers_And_Notifications_Form_Update_Hotel: { serviceUrl: '/notification/guest/update/group/:groupId/hotel/:hotelId' },
+		Guest_Repairs_Form_List_Hotel: { serviceUrl: '/config/category/list/group/:groupId/hotel/:hotelId' },
+		Guest_Repairs_Form_List_Sub_Hotel: { serviceUrl: '/config/subcategory/list/group/:groupId/hotel/:hotelId' },
+		Guest_Repairs_Form_Create_Hotel: { serviceUrl: '/config/category/create/group/:groupId/hotel/:hotelId' }
 	},
 	Notifications: {
 		Notifications_List_Hotel: { serviceUrl: '/notification/list/group/:groupId/hotel/:hotelId' },

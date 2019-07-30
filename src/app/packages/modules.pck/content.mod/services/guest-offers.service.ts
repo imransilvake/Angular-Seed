@@ -43,8 +43,8 @@ export class GuestOffersService {
 		}
 
 		// api
-		const api = AppServices['Content']['Guest_Offers_And_Notifications_List_Hotel'];
-		const updateApi = AppServices['Content']['Guest_Offers_And_Notifications_Form_Update_Hotel'];
+		const api = AppServices['Content']['Guest_Repairs_Form_List_Hotel'];
+		const updateApi = AppServices['Content']['Guest_Repairs_Form_List_Hotel'];
 
 		// payload
 		const payload: any = {

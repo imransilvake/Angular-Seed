@@ -394,7 +394,12 @@ export class GuestPushMessageFormComponent implements OnInit, OnDestroy {
 
 		// state, access
 		const state = (this.state.value) ? 'ACTIVE' : 'INACTIVE';
-		const access = (this.access.value) ? 'HOTEL' : 'GROUP';
+		let access = (this.access.value) ? 'HOTEL' : 'GROUP';
+
+		// permission level: 4
+		if (this._helperService.permissionLevel4(this.currentRole)) {
+			access = 'HOTEL';
+		}
 
 		// id
 		const id = (!!this.data) ? {ID: this.data.ID} : {};

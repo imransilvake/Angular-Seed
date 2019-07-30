@@ -20,6 +20,7 @@ import { SelectGroupInterface } from '../../../../../core.pck/fields.mod/interfa
 import { ErrorHandlerInterface } from '../../../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 import { SelectTypeEnum } from '../../../../../core.pck/fields.mod/enums/select-type.enum';
 import { GuestRepairsService } from '../../../services/guest-repairs.service';
+import { GuestRepairInterface } from '../../../interfaces/guest-repair.interface';
 
 @Component({
 	selector: 'app-guest-repairs-form',
@@ -29,6 +30,7 @@ import { GuestRepairsService } from '../../../services/guest-repairs.service';
 
 export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 	@Output() changeRepairsView: EventEmitter<any> = new EventEmitter();
+	@Output() categoryEmitter: EventEmitter<any> = new EventEmitter();
 	@Input() id;
 	@Input() data;
 
@@ -38,13 +40,16 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 	public systemInfo;
 	public languageList = [];
 	public title = 'Form';
+	public categoryId;
 
 	public isAccess = false;
+	public hideSelectedEntryButtons = -1;
 	public selectTypeDefault = SelectTypeEnum.DEFAULT;
 	public selectTypeGroup = SelectTypeEnum.GROUP;
 	public hotelList: SelectDefaultInterface[] = [];
 	public hotelListGroup: SelectGroupInterface[] = [];
 	public selectedHotels = [];
+	public subCategoriesList = [];
 
 	public currentRole;
 	public roleAdmin: UserRoleEnum = UserRoleEnum[UserRoleEnum.ADMIN];
@@ -98,7 +103,7 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 					// languages list
 					this.systemInfo = res.formLanguages;
 					if (this.systemInfo && this.systemInfo['System'] && this.systemInfo['System'].Languages.length > 1) {
-						this.systemInfo['System'].Languages.forEach(language => {
+						this.systemInfo['System'].Languages.forEach((language, index) => {
 							// add form groups dynamically
 							this.addLanguageSpecificFields();
 
@@ -106,9 +111,48 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 							this.languageList.push(
 								...this.systemLanguages.filter(item => item.id === language)
 							);
+
+							// update existing data
+							if (this.data) {
+								const category = this.formFields.controls['languages'].controls[index].controls['field'];
+								category.setValue(this.data.Name[language]);
+								this.title = this.data.Name[language];
+							}
 						});
+
+						// listen: category field
+						const category = this.formFields.controls['languages'].controls[0].controls['field'];
+						category.valueChanges
+							.pipe(takeUntil(this._ngUnSubscribe))
+							.subscribe(x => this.title = x);
 					}
 				}
+
+				// update existing data
+				if (this.data) {
+					// category id
+					this.categoryId = this.data.ID;
+
+					// access
+					this.isAccess = this.data.Access.toLowerCase() !== 'group';
+					this.access.setValue(this.isAccess);
+
+					// set entry list
+					this._guestRepairsService.guestRepairsSubCategoriesFetch(this.data)
+						.subscribe(res => this.subCategoriesList = res.data);
+				}
+			});
+
+		// listen: category creation
+		this.categoryEmitter
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => {
+				// set category id;
+				this.categoryId = res;
+
+				// set entry list
+				this._guestRepairsService.guestRepairsSubCategoriesFetch(this.data)
+					.subscribe(res => this.subCategoriesList = res.data);
 			});
 
 		// listen: on hotels change
@@ -235,21 +279,81 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 
 	/**
 	 * on submit form
+	 *
+	 * @param repairEntryForm
 	 */
-	public onSubmitForm() {
+	public onSubmitForm(repairEntryForm: boolean) {
 		const formData = this.formFields.getRawValue();
-		console.log(formData);
+		const entryFormData = this.entryFormFields.getRawValue();
+
+		// category
+		const category = {};
+		if (this.languageList && this.languageList.length) {
+			for (let i = 0; i < this.languageList.length; i++) {
+				if (repairEntryForm) {
+					category[this.languageList[i].id] = entryFormData.languages[i].field;
+				} else {
+					category[this.languageList[i].id] = formData.languages[i].field;
+				}
+			}
+		}
+
+		// hotels
+		const hotels = this.hotels.value && this.hotels.value.length > 0 && this.hotels.value.map(h => h.id);
+
+		// state, access
+		let access = (this.access.value) ? 'HOTEL' : 'GROUP';
+
+		// permission level: 4
+		if (this._helperService.permissionLevel4(this.currentRole)) {
+			access = 'HOTEL';
+		}
+
+		// id
+		const id = (!!this.data && !repairEntryForm) ? {ID: this.data.ID, Sort: this.data.Sort} : {};
+
+		// category form
+		const catData = !repairEntryForm ? {Parent: null, Level: 1} : {Parent: this.data.ID, Level: 2};
+
+		// form
+		const formPayload: GuestRepairInterface = {
+			...id,
+			...catData,
+			GroupID: this._guestRepairsService.appState.groupId,
+			HotelIDs: hotels,
+			Name: category,
+			Access: access
+		};
+
+		// service
+		this._guestRepairsService.guestUpdateRepair(formPayload, this.data, this.categoryEmitter);
+
+		// repair entry form
+		if (repairEntryForm) {
+			// reset entry form fields
+			this.entryFormFields.reset();
+		}
 	}
 
 	/**
-	 * on submit entry form
+	 * edit entry
+	 *
+	 * @param row
 	 */
-	public onSubmitEntryForm() {
-		const formData = this.entryFormFields.getRawValue();
-		console.log(formData);
+	public onClickEditEntry(row: any) {
+		// hide buttons
+		this.hideSelectedEntryButtons = row;
 
-		// reset
-		this.entryFormFields.reset();
+		// set values
+	}
+
+	/**
+	 * delete entry
+	 *
+	 * @param row
+	 */
+	public onClickDeleteEntry(row: any) {
+
 	}
 
 	/**

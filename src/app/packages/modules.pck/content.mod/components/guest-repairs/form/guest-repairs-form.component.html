@@ -10,10 +10,10 @@
 		</div>
 
 		<!-- Form -->
-		<form class="ham-block ham-form" (ngSubmit)="onSubmitForm()">
+		<form class="ham-block ham-form" (ngSubmit)="onSubmitForm(false)">
 			<div class="cd-row ham-padding-0" *ngFor="let language of formLanguages; let idx=index;">
 				<div class="cd-col cd-col-pm-t-9 cd-col-pm-d-6">
-					<span class="ham-label" i18n="@@Guest_Repairs_Form_Title_Label">
+					<span class="ham-label" i18n="@@Guest_Repairs_Form_Title_Label" *ngIf="languageList && languageList[idx] && languageList[idx].id">
 						Repair Category ({{languageList[idx].id}}):*
 					</span>
 					<app-input
@@ -94,46 +94,29 @@
 	</div>
 
 	<!-- Entries List -->
-	<div class="ham-form-wrapper mt-20 ham-wrapper-2">
+	<div class="ham-form-wrapper mt-20 ham-wrapper-2" *ngIf="subCategoriesList && subCategoriesList.length > 0">
 		<div class="ham-list">
 			<h6 class="ham-label ham-italic" i18n="@@Guest_Repairs_Form_Entry_Note">The list of entered entries here is automatically sorted alphabetically in the output.</h6>
-			<article class="ham-article">
-				<h5 class="ham-title">Entry 1:</h5>
+			<article class="ham-article" *ngFor="let item of subCategoriesList; let idx=index;">
+				<h5 class="ham-title">Entry {{idx + 1}}:</h5>
 				<div class="ham-content">
-					<p><span>EN: </span>WiFi is not working properly</p>
-					<p><span>DE: </span>WLAN funkioniert nicht in dem Zimmer</p>
+					<p *ngFor="let lang of languageList">
+						<span class="ham-uppercase">{{lang.id}}: </span>
+						{{item.Name[lang.id]}}
+					</p>
 				</div>
-				<div class="ham-buttons">
+				<div class="ham-buttons" *ngIf="hideSelectedEntryButtons !== 1">
 					<button
 						mat-button
 						class="ham-button ham-button-2 ham-table-button-1"
+						(click)="onClickEditEntry(1)"
 						i18n="@@Guest_Repairs_List_Edit">
 						Edit
 					</button>
 					<button
 						mat-button
 						class="ham-button ham-button-2 ham-table-button-2 ham-red"
-						i18n="@@Guest_Repairs_List_Delete">
-						Delete
-					</button>
-				</div>
-			</article>
-			<article class="ham-article">
-				<h5 class="ham-title">Entry 1:</h5>
-				<div class="ham-content">
-					<p><span>EN: </span>WiFi is not working properly</p>
-					<p><span>DE: </span>WLAN funkioniert nicht in dem Zimmer</p>
-				</div>
-				<div class="ham-buttons">
-					<button
-						mat-button
-						class="ham-button ham-button-2 ham-table-button-1"
-						i18n="@@Guest_Repairs_List_Edit">
-						Edit
-					</button>
-					<button
-						mat-button
-						class="ham-button ham-button-2 ham-table-button-2 ham-red"
+						(click)="onClickDeleteEntry(1)"
 						i18n="@@Guest_Repairs_List_Delete">
 						Delete
 					</button>
@@ -143,21 +126,25 @@
 	</div>
 
 	<!-- Entry Form -->
-	<div class="ham-form-wrapper mt-20 ham-wrapper-2">
+	<div class="ham-form-wrapper mt-20 ham-wrapper-2" *ngIf="categoryId">
 		<div class="ham-top">
 			<!-- Title -->
-			<h4 i18n="@@Guest_Repairs_Form_Entry_Title">Add Entry</h4>
+			<h4 i18n="@@Guest_Repairs_Form_Entry_New_Title" *ngIf="hideSelectedEntryButtons === -1">Add Entry</h4>
+			<h4 i18n="@@Guest_Repairs_Form_Entry_Edit_Title" *ngIf="hideSelectedEntryButtons !== -1">Edit Entry</h4>
 		</div>
 
 		<!-- Form -->
-		<form class="ham-block ham-form" (ngSubmit)="onSubmitEntryForm()">
+		<form class="ham-block ham-form" (ngSubmit)="onSubmitForm(true)">
 			<div class="cd-row ham-padding-0">
 				<div class="cd-col">
 					<div class="ham-entry-form">
 						<div class="cd-row ham-padding-0" *ngFor="let language of entryFormLanguages; let idx=index;">
 							<div class="cd-col cd-col-pm-t-9 cd-col-pm-d-6">
-								<span class="ham-label" i18n="@@Guest_Repairs_Form_Entry_Label">
+								<span class="ham-label" i18n="@@Guest_Repairs_Form_Entry_New_Label" *ngIf="hideSelectedEntryButtons === -1">
 									New Entry ({{languageList[idx].id}}):*
+								</span>
+								<span class="ham-label" i18n="@@Guest_Repairs_Form_Entry_Edit_Label" *ngIf="hideSelectedEntryButtons !== -1">
+									Edit Entry ({{languageList[idx].id}}):*
 								</span>
 								<app-input
 									[inputId]="'guest-repairs-entry-id-' + idx"

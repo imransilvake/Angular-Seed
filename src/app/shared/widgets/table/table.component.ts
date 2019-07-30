@@ -649,13 +649,8 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 						};
 					}
 
-					// Order
-					if (item.hasOwnProperty('Order')) {
-
-					}
-
 					// module: guest
-					if (this._router.url === `/${ ROUTING.content.routes.guestPushMessage }` || this._router.url === `/${ ROUTING.content.routes.guestOffers }`) {
+					if (this._router.url === `/${ ROUTING.content.routes.guestPushMessage }` || this._router.url === `/${ ROUTING.content.routes.guestOffers }` || this._router.url === `/${ ROUTING.content.routes.guestRepairs }`) {
 						// Title
 						if (item.hasOwnProperty('Title')) {
 							newItem = {
@@ -681,6 +676,15 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 									Image: image
 								};
 							}
+						}
+
+						// Category
+						if (item.hasOwnProperty('Name')) {
+							newItem = {
+								...newItem,
+								Category: item.Name[language],
+								Name: item.Name
+							};
 						}
 					}
 

@@ -85,9 +85,8 @@ export class VersionService {
 			extraPayload = {
 				type: 'update',
 				...formPayload
-			}
-		}
-		else {
+			};
+		} else {
 			text = {
 				title: this._i18n({ value: 'Title: Version Created', id: 'Management_Version_Created_Form_Success_Title' }),
 				message: this._i18n({
@@ -98,7 +97,7 @@ export class VersionService {
 
 			extraPayload = {
 				...formPayload
-			}
+			};
 		}
 
 		// service
