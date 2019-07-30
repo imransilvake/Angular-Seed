@@ -98,7 +98,14 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 				// form languages
 				if (res && res.formLanguages) {
 					// reset language list
+					if (this.languageList.length !== 0) {
+						const control = <FormArray>this.formFields.controls.languages;
+						for(let i = control.length-1; i >= 0; i--) {
+							control.removeAt(i)
+						}
+					}
 					this.languageList = [];
+					this.title = 'Form';
 
 					// languages list
 					this.systemInfo = res.formLanguages;
@@ -116,7 +123,9 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 							if (this.data) {
 								const category = this.formFields.controls['languages'].controls[index].controls['field'];
 								category.setValue(this.data.Name[language]);
-								this.title = this.data.Name[language];
+								if (this.title && this.title === 'Form') {
+									this.title = this.data.Name[language];
+								}
 							}
 						});
 

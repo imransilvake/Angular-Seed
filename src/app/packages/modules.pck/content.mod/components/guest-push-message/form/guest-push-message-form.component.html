@@ -18,7 +18,7 @@
 			<!-- Multi-Language Fields | Tabs -->
 			<div class="ham-tabs">
 				<mat-tab-group class="ham-tabs-1" [@.disabled]="true" (selectedTabChange)="onChangeTab($event)">
-					<mat-tab *ngFor="let tab of formArray; let idx=index;" [label]="tabsList[idx].text">
+					<mat-tab *ngFor="let tab of formArray; let idx=index;" [label]="tabsList && tabsList[idx] && tabsList[idx].text">
 						<div class="cd-row ham-padding-0">
 							<div class="cd-col">
 								<app-input

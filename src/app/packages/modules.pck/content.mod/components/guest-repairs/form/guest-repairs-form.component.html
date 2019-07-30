@@ -139,7 +139,7 @@
 				<div class="cd-col">
 					<div class="ham-entry-form">
 						<div class="cd-row ham-padding-0" *ngFor="let language of entryFormLanguages; let idx=index;">
-							<div class="cd-col cd-col-pm-t-9 cd-col-pm-d-6">
+							<div class="cd-col cd-col-pm-t-9 cd-col-pm-d-6" *ngIf="languageList && languageList[idx] && languageList[idx].id">
 								<span class="ham-label" i18n="@@Guest_Repairs_Form_Entry_New_Label" *ngIf="hideSelectedEntryButtons === -1">
 									New Entry ({{languageList[idx].id}}):*
 								</span>

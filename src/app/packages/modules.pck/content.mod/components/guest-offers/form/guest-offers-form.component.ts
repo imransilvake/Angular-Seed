@@ -109,7 +109,14 @@ export class GuestOffersFormComponent implements OnInit, OnDestroy {
 				// form languages
 				if (res && res.formLanguages) {
 					// reset tab list
+					if (this.tabsList.length !== 0) {
+						const control = <FormArray>this.formFields.controls.languages;
+						for(let i = control.length-1; i >= 0; i--) {
+							control.removeAt(i)
+						}
+					}
 					this.tabsList = [];
+					this.title = 'Form';
 
 					// tabs list
 					this.systemInfo = res.formLanguages;
@@ -130,7 +137,9 @@ export class GuestOffersFormComponent implements OnInit, OnDestroy {
 							// update existing data
 							if (this.data) {
 								title.setValue(this.data.Titles[language]);
-								this.title = this.data.Titles[language];
+								if (this.title && this.title === 'Form') {
+									this.title = this.data.Titles[language];
+								}
 								text.setValue(this.data.Text[language]);
 							}
 
