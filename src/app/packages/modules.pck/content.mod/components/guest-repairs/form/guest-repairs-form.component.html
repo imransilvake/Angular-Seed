@@ -105,21 +105,23 @@
 						{{item.Name[lang.id]}}
 					</p>
 				</div>
-				<div class="ham-buttons" *ngIf="hideSelectedEntryButtons !== 1">
-					<button
-						mat-button
-						class="ham-button ham-button-2 ham-table-button-1"
-						(click)="onClickEditEntry(1)"
-						i18n="@@Guest_Repairs_List_Edit">
-						Edit
-					</button>
-					<button
-						mat-button
-						class="ham-button ham-button-2 ham-table-button-2 ham-red"
-						(click)="onClickDeleteEntry(1)"
-						i18n="@@Guest_Repairs_List_Delete">
-						Delete
-					</button>
+				<div class="ham-buttons">
+					<ng-container *ngIf="hideSelectedEntryButtons !== idx">
+						<button
+							mat-button
+							class="ham-button ham-button-2 ham-table-button-1"
+							(click)="onClickEditEntry(item, idx)"
+							i18n="@@Guest_Repairs_List_Edit">
+							Edit
+						</button>
+						<button
+							mat-button
+							class="ham-button ham-button-2 ham-table-button-2 ham-red"
+							(click)="onClickDeleteEntry(item, idx)"
+							i18n="@@Guest_Repairs_List_Delete">
+							Delete
+						</button>
+					</ng-container>
 				</div>
 			</article>
 		</div>
@@ -134,7 +136,7 @@
 		</div>
 
 		<!-- Form -->
-		<form class="ham-block ham-form" (ngSubmit)="onSubmitForm(true)">
+		<form class="ham-block ham-form" (ngSubmit)="onSubmitEntryForm()">
 			<div class="cd-row ham-padding-0">
 				<div class="cd-col">
 					<div class="ham-entry-form">

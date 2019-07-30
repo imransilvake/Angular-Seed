@@ -4,10 +4,8 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { I18n } from '@ngx-translate/i18n-polyfill';
-
 // store
 import { Store } from '@ngrx/store';
-
 // app
 import * as ErrorHandlerActions from '../../../../../utilities.pck/error-handler.mod/store/actions/error-handler.actions';
 import { AppViewTypeEnum } from '../../../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
@@ -41,6 +39,7 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 	public languageList = [];
 	public title = 'Form';
 	public categoryId;
+	public subCategoryId;
 
 	public isAccess = false;
 	public hideSelectedEntryButtons = -1;
@@ -108,6 +107,7 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 					}
 					this.languageList = [];
 					this.title = 'Form';
+					this.hideSelectedEntryButtons = -1;
 
 					// languages list
 					this.systemInfo = res.formLanguages;
@@ -150,6 +150,7 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 
 					// set entry list
 					this._guestRepairsService.guestRepairsSubCategoriesFetch(this.data)
+						.pipe(takeUntil(this._ngUnSubscribe))
 						.subscribe(list => this.subCategoriesList = list.data);
 				}
 			});
@@ -159,11 +160,16 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => {
 				// set category id;
-				this.categoryId = res;
+				if (res && res.data) {
+					this.categoryId = res.data;
+				}
 
 				// set entry list
-				this._guestRepairsService.guestRepairsSubCategoriesFetch(this.data)
-					.subscribe(list => this.subCategoriesList = list.data);
+				if (this.data) {
+					this._guestRepairsService.guestRepairsSubCategoriesFetch(this.data)
+						.pipe(takeUntil(this._ngUnSubscribe))
+						.subscribe(list => this.subCategoriesList = list.data);
+				}
 			});
 
 		// listen: on hotels change
@@ -292,8 +298,9 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 	 * on submit form
 	 *
 	 * @param repairEntryForm
+	 * @param subCategoryId
 	 */
-	public onSubmitForm(repairEntryForm: boolean) {
+	public onSubmitForm(repairEntryForm: boolean, subCategoryId?: number) {
 		const formData = this.formFields.getRawValue();
 		const entryFormData = this.entryFormFields.getRawValue();
 
@@ -320,11 +327,12 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 			access = 'HOTEL';
 		}
 
-		// id
-		const id = (!!this.data && !repairEntryForm) ? {ID: this.data.ID, Sort: this.data.Sort} : {};
-
 		// category form
-		const catData = !repairEntryForm ? {Parent: null, Level: 1} : {Parent: this.data.ID, Level: 2};
+		const catData = !repairEntryForm ? { Parent: null, Level: 1 } : { Parent: this.categoryId, Level: 2 };
+
+		// id
+		let id = (!!this.data && !repairEntryForm) ? { ID: this.data.ID, Sort: this.data.Sort } : {};
+		id = subCategoryId ? { ID: subCategoryId, Sort: this.data.Sort } : id;
 
 		// form
 		const formPayload: GuestRepairInterface = {
@@ -336,34 +344,62 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 			Access: access
 		};
 
+		// modal message state
+		const modalMessageState = !!(this.data && formPayload.Level === 1 || this.data && formPayload.Level === 2 && subCategoryId);
+
 		// service
-		this._guestRepairsService.guestUpdateRepair(formPayload, this.data, this.categoryEmitter);
+		this._guestRepairsService.guestUpdateRepair(formPayload, this.categoryEmitter, modalMessageState);
 
 		// repair entry form
 		if (repairEntryForm) {
 			// reset entry form fields
 			this.entryFormFields.reset();
+
+			// reset buttons
+			this.hideSelectedEntryButtons = -1;
 		}
+	}
+
+	/**
+	 * on submit form
+	 */
+	public onSubmitEntryForm() {
+		// submit form
+		this.onSubmitForm(true, this.subCategoryId);
+
+		// reset
+		this.subCategoryId = null;
 	}
 
 	/**
 	 * edit entry
 	 *
 	 * @param row
+	 * @param index
 	 */
-	public onClickEditEntry(row: any) {
+	public onClickEditEntry(row: any, index: number) {
 		// hide buttons
-		this.hideSelectedEntryButtons = row;
+		this.hideSelectedEntryButtons = index;
+
+		// set sub category id
+		this.subCategoryId = row.ID;
 
 		// set values
+		if (this.languageList && this.languageList.length) {
+			for (let i = 0; i < this.languageList.length; i++) {
+				const name = row.Name[this.languageList[i].id];
+				this.entryFormLanguages[i].controls['field'].setValue(name);
+			}
+		}
 	}
 
 	/**
 	 * delete entry
 	 *
 	 * @param row
+	 * @param index
 	 */
-	public onClickDeleteEntry(row: any) {
+	public onClickDeleteEntry(row: any, index: number) {
 
 	}
 

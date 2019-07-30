@@ -105,11 +105,10 @@ export class GuestRepairsService {
 	 * create / update guest repair
 	 *
 	 * @param formPayload
-	 * @param rowData
 	 * @param categoryEmitter
+	 * @param modalMessageState
 	 */
-	public guestUpdateRepair(formPayload: GuestRepairInterface, rowData: any, categoryEmitter: any) {
-		const isEditForm = !!rowData;
+	public guestUpdateRepair(formPayload: GuestRepairInterface, categoryEmitter: any, modalMessageState: boolean) {
 		const api = AppServices['Content']['Guest_Repairs_Form_Create_Hotel'];
 
 		// start loading animation
@@ -130,7 +129,7 @@ export class GuestRepairsService {
 				// stop loading animation
 				this._loadingAnimationService.stopLoadingAnimation();
 
-				const text = isEditForm ? {
+				const text = modalMessageState ? {
 					title: this._i18n({ value: 'Title: Repair Updated', id: 'Guest_Repairs_Form_Success_Updated_Title' }),
 					message: this._i18n({
 						value: 'Description: Repair Updated',
@@ -157,7 +156,7 @@ export class GuestRepairsService {
 				// listen: dialog service
 				this._dialogService
 					.showDialog(dialogPayload)
-					.subscribe(() => res && res.data && categoryEmitter.emit(res.data));
+					.subscribe(() => categoryEmitter.emit(res));
 			});
 	}
 }
