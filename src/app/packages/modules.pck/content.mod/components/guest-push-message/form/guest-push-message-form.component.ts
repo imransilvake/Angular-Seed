@@ -122,8 +122,8 @@ export class GuestPushMessageFormComponent implements OnInit, OnDestroy {
 					// reset tab list
 					if (this.tabsList.length !== 0) {
 						const control = <FormArray>this.formFields.controls.languages;
-						for(let i = control.length-1; i >= 0; i--) {
-							control.removeAt(i)
+						for (let i = control.length - 1; i >= 0; i--) {
+							control.removeAt(i);
 						}
 					}
 					this.tabsList = [];

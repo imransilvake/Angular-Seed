@@ -3,7 +3,6 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-
 // app
 import * as moment from 'moment';
 import { AppViewTypeEnum } from '../../../../../utilities.pck/accessories.mod/enums/app-view-type.enum';
@@ -64,6 +63,12 @@ export class VersionFormComponent implements OnInit, OnDestroy {
 				// form languages
 				if (res && res.formLanguages) {
 					// reset tab list
+					if (this.tabsList.length !== 0) {
+						const control = <FormArray>this.formFields.controls.languages;
+						for (let i = control.length - 1; i >= 0; i--) {
+							control.removeAt(i);
+						}
+					}
 					this.tabsList = [];
 
 					// tabs list
@@ -78,12 +83,10 @@ export class VersionFormComponent implements OnInit, OnDestroy {
 								...this.systemLanguages.filter(item => item.id === language)
 							);
 
-							// text
-							const text = this.formFields.controls['languages'].controls[index].controls['description'];
-
 							// update existing data
 							if (this.data) {
 								// description
+								const text = this.formFields.controls['languages'].controls[index].controls['description'];
 								text.setValue(this.data.Text[language]);
 							}
 						});

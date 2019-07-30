@@ -100,8 +100,10 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 					// reset language list
 					if (this.languageList.length !== 0) {
 						const control = <FormArray>this.formFields.controls.languages;
-						for(let i = control.length-1; i >= 0; i--) {
-							control.removeAt(i)
+						const control2 = <FormArray>this.entryFormFields.controls.languages;
+						for (let i = control.length - 1; i >= 0; i--) {
+							control.removeAt(i);
+							control2.removeAt(i);
 						}
 					}
 					this.languageList = [];
@@ -130,8 +132,8 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 						});
 
 						// listen: category field
-						const category = this.formFields.controls['languages'].controls[0].controls['field'];
-						category.valueChanges
+						const categoryListener = this.formFields.controls['languages'].controls[0].controls['field'];
+						categoryListener.valueChanges
 							.pipe(takeUntil(this._ngUnSubscribe))
 							.subscribe(x => this.title = x);
 					}
@@ -148,7 +150,7 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 
 					// set entry list
 					this._guestRepairsService.guestRepairsSubCategoriesFetch(this.data)
-						.subscribe(res => this.subCategoriesList = res.data);
+						.subscribe(list => this.subCategoriesList = list.data);
 				}
 			});
 
@@ -161,7 +163,7 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 
 				// set entry list
 				this._guestRepairsService.guestRepairsSubCategoriesFetch(this.data)
-					.subscribe(res => this.subCategoriesList = res.data);
+					.subscribe(list => this.subCategoriesList = list.data);
 			});
 
 		// listen: on hotels change

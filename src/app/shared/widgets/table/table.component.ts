@@ -649,8 +649,12 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 						};
 					}
 
-					// module: guest
-					if (this._router.url === `/${ ROUTING.content.routes.guestPushMessage }` || this._router.url === `/${ ROUTING.content.routes.guestOffers }` || this._router.url === `/${ ROUTING.content.routes.guestRepairs }`) {
+					// module: content
+					if (
+						this._router.url === `/${ ROUTING.content.routes.guestPushMessage }` ||
+						this._router.url === `/${ ROUTING.content.routes.guestOffers }` ||
+						this._router.url === `/${ ROUTING.content.routes.guestRepairs }`
+					) {
 						// Title
 						if (item.hasOwnProperty('Title')) {
 							newItem = {
