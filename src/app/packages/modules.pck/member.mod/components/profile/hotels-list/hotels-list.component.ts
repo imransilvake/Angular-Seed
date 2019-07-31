@@ -40,6 +40,7 @@ export class HotelsListComponent implements OnInit, OnDestroy {
 
 						// fetch assigned hotels
 						this._utilityService.getHotelListByGroup(payload)
+							.pipe(takeUntil(this._ngUnSubscribe))
 							.subscribe(result => this.hotelList = result.items);
 					}
 
