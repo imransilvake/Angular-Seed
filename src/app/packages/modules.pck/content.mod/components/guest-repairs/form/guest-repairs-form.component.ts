@@ -323,7 +323,7 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 		const catData = !isSubCategoryForm ? { Parent: null, Level: 1 } : { Parent: this.categoryId, Level: 2 };
 
 		// id
-		let id: any = (!!this.data && !isSubCategoryForm) ? { ID: this.data.ID, Sort: this.data.Sort } : {};
+		let id: any = (!!this.categoryId && !isSubCategoryForm) ? { ID: this.categoryId } : {};
 		id = subCategoryId ? { ID: subCategoryId } : id;
 
 		// hotels
