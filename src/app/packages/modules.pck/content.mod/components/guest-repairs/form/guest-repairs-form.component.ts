@@ -167,8 +167,8 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 				}
 
 				// set sub categories list
-				if (this.data || response && response.id) {
-					const id = this.data && this.data.ID || response && response.id;
+				if (this.data || this.categoryId) {
+					const id = this.data && this.data.ID || this.categoryId;
 					this._guestRepairsService.guestRepairsSubCategoriesFetch(id)
 						.pipe(takeUntil(this._ngUnSubscribe))
 						.subscribe(list => this.subCategoriesList = list.data);
@@ -323,8 +323,8 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 		const catData = !isSubCategoryForm ? { Parent: null, Level: 1 } : { Parent: this.categoryId, Level: 2 };
 
 		// id
-		let id = (!!this.data && !isSubCategoryForm) ? { ID: this.data.ID, Sort: this.data.Sort } : {};
-		id = subCategoryId ? { ID: subCategoryId, Sort: this.data.Sort } : id;
+		let id: any = (!!this.data && !isSubCategoryForm) ? { ID: this.data.ID, Sort: this.data.Sort } : {};
+		id = subCategoryId ? { ID: subCategoryId } : id;
 
 		// hotels
 		const hotels = this.hotels.value && this.hotels.value.length > 0 && this.hotels.value.map(h => h.id);
@@ -348,7 +348,7 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 		};
 
 		// modal message state
-		const modalMessageState = !!(this.data && formPayload.Level === 1 || this.data && formPayload.Level === 2 && subCategoryId);
+		const modalMessageState = !!(this.categoryId && formPayload.Level === 1 || subCategoryId && formPayload.Level === 2);
 
 		// service
 		this._guestRepairsService.guestCreateAndUpdateRepair(formPayload, this.categoryEmitter, modalMessageState, isSubCategoryForm);
