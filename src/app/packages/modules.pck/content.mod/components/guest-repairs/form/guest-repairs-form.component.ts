@@ -28,10 +28,10 @@ import { GuestRepairInterface } from '../../../interfaces/guest-repair.interface
 
 export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 	@Output() changeRepairsView: EventEmitter<any> = new EventEmitter();
-	@Output() categoryEmitter: EventEmitter<any> = new EventEmitter();
 	@Input() id;
 	@Input() data;
 
+	public categoryEmitter: EventEmitter<any> = new EventEmitter();
 	public formFields;
 	public entryFormFields;
 	public systemLanguages;
@@ -316,6 +316,13 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 			}
 		}
 
+		// category form
+		const catData = !repairEntryForm ? { Parent: null, Level: 1 } : { Parent: this.categoryId, Level: 2 };
+
+		// id
+		let id = (!!this.data && !repairEntryForm) ? { ID: this.data.ID, Sort: this.data.Sort } : {};
+		id = subCategoryId ? { ID: subCategoryId, Sort: this.data.Sort } : id;
+
 		// hotels
 		const hotels = this.hotels.value && this.hotels.value.length > 0 && this.hotels.value.map(h => h.id);
 
@@ -326,13 +333,6 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 		if (this._helperService.permissionLevel4(this.currentRole)) {
 			access = 'HOTEL';
 		}
-
-		// category form
-		const catData = !repairEntryForm ? { Parent: null, Level: 1 } : { Parent: this.categoryId, Level: 2 };
-
-		// id
-		let id = (!!this.data && !repairEntryForm) ? { ID: this.data.ID, Sort: this.data.Sort } : {};
-		id = subCategoryId ? { ID: subCategoryId, Sort: this.data.Sort } : id;
 
 		// form
 		const formPayload: GuestRepairInterface = {
@@ -348,7 +348,7 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 		const modalMessageState = !!(this.data && formPayload.Level === 1 || this.data && formPayload.Level === 2 && subCategoryId);
 
 		// service
-		this._guestRepairsService.guestUpdateRepair(formPayload, this.categoryEmitter, modalMessageState);
+		this._guestRepairsService.guestCreateAndUpdateRepair(formPayload, this.categoryEmitter, modalMessageState);
 
 		// repair entry form
 		if (repairEntryForm) {

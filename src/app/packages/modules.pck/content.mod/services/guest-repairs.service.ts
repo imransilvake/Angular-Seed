@@ -32,7 +32,7 @@ export class GuestRepairsService {
 	 *
 	 * @param id
 	 */
-	public guestRepairsFetch(id: number) {
+	public guestRepairsCategoriesFetch(id: number) {
 		if (id) {
 			return of(null);
 		}
@@ -98,7 +98,7 @@ export class GuestRepairsService {
 	 * @param categoryEmitter
 	 * @param modalMessageState
 	 */
-	public guestUpdateRepair(formPayload: GuestRepairInterface, categoryEmitter: any, modalMessageState: boolean) {
+	public guestCreateAndUpdateRepair(formPayload: GuestRepairInterface, categoryEmitter: any, modalMessageState: boolean) {
 		const api = AppServices['Content']['Guest_Repairs_Form_Create_Hotel'];
 
 		// start loading animation
