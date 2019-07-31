@@ -39,12 +39,12 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 	public systemLanguages;
 	public systemInfo;
 	public languageList = [];
-	public title = 'Form';
 	public categoryId;
 	public subCategoryId;
+	public title = 'Form';
 
 	public isAccess = false;
-	public hideSelectedEntryButtons = -1;
+	public hideSelectedSubCategoryButtons = -1;
 	public selectTypeDefault = SelectTypeEnum.DEFAULT;
 	public selectTypeGroup = SelectTypeEnum.GROUP;
 	public hotelList: SelectDefaultInterface[] = [];
@@ -109,7 +109,7 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 					}
 					this.languageList = [];
 					this.title = 'Form';
-					this.hideSelectedEntryButtons = -1;
+					this.hideSelectedSubCategoryButtons = -1;
 
 					// languages list
 					this.systemInfo = res.formLanguages;
@@ -150,7 +150,7 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 					this.isAccess = this.data.Access.toLowerCase() !== 'group';
 					this.access.setValue(this.isAccess);
 
-					// set entry list
+					// set sub categories list
 					this._guestRepairsService.guestRepairsSubCategoriesFetch(this.data)
 						.pipe(takeUntil(this._ngUnSubscribe))
 						.subscribe(list => this.subCategoriesList = list.data);
@@ -166,7 +166,7 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 					this.categoryId = res.data;
 				}
 
-				// set entry list
+				// set sub categories list
 				if (this.data) {
 					this._guestRepairsService.guestRepairsSubCategoriesFetch(this.data)
 						.pipe(takeUntil(this._ngUnSubscribe))
@@ -261,11 +261,11 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 		return this.parentCategoryFormFields.valid;
 	}
 
-	get entryFormLanguages() {
+	get subCategoriesFormLanguages() {
 		return <FormArray>this.subCategoryFormFields.controls.languages.controls;
 	}
 
-	get isEntryFormValid() {
+	get isSubCategoryFormValid() {
 		return this.subCategoryFormFields.valid;
 	}
 
@@ -352,20 +352,20 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 		// service
 		this._guestRepairsService.guestCreateAndUpdateRepair(formPayload, this.categoryEmitter, modalMessageState);
 
-		// repair entry form
+		// sub category form
 		if (isSubCategoryForm) {
-			// reset entry form fields
+			// reset sub category form fields
 			this.subCategoryFormFields.reset();
 
 			// reset buttons
-			this.hideSelectedEntryButtons = -1;
+			this.hideSelectedSubCategoryButtons = -1;
 		}
 	}
 
 	/**
 	 * on submit form
 	 */
-	public onSubmitEntryForm() {
+	public onSubmitSubCategoryForm() {
 		// submit form
 		this.onSubmitForm(true, this.subCategoryId);
 
@@ -381,7 +381,7 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 	 */
 	public onClickEditSubCategory(row: any, index: number) {
 		// hide buttons
-		this.hideSelectedEntryButtons = index;
+		this.hideSelectedSubCategoryButtons = index;
 
 		// set sub category id
 		this.subCategoryId = row.ID;
@@ -390,13 +390,13 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 		if (this.languageList && this.languageList.length) {
 			for (let i = 0; i < this.languageList.length; i++) {
 				const name = row.Name[this.languageList[i].id];
-				this.entryFormLanguages[i].controls['field'].setValue(name);
+				this.subCategoriesFormLanguages[i].controls['field'].setValue(name);
 			}
 		}
 	}
 
 	/**
-	 * delete entry
+	 * delete sub category
 	 *
 	 * @param row
 	 */

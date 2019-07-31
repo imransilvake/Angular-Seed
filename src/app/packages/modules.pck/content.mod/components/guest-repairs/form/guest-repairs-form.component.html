@@ -106,7 +106,7 @@
 					</p>
 				</div>
 				<div class="ham-buttons">
-					<ng-container *ngIf="hideSelectedEntryButtons !== idx">
+					<ng-container *ngIf="hideSelectedSubCategoryButtons !== idx">
 						<button
 							mat-button
 							class="ham-button ham-button-2 ham-table-button-1"
@@ -131,21 +131,21 @@
 	<div class="ham-form-wrapper mt-20 ham-wrapper-2" *ngIf="categoryId">
 		<div class="ham-top">
 			<!-- Title -->
-			<h4 i18n="@@Guest_Repairs_Form_Entry_New_Title" *ngIf="hideSelectedEntryButtons === -1">Add Entry</h4>
-			<h4 i18n="@@Guest_Repairs_Form_Entry_Edit_Title" *ngIf="hideSelectedEntryButtons !== -1">Edit Entry</h4>
+			<h4 i18n="@@Guest_Repairs_Form_Entry_New_Title" *ngIf="hideSelectedSubCategoryButtons === -1">Add Entry</h4>
+			<h4 i18n="@@Guest_Repairs_Form_Entry_Edit_Title" *ngIf="hideSelectedSubCategoryButtons !== -1">Edit Entry</h4>
 		</div>
 
 		<!-- Form -->
-		<form class="ham-block ham-form" (ngSubmit)="onSubmitEntryForm()">
+		<form class="ham-block ham-form" (ngSubmit)="onSubmitSubCategoryForm()">
 			<div class="cd-row ham-padding-0">
 				<div class="cd-col">
 					<div class="ham-entry-form">
-						<div class="cd-row ham-padding-0" *ngFor="let language of entryFormLanguages; let idx=index;">
+						<div class="cd-row ham-padding-0" *ngFor="let language of subCategoriesFormLanguages; let idx=index;">
 							<div class="cd-col cd-col-pm-t-9 cd-col-pm-d-6" *ngIf="languageList && languageList[idx] && languageList[idx].id">
-								<span class="ham-label" i18n="@@Guest_Repairs_Form_Entry_New_Label" *ngIf="hideSelectedEntryButtons === -1">
+								<span class="ham-label" i18n="@@Guest_Repairs_Form_Entry_New_Label" *ngIf="hideSelectedSubCategoryButtons === -1">
 									New Entry ({{languageList[idx].id}}):*
 								</span>
-								<span class="ham-label" i18n="@@Guest_Repairs_Form_Entry_Edit_Label" *ngIf="hideSelectedEntryButtons !== -1">
+								<span class="ham-label" i18n="@@Guest_Repairs_Form_Entry_Edit_Label" *ngIf="hideSelectedSubCategoryButtons !== -1">
 									Edit Entry ({{languageList[idx].id}}):*
 								</span>
 								<app-input
@@ -170,7 +170,7 @@
 									type="submit"
 									class="ham-button ham-button-1"
 									i18n="@@Guest_Repairs_Form_Entry_Button"
-									[disabled]="!isEntryFormValid">
+									[disabled]="!isSubCategoryFormValid">
 									Save
 								</button>
 							</div>
