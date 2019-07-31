@@ -32,8 +32,8 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 	@Input() data;
 
 	public categoryEmitter: EventEmitter<any> = new EventEmitter();
-	public formFields;
-	public entryFormFields;
+	public parentCategoryFormFields;
+	public subCategoryFormFields;
 	public systemLanguages;
 	public systemInfo;
 	public languageList = [];
@@ -70,15 +70,15 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 		// languages
 		this.systemLanguages = this._utilityService.getSystemLanguageList();
 
-		// form group
-		this.formFields = new FormGroup({
+		// parent category form group
+		this.parentCategoryFormFields = new FormGroup({
 			languages: this._formBuilder.array([]),
 			hotels: new FormControl('', [Validators.required]),
 			access: new FormControl(false)
 		});
 
-		// entry form group
-		this.entryFormFields = new FormGroup({
+		// sub category form group
+		this.subCategoryFormFields = new FormGroup({
 			languages: this._formBuilder.array([])
 		});
 	}
@@ -98,8 +98,8 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 				if (res && res.formLanguages) {
 					// reset language list
 					if (this.languageList.length !== 0) {
-						const control = <FormArray>this.formFields.controls.languages;
-						const control2 = <FormArray>this.entryFormFields.controls.languages;
+						const control = <FormArray>this.parentCategoryFormFields.controls.languages;
+						const control2 = <FormArray>this.subCategoryFormFields.controls.languages;
 						for (let i = control.length - 1; i >= 0; i--) {
 							control.removeAt(i);
 							control2.removeAt(i);
@@ -123,7 +123,7 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 
 							// update existing data
 							if (this.data) {
-								const category = this.formFields.controls['languages'].controls[index].controls['field'];
+								const category = this.parentCategoryFormFields.controls['languages'].controls[index].controls['field'];
 								category.setValue(this.data.Name[language]);
 								if (this.title && this.title === 'Form') {
 									this.title = this.data.Name[language];
@@ -132,7 +132,7 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 						});
 
 						// listen: category field
-						const categoryListener = this.formFields.controls['languages'].controls[0].controls['field'];
+						const categoryListener = this.parentCategoryFormFields.controls['languages'].controls[0].controls['field'];
 						categoryListener.valueChanges
 							.pipe(takeUntil(this._ngUnSubscribe))
 							.subscribe(x => this.title = x);
@@ -244,35 +244,35 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 	 * getters
 	 */
 	get formLanguages() {
-		return <FormArray>this.formFields.controls.languages.controls;
+		return <FormArray>this.parentCategoryFormFields.controls.languages.controls;
 	}
 
 	get hotels() {
-		return this.formFields.get('hotels');
+		return this.parentCategoryFormFields.get('hotels');
 	}
 
 	get access() {
-		return this.formFields.get('access');
+		return this.parentCategoryFormFields.get('access');
 	}
 
 	get isFormValid() {
-		return this.formFields.valid;
+		return this.parentCategoryFormFields.valid;
 	}
 
 	get entryFormLanguages() {
-		return <FormArray>this.entryFormFields.controls.languages.controls;
+		return <FormArray>this.subCategoryFormFields.controls.languages.controls;
 	}
 
 	get isEntryFormValid() {
-		return this.entryFormFields.valid;
+		return this.subCategoryFormFields.valid;
 	}
 
 	/**
 	 * add forms groups for each language
 	 */
 	public addLanguageSpecificFields() {
-		// form
-		(<FormArray>this.formFields.controls['languages']).push(
+		// parent category form
+		(<FormArray>this.parentCategoryFormFields.controls['languages']).push(
 			new FormGroup({
 				field: new FormControl('', [
 					Validators.required,
@@ -282,8 +282,8 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 			})
 		);
 
-		// entry form
-		(<FormArray>this.entryFormFields.controls['languages']).push(
+		// sub category form
+		(<FormArray>this.subCategoryFormFields.controls['languages']).push(
 			new FormGroup({
 				field: new FormControl('', [
 					Validators.required,
@@ -297,19 +297,19 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 	/**
 	 * on submit form
 	 *
-	 * @param repairEntryForm
+	 * @param isSubCategoryForm
 	 * @param subCategoryId
 	 */
-	public onSubmitForm(repairEntryForm: boolean, subCategoryId?: number) {
-		const formData = this.formFields.getRawValue();
-		const entryFormData = this.entryFormFields.getRawValue();
+	public onSubmitForm(isSubCategoryForm: boolean, subCategoryId?: number) {
+		const formData = this.parentCategoryFormFields.getRawValue();
+		const subCategoryForm = this.subCategoryFormFields.getRawValue();
 
 		// category
 		const category = {};
 		if (this.languageList && this.languageList.length) {
 			for (let i = 0; i < this.languageList.length; i++) {
-				if (repairEntryForm) {
-					category[this.languageList[i].id] = entryFormData.languages[i].field;
+				if (isSubCategoryForm) {
+					category[this.languageList[i].id] = subCategoryForm.languages[i].field;
 				} else {
 					category[this.languageList[i].id] = formData.languages[i].field;
 				}
@@ -317,10 +317,10 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 		}
 
 		// category form
-		const catData = !repairEntryForm ? { Parent: null, Level: 1 } : { Parent: this.categoryId, Level: 2 };
+		const catData = !isSubCategoryForm ? { Parent: null, Level: 1 } : { Parent: this.categoryId, Level: 2 };
 
 		// id
-		let id = (!!this.data && !repairEntryForm) ? { ID: this.data.ID, Sort: this.data.Sort } : {};
+		let id = (!!this.data && !isSubCategoryForm) ? { ID: this.data.ID, Sort: this.data.Sort } : {};
 		id = subCategoryId ? { ID: subCategoryId, Sort: this.data.Sort } : id;
 
 		// hotels
@@ -351,9 +351,9 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 		this._guestRepairsService.guestCreateAndUpdateRepair(formPayload, this.categoryEmitter, modalMessageState);
 
 		// repair entry form
-		if (repairEntryForm) {
+		if (isSubCategoryForm) {
 			// reset entry form fields
-			this.entryFormFields.reset();
+			this.subCategoryFormFields.reset();
 
 			// reset buttons
 			this.hideSelectedEntryButtons = -1;
@@ -372,12 +372,12 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 	}
 
 	/**
-	 * edit entry
+	 * edit sub category to the specific parent category
 	 *
 	 * @param row
 	 * @param index
 	 */
-	public onClickEditEntry(row: any, index: number) {
+	public onClickEditSubCategory(row: any, index: number) {
 		// hide buttons
 		this.hideSelectedEntryButtons = index;
 
@@ -398,7 +398,7 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 	 *
 	 * @param row
 	 */
-	public onClickDeleteEntry(row: any) {
+	public onClickDeleteSubCategory(row: any) {
 		console.log(row);
 	}
 
