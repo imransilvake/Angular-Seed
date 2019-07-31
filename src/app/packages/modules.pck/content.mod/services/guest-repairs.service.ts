@@ -70,9 +70,9 @@ export class GuestRepairsService {
 	/**
 	 * fetch guest repair sub categories
 	 *
-	 * @param row
+	 * @param id
 	 */
-	public guestRepairsSubCategoriesFetch(row: any) {
+	public guestRepairsSubCategoriesFetch(id: string) {
 		const api = AppServices['Content']['Guest_Repairs_Form_List_Sub_Hotel'];
 
 		// payload
@@ -82,7 +82,7 @@ export class GuestRepairsService {
 				hotelId: this.appState.hotelId
 			},
 			queryParams: {
-				ID: row.ID
+				ID: id
 			}
 		};
 
@@ -97,8 +97,9 @@ export class GuestRepairsService {
 	 * @param formPayload
 	 * @param refreshEmitter
 	 * @param modalMessageState
+	 * @param isSubCategoryForm
 	 */
-	public guestCreateAndUpdateRepair(formPayload: GuestRepairInterface, refreshEmitter: any, modalMessageState: boolean) {
+	public guestCreateAndUpdateRepair(formPayload: GuestRepairInterface, refreshEmitter: any, modalMessageState: boolean, isSubCategoryForm: boolean) {
 		const api = AppServices['Content']['Guest_Repairs_Form_Create_Hotel'];
 
 		// start loading animation
@@ -146,7 +147,10 @@ export class GuestRepairsService {
 				// listen: dialog service
 				this._dialogService
 					.showDialog(dialogPayload)
-					.subscribe(() => refreshEmitter.emit(res));
+					.subscribe(() => refreshEmitter.emit({
+						id: res && res.data,
+						isSubCategoryForm: isSubCategoryForm
+					}));
 			});
 	}
 

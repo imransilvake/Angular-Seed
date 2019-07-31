@@ -151,7 +151,7 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 					this.access.setValue(this.isAccess);
 
 					// set sub categories list
-					this._guestRepairsService.guestRepairsSubCategoriesFetch(this.data)
+					this._guestRepairsService.guestRepairsSubCategoriesFetch(this.categoryId)
 						.pipe(takeUntil(this._ngUnSubscribe))
 						.subscribe(list => this.subCategoriesList = list.data);
 				}
@@ -160,15 +160,16 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 		// listen: category creation
 		this.categoryEmitter
 			.pipe(takeUntil(this._ngUnSubscribe))
-			.subscribe(res => {
+			.subscribe(response => {
 				// set category id;
-				if (res && res.data) {
-					this.categoryId = res.data;
+				if (response && response.id && !response.isSubCategoryForm) {
+					this.categoryId = response.id;
 				}
 
 				// set sub categories list
-				if (this.data) {
-					this._guestRepairsService.guestRepairsSubCategoriesFetch(this.data)
+				if (this.data || response && response.id) {
+					const id = this.data && this.data.ID || response && response.id;
+					this._guestRepairsService.guestRepairsSubCategoriesFetch(id)
 						.pipe(takeUntil(this._ngUnSubscribe))
 						.subscribe(list => this.subCategoriesList = list.data);
 				}
@@ -350,7 +351,7 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 		const modalMessageState = !!(this.data && formPayload.Level === 1 || this.data && formPayload.Level === 2 && subCategoryId);
 
 		// service
-		this._guestRepairsService.guestCreateAndUpdateRepair(formPayload, this.categoryEmitter, modalMessageState);
+		this._guestRepairsService.guestCreateAndUpdateRepair(formPayload, this.categoryEmitter, modalMessageState, isSubCategoryForm);
 
 		// sub category form
 		if (isSubCategoryForm) {
