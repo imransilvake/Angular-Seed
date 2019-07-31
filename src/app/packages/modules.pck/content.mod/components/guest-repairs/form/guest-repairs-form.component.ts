@@ -397,10 +397,9 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 	 * delete entry
 	 *
 	 * @param row
-	 * @param index
 	 */
-	public onClickDeleteEntry(row: any, index: number) {
-
+	public onClickDeleteEntry(row: any) {
+		console.log(row);
 	}
 
 	/**

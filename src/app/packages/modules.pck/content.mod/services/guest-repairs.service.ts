@@ -1,6 +1,7 @@
 // angular
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, of } from 'rxjs';
+import { delay, map } from 'rxjs/operators';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 
 // app
@@ -10,7 +11,6 @@ import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service
 import { AppOptions, AppServices } from '../../../../../app.config';
 import { DialogTypeEnum } from '../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { DialogService } from '../../../utilities.pck/dialog.mod/services/dialog.service';
-import { map } from 'rxjs/operators';
 
 @Injectable()
 export class GuestRepairsService {
@@ -38,7 +38,7 @@ export class GuestRepairsService {
 		}
 
 		// api
-		const api = AppServices['Content']['Guest_Repairs_Form_List_Hotel'];
+		const api = AppServices['Content']['Guest_Repairs_List_Hotel'];
 		const dragApi = AppServices['Content']['Guest_Repairs_Form_Create_Hotel'];
 
 		// payload
@@ -89,16 +89,6 @@ export class GuestRepairsService {
 		// service
 		return this._proxyService.getAPI(api, payload)
 			.pipe(map(res => res));
-	}
-
-	/**
-	 * delete guest offer
-	 *
-	 * @param row
-	 * @param refreshEmitter
-	 */
-	public guestRemoveRepair(row: any, refreshEmitter: any) {
-		console.log(row);
 	}
 
 	/**
@@ -157,6 +147,58 @@ export class GuestRepairsService {
 				this._dialogService
 					.showDialog(dialogPayload)
 					.subscribe(() => categoryEmitter.emit(res));
+			});
+	}
+
+	/**
+	 * delete guest offer
+	 *
+	 * @param row
+	 * @param refreshEmitter
+	 */
+	public guestRemoveRepair(row: any, refreshEmitter: any) {
+		// dialog payload
+		const data = {
+			type: DialogTypeEnum.CONFIRMATION,
+			payload: {
+				title: this._i18n({ value: 'Title: Delete Guest Repair', id: 'Guest_Repairs_Delete_Title' }),
+				message: this._i18n({ value: 'Description: Delete Guest Repair', id: 'Guest_Repairs_Delete_Description' }),
+				icon: 'dialog_confirmation',
+				buttonTexts: [
+					this._i18n({
+						value: 'Button - OK',
+						id: 'Common_Button_OK'
+					}),
+					this._i18n({
+						value: 'Button - Cancel',
+						id: 'Common_Button_Cancel'
+					}),
+				]
+			}
+		};
+
+		// listen: dialog service
+		this._dialogService
+			.showDialog(data)
+			.subscribe(res => {
+				if (res) {
+					// payload
+					const payload: any = {
+						pathParams: {
+							groupId: this.appState.groupId,
+							hotelId: this.appState.hotelId
+						},
+						bodyParams: {
+							ID: row.ID
+						}
+					};
+
+					// service
+					this._proxyService
+						.postAPI(AppServices['Content']['Guest_Repairs_List_Remove_Hotel'], payload)
+						.pipe(delay(1000))
+						.subscribe(() => refreshEmitter.emit());
+				}
 			});
 	}
 }
