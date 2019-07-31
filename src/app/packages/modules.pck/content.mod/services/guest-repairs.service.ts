@@ -95,10 +95,10 @@ export class GuestRepairsService {
 	 * create / update guest repair
 	 *
 	 * @param formPayload
-	 * @param categoryEmitter
+	 * @param refreshEmitter
 	 * @param modalMessageState
 	 */
-	public guestCreateAndUpdateRepair(formPayload: GuestRepairInterface, categoryEmitter: any, modalMessageState: boolean) {
+	public guestCreateAndUpdateRepair(formPayload: GuestRepairInterface, refreshEmitter: any, modalMessageState: boolean) {
 		const api = AppServices['Content']['Guest_Repairs_Form_Create_Hotel'];
 
 		// start loading animation
@@ -146,7 +146,7 @@ export class GuestRepairsService {
 				// listen: dialog service
 				this._dialogService
 					.showDialog(dialogPayload)
-					.subscribe(() => categoryEmitter.emit(res));
+					.subscribe(() => refreshEmitter.emit(res));
 			});
 	}
 

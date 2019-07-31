@@ -374,7 +374,7 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 	}
 
 	/**
-	 * edit sub category to the specific parent category
+	 * edit sub category of the specific parent category
 	 *
 	 * @param row
 	 * @param index
@@ -401,7 +401,7 @@ export class GuestRepairsFormComponent implements OnInit, OnDestroy {
 	 * @param row
 	 */
 	public onClickDeleteSubCategory(row: any) {
-		console.log(row);
+		this._guestRepairsService.guestRemoveRepair(row, this.categoryEmitter);
 	}
 
 	/**
