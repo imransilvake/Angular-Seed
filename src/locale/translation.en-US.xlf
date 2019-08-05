@@ -154,6 +154,26 @@
 					<context context-type="linenumber">85</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="Fields_Datepicker_Error_Invalid_Time" datatype="html">
+				<source>
+					Invalid Time!
+				</source>
+				<target>Invalid date</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/core.pck/fields.mod/components/input/input.component.html</context>
+					<context context-type="linenumber">143</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Fields_Datepicker_Error_Invalid_Version" datatype="html">
+				<source>
+					Only numeric and dot(s) are allowed!
+				</source>
+				<target>Only numeric characters and dots are allowed</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/core.pck/fields.mod/components/input/input.component.html</context>
+					<context context-type="linenumber">146</context>
+				</context-group>
+			</trans-unit>
 			<trans-unit id="Fields_Input_Error_Default" datatype="html">
 				<source>
 					Unknown error occurred
@@ -238,6 +258,26 @@
 					<context context-type="linenumber">53</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="Fields_Datepicker_Error_Required" datatype="html">
+				<source>
+					Required field
+				</source>
+				<target>Required field</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/core.pck/fields.mod/components/datepicker/datepicker.component.html</context>
+					<context context-type="linenumber">40</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Fields_Datepicker_Error_Default" datatype="html">
+				<source>
+					Unknown error occurred
+				</source>
+				<target>Unknown error occurred</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/core.pck/fields.mod/components/datepicker/datepicker.component.html</context>
+					<context context-type="linenumber">46</context>
+				</context-group>
+			</trans-unit>
 			<trans-unit id="Frame_Hotel_Group_List_PlaceHolder" datatype="html">
 				<source>Select Hotel / Group</source>
 				<target>Choose hotel / hotel group</target>
@@ -312,6 +352,18 @@
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/frame.pck/components/pages/e404.component.html</context>
 					<context context-type="linenumber">16</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notification_Message_Title" datatype="html">
+				<source>
+					New registration: <x id="INTERPOLATION" equiv-text="{{ notification.SendUser }}"/>
+				</source>
+				<target>
+					New registration from <x id="INTERPOLATION" equiv-text="{{ notification.SendUser }}"/>
+				</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/frame.pck/components/menus/notification/notification-menu.component.html</context>
+					<context context-type="linenumber">25</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Auth_Register_Info_Title" datatype="html">
@@ -1959,6 +2011,84 @@
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-repairs/form/guest-repairs-form.component.html</context>
 					<context context-type="linenumber">173</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notification_Title" datatype="html">
+				<source>Notifications</source>
+				<target>Notifications</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/notification.mod/components/notification.component.html</context>
+					<context context-type="linenumber">4</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notification_Page_Hint_Title" datatype="html">
+				<source>Title: Notification</source>
+				<target>Pagehint Title</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/notification.mod/components/notification.component.html</context>
+					<context context-type="linenumber">6</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notification_Page_Hint_Text" datatype="html">
+				<source>Text: Notification</source>
+				<target>Pagehint Text</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/notification.mod/components/notification.component.html</context>
+					<context context-type="linenumber">8</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notifications_Date_PlaceHolder" datatype="html">
+				<source>Date</source>
+				<target>Date</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/notification.mod/components/list/notification-list.component.html</context>
+					<context context-type="linenumber">18</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notifications_Filter_PlaceHolder" datatype="html">
+				<source>Select Language</source>
+				<target>Filter</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/notification.mod/components/list/notification-list.component.html</context>
+					<context context-type="linenumber">32</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notifications_Function_Clear_All" datatype="html">
+				<source>
+					Clear All
+				</source>
+				<target>Clear all</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/notification.mod/components/list/notification-list.component.html</context>
+					<context context-type="linenumber">47</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notifications_Table_Recognize" datatype="html">
+				<source>
+					Recognize
+				</source>
+				<target>Taken note of</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/notification.mod/components/list/notification-list.component.html</context>
+					<context context-type="linenumber">77</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notifications_Table_Visit" datatype="html">
+				<source>
+					Visit Function
+				</source>
+				<target>Details</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/notification.mod/components/list/notification-list.component.html</context>
+					<context context-type="linenumber">89</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notifications_Table_Title" datatype="html">
+				<source>Notifications</source>
+				<target>Notifications</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/notification.mod/components/list/notification-list.component.html</context>
+					<context context-type="linenumber">59</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Error_Internet_Connection_Title" datatype="html">

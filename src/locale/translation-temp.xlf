@@ -758,13 +758,6 @@
           <context context-type="linenumber">56</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="Member_Profile_ChangePassword_Form_Confirm_New_Password_Hint" datatype="html">
-        <source>Password Hint</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/change-password/change-password.component.html</context>
-          <context context-type="linenumber">59</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="Member_Profile_ChangePassword_Form_Submit_Button" datatype="html">
         <source>Change</source>
         <context-group purpose="location">

@@ -154,12 +154,32 @@
 					<context context-type="linenumber">85</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="Fields_Datepicker_Error_Invalid_Time" datatype="html">
+				<source>
+					Invalid Time!
+				</source>
+				<target>Ungültiges Datum</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/core.pck/fields.mod/components/input/input.component.html</context>
+					<context context-type="linenumber">143</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Fields_Datepicker_Error_Invalid_Version" datatype="html">
+				<source>
+					Only numeric and dot(s) are allowed!
+				</source>
+				<target>Nur numerische Zeichen und Punkte sind erlaubt</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/core.pck/fields.mod/components/input/input.component.html</context>
+					<context context-type="linenumber">146</context>
+				</context-group>
+			</trans-unit>
 			<trans-unit id="Fields_Input_Error_Default" datatype="html">
 				<source>
 					Unknown error occurred
 				</source>
 				<target>
-					Unbekannter Fehler aufgetreten
+					Unbekannter Fehler ist aufgetreten
 				</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
@@ -238,6 +258,26 @@
 					<context context-type="linenumber">53</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="Fields_Datepicker_Error_Required" datatype="html">
+				<source>
+					Required field
+				</source>
+				<target>Eingabe erforderlich</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/core.pck/fields.mod/components/datepicker/datepicker.component.html</context>
+					<context context-type="linenumber">40</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Fields_Datepicker_Error_Default" datatype="html">
+				<source>
+					Unknown error occurred
+				</source>
+				<target>Unbekannter Fehler ist aufgetreten</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/core.pck/fields.mod/components/datepicker/datepicker.component.html</context>
+					<context context-type="linenumber">46</context>
+				</context-group>
+			</trans-unit>
 			<trans-unit id="Frame_Hotel_Group_List_PlaceHolder" datatype="html">
 				<source>Select Hotel / Group</source>
 				<target>Wähle Hotel / Hotelgruppe</target>
@@ -312,6 +352,18 @@
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/frame.pck/components/pages/e404.component.html</context>
 					<context context-type="linenumber">16</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notification_Message_Title" datatype="html">
+				<source>
+					New registration: <x id="INTERPOLATION" equiv-text="{{ notification.SendUser }}"/>
+				</source>
+				<target>
+				Neue Registrierung von <x id="INTERPOLATION" equiv-text="{{ notification.SendUser }}"/>
+			</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/frame.pck/components/menus/notification/notification-menu.component.html</context>
+					<context context-type="linenumber">25</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Auth_Register_Info_Title" datatype="html">
@@ -1140,6 +1192,7 @@
 			</trans-unit>
 			<trans-unit id="Content_Guest_Offers_Title" datatype="html">
 				<source>Guest Offers</source>
+				<target>Gastangebote</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-offers/guest-offers.component.html</context>
 					<context context-type="linenumber">4</context>
@@ -1147,6 +1200,7 @@
 			</trans-unit>
 			<trans-unit id="Content_Guest_Offers_Page_Hint_Title" datatype="html">
 				<source>Title: Guest Offers</source>
+				<target>Pagehint: Title</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-offers/guest-offers.component.html</context>
 					<context context-type="linenumber">6</context>
@@ -1154,6 +1208,7 @@
 			</trans-unit>
 			<trans-unit id="Content_Guest_Offers_Page_Hint_Text" datatype="html">
 				<source>Text: Guest Offers</source>
+				<target>Pagehint Text</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-offers/guest-offers.component.html</context>
 					<context context-type="linenumber">8</context>
@@ -1161,6 +1216,7 @@
 			</trans-unit>
 			<trans-unit id="Common_Select_Hotel" datatype="html">
 				<source>Please Select a hotel!</source>
+				<target>Wähle Hotel(s)</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-offers/guest-offers.component.html</context>
 					<context context-type="linenumber">34</context>
@@ -1178,6 +1234,7 @@
 				<source>
 					Create New Hotel Offer
 				</source>
+				<target>Erstelle neues Gastangebot</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-offers/list/guest-offers-list.component.html</context>
 					<context context-type="linenumber">4</context>
@@ -1187,6 +1244,7 @@
 				<source>
 					Edit
 				</source>
+				<target>Bearbeiten</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-offers/list/guest-offers-list.component.html</context>
 					<context context-type="linenumber">30</context>
@@ -1196,6 +1254,7 @@
 				<source>
 					Delete
 				</source>
+				<target>Löschen</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-offers/list/guest-offers-list.component.html</context>
 					<context context-type="linenumber">37</context>
@@ -1203,6 +1262,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Offers_Table_Title" datatype="html">
 				<source>Active Hotel Offers</source>
+				<target>Gastangebote</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-offers/list/guest-offers-list.component.html</context>
 					<context context-type="linenumber">12</context>
@@ -1210,6 +1270,7 @@
 			</trans-unit>
 			<trans-unit id="Content_Guest_Push_Message_Title" datatype="html">
 				<source>Guest Push Message</source>
+				<target>Gästemitteilungen</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/guest-push-message.component.html</context>
 					<context context-type="linenumber">4</context>
@@ -1217,6 +1278,7 @@
 			</trans-unit>
 			<trans-unit id="Content_Guest_Push_Message_Page_Hint_Title" datatype="html">
 				<source>Title: Guest Push Message</source>
+				<target>Pagehint Title</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/guest-push-message.component.html</context>
 					<context context-type="linenumber">6</context>
@@ -1224,6 +1286,7 @@
 			</trans-unit>
 			<trans-unit id="Content_Guest_Push_Message_Page_Hint_Text" datatype="html">
 				<source>Text: Guest Push Message</source>
+				<target>Pagehint Text</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/guest-push-message.component.html</context>
 					<context context-type="linenumber">8</context>
@@ -1233,6 +1296,7 @@
 				<source>
 					Create New Notification
 				</source>
+				<target>Erstelle neue Gästemitteilung</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/list/guest-push-message-list.component.html</context>
 					<context context-type="linenumber">4</context>
@@ -1242,6 +1306,7 @@
 				<source>
 					Edit
 				</source>
+				<target>Bearbeiten</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/list/guest-push-message-list.component.html</context>
 					<context context-type="linenumber">28</context>
@@ -1251,6 +1316,7 @@
 				<source>
 					Delete
 				</source>
+				<target>Löschen</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/list/guest-push-message-list.component.html</context>
 					<context context-type="linenumber">35</context>
@@ -1258,6 +1324,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Push_Periodic_Notification_Table_Title" datatype="html">
 				<source>Periodically Guest Notification</source>
+				<target>Periodische Gästemitteilungen</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/list/guest-push-message-list.component.html</context>
 					<context context-type="linenumber">12</context>
@@ -1266,7 +1333,7 @@
 			<trans-unit id="Guest_Push_Notification_Table_Copy" datatype="html">
 				<source>
 					Copy
-				</source>
+				</source><target>Kopieren</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/list/guest-push-message-list.component.html</context>
 					<context context-type="linenumber">61</context>
@@ -1274,6 +1341,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Push_Recent_Notification_Table_Title" datatype="html">
 				<source>Recently Sent Guest Notification</source>
+				<target>Versendete Gästemitteilungen</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/list/guest-push-message-list.component.html</context>
 					<context context-type="linenumber">45</context>
@@ -1281,6 +1349,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Push_Message_Form_Title_Label" datatype="html">
 				<source>Title*</source>
+				<target>Nachrichtentitel*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/form/guest-push-message-form.component.html</context>
 					<context context-type="linenumber">26</context>
@@ -1288,6 +1357,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Push_Message_Form_Title_PlaceHolder" datatype="html">
 				<source>Title</source>
+				<target>Nachrichtentitel eingeben</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/form/guest-push-message-form.component.html</context>
 					<context context-type="linenumber">31</context>
@@ -1295,6 +1365,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Push_Message_Form_Text_Label" datatype="html">
 				<source>Notification Description*</source>
+				<target>Nachrichtentext*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/form/guest-push-message-form.component.html</context>
 					<context context-type="linenumber">44</context>
@@ -1302,6 +1373,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Push_Message_Form_Text_PlaceHolder" datatype="html">
 				<source>Notification Description</source>
+				<target>Nachrichtentext eingeben</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/form/guest-push-message-form.component.html</context>
 					<context context-type="linenumber">49</context>
@@ -1309,6 +1381,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Push_Message_Form_Link_Label" datatype="html">
 				<source>Link</source>
+				<target>Link</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/form/guest-push-message-form.component.html</context>
 					<context context-type="linenumber">64</context>
@@ -1316,6 +1389,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Push_Message_Form_Link_PlaceHolder" datatype="html">
 				<source>Link</source>
+				<target>Optionalen Link eingeben</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/form/guest-push-message-form.component.html</context>
 					<context context-type="linenumber">69</context>
@@ -1323,6 +1397,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Push_Message_Form_Color_Label" datatype="html">
 				<source>Color</source>
+				<target>Hintergrundfarbe</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/form/guest-push-message-form.component.html</context>
 					<context context-type="linenumber">77</context>
@@ -1330,6 +1405,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Push_Message_Form_Date_Label" datatype="html">
 				<source>One Time</source>
+				<target>Einmalig</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/form/guest-push-message-form.component.html</context>
 					<context context-type="linenumber">96</context>
@@ -1337,6 +1413,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Push_Message_Form_Date_PlaceHolder" datatype="html">
 				<source>Date</source>
+				<target>Datum</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/form/guest-push-message-form.component.html</context>
 					<context context-type="linenumber">107</context>
@@ -1350,6 +1427,7 @@
 				<source>
 					Now
 				</source>
+				<target>Sofort</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/form/guest-push-message-form.component.html</context>
 					<context context-type="linenumber">130</context>
@@ -1357,6 +1435,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Push_Message_Form_Date_Hint" datatype="html">
 				<source>Hint Text</source>
+				<target>Der Zeitpunkt, wenn die Push-Notification an alle Gäste der HotelGuest/APP gesendet werden soll oder unmittelbar nach dem Speichern, wenn der Button 'Sofort' aktiviert wurde</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/form/guest-push-message-form.component.html</context>
 					<context context-type="linenumber">137</context>
@@ -1364,6 +1443,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Push_Message_Form_Periodic_Label" datatype="html">
 				<source>Periodically</source>
+				<target>Periodisch</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/form/guest-push-message-form.component.html</context>
 					<context context-type="linenumber">144</context>
@@ -1371,6 +1451,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Push_Message_Form_Periodic_PlaceHolder" datatype="html">
 				<source>Periodically</source>
+				<target>Wähle</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/form/guest-push-message-form.component.html</context>
 					<context context-type="linenumber">153</context>
@@ -1378,6 +1459,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Push_Message_Form_Periodic_Hint" datatype="html">
 				<source>Hint Text</source>
+				<target>Wähle den Zeitpunkt, wann die Nachricht automatisch an alle Gäste der HotelGuest/APP gesendet werden soll</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/form/guest-push-message-form.component.html</context>
 					<context context-type="linenumber">187</context>
@@ -1385,6 +1467,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Push_Message_Form_Target_Groups_Label" datatype="html">
 				<source>Target Groups*</source>
+				<target>Zielgruppen*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/form/guest-push-message-form.component.html</context>
 					<context context-type="linenumber">198</context>
@@ -1392,6 +1475,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Push_Message_Form_Target_Groups_PlaceHolder" datatype="html">
 				<source>Target Group</source>
+				<target>Wähle</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/form/guest-push-message-form.component.html</context>
 					<context context-type="linenumber">202</context>
@@ -1399,6 +1483,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Push_Message_Form_Target_Groups_Hint" datatype="html">
 				<source>Hint Text</source>
+				<target>Die Zielgruppe, der die Push-Nachricht in der HotelGuest/APP zugestellt werden soll</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/form/guest-push-message-form.component.html</context>
 					<context context-type="linenumber">206</context>
@@ -1406,6 +1491,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Push_Message_Form_Hotels_Label" datatype="html">
 				<source>Hotel(s)*</source>
+				<target>Hotel(s)*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/form/guest-push-message-form.component.html</context>
 					<context context-type="linenumber">216</context>
@@ -1417,6 +1503,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Push_Message_Form_Hotels_PlaceHolder" datatype="html">
 				<source>Hotel(s)</source>
+				<target>Wähle Hotel(s)</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/form/guest-push-message-form.component.html</context>
 					<context context-type="linenumber">220</context>
@@ -1428,6 +1515,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Push_Message_Form_Hotels_Hint" datatype="html">
 				<source>Hint Text</source>
+				<target>Wähle die Hotels, denen die Push-Nachricht zugeordnet werden soll</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/form/guest-push-message-form.component.html</context>
 					<context context-type="linenumber">224</context>
@@ -1439,6 +1527,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Push_Message_Form_Access" datatype="html">
 				<source>HotelManager can edit and delete</source>
+				<target>HotelManager können editieren und löschen</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/form/guest-push-message-form.component.html</context>
 					<context context-type="linenumber">259</context>
@@ -1447,6 +1536,7 @@
 			<trans-unit id="Guest_Push_Message_Form_Cancel_Button" datatype="html">
 				<source>Cancel
 				</source>
+				<target>Abbrechen</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/form/guest-push-message-form.component.html</context>
 					<context context-type="linenumber">264</context>
@@ -1454,6 +1544,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Push_Message_Form_Save_Button" datatype="html">
 				<source>Save</source>
+				<target>Speichern / Versenden</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/form/guest-push-message-form.component.html</context>
 					<context context-type="linenumber">267</context>
@@ -1461,6 +1552,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Offers_Form_Title_Label" datatype="html">
 				<source>Title*</source>
+				<target>Angebotstitel*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-offers/form/guest-offers-form.component.html</context>
 					<context context-type="linenumber">28</context>
@@ -1468,6 +1560,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Offers_Form_Title_PlaceHolder" datatype="html">
 				<source>Title</source>
+				<target>Angebotstitel eingeben</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-offers/form/guest-offers-form.component.html</context>
 					<context context-type="linenumber">33</context>
@@ -1475,6 +1568,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Offers_Form_Text_Label" datatype="html">
 				<source>Offer Description*</source>
+				<target>Angebotsbeschreibung*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-offers/form/guest-offers-form.component.html</context>
 					<context context-type="linenumber">44</context>
@@ -1482,6 +1576,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Offers_Form_Date_Label" datatype="html">
 				<source>Validity</source>
+				<target>Gültig von*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-offers/form/guest-offers-form.component.html</context>
 					<context context-type="linenumber">76</context>
@@ -1489,6 +1584,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Offers_Form_Date_From_PlaceHolder" datatype="html">
 				<source>From*</source>
+				<target>Gültig von</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-offers/form/guest-offers-form.component.html</context>
 					<context context-type="linenumber">85</context>
@@ -1496,6 +1592,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Offers_Form_Date_To_PlaceHolder" datatype="html">
 				<source>To*</source>
+				<target>bis*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-offers/form/guest-offers-form.component.html</context>
 					<context context-type="linenumber">96</context>
@@ -1503,6 +1600,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Offers_Form_Date_Hint" datatype="html">
 				<source>Hint Text</source>
+				<target>Der Zeitraum, in dem das Angebot in der HotelGuest/APP angezeigt wird</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-offers/form/guest-offers-form.component.html</context>
 					<context context-type="linenumber">105</context>
@@ -1510,6 +1608,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Offers_Form_Target_Groups_Label" datatype="html">
 				<source>Target Groups*</source>
+				<target>Zielgruppen*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-offers/form/guest-offers-form.component.html</context>
 					<context context-type="linenumber">112</context>
@@ -1517,6 +1616,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Offers_Form_Target_Groups_PlaceHolder" datatype="html">
 				<source>Target Group</source>
+				<target>Wähle</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-offers/form/guest-offers-form.component.html</context>
 					<context context-type="linenumber">116</context>
@@ -1524,6 +1624,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Offers_Form_Target_Groups_Hint" datatype="html">
 				<source>Hint Text</source>
+				<target>Die Zielgruppe, der das Angebot in der HotelGuest/APP angezeigt wird</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-offers/form/guest-offers-form.component.html</context>
 					<context context-type="linenumber">120</context>
@@ -1531,6 +1632,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Offers_Form_Hotels_Label" datatype="html">
 				<source>Hotel(s)*</source>
+				<target>Hotel(s)*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-offers/form/guest-offers-form.component.html</context>
 					<context context-type="linenumber">131</context>
@@ -1542,6 +1644,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Offers_Form_Hotels_PlaceHolder" datatype="html">
 				<source>Hotel(s)</source>
+				<target>Wähle Hotel(s)</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-offers/form/guest-offers-form.component.html</context>
 					<context context-type="linenumber">135</context>
@@ -1553,6 +1656,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Offers_Form_Hotels_Hint" datatype="html">
 				<source>Hint Text</source>
+				<target>Wähle die Hotels, für die das Angebot angezeigt werden soll</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-offers/form/guest-offers-form.component.html</context>
 					<context context-type="linenumber">139</context>
@@ -1564,6 +1668,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Offers_Form_BarCode_Text" datatype="html">
 				<source>Create a personalized bar code</source>
+				<target>Erzeuge einen personalisierten Barcode</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-offers/form/guest-offers-form.component.html</context>
 					<context context-type="linenumber">170</context>
@@ -1571,6 +1676,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Offers_Form_BarCode_Hint" datatype="html">
 				<source>Note Text</source>
+				<target>Ist diese Funktion aktiviert, wird ein persönlicher Barcode erzeugt, der unterhalb des Gastangebotes in der HotelGuest/APP zum Einlösen des Angebotes dargestellt wird.</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-offers/form/guest-offers-form.component.html</context>
 					<context context-type="linenumber">171</context>
@@ -1578,6 +1684,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Offers_Form_Redeem_Text" datatype="html">
 				<source>Create a redeem slider</source>
+				<target>Erzeuge einen Einlöse-Slider</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-offers/form/guest-offers-form.component.html</context>
 					<context context-type="linenumber">182</context>
@@ -1585,6 +1692,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Offers_Form_Redeem_Hint" datatype="html">
 				<source>Note Text</source>
+				<target>Ist diese Funktion aktiviert, wird unterhalb des Angebots in der HotelGuest/APP ein Einlöse-Slider eingeblendet, worüber das Hotelpersonal den Gutschein einlösen kann.</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-offers/form/guest-offers-form.component.html</context>
 					<context context-type="linenumber">183</context>
@@ -1592,6 +1700,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Offers_Form_Access" datatype="html">
 				<source>HotelManager can edit and delete</source>
+				<target>HotelManager können editieren und löschen</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-offers/form/guest-offers-form.component.html</context>
 					<context context-type="linenumber">200</context>
@@ -1600,6 +1709,7 @@
 			<trans-unit id="Guest_Offers_Form_Cancel_Button" datatype="html">
 				<source>Cancel
 				</source>
+				<target>Abbrechen</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-offers/form/guest-offers-form.component.html</context>
 					<context context-type="linenumber">208</context>
@@ -1607,6 +1717,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Offers_Form_Save_Button" datatype="html">
 				<source>Save</source>
+				<target>Speichern</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-offers/form/guest-offers-form.component.html</context>
 					<context context-type="linenumber">211</context>
@@ -1614,6 +1725,7 @@
 			</trans-unit>
 			<trans-unit id="Content_Guest_Repairs_Title" datatype="html">
 				<source>Guest Repairs</source>
+				<target>Reparatur-Mitteilungen</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-repairs/guest-repairs.component.html</context>
 					<context context-type="linenumber">4</context>
@@ -1621,6 +1733,7 @@
 			</trans-unit>
 			<trans-unit id="Content_Guest_Repairs_Page_Hint_Title" datatype="html">
 				<source>Title: Guest Repairs</source>
+				<target>Pagehint: Title</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-repairs/guest-repairs.component.html</context>
 					<context context-type="linenumber">6</context>
@@ -1628,6 +1741,7 @@
 			</trans-unit>
 			<trans-unit id="Content_Guest_Repairs_Page_Hint_Text" datatype="html">
 				<source>Text: Guest Repairs</source>
+				<target>Pagehint Text</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-repairs/guest-repairs.component.html</context>
 					<context context-type="linenumber">8</context>
@@ -1637,6 +1751,7 @@
 				<source>
 					Create New Repair Category
 				</source>
+				<target>Erstelle neue Reparatur-Kategorie</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-repairs/list/guest-repairs-list.component.html</context>
 					<context context-type="linenumber">4</context>
@@ -1646,6 +1761,7 @@
 				<source>
 					Edit
 				</source>
+				<target>Bearbeiten</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-repairs/list/guest-repairs-list.component.html</context>
 					<context context-type="linenumber">30</context>
@@ -1655,6 +1771,7 @@
 				<source>
 					Delete
 				</source>
+				<target>Löschen</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-repairs/list/guest-repairs-list.component.html</context>
 					<context context-type="linenumber">37</context>
@@ -1662,6 +1779,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Repairs_Table_Title" datatype="html">
 				<source>Repair Categories</source>
+				<target>Reparatur Kategorien</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-repairs/list/guest-repairs-list.component.html</context>
 					<context context-type="linenumber">12</context>
@@ -1671,6 +1789,9 @@
 				<source>
 					Repair Category (<x id="INTERPOLATION" equiv-text="{{languageList[idx].id}}"/>):*
 				</source>
+				<target>
+					Reparatur-Kategorietitel (<x id="INTERPOLATION" equiv-text="{{languageList[idx].id}}"/>):*
+				</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-repairs/form/guest-repairs-form.component.html</context>
 					<context context-type="linenumber">16</context>
@@ -1678,6 +1799,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Repairs_Form_Title_PlaceHolder" datatype="html">
 				<source>Repair Category</source>
+				<target>Reparatur-Kategorietitel eingeben</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-repairs/form/guest-repairs-form.component.html</context>
 					<context context-type="linenumber">23</context>
@@ -1685,6 +1807,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Repairs_Form_Hotels_Label" datatype="html">
 				<source>Hotel(s)*</source>
+				<target>Hotel(s)*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-repairs/form/guest-repairs-form.component.html</context>
 					<context context-type="linenumber">36</context>
@@ -1696,6 +1819,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Repairs_Form_Hotels_Hint" datatype="html">
 				<source>Hotel(s)</source>
+				<target>Wähle die Hotels, denen die Kategorie angezeigt werden sollen</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-repairs/form/guest-repairs-form.component.html</context>
 					<context context-type="linenumber">40</context>
@@ -1711,6 +1835,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Repairs_Form_Hotels_PlaceHolder" datatype="html">
 				<source>Hotel(s)</source>
+				<target>Wähle Hotel(s)</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-repairs/form/guest-repairs-form.component.html</context>
 					<context context-type="linenumber">56</context>
@@ -1718,6 +1843,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Repairs_Form_Access" datatype="html">
 				<source>HotelManager can edit and delete</source>
+				<target>HotelManager können editieren und löschen</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-repairs/form/guest-repairs-form.component.html</context>
 					<context context-type="linenumber">78</context>
@@ -1726,6 +1852,7 @@
 			<trans-unit id="Guest_Repairs_Form_Cancel_Button" datatype="html">
 				<source>Cancel
 				</source>
+				<target>Abbrechen</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-repairs/form/guest-repairs-form.component.html</context>
 					<context context-type="linenumber">86</context>
@@ -1733,6 +1860,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Repairs_Form_Save_Button" datatype="html">
 				<source>Save</source>
+				<target>Speichern</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-repairs/form/guest-repairs-form.component.html</context>
 					<context context-type="linenumber">89</context>
@@ -1740,6 +1868,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Repairs_Form_Entry_Note" datatype="html">
 				<source>Note</source>
+				<target>Die Liste der hier eingegebenen Einträge werden in the HotelGuest/APP autom. alphabetisch sortiert ausgegeben.</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-repairs/form/guest-repairs-form.component.html</context>
 					<context context-type="linenumber">99</context>
@@ -1749,6 +1878,7 @@
 				<source>
 					Edit
 				</source>
+				<target>Bearbeiten</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-repairs/form/guest-repairs-form.component.html</context>
 					<context context-type="linenumber">114</context>
@@ -1758,6 +1888,7 @@
 				<source>
 					Delete
 				</source>
+				<target>Löschen</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-repairs/form/guest-repairs-form.component.html</context>
 					<context context-type="linenumber">121</context>
@@ -1765,6 +1896,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Repairs_Form_Entry_New_Title" datatype="html">
 				<source>Add Entry</source>
+				<target>Neuer Eintrag</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-repairs/form/guest-repairs-form.component.html</context>
 					<context context-type="linenumber">134</context>
@@ -1772,6 +1904,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Repairs_Form_Entry_Edit_Title" datatype="html">
 				<source>Edit Entry</source>
+				<target>Eintrag bearbeiten</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-repairs/form/guest-repairs-form.component.html</context>
 					<context context-type="linenumber">135</context>
@@ -1781,6 +1914,9 @@
 				<source>
 					New Entry (<x id="INTERPOLATION" equiv-text="{{languageList[idx].id}}"/>):*
 				</source>
+				<target>
+					Neuer Eintrag (<x id="INTERPOLATION" equiv-text="{{languageList[idx].id}}"/>):*
+				</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-repairs/form/guest-repairs-form.component.html</context>
 					<context context-type="linenumber">145</context>
@@ -1790,6 +1926,9 @@
 				<source>
 					Edit Entry (<x id="INTERPOLATION" equiv-text="{{languageList[idx].id}}"/>):*
 				</source>
+				<target>
+					Eintrag bearbeiten (<x id="INTERPOLATION" equiv-text="{{languageList[idx].id}}"/>):*
+				</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-repairs/form/guest-repairs-form.component.html</context>
 					<context context-type="linenumber">148</context>
@@ -1797,6 +1936,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Repairs_Form_Entry_PlaceHolder" datatype="html">
 				<source>Enter Entry</source>
+				<target>Eintrag eingeben</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-repairs/form/guest-repairs-form.component.html</context>
 					<context context-type="linenumber">155</context>
@@ -1806,9 +1946,88 @@
 				<source>
 					Save
 				</source>
+				<target>Speichern</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-repairs/form/guest-repairs-form.component.html</context>
 					<context context-type="linenumber">173</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notification_Title" datatype="html">
+				<source>Notifications</source>
+				<target>Benachrichtigungen</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/notification.mod/components/notification.component.html</context>
+					<context context-type="linenumber">4</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notification_Page_Hint_Title" datatype="html">
+				<source>Title: Notification</source>
+				<target>Pagehint Title</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/notification.mod/components/notification.component.html</context>
+					<context context-type="linenumber">6</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notification_Page_Hint_Text" datatype="html">
+				<source>Text: Notification</source>
+				<target>Pagehint Text</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/notification.mod/components/notification.component.html</context>
+					<context context-type="linenumber">8</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notifications_Date_PlaceHolder" datatype="html">
+				<source>Date</source>
+				<target>Datum</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/notification.mod/components/list/notification-list.component.html</context>
+					<context context-type="linenumber">18</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notifications_Filter_PlaceHolder" datatype="html">
+				<source>Select Language</source>
+				<target>Filter</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/notification.mod/components/list/notification-list.component.html</context>
+					<context context-type="linenumber">32</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notifications_Function_Clear_All" datatype="html">
+				<source>
+					Clear All
+				</source>
+				<target>Alle zurücksetzen</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/notification.mod/components/list/notification-list.component.html</context>
+					<context context-type="linenumber">47</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notifications_Table_Recognize" datatype="html">
+				<source>
+					Recognize
+				</source>
+				<target>Kenntnis genommen</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/notification.mod/components/list/notification-list.component.html</context>
+					<context context-type="linenumber">77</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notifications_Table_Visit" datatype="html">
+				<source>
+					Visit Function
+				</source>
+				<target>Details</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/notification.mod/components/list/notification-list.component.html</context>
+					<context context-type="linenumber">89</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notifications_Table_Title" datatype="html">
+				<source>Notifications</source>
+				<target>Benachrichtigungen</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/notification.mod/components/list/notification-list.component.html</context>
+					<context context-type="linenumber">59</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Member_Profile_ProfileCover_Upload_Image_Title" datatype="html">
