@@ -2272,6 +2272,20 @@
 					<context context-type="linenumber">4</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="Page_Hint_Client_Title" datatype="html">
+				<source>Title: Client</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/client.component.html</context>
+					<context context-type="linenumber">6</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Page_Hint_Client_Text" datatype="html">
+				<source>Text: Client</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/client.component.html</context>
+					<context context-type="linenumber">8</context>
+				</context-group>
+			</trans-unit>
 			<trans-unit id="Management_Client_Create_Hotel_Group" datatype="html">
 				<source>
 					Create New Hotel / Group
@@ -2307,6 +2321,25 @@
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/default/client-default.component.html</context>
 					<context context-type="linenumber">16</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Common_No_Access_Available" datatype="html">
+				<source>Access Denied!</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/list/client-list.component.html</context>
+					<context context-type="linenumber">40</context>
+				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/broadcast/broadcast.component.html</context>
+					<context context-type="linenumber">22</context>
+				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/hotel-guest-app/hotel-guest-app.component.html</context>
+					<context context-type="linenumber">84</context>
+				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/version/version.component.html</context>
+					<context context-type="linenumber">34</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Management_Client_Access_Denied" datatype="html">
@@ -2356,6 +2389,20 @@
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/broadcast/broadcast.component.html</context>
 					<context context-type="linenumber">4</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Page_Hint_Broadcast_Title" datatype="html">
+				<source>Title: Broadcast</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/broadcast/broadcast.component.html</context>
+					<context context-type="linenumber">6</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Page_Hint_Broadcast_Text" datatype="html">
+				<source>Text: Broadcast</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/broadcast/broadcast.component.html</context>
+					<context context-type="linenumber">8</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Management_User_Form_Title" datatype="html">
@@ -2497,6 +2544,20 @@
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/user.component.html</context>
 					<context context-type="linenumber">4</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Page_Hint_User_Title" datatype="html">
+				<source>Title: User</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/user.component.html</context>
+					<context context-type="linenumber">6</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Page_Hint_User_Text" datatype="html">
+				<source>Text: User</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/user.component.html</context>
+					<context context-type="linenumber">8</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Management_Client_License_Form_Company_Label" datatype="html">
@@ -3115,6 +3176,20 @@
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/broadcast/default/broadcast-default.component.html</context>
 					<context context-type="linenumber">16</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Page_Hint_Version_Title" datatype="html">
+				<source>Title: Version</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/version/version.component.html</context>
+					<context context-type="linenumber">6</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Page_Hint_Version_Text" datatype="html">
+				<source>Text: Version</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/version/version.component.html</context>
+					<context context-type="linenumber">8</context>
 				</context-group>
 			</trans-unit>
 		</body>
