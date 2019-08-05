@@ -1521,7 +1521,8 @@
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Guest_Push_Message_Form_Periodic_Hint" datatype="html">
-				<source>Select a period when the message should automatically be sent to all guests of the HotelGuest/APP</source>
+				<source>Hint Text</source>
+				<target>Select a period when the message should automatically be sent to all guests of the HotelGuest/APP</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/form/guest-push-message-form.component.html</context>
 					<context context-type="linenumber">187</context>
@@ -1737,7 +1738,8 @@
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Guest_Offers_Form_BarCode_Hint" datatype="html">
-				<source>If activated, a personalized bar code will be generated and displayed below the guest offer in the HotelGuest/APP to redeem the offer.</source>
+				<source>Note Text</source>
+				<target>If activated, a personalized bar code will be generated and displayed below the guest offer in the HotelGuest/APP to redeem the offer.</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-offers/form/guest-offers-form.component.html</context>
 					<context context-type="linenumber">171</context>
@@ -1753,7 +1755,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Offers_Form_Redeem_Hint" datatype="html">
 				<source>Note Text</source>
-				<target><Title>Create a redeem slider</Title>If activated, each offer will equipped with a slider element which the hotel staff may use to redeem deals on the guests' smart device.</target>
+				<target>If activated, each offer will equipped with a slider element which the hotel staff may use to redeem deals on the guests' smart device.</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-offers/form/guest-offers-form.component.html</context>
 					<context context-type="linenumber">183</context>
@@ -1975,9 +1977,7 @@
 				<source>
 					New Entry (<x id="INTERPOLATION" equiv-text="{{languageList[idx].id}}"/>):*
 				</source>
-				<target>
-					New Entry (<x id="INTERPOLATION" equiv-text="{{languageList[idx].id}}"/>):*
-				<target/>
+				<target>New Entry (<x id="INTERPOLATION" equiv-text="{{languageList[idx].id}}"/>):*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-repairs/form/guest-repairs-form.component.html</context>
 					<context context-type="linenumber">145</context>
@@ -2551,6 +2551,22 @@
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/client.component.html</context>
 					<context context-type="linenumber">4</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Page_Hint_Client_Title" datatype="html">
+				<source>Title: Client</source>
+				<target>Pagehint: Title</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/client.component.html</context>
+					<context context-type="linenumber">6</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Page_Hint_Client_Text" datatype="html">
+				<source>Text: Client</source>
+				<target>Pagehint: Text</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/client.component.html</context>
+					<context context-type="linenumber">8</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Management_Client_Create_Hotel_Group" datatype="html">
@@ -3784,16 +3800,6 @@
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/broadcast/form/broadcast-form.component.html</context>
 					<context context-type="linenumber">88</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="Management_User_NewUsers_Table_Edit" datatype="html">
-				<source>
-					Edit
-				</source>
-				<target>Edit</target>
-				<context-group purpose="location">
-					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/list/user-list.component.html</context>
-					<context context-type="linenumber">23</context>
 				</context-group>
 			</trans-unit>
 		</body>

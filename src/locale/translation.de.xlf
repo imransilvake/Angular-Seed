@@ -3678,6 +3678,7 @@
 			</trans-unit>
 			<trans-unit id="Management_Version_Form_Release_Date_PlaceHolder" datatype="html">
 				<source>Release Date</source>
+				<target>Veröffentlichungsdatum eingeben</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/version/form/version-form.component.html</context>
 					<context context-type="linenumber">59</context>
@@ -3802,16 +3803,6 @@
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/broadcast/form/broadcast-form.component.html</context>
 					<context context-type="linenumber">88</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="Management_User_NewUsers_Table_Edit" datatype="html">
-				<source>
-					Edit
-				</source>
-				<target>Bearbeiten</target>
-				<context-group purpose="location">
-					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/user/list/user-list.component.html</context>
-					<context context-type="linenumber">23</context>
 				</context-group>
 			</trans-unit>
 		</body>
