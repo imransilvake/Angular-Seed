@@ -3579,6 +3579,101 @@
 					<context context-type="linenumber">8</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="Management_Version_Create_NewFeatureList" datatype="html">
+				<source>
+					Create New Feature List
+				</source>
+				<target>Create new version</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/version/list/version-list.component.html</context>
+					<context context-type="linenumber">4</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Version_Table_Edit" datatype="html">
+				<source>
+					Edit
+				</source>
+				<target>Edit</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/version/list/version-list.component.html</context>
+					<context context-type="linenumber">30</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Version_Table_Delete" datatype="html">
+				<source>
+					Delete
+				</source>
+				<target>Delete</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/version/list/version-list.component.html</context>
+					<context context-type="linenumber">38</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Version_Table_Title" datatype="html">
+				<source>Version List</source>
+				<target>Version overview</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/version/list/version-list.component.html</context>
+					<context context-type="linenumber">12</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Version_Form_Text_Label" datatype="html">
+				<source>Description / List of new Features*</source>
+				<target>Description of new functions*</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/version/form/version-form.component.html</context>
+					<context context-type="linenumber">25</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Version_Form_Version_Label" datatype="html">
+				<source>Version ID*</source>
+				<target>Version ID*</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/version/form/version-form.component.html</context>
+					<context context-type="linenumber">40</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Version_Form_Version_PlaceHolder" datatype="html">
+				<source>Version ID</source>
+				<target>Enter Version ID</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/version/form/version-form.component.html</context>
+					<context context-type="linenumber">45</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Version_Form_Release_Date_Label" datatype="html">
+				<source>Release Date*</source>
+				<target>Release date*</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/version/form/version-form.component.html</context>
+					<context context-type="linenumber">54</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Version_Form_Release_Date_PlaceHolder" datatype="html">
+				<source>Release Date</source>
+				<target>Enter release date</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/version/form/version-form.component.html</context>
+					<context context-type="linenumber">59</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Version_Form_Cancel_Button" datatype="html">
+				<source>Cancel
+				</source>
+				<target>Cancel</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/version/form/version-form.component.html</context>
+					<context context-type="linenumber">80</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Version_Form_Save_Button" datatype="html">
+				<source>Save</source>
+				<target>Save</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/version/form/version-form.component.html</context>
+					<context context-type="linenumber">83</context>
+				</context-group>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
