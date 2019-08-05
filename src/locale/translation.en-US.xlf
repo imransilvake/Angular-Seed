@@ -4066,6 +4066,38 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="Management_Client_HAM_OnlineBooking_Title" datatype="html">
+				<source>Online Booking Statistics</source>
+				<target>Online Booking Statistics</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HAM_OnlineBooking_Description" datatype="html">
+				<source>Online Booking Statistics Description</source>
+				<target>Hotel manager can see incoming reservations and cancellations in real time on the dashboard</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HAM_GuestOverview_Title" datatype="html">
+				<source>International Guest Overview</source>
+				<target>International Guest Overview</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HAM_GuestOverview_Description" datatype="html">
+				<source>Guest Overview Description</source>
+				<target>Hotel manager can see incoming reservations and cancellations in real time on the dashboard</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
