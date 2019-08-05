@@ -42,7 +42,7 @@ export class ProfileComponent implements OnDestroy {
 	/**
 	 * trigger all components services
 	 */
-	private triggerServices() {
+	public triggerServices() {
 		// set current user state
 		this._memberService.currentUser = this._authService.currentUserState;
 

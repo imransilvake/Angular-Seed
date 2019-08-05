@@ -72,7 +72,7 @@ export class UserComponent implements OnDestroy {
 	/**
 	 * trigger all components services
 	 */
-	private triggerServices() {
+	public triggerServices() {
 		// set current user state
 		this._userService.currentUser = this._authService.currentUserState;
 
