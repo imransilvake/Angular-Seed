@@ -3383,6 +3383,160 @@
 					<context context-type="linenumber">23</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="Guest_Periods_Adhoc" datatype="html">
+				<source>Adhoc</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Periods_First_Login" datatype="html">
+				<source>First Login</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Periods_Middle_Stay" datatype="html">
+				<source>Middle Stay</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Periods_Day_Before_Checkout" datatype="html">
+				<source>Day Before Checkout</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Periods_Day_After_Checkout" datatype="html">
+				<source>Day Before Checkout</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Target_Groups_All" datatype="html">
+				<source>All guests</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Target_Groups_Members_Only" datatype="html">
+				<source>Member only</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Target_Groups_Standard_Guest_Only" datatype="html">
+				<source>Standard guests only</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Table_Clear_Row_Title" datatype="html">
+				<source>Title: Clear Row Confirmation</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/shared/widgets/table/table.component.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Table_Clear_Row_Description" datatype="html">
+				<source>Description: Clear Row Confirmation</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/shared/widgets/table/table.component.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Table_Notification_Message_Title" datatype="html">
+				<source>New Registration from &apos;<x id="INTERPOLATION" equiv-text="{{name}}"/>&apos;</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/shared/widgets/table/table.component.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notifications_Filters_All" datatype="html">
+				<source>All notifications</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notifications_Filters_Open" datatype="html">
+				<source>Only open notifications</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notifications_Filters_Admin" datatype="html">
+				<source>Only admin notifications</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notifications_Filters_Registrations" datatype="html">
+				<source>Only registrations</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notifications_Filters_Room" datatype="html">
+				<source>Only room notifications</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notifications_Filters_Repair" datatype="html">
+				<source>Only repair notifications</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notifications_Filters_Alert" datatype="html">
+				<source>Only alert notifications</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notification_Clear_All_Title" datatype="html">
+				<source>Title: Clear All Confirmation</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/notification.mod/services/notification.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notification_Clear_All_Description" datatype="html">
+				<source>Description: Clear All Confirmation</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/notification.mod/services/notification.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notification_Recognize_Row_Title" datatype="html">
+				<source>Title: Recognize Row Confirmation</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/notification.mod/services/notification.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notification_Recognize_Row_Description" datatype="html">
+				<source>Description: Recognize Row Confirmation</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/notification.mod/services/notification.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

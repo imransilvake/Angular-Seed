@@ -1,0 +1,1283 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="Error_Internet_Connection_Title" datatype="html">
+        <source>Title: Internet Connection Exception</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Error_Internet_Connection_Description" datatype="html">
+        <source>Description: Internet Connection Exception</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Error_UnknownErrorException_Title" datatype="html">
+        <source>Title: Unknown Error Exception</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Error_UnknownErrorException_Description" datatype="html">
+        <source>Description: Unknown Error Exception</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Common_Button_Close" datatype="html">
+        <source>Button - Close</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/authorization.mod/services/auth.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/components/guest-offers/form/guest-offers-form.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/components/guest-push-message/form/guest-push-message-form.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/components/guest-repairs/form/guest-repairs-form.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/components/user/form/user-form.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/member.mod/services/member.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/member.mod/services/member.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/member.mod/services/member.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Logout_Confirmation_Title" datatype="html">
+        <source>Title: Logout Confirmation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/frame.pck/components/menus/account/account-menu.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Logout_Confirmation_Description" datatype="html">
+        <source>Description: Logout Confirmation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/frame.pck/components/menus/account/account-menu.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Common_Button_OK" datatype="html">
+        <source>Button - OK</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/frame.pck/components/menus/account/account-menu.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/authorization.mod/services/auth.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/authorization.mod/services/auth.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/guest-offers.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/guest-offers.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/guest-repairs.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/guest-repairs.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/push-message.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/push-message.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/components/broadcast/form/broadcast-form.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/components/client/form/hotel-guest-app/hotel-guest-app.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/broadcast.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/user.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/user.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/user.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/version.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/version.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/member.mod/services/member.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/member.mod/services/member.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/member.mod/services/member.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/notification.mod/services/notification.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/notification.mod/services/notification.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/widgets/table/table.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Common_Button_Cancel" datatype="html">
+        <source>Button - Cancel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/frame.pck/components/menus/account/account-menu.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/guest-offers.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/guest-repairs.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/push-message.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/components/broadcast/form/broadcast-form.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/components/client/form/hotel-guest-app/hotel-guest-app.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/user.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/version.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/notification.mod/services/notification.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/notification.mod/services/notification.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/widgets/table/table.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Auth_Register_Form_Success_Title" datatype="html">
+        <source>Title: Success</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/authorization.mod/services/auth.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Auth_Register_Form_Success_Description" datatype="html">
+        <source>Description: Success</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/authorization.mod/services/auth.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Auth_Register_Error_UsernameExistsException_Description" datatype="html">
+        <source>Description: Username Exists Exception</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/authorization.mod/services/auth.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Auth_Login_Error_BlockUserException_Description" datatype="html">
+        <source>Description: Block User Exception</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/authorization.mod/services/auth.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Auth_Login_Error_UserNotFoundException_Description" datatype="html">
+        <source>Description: User Not Found Exception</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/authorization.mod/services/auth.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Auth_Login_Error_UserNotConfirmedException_Description" datatype="html">
+        <source>Description: User Not Confirmed Exception</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/authorization.mod/services/auth.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Auth_Login_Error_PasswordInvalid_Description" datatype="html">
+        <source>Description: Password Invalid Exception</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/authorization.mod/services/auth.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Auth_ForgotPassword_Form_Success_Title" datatype="html">
+        <source>Title: Password Reset</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/authorization.mod/services/auth.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Auth_ForgotPassword_Form_Success_Description" datatype="html">
+        <source>Description: Forgot Password</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/authorization.mod/services/auth.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Auth_ForgotPassword_Error_InvalidParameterException_Description" datatype="html">
+        <source>Description: Invalid Parameter Exception</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/authorization.mod/services/auth.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Auth_ForgotPassword_Error_UserNotFoundException_Description" datatype="html">
+        <source>Description: User Not Found Exception</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/authorization.mod/services/auth.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Auth_ForgotPassword_Error_InvalidFirstNameException_Description" datatype="html">
+        <source>Description: Invalid First Name Exception</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/authorization.mod/services/auth.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Auth_ForgotPassword_Error_InvalidLastNameException_Description" datatype="html">
+        <source>Description: Invalid Last Name Exception</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/authorization.mod/services/auth.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Auth_ResetPassword_Form_Success_Title" datatype="html">
+        <source>Title: Reset Password</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/authorization.mod/services/auth.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Auth_ResetPassword_Form_Success_Description" datatype="html">
+        <source>Description: Reset Password</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/authorization.mod/services/auth.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Auth_ResetPassword_Error_CodeMismatchException_Description" datatype="html">
+        <source>Description: Mismatch Verification Code Exception</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/authorization.mod/services/auth.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Auth_ResetPassword_Error_ExpiredCodeException_Description" datatype="html">
+        <source>Description: Expired Verification Code Exception</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/authorization.mod/services/auth.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Error_Common_GroupSelection_Title" datatype="html">
+        <source>Title: Wrong Group Selection Error Exception</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/components/guest-offers/form/guest-offers-form.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/components/guest-push-message/form/guest-push-message-form.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/components/guest-repairs/form/guest-repairs-form.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/components/user/form/user-form.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Error_Common_GroupSelection_Description" datatype="html">
+        <source>Description: Wrong Group Selection Error Exception</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/components/guest-offers/form/guest-offers-form.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/components/guest-push-message/form/guest-push-message-form.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/components/guest-repairs/form/guest-repairs-form.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/components/user/form/user-form.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Guest_Offer_Delete_Title" datatype="html">
+        <source>Title: Delete Guest Offer</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/guest-offers.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Guest_Offer_Delete_Description" datatype="html">
+        <source>Description: Delete Guest Offer</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/guest-offers.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Guest_Offers_Form_Success_Updated_Title" datatype="html">
+        <source>Title: Offer Updated</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/guest-offers.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Guest_Offers_Form_Success_Updated_Description" datatype="html">
+        <source>Description: Offer Updated</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/guest-offers.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Guest_Offers_Form_Success_Created_Title" datatype="html">
+        <source>Title: Offer Created</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/guest-offers.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Guest_Offers_Form_Success_Created_Description" datatype="html">
+        <source>Description: Offer Created</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/guest-offers.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Guest_Repairs_Form_Success_Updated_Title" datatype="html">
+        <source>Title: Repair Updated</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/guest-repairs.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Guest_Repairs_Form_Success_Updated_Description" datatype="html">
+        <source>Description: Repair Updated</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/guest-repairs.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Guest_Repairs_Form_Success_Created_Title" datatype="html">
+        <source>Title: Repair Created</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/guest-repairs.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Guest_Repairs_Form_Success_Created_Description" datatype="html">
+        <source>Description: Repair Created</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/guest-repairs.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Guest_Repairs_Delete_Title" datatype="html">
+        <source>Title: Delete Guest Repair</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/guest-repairs.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Guest_Repairs_Delete_Description" datatype="html">
+        <source>Description: Delete Guest Repair</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/guest-repairs.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Guest_Push_Periodic_Notification_Delete_Title" datatype="html">
+        <source>Title: Delete Push Notification</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/push-message.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Guest_Push_Periodic_Notification_Delete_Description" datatype="html">
+        <source>Description: Delete Push Notification</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/push-message.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Guest_Push_Message_Form_Success_Updated_Title" datatype="html">
+        <source>Title: Push Message Updated</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/push-message.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Guest_Push_Message_Form_Success_Updated_Description" datatype="html">
+        <source>Description: Notification Updated</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/push-message.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Guest_Push_Message_Form_Success_Created_Title" datatype="html">
+        <source>Title: Push Message Created</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/push-message.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Guest_Push_Message_Form_Success_Created_Description" datatype="html">
+        <source>Description: Notification Created</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/push-message.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_BroadcastCreateConfirmation_Form_Success_Title" datatype="html">
+        <source>Title: Broadcast Create Confirmation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/components/broadcast/form/broadcast-form.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_BroadcastCreateConfirmation_Form_Success_Description" datatype="html">
+        <source>Description: Broadcast Create Confirmation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/components/broadcast/form/broadcast-form.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="HGA_Activation_Title" datatype="html">
+        <source>Title: HGA Activation Confirmation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/components/client/form/hotel-guest-app/hotel-guest-app.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="HGA_Activation_Description" datatype="html">
+        <source>Description: HGA Activation Confirmation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/components/client/form/hotel-guest-app/hotel-guest-app.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="User_List_Decline_User_Confirmation_Title" datatype="html">
+        <source>Title: Decline User Confirmation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/components/user/list/user-list.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="User_List_Decline_User_Confirmation_Description" datatype="html">
+        <source>Description: Decline User Confirmation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/components/user/list/user-list.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="User_List_Delete_User_Confirmation_Title" datatype="html">
+        <source>Title: Delete User Confirmation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/components/user/list/user-list.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="User_List_Delete_User_Confirmation_Description" datatype="html">
+        <source>Description: Delete User Confirmation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/components/user/list/user-list.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_BroadcastCreated_Form_Success_Title" datatype="html">
+        <source>Title: Broadcast Created</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/broadcast.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_BroadcastCreated_Form_Success_Description" datatype="html">
+        <source>Description: Broadcast Created</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/broadcast.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_License_List_1" datatype="html">
+        <source>1 Hotel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_License_List_2_5" datatype="html">
+        <source>2 to 5 Hotels</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_License_List_6_20" datatype="html">
+        <source>6 to 20 Hotels</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_License_List_21_50" datatype="html">
+        <source>21 to 50 Hotels</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_License_List_51_100" datatype="html">
+        <source>51 to 100 Hotels</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_License_List_101_150" datatype="html">
+        <source>101 to 150 Hotels</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_License_List_151_250" datatype="html">
+        <source>151 to 250 hotels</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Member_Client_License_SystemIdentifier_Error_InvalidGroupID_Description" datatype="html">
+        <source>Description: Invalid Group ID Exception</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Member_Client_System_Error_InvalidEndpointCredentials_Description" datatype="html">
+        <source>Description: Invalid Endpoint Credentials Exception</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Member_Client_System_Error_InvalidEndpointUrl_Description" datatype="html">
+        <source>Description: Invalid Endpoint Url Exception</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_License_System_Success_Title" datatype="html">
+        <source>Title: Client License &amp; System Data Updated</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_License_System_Success_Description" datatype="html">
+        <source>Description: Client License &amp; System Data Updated</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_App_Success_Title" datatype="html">
+        <source>Title: App Data Updated</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_App_Success_Description" datatype="html">
+        <source>Description: App Data Updated</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_HGA_General_Guest_Push_Notifications_Title" datatype="html">
+        <source>Guest Push Notifications</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_HGA_General_Guest_Push_Notifications_Description" datatype="html">
+        <source>Send individual and automatic push notifications to your guests</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_HGA_Room_KeyCode_Title" datatype="html">
+        <source>Room Key Code</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_HGA_Room_KeyCode_Description" datatype="html">
+        <source>Offer your guests access to the digital room key</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_HGA_Room_CleaningStatus_Title" datatype="html">
+        <source>Room Cleaning Status</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_HGA_Room_CleaningStatus_Description" datatype="html">
+        <source>Guests can see if the room is in cleaning process</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_HGA_Room_EmergencyButton_Title" datatype="html">
+        <source>Room Emergency Button</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_HGA_Room_EmergencyButton_Description" datatype="html">
+        <source>Offer your Guests the possibility to send an emergency message to the reception</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_HGA_Room_RepairMessage_Title" datatype="html">
+        <source>Room Repair Message</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_HGA_Room_RepairMessage_Description" datatype="html">
+        <source>Guests can inform the hotel manager about necessary room repairs</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_HGA_Hotel_HotelDeals_Title" datatype="html">
+        <source>Hotel Deals</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_HGA_Hotel_HotelDeals_Description" datatype="html">
+        <source>Inform your guests about specific offers in your hotel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_HGA_Hotel_HotelDetails_Title" datatype="html">
+        <source>Hotel Details</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_HGA_Hotel_HotelDetails_Description" datatype="html">
+        <source>Guests can have a direct access to all facilities of your hotel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_HGA_Hotel_GuestTravelDetails_Title" datatype="html">
+        <source>Guest Travel Details</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_HGA_Hotel_GuestTravelDetails_Description" datatype="html">
+        <source>Guests can see their stay details</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_HGA_Hotel_HotelMagazine_Title" datatype="html">
+        <source>Hotel Magazine</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_HGA_Hotel_HotelMagazine_Description" datatype="html">
+        <source>Guests can read your digital hotel magazine</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_HGA_Hotel_TrustYouHotelRatings_Title" datatype="html">
+        <source>TrustYou Hotel Ratings</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_HGA_Hotel_TrustYouHotelRatings_Description" datatype="html">
+        <source>Guest can leave a hotel rating during stay</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_HSA_HouseKeeping_Title" datatype="html">
+        <source>House Keeping</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_HSA_HouseKeeping_Description" datatype="html">
+        <source>Housekeeping Description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_HSA_Repairs_Title" datatype="html">
+        <source>Repairs</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_HSA_Repairs_Description" datatype="html">
+        <source>Repairs Description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_HAM_OnlineBooking_Title" datatype="html">
+        <source>Online Booking Statistics</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_HAM_OnlineBooking_Description" datatype="html">
+        <source>Online Booking Statistics Description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_HAM_GuestOverview_Title" datatype="html">
+        <source>International Guest Overview</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Client_HAM_GuestOverview_Description" datatype="html">
+        <source>Guest Overview Description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_User_Form_NewUserCreated_Success_Title" datatype="html">
+        <source>Title: New User Created</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/user.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_User_Form_NewUserCreated_Success_Description" datatype="html">
+        <source>Description: New User Created</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/user.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_User_Form_Error_UsernameExistsException_Description" datatype="html">
+        <source>Description: Username Exists Exception</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/user.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_UserUpdated_Form_Success_Title" datatype="html">
+        <source>Title: User Updated</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/user.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_UserUpdated_Form_Success_Description" datatype="html">
+        <source>Description: User Updated</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/user.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Version_Updated_Form_Success_Title" datatype="html">
+        <source>Title: Version Updated</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/version.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Version_Updated_Form_Success_Description" datatype="html">
+        <source>Description: Version Updated</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/version.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Version_Created_Form_Success_Title" datatype="html">
+        <source>Title: Version Created</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/version.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Version_Created_Form_Success_Description" datatype="html">
+        <source>Description: Version Created</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/version.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Version_Error_Invalid_VersionID_Description" datatype="html">
+        <source>Description: Invalid Version ID Exception</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/version.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Version_Delete_Title" datatype="html">
+        <source>Title: Delete Version Confirmation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/version.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Management_Version_Delete_Description" datatype="html">
+        <source>Description: Delete Version Confirmation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/version.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Member_Profile_UpdateProfile_Success_Title" datatype="html">
+        <source>Title: Profile Updated</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/member.mod/services/member.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Member_Profile_UpdateProfile_Success_Description" datatype="html">
+        <source>Description: Profile Updated</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/member.mod/services/member.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Member_Profile_UpdateProfile_Error_Title" datatype="html">
+        <source>Title: Profile Update Error</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/member.mod/services/member.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Member_Profile_UpdateProfile_Error_Description" datatype="html">
+        <source>Description: Profile Update Error</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/member.mod/services/member.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Member_Profile_ChangePassword_Success_Title" datatype="html">
+        <source>Title: Password Changed</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/member.mod/services/member.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Member_Profile_ChangePassword_Success_Description" datatype="html">
+        <source>Description: Password Changed</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/member.mod/services/member.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Member_Profile_ChangePassword_Error_PasswordInvalid_Title" datatype="html">
+        <source>Title: Password Invalid Exception</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/member.mod/services/member.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Member_Profile_ChangePassword_Error_PasswordInvalid_Description" datatype="html">
+        <source>Description: Password Invalid Exception</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/member.mod/services/member.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Member_Profile_ChangePassword_Error_LimitExceeded_Title" datatype="html">
+        <source>Title: Limit Exceed Exception</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/member.mod/services/member.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Member_Profile_ChangePassword_Error_LimitExceeded_Description" datatype="html">
+        <source>Description: Limit Exceed Exception</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/member.mod/services/member.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Member_Profile_UpdateProfileImage_Success_Description" datatype="html">
+        <source>Description: Profile Image Updated</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/member.mod/services/member.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Notification_Clear_All_Title" datatype="html">
+        <source>Title: Clear All Confirmation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/notification.mod/services/notification.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Notification_Clear_All_Description" datatype="html">
+        <source>Description: Clear All Confirmation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/notification.mod/services/notification.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Notification_Recognize_Row_Title" datatype="html">
+        <source>Title: Recognize Row Confirmation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/notification.mod/services/notification.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Notification_Recognize_Row_Description" datatype="html">
+        <source>Description: Recognize Row Confirmation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/modules.pck/notification.mod/services/notification.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Language_English" datatype="html">
+        <source>English</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Language_German" datatype="html">
+        <source>German</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Language_French" datatype="html">
+        <source>French</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Language_Spanish" datatype="html">
+        <source>Spanish</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Salutation_Mr" datatype="html">
+        <source>Salutation: Mr</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Salutation_Mrs" datatype="html">
+        <source>Salutation: Mrs</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Salutation_Individual" datatype="html">
+        <source>Salutation: Individual</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Notifications_Filters_All" datatype="html">
+        <source>All notifications</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Notifications_Filters_Open" datatype="html">
+        <source>Only open notifications</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Notifications_Filters_Admin" datatype="html">
+        <source>Only admin notifications</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Notifications_Filters_Registrations" datatype="html">
+        <source>Only registrations</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Notifications_Filters_Room" datatype="html">
+        <source>Only room notifications</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Notifications_Filters_Repair" datatype="html">
+        <source>Only repair notifications</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Notifications_Filters_Alert" datatype="html">
+        <source>Only alert notifications</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Guest_Periods_Adhoc" datatype="html">
+        <source>Adhoc</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Guest_Periods_First_Login" datatype="html">
+        <source>First Login</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Guest_Periods_Middle_Stay" datatype="html">
+        <source>Middle Stay</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Guest_Periods_Day_Before_Checkout" datatype="html">
+        <source>Day Before Checkout</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Guest_Periods_Day_After_Checkout" datatype="html">
+        <source>Day Before Checkout</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Guest_Target_Groups_All" datatype="html">
+        <source>All guests</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Guest_Target_Groups_Members_Only" datatype="html">
+        <source>Member only</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Guest_Target_Groups_Standard_Guest_Only" datatype="html">
+        <source>Standard guests only</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Upload_Image_Error_FileSize" datatype="html">
+        <source>Description: FileSize Error</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/widgets/image-upload/image-upload.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Upload_Image_Error_Wrong_Format" datatype="html">
+        <source>Description: Wrong Format Error</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/widgets/image-upload/image-upload.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Table_Clear_Row_Title" datatype="html">
+        <source>Title: Clear Row Confirmation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/widgets/table/table.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Table_Clear_Row_Description" datatype="html">
+        <source>Description: Clear Row Confirmation</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/widgets/table/table.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="Table_Notification_Message_Title" datatype="html">
+        <source>New Registration from &apos;<x id="INTERPOLATION" equiv-text="{{name}}"/>&apos;</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/widgets/table/table.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

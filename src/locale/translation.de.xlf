@@ -3805,6 +3805,182 @@
 					<context context-type="linenumber">88</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="Guest_Periods_Adhoc" datatype="html">
+				<source>Adhoc</source>
+				<target>Adhoc</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Periods_First_Login" datatype="html">
+				<source>First Login</source>
+				<target>Nach dem ersten Login</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Periods_Middle_Stay" datatype="html">
+				<source>Middle Stay</source>
+				<target>In der Mitte des Aufenthaltes</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Periods_Day_Before_Checkout" datatype="html">
+				<source>Day Before Checkout</source>
+				<target>Am nächsten Tag des Check-In</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Periods_Day_After_Checkout" datatype="html">
+				<source>Day Before Checkout</source>
+				<target>Ein Tag vor dem Check-Out</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Target_Groups_All" datatype="html">
+				<source>All guests</source>
+				<target>Alle Gäste</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Target_Groups_Members_Only" datatype="html">
+				<source>Member only</source>
+				<target>Nur Mitglieder</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Target_Groups_Standard_Guest_Only" datatype="html">
+				<source>Standard guests only</source>
+				<target>Nur Standardgäste</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Table_Clear_Row_Title" datatype="html">
+				<source>Title: Clear Row Confirmation</source>
+				<target>Sicher...</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/shared/widgets/table/table.component.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Table_Clear_Row_Description" datatype="html">
+				<source>Description: Clear Row Confirmation</source>
+				<target>Sollen alle Benachrichtigungen wirklich zurückgesetzt werden?</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/shared/widgets/table/table.component.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Table_Notification_Message_Title" datatype="html">
+				<source>New Registration from &apos;<x id="INTERPOLATION" equiv-text="{{name}}"/>&apos;</source>
+				<source>Neue Registrierung von &apos;<x id="INTERPOLATION" equiv-text="{{name}}"/>&apos;</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/shared/widgets/table/table.component.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notifications_Filters_All" datatype="html">
+				<source>All notifications</source>
+				<target>Alle Benachrichtigungen</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notifications_Filters_Open" datatype="html">
+				<source>Only open notifications</source>
+				<target>Nur offene Benachrichtigungen</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notifications_Filters_Admin" datatype="html">
+				<source>Only admin notifications</source>
+				<target>Nur Admin-Benachrichtigungen</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notifications_Filters_Registrations" datatype="html">
+				<source>Only registrations</source>
+				<target>Nur Registrierungen</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notifications_Filters_Room" datatype="html">
+				<source>Only room notifications</source>
+				<target>Nur Zimmer-Benachrichtigungen</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notifications_Filters_Repair" datatype="html">
+				<source>Only repair notifications</source>
+				<target>Nur Reparatur-Benachrichtigungen</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notifications_Filters_Alert" datatype="html">
+				<source>Only alert notifications</source>
+				<target>Nur Alarm-Benachrichtigungen</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notification_Clear_All_Title" datatype="html">
+				<source>Title: Clear All Confirmation</source>
+				<target>Sicher...</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/notification.mod/services/notification.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notification_Clear_All_Description" datatype="html">
+				<source>Description: Clear All Confirmation</source>
+				<target>Sollen alle Benachrichtigungen wirklich zurückgesetzt werden?</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/notification.mod/services/notification.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notification_Recognize_Row_Title" datatype="html">
+				<source>Title: Recognize Row Confirmation</source>
+				<target>Sicher...</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/notification.mod/services/notification.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Notification_Recognize_Row_Description" datatype="html">
+				<source>Description: Recognize Row Confirmation</source>
+				<target>Sollen alle markierten Benachrichtigungen wirklich zurückgesetzt werden?</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/notification.mod/services/notification.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
