@@ -10,8 +10,6 @@ Angular CLI based seed application incorporating many best practices typically n
 - [X] Components from Material: `input`, `select`, `dialog`, `tree`, `sidenav`
 - [X] Icons from Material and Fontawesome
 
-![Alt text](preview.png?raw=true "Angular Seed")
-
 
 ## Content
 Please follow the link for the documentation: [GUIDE](./GUIDE.md)
