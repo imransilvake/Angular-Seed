@@ -3978,6 +3978,62 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="Management_Version_Updated_Form_Success_Title" datatype="html">
+				<source>Title: Version Updated</source>
+				<target>Version updated</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/version.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Version_Updated_Form_Success_Description" datatype="html">
+				<source>Description: Version Updated</source>
+				<target>Version was successfully updated</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/version.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Version_Created_Form_Success_Title" datatype="html">
+				<source>Title: Version Created</source>
+				<target>Successfully created</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/version.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Version_Created_Form_Success_Description" datatype="html">
+				<source>Description: Version Created</source>
+				<target>Version was successfully created</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/version.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Version_Error_Invalid_VersionID_Description" datatype="html">
+				<source>Description: Invalid Version ID Exception</source>
+				<target>Invalid Version ID</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/version.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Version_Delete_Title" datatype="html">
+				<source>Title: Delete Version Confirmation</source>
+				<target>Sure...</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/version.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Version_Delete_Description" datatype="html">
+				<source>Description: Delete Version Confirmation</source>
+				<target>Should this version really be deleted?</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/version.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
