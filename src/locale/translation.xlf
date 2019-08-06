@@ -4028,6 +4028,48 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="Guest_Repairs_Form_Success_Updated_Title" datatype="html">
+				<source>Title: Repair Updated</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/guest-repairs.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Repairs_Form_Success_Updated_Description" datatype="html">
+				<source>Description: Repair Updated</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/guest-repairs.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Repairs_Form_Success_Created_Title" datatype="html">
+				<source>Title: Repair Created</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/guest-repairs.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Repairs_Form_Success_Created_Description" datatype="html">
+				<source>Description: Repair Created</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/guest-repairs.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Repairs_Delete_Title" datatype="html">
+				<source>Title: Delete Guest Repair</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/guest-repairs.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Repairs_Delete_Description" datatype="html">
+				<source>Description: Delete Guest Repair</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/guest-repairs.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

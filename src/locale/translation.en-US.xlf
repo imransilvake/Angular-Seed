@@ -4538,6 +4538,54 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="Guest_Repairs_Form_Success_Updated_Title" datatype="html">
+				<source>Title: Repair Updated</source>
+				<target>Repair category saved</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/guest-repairs.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Repairs_Form_Success_Updated_Description" datatype="html">
+				<source>Description: Repair Updated</source>
+				<target>The repair category has been saved successfully</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/guest-repairs.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Repairs_Form_Success_Created_Title" datatype="html">
+				<source>Title: Repair Created</source>
+				<target>Repair category saved</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/guest-repairs.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Repairs_Form_Success_Created_Description" datatype="html">
+				<source>Description: Repair Created</source>
+				<target>The repair category has been saved successfully</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/guest-repairs.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Repairs_Delete_Title" datatype="html">
+				<source>Title: Delete Guest Repair</source>
+				<target>Sure...</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/guest-repairs.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Repairs_Delete_Description" datatype="html">
+				<source>Description: Delete Guest Repair</source>
+				<target>Should the repair object really be deleted?</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/guest-repairs.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
