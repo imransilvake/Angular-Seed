@@ -4386,6 +4386,30 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="Member_Client_License_SystemIdentifier_Error_InvalidGroupID_Description" datatype="html">
+				<source>Description: Invalid Group ID Exception</source>
+				<target>Invalid Group ID</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Member_Client_System_Error_InvalidEndpointCredentials_Description" datatype="html">
+				<source>Description: Invalid Endpoint Credentials Exception</source>
+				<target>Invalid endpoint credentials</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Member_Client_System_Error_InvalidEndpointUrl_Description" datatype="html">
+				<source>Description: Invalid Endpoint Url Exception</source>
+				<target>Invalid endpoint URL</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
