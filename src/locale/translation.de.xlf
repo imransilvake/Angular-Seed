@@ -4413,6 +4413,38 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="Management_BroadcastCreated_Form_Success_Title" datatype="html">
+				<source>Title: Broadcast Created</source>
+				<target>Systemnachricht versendet</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/broadcast.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_BroadcastCreated_Form_Success_Description" datatype="html">
+				<source>Description: Broadcast Created</source>
+				<target>Die Systemnachricht wurde erfolgreich versendet</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/broadcast.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_BroadcastCreateConfirmation_Form_Success_Title" datatype="html">
+				<source>Title: Broadcast Create Confirmation</source>
+				<target>Sicher...</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/components/broadcast/form/broadcast-form.component.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_BroadcastCreateConfirmation_Form_Success_Description" datatype="html">
+				<source>Description: Broadcast Create Confirmation</source>
+				<target>Soll die Nachricht „“ wirklich versendet werden?</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/components/broadcast/form/broadcast-form.component.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
