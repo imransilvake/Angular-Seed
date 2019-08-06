@@ -3944,6 +3944,34 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="User_List_Decline_User_Confirmation_Title" datatype="html">
+				<source>Title: Decline User Confirmation</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/components/user/list/user-list.component.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="User_List_Decline_User_Confirmation_Description" datatype="html">
+				<source>Description: Decline User Confirmation</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/components/user/list/user-list.component.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="User_List_Delete_User_Confirmation_Title" datatype="html">
+				<source>Title: Delete User Confirmation</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/components/user/list/user-list.component.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="User_List_Delete_User_Confirmation_Description" datatype="html">
+				<source>Description: Delete User Confirmation</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/components/user/list/user-list.component.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
