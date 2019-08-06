@@ -4130,6 +4130,166 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="Management_Client_HGA_General_Guest_Push_Notifications_Title" datatype="html">
+				<source>Guest Push Notifications</source>
+				<target>Guest Push Notifications</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HGA_General_Guest_Push_Notifications_Description" datatype="html">
+				<source>Send individual and automatic push notifications to your guests</source>
+				<target>Send individual and automatic push notifications to your guests</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HGA_Room_KeyCode_Title" datatype="html">
+				<source>Room Key Code</source>
+				<target>Room Key Code</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HGA_Room_KeyCode_Description" datatype="html">
+				<source>Offer your guests access to the digital room key</source>
+				<target>Offer your guests access to the digital room key</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HGA_Room_CleaningStatus_Title" datatype="html">
+				<source>Room Cleaning Status</source>
+				<target>Room Cleaning Status</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HGA_Room_CleaningStatus_Description" datatype="html">
+				<source>Guests can see if the room is in cleaning process</source>
+				<target>Guests can see if the room is in cleaning process</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HGA_Room_EmergencyButton_Title" datatype="html">
+				<source>Room Emergency Button</source>
+				<target>Room Emergency Button</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HGA_Room_EmergencyButton_Description" datatype="html">
+				<source>Offer your Guests the possibility to send an emergency message to the reception</source>
+				<target>Offer your guests the possibility to send an emergency message to the reception</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HGA_Room_RepairMessage_Title" datatype="html">
+				<source>Room Repair Message</source>
+				<target>Room Repair Message</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HGA_Room_RepairMessage_Description" datatype="html">
+				<source>Guests can inform the hotel manager about necessary room repairs</source>
+				<target>Guests can inform the hotel manager about necessary room repairs</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HGA_Hotel_HotelDeals_Title" datatype="html">
+				<source>Hotel Deals</source>
+				<target>Hotel Deals</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HGA_Hotel_HotelDeals_Description" datatype="html">
+				<source>Inform your guests about specific offers in your hotel</source>
+				<target>Inform your guests about specific offers in your hotel</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HGA_Hotel_HotelDetails_Title" datatype="html">
+				<source>Hotel Details</source>
+				<target>Hotel Details</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HGA_Hotel_HotelDetails_Description" datatype="html">
+				<source>Guests can have a direct access to all facilities of your hotel</source>
+				<target>Guests can have access to an overview of all hotel facilities</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HGA_Hotel_GuestTravelDetails_Title" datatype="html">
+				<source>Guest Travel Details</source>
+				<target>Guest Travel Details</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HGA_Hotel_GuestTravelDetails_Description" datatype="html">
+				<source>Guests can see their stay details</source>
+				<target>Guests can see their stay details</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HGA_Hotel_HotelMagazine_Title" datatype="html">
+				<source>Hotel Magazine</source>
+				<target>Hotel Magazine</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HGA_Hotel_HotelMagazine_Description" datatype="html">
+				<source>Guests can read your digital hotel magazine</source>
+				<target>Guests can read your digital hotel magazine</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HGA_Hotel_TrustYouHotelRatings_Title" datatype="html">
+				<source>TrustYou Hotel Ratings</source>
+				<target>TrustYou Hotel Ratings</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_HGA_Hotel_TrustYouHotelRatings_Description" datatype="html">
+				<source>Guest can leave a hotel rating during stay</source>
+				<target>Guests can leave a hotel rating during their stay</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
