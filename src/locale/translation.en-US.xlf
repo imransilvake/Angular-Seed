@@ -4290,6 +4290,102 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="Management_Client_App_Success_Title" datatype="html">
+				<source>Title: App Data Updated</source>
+				<target>App data updated</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_App_Success_Description" datatype="html">
+				<source>Description: App Data Updated</source>
+				<target>App data was successfully updated</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_System_Success_Title" datatype="html">
+				<source>Title: Client License &amp; System Data Updated</source>
+				<target>Licenses and system data updated</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_System_Success_Description" datatype="html">
+				<source>Description: Client License &amp; System Data Updated</source>
+				<target>Licenses and system data successfully updated</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_List_1" datatype="html">
+				<source>1 Hotel</source>
+				<target>1 hotel</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_List_2_5" datatype="html">
+				<source>2 to 5 Hotels</source>
+				<target>2 to 5 hotels</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_List_6_20" datatype="html">
+				<source>6 to 20 Hotels</source>
+				<target>6 to 20 hotels</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_List_21_50" datatype="html">
+				<source>21 to 50 Hotels</source>
+				<target>21 to 50 hotels</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_List_51_100" datatype="html">
+				<source>51 to 100 Hotels</source>
+				<target>51 to 100 hotels</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_List_101_150" datatype="html">
+				<source>101 to 150 Hotels</source>
+				<target>101 to 150 hotels</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Management_Client_License_List_151_250" datatype="html">
+				<source>151 to 250 hotels</source>
+				<target>151 to 250 hotels</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
