@@ -3972,6 +3972,62 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="HGA_Activation_Title" datatype="html">
+				<source>Title: HGA Activation Confirmation</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/components/client/form/hotel-guest-app/hotel-guest-app.component.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="HGA_Activation_Description" datatype="html">
+				<source>Description: HGA Activation Confirmation</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/components/client/form/hotel-guest-app/hotel-guest-app.component.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Push_Periodic_Notification_Delete_Title" datatype="html">
+				<source>Title: Delete Push Notification</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/push-message.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Push_Periodic_Notification_Delete_Description" datatype="html">
+				<source>Description: Delete Push Notification</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/push-message.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Push_Message_Form_Success_Updated_Title" datatype="html">
+				<source>Title: Push Message Updated</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/push-message.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Push_Message_Form_Success_Updated_Description" datatype="html">
+				<source>Description: Notification Updated</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/push-message.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Push_Message_Form_Success_Created_Title" datatype="html">
+				<source>Title: Push Message Created</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/push-message.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Push_Message_Form_Success_Created_Description" datatype="html">
+				<source>Description: Notification Created</source>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/push-message.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

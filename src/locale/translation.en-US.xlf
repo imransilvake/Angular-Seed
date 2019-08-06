@@ -4474,6 +4474,70 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="HGA_Activation_Title" datatype="html">
+				<source>Title: HGA Activation Confirmation</source>
+				<target>Sure...</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/components/client/form/hotel-guest-app/hotel-guest-app.component.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="HGA_Activation_Description" datatype="html">
+				<source>Description: HGA Activation Confirmation</source>
+				<target>Should the Hotelguest/App really be activated?</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/components/client/form/hotel-guest-app/hotel-guest-app.component.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Push_Periodic_Notification_Delete_Title" datatype="html">
+				<source>Title: Delete Push Notification</source>
+				<target>Sure...</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/push-message.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Push_Periodic_Notification_Delete_Description" datatype="html">
+				<source>Description: Delete Push Notification</source>
+				<target>Should the periodical push notification really be deleted?</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/push-message.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Push_Message_Form_Success_Updated_Title" datatype="html">
+				<source>Title: Push Message Updated</source>
+				<target>Push notification updated</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/push-message.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Push_Message_Form_Success_Updated_Description" datatype="html">
+				<source>Description: Notification Updated</source>
+				<target>Push notification was successfully updated</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/push-message.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Push_Message_Form_Success_Created_Title" datatype="html">
+				<source>Title: Push Message Created</source>
+				<target>Push notification sent</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/push-message.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Guest_Push_Message_Form_Success_Created_Description" datatype="html">
+				<source>Description: Notification Created</source>
+				<target>The push notification was sent successfully</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/modules.pck/content.mod/services/push-message.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
