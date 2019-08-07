@@ -2422,7 +2422,7 @@
 			</trans-unit>
 			<trans-unit id="Common_Button_Cancel" datatype="html">
 				<source>Button - Cancel</source>
-				<target>Stornieren</target>
+				<target>Abbrechen</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">src/app/packages/frame.pck/components/menus/account/account-menu.component.ts</context>
 					<context context-type="linenumber">1</context>
@@ -4768,6 +4768,14 @@
 				</context-group>
 				<context-group purpose="location">
 					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/components/user/form/user-form.component.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Table_Notification_Message_Repair_Title" datatype="html">
+				<source><x id="INTERPOLATION" equiv-text="{{type}}"/>: <x id="INTERPOLATION_1" equiv-text="{{name}}"/> New Repair Message from &apos;<x id="INTERPOLATION_2" equiv-text="{{room}}"/>&apos;</source>
+				<target><x id="INTERPOLATION" equiv-text="{{type}}"/>: Reparaturanfrage: Gast <x id="INTERPOLATION_1" equiv-text="{{name}}"/> meldete eine Reparaturanfrage für Zimmer &apos;<x id="INTERPOLATION_2" equiv-text="{{room}}"/>&apos;</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/shared/widgets/table/table.component.ts</context>
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
