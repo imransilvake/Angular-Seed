@@ -59,7 +59,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	public sortOrder;
 	public clearRows = [];
 	public checkAllRows = false;
-	public staticColors = ['#3b7fc4'];
+	public staticColors = ['#3b7fc4', '#9295a2'];
 
 	public currentRole;
 	public permissionLevel2 = false;
@@ -508,6 +508,11 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 							color = this.staticColors[0];
 						}
 
+						// type: REPAIR
+						if (type && type === NotificationsFiltersEnums.REPAIR) {
+							color = this.staticColors[1];
+						}
+
 						newItem = {
 							...newItem,
 							TypeRaw: type,
@@ -600,6 +605,15 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 							messageTitle = this._i18n({
 								value: `New Registration from '{{name}}'`,
 								id: 'Table_Notification_Message_Title'
+							}, {
+								name: data[index]['SendUser']
+							});
+						}
+
+						if (type && type === 'REPAIR') {
+							messageTitle = this._i18n({
+								value: `New Repair Message from '{{name}}'`,
+								id: 'Table_Notification_Message_Repair_Title'
 							}, {
 								name: data[index]['SendUser']
 							});

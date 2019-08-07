@@ -30,7 +30,8 @@
 					<p
 						class="ham-ellipses ham-type"
 						[ngStyle]="{ 'background-color' : notification && notification.Message && notification.Message.Colour }"
-						[class.ham-blue]="notification.Type === 'REG'">
+						[class.ham-blue]="notification.Type === 'REG'"
+						[class.ham-repair]="notification.Type === 'REPAIR'">
 						{{ notification.Type }}
 					</p>
 				</div>
