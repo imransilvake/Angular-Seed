@@ -612,10 +612,12 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
 						if (type && type === 'REPAIR') {
 							messageTitle = this._i18n({
-								value: `New Repair Message from '{{name}}'`,
+								value: `{{type}}: {{name}} New Repair Message from '{{room}}'`,
 								id: 'Table_Notification_Message_Repair_Title'
 							}, {
-								name: data[index]['SendUser']
+								type: data[index]['SendUserType'],
+								name: data[index]['SendUser'],
+								room: data[index]['Message'].RoomNo
 							});
 						}
 
