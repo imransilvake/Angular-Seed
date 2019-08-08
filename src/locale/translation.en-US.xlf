@@ -1420,7 +1420,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Push_Message_Form_Title_PlaceHolder" datatype="html">
 				<source>Title</source>
-				<target>Enter notification title</target>
+				<target>Enter title</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/form/guest-push-message-form.component.html</context>
 					<context context-type="linenumber">31</context>
@@ -1436,7 +1436,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Push_Message_Form_Text_PlaceHolder" datatype="html">
 				<source>Notification Description</source>
-				<target>Enter notification text</target>
+				<target>Enter text</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/form/guest-push-message-form.component.html</context>
 					<context context-type="linenumber">49</context>
@@ -1452,7 +1452,7 @@
 			</trans-unit>
 			<trans-unit id="Guest_Push_Message_Form_Link_PlaceHolder" datatype="html">
 				<source>Link</source>
-				<target>Enter an optional link</target>
+				<target>Enter link</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/content.mod/components/guest-push-message/form/guest-push-message-form.component.html</context>
 					<context context-type="linenumber">69</context>
@@ -2976,7 +2976,7 @@
 			</trans-unit>
 			<trans-unit id="Management_Client_License_Form_Company_Label" datatype="html">
 				<source>Company*</source>
-				<target>Company name</target>
+				<target>Company name*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
 					<context context-type="linenumber">8</context>
@@ -2992,7 +2992,7 @@
 			</trans-unit>
 			<trans-unit id="Management_Client_License_Form_SystemIdentifier_Label" datatype="html">
 				<source>Sys-Identifier*</source>
-				<target>System ID</target>
+				<target>System ID*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
 					<context context-type="linenumber">22</context>
@@ -3008,7 +3008,7 @@
 			</trans-unit>
 			<trans-unit id="Management_Client_License_Form_Address1_Label" datatype="html">
 				<source>Address1*</source>
-				<target>Address 1</target>
+				<target>Address 1*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
 					<context context-type="linenumber">40</context>
@@ -3040,7 +3040,7 @@
 			</trans-unit>
 			<trans-unit id="Management_Client_License_Form_Zip_Label" datatype="html">
 				<source>Zip*</source>
-				<target>ZIP</target>
+				<target>ZIP*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
 					<context context-type="linenumber">70</context>
@@ -3056,7 +3056,7 @@
 			</trans-unit>
 			<trans-unit id="Management_Client_License_Form_City_Label" datatype="html">
 				<source>City*</source>
-				<target>City</target>
+				<target>City*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
 					<context context-type="linenumber">84</context>
@@ -3072,7 +3072,7 @@
 			</trans-unit>
 			<trans-unit id="Management_Client_License_Form_Country_Label" datatype="html">
 				<source>Country*</source>
-				<target>Country</target>
+				<target>Country*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
 					<context context-type="linenumber">101</context>
@@ -3096,7 +3096,7 @@
 			</trans-unit>
 			<trans-unit id="Management_Client_License_Form_HGA_NumberOfHotels_Label" datatype="html">
 				<source>Number of Hotels</source>
-				<target>Number of hotels</target>
+				<target>Number of hotels*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
 					<context context-type="linenumber">122</context>
@@ -3136,7 +3136,7 @@
 			</trans-unit>
 			<trans-unit id="Management_Client_License_Form_HSA_NumberOfHotels_Label" datatype="html">
 				<source>Number of Hotels</source>
-				<target>Number of hotels</target>
+				<target>Number of hotels*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
 					<context context-type="linenumber">154</context>
@@ -3168,7 +3168,7 @@
 			</trans-unit>
 			<trans-unit id="Management_Client_License_Form_HSA_NumberOfUserBlocks_Label" datatype="html">
 				<source>Number of User Blocks</source>
-				<target>Number of additional user blocks</target>
+				<target>Additional 9 user block</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/management.mod/components/client/form/license/license.component.html</context>
 					<context context-type="linenumber">183</context>
@@ -4410,7 +4410,7 @@
 			</trans-unit>
 			<trans-unit id="Management_Client_License_System_Success_Title" datatype="html">
 				<source>Title: Client License &amp; System Data Updated</source>
-				<target>Licenses and system data updated</target>
+				<target>Data saved</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
 					<context context-type="linenumber">1</context>
@@ -4418,7 +4418,7 @@
 			</trans-unit>
 			<trans-unit id="Management_Client_License_System_Success_Description" datatype="html">
 				<source>Description: Client License &amp; System Data Updated</source>
-				<target>Licenses and system data successfully updated</target>
+				<target>The data was saved successfully</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">src/app/packages/modules.pck/management.mod/services/client.service.ts</context>
 					<context context-type="linenumber">1</context>
