@@ -585,7 +585,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Login_Form_Username_Label" datatype="html">
 				<source>Username*</source>
-				<target>User Name / Email*</target>
+				<target>User name / Email*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/login/login.component.html
@@ -625,7 +625,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Login_Form_Remember_Text" datatype="html">
 				<source>Remember Me</source>
-				<target>Remember me</target>
+				<target>Remember login</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/login/login.component.html
@@ -731,7 +731,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_ForgotPassword_Form_LastName_Label" datatype="html">
 				<source>Last Name*</source>
-				<target>Last Name*</target>
+				<target>Last name*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/forgot-password/forgot-password.component.html
@@ -953,7 +953,7 @@
 			</trans-unit>
 			<trans-unit id="Member_Profile_UpdateProfile_Form_LastName_Label" datatype="html">
 				<source>Last Name*</source>
-				<target>Last Name*</target>
+				<target>Last name*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/update-profile/update-profile.component.html</context>
 					<context context-type="linenumber">48</context>
@@ -1041,7 +1041,7 @@
 			</trans-unit>
 			<trans-unit id="Member_Profile_ChangePassword_Form_Current_Password_Label" datatype="html">
 				<source>Current Password*</source>
-				<target>Current password</target>
+				<target>Current password*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/change-password/change-password.component.html</context>
 					<context context-type="linenumber">14</context>
@@ -1057,7 +1057,7 @@
 			</trans-unit>
 			<trans-unit id="Member_Profile_ChangePassword_Form_New_Password_Label" datatype="html">
 				<source>New Password*</source>
-				<target>New password</target>
+				<target>New password*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/change-password/change-password.component.html</context>
 					<context context-type="linenumber">34</context>
@@ -1073,7 +1073,7 @@
 			</trans-unit>
 			<trans-unit id="Member_Profile_ChangePassword_Form_Confirm_New_Password_Label" datatype="html">
 				<source>Confirm New Password*</source>
-				<target>Confirm password</target>
+				<target>Confirm password*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/change-password/change-password.component.html</context>
 					<context context-type="linenumber">49</context>
@@ -1081,7 +1081,7 @@
 			</trans-unit>
 			<trans-unit id="Member_Profile_ChangePassword_Form_Confirm_New_Password_PlaceHolder" datatype="html">
 				<source>Confirm New Password</source>
-				<target>Enter new password</target>
+				<target>Confirm password</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/change-password/change-password.component.html</context>
 					<context context-type="linenumber">56</context>
@@ -4773,6 +4773,22 @@
 				<target><x id="INTERPOLATION" equiv-text="{{type}}"/>: Repair request: Guest <x id="INTERPOLATION_1" equiv-text="{{name}}"/> reported a repair for room &apos;<x id="INTERPOLATION_2" equiv-text="{{room}}"/>&apos;</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">src/app/shared/widgets/table/table.component.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Language_French" datatype="html">
+				<source>French</source>
+				<target>French</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Language_Spanish" datatype="html">
+				<source>Spanish</source>
+				<target>Spanish</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>

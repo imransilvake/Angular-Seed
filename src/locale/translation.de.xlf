@@ -1042,7 +1042,7 @@
 			</trans-unit>
 			<trans-unit id="Member_Profile_ChangePassword_Form_Current_Password_Label" datatype="html">
 				<source>Current Password*</source>
-				<target>Aktuelles Passwort</target>
+				<target>Aktuelles Passwort*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/change-password/change-password.component.html</context>
 					<context context-type="linenumber">14</context>
@@ -1058,7 +1058,7 @@
 			</trans-unit>
 			<trans-unit id="Member_Profile_ChangePassword_Form_New_Password_Label" datatype="html">
 				<source>New Password*</source>
-				<target>Neues Passwort</target>
+				<target>Neues Passwort*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/change-password/change-password.component.html</context>
 					<context context-type="linenumber">34</context>
@@ -1074,7 +1074,7 @@
 			</trans-unit>
 			<trans-unit id="Member_Profile_ChangePassword_Form_Confirm_New_Password_Label" datatype="html">
 				<source>Confirm New Password*</source>
-				<target>Wiederhole Passwort</target>
+				<target>Wiederhole Passwort*</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/change-password/change-password.component.html</context>
 					<context context-type="linenumber">49</context>
@@ -1082,7 +1082,7 @@
 			</trans-unit>
 			<trans-unit id="Member_Profile_ChangePassword_Form_Confirm_New_Password_PlaceHolder" datatype="html">
 				<source>Confirm New Password</source>
-				<target>Neues Passwort eingeben</target>
+				<target>Passwort erneut eingeben</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/change-password/change-password.component.html</context>
 					<context context-type="linenumber">56</context>
@@ -4776,6 +4776,22 @@
 				<target><x id="INTERPOLATION" equiv-text="{{type}}"/>: Reparaturanfrage: Gast <x id="INTERPOLATION_1" equiv-text="{{name}}"/> meldete eine Reparaturanfrage für Zimmer &apos;<x id="INTERPOLATION_2" equiv-text="{{room}}"/>&apos;</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">src/app/shared/widgets/table/table.component.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Language_French" datatype="html">
+				<source>French</source>
+				<target>Französisch</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
+					<context context-type="linenumber">1</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Language_Spanish" datatype="html">
+				<source>Spanish</source>
+				<target>Spanisch</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">src/app/packages/utilities.pck/accessories.mod/services/utility.service.ts</context>
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
