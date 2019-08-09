@@ -241,6 +241,24 @@ export class GuestOffersFormComponent implements OnInit, OnDestroy {
 				}
 			});
 
+		// listen: redeem
+		this.redeem.valueChanges
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => {
+				if (res) {
+					this.barCode.setValue(false);
+				}
+			});
+
+		// listen: barCode
+		this.barCode.valueChanges
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(res => {
+				if (res) {
+					this.redeem.setValue(false);
+				}
+			});
+
 		let payload;
 		switch (this.currentRole) {
 			case this.roleAdmin:
