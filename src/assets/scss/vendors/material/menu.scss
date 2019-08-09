@@ -106,6 +106,10 @@
 						&.ham-repair {
 							background-color: cd-palette($cd-background, 2004);
 						}
+
+						&.ham-alert {
+							background-color: cd-palette($cd-background, 2010);
+						}
 					}
 				}
 			}

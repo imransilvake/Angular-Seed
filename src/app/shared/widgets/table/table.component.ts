@@ -59,7 +59,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	public sortOrder;
 	public clearRows = [];
 	public checkAllRows = false;
-	public staticColors = ['#3b7fc4', '#9295a2'];
+	public staticColors = ['#3b7fc4', '#9295a2', '#dc3545'];
 
 	public currentRole;
 	public permissionLevel2 = false;
@@ -513,6 +513,11 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 							color = this.staticColors[1];
 						}
 
+						// type: ALERT
+						if (type && type === NotificationsFiltersEnums.ALERT) {
+							color = this.staticColors[2];
+						}
+
 						newItem = {
 							...newItem,
 							TypeRaw: type,
@@ -618,6 +623,16 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 								type: data[index]['SendUserType'],
 								name: data[index]['SendUser'],
 								room: data[index]['Message'].RoomNo
+							});
+						}
+
+						if (type && type === 'ALERT') {
+							messageTitle = this._i18n({
+								value: `Emergency Button: Room '{{room}}' / Guest: {{name}}`,
+								id: 'Table_Notification_Message_Emergency_Title'
+							}, {
+								room: data[index]['Message'].RoomNo,
+								name: data[index]['SendUser']
 							});
 						}
 
