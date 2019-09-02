@@ -1,16 +1,4 @@
 <section class="ham-sidebar-primary">
-	<!-- Hotel Select -->
-	<div class="ham-select" [class.ham-hide]="!drawerState">
-		<app-select
-			[selectType]="hotelGroupSelectType"
-			[selectId]="'sidenav-hotel-group-list-id'"
-			selectPlaceHolder="Select Hotel / Group"
-			i18n-selectPlaceHolder="@@Frame_Hotel_Group_List_PlaceHolder"
-			[dataGroups]="hotelGroupList"
-			[control]="hotelByGroupList">
-		</app-select>
-	</div>
-
 	<!-- Tree -->
 	<mat-tree class="ham-tree-primary" [dataSource]="sidebarMenuList" [treeControl]="treeControl">
 		<!-- Expandable Node -->
@@ -43,7 +31,6 @@
 			matTreeNodePadding>
 			<h6 class="ham-label" *ngIf="node.section">{{node.section}}</h6>
 			<a class="ham-blank"
-			   *ngIf="filterMenuListByRole(node.name)"
 			   [target]="node.externalIcon ? '_blank' : null"
 			   mat-button
 			   matTreeNodeToggle

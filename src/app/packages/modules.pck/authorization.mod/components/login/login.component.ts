@@ -8,14 +8,11 @@ import { takeUntil } from 'rxjs/operators';
 // app
 import { ROUTING } from '../../../../../../environments/environment';
 import { ValidationService } from '../../../../core.pck/fields.mod/services/validation.service';
-import { UtilityService } from '../../../../utilities.pck/accessories.mod/services/utility.service';
-import { SelectTypeEnum } from '../../../../core.pck/fields.mod/enums/select-type.enum';
 import { SelectDefaultInterface } from '../../../../core.pck/fields.mod/interfaces/select-default-interface';
 import { LoadingAnimationService } from '../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { AuthLoginInterface } from '../../interfaces/auth-login.interface';
 import { AuthService } from '../../services/auth.service';
 import { HelperService } from '../../../../utilities.pck/accessories.mod/services/helper.service';
-import { AppOptions } from '../../../../../../app.config';
 
 @Component({
 	selector: 'app-login',
@@ -26,7 +23,6 @@ import { AppOptions } from '../../../../../../app.config';
 export class LoginComponent implements OnInit, OnDestroy {
 	public routing = ROUTING;
 	public formFields;
-	public loginHotelNameSelectType = SelectTypeEnum.DEFAULT;
 	public languageList: SelectDefaultInterface[] = [];
 	public errorMessage;
 
@@ -34,13 +30,11 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private _loadingAnimationService: LoadingAnimationService,
-		private _utilityService: UtilityService,
 		private _authService: AuthService,
 		private _route: ActivatedRoute
 	) {
 		// form group
 		this.formFields = new FormGroup({
-			languageName: new FormControl(''),
 			email: new FormControl('', [
 				Validators.required,
 				ValidationService.emailValidator
@@ -54,25 +48,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
-		// set language list
-		this.languageList = this._utilityService.getAuthLanguageList();
-
-		// listen: language state (default: english)
-		this._route.url
-			.pipe(takeUntil(this._ngUnSubscribe))
-			.subscribe(res => {
-				if (res && (res[0].path === AppOptions.languages['en'] || res[0].path === AppOptions.languages['de'])) {
-					this.languageName.setValue(res[0].path);
-				} else {
-					this.languageName.setValue(AppOptions.languages['de']);
-				}
-			});
-
-		// listen: language event
-		this.languageName.valueChanges
-			.pipe(takeUntil(this._ngUnSubscribe))
-			.subscribe(url => location.href = url);
-
 		// listen: error message
 		this._authService.errorMessage
 			.pipe(takeUntil(this._ngUnSubscribe))
@@ -88,10 +63,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 	/**
 	 * getters
 	 */
-	get languageName() {
-		return this.formFields.get('languageName');
-	}
-
 	get email() {
 		return this.formFields.get('email');
 	}

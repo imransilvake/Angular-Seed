@@ -34,22 +34,6 @@ const ROUTES: Routes = [
 					{
 						path: ROUTING.pages.dashboard,
 						component: DashboardComponent
-					},
-					{
-						path: ROUTING.member.title,
-						loadChildren: () => import('./packages/modules.pck/member.mod/member.module').then(m => m.MemberModule)
-					},
-					{
-						path: ROUTING.content.title,
-						loadChildren: () => import('./packages/modules.pck/content.mod/content.module').then(m => m.ContentModule)
-					},
-					{
-						path: ROUTING.notifications.title,
-						loadChildren: () => import('./packages/modules.pck/notification.mod/notification.module').then(m => m.NotificationModule)
-					},
-					{
-						path: ROUTING.management.title,
-						loadChildren: () => import('./packages/modules.pck/management.mod/management.module').then(m => m.ManagementModule)
 					}
 				],
 				canActivateChild: [AuthUserStatusGuard]

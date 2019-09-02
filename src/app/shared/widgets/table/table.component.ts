@@ -2,15 +2,12 @@
 import { Component, ElementRef, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { FormControl, FormGroup } from '@angular/forms';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Subject } from 'rxjs';
 import { debounceTime, delay, takeUntil } from 'rxjs/operators';
 import { I18n } from '@ngx-translate/i18n-polyfill';
-import { Router } from '@angular/router';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 // app
-import { ROUTING } from '../../../../environments/environment';
-import { faBan, faEllipsisV, faPauseCircle, faPlayCircle } from '@fortawesome/free-solid-svg-icons';
 import { ProxyService } from '../../../packages/core.pck/proxy.mod/services/proxy.service';
 import { AppOptions, AppServices } from '../../../../app.config';
 import { HelperService } from '../../../packages/utilities.pck/accessories.mod/services/helper.service';
@@ -18,8 +15,7 @@ import { UtilityService } from '../../../packages/utilities.pck/accessories.mod/
 import { AuthService } from '../../../packages/modules.pck/authorization.mod/services/auth.service';
 import { DialogTypeEnum } from '../../../packages/utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { DialogService } from '../../../packages/utilities.pck/dialog.mod/services/dialog.service';
-import { NotificationsFiltersEnums } from '../../../packages/modules.pck/notification.mod/enums/notifications-filters.enums';
-import { SidebarService } from '../../../packages/frame.pck/services/sidebar.service';
+import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
 	selector: 'app-table',
@@ -49,7 +45,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	@ViewChild(MatSort, { static: true }) sort: MatSort;
 	@ViewChild('filterInput', { static: false }) filterInput: ElementRef;
 
-	public faIcons = [faPlayCircle, faPauseCircle, faBan, faEllipsisV];
+	public faIcons = [faEllipsisV];
 	public allColumns = [];
 	public formFields;
 	public dataSource;
@@ -59,22 +55,14 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	public sortOrder;
 	public clearRows = [];
 	public checkAllRows = false;
-	public staticColors = ['#3b7fc4', '#9295a2', '#dc3545'];
-
-	public currentRole;
-	public permissionLevel2 = false;
-	public permissionLevel4 = false;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
-		private _router: Router,
 		private _proxyService: ProxyService,
 		private _utilityService: UtilityService,
-		private _helperService: HelperService,
 		private _authService: AuthService,
 		private _dialogService: DialogService,
-		private _sidebarService: SidebarService,
 		private _i18n: I18n
 	) {
 		// form group
@@ -85,13 +73,6 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	}
 
 	ngOnInit() {
-		// set current role
-		this.currentRole = this._sidebarService.appState.role;
-		if (this.currentRole) {
-			this.permissionLevel2 = this._helperService.permissionLevel2(this.currentRole);
-			this.permissionLevel4 = this._helperService.permissionLevel4(this.currentRole);
-		}
-
 		// add additional columns
 		this.allColumns = this.tableColumns.concat(this.tableAdditionalColumns);
 
@@ -456,7 +437,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 	 */
 	private mapData(data, init?: boolean) {
 		if (data) {
-			data.forEach((item, index) => {
+			data.forEach(item => {
 				const id = this.tableResources.uniqueID;
 				if (!this.dataSource.data.some(row => row[id] === item[id])) {
 					const language = this._authService.currentUserState.profile.language;
@@ -489,81 +470,6 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 						}
 					}
 
-					// Role
-					if (item.hasOwnProperty('Role')) {
-						const role = item.Role ? HelperService.capitalizeString(item.Role.replace(/_/g, ' ').toLowerCase()) : '-';
-						newItem = {
-							...newItem,
-							Role: role
-						};
-					}
-
-					// Type
-					if (item.hasOwnProperty('Type')) {
-						const type = item.Type;
-						let color =  data[index]['Message'] && data[index]['Message'].Colour;
-
-						// type: REG
-						if (type && type === NotificationsFiltersEnums.REGISTRATIONS) {
-							color = this.staticColors[0];
-						}
-
-						// type: REPAIR
-						if (type && type === NotificationsFiltersEnums.REPAIR) {
-							color = this.staticColors[1];
-						}
-
-						// type: ALERT
-						if (type && type === NotificationsFiltersEnums.ALERT) {
-							color = this.staticColors[2];
-						}
-
-						newItem = {
-							...newItem,
-							TypeRaw: type,
-							Type: `<span>${type}</span>`,
-							Color: color
-						};
-					}
-
-					// Hotels
-					if (item.hasOwnProperty('HotelIDs')) {
-						let hotels = [];
-						if (item && item.HotelIDs && typeof item.HotelIDs !== 'string') {
-							item.HotelIDs.forEach(hotel => {
-								if (hotel.split('_')[1]) {
-									hotels.push(this._utilityService.hotelList[hotel]);
-								}
-							});
-						}
-
-						// remove hotel label
-						hotels = hotels && hotels.length && hotels.map(hotel => hotel.split(' - ')[1]);
-
-						newItem = {
-							...newItem,
-							Hotels: hotels && hotels.length ? hotels.join(', ') : 'ALL'
-						};
-					}
-
-					// Create Date
-					if (item.hasOwnProperty('CreateDate')) {
-						const date = item.CreateDate ? HelperService.getDateTime(language, item.CreateDate) : '-';
-						newItem = {
-							...newItem,
-							'Reg. Date': date
-						};
-					}
-
-					// Login Date
-					if (item.hasOwnProperty('LoginDate')) {
-						const date = item.LoginDate ? HelperService.getDateTime(language, item.LoginDate) : '-';
-						newItem = {
-							...newItem,
-							'Last Login': date
-						};
-					}
-
 					// Date
 					if (item.hasOwnProperty('Date')) {
 						const date = item.Date ? HelperService.getDateTime(language, item.Date) : '-';
@@ -571,156 +477,6 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 							...newItem,
 							'Date': date
 						};
-					}
-
-					// Creator
-					if (item.hasOwnProperty('Creator')) {
-						newItem = {
-							...newItem,
-							Creator: item.Creator ? item.Creator : '-'
-						};
-					}
-
-					// Received
-					if (item.hasOwnProperty('Received')) {
-						const date = item.Received ? HelperService.getDateFromNow(language, item.Received) : '-';
-						newItem = {
-							...newItem,
-							Received: date
-						};
-					}
-
-					// Confirm Date
-					if (item.hasOwnProperty('ConfirmDate')) {
-						const date = item.ConfirmDate ? HelperService.getDateFromNow(language, item.ConfirmDate) : '-';
-						newItem = {
-							...newItem,
-							ConfirmDate: date,
-							Notification: true
-						};
-					}
-
-					// Message
-					if (item.hasOwnProperty('Message')) {
-						let messageTitle = item.Message ? item.Message.Title : '-';
-						const type = data && data[index]['Type'];
-
-						// type: REG
-						if (type && type === 'REG') {
-							messageTitle = this._i18n({
-								value: `New Registration from '{{name}}'`,
-								id: 'Table_Notification_Message_Title'
-							}, {
-								name: data[index]['SendUser']
-							});
-						}
-
-						if (type && type === 'REPAIR') {
-							messageTitle = this._i18n({
-								value: `{{type}}: {{name}} New Repair Message from '{{room}}'`,
-								id: 'Table_Notification_Message_Repair_Title'
-							}, {
-								type: data[index]['SendUserType'],
-								name: data[index]['SendUser'],
-								room: data[index]['Message'].RoomNo
-							});
-						}
-
-						if (type && type === 'ALERT') {
-							messageTitle = this._i18n({
-								value: `Emergency Button: Room '{{room}}' / Guest: {{name}}`,
-								id: 'Table_Notification_Message_Emergency_Title'
-							}, {
-								room: data[index]['Message'].RoomNo,
-								name: data[index]['SendUser']
-							});
-						}
-
-						newItem = {
-							...newItem,
-							Message: messageTitle
-						};
-					}
-
-					// Sent Date
-					if (item.hasOwnProperty('SendDate')) {
-						const date = item.SendDate ? HelperService.getDateTime(language, item.SendDate) : '-';
-						newItem = {
-							...newItem,
-							Sent: date
-						};
-					}
-
-					// Target Group
-					if (item.hasOwnProperty('Targets')) {
-						const targets = item.Targets ? item.Targets.join(', ') : '-';
-						newItem = {
-							...newItem,
-							'Target Group': targets
-						};
-					}
-
-					// Period
-					if (item.hasOwnProperty('Trigger')) {
-						const period = item.Trigger ? this._utilityService.getGuestPeriods().filter(periodItem => periodItem.id === item.Trigger)[0].text : '-';
-						newItem = {
-							...newItem,
-							Period: period
-						};
-					}
-
-					// Validity
-					if (item.hasOwnProperty('ExpDate')) {
-						const createDate = data[index].CreateDate ? HelperService.getDate(language, data[index].CreateDate) : '-';
-						const expDate = item.ExpDate ? HelperService.getDate(language, item.ExpDate) : '-';
-
-						newItem = {
-							...newItem,
-							Validity: `${createDate} - ${expDate}`
-						};
-					}
-
-					// module: content
-					if (
-						this._router.url === `/${ ROUTING.content.routes.guestPushMessage }` ||
-						this._router.url === `/${ ROUTING.content.routes.guestOffers }` ||
-						this._router.url === `/${ ROUTING.content.routes.guestRepairs }`
-					) {
-						// Title
-						if (item.hasOwnProperty('Title')) {
-							newItem = {
-								...newItem,
-								Title: item.Title[language],
-								Titles: item.Title,
-								Guest: true
-							};
-						}
-
-						// Data
-						if (item.hasOwnProperty('Data')) {
-							const image = item.Data && item.Data.Image ? item.Data.Image : 'N/A';
-							if (image && image.length > 20) {
-								const imagePromise = this.getImageSrc(image);
-								newItem = {
-									...newItem,
-									Image: imagePromise
-								};
-							} else {
-								newItem = {
-									...newItem,
-									Image: image
-								};
-							}
-						}
-
-						// Category
-						if (item.hasOwnProperty('Name')) {
-							newItem = {
-								...newItem,
-								Category: item.Name[language],
-								Name: item.Name
-							};
-						}
 					}
 
 					// update data source

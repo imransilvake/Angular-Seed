@@ -43,15 +43,11 @@
 						{{ column }}
 					</ng-container>
 				</th>
-				<td
-					mat-cell
-					*matCellDef="let element"
-					[class.ham-notifications]="element['ConfirmDate'] && !(element['ConfirmDate'] && element['ConfirmUser'])"
-					[class.ham-hotels]="column === 'Hotels'">
+				<td mat-cell *matCellDef="let element">
 					<ng-container [ngSwitch]="column">
 						<!-- Order -->
 						<ng-container *ngSwitchCase="'Order'">
-							<fa-icon class="ham-icon ham-small" [icon]="faIcons[3]"></fa-icon>
+							<fa-icon class="ham-icon ham-small" [icon]="faIcons[0]"></fa-icon>
 						</ng-container>
 
 						<!-- Clear -->
@@ -89,19 +85,6 @@
 							</ng-container>
 						</ng-container>
 
-						<!-- Status -->
-						<ng-container *ngSwitchCase="'Status'">
-							<ng-container *ngIf="element['State'] === 'ACTIVE'">
-								<fa-icon class="ham-icon ham-large ham-green" [icon]="faIcons[0]"></fa-icon>
-							</ng-container>
-							<ng-container *ngIf="element['State'] === 'INACTIVE'">
-								<fa-icon class="ham-icon ham-large ham-orange" [icon]="faIcons[1]"></fa-icon>
-							</ng-container>
-							<ng-container *ngIf="element['State'] === 'EXPIRED'">
-								<fa-icon class="ham-icon ham-large ham-grey" [icon]="faIcons[2]"></fa-icon>
-							</ng-container>
-						</ng-container>
-
 						<!-- Rest -->
 						<ng-container *ngSwitchDefault>
 							<ng-container [ngSwitch]="validateType(element[column])">
@@ -120,11 +103,7 @@
 
 								<!-- Text -->
 								<ng-container *ngSwitchDefault>
-									<span
-										[class.ham-td-bg]="column === 'Type'"
-										[ngStyle]="{ 'background-color': column === 'Type' ? element['Color'] : null }"
-										[innerHTML]="element[column]">
-									</span>
+									<span [innerHTML]="element[column]"></span>
 								</ng-container>
 							</ng-container>
 						</ng-container>
@@ -136,25 +115,7 @@
 			<ng-container *ngFor="let column of tableAdditionalColumns; let idx=index" matColumnDef="{{ column }}">
 				<th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="!tableSorting[tableSorting.length - 1]">{{ column }}</th>
 				<td mat-cell *matCellDef="let element">
-					<!-- Notification | without buttons -->
-					<ng-container *ngIf="!!element['Notification'] && !!element['ConfirmUser']">
-						<p><span>{{ element['ConfirmDate'] }}</span> (<span>{{ element['ConfirmUser'] }}</span>)</p>
-					</ng-container>
-
-					<!-- Rest -->
-					<ng-container *ngIf="!(!!element['Notification'] && !!element['ConfirmUser'])">
-						<!-- Guest State -->
-						<ng-container *ngIf="!!element['Guest'] && ((element['Access'] === 'HOTEL' && permissionLevel4) || permissionLevel2)">
-							<ng-container *ngTemplateOutlet="tableTemplateRef[idx]"></ng-container>
-						</ng-container>
-
-						<!-- Rest -->
-						<ng-container *ngIf="!(!!element['Guest'])">
-							<ng-container *ngIf="column !== 'Visit' || column === 'Visit' && element['TypeRaw'] !== 'ALERT'">
-								<ng-container *ngTemplateOutlet="tableTemplateRef[idx]"></ng-container>
-							</ng-container>
-						</ng-container>
-					</ng-container>
+					<ng-container *ngTemplateOutlet="tableTemplateRef[idx]"></ng-container>
 				</td>
 			</ng-container>
 

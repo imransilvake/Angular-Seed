@@ -3,15 +3,6 @@
 .ham-header {
 	box-shadow: 1px 1px 15px cd-palette($cd-shadow, 4000, .4);
 
-	&:not(.ham-emergency) {
-		background-color: cd-palette($cd-background, 2003);
-		color: cd-palette($cd-color, 1004);
-	}
-
-	&.ham-emergency {
-		background-color: cd-palette($cd-background, 2010);
-	}
-
 	.cd-row {
 		padding: 15px 0;
 
@@ -72,12 +63,6 @@
 								transform: scale(0);
 							}
 						}
-
-						&.ham-icon-emergency {
-							&::before, &::after, div {
-								background-color: cd-palette($cd-background, 2001);
-							}
-						}
 					}
 
 					button {
@@ -96,12 +81,6 @@
 				button {
 					color: cd-palette($cd-color, 1004);
 					min-width: 48px;
-
-					&.ham-emergency-btn {
-						background-color: cd-palette($cd-background, 2006);
-						color: cd-palette($cd-color, 1001);
-						margin-right: 10px;
-					}
 				}
 			}
 		}

@@ -9,14 +9,11 @@ import { FooterComponent } from './components/footer/footer.component';
 import { NotificationModule } from '../utilities.pck/notification.mod/notification.module';
 import { ScrollTopComponent } from './components/scroll-top/scroll-top.component';
 import { PrimarySidebarComponent } from './components/sidebar/primary/primary-sidebar.component';
-import { NotificationMenuComponent } from './components/menus/notification/notification-menu.component';
 import { AccountMenuComponent } from './components/menus/account/account-menu.component';
 import { WidgetsModule } from '../../shared/widgets/widgets.module';
 import { HeadComponent } from './components/content/head/head.component';
 import { BreadcrumbModule } from '../utilities.pck/breadcrumb.mod/breadcrumb.module';
-import { EmergencyService } from './services/emergency.service';
 import { FieldsModule } from '../core.pck/fields.mod/fields.module';
-import { MenuService } from './services/menu.service';
 import { PageHintService } from './services/page-hint.service';
 
 @NgModule({
@@ -33,7 +30,6 @@ import { PageHintService } from './services/page-hint.service';
 		FooterComponent,
 		ScrollTopComponent,
 		PrimarySidebarComponent,
-		NotificationMenuComponent,
 		AccountMenuComponent,
 		HeadComponent
 	],
@@ -44,11 +40,7 @@ import { PageHintService } from './services/page-hint.service';
 		PrimarySidebarComponent,
 		HeadComponent
 	],
-	providers: [
-		EmergencyService,
-		MenuService,
-		PageHintService
-	]
+	providers: [PageHintService]
 })
 
 export class FrameModule {

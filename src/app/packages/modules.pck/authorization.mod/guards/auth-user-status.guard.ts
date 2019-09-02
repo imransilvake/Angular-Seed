@@ -19,7 +19,6 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 		private _authService: AuthService
 	) {
 		this.authRoutes = [
-			ROUTING.authorization.routes.register,
 			ROUTING.authorization.routes.login,
 			ROUTING.authorization.routes.reset,
 			ROUTING.authorization.routes.forgot

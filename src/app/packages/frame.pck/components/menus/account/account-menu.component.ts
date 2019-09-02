@@ -12,7 +12,6 @@ import { ROUTING } from '../../../../../../environments/environment';
 import { DialogTypeEnum } from '../../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { DialogService } from '../../../../utilities.pck/dialog.mod/services/dialog.service';
 import { LoadingAnimationService } from '../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
-import { MemberService } from '../../../../modules.pck/member.mod/services/member.service';
 
 @Component({
 	selector: 'app-menu-account',
@@ -32,7 +31,6 @@ export class AccountMenuComponent implements OnInit, OnDestroy {
 	constructor(
 		private _loadingAnimationService: LoadingAnimationService,
 		private _authService: AuthService,
-		private _memberService: MemberService,
 		private _dialogService: DialogService,
 		private _i18n: I18n
 	) {
@@ -42,11 +40,6 @@ export class AccountMenuComponent implements OnInit, OnDestroy {
 		this.currentUser = this._authService.currentUserState; // get current user state
 		this.userName = HelperService.capitalizeString(this.currentUser.profile.name); // get user name
 		this.userNameLetters = HelperService.getFirstLetter(this.userName); // get first letters of name
-
-		// listen: on new image upload
-		this._memberService.profileImageUpdate
-			.pipe(takeUntil(this._ngUnSubscribe))
-			.subscribe(() => this.currentUser = this._authService.currentUserState);
 	}
 
 	ngOnDestroy() {

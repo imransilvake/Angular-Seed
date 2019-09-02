@@ -18,17 +18,6 @@
 				<h3 i18n="@@Auth_Login_Form_Title">Login</h3>
 				<div class="cd-row">
 					<div class="cd-col">
-						<app-select
-							[selectType]="loginHotelNameSelectType"
-							[selectId]="'login-language-id'"
-							selectPlaceHolder="Language"
-							i18n-selectPlaceHolder="@@Auth_Login_Form_Language_PlaceHolder"
-							[dataDefault]="languageList"
-							[control]="languageName">
-						</app-select>
-					</div>
-
-					<div class="cd-col">
 						<app-input
 							[showLabel]="true"
 							labelName="Username*"
@@ -77,11 +66,6 @@
 						</div>
 
 						<p *ngIf="errorMessage">{{errorMessage}}</p>
-					</div>
-
-					<!-- Note -->
-					<div class="cd-col">
-						<p i18n="@@Auth_Login_Form_Note">Don't have an account? <a [routerLink]="['/' + routing.authorization.routes.register]">Register</a></p>
 					</div>
 				</div>
 			</form>

@@ -15,7 +15,6 @@ import * as SessionActions from '../../../core.pck/session.mod/store/actions/ses
 import { AppOptions, AppServices, LocalStorageItems, SessionStorageItems } from '../../../../../app.config';
 import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service';
 import { AuthForgotInterface } from '../interfaces/auth-forgot.interface';
-import { AuthRegisterInterface } from '../interfaces/auth-register.interface';
 import { AuthLoginInterface } from '../interfaces/auth-login.interface';
 import { AuthResetInterface } from '../interfaces/auth-reset.interface';
 import { StorageTypeEnum } from '../../../core.pck/storage.mod/enums/storage-type.enum';
@@ -65,58 +64,6 @@ export class AuthService {
 			this._storageService.get(LocalStorageItems.userState, StorageTypeEnum.PERSISTANT) ||
 			this._storageService.get(SessionStorageItems.userState, StorageTypeEnum.SESSION)
 		);
-	}
-
-	/**
-	 * perform registration process
-	 *
-	 * @param formPayload
-	 * @param formFields
-	 */
-	public authRegister(formPayload: AuthRegisterInterface, formFields: FormGroup) {
-		this._proxyService
-			.postAPI(AppServices['Auth']['Register'], { bodyParams: formPayload })
-			.subscribe(() => {
-				// clear the form
-				formFields.reset();
-
-				// stop loading animation
-				this._loadingAnimationService.stopLoadingAnimation();
-
-				// dialog payload
-				const data = {
-					type: DialogTypeEnum.NOTICE,
-					payload: {
-						icon: 'dialog_email',
-						title: this._i18n({ value: 'Title: Success', id: 'Auth_Register_Form_Success_Title' }),
-						message: this._i18n({ value: 'Description: Success', id: 'Auth_Register_Form_Success_Description' }),
-						buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-					}
-				};
-
-				// dialog service
-				this._dialogService
-					.showDialog(data)
-					.subscribe(() =>
-						this._router.navigate([ROUTING.authorization.routes.login]).then()
-					);
-			}, (err: HttpErrorResponse) => {
-				if (err.error.detail.code === 'UsernameExistsException') {
-					const message = this._i18n({
-						value: 'Description: Username Exists Exception',
-						id: 'Auth_Register_Error_UsernameExistsException_Description'
-					});
-
-					// set field to show error message
-					formFields.get('email').setErrors({ backendError: true, text: message });
-
-					// message
-					this.errorMessage.emit(message);
-				}
-
-				// stop loading animation
-				this._loadingAnimationService.stopLoadingAnimation();
-			});
 	}
 
 	/**
@@ -181,14 +128,6 @@ export class AuthService {
 									role: role
 								};
 								this.initAppState(asPayload);
-
-								// update last request time
-								const lrtPayload = {
-									hotelId: hotelIds[0] === 'ANY' ? 'All' : hotelIds[0],
-									groupId: groupId,
-									email: formPayload.username
-								};
-								this.updateNotificationLRTOnWeb(lrtPayload);
 							});
 					});
 				}
@@ -511,25 +450,5 @@ export class AuthService {
 		const storageItem = this.currentUserState.rememberMe ? LocalStorageItems.appState : SessionStorageItems.appState;
 		const storageType = this.currentUserState.rememberMe ? StorageTypeEnum.PERSISTANT : StorageTypeEnum.SESSION;
 		this._storageService.put(storageItem, appStatePayload, storageType);
-	}
-
-	/**
-	 * update last request time on web storage
-	 *
-	 * @param payload
-	 */
-	private updateNotificationLRTOnWeb(payload: any) {
-		// validate last request time
-		let lastRequestTime = this.currentUserState.profile['custom:last_request_time'];
-		if (!lastRequestTime) {
-			lastRequestTime = HelperService.getUTCDate(
-				moment().subtract(1, 'year')
-			);
-		}
-
-		// update last request time to browser storage
-		const storageType = this.currentUserState.rememberMe ? StorageTypeEnum.PERSISTANT : StorageTypeEnum.SESSION;
-		const storageItemNotification = this.currentUserState.rememberMe ? LocalStorageItems.notificationState : SessionStorageItems.notificationState;
-		this._storageService.put(storageItemNotification, lastRequestTime, storageType);
 	}
 }
