@@ -3,7 +3,10 @@ import { EnvironmentRoutes } from './environment-routes';
 
 // dev environment
 export const environment = {
-	production: false
+	production: false,
+	mapBox: {
+		accessToken: 'YOUR_TOKEN'
+	}
 };
 
 export const APP_URL = 'http://localhost:1500';
