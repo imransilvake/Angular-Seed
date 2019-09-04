@@ -43,8 +43,10 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 								}
 								break;
 							case 'FAIL':
-								// logout user
-								this._authService.authLogoutUser();
+								if (!this.authRoutes.includes(currentPath)) {
+									// logout user
+									this._authService.authLogoutUser();
+								}
 								break;
 						}
 					} else {
