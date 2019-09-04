@@ -14,9 +14,7 @@ import * as moment from 'moment';
 import * as SessionActions from '../../../core.pck/session.mod/store/actions/session.actions';
 import { AppOptions, AppServices, LocalStorageItems, SessionStorageItems } from '../../../../../app.config';
 import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service';
-import { AuthForgotInterface } from '../interfaces/auth-forgot.interface';
 import { AuthLoginInterface } from '../interfaces/auth-login.interface';
-import { AuthResetInterface } from '../interfaces/auth-reset.interface';
 import { StorageTypeEnum } from '../../../core.pck/storage.mod/enums/storage-type.enum';
 import { StorageService } from '../../../core.pck/storage.mod/services/storage.service';
 import { ROUTING } from '../../../../../environments/environment';
@@ -24,14 +22,12 @@ import { SessionInterface } from '../../../core.pck/session.mod/interfaces/sessi
 import { SessionsEnum } from '../../../core.pck/session.mod/enums/sessions.enum';
 import { HelperService } from '../../../utilities.pck/accessories.mod/services/helper.service';
 import { LoadingAnimationService } from '../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
-import { DialogTypeEnum } from '../../../utilities.pck/dialog.mod/enums/dialog-type.enum';
 import { DialogService } from '../../../utilities.pck/dialog.mod/services/dialog.service';
 import { AppViewStateInterface } from '../../../frame.pck/interfaces/app-view-state.interfsce';
 import { UserRoleEnum } from '../enums/user-role.enum';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-	public notificationLRT: EventEmitter<number> = new EventEmitter();
 	public errorMessage: EventEmitter<string> = new EventEmitter();
 
 	constructor(
@@ -178,164 +174,6 @@ export class AuthService {
 							formFields.get('email').setErrors({ backendError: true, text: message });
 						}
 						formFields.get('password').setErrors({ backendError: true, text: message });
-
-						// message
-						this.errorMessage.emit(message);
-						break;
-				}
-
-				// stop loading animation
-				this._loadingAnimationService.stopLoadingAnimation();
-			});
-	}
-
-	/**
-	 * perform forgot password process
-	 *
-	 * @param formPayload
-	 * @param formFields
-	 */
-	public authForgotPassword(formPayload: AuthForgotInterface, formFields: FormGroup) {
-		this._proxyService
-			.postAPI(AppServices['Auth']['Forgot_Password'], { bodyParams: formPayload })
-			.subscribe(() => {
-				// clear the form
-				formFields.reset();
-
-				// stop loading animation
-				this._loadingAnimationService.stopLoadingAnimation();
-
-				// payload
-				const dialogPayload = {
-					type: DialogTypeEnum.NOTICE,
-					payload: {
-						icon: 'dialog_email',
-						title: this._i18n({ value: 'Title: Password Reset', id: 'Auth_ForgotPassword_Form_Success_Title' }),
-						message: this._i18n({
-							value: 'Description: Forgot Password',
-							id: 'Auth_ForgotPassword_Form_Success_Description'
-						}),
-						buttonTexts: [this._i18n({ value: 'Button - OK', id: 'Common_Button_OK' })]
-					}
-				};
-
-				// dialog service
-				this._dialogService
-					.showDialog(dialogPayload)
-					.subscribe(() =>
-						this._router.navigate([ROUTING.authorization.routes.login]).then()
-					);
-			}, (err: HttpErrorResponse) => {
-				let message;
-				switch (err.error.detail.code) {
-					case 'InvalidParameterException':
-						message = this._i18n({
-							value: 'Description: Invalid Parameter Exception',
-							id: 'Auth_ForgotPassword_Error_InvalidParameterException_Description'
-						});
-
-						// set field to show error message
-						formFields.get('email').setErrors({ backendError: true, text: message });
-
-						// message
-						this.errorMessage.emit(message);
-						break;
-					case 'UserNotFoundException':
-						message = this._i18n({
-							value: 'Description: User Not Found Exception',
-							id: 'Auth_ForgotPassword_Error_UserNotFoundException_Description'
-						});
-
-						// set field to show error message
-						formFields.get('email').setErrors({ backendError: true, text: message });
-
-						// message
-						this.errorMessage.emit(message);
-						break;
-					case 'InvalidFirstName':
-						message = this._i18n({
-							value: 'Description: Invalid First Name Exception',
-							id: 'Auth_ForgotPassword_Error_InvalidFirstNameException_Description'
-						});
-
-						// set field to show error message
-						formFields.get('firstName').setErrors({ backendError: true, text: message });
-
-						// message
-						this.errorMessage.emit(message);
-						break;
-					case 'InvalidLastName':
-						message = this._i18n({
-							value: 'Description: Invalid Last Name Exception',
-							id: 'Auth_ForgotPassword_Error_InvalidLastNameException_Description'
-						});
-
-						// set field to show error message
-						formFields.get('lastName').setErrors({ backendError: true, text: message });
-
-						// message
-						this.errorMessage.emit(message);
-						break;
-				}
-
-				// stop loading animation
-				this._loadingAnimationService.stopLoadingAnimation();
-			});
-	}
-
-	/**
-	 * perform reset password process
-	 *
-	 * @param formPayload
-	 * @param formFields
-	 */
-	public authResetPassword(formPayload: AuthResetInterface, formFields: FormGroup) {
-		this._proxyService
-			.postAPI(AppServices['Auth']['Reset_Password'], { bodyParams: formPayload })
-			.subscribe(() => {
-				// clear the form
-				formFields.reset();
-
-				// stop loading animation
-				this._loadingAnimationService.stopLoadingAnimation();
-
-				// payload
-				const dialogPayload = {
-					type: DialogTypeEnum.NOTICE,
-					payload: {
-						icon: 'dialog_tick',
-						title: this._i18n({ value: 'Title: Reset Password', id: 'Auth_ResetPassword_Form_Success_Title' }),
-						message: this._i18n({
-							value: 'Description: Reset Password',
-							id: 'Auth_ResetPassword_Form_Success_Description'
-						}),
-						buttonTexts: [this._i18n({ value: 'Button - OK', id: 'Common_Button_OK' })]
-					}
-				};
-
-				// dialog service
-				this._dialogService
-					.showDialog(dialogPayload)
-					.subscribe(() =>
-						this._router.navigate([ROUTING.authorization.routes.login]).then()
-					);
-			}, (err: HttpErrorResponse) => {
-				let message;
-				switch (err.error.detail.code) {
-					case 'CodeMismatchException':
-						message = this._i18n({
-							value: 'Description: Mismatch Verification Code Exception',
-							id: 'Auth_ResetPassword_Error_CodeMismatchException_Description'
-						});
-
-						// message
-						this.errorMessage.emit(message);
-						break;
-					case 'ExpiredCodeException':
-						message = this._i18n({
-							value: 'Description: Expired Verification Code Exception',
-							id: 'Auth_ResetPassword_Error_ExpiredCodeException_Description'
-						});
 
 						// message
 						this.errorMessage.emit(message);
