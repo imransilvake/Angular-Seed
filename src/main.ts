@@ -14,6 +14,7 @@ if (environment.production) {
 	enableProdMode();
 }
 
+// amplify
 Amplify.configure({
 	Auth: {
 		// REQUIRED only for Federated Authentication - Amazon Cognito Identity Pool ID
@@ -23,7 +24,6 @@ Amplify.configure({
 		region: 'eu-central-1'
 	}
 });
-
 
 // bootstrap app
 platformBrowserDynamic().bootstrapModule(AppModule)

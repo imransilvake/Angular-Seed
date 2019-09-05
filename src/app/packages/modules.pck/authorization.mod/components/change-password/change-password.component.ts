@@ -58,7 +58,9 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
 			.subscribe(() => this.newPassword.updateValueAndValidity());
 
 		// set email
-		this.email.setValue(this.queryParams.email);
+		if (this.queryParams && this.queryParams.email) {
+			this.email.setValue(this.queryParams.email);
+		}
 	}
 
 	ngOnInit() {
