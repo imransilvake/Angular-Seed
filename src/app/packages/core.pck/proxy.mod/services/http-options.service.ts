@@ -15,11 +15,11 @@ export class HttpOptionsService {
 	/**
 	 * returns important headers for the request
 	 *
-	 * @param {Object} postBodyParams
 	 * @returns {HttpHeaders}
+	 * @param postApi
 	 */
-	public getHeaders(postBodyParams?: Object): HttpHeaders {
-		const headerValues: { [s: string]: string } = (postBodyParams) ? RequestHeaders.post : RequestHeaders.get;
+	public getHeaders(postApi?: boolean): HttpHeaders {
+		const headerValues: { [s: string]: string } = (postApi) ? RequestHeaders.post : RequestHeaders.get;
 		let headers = new HttpHeaders();
 
 		// request headers defined in app config file
@@ -143,7 +143,7 @@ export class HttpOptionsService {
 
 		// add access token
 		if (userState) {
-			return headers.set('Authorization', userState.credentials.accessToken.toString());
+			return headers.set('Authorization', userState.credentials.IdToken.toString());
 		}
 
 		return headers;

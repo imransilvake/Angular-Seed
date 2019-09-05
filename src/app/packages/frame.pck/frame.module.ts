@@ -14,7 +14,6 @@ import { WidgetsModule } from '../../shared/widgets/widgets.module';
 import { HeadComponent } from './components/content/head/head.component';
 import { BreadcrumbModule } from '../utilities.pck/breadcrumb.mod/breadcrumb.module';
 import { FieldsModule } from '../core.pck/fields.mod/fields.module';
-import { PageHintService } from './services/page-hint.service';
 
 @NgModule({
 	imports: [
@@ -39,8 +38,7 @@ import { PageHintService } from './services/page-hint.service';
 		ScrollTopComponent,
 		PrimarySidebarComponent,
 		HeadComponent
-	],
-	providers: [PageHintService]
+	]
 })
 
 export class FrameModule {

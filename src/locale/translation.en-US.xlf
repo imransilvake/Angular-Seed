@@ -374,7 +374,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Login_Info_Title" datatype="html">
 				<source>Title</source>
-				<target>Welcome</target>
+				<target>Hajj Gear Portal</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/login/login.component.html
@@ -384,7 +384,7 @@
 			</trans-unit>
 			<trans-unit id="Auth_Login_Info_Description" datatype="html">
 				<source>Description</source>
-				<target>at the HotelAppManager. Interact with your guests and learn more about what they think about your hotel.</target>
+				<target>Welcome to the Hajj Gear Portal App. Login and customize the app according to your needs.</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/login/login.component.html
@@ -570,39 +570,13 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Auth_Login_Error_BlockUserException_Description" datatype="html">
-				<source>Description: Block User Exception</source>
-				<target>Block User Exception</target>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/modules.pck/authorization.mod/services/auth.service.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="Auth_Login_Error_UserNotFoundException_Description" datatype="html">
-				<source>Description: User Not Found Exception</source>
-				<target>User Not Found Exception</target>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/modules.pck/authorization.mod/services/auth.service.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="Auth_Login_Error_UserNotConfirmedException_Description" datatype="html">
-				<source>Description: User Not Confirmed Exception</source>
-				<target>User Not Confirmed Exception</target>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/modules.pck/authorization.mod/services/auth.service.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="Auth_Login_Error_PasswordInvalid_Description" datatype="html">
-				<source>Description: Password Invalid Exception</source>
-				<target>Password Invalid Exception</target>
+			<trans-unit id="Auth_Login_Error_UserOrPasswordException_Description" datatype="html">
+				<source>Error:
+					<x id="INTERPOLATION" equiv-text="{{message}}"/>
+				</source>
+				<target>Error:
+					<x id="INTERPOLATION" equiv-text="{{message}}"/>
+				</target>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						src/app/packages/modules.pck/authorization.mod/services/auth.service.ts

@@ -52,7 +52,7 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 					} else {
 						// get current user state
 						const data = this._authService.currentUserState;
-						const userInfo = HelperService.decodeJWTToken(res.idToken);
+						const userInfo = HelperService.decodeJWTToken(res['AuthenticationResult'].IdToken);
 
 						// set current user state
 						this.setUserState(userInfo, res, data);
@@ -85,7 +85,7 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 					} else {
 						// get current user state
 						const data = this._authService.currentUserState;
-						const userInfo = HelperService.decodeJWTToken(res.idToken);
+						const userInfo = HelperService.decodeJWTToken(res['AuthenticationResult'].IdToken);
 
 						// set current user state
 						this.setUserState(userInfo, res, data);

@@ -81,7 +81,7 @@ export class ProxyService {
 
 		// options
 		const options = {
-			headers: this._httpOptionsService.getHeaders(params.singleBodyParam),
+			headers: this._httpOptionsService.getHeaders(true),
 			responseType: (params.responseContentType ? params.responseContentType : 'json')
 		};
 

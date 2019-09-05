@@ -74,110 +74,57 @@ export class AuthService {
 			.subscribe(res => {
 				if (res) {
 					// decode token
-					const userInfo = HelperService.decodeJWTToken(res.idToken.jwtToken);
+					const userInfo = HelperService.decodeJWTToken(res.AuthenticationResult.IdToken);
 
-					// get profile image
-					const imagePayload = { image: userInfo.picture };
+					// set current user state
+					this.currentUserState = {
+						profile: {
+							...userInfo,
+							password: formPayload.password,
+							language: 'en'
+						},
+						credentials: res.AuthenticationResult,
+						rememberMe: formFields.value.rememberMe,
+						timestamp: moment()
+					};
 
-					// service: get profile image
-					const imageResponse = !userInfo.picture ?
-						of(null) :
-						this._proxyService
-							.postAPI(AppServices['Utilities']['Profile_Image_Fetch'], { bodyParams: imagePayload });
+					// navigate to defined url
+					// stop loading animation
+					this._router
+						.navigate([ROUTING.pages.dashboard])
+						.then(() => {
+							// stop loading animation
+							this._loadingAnimationService.stopLoadingAnimation();
 
-					// image service response
-					imageResponse.subscribe(resp => {
-						// set current user state
-						this.currentUserState = {
-							profile: {
-								...userInfo,
-								password: formPayload.password,
-								language: formFields.value.languageName,
-								image: resp ? resp.image : null
-							},
-							credentials: {
-								accessToken: res.accessToken.jwtToken,
-								idToken: res.idToken.jwtToken,
-								refreshToken: res.refreshToken.token
-							},
-							rememberMe: formFields.value.rememberMe,
-							timestamp: moment()
-						};
+							// set initial app state
+							const role = this.currentUserState.profile['cognito:groups'][0];
 
-						// navigate to defined url
-						// stop loading animation
-						this._router
-							.navigate([ROUTING.pages.dashboard])
-							.then(() => {
-								// stop loading animation
-								this._loadingAnimationService.stopLoadingAnimation();
-
-								// set initial app state
-								const groupId = this.currentUserState.profile['custom:hotel_group_id'];
-								const hotelIds = this.currentUserState.profile['custom:hotelId'].split(',');
-								const role = this.currentUserState.profile['cognito:groups'][0];
-
-								// init app state
-								const asPayload = {
-									hotelId: hotelIds[0],
-									groupId: groupId,
-									role: role
-								};
-								this.initAppState(asPayload);
-							});
-					});
+							// init app state
+							const asPayload = {
+								role: role.toUpperCase()
+							};
+							this.initAppState(asPayload);
+						});
 				}
 			}, (err: HttpErrorResponse) => {
-				let message;
-				switch (err.error.detail.code) {
-					case 'UserLambdaValidationException':
-						message = this._i18n({
-							value: 'Description: Block User Exception',
-							id: 'Auth_Login_Error_BlockUserException_Description'
-						});
+				this.errorMessage.emit('');
+				const error = err && err.error && err.error.errors && err.error.errors.exception[0];
+				console.log(err);
+				console.log(error);
+				if (error) {
+					let message = this._i18n({
+						value: 'Error: {{message}}',
+						id: 'Auth_Login_Error_UserOrPasswordException_Description',
+					}, {
+						message: error
+					});
 
-						// message
-						this.errorMessage.emit(message);
-						break;
-					case 'UserNotFoundException':
-						message = this._i18n({
-							value: 'Description: User Not Found Exception',
-							id: 'Auth_Login_Error_UserNotFoundException_Description'
-						});
+					// message
+					this.errorMessage.emit(message);
 
-						// set field to show error message
-						formFields.get('email').setErrors({ backendError: true, text: message });
-
-						// message
-						this.errorMessage.emit(message);
-						break;
-					case 'UserNotConfirmedException':
-						message = this._i18n({
-							value: 'Description: User Not Confirmed Exception',
-							id: 'Auth_Login_Error_UserNotConfirmedException_Description'
-						});
-
-						// set field to show error message
-						formFields.get('email').setErrors({ backendError: true, text: message });
-
-						// message
-						this.errorMessage.emit(message);
-						break;
-					case 'NotAuthorizedException':
-						message = this._i18n({
-							value: 'Description: Password Invalid Exception',
-							id: 'Auth_Login_Error_PasswordInvalid_Description'
-						});
-
-						// set fields to show error message
-						if (formFields.get('email')) {
-							formFields.get('email').setErrors({ backendError: true, text: message });
-						}
-						formFields.get('password').setErrors({ backendError: true, text: message });
-
-						// message
-						this.errorMessage.emit(message);
-						break;
+					// set field to show error message
+					formFields.get('email').setErrors({ backendError: true, text: message });
+					formFields.get('password').setErrors({ backendError: true, text: message });
 				}
 
 				// stop loading animation
@@ -197,11 +144,14 @@ export class AuthService {
 			if (storageValidity <= AppOptions.rememberMeValidityInDays) {
 				// payload
 				const sessionValidityPayload = {
-					accessToken: userState.credentials.accessToken,
-					refreshToken: userState.credentials.refreshToken,
+					accessToken: userState.credentials.AccessToken,
+					refreshToken: userState.credentials.RefreshToken,
 					username: userState.profile.email,
 					...payload
 				};
+
+				// TODO
+				return of({ status: 'OK' });
 
 				// service: session validity
 				return this._proxyService
@@ -223,7 +173,7 @@ export class AuthService {
 					// payload
 					const logoutPayload = {
 						email: this.currentUserState.profile.email,
-						accessToken: this.currentUserState.credentials.accessToken
+						accessToken: this.currentUserState.credentials.AccessToken
 					};
 
 					// call sign-out service
@@ -268,7 +218,7 @@ export class AuthService {
 			case UserRoleEnum[UserRoleEnum.ADMIN]:
 				type = 0;
 				break;
-			case UserRoleEnum[UserRoleEnum.GROUP_MANAGER]:
+			case UserRoleEnum[UserRoleEnum.PARTNER]:
 				type = 1;
 				break;
 			default:
@@ -278,10 +228,7 @@ export class AuthService {
 
 		// app state payload
 		const appStatePayload: AppViewStateInterface = {
-			hotelId: payload.hotelId,
-			groupId: payload.groupId,
-			role: payload.role,
-			type: type
+			role: payload.role
 		};
 
 		// save to browser storage

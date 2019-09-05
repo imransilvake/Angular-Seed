@@ -38,7 +38,7 @@ export class AccountMenuComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		this.currentUser = this._authService.currentUserState; // get current user state
-		this.userName = HelperService.capitalizeString(this.currentUser.profile.name); // get user name
+		this.userName = HelperService.capitalizeString(this.currentUser.profile.email.split('@')[0]); // get user name
 		this.userNameLetters = HelperService.getFirstLetter(this.userName); // get first letters of name
 	}
 

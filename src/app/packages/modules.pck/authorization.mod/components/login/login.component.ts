@@ -1,18 +1,15 @@
 // angular
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 // app
 import { ROUTING } from '../../../../../../environments/environment';
 import { ValidationService } from '../../../../core.pck/fields.mod/services/validation.service';
-import { SelectDefaultInterface } from '../../../../core.pck/fields.mod/interfaces/select-default-interface';
 import { LoadingAnimationService } from '../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
 import { AuthLoginInterface } from '../../interfaces/auth-login.interface';
 import { AuthService } from '../../services/auth.service';
-import { HelperService } from '../../../../utilities.pck/accessories.mod/services/helper.service';
 
 @Component({
 	selector: 'app-login',
@@ -23,15 +20,13 @@ import { HelperService } from '../../../../utilities.pck/accessories.mod/service
 export class LoginComponent implements OnInit, OnDestroy {
 	public routing = ROUTING;
 	public formFields;
-	public languageList: SelectDefaultInterface[] = [];
 	public errorMessage;
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
 	constructor(
 		private _loadingAnimationService: LoadingAnimationService,
-		private _authService: AuthService,
-		private _route: ActivatedRoute
+		private _authService: AuthService
 	) {
 		// form group
 		this.formFields = new FormGroup({
@@ -52,6 +47,26 @@ export class LoginComponent implements OnInit, OnDestroy {
 		this._authService.errorMessage
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => this.errorMessage = res);
+
+		// listen: username
+		this.email.valueChanges
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(() => {
+				const error = this.password.errors;
+				if (!this.password.invalid || error['backendError']) {
+					this.password.setErrors(null);
+				}
+			});
+
+		// listen: password
+		this.password.valueChanges
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(() => {
+				const error = this.email.errors;
+				if (!this.email.invalid || error['backendError']) {
+					this.email.setErrors(null);
+				}
+			});
 	}
 
 	ngOnDestroy() {
@@ -89,7 +104,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 		// payload
 		const formPayload: AuthLoginInterface = {
 			username: this.email.value,
-			password: HelperService.hashPassword(this.password.value)
+			password: this.password.value
 		};
 
 		// start login process
