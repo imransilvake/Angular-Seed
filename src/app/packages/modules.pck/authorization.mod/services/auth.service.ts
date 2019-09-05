@@ -72,7 +72,7 @@ export class AuthService {
 	 * @param formPayload
 	 * @param formFields
 	 */
-	public authLogin(formPayload: AuthLoginInterface, formFields: FormGroup) {
+	public authLogin(formPayload: AuthLoginInterface, formFields?: FormGroup) {
 		this._proxyService
 			.postAPI(AppServices['Auth']['Login'], { bodyParams: formPayload })
 			.subscribe(res => {
@@ -102,7 +102,7 @@ export class AuthService {
 								language: 'en'
 							},
 							credentials: res.AuthenticationResult,
-							rememberMe: formFields.value.rememberMe,
+							rememberMe: !!formFields ? formFields.value.rememberMe : false,
 							timestamp: moment()
 						};
 
@@ -111,24 +111,26 @@ export class AuthService {
 						this._router
 							.navigate([ROUTING.pages.dashboard])
 							.then(() => {
-								// stop loading animation
-								this._loadingAnimationService.stopLoadingAnimation();
-
 								// set initial app state
-								const role = this.currentUserState.profile['cognito:groups'][0];
+								const groups = this.currentUserState.profile['cognito:groups'];
+								const role = groups && groups[0];
 
 								// init app state
-								const asPayload = {
-									role: role.toUpperCase()
-								};
-								this.initAppState(asPayload);
+								if (role) {
+									this.initAppState({
+										role: role.toUpperCase()
+									});
+								}
+
+								// stop loading animation
+								this._loadingAnimationService.stopLoadingAnimation();
 							});
 					}
 				}
 			}, (err: HttpErrorResponse) => {
-				let error = err && err.error && err.error.errors && err.error.errors.exception;
+				const error = err && err.error && err.error.errors && err.error.errors.exception;
 				if (error && error[0]) {
-					let message = this._i18n({
+					const message = this._i18n({
 						value: 'Error: {{message}}',
 						id: 'Auth_Login_Error_UserOrPasswordException_Description',
 					}, {
@@ -167,8 +169,11 @@ export class AuthService {
 							email: formPayload.email
 						}
 					).then(() => {
-						// stop loading animation
-						this._loadingAnimationService.stopLoadingAnimation();
+						// login user
+						this.authLogin({
+							username: formPayload.email,
+							password: formPayload.newPassword
+						});
 					}).catch(err => {
 						// log error
 						console.error(err);
@@ -232,9 +237,9 @@ export class AuthService {
 					};
 
 					// call sign-out service
-					this._proxyService
-						.postAPI(AppServices['Auth']['Logout'], { bodyParams: logoutPayload })
-						.subscribe();
+					//this._proxyService
+					//	.postAPI(AppServices['Auth']['Logout'], { bodyParams: logoutPayload })
+					//	.subscribe();
 				}
 
 				// clear sessions
