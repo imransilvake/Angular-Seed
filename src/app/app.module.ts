@@ -28,7 +28,7 @@ import { NotificationModule } from './packages/utilities.pck/notification.mod/no
 import { AuthorizationModule } from './packages/modules.pck/authorization.mod/authorization.module';
 import { AppLayoutComponent } from './app-layout.component';
 import { DashboardComponent } from './packages/modules.pck/dashboard.component';
-import { AmplifyAngularModule } from 'aws-amplify-angular';
+import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
 
 // i18n using polyfills
 // provided by webpack
@@ -91,7 +91,8 @@ declare const require;
 			deps: [LOCALE_ID]
 		},
 		{ provide: TRANSLATIONS_FORMAT, useValue: 'xlf' },
-		HttpInterceptorProviders
+		HttpInterceptorProviders,
+		AmplifyService
 	],
 	bootstrap: [AppComponent]
 })
