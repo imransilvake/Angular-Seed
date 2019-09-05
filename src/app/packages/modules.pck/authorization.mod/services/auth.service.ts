@@ -107,10 +107,7 @@ export class AuthService {
 						});
 				}
 			}, (err: HttpErrorResponse) => {
-				this.errorMessage.emit('');
 				const error = err && err.error && err.error.errors && err.error.errors.exception[0];
-				console.log(err);
-				console.log(error);
 				if (error) {
 					let message = this._i18n({
 						value: 'Error: {{message}}',
