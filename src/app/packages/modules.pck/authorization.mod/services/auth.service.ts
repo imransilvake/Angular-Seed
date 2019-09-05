@@ -159,7 +159,6 @@ export class AuthService {
 	public authChangePassword(formPayload: AuthChangePasswordInterface, formFields: FormGroup) {
 		Auth.signIn(formPayload.email, formPayload.oldPassword)
 			.then(user => {
-				console.log(user);
 				if (user.challengeName === 'NEW_PASSWORD_REQUIRED') {
 					Auth.completeNewPassword(
 						user,
@@ -167,21 +166,25 @@ export class AuthService {
 						{
 							email: formPayload.email
 						}
-					).then(user => {
-						// at this time the user is logged in if no MFA required
-						console.log(user);
-
+					).then(() => {
 						// stop loading animation
 						this._loadingAnimationService.stopLoadingAnimation();
-					}).catch(e => {
+					}).catch(err => {
+						// log error
+						console.error(err);
+
 						// stop loading animation
 						this._loadingAnimationService.stopLoadingAnimation();
 					});
 				}
-			}).catch(e => {
-			// stop loading animation
-			this._loadingAnimationService.stopLoadingAnimation();
-		});
+			})
+			.catch(err => {
+				// log error
+				console.error(err);
+
+				// stop loading animation
+				this._loadingAnimationService.stopLoadingAnimation();
+			});
 	}
 
 	/**
