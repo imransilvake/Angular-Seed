@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "scripts": {
         "ng": "ng",
-        "start": "ng serve --port 1700",
+        "start": "ng serve --port 4200",
         "build": "ng build",
         "serve.app.next": "ng serve -c next --port 2000",
         "build.app.next": "ng build -c next",

@@ -11,7 +11,6 @@ import { HelperService } from '../../../utilities.pck/accessories.mod/services/h
 
 @Injectable()
 export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
-	public currentUserState;
 	public authRoutes = [];
 
 	constructor(
@@ -19,7 +18,8 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 		private _authService: AuthService
 	) {
 		this.authRoutes = [
-			ROUTING.authorization.routes.login
+			ROUTING.authorization.routes.login,
+			ROUTING.authorization.routes.changePassword
 		];
 	}
 

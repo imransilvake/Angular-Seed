@@ -28,6 +28,7 @@ import { NotificationModule } from './packages/utilities.pck/notification.mod/no
 import { AuthorizationModule } from './packages/modules.pck/authorization.mod/authorization.module';
 import { AppLayoutComponent } from './app-layout.component';
 import { DashboardComponent } from './packages/modules.pck/dashboard.component';
+import { AmplifyAngularModule } from 'aws-amplify-angular';
 
 // i18n using polyfills
 // provided by webpack
@@ -68,6 +69,7 @@ declare const require;
 
 		// vendors
 		MaterialModule,
+		AmplifyAngularModule,
 
 		// frame
 		FrameModule,

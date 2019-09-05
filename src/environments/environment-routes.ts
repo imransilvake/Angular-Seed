@@ -5,7 +5,8 @@ export const EnvironmentRoutes = {
 	authorization: {
 		title: 'authorization',
 		routes: {
-			login: 'auth/login'
+			login: 'auth/login',
+			changePassword: 'auth/change-password'
 		}
 	}
 };

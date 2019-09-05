@@ -9,6 +9,9 @@ import { FormGroup } from '@angular/forms';
 // store
 import { Store } from '@ngrx/store';
 
+// amplify
+import { Auth } from 'aws-amplify';
+
 // app
 import * as moment from 'moment';
 import * as SessionActions from '../../../core.pck/session.mod/store/actions/session.actions';
@@ -25,6 +28,7 @@ import { LoadingAnimationService } from '../../../utilities.pck/loading-animatio
 import { DialogService } from '../../../utilities.pck/dialog.mod/services/dialog.service';
 import { AppViewStateInterface } from '../../../frame.pck/interfaces/app-view-state.interfsce';
 import { UserRoleEnum } from '../enums/user-role.enum';
+import { AuthChangePasswordInterface } from '../interfaces/auth-change-password.interface';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -73,38 +77,53 @@ export class AuthService {
 			.postAPI(AppServices['Auth']['Login'], { bodyParams: formPayload })
 			.subscribe(res => {
 				if (res) {
-					// decode token
-					const userInfo = HelperService.decodeJWTToken(res.AuthenticationResult.IdToken);
+					// route: change password
+					if (res.ChallengeName && res.ChallengeName === 'NEW_PASSWORD_REQUIRED') {
+						// navigate to defined url
+						// stop loading animation
+						this._router
+							.navigate(
+								[ROUTING.authorization.routes.changePassword],
+								{ queryParams: { email: formPayload.username } }
+							)
+							.then(() => {
+								// stop loading animation
+								this._loadingAnimationService.stopLoadingAnimation();
+							});
+					} else {
+						// decode token
+						const userInfo = HelperService.decodeJWTToken(res.AuthenticationResult.IdToken);
 
-					// set current user state
-					this.currentUserState = {
-						profile: {
-							...userInfo,
-							password: formPayload.password,
-							language: 'en'
-						},
-						credentials: res.AuthenticationResult,
-						rememberMe: formFields.value.rememberMe,
-						timestamp: moment()
-					};
+						// set current user state
+						this.currentUserState = {
+							profile: {
+								...userInfo,
+								password: formPayload.password,
+								language: 'en'
+							},
+							credentials: res.AuthenticationResult,
+							rememberMe: formFields.value.rememberMe,
+							timestamp: moment()
+						};
 
-					// navigate to defined url
-					// stop loading animation
-					this._router
-						.navigate([ROUTING.pages.dashboard])
-						.then(() => {
-							// stop loading animation
-							this._loadingAnimationService.stopLoadingAnimation();
+						// navigate to defined url
+						// stop loading animation
+						this._router
+							.navigate([ROUTING.pages.dashboard])
+							.then(() => {
+								// stop loading animation
+								this._loadingAnimationService.stopLoadingAnimation();
 
-							// set initial app state
-							const role = this.currentUserState.profile['cognito:groups'][0];
+								// set initial app state
+								const role = this.currentUserState.profile['cognito:groups'][0];
 
-							// init app state
-							const asPayload = {
-								role: role.toUpperCase()
-							};
-							this.initAppState(asPayload);
-						});
+								// init app state
+								const asPayload = {
+									role: role.toUpperCase()
+								};
+								this.initAppState(asPayload);
+							});
+					}
 				}
 			}, (err: HttpErrorResponse) => {
 				let error = err && err.error && err.error.errors && err.error.errors.exception;
@@ -129,6 +148,40 @@ export class AuthService {
 				// stop loading animation
 				this._loadingAnimationService.stopLoadingAnimation();
 			});
+	}
+
+	/**
+	 * perform change password process
+	 *
+	 * @param formPayload
+	 * @param formFields
+	 */
+	public authChangePassword(formPayload: AuthChangePasswordInterface, formFields: FormGroup) {
+		Auth.signIn(formPayload.email, formPayload.oldPassword)
+			.then(user => {
+				console.log(user);
+				if (user.challengeName === 'NEW_PASSWORD_REQUIRED') {
+					Auth.completeNewPassword(
+						user,
+						formPayload.newPassword,
+						{
+							email: formPayload.email
+						}
+					).then(user => {
+						// at this time the user is logged in if no MFA required
+						console.log(user);
+
+						// stop loading animation
+						this._loadingAnimationService.stopLoadingAnimation();
+					}).catch(e => {
+						// stop loading animation
+						this._loadingAnimationService.stopLoadingAnimation();
+					});
+				}
+			}).catch(e => {
+			// stop loading animation
+			this._loadingAnimationService.stopLoadingAnimation();
+		});
 	}
 
 	/**
