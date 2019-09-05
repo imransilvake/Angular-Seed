@@ -107,8 +107,8 @@ export class AuthService {
 						});
 				}
 			}, (err: HttpErrorResponse) => {
-				const error = err && err.error && err.error.errors && err.error.errors.exception[0];
-				if (error) {
+				let error = err && err.error && err.error.errors && err.error.errors.exception;
+				if (error && error[0]) {
 					let message = this._i18n({
 						value: 'Error: {{message}}',
 						id: 'Auth_Login_Error_UserOrPasswordException_Description',
