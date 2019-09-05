@@ -10,7 +10,7 @@ export const environment = {
 };
 
 export const APP_URL = 'http://localhost:3000';
-export const ENV_SERVICE_URL = 'https://c7o8rvuk52.execute-api.eu-west-1.amazonaws.com/stag';
+export const ENV_SERVICE_URL = 'https://7wrr6msrh4.execute-api.eu-central-1.amazonaws.com/prod';
 
 // routing
 export const ROUTING = EnvironmentRoutes;

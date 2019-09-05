@@ -24,10 +24,7 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 		CountryList: { serviceUrl: '/config/countries/list' }
 	},
 	Auth: {
-		Register: { serviceUrl: '/ham/auth/signup' },
-		Login: { serviceUrl: '/ham/auth/authenticate' },
-		Forgot_Password: { serviceUrl: '/ham/auth/forgotpassword' },
-		Reset_Password: { serviceUrl: '/ham/auth/confirmpassword' },
+		Login: { serviceUrl: '/auth' },
 		Logout: { serviceUrl: '/ham/auth/signout' },
 		Session_Validity: { serviceUrl: '/ham/auth/sessionvalidity' }
 	}
