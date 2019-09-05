@@ -120,8 +120,10 @@ export class AuthService {
 					this.errorMessage.emit(message);
 
 					// set field to show error message
-					formFields.get('email').setErrors({ backendError: true, text: message });
-					formFields.get('password').setErrors({ backendError: true, text: message });
+					if (message.indexOf('attempts') === -1) {
+						formFields.get('email').setErrors({ backendError: true, text: message });
+						formFields.get('password').setErrors({ backendError: true, text: message });
+					}
 				}
 
 				// stop loading animation
