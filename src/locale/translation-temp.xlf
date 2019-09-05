@@ -4,26 +4,26 @@
 		<body>
 			<trans-unit id="Fields_Input_Error_Required" datatype="html">
 				<source>
-					Required field!
+					Required field
 				</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/core.pck/fields.mod/components/input/input.component.html
 					</context>
-					<context context-type="linenumber">62</context>
+					<context context-type="linenumber">108</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Fields_Input_Error_MinLength" datatype="html">
 				<source>
 					It must have at least
 					<x id="INTERPOLATION" equiv-text="{{control.errors.minlength.requiredLength}}"/>
-					alphabetic characters
+					characters long
 				</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/core.pck/fields.mod/components/input/input.component.html
 					</context>
-					<context context-type="linenumber">65</context>
+					<context context-type="linenumber">111</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Fields_Input_Error_MaxLength" datatype="html">
@@ -36,7 +36,7 @@
 					<context context-type="sourcefile">
 						app/packages/core.pck/fields.mod/components/input/input.component.html
 					</context>
-					<context context-type="linenumber">68</context>
+					<context context-type="linenumber">114</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Fields_Input_Error_Username" datatype="html">
@@ -56,7 +56,7 @@
 					<context context-type="sourcefile">
 						app/packages/core.pck/fields.mod/components/input/input.component.html
 					</context>
-					<context context-type="linenumber">71</context>
+					<context context-type="linenumber">117</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Fields_Input_Error_Text" datatype="html">
@@ -67,18 +67,18 @@
 					<context context-type="sourcefile">
 						app/packages/core.pck/fields.mod/components/input/input.component.html
 					</context>
-					<context context-type="linenumber">79</context>
+					<context context-type="linenumber">125</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Fields_Input_Error_Password" datatype="html">
 				<source>
-					Your password must be at least 8 characters long
+					Password min. 8 characters required!
 				</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/core.pck/fields.mod/components/input/input.component.html
 					</context>
-					<context context-type="linenumber">79</context>
+					<context context-type="linenumber">128</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Fields_Input_Error_Password_Strength" datatype="html">
@@ -89,7 +89,7 @@
 					<context context-type="sourcefile">
 						app/packages/core.pck/fields.mod/components/input/input.component.html
 					</context>
-					<context context-type="linenumber">82</context>
+					<context context-type="linenumber">131</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Fields_Input_Error_Email" datatype="html">
@@ -100,7 +100,7 @@
 					<context context-type="sourcefile">
 						app/packages/core.pck/fields.mod/components/input/input.component.html
 					</context>
-					<context context-type="linenumber">82</context>
+					<context context-type="linenumber">134</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Fields_Input_Error_Password_Mismatch" datatype="html">
@@ -111,20 +111,28 @@
 					<context context-type="sourcefile">
 						app/packages/core.pck/fields.mod/components/input/input.component.html
 					</context>
-					<context context-type="linenumber">85</context>
+					<context context-type="linenumber">137</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Fields_Datepicker_Error_Invalid_Time" datatype="html">
-				<source>Invalid date</source>
+				<source>
+					Invalid Time!
+				</source>
 				<context-group purpose="location">
-					<context context-type="sourcefile">app/packages/core.pck/fields.mod/components/input/input.component.html</context>
+					<context context-type="sourcefile">
+						app/packages/core.pck/fields.mod/components/input/input.component.html
+					</context>
 					<context context-type="linenumber">143</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Fields_Datepicker_Error_Invalid_Version" datatype="html">
-				<source>Only numeric characters and dots are allowed</source>
+				<source>
+					Only numeric and dot(s) are allowed!
+				</source>
 				<context-group purpose="location">
-					<context context-type="sourcefile">app/packages/core.pck/fields.mod/components/input/input.component.html</context>
+					<context context-type="sourcefile">
+						app/packages/core.pck/fields.mod/components/input/input.component.html
+					</context>
 					<context context-type="linenumber">146</context>
 				</context-group>
 			</trans-unit>
@@ -136,18 +144,18 @@
 					<context context-type="sourcefile">
 						app/packages/core.pck/fields.mod/components/input/input.component.html
 					</context>
-					<context context-type="linenumber">88</context>
+					<context context-type="linenumber">152</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Fields_Select_Error_Required" datatype="html">
 				<source>
-					Required field!
+					Required field
 				</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/core.pck/fields.mod/components/select/select.component.html
 					</context>
-					<context context-type="linenumber">60</context>
+					<context context-type="linenumber">57</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Fields_Select_Error_Default" datatype="html">
@@ -163,13 +171,13 @@
 			</trans-unit>
 			<trans-unit id="Fields_AutoComplete_Error_Required" datatype="html">
 				<source>
-					Required field!
+					Required field
 				</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/core.pck/fields.mod/components/autocomplete/autocomplete.component.html
 					</context>
-					<context context-type="linenumber">47</context>
+					<context context-type="linenumber">69</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Fields_AutoComplete_Error_Invalid_Option" datatype="html">
@@ -180,7 +188,7 @@
 					<context context-type="sourcefile">
 						app/packages/core.pck/fields.mod/components/autocomplete/autocomplete.component.html
 					</context>
-					<context context-type="linenumber">50</context>
+					<context context-type="linenumber">72</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Fields_AutoComplete_Error_Default" datatype="html">
@@ -191,20 +199,28 @@
 					<context context-type="sourcefile">
 						app/packages/core.pck/fields.mod/components/autocomplete/autocomplete.component.html
 					</context>
-					<context context-type="linenumber">53</context>
+					<context context-type="linenumber">78</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Fields_Datepicker_Error_Required" datatype="html">
-				<source>Required field</source>
+				<source>
+					Required field
+				</source>
 				<context-group purpose="location">
-					<context context-type="sourcefile">app/packages/core.pck/fields.mod/components/datepicker/datepicker.component.html</context>
+					<context context-type="sourcefile">
+						app/packages/core.pck/fields.mod/components/datepicker/datepicker.component.html
+					</context>
 					<context context-type="linenumber">40</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Fields_Datepicker_Error_Default" datatype="html">
-				<source>Unknown error occurred</source>
+				<source>
+					Unknown error occurred
+				</source>
 				<context-group purpose="location">
-					<context context-type="sourcefile">app/packages/core.pck/fields.mod/components/datepicker/datepicker.component.html</context>
+					<context context-type="sourcefile">
+						app/packages/core.pck/fields.mod/components/datepicker/datepicker.component.html
+					</context>
 					<context context-type="linenumber">46</context>
 				</context-group>
 			</trans-unit>
@@ -254,35 +270,40 @@
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Management_Table_No_Data" datatype="html">
-				<source>No data is available.</source>
+				<source>
+					No Data is available.
+				</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">app/shared/widgets/table/table.component.html</context>
-					<context context-type="linenumber">78</context>
+					<context context-type="linenumber">133</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Upload_Image_Drag_Image" datatype="html">
-				<source>Drop image here</source>
+				<source>Drag Image Here</source>
 				<context-group purpose="location">
-					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/profile-cover/profile-upload-image.component.html</context>
-					<context context-type="linenumber">27</context>
+					<context context-type="sourcefile">app/shared/widgets/image-upload/image-upload.component.html
+					</context>
+					<context context-type="linenumber">9</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Upload_Image_Select_File" datatype="html">
 				<source>
 					<x id="START_TAG_LABEL" ctype="x-label" equiv-text="&lt;label&gt;"/>
-					Select file
+					[Select Image]
 					<x id="TAG_INPUT" ctype="x-input" equiv-text="&lt;input/&gt;"/>
 					<x id="CLOSE_TAG_LABEL" ctype="x-label" equiv-text="&lt;/label&gt;"/>
 				</source>
 				<context-group purpose="location">
-					<context context-type="sourcefile">app/packages/modules.pck/member.mod/components/profile/profile-cover/profile-upload-image.component.html</context>
-					<context context-type="linenumber">35</context>
+					<context context-type="sourcefile">app/shared/widgets/image-upload/image-upload.component.html
+					</context>
+					<context context-type="linenumber">17</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Pages_404_Link" datatype="html">
 				<source>Back to start page</source>
 				<context-group purpose="location">
-					<context context-type="sourcefile">app/packages/frame.pck/components/pages/e404.component.html</context>
+					<context context-type="sourcefile">app/packages/frame.pck/components/pages/e404.component.html
+					</context>
 					<context context-type="linenumber">16</context>
 				</context-group>
 			</trans-unit>
@@ -292,7 +313,7 @@
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/login/login.component.html
 					</context>
-					<context context-type="linenumber">7</context>
+					<context context-type="linenumber">6</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Auth_Login_Info_Description" datatype="html">
@@ -314,30 +335,30 @@
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Auth_Login_Form_Title" datatype="html">
-				<source>Sign In</source>
+				<source>Login</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/login/login.component.html
 					</context>
-					<context context-type="linenumber">19</context>
+					<context context-type="linenumber">18</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Auth_Login_Form_Username_Label" datatype="html">
-				<source>User name / Email*</source>
+				<source>Username*</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/login/login.component.html
 					</context>
-					<context context-type="linenumber">42</context>
+					<context context-type="linenumber">23</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Auth_Login_Form_Username_PlaceHolder" datatype="html">
-				<source>Enter user name</source>
+				<source>Username</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/login/login.component.html
 					</context>
-					<context context-type="linenumber">47</context>
+					<context context-type="linenumber">28</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Auth_Login_Form_Password_Label" datatype="html">
@@ -346,164 +367,36 @@
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/login/login.component.html
 					</context>
-					<context context-type="linenumber">56</context>
+					<context context-type="linenumber">37</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Auth_Login_Form_Password_PlaceHolder" datatype="html">
-				<source>Enter password</source>
+				<source>Password</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
 						app/packages/modules.pck/authorization.mod/components/login/login.component.html
 					</context>
-					<context context-type="linenumber">63</context>
+					<context context-type="linenumber">44</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Auth_Login_Form_Remember_Text" datatype="html">
-				<source>Remember login</source>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						app/packages/modules.pck/authorization.mod/components/login/login.component.html
-					</context>
-					<context context-type="linenumber">71</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="Auth_Login_Form_Submit_Button" datatype="html">
-				<source>LOG IN</source>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						app/packages/modules.pck/authorization.mod/components/login/login.component.html
-					</context>
-					<context context-type="linenumber">77</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="Error_Internet_Connection_Title" datatype="html">
-				<source>Title: Internet Connection Exception</source>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="Error_Internet_Connection_Description" datatype="html">
-				<source>Description: Internet Connection Exception</source>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="Error_UnknownErrorException_Title" datatype="html">
-				<source>Title: Unknown Error Exception</source>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="Error_UnknownErrorException_Description" datatype="html">
-				<source>Description: Unknown Error Exception</source>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="Common_Button_Close" datatype="html">
-				<source>Button - Close</source>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/core.pck/proxy.mod/services/http-error-handling.service.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="Logout_Confirmation_Title" datatype="html">
-				<source>Title: Logout Confirmation</source>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/frame.pck/components/menus/account/account-menu.component.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="Logout_Confirmation_Description" datatype="html">
-				<source>Description: Logout Confirmation</source>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/frame.pck/components/menus/account/account-menu.component.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="Common_Button_OK" datatype="html">
-				<source>Button - OK</source>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/frame.pck/components/menus/account/account-menu.component.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-				<context-group purpose="location">
-					<context context-type="sourcefile">src/app/shared/widgets/table/table.component.ts</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="Common_Button_Cancel" datatype="html">
-				<source>Button - Cancel</source>
-				<context-group purpose="location">
-					<context context-type="sourcefile">
-						src/app/packages/frame.pck/components/menus/account/account-menu.component.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-				<context-group purpose="location">
-					<context context-type="sourcefile">src/app/shared/widgets/table/table.component.ts</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="Auth_Login_Error_UserOrPasswordException_Description" datatype="html">
-				<source>Error:
-					<x id="INTERPOLATION" equiv-text="{{message}}"/>
+				<source>
+					Remember Me
 				</source>
 				<context-group purpose="location">
 					<context context-type="sourcefile">
-						src/app/packages/modules.pck/authorization.mod/services/auth.service.ts
+						app/packages/modules.pck/authorization.mod/components/login/login.component.html
 					</context>
-					<context context-type="linenumber">1</context>
+					<context context-type="linenumber">56</context>
 				</context-group>
 			</trans-unit>
-			<trans-unit id="Upload_Image_Error_FileSize" datatype="html">
-				<source>Description: FileSize Error</source>
+			<trans-unit id="Auth_Login_Form_Submit_Button" datatype="html">
+				<source>Login</source>
 				<context-group purpose="location">
-					<context context-type="sourcefile">src/app/shared/widgets/image-upload/image-upload.component.ts
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/login/login.component.html
 					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="Upload_Image_Error_Wrong_Format" datatype="html">
-				<source>Description: Wrong Format Error</source>
-				<context-group purpose="location">
-					<context context-type="sourcefile">src/app/shared/widgets/image-upload/image-upload.component.ts
-					</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="Table_Clear_Row_Title" datatype="html">
-				<source>Title: Clear Row Confirmation</source>
-				<context-group purpose="location">
-					<context context-type="sourcefile">src/app/shared/widgets/table/table.component.ts</context>
-					<context context-type="linenumber">1</context>
-				</context-group>
-			</trans-unit>
-			<trans-unit id="Table_Clear_Row_Description" datatype="html">
-				<source>Description: Clear Row Confirmation</source>
-				<context-group purpose="location">
-					<context context-type="sourcefile">src/app/shared/widgets/table/table.component.ts</context>
-					<context context-type="linenumber">1</context>
+					<context context-type="linenumber">64</context>
 				</context-group>
 			</trans-unit>
 			<trans-unit id="Auth_ChangePassword_Info_Title" datatype="html">

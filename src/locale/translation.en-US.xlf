@@ -618,6 +618,116 @@
 					<context context-type="linenumber">1</context>
 				</context-group>
 			</trans-unit>
+			<trans-unit id="Auth_ChangePassword_Info_Title" datatype="html">
+				<source>Title</source>
+				<target>Hajj Gear Portal</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/change-password/change-password.component.html
+					</context>
+					<context context-type="linenumber">6</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_ChangePassword_Info_Description" datatype="html">
+				<source>Description</source>
+				<target>Welcome to the Hajj Gear Portal App. Login and customize the app according to your needs.</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/change-password/change-password.component.html
+					</context>
+					<context context-type="linenumber">8</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_ChangePassword_Info_Version" datatype="html">
+				<source>Version</source>
+				<target>Version</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/change-password/change-password.component.html
+					</context>
+					<context context-type="linenumber">10</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_ChangePassword_Form_Title" datatype="html">
+				<source>Change Password</source>
+				<target>Change Password</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/change-password/change-password.component.html
+					</context>
+					<context context-type="linenumber">18</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_ChangePassword_Form_Username_Label" datatype="html">
+				<source>Username*</source>
+				<target>Username*</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/change-password/change-password.component.html
+					</context>
+					<context context-type="linenumber">24</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_ChangePassword_Form_Username_PlaceHolder" datatype="html">
+				<source>Username</source>
+				<target>Username</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/change-password/change-password.component.html
+					</context>
+					<context context-type="linenumber">29</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_ChangePassword_Form_Old_Password_Label" datatype="html">
+				<source>Old Password*</source>
+				<target>Old Password*</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/change-password/change-password.component.html
+					</context>
+					<context context-type="linenumber">38</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_ChangePassword_Form_Old_Password_PlaceHolder" datatype="html">
+				<source>Old Password</source>
+				<target>Old Password</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/change-password/change-password.component.html
+					</context>
+					<context context-type="linenumber">45</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_ChangePassword_Form_New_Password_Label" datatype="html">
+				<source>New Password*</source>
+				<target>New Password*</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/change-password/change-password.component.html
+					</context>
+					<context context-type="linenumber">58</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_ChangePassword_Form_New_Password_PlaceHolder" datatype="html">
+				<source>New Password</source>
+				<target>New Password</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/change-password/change-password.component.html
+					</context>
+					<context context-type="linenumber">65</context>
+				</context-group>
+			</trans-unit>
+			<trans-unit id="Auth_ChangePassword_Form_Submit_Button" datatype="html">
+				<source>Change Password</source>
+				<target>Change Password</target>
+				<context-group purpose="location">
+					<context context-type="sourcefile">
+						app/packages/modules.pck/authorization.mod/components/change-password/change-password.component.html
+					</context>
+					<context context-type="linenumber">81</context>
+				</context-group>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
