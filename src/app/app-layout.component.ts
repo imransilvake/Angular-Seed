@@ -35,9 +35,8 @@ export class AppLayoutComponent implements AfterViewInit, OnDestroy {
 		// detect current view
 		this.isViewDesktop = HelperService.isDesktopView;
 
-		// session: start authentication & notifications
+		// session: start authentication
 		this._store.dispatch(new SessionActions.SessionCounterStart(SessionsEnum.SESSION_AUTHENTICATION));
-		this._store.dispatch(new SessionActions.SessionCounterStart(SessionsEnum.SESSION_NOTIFICATIONS));
 	}
 
 	ngAfterViewInit() {
@@ -62,9 +61,8 @@ export class AppLayoutComponent implements AfterViewInit, OnDestroy {
 		this._ngUnSubscribe.next();
 		this._ngUnSubscribe.complete();
 
-		// session: stop authentication & notifications
+		// session: stop authentication
 		this._store.dispatch(new SessionActions.SessionCounterExit(SessionsEnum.SESSION_AUTHENTICATION));
-		this._store.dispatch(new SessionActions.SessionCounterExit(SessionsEnum.SESSION_NOTIFICATIONS));
 	}
 
 	/**

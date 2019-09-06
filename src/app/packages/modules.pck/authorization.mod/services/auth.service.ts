@@ -98,7 +98,7 @@ export class AuthService {
 						this.currentUserState = {
 							profile: {
 								...userInfo,
-								password: formPayload.password,
+								password: HelperService.hashPassword(formPayload.password),
 								language: 'en'
 							},
 							credentials: res.AuthenticationResult,
@@ -244,7 +244,6 @@ export class AuthService {
 
 				// clear sessions
 				this._store.dispatch(new SessionActions.SessionCounterExit(SessionsEnum.SESSION_AUTHENTICATION));
-				this._store.dispatch(new SessionActions.SessionCounterExit(SessionsEnum.SESSION_NOTIFICATIONS));
 
 				// clear sessions
 				this.authClearSessions();
