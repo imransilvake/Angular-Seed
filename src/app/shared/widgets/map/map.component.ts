@@ -47,6 +47,9 @@ export class MapComponent implements OnInit {
 					.addTo(this.map)
 			);
 		});
+
+		// update map
+		this.map.on('load', () => this.map.resize());
 	}
 
 	/**

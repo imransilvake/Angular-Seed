@@ -1,5 +1,5 @@
 // angular
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 // app
 import { faHome } from '@fortawesome/free-solid-svg-icons';
@@ -14,8 +14,6 @@ import { HelperService } from '../../utilities.pck/accessories.mod/services/help
 
 @Injectable({ providedIn: 'root' })
 export class SidebarService {
-	public hotelGroupListEvent: EventEmitter<boolean> = new EventEmitter(false);
-
 	constructor(
 		private _authService: AuthService,
 		private _storageService: StorageService,
