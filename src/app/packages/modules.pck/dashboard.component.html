@@ -1,4 +1,9 @@
 <div class="ham-dashboard">
 	<!-- Head -->
 	<app-head [pageTitle]="'Dashboard'"></app-head>
+
+	<!-- Map -->
+	<ng-container *ngIf="geoJson">
+		<app-map [markers]="geoJson"></app-map>
+	</ng-container>
 </div>

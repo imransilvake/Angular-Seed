@@ -1,0 +1,12 @@
+<section class="ham-map-wrapper">
+    <!-- Map -->
+    <div id="ham-map" class="ham-map"></div>
+
+    <!-- Content -->
+    <div class="ham-content">
+        <!-- Markers -->
+        <ng-container *ngFor="let marker of markersList">
+            <div (click)="onClickRemoveMarkers(marker)">Remove Markers</div>
+        </ng-container>
+    </div>
+</section>

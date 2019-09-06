@@ -5,7 +5,7 @@ import { EnvironmentRoutes } from './environment-routes';
 export const environment = {
 	production: true,
 	mapBox: {
-		accessToken: 'YOUR_TOKEN'
+		accessToken: 'pk.eyJ1IjoiaW1yYW5zaWx2YWtlIiwiYSI6ImNqenlmb2JnZjB1bGQzY3FwNTQxYjA4bHIifQ.GDFD-gYA9EjaE6jDZCvyrA'
 	}
 };
 

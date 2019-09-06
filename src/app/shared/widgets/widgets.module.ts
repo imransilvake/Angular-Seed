@@ -11,6 +11,7 @@ import { TableComponent } from './table/table.component';
 import { FieldsModule } from '../../packages/core.pck/fields.mod/fields.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
 	imports: [
@@ -24,7 +25,8 @@ import { ImageUploadComponent } from './image-upload/image-upload.component';
 		PasswordStrengthComponent,
 		ReadMoreComponent,
 		TableComponent,
-		ImageUploadComponent
+		ImageUploadComponent,
+		MapComponent
 	],
 	exports: [
 		DividerComponent,
@@ -32,7 +34,8 @@ import { ImageUploadComponent } from './image-upload/image-upload.component';
 		PasswordStrengthComponent,
 		ReadMoreComponent,
 		TableComponent,
-		ImageUploadComponent
+		ImageUploadComponent,
+		MapComponent
 	]
 })
 

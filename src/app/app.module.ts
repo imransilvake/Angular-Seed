@@ -14,6 +14,9 @@ import { notificationReducer } from './packages/utilities.pck/notification.mod/s
 import { errorHandlerReducer } from './packages/utilities.pck/error-handler.mod/store/reducers/error-handler.reducer';
 import { sessionReducer } from './packages/core.pck/session.mod/store/reducers/session.reducer';
 
+// amplify
+import { AmplifyAngularModule } from 'aws-amplify-angular';
+
 // app
 import { AppComponent } from './app.component';
 import { FrameModule } from './packages/frame.pck/frame.module';
@@ -28,7 +31,7 @@ import { NotificationModule } from './packages/utilities.pck/notification.mod/no
 import { AuthorizationModule } from './packages/modules.pck/authorization.mod/authorization.module';
 import { AppLayoutComponent } from './app-layout.component';
 import { DashboardComponent } from './packages/modules.pck/dashboard.component';
-import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
+import { WidgetsModule } from './shared/widgets/widgets.module';
 
 // i18n using polyfills
 // provided by webpack
@@ -58,9 +61,6 @@ declare const require;
 		}),
 		StoreDevtoolsModule.instrument({ maxAge: 10 }),
 
-		// core
-		FieldsModule,
-
 		// utilities
 		NotificationModule,
 		LoadingAnimationModule,
@@ -71,9 +71,11 @@ declare const require;
 		MaterialModule,
 		AmplifyAngularModule,
 
-		// frame
+		// core
+		FieldsModule,
 		FrameModule,
-		AuthorizationModule
+		AuthorizationModule,
+		WidgetsModule
 	],
 	declarations: [
 		AppComponent,
@@ -91,8 +93,7 @@ declare const require;
 			deps: [LOCALE_ID]
 		},
 		{ provide: TRANSLATIONS_FORMAT, useValue: 'xlf' },
-		HttpInterceptorProviders,
-		AmplifyService
+		HttpInterceptorProviders
 	],
 	bootstrap: [AppComponent]
 })

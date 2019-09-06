@@ -1,6 +1,7 @@
 @import 'main';
 
 .ham-header {
+	background-color: cd-palette($cd-background, 2003);
 	box-shadow: 1px 1px 15px cd-palette($cd-shadow, 4000, .4);
 
 	.cd-row {
