@@ -21,12 +21,7 @@ export const AppOptions = {
 // services
 export const AppServices: { [moduleName: string]: { [name: string]: AppServicesInterface } } = {
 	Utilities: {
-		CountryList: { serviceUrl: '/config/countries/list' }
-	},
-	Auth: {
-		Login: { serviceUrl: '/auth' },
-		Logout: { serviceUrl: '/ham/auth/signout' },
-		Session_Validity: { serviceUrl: '/ham/auth/sessionvalidity' }
+		CountryList: { serviceUrl: '' }
 	}
 };
 

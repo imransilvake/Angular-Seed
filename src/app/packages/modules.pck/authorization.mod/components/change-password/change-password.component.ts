@@ -9,8 +9,8 @@ import { takeUntil } from 'rxjs/operators';
 import { ROUTING } from '../../../../../../environments/environment';
 import { ValidationService } from '../../../../core.pck/fields.mod/services/validation.service';
 import { LoadingAnimationService } from '../../../../utilities.pck/loading-animation.mod/services/loading-animation.service';
+import { AuthLoginInterface } from '../../interfaces/auth-login.interface';
 import { AuthService } from '../../services/auth.service';
-import { AuthChangePasswordInterface } from '../../interfaces/auth-change-password.interface';
 
 @Component({
 	selector: 'app-change-password',
@@ -42,7 +42,7 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
 				Validators.required,
 				ValidationService.emailValidator
 			]),
-			oldPassword: new FormControl('', [
+			password: new FormControl('', [
 				Validators.required
 			]),
 			newPassword: new FormControl('', [
@@ -51,11 +51,6 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
 				ValidationService.passwordStrengthValidator
 			])
 		});
-
-		// listen: to password change (update new password field)
-		this.oldPassword.valueChanges
-			.pipe(takeUntil(this._ngUnSubscribe))
-			.subscribe(() => this.newPassword.updateValueAndValidity());
 
 		// set email
 		if (this.queryParams && this.queryParams.email) {
@@ -68,6 +63,29 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
 		this._authService.errorMessage
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(res => this.errorMessage = res);
+
+		// listen: username
+		this.email.valueChanges
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(() => {
+				const error = this.password.errors;
+				if (!this.password.invalid || error['backendError']) {
+					this.password.setErrors(null);
+				}
+			});
+
+		// listen: password
+		this.password.valueChanges
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(() => {
+				// update new password field
+				this.newPassword.updateValueAndValidity();
+
+				const error = this.email.errors;
+				if (!this.email.invalid || error['backendError']) {
+					this.email.setErrors(null);
+				}
+			});
 	}
 
 	ngOnDestroy() {
@@ -83,8 +101,8 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
 		return this.formFields.get('email');
 	}
 
-	get oldPassword() {
-		return this.formFields.get('oldPassword');
+	get password() {
+		return this.formFields.get('password');
 	}
 
 	get newPassword() {
@@ -103,13 +121,13 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
 		this._loadingAnimationService.startLoadingAnimation();
 
 		// payload
-		const formPayload: AuthChangePasswordInterface = {
-			email: this.email.value,
-			oldPassword: this.oldPassword.value,
+		const formPayload: AuthLoginInterface = {
+			username: this.email.value,
+			password: this.password.value,
 			newPassword: this.newPassword.value
 		};
 
 		// start change password process
-		this._authService.authChangePassword(formPayload, this.formFields);
+		this._authService.authLogin(formPayload, this.formFields);
 	}
 }

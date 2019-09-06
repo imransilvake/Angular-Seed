@@ -1,10 +1,9 @@
 // angular
 import { EventEmitter, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { of } from 'rxjs';
 import { I18n } from '@ngx-translate/i18n-polyfill';
-import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
+import { of } from 'rxjs';
 
 // store
 import { Store } from '@ngrx/store';
@@ -15,7 +14,7 @@ import { Auth } from 'aws-amplify';
 // app
 import * as moment from 'moment';
 import * as SessionActions from '../../../core.pck/session.mod/store/actions/session.actions';
-import { AppOptions, AppServices, LocalStorageItems, SessionStorageItems } from '../../../../../app.config';
+import { AppOptions, LocalStorageItems, SessionStorageItems } from '../../../../../app.config';
 import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service';
 import { AuthLoginInterface } from '../interfaces/auth-login.interface';
 import { StorageTypeEnum } from '../../../core.pck/storage.mod/enums/storage-type.enum';
@@ -28,7 +27,6 @@ import { LoadingAnimationService } from '../../../utilities.pck/loading-animatio
 import { DialogService } from '../../../utilities.pck/dialog.mod/services/dialog.service';
 import { AppViewStateInterface } from '../../../frame.pck/interfaces/app-view-state.interfsce';
 import { UserRoleEnum } from '../enums/user-role.enum';
-import { AuthChangePasswordInterface } from '../interfaces/auth-change-password.interface';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -73,12 +71,13 @@ export class AuthService {
 	 * @param formFields
 	 */
 	public authLogin(formPayload: AuthLoginInterface, formFields?: FormGroup) {
-		this._proxyService
-			.postAPI(AppServices['Auth']['Login'], { bodyParams: formPayload })
-			.subscribe(res => {
-				if (res) {
-					// route: change password
-					if (res.ChallengeName && res.ChallengeName === 'NEW_PASSWORD_REQUIRED') {
+		Auth.signIn(formPayload.username, formPayload.password)
+			.then(user => {
+				// route: change password
+				const challenge = user.ChallengeName || user.challengeName;
+				if (challenge && challenge === 'NEW_PASSWORD_REQUIRED') {
+					const currentUrl = this._router.url.split('?')[0];
+					if (currentUrl !== `/${ROUTING.authorization.routes.changePassword}`) {
 						// navigate to defined url
 						// stop loading animation
 						this._router
@@ -91,45 +90,46 @@ export class AuthService {
 								this._loadingAnimationService.stopLoadingAnimation();
 							});
 					} else {
-						// decode token
-						const userInfo = HelperService.decodeJWTToken(res.AuthenticationResult.IdToken);
+						// update new password
+						Auth.completeNewPassword(
+							user,
+							formPayload.newPassword,
+							{
+								email: formPayload.username
+							}
+						).then(() => {
+							// payload
+							const payload = {
+								email: formPayload.username,
+								password: formPayload.newPassword,
+								rememberMe: false
+							};
 
-						// set current user state
-						this.currentUserState = {
-							profile: {
-								...userInfo,
-								password: HelperService.hashPassword(formPayload.password),
-								language: 'en'
-							},
-							credentials: res.AuthenticationResult,
-							rememberMe: !!formFields ? formFields.value.rememberMe : false,
-							timestamp: moment()
-						};
+							// login user
+							this.initUserState(user, payload);
+						}).catch(err => {
+							// log error
+							console.error(err);
 
-						// navigate to defined url
-						// stop loading animation
-						this._router
-							.navigate([ROUTING.pages.dashboard])
-							.then(() => {
-								// set initial app state
-								const groups = this.currentUserState.profile['cognito:groups'];
-								const role = groups && groups[0];
-
-								// init app state
-								if (role) {
-									this.initAppState({
-										role: role.toUpperCase()
-									});
-								}
-
-								// stop loading animation
-								this._loadingAnimationService.stopLoadingAnimation();
-							});
+							// stop loading animation
+							this._loadingAnimationService.stopLoadingAnimation();
+						});
 					}
+				} else {
+					// payload
+					const payload = {
+						email: formPayload.username,
+						password: formPayload.password,
+						rememberMe: !!formFields ? formFields.value.rememberMe : false
+					};
+
+					// login user
+					this.initUserState(user, payload);
 				}
-			}, (err: HttpErrorResponse) => {
-				const error = err && err.error && err.error.errors && err.error.errors.exception;
-				if (error && error[0]) {
+			})
+			.catch(err => {
+				const error = err && err.message;
+				if (error) {
 					const message = this._i18n({
 						value: 'Error: {{message}}',
 						id: 'Auth_Login_Error_UserOrPasswordException_Description',
@@ -153,46 +153,6 @@ export class AuthService {
 	}
 
 	/**
-	 * perform change password process
-	 *
-	 * @param formPayload
-	 * @param formFields
-	 */
-	public authChangePassword(formPayload: AuthChangePasswordInterface, formFields: FormGroup) {
-		Auth.signIn(formPayload.email, formPayload.oldPassword)
-			.then(user => {
-				if (user.challengeName === 'NEW_PASSWORD_REQUIRED') {
-					Auth.completeNewPassword(
-						user,
-						formPayload.newPassword,
-						{
-							email: formPayload.email
-						}
-					).then(() => {
-						// login user
-						this.authLogin({
-							username: formPayload.email,
-							password: formPayload.newPassword
-						});
-					}).catch(err => {
-						// log error
-						console.error(err);
-
-						// stop loading animation
-						this._loadingAnimationService.stopLoadingAnimation();
-					});
-				}
-			})
-			.catch(err => {
-				// log error
-				console.error(err);
-
-				// stop loading animation
-				this._loadingAnimationService.stopLoadingAnimation();
-			});
-	}
-
-	/**
 	 * authenticate logged-in user
 	 *
 	 * @param payload
@@ -202,20 +162,7 @@ export class AuthService {
 		if (userState) {
 			const storageValidity = moment().diff(userState.timestamp, 'days');
 			if (storageValidity <= AppOptions.rememberMeValidityInDays) {
-				// payload
-				const sessionValidityPayload = {
-					accessToken: userState.credentials.AccessToken,
-					refreshToken: userState.credentials.RefreshToken,
-					username: userState.profile.email,
-					...payload
-				};
-
-				// TODO
 				return of({ status: 'OK' });
-
-				// service: session validity
-				return this._proxyService
-					.postAPI(AppServices['Auth']['Session_Validity'], { bodyParams: sessionValidityPayload });
 			}
 		}
 
@@ -230,16 +177,9 @@ export class AuthService {
 		this.authenticateUser()
 			.subscribe(() => {
 				if (this.currentUserState) {
-					// payload
-					const logoutPayload = {
-						email: this.currentUserState.profile.email,
-						accessToken: this.currentUserState.credentials.AccessToken
-					};
-
-					// call sign-out service
-					//this._proxyService
-					//	.postAPI(AppServices['Auth']['Logout'], { bodyParams: logoutPayload })
-					//	.subscribe();
+					Auth.signOut()
+						.then()
+						.catch(err => console.error(err));
 				}
 
 				// clear sessions
@@ -262,6 +202,49 @@ export class AuthService {
 		this._router
 			.navigate([ROUTING.authorization.routes.login])
 			.then(() => this._loadingAnimationService.stopLoadingAnimation());
+	}
+
+	/**
+	 * init user state
+	 *
+	 * @param data
+	 * @param formPayload
+	 */
+	private initUserState(data, formPayload) {
+		// decode token
+		const userInfo = HelperService.decodeJWTToken(data['signInUserSession'].idToken['jwtToken']);
+
+		// set current user state
+		this.currentUserState = {
+			profile: {
+				...userInfo,
+				password: HelperService.hashPassword(formPayload.password),
+				language: 'en'
+			},
+			credentials: data['signInUserSession'],
+			rememberMe: formPayload.rememberMe,
+			timestamp: moment()
+		};
+
+		// navigate to defined url
+		// stop loading animation
+		this._router
+			.navigate([ROUTING.pages.dashboard])
+			.then(() => {
+				// set initial app state
+				const groups = this.currentUserState.profile['cognito:groups'];
+				const role = groups && groups[0];
+
+				// init app state
+				if (role) {
+					this.initAppState({
+						role: role.toUpperCase()
+					});
+				}
+
+				// stop loading animation
+				this._loadingAnimationService.stopLoadingAnimation();
+			});
 	}
 
 	/**
