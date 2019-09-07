@@ -34,6 +34,10 @@ const ROUTES: Routes = [
 					{
 						path: ROUTING.pages.dashboard,
 						component: DashboardComponent
+					},
+					{
+						path: ROUTING.tracking.title,
+						loadChildren: () => import('./packages/modules.pck/tracking.mod/tracking.module').then(m => m.TrackingModule)
 					}
 				],
 				canActivateChild: [AuthUserStatusGuard]

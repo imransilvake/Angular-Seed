@@ -43,7 +43,7 @@
 			<div class="cd-col cd-col-pm-m-12 cd-col-pm-s-6 cd-col-pm-d-4">
 				<div class="ham-block">
 					<div class="ham-icons ham-red">
-						<fa-icon class="ham-icon" [icon]="faIcons[1]"></fa-icon>
+						<fa-icon class="ham-icon" [icon]="faIcons[3]"></fa-icon>
 					</div>
 					<div class="ham-numbers">
 						<h6>No of Users</h6>
@@ -55,7 +55,7 @@
 			<div class="cd-col cd-col-pm-m-12 cd-col-pm-s-6 cd-col-pm-d-4">
 				<div class="ham-block">
 					<div class="ham-icons ham-green">
-						<fa-icon class="ham-icon" [icon]="faIcons[3]"></fa-icon>
+						<fa-icon class="ham-icon" [icon]="faIcons[5]"></fa-icon>
 					</div>
 					<div class="ham-numbers">
 						<h6>Assigned Hardware</h6>
@@ -67,7 +67,7 @@
 			<div class="cd-col cd-col-pm-m-12 cd-col-pm-s-6 cd-col-pm-d-4">
 				<div class="ham-block">
 					<div class="ham-icons ham-green">
-						<fa-icon class="ham-icon" [icon]="faIcons[4]"></fa-icon>
+						<fa-icon class="ham-icon" [icon]="faIcons[5]"></fa-icon>
 					</div>
 					<div class="ham-numbers">
 						<h6>Unassigned Hardware</h6>
@@ -77,9 +77,4 @@
 			</div>
 		</div>
 	</div>
-
-	<!-- Map -->
-	<ng-container *ngIf="!geoJson">
-		<app-map [markers]="geoJson"></app-map>
-	</ng-container>
 </div>

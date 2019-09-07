@@ -1,0 +1,13 @@
+<div class="ham-tracking">
+    <!-- Head -->
+    <app-head [pageTitle]="'Tracking'"></app-head>
+
+    <!-- Map -->
+    <div class="ham-details">
+        <ng-container *ngIf="geoJson">
+            <div class="ham-map">
+                <app-map [markers]="geoJson"></app-map>
+            </div>
+        </ng-container>
+    </div>
+</div>

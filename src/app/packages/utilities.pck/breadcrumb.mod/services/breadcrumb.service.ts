@@ -80,7 +80,7 @@ export class BreadcrumbService {
 			url += `/${routeURL}`;
 
 			// set specific breadcrumb name
-			const currentLanguage = this._authService.currentUserState.profile.language;
+			const currentLanguage = 'en';
 			const breadcrumbData = child.snapshot.data[this.routeDataBreadcrumb];
 			const name = currentLanguage === AppOptions.languages['en'] ? breadcrumbData.en : breadcrumbData.de;
 
