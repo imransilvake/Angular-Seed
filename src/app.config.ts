@@ -11,7 +11,7 @@ export const AppOptions = {
 		es: 'es'
 	},
 	sessionTime: {
-		auth: 3300 * 1000, // 55 minutes
+		auth: 3601 * 1000, // 1 hour, 1 second
 	},
 	rememberMeValidityInDays: 90,
 	tablePageSizeLimit: 21,

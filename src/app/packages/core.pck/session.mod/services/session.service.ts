@@ -90,7 +90,7 @@ export class SessionService {
 			)
 			.subscribe(() => {
 				// authenticate user
-				this._authService.authValidation(this._router.url).then();
+				this._authService.authValidation(this._router).then();
 			});
 	}
 }
