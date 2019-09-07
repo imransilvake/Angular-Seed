@@ -2,8 +2,84 @@
 	<!-- Head -->
 	<app-head [pageTitle]="'Dashboard'"></app-head>
 
+	<div class="ham-detail">
+		<div class="cd-row">
+			<div class="cd-col cd-col-pm-m-12 cd-col-pm-s-6 cd-col-pm-d-4">
+				<div class="ham-block">
+					<div class="ham-icons ham-yellow">
+						<fa-icon class="ham-icon" [icon]="faIcons[0]"></fa-icon>
+					</div>
+					<div class="ham-numbers">
+						<h6>No of Pilgrims</h6>
+						<h4>2451</h4>
+					</div>
+				</div>
+			</div>
+
+			<div class="cd-col cd-col-pm-m-12 cd-col-pm-s-6 cd-col-pm-d-4">
+				<div class="ham-block">
+					<div class="ham-icons ham-blue">
+						<fa-icon class="ham-icon" [icon]="faIcons[1]"></fa-icon>
+					</div>
+					<div class="ham-numbers">
+						<h6>No of Groups</h6>
+						<h4>23</h4>
+					</div>
+				</div>
+			</div>
+
+			<div class="cd-col cd-col-pm-m-12 cd-col-pm-s-6 cd-col-pm-d-4">
+				<div class="ham-block">
+					<div class="ham-icons ham-red">
+						<fa-icon class="ham-icon" [icon]="faIcons[2]"></fa-icon>
+					</div>
+					<div class="ham-numbers">
+						<h6>No of Campaigns</h6>
+						<h4>43</h4>
+					</div>
+				</div>
+			</div>
+
+			<div class="cd-col cd-col-pm-m-12 cd-col-pm-s-6 cd-col-pm-d-4">
+				<div class="ham-block">
+					<div class="ham-icons ham-red">
+						<fa-icon class="ham-icon" [icon]="faIcons[1]"></fa-icon>
+					</div>
+					<div class="ham-numbers">
+						<h6>No of Users</h6>
+						<h4>439</h4>
+					</div>
+				</div>
+			</div>
+
+			<div class="cd-col cd-col-pm-m-12 cd-col-pm-s-6 cd-col-pm-d-4">
+				<div class="ham-block">
+					<div class="ham-icons ham-green">
+						<fa-icon class="ham-icon" [icon]="faIcons[3]"></fa-icon>
+					</div>
+					<div class="ham-numbers">
+						<h6>Assigned Hardware</h6>
+						<h4>40</h4>
+					</div>
+				</div>
+			</div>
+
+			<div class="cd-col cd-col-pm-m-12 cd-col-pm-s-6 cd-col-pm-d-4">
+				<div class="ham-block">
+					<div class="ham-icons ham-green">
+						<fa-icon class="ham-icon" [icon]="faIcons[4]"></fa-icon>
+					</div>
+					<div class="ham-numbers">
+						<h6>Unassigned Hardware</h6>
+						<h4>10</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<!-- Map -->
-	<ng-container *ngIf="geoJson">
+	<ng-container *ngIf="!geoJson">
 		<app-map [markers]="geoJson"></app-map>
 	</ng-container>
 </div>

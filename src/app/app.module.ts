@@ -32,6 +32,7 @@ import { AuthorizationModule } from './packages/modules.pck/authorization.mod/au
 import { AppLayoutComponent } from './app-layout.component';
 import { DashboardComponent } from './packages/modules.pck/dashboard.component';
 import { WidgetsModule } from './shared/widgets/widgets.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 // i18n using polyfills
 // provided by webpack
@@ -70,6 +71,7 @@ declare const require;
 		// vendors
 		MaterialModule,
 		AmplifyAngularModule,
+		FontAwesomeModule,
 
 		// core
 		FieldsModule,
