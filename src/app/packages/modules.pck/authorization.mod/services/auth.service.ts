@@ -170,17 +170,13 @@ export class AuthService {
 				const data = this.currentUserState;
 
 				// set current user state
-				if (data.credentials['idToken'].jwtToken !== credentials['idToken'].jwtToken) {
+				if (!data || data && data.credentials['idToken'].jwtToken !== credentials['idToken'].jwtToken) {
 					const userInfo = HelperService.decodeJWTToken(credentials['idToken'].jwtToken);
 					this.currentUserState = {
-						profile: {
-							...userInfo,
-							password: data.profile.password,
-							language: data.profile.language
-						},
+						profile: userInfo,
 						credentials: credentials,
-						rememberMe: data.rememberMe,
-						timestamp: data.timestamp
+						rememberMe: !!data ? data.rememberMe : false,
+						timestamp: !!data ? data.timestamp : moment()
 					};
 				}
 
@@ -191,7 +187,8 @@ export class AuthService {
 				return true;
 			})
 			.catch(() => {
-				if (!this.authRoutes.includes(currentPath)) {
+				const path = currentPath.split('?')[0]; // case: change password
+				if (!this.authRoutes.includes(path)) {
 					// logout user
 					this.authLogoutUser();
 				}
@@ -251,11 +248,7 @@ export class AuthService {
 
 		// set current user state
 		this.currentUserState = {
-			profile: {
-				...userInfo,
-				password: HelperService.hashPassword(formPayload.password),
-				language: 'en'
-			},
+			profile: userInfo,
 			credentials: data['signInUserSession'],
 			rememberMe: formPayload.rememberMe,
 			timestamp: moment()

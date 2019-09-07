@@ -71,7 +71,9 @@ export class SessionService {
 	 */
 	private exitSessions(session: any) {
 		if (session === SessionsEnum.SESSION_AUTHENTICATION) {
-			this.authenticationExit.unsubscribe();
+			if (this.authenticationExit) {
+				this.authenticationExit.unsubscribe();
+			}
 		}
 	}
 

@@ -1,16 +1,18 @@
 <div class="ham-account-menu">
 	<button class="ham-btn-icon" mat-button [matMenuTriggerFor]="account">
-		<!-- Image -->
-		<img *ngIf="currentUser.profile.image" class="ham-profile-logo" [src]="currentUser.profile.image" [alt]="userName"/>
+		<ng-container *ngIf="currentUser && currentUser.profile">
+			<!-- Image -->
+			<img *ngIf="currentUser.profile.image" class="ham-profile-logo" [src]="currentUser.profile.image" [alt]="userName"/>
 
-		<!-- No Image -->
-		<span *ngIf="!currentUser.profile.image" class="ham-user-name">{{userNameLetters}}</span>
+			<!-- No Image -->
+			<span *ngIf="!currentUser.profile.image" class="ham-user-name">{{userNameLetters}}</span>
+		</ng-container>
 	</button>
 	<mat-menu #account="matMenu" class="ham-account-mat-menu">
 		<!-- Head -->
 		<div class="ham-head-2" (click)="onClickStopPropagation($event)">
 			<h5 class="ham-title ham-ellipses">{{userName}}</h5>
-			<p class="ham-ellipses">{{currentUser.profile.email}}</p>
+			<p class="ham-ellipses" *ngIf="currentUser && currentUser.profile">{{currentUser.profile.email}}</p>
 		</div>
 		<div (click)="onClickStopPropagationFromActiveElement($event)">
 			<!-- Divider -->
