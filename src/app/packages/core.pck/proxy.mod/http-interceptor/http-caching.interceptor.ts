@@ -1,9 +1,8 @@
 // angular
 import { Injectable } from '@angular/core';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs/internal/Observable';
+import { Observable, AsyncSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { AsyncSubject } from 'rxjs/internal/AsyncSubject';
 
 // app
 import { StorageService } from '../../storage.mod/services/storage.service';

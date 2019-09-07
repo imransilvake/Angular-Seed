@@ -1,7 +1,7 @@
 // angular
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Subject } from 'rxjs/internal/Subject';
+import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 // store

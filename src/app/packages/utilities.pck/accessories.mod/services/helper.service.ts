@@ -1,8 +1,7 @@
 // angular
 import { Injectable } from '@angular/core';
-import { fromEvent } from 'rxjs/internal/observable/fromEvent';
 import { debounceTime } from 'rxjs/operators';
-import { merge } from 'rxjs/internal/observable/merge';
+import { merge, fromEvent } from 'rxjs';
 
 // app
 import { UserRoleEnum } from '../../../modules.pck/authorization.mod/enums/user-role.enum';

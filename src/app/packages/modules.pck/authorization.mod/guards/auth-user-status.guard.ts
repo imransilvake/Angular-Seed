@@ -17,7 +17,6 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 	 * @param state
 	 */
 	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
-		console.log(this._authService.authValidation(state));
 		return this._authService.authValidation(state);
 	}
 

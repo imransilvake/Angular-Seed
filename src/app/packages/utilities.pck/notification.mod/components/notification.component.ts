@@ -1,9 +1,8 @@
 // angular
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
-import { Subject } from 'rxjs/internal/Subject';
 import { delay, takeUntil } from 'rxjs/operators';
-import { of } from 'rxjs/internal/observable/of';
+import { of, Subject } from 'rxjs';
 
 // store
 import { Store } from '@ngrx/store';

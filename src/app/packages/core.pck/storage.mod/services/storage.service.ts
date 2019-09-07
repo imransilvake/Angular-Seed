@@ -1,6 +1,6 @@
 // angular
 import { Injectable } from '@angular/core';
-import { AsyncSubject } from 'rxjs/internal/AsyncSubject';
+import { AsyncSubject } from 'rxjs';
 
 // app
 import { StorageTypeEnum } from '../enums/storage-type.enum';
