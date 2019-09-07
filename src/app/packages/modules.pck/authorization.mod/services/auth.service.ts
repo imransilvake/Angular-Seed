@@ -99,7 +99,8 @@ export class AuthService {
 							user,
 							formPayload.newPassword,
 							{
-								email: formPayload.username
+								email: formPayload.username,
+								name: formPayload.name
 							}
 						).then(() => {
 							// payload

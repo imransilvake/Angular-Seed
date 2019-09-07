@@ -38,6 +38,7 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
 
 		// form group
 		this.formFields = new FormGroup({
+			name: new FormControl('', [Validators.required]),
 			email: new FormControl('', [
 				Validators.required,
 				ValidationService.emailValidator
@@ -78,13 +79,13 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
 		this.password.valueChanges
 			.pipe(takeUntil(this._ngUnSubscribe))
 			.subscribe(() => {
-				// update new password field
-				this.newPassword.updateValueAndValidity();
-
 				const error = this.email.errors;
 				if (!this.email.invalid || error['backendError']) {
 					this.email.setErrors(null);
 				}
+
+				// update new password field
+				this.newPassword.updateValueAndValidity();
 			});
 	}
 
@@ -97,6 +98,10 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
 	/**
 	 * getters
 	 */
+	get name() {
+		return this.formFields.get('name');
+	}
+
 	get email() {
 		return this.formFields.get('email');
 	}
@@ -122,6 +127,7 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
 
 		// payload
 		const formPayload: AuthLoginInterface = {
+			name: this.name.value,
 			username: this.email.value,
 			password: this.password.value,
 			newPassword: this.newPassword.value
