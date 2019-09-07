@@ -8,16 +8,12 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 // app
-import { StorageService } from '../../storage.mod/services/storage.service';
 import { SessionInterface } from '../interfaces/session.interface';
 import { SessionTypeEnum } from '../enums/session-type.enum';
 import { ErrorHandlerInterface } from '../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 import { AuthService } from '../../../modules.pck/authorization.mod/services/auth.service';
 import { SessionsEnum } from '../enums/sessions.enum';
 import { AppOptions } from '../../../../../app.config';
-import { HelperService } from '../../../utilities.pck/accessories.mod/services/helper.service';
-import { ProxyService } from '../../proxy.mod/services/proxy.service';
-import { SidebarService } from '../../../frame.pck/services/sidebar.service';
 
 @Injectable({ providedIn: 'root' })
 export class SessionService {
@@ -27,9 +23,6 @@ export class SessionService {
 	constructor(
 		private _router: Router,
 		private _authService: AuthService,
-		private _storageService: StorageService,
-		private _sidebarService: SidebarService,
-		private _proxyService: ProxyService,
 		private _store: Store<{ SessionInterface: SessionInterface, ErrorHandlerInterface: ErrorHandlerInterface }>
 	) {
 		// subscribe: session
@@ -94,31 +87,8 @@ export class SessionService {
 				switchMap(() => timer(seconds, seconds))
 			)
 			.subscribe(() => {
-				// payload
-				const payload = { source: 'notification' };
-
 				// authenticate user
-				this._authService.authenticateUser(payload)
-					.subscribe(res => {
-						if (!res.status) {
-							// get current user state
-							const data = this._authService.currentUserState;
-							const userInfo = HelperService.decodeJWTToken(res['AuthenticationResult'].IdToken);
-
-							// set current user state
-							this._authService.currentUserState = {
-								profile: {
-									...userInfo,
-									password: data.profile.password,
-									language: data.profile.language,
-									image: data.profile.image
-								},
-								credentials: res,
-								rememberMe: data.rememberMe,
-								timestamp: data.timestamp
-							};
-						}
-					});
+				this._authService.authValidation(this._router.url).then();
 			});
 	}
 }

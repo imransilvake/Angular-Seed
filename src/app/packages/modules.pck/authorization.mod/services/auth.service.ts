@@ -3,7 +3,6 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { FormGroup } from '@angular/forms';
-import { of } from 'rxjs';
 
 // store
 import { Store } from '@ngrx/store';
@@ -14,7 +13,7 @@ import { Auth } from 'aws-amplify';
 // app
 import * as moment from 'moment';
 import * as SessionActions from '../../../core.pck/session.mod/store/actions/session.actions';
-import { AppOptions, LocalStorageItems, SessionStorageItems } from '../../../../../app.config';
+import { LocalStorageItems, SessionStorageItems } from '../../../../../app.config';
 import { ProxyService } from '../../../core.pck/proxy.mod/services/proxy.service';
 import { AuthLoginInterface } from '../interfaces/auth-login.interface';
 import { StorageTypeEnum } from '../../../core.pck/storage.mod/enums/storage-type.enum';
@@ -30,6 +29,7 @@ import { UserRoleEnum } from '../enums/user-role.enum';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+	public authRoutes = [];
 	public errorMessage: EventEmitter<string> = new EventEmitter();
 
 	constructor(
@@ -41,6 +41,10 @@ export class AuthService {
 		private _i18n: I18n,
 		private _dialogService: DialogService
 	) {
+		this.authRoutes = [
+			ROUTING.authorization.routes.login,
+			ROUTING.authorization.routes.changePassword
+		];
 	}
 
 	/**
@@ -153,40 +157,58 @@ export class AuthService {
 	}
 
 	/**
-	 * authenticate logged-in user
+	 * authentication validation
 	 *
-	 * @param payload
+	 * @param state
 	 */
-	public authenticateUser(payload?: any) {
-		const userState = this.currentUserState;
-		if (userState) {
-			const storageValidity = moment().diff(userState.timestamp, 'days');
-			if (storageValidity <= AppOptions.rememberMeValidityInDays) {
-				return of({ status: 'OK' });
-			}
-		}
+	public authValidation(state) {
+		const currentPath = state.url.substring(1);
+		return Auth.currentSession()
+			.then(user => {
+				// get current user state
+				const data = this.currentUserState;
 
-		// authentication failed
-		return of({ status: 'FAIL' });
+				// set current user state
+				if (data.credentials['idToken'].jwtToken !== user['idToken'].jwtToken) {
+					const userInfo = HelperService.decodeJWTToken(user['idToken'].jwtToken);
+					this.setUserState(userInfo, user, data);
+				}
+
+				// navigate to dashboard
+				if (this.authRoutes.includes(currentPath)) {
+					this._router.navigate([ROUTING.pages.dashboard]).then();
+				}
+				return true;
+			})
+			.catch(() => {
+				if (!this.authRoutes.includes(currentPath)) {
+					// logout user
+					this.authLogoutUser();
+				}
+				return true;
+			});
 	}
 
 	/**
 	 * logout user
 	 */
 	public authLogoutUser() {
-		this.authenticateUser()
-			.subscribe(() => {
+		// check user session
+		Auth.currentAuthenticatedUser()
+			.then(() => {
 				if (this.currentUserState) {
+					// logout
 					Auth.signOut()
-						.then()
+						.then(() => this.authClearSessions())
 						.catch(err => console.error(err));
 				}
-
-				// clear sessions
-				this._store.dispatch(new SessionActions.SessionCounterExit(SessionsEnum.SESSION_AUTHENTICATION));
-
+			})
+			.catch(err => {
 				// clear sessions
 				this.authClearSessions();
+
+				// log error
+				console.error(err);
 			});
 	}
 
@@ -194,6 +216,9 @@ export class AuthService {
 	 * clear sessions
 	 */
 	public authClearSessions() {
+		// clear sessions
+		this._store.dispatch(new SessionActions.SessionCounterExit(SessionsEnum.SESSION_AUTHENTICATION));
+
 		// clear data
 		StorageService.clearAllLocalStorageItems();
 		StorageService.clearAllSessionStorageItems();
@@ -277,5 +302,25 @@ export class AuthService {
 		const storageItem = this.currentUserState.rememberMe ? LocalStorageItems.appState : SessionStorageItems.appState;
 		const storageType = this.currentUserState.rememberMe ? StorageTypeEnum.PERSISTANT : StorageTypeEnum.SESSION;
 		this._storageService.put(storageItem, appStatePayload, storageType);
+	}
+
+	/**
+	 * set current user state
+	 *
+	 * @param userInfo
+	 * @param credentials
+	 * @param data
+	 */
+	private setUserState(userInfo: any, credentials: any, data: any) {
+		this.currentUserState = {
+			profile: {
+				...userInfo,
+				password: data.profile.password,
+				language: data.profile.language
+			},
+			credentials: credentials,
+			rememberMe: data.rememberMe,
+			timestamp: data.timestamp
+		};
 	}
 }

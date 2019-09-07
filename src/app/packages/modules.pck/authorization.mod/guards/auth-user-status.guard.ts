@@ -1,26 +1,13 @@
 // angular
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot } from '@angular/router';
-import { catchError, distinctUntilChanged, map } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
 
 // app
-import { ROUTING } from '../../../../../environments/environment';
 import { AuthService } from '../services/auth.service';
-import { HelperService } from '../../../utilities.pck/accessories.mod/services/helper.service';
 
 @Injectable()
 export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
-	public authRoutes = [];
-
-	constructor(
-		private _router: Router,
-		private _authService: AuthService
-	) {
-		this.authRoutes = [
-			ROUTING.authorization.routes.login,
-			ROUTING.authorization.routes.changePassword
-		];
+	constructor(private _authService: AuthService) {
 	}
 
 	/**
@@ -29,41 +16,8 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 	 * @param route
 	 * @param state
 	 */
-	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-		const currentPath = state.url.substring(1);
-		return this._authService.authenticateUser()
-			.pipe(
-				map(res => {
-					if (res.status) {
-						switch (res.status) {
-							case 'OK':
-								if (this.authRoutes.includes(currentPath)) {
-									// navigate to dashboard
-									this._router.navigate([ROUTING.pages.dashboard]).then();
-								}
-								break;
-							case 'FAIL':
-								if (!this.authRoutes.includes(currentPath)) {
-									// logout user
-									this._authService.authLogoutUser();
-								}
-								break;
-						}
-					} else {
-						// get current user state
-						const data = this._authService.currentUserState;
-						const userInfo = HelperService.decodeJWTToken(res['AuthenticationResult'].IdToken);
-
-						// set current user state
-						this.setUserState(userInfo, res, data);
-					}
-					return true;
-				}),
-				catchError(() => {
-					this._authService.authClearSessions();
-					return of(true);
-				})
-			);
+	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+		return this._authService.authValidation(state);
 	}
 
 	/**
@@ -72,51 +26,7 @@ export class AuthUserStatusGuard implements CanActivate, CanActivateChild {
 	 * @param route
 	 * @param state
 	 */
-	canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-		return this._authService.authenticateUser()
-			.pipe(
-				distinctUntilChanged(),
-				map(res => {
-					if (res.status) {
-						if (res.status === 'FAIL') {
-							// logout user
-							this._authService.authLogoutUser();
-						}
-					} else {
-						// get current user state
-						const data = this._authService.currentUserState;
-						const userInfo = HelperService.decodeJWTToken(res['AuthenticationResult'].IdToken);
-
-						// set current user state
-						this.setUserState(userInfo, res, data);
-					}
-					return true;
-				}),
-				catchError(() => {
-					this._authService.authClearSessions();
-					return of(true);
-				})
-			);
-	}
-
-	/**
-	 * set current user state
-	 *
-	 * @param userInfo
-	 * @param credentials
-	 * @param data
-	 */
-	private setUserState(userInfo: any, credentials: any, data: any) {
-		this._authService.currentUserState = {
-			profile: {
-				...userInfo,
-				password: data.profile.password,
-				language: data.profile.language,
-				image: data.profile.image
-			},
-			credentials: credentials,
-			rememberMe: data.rememberMe,
-			timestamp: data.timestamp
-		};
+	canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+		return this._authService.authValidation(state);
 	}
 }
