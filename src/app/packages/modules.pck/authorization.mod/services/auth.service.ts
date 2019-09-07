@@ -164,14 +164,23 @@ export class AuthService {
 	public authValidation(state) {
 		const currentPath = state.url.substring(1);
 		return Auth.currentSession()
-			.then(user => {
+			.then(credentials => {
 				// get current user state
 				const data = this.currentUserState;
 
 				// set current user state
-				if (data.credentials['idToken'].jwtToken !== user['idToken'].jwtToken) {
-					const userInfo = HelperService.decodeJWTToken(user['idToken'].jwtToken);
-					this.setUserState(userInfo, user, data);
+				if (data.credentials['idToken'].jwtToken !== credentials['idToken'].jwtToken) {
+					const userInfo = HelperService.decodeJWTToken(credentials['idToken'].jwtToken);
+					this.currentUserState = {
+						profile: {
+							...userInfo,
+							password: data.profile.password,
+							language: data.profile.language
+						},
+						credentials: credentials,
+						rememberMe: data.rememberMe,
+						timestamp: data.timestamp
+					};
 				}
 
 				// navigate to dashboard
@@ -302,25 +311,5 @@ export class AuthService {
 		const storageItem = this.currentUserState.rememberMe ? LocalStorageItems.appState : SessionStorageItems.appState;
 		const storageType = this.currentUserState.rememberMe ? StorageTypeEnum.PERSISTANT : StorageTypeEnum.SESSION;
 		this._storageService.put(storageItem, appStatePayload, storageType);
-	}
-
-	/**
-	 * set current user state
-	 *
-	 * @param userInfo
-	 * @param credentials
-	 * @param data
-	 */
-	private setUserState(userInfo: any, credentials: any, data: any) {
-		this.currentUserState = {
-			profile: {
-				...userInfo,
-				password: data.profile.password,
-				language: data.profile.language
-			},
-			credentials: credentials,
-			rememberMe: data.rememberMe,
-			timestamp: data.timestamp
-		};
 	}
 }
