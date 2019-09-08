@@ -63,7 +63,7 @@ export class SidebarService {
 				icon: faMapMarkerAlt,
 				children: [
 					{
-						name: 'Realtime Overview',
+						name: 'Overview',
 						url: `/${ ROUTING.tracking.routes.realtimeMap }`,
 					}
 				]
@@ -73,7 +73,7 @@ export class SidebarService {
 				icon: faUsers,
 				children: [
 					{
-						name: 'Pilgrims Overview',
+						name: 'Overview',
 						url: `/${ ROUTING.pilgrim.routes.pilgrim }`,
 					}
 				]
