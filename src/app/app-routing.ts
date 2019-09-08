@@ -38,6 +38,10 @@ const ROUTES: Routes = [
 					{
 						path: ROUTING.tracking.title,
 						loadChildren: () => import('./packages/modules.pck/tracking.mod/tracking.module').then(m => m.TrackingModule)
+					},
+					{
+						path: ROUTING.pilgrim.title,
+						loadChildren: () => import('./packages/modules.pck/pilgrim.mod/pilgrim.module').then(m => m.PilgrimModule)
 					}
 				],
 				canActivateChild: [AuthUserStatusGuard]

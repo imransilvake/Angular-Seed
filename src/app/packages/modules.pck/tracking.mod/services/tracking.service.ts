@@ -38,8 +38,9 @@ export class TrackingService {
 							title: 'Mapbox',
 							description: 'San Francisco, California'
 						}
-					}]
+					}
+				]
 			}
-		)
+		);
 	}
 }

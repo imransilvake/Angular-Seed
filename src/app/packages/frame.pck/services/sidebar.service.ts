@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 
 // app
-import { faHome, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faMapMarkerAlt, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { ROUTING } from '../../../../environments/environment';
 import { SidebarInterface } from '../interfaces/sidebar.interface';
 import { StorageTypeEnum } from '../../core.pck/storage.mod/enums/storage-type.enum';
@@ -65,6 +65,16 @@ export class SidebarService {
 					{
 						name: 'Realtime Overview',
 						url: `/${ ROUTING.tracking.routes.realtimeMap }`,
+					}
+				]
+			},
+			{
+				name: 'Pilgrims',
+				icon: faUsers,
+				children: [
+					{
+						name: 'Pilgrims Overview',
+						url: `/${ ROUTING.pilgrim.routes.pilgrim }`,
 					}
 				]
 			}

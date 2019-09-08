@@ -14,5 +14,11 @@ export const EnvironmentRoutes = {
 		routes: {
 			realtimeMap: 'tracking/map'
 		}
+	},
+	pilgrim: {
+		title: 'pilgrim',
+		routes: {
+			pilgrim: 'pilgrim/overview'
+		}
 	}
 };
