@@ -4,9 +4,9 @@
 
     <!-- Map -->
     <div class="ham-details">
-        <ng-container *ngIf="geoJson">
+        <ng-container *ngIf="mapData">
             <div class="ham-map">
-                <app-map [markers]="geoJson"></app-map>
+                <app-map [markers]="mapData"></app-map>
             </div>
         </ng-container>
     </div>

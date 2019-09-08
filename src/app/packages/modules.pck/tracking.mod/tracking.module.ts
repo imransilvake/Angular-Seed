@@ -3,11 +3,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 // app
-import { WidgetsModule } from '../../../shared/widgets/widgets.module';
-import { RealtimeMapComponent } from './components/realtime-map/realtime-map.component';
-import { SharedModule } from '../../../shared/shared.module';
 import { TACKING_ROUTES } from './tracking-routing';
+import { WidgetsModule } from '../../../shared/widgets/widgets.module';
+import { SharedModule } from '../../../shared/shared.module';
 import { FrameModule } from '../../frame.pck/frame.module';
+import { TrackingService } from './services/tracking.service';
+import { TrackingComponent } from './components/tracking.component';
 
 @NgModule({
 	imports: [
@@ -17,7 +18,10 @@ import { FrameModule } from '../../frame.pck/frame.module';
 		FrameModule
 	],
 	declarations: [
-		RealtimeMapComponent
+		TrackingComponent
+	],
+	providers: [
+		TrackingService
 	]
 })
 

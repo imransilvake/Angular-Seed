@@ -2,7 +2,7 @@
 import { Routes } from '@angular/router';
 
 // app
-import { RealtimeMapComponent } from './components/realtime-map/realtime-map.component';
+import { TrackingComponent } from './components/tracking.component';
 
 // routes
 export const TACKING_ROUTES: Routes = [
@@ -11,7 +11,7 @@ export const TACKING_ROUTES: Routes = [
 		children: [
 			{
 				path: 'map',
-				component: RealtimeMapComponent,
+				component: TrackingComponent,
 				data: {
 					breadcrumb: {
 						en: 'Realtime Overview'
