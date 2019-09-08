@@ -1,9 +1,12 @@
 // angular
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { delay, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 // app
 import * as mapboxgl from 'mapbox-gl';
 import { environment } from '../../../../environments/environment';
+import { SidebarService } from '../../../packages/frame.pck/services/sidebar.service';
 
 @Component({
 	selector: 'app-map',
@@ -11,13 +14,18 @@ import { environment } from '../../../../environments/environment';
 	styleUrls: ['./map.component.scss']
 })
 
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, OnDestroy {
 	@Input() style = 'mapbox://styles/mapbox/streets-v11';
 	@Input() mapCoordinates = [-96, 37.8];
 	@Input() markers;
 
 	public map: mapboxgl.Map;
 	public markersList = [];
+
+	private _ngUnSubscribe: Subject<void> = new Subject<void>();
+
+	constructor(private _sidebarService: SidebarService) {
+	}
 
 	ngOnInit() {
 		(mapboxgl as any).accessToken = environment.mapBox.accessToken;
@@ -50,6 +58,20 @@ export class MapComponent implements OnInit {
 
 		// update map
 		this.map.on('load', () => this.map.resize());
+
+		// listen: sidebar toggle
+		this._sidebarService.sidebarToggle
+			.pipe(
+				takeUntil(this._ngUnSubscribe),
+				delay(350)
+			)
+			.subscribe(() => this.map.resize());
+	}
+
+	ngOnDestroy() {
+		// remove subscriptions
+		this._ngUnSubscribe.next();
+		this._ngUnSubscribe.complete();
 	}
 
 	/**

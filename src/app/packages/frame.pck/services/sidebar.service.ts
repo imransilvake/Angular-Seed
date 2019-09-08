@@ -1,5 +1,5 @@
 // angular
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 
 // app
 import { faHome, faMapMarkerAlt, faUsers } from '@fortawesome/free-solid-svg-icons';
@@ -14,6 +14,8 @@ import { HelperService } from '../../utilities.pck/accessories.mod/services/help
 
 @Injectable({ providedIn: 'root' })
 export class SidebarService {
+	public sidebarToggle: EventEmitter<boolean> = new EventEmitter(false);
+
 	constructor(
 		private _authService: AuthService,
 		private _storageService: StorageService,

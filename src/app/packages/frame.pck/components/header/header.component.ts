@@ -5,9 +5,10 @@ import { delay, takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 // app
-import { ROUTING } from '../../../../../environments/environment';
+import{  ROUTING } from '../../../../../environments/environment';
 import { HelperService } from '../../../utilities.pck/accessories.mod/services/helper.service';
 import { faExpandArrowsAlt, faSpinner, faSync } from '@fortawesome/free-solid-svg-icons';
+import { SidebarService } from '../../services/sidebar.service';
 
 declare const document: any;
 
@@ -27,7 +28,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 	private _ngUnSubscribe: Subject<void> = new Subject<void>();
 
-	constructor(private _router: Router) {
+	constructor(
+		private _router: Router,
+		private _sidebarService: SidebarService
+	) {
 	}
 
 	ngOnInit() {
@@ -64,6 +68,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 		// show full screen
 		HelperService.showFullScreen();
+	}
+
+	/**
+	 * toggle sidebar
+	 */
+	public onClickToggleSidebar() {
+		// toggle sidebar
+		this.drawer.toggle();
+
+		// emit event
+		this._sidebarService.sidebarToggle.emit(true);
 	}
 
 	/**
