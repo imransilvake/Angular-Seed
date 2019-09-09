@@ -38,7 +38,7 @@
 			   [routerLinkActive]="['ham-active']">
 				<!-- name -->
 				<span class="ham-btn-icon">
-					<fa-icon *ngIf="node.icon" [icon]="node.icon"></fa-icon>
+					<fa-icon class="ham-fa-icon" *ngIf="node.icon" [icon]="node.icon"></fa-icon>
 					<span class="ham-title" [class.ham-hide]="!drawerState">{{node.name}}</span>
 					<fa-icon *ngIf="node.externalIcon" [icon]="node.externalIcon"></fa-icon>
 				</span>

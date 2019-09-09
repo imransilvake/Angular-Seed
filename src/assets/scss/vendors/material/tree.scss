@@ -12,13 +12,13 @@
 			a {
 				border-radius: 0;
 				height: 48px;
+				min-width: auto;
 				width: 100%;
 
 				&.ham-blank {
 					.ham-btn-icon {
-						align-items: center;
-						display: flex;
-						justify-content: space-between;
+						display: block;
+						text-align: left;
 						width: 100%;
 					}
 				}

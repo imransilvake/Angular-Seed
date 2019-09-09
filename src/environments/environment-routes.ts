@@ -20,5 +20,11 @@ export const EnvironmentRoutes = {
 		routes: {
 			pilgrim: 'pilgrim/overview'
 		}
+	},
+	group: {
+		title: 'group',
+		routes: {
+			group: 'group/overview'
+		}
 	}
 };

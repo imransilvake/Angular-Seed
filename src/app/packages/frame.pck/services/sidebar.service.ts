@@ -2,7 +2,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 
 // app
-import { faHome, faMapMarkerAlt, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faMapMarkerAlt, faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { ROUTING } from '../../../../environments/environment';
 import { SidebarInterface } from '../interfaces/sidebar.interface';
 import { StorageTypeEnum } from '../../core.pck/storage.mod/enums/storage-type.enum';
@@ -53,32 +53,22 @@ export class SidebarService {
 			{
 				name: 'Dashboard',
 				icon: faHome,
-				children: [
-					{
-						name: 'Home',
-						url: `/${ ROUTING.pages.dashboard }`,
-					}
-				]
+				url: `/${ ROUTING.pages.dashboard }`
 			},
 			{
 				name: 'Tracking',
 				icon: faMapMarkerAlt,
-				children: [
-					{
-						name: 'Overview',
-						url: `/${ ROUTING.tracking.routes.realtimeMap }`,
-					}
-				]
+				url: `/${ ROUTING.tracking.routes.realtimeMap }`
 			},
 			{
 				name: 'Pilgrims',
+				icon: faUser,
+				url: `/${ ROUTING.pilgrim.routes.pilgrim }`
+			},
+			{
+				name: 'Groups',
 				icon: faUsers,
-				children: [
-					{
-						name: 'Overview',
-						url: `/${ ROUTING.pilgrim.routes.pilgrim }`,
-					}
-				]
+				url: `/${ ROUTING.group.routes.group }`
 			}
 		];
 

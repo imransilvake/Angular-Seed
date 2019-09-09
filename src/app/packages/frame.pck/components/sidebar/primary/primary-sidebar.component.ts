@@ -8,9 +8,7 @@ import { Subject } from 'rxjs';
 // app
 import { SidebarInterface } from '../../../interfaces/sidebar.interface';
 import { SidebarService } from '../../../services/sidebar.service';
-import { SelectTypeEnum } from '../../../../core.pck/fields.mod/enums/select-type.enum';
 import { AuthService } from '../../../../modules.pck/authorization.mod/services/auth.service';
-import { UserRoleEnum } from '../../../../modules.pck/authorization.mod/enums/user-role.enum';
 
 @Component({
 	selector: 'app-sidebar-primary',
