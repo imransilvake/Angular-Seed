@@ -1,7 +1,7 @@
 // angular
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { delay, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Subject, timer } from 'rxjs';
 
 // app
 import * as mapboxgl from 'mapbox-gl';
@@ -61,11 +61,19 @@ export class MapComponent implements OnInit, OnDestroy {
 
 		// listen: sidebar toggle
 		this._sidebarService.sidebarToggle
-			.pipe(
-				takeUntil(this._ngUnSubscribe),
-				delay(350)
-			)
-			.subscribe(() => this.map.resize());
+			.pipe(takeUntil(this._ngUnSubscribe))
+			.subscribe(() => {
+				const un = timer(0, 1)
+					.subscribe((res) => {
+						// validate listener
+						if (res > 100) {
+							un.unsubscribe();
+						}
+
+						// resize
+						this.map.resize();
+					})
+			});
 	}
 
 	ngOnDestroy() {
