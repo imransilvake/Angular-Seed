@@ -14,12 +14,19 @@
 				height: 48px;
 				min-width: auto;
 				width: 100%;
+				padding: 0 13px;
 
 				&.ham-blank {
 					.ham-btn-icon {
 						display: block;
 						text-align: left;
 						width: 100%;
+
+						.ham-fa-icon {
+							display: inline-block;
+							text-align: center;
+							width: 23px;
+						}
 					}
 				}
 
