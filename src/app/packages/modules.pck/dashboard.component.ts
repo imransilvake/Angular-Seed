@@ -2,7 +2,7 @@
 import { Component } from '@angular/core';
 
 // app
-import { faCalendarAlt, faMobileAlt, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarAlt, faMobileAlt, faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
 	selector: 'app-dashboard',
@@ -11,5 +11,5 @@ import { faCalendarAlt, faMobileAlt, faUsers } from '@fortawesome/free-solid-svg
 })
 
 export class DashboardComponent {
-	public faIcons = [faUsers, faUsers, faCalendarAlt, faUsers, faMobileAlt, faMobileAlt];
+	public faIcons = [faUser, faUsers, faCalendarAlt, faUsers, faMobileAlt, faMobileAlt];
 }

@@ -42,6 +42,10 @@ const ROUTES: Routes = [
 					{
 						path: ROUTING.pilgrim.title,
 						loadChildren: () => import('./packages/modules.pck/pilgrim.mod/pilgrim.module').then(m => m.PilgrimModule)
+					},
+					{
+						path: ROUTING.group.title,
+						loadChildren: () => import('./packages/modules.pck/group.mod/group.module').then(m => m.GroupModule)
 					}
 				],
 				canActivateChild: [AuthUserStatusGuard]

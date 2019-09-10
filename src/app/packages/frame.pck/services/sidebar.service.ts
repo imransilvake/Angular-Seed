@@ -2,7 +2,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 
 // app
-import { faHome, faMapMarkerAlt, faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarAlt, faHome, faMapMarkerAlt, faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { ROUTING } from '../../../../environments/environment';
 import { SidebarInterface } from '../interfaces/sidebar.interface';
 import { StorageTypeEnum } from '../../core.pck/storage.mod/enums/storage-type.enum';
@@ -69,6 +69,11 @@ export class SidebarService {
 				name: 'Groups',
 				icon: faUsers,
 				url: `/${ ROUTING.group.routes.group }`
+			},
+			{
+				name: 'Campaign',
+				icon: faCalendarAlt,
+				url: `/${ ROUTING.group.routes.group }/remove`
 			}
 		];
 
