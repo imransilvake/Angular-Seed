@@ -1,5 +1,5 @@
 # Angular CLI
-Angular CLI based seed application incorporating many best practices typically needed in Enterprise apps. It includes:
+Angular CLI based seed application incorporating many best practices typically needed in Enterprise apps.
 
 
 ## Content
