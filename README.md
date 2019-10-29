@@ -1,6 +1,9 @@
 # Angular CLI
 Angular CLI based seed application incorporating many best practices typically needed in Enterprise apps.
 
+![Alt text](preview-01.png?raw=true "Login")
+
+![Alt text](preview-02.png?raw=true "Dashboard")
 
 ## Content
 - [X] HttpClient: `getAPI`, `postAPI`
