@@ -4,7 +4,6 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 // amplify
 import Amplify from 'aws-amplify';
-import awsconfig from './aws-exports';
 
 // app
 import { AppModule } from './app/app.module';
@@ -16,7 +15,20 @@ if (environment.production) {
 }
 
 // amplify
-Amplify.configure(awsconfig);
+Amplify.configure({
+	Auth: {
+		identityPoolId: 'eu-central-1:52519fab-2477-47aa-8112-1b2406b552d7',
+		region: 'eu-central-1',
+		userPoolId: 'eu-central-1_okViFvvPn',
+		userPoolWebClientId: '1gp9m9i1475urd1kt0v6tubobf'
+	},
+	Storage: {
+		AWSS3: {
+			bucket: 'rabt-partner-portal',
+			region: 'eu-central-1'
+		}
+	}
+});
 
 // bootstrap app
 platformBrowserDynamic().bootstrapModule(AppModule)
