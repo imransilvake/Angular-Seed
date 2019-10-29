@@ -1,5 +1,8 @@
 # Angular CLI
 Angular CLI based seed application incorporating many best practices typically needed in Enterprise apps. It includes:
+
+
+## Content
 - [X] HttpClient: `getAPI`, `postAPI`
 	- Ensure secure HTTPs calls
 	- HTTP Caching
@@ -11,7 +14,7 @@ Angular CLI based seed application incorporating many best practices typically n
 - [X] Icons from Material and Fontawesome
 
 
-## Content
+## Documentation
 Please follow the link for the documentation: [GUIDE](./GUIDE.md)
 
 #### Configuration
