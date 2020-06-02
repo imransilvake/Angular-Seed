@@ -20,6 +20,7 @@ Please follow the link for the documentation: [GUIDE](./GUIDE.md)
 - [X] SCSS Inclusion
 - [X] Linting: `scss, ts`
 - [X] Build Environments: `dev, stag, next, prod`
+- [X] Translation (i18n)
 
 #### Development
 - [X] Loading Animation
