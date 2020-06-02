@@ -23,15 +23,6 @@ Angular CLI based seed application incorporating many best practices typically n
 - [X] Translation (i18n)
 
 
-#### Development
-- [X] Loading Animation
-- [X] Notification: `success, error, info, warning`
-- [X] Dialog: `confirmation, notice`
-- [X] Error Handler: `common, system`
-- [X] Storage: `local, session, memory`
-- [X] Proxy: `getAPI, postAPI`
-
-
 ## Libraries and Frameworks
 
 #### Internal
