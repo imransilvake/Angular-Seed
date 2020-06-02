@@ -2,7 +2,6 @@
 Angular CLI based seed application incorporating many best practices typically needed in Enterprise apps.
 
 ![Alt text](preview-01.png?raw=true "Login")
-
 ![Alt text](preview-02.png?raw=true "Dashboard")
 
 ## Content
@@ -14,7 +13,7 @@ Angular CLI based seed application incorporating many best practices typically n
 - [X] Custom Pipes: `firstKey`
 - [X] Web Storage API: `local`, `session`, `memory`
 - [X] Components from Material: `input`, `select`, `dialog`, `tree`, `sidenav`
-- [X] Icons from Material and Fontawesome
+- [X] Icons support from Material and Fontawesome
 
 
 ## Documentation
