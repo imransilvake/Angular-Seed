@@ -1,26 +1,27 @@
 # Angular CLI
 Angular CLI based seed application incorporating many best practices typically needed in Enterprise apps.
 
+- Custom Modules:
+	- Loading Animation
+	- Notification: `success, error, info, warning`
+	- Dialog: `confirmation, notice`
+	- Error Handler: `common, system`
+	- Storage: `local, session, memory`
+	- Proxy: `getAPI, postAPI`
+		- Ensure secure HTTPs calls
+		- HTTP Caching
+		- HTTP Error Handling
+- Custom Pipes
+- Usage of Angular Material Framework: `input`, `select`, `dialog`, `tree`, `sidenav`
+- Icons support from Material and Fontawesome
+
+
 ## Content
-- [X] HttpClient: `getAPI`, `postAPI`
-	- Ensure secure HTTPs calls
-	- HTTP Caching
-	- HTTP Error Handling
-- [X] Angular Routing
-- [X] Custom Pipes: `firstKey`
-- [X] Web Storage API: `local`, `session`, `memory`
-- [X] Components from Material: `input`, `select`, `dialog`, `tree`, `sidenav`
-- [X] Icons support from Material and Fontawesome
-
-
-## Documentation
-Please follow the link for the documentation: [GUIDE](./GUIDE.md)
-
-#### Configuration
 - [X] SCSS Inclusion
 - [X] Linting: `scss, ts`
 - [X] Build Environments: `dev, stag, next, prod`
 - [X] Translation (i18n)
+
 
 #### Development
 - [X] Loading Animation
@@ -86,3 +87,7 @@ Include this import in each component to get access to [SCSS variables and funct
 ```
 @import 'main';
 ```
+
+
+## Documentation
+Please follow the link for the documentation: [GUIDE](./GUIDE.md)
