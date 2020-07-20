@@ -39,7 +39,8 @@
 						"aot": true,
 						"assets": [
 							"src/favicon.ico",
-							"src/assets/images"
+							"src/assets/images",
+							"src/assets/svg"
 						],
 						"styles": [
 							"node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
@@ -138,9 +139,6 @@
 						"browserTarget": "seed:build"
 					},
 					"configurations": {
-						"stag": {
-							"browserTarget": "seed:build:stag"
-						},
 						"next": {
 							"browserTarget": "seed:build:next"
 						},
@@ -159,23 +157,6 @@
 					"builder": "@angular-devkit/build-angular:extract-i18n",
 					"options": {
 						"browserTarget": "seed:build"
-					}
-				},
-				"test": {
-					"builder": "@angular-devkit/build-angular:karma",
-					"options": {
-						"main": "src/test.ts",
-						"polyfills": "src/polyfills.ts",
-						"tsConfig": "tsconfig.spec.json",
-						"karmaConfig": "src/karma.conf.js",
-						"styles": [
-							"src/styles.scss"
-						],
-						"scripts": [],
-						"assets": [
-							"src/favicon.ico",
-							"src/assets"
-						]
 					}
 				},
 				"lint": {
