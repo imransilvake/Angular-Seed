@@ -2,42 +2,43 @@
 	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
 	"version": 1,
 	"newProjectRoot": "projects",
+	"defaultProject": "seed",
 	"projects": {
-		"ham": {
+		"seed": {
 			"root": "",
 			"sourceRoot": "src",
 			"projectType": "application",
 			"prefix": "app",
 			"schematics": {
 				"@schematics/angular:component": {
-					"styleext": "scss",
-					"spec": false
+					"style": "scss",
+					"skipTests": true
 				},
 				"@schematics/angular:module": {
-					"spec": false
+					"skipTests": false
 				},
 				"@schematics/angular:service": {
-					"spec": false
+					"skipTests": false
 				},
 				"@schematics/angular:pipe": {
-					"spec": false
+					"skipTests": false
 				},
 				"@schematics/angular:directive": {
-					"spec": false
+					"skipTests": false
 				}
 			},
 			"architect": {
 				"build": {
 					"builder": "@angular-devkit/build-angular:browser",
 					"options": {
-						"outputPath": "dist/ham",
+						"outputPath": "dist/seed",
 						"index": "src/index.html",
 						"main": "src/main.ts",
 						"polyfills": "src/polyfills.ts",
-						"tsConfig": "src/tsconfig.app.json",
+						"tsConfig": "tsconfig.app.json",
+						"aot": true,
 						"assets": [
 							"src/favicon.ico",
-							"src/assets/svg",
 							"src/assets/images"
 						],
 						"styles": [
@@ -52,23 +53,6 @@
 						"scripts": []
 					},
 					"configurations": {
-						"stag": {
-							"fileReplacements": [
-								{
-									"replace": "src/environments/environment.ts",
-									"with": "src/environments/environment.stag.ts"
-								}
-							],
-							"optimization": true,
-							"outputHashing": "all",
-							"sourceMap": false,
-							"extractCss": true,
-							"namedChunks": false,
-							"aot": true,
-							"extractLicenses": true,
-							"vendorChunk": false,
-							"buildOptimizer": true
-						},
 						"next": {
 							"fileReplacements": [
 								{
@@ -81,7 +65,6 @@
 							"sourceMap": false,
 							"extractCss": true,
 							"namedChunks": false,
-							"aot": true,
 							"extractLicenses": true,
 							"vendorChunk": false,
 							"buildOptimizer": true
@@ -98,7 +81,6 @@
 							"sourceMap": false,
 							"extractCss": true,
 							"namedChunks": false,
-							"aot": true,
 							"extractLicenses": true,
 							"vendorChunk": false,
 							"buildOptimizer": true
@@ -115,11 +97,10 @@
 							"sourceMap": false,
 							"extractCss": true,
 							"namedChunks": false,
-							"aot": true,
 							"extractLicenses": true,
 							"vendorChunk": false,
 							"buildOptimizer": true,
-							"outputPath": "dist/ham-en/",
+							"outputPath": "dist/seed-en/",
 							"baseHref": "/en/",
 							"i18nFile": "src/locale/translation.en-US.xlf",
 							"i18nFormat": "xlf",
@@ -142,7 +123,7 @@
 							"extractLicenses": true,
 							"vendorChunk": false,
 							"buildOptimizer": true,
-							"outputPath": "dist/ham-de/",
+							"outputPath": "dist/seed-de/",
 							"baseHref": "/de/",
 							"i18nFile": "src/locale/translation.de.xlf",
 							"i18nFormat": "xlf",
@@ -154,30 +135,30 @@
 				"serve": {
 					"builder": "@angular-devkit/build-angular:dev-server",
 					"options": {
-						"browserTarget": "ham:build"
+						"browserTarget": "seed:build"
 					},
 					"configurations": {
 						"stag": {
-							"browserTarget": "ham:build:stag"
+							"browserTarget": "seed:build:stag"
 						},
 						"next": {
-							"browserTarget": "ham:build:next"
+							"browserTarget": "seed:build:next"
 						},
 						"prod": {
-							"browserTarget": "ham:build:prod"
+							"browserTarget": "seed:build:prod"
 						},
 						"prod-en": {
-							"browserTarget": "ham:build:prod-en"
+							"browserTarget": "seed:build:prod-en"
 						},
 						"prod-de": {
-							"browserTarget": "ham:build:prod-de"
+							"browserTarget": "seed:build:prod-de"
 						}
 					}
 				},
 				"extract-i18n": {
 					"builder": "@angular-devkit/build-angular:extract-i18n",
 					"options": {
-						"browserTarget": "ham:build"
+						"browserTarget": "seed:build"
 					}
 				},
 				"test": {
@@ -211,7 +192,7 @@
 				}
 			}
 		},
-		"ham-e2e": {
+		"seed-e2e": {
 			"root": "e2e/",
 			"projectType": "application",
 			"architect": {
@@ -219,17 +200,17 @@
 					"builder": "@angular-devkit/build-angular:protractor",
 					"options": {
 						"protractorConfig": "e2e/protractor.conf.js",
-						"devServerTarget": "ham:serve"
+						"devServerTarget": "seed:serve"
 					},
 					"configurations": {
 						"stag": {
-							"devServerTarget": "ham:serve:stag"
+							"devServerTarget": "seed:serve:stag"
 						},
 						"next": {
-							"devServerTarget": "ham:serve:next"
+							"devServerTarget": "seed:serve:next"
 						},
 						"prod": {
-							"devServerTarget": "ham:serve:prod"
+							"devServerTarget": "seed:serve:prod"
 						}
 					}
 				},
@@ -244,6 +225,5 @@
 				}
 			}
 		}
-	},
-	"defaultProject": "ham"
+	}
 }

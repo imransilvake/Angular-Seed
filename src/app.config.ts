@@ -2,21 +2,7 @@
 import { AppServicesInterface } from './app/packages/core.pck/proxy.mod/interfaces/app-services.interface';
 
 // general
-export const AppOptions = {
-	secretKey: 'ham',
-	languages: {
-		en: 'en',
-		de: 'de',
-		fr: 'fr',
-		es: 'es'
-	},
-	sessionTime: {
-		auth: 3601 * 1000, // 1 hour, 1 second
-	},
-	rememberMeValidityInDays: 90,
-	tablePageSizeLimit: 21,
-	tablePageSizeWithoutLimit: 1000
-};
+export const AppOptions = {};
 
 // services
 export const AppServices: { [moduleName: string]: { [name: string]: AppServicesInterface } } = {
@@ -27,14 +13,14 @@ export const AppServices: { [moduleName: string]: { [name: string]: AppServicesI
 
 // local-storage items
 export const LocalStorageItems = {
-	userState: 'ham-local-us',
-	appState: 'ham-local-as'
+	userState: 'app-local-us',
+	appState: 'app-local-as'
 };
 
 // session-storage items
 export const SessionStorageItems = {
-	userState: 'ham-session-us',
-	appState: 'ham-session-as'
+	userState: 'app-session-us',
+	appState: 'app-session-as'
 };
 
 // headers for a request to backend

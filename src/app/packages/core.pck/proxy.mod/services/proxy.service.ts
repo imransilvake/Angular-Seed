@@ -5,8 +5,8 @@ import { retry, timeout } from 'rxjs/operators';
 
 // app
 import { ENV_SERVICE_URL } from '../../../../../environments/environment';
-import { AppServicesInterface } from '../interfaces/app-services.interface';
 import { RESTAPIConfig } from '../../../../../app.config';
+import { AppServicesInterface } from '../interfaces/app-services.interface';
 import { HttpOptionsService } from './http-options.service';
 
 @Injectable({ providedIn: 'root' })

@@ -3,9 +3,8 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 
 // app
-import { LocalStorageItems, RequestHeaders, SessionStorageItems } from '../../../../../app.config';
+import { RequestHeaders } from '../../../../../app.config';
 import { StorageService } from '../../storage.mod/services/storage.service';
-import { StorageTypeEnum } from '../../storage.mod/enums/storage-type.enum';
 
 @Injectable({ providedIn: 'root' })
 export class HttpOptionsService {
@@ -28,9 +27,6 @@ export class HttpOptionsService {
 				headers = headers.set(key, headerValues[key]);
 			});
 		}
-
-		// add access token to the headers
-		headers = this.addAccessToken(headers);
 
 		return headers;
 	}
@@ -82,7 +78,6 @@ export class HttpOptionsService {
 				}
 			}
 		}
-
 		return url + params;
 	}
 
@@ -105,7 +100,6 @@ export class HttpOptionsService {
 
 			url = url + params;
 		}
-
 		return url;
 	}
 
@@ -126,26 +120,6 @@ export class HttpOptionsService {
 				}
 			}
 		}
-
 		return url;
-	}
-
-	/**
-	 * add access token to the headers
-	 *
-	 * @param headers
-	 */
-	private addAccessToken(headers: HttpHeaders) {
-		// current user
-		const userState =
-			this._storageService.get(LocalStorageItems.userState, StorageTypeEnum.PERSISTANT) ||
-			this._storageService.get(SessionStorageItems.userState, StorageTypeEnum.SESSION);
-
-		// add access token
-		if (userState) {
-			return headers.set('Authorization', userState.credentials.IdToken.toString());
-		}
-
-		return headers;
 	}
 }

@@ -24,8 +24,8 @@ export class SelectComponent {
 	@Input() showLabel = false;
 	@Input() labelName;
 
-	@Input() selectId = 'ham-select';
-	@Input() selectClassPanel = 'ham-select-panel';
+	@Input() selectId = 'app-select';
+	@Input() selectClassPanel = 'app-select-panel';
 	@Input() selectPlaceHolder;
 
 	@Input() showHint = false;

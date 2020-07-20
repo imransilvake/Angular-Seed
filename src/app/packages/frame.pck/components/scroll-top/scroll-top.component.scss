@@ -1,29 +1,20 @@
-@import 'main';
+@import 'scss-methods';
 
-.ham-scroll-top {
-	bottom: 25px;
+.app-scroll-top {
+	bottom: 20px;
 	position: fixed;
-	right: 25px;
+	right: 20px;
 	z-index: cd-zIndex(float);
 
 	a {
-		background-color: cd-palette($cd-background, 2003);
-		border-radius: 5px;
-		box-shadow: 1px 1px 15px cd-palette($cd-shadow, 4000, .4);
-		color: cd-palette($cd-color, 1001);
+		color: var(--tc5);
 		cursor: pointer;
-		display: block;
-		height: 36px;
-		opacity: .9;
-		padding: 3px;
-		width: 36px;
 
-		&:hover {
-			opacity: 1;
-		}
-
-		.mat-icon {
-			font-size: cd-fontSize(s30);
+		.ik-icon {
+			display: block;
+			font-size: cd-fontSize(s24);
+			height: 24px;
+			line-height: cd-lineHeight(1.1);
 		}
 	}
 }

@@ -1,6 +1,6 @@
 // angular
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 
 // app
 import { DialogInterface } from '../interfaces/dialog.interface';

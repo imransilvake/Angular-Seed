@@ -2,11 +2,9 @@
 import { NgModule } from '@angular/core';
 
 // app
-import { SharedModule } from '../../../shared/shared.module';
+import { SharedModule } from '../../../shared.module';
 import { InputComponent } from './components/input/input.component';
 import { SelectComponent } from './components/select/select.component';
-import { AutocompleteComponent } from './components/autocomplete/autocomplete.component';
-import { DatepickerComponent } from './components/datepicker/datepicker.component';
 
 @NgModule({
 	imports: [
@@ -14,15 +12,11 @@ import { DatepickerComponent } from './components/datepicker/datepicker.componen
 	],
 	declarations: [
 		InputComponent,
-		SelectComponent,
-		AutocompleteComponent,
-		DatepickerComponent
+		SelectComponent
 	],
 	exports: [
 		InputComponent,
-		SelectComponent,
-		AutocompleteComponent,
-		DatepickerComponent
+		SelectComponent
 	]
 })
 

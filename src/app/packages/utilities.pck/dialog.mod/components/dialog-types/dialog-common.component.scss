@@ -1,9 +1,9 @@
-@import 'main';
+@import 'scss-methods';
 
-.ham-dialog-common {
+.app-dialog-common {
 	text-align: center;
 
-	.ham-header {
+	.app-header {
 		padding: 20px 40px 12px;
 
 		.modal-icon {
@@ -12,17 +12,17 @@
 		}
 	}
 
-	.ham-content {
+	.app-content {
 		padding: 0 40px;
 	}
 
-	.ham-footer {
+	.app-footer {
 		padding: 20px 40px 30px;
 
 		button {
-			background-color: cd-palette($cd-background, 2003);
+			// background-color: cd-palette($cd-background, 2003);
 			border-radius: 3px;
-			color: cd-palette($cd-color, 1001);
+			// color: cd-palette($cd-color, 1001);
 			margin: 0 15px;
 			width: 25%;
 		}
@@ -30,17 +30,17 @@
 
 	// media
 	@include cd-media(desktop, mini) {
-		.ham-header {
+		.app-header {
 			.modal-icon {
 				max-width: 80px;
 			}
 
 			h4 {
-				font-size: cd-fontSize(s19);
+				// font-size: cd-fontSize(s19);
 			}
 		}
 
-		.ham-footer {
+		.app-footer {
 			button {
 				margin: 10px 0;
 				width: 100%;

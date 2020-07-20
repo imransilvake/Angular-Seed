@@ -1,28 +1,12 @@
 // angular
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { I18n } from '@ngx-translate/i18n-polyfill';
-
-// store
-import { Store } from '@ngrx/store';
 
 // app
-import * as NotificationActions from '../../../utilities.pck/notification.mod/store/actions/notification.actions';
-import * as ErrorHandlerActions from '../../../utilities.pck/error-handler.mod/store/actions/error-handler.actions';
 import { HttpApiTypeEnum } from '../enums/http-api-type.enum';
-import { NotificationPayloadInterface } from '../../../utilities.pck/notification.mod/interfaces/notification-payload.interface';
-import { NotificationInterface } from '../../../utilities.pck/notification.mod/interfaces/notification.interface';
-import { ErrorHandlerPayloadInterface } from '../../../utilities.pck/error-handler.mod/interfaces/error-handler-payload.interface';
-import { ErrorHandlerInterface } from '../../../utilities.pck/error-handler.mod/interfaces/error-handler.interface';
 
 @Injectable({ providedIn: 'root' })
 export class HttpErrorHandlingService {
-	constructor(
-		private _store: Store<{ NotificationInterface: NotificationInterface, ErrorHandlerInterface: ErrorHandlerInterface }>,
-		private _i18n: I18n
-	) {
-	}
-
 	/**
 	 * http error handling
 	 *
@@ -46,24 +30,11 @@ export class HttpErrorHandlingService {
 	 * @param response
 	 */
 	private handleGeneralErrors(response) {
-		let payload: ErrorHandlerPayloadInterface;
 		if (!navigator.onLine) {
 			// system error
-			payload = {
-				icon: 'error_icon',
-				title: this._i18n({
-					value: 'Title: Internet Connection Exception',
-					id: 'Error_Internet_Connection_Title'
-				}),
-				message: this._i18n({
-					value: 'Description: Internet Connection Exception',
-					id: 'Error_Internet_Connection_Description'
-				})
-			};
-			this._store.dispatch(new ErrorHandlerActions.ErrorHandlerSystem(payload));
+			console.log('network error')
 			return false;
 		}
-
 		return true;
 	}
 
@@ -84,13 +55,9 @@ export class HttpErrorHandlingService {
 			}
 		}
 
-		// dispatch action: notification error
+		// notification error
 		if (backendError) {
-			const payload: NotificationPayloadInterface = {
-				text: backendError,
-				keepAfterNavigationChange: true
-			};
-			this._store.dispatch(new NotificationActions.NotificationError(payload));
+			console.error('Get error');
 		}
 
 		// return response
@@ -103,23 +70,9 @@ export class HttpErrorHandlingService {
 	 * @param response
 	 */
 	private handlePostErrors(response) {
-		let payload: ErrorHandlerPayloadInterface;
 		switch (response.status) {
 			case 0:
 			case 403:
-				payload = {
-					icon: 'error_icon',
-					title: this._i18n({
-						value: 'Title: Unknown Error Exception',
-						id: 'Error_UnknownErrorException_Title'
-					}),
-					message: this._i18n({
-						value: 'Description: Unknown Error Exception',
-						id: 'Error_UnknownErrorException_Description'
-					}),
-					buttonTexts: [this._i18n({ value: 'Button - Close', id: 'Common_Button_Close' })]
-				};
-				this._store.dispatch(new ErrorHandlerActions.ErrorHandlerCommon(payload));
 				break;
 		}
 

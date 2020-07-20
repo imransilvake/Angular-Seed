@@ -1,67 +1,67 @@
-@import 'main';
+@import 'scss-methods';
 
-.ham-input-field {
+.app-input-field {
 	label {
-		color: cd-palette($cd-color, 1004);
+		// color: cd-palette($cd-color, 1004);
 		display: block;
-		font-size: cd-fontSize(s13);
+		// font-size: cd-fontSize(s13);
 		margin-bottom: 5px;
 	}
 
-	.ham-input-wrapper {
-		border: 1px solid cd-palette($cd-border, 3004, .3);
+	.app-input-wrapper {
+		// border: 1px solid cd-palette($cd-border, 3004, .3);
 
-		&.ham-invalid {
-			border: 1px solid cd-palette($cd-border, 3009);
+		&.app-invalid {
+			// border: 1px solid cd-palette($cd-border, 3009);
 		}
 
-		&.ham-layout-flex {
+		&.app-layout-flex {
 			align-items: center;
 			display: flex;
 
-			&.ham-direction {
+			&.app-direction {
 				direction: rtl;
 			}
 
-			.ham-info {
+			.app-info {
 				display: block;
 
 				button {
-					background-color: cd-palette($cd-background, 2007);
+					// background-color: cd-palette($cd-background, 2007);
 					border-radius: 0;
 					height: 41px;
 					margin-left: 0;
 					margin-top: 0;
 
 					&:disabled {
-						background-color: cd-palette($cd-background, 2003);
+						// background-color: cd-palette($cd-background, 2003);
 					}
 
-					&:not(.ham-simple) {
+					&:not(.app-simple) {
 						min-width: 38px;
 						padding: 0;
 						width: 38px;
 					}
 
-					&.ham-simple {
+					&.app-simple {
 						min-width: auto;
 						padding: 0 8px;
 						width: auto;
 					}
 
 					fa-icon {
-						color: cd-palette($cd-color, 1001);
-						font-size: cd-fontSize(s14);
+						// color: cd-palette($cd-color, 1001);
+						// font-size: cd-fontSize(s14);
 					}
 
 					p {
-						color: cd-palette($cd-color, 1001);
+						// color: cd-palette($cd-color, 1001);
 					}
 				}
 			}
 		}
 
-		.ham-input, .ham-textarea {
+		.app-input, .app-textarea {
 			direction: ltr;
 			position: relative;
 			width: 100%;
@@ -70,19 +70,19 @@
 				background-color: transparent;
 				border: none;
 				box-shadow: none;
-				color: cd-palette($cd-color, 1001);
+				// color: cd-palette($cd-color, 1001);
 				cursor: pointer;
-				font-size: cd-fontSize(s14);
+				// font-size: cd-fontSize(s14);
 				margin: 0;
 				outline: 0;
 				padding: 12px;
 				width: 100%;
 
-				&.ham-time {
+				&.app-time {
 					padding: 10px;
 				}
 
-				&.ham-space {
+				&.app-space {
 					padding-right: 32px;
 				}
 
@@ -92,7 +92,7 @@
 				}
 
 				&::placeholder {
-					color: cd-palette($cd-color, 1004);
+					// color: cd-palette($cd-color, 1004);
 					opacity: 1;
 				}
 
@@ -104,23 +104,14 @@
 					animation: autofill 0s forwards;
 					background-color: transparent;
 					box-shadow: none;
-					color: cd-palette($cd-color, 1001);
+					// color: cd-palette($cd-color, 1001);
 					transition: background-color 5000s ease-in-out 0s;
-				}
-
-				&::-webkit-credentials-auto-fill-button,
-				&::-webkit-caps-lock-indicator,
-				&::-webkit-contacts-auto-fill-button {
-					pointer-events: none;
-					position: absolute;
-					right: 0;
-					visibility: hidden;
 				}
 
 				@keyframes autofill {
 					100% {
 						background-color: transparent;
-						color: cd-palette($cd-color, 1001);
+						// color: cd-palette($cd-color, 1001);
 					}
 				}
 
@@ -130,26 +121,26 @@
 			}
 
 			// icon: password show
-			.ham-icon {
-				color: cd-palette($cd-color, 1001);
+			.app-icon {
+				// color: cd-palette($cd-color, 1001);
 				cursor: pointer;
 				position: absolute;
 				right: 6px;
 
-				&:not(.ham-textarea) {
+				&:not(.app-textarea) {
 					top: 12px;
 				}
 
-				&.ham-textarea {
+				&.app-textarea {
 					top: 10px;
 				}
 
-				&.ham-eye {
+				&.app-eye {
 					right: 30px;
 				}
 
 				&.mat-icon {
-					font-size: cd-fontSize(s19);
+					// font-size: cd-fontSize(s19);
 					height: 20px;
 					width: 20px;
 				}
@@ -157,9 +148,9 @@
 		}
 
 		// focused
-		&.ham-focused {
-			&:not(.ham-invalid) {
-				border: 1px solid cd-palette($cd-border, 3007);
+		&.app-focused {
+			&:not(.app-invalid) {
+				// border: 1px solid cd-palette($cd-border, 3007);
 			}
 		}
 	}
@@ -167,9 +158,9 @@
 	// error
 	.mat-error {
 		p {
-			background-color: cd-palette($cd-background, 2009);
-			color: cd-palette($cd-color, 1001);
-			font-size: cd-fontSize(s12);
+			// background-color: cd-palette($cd-background, 2009);
+			// color: cd-palette($cd-color, 1001);
+			// font-size: cd-fontSize(s12);
 			margin-top: 0;
 			padding: 2px 6px;
 		}
@@ -177,9 +168,9 @@
 
 	// hint
 	.mat-hint {
-		color: cd-palette($cd-color, 1004);
+		// color: cd-palette($cd-color, 1004);
 		display: block;
-		font-size: cd-fontSize(s12);
+		// font-size: cd-fontSize(s12);
 		margin-top: 4px;
 	}
 }

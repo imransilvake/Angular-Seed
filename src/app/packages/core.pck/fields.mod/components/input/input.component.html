@@ -1,102 +1,67 @@
-<div class="ham-input-field" *ngIf="control">
+<div class="app-input-field" *ngIf="control">
 	<!-- Label -->
 	<label *ngIf="showLabel" [htmlFor]="inputId">{{labelName}}</label>
 
 	<!-- Info & Input -->
-	<div
-		class="ham-input-wrapper"
-		[class.ham-invalid]="control.invalid && control.touched"
-		[class.ham-focused]="inputFocused"
-		[class.ham-layout-flex]="layoutStyleType === 1"
-		[class.ham-direction]="layoutStyleData?.changeDirection">
-		<!-- Info -->
-		<div class="ham-info cd-hide" *ngIf="layoutStyleData">
-			<button
-				mat-button
-				type="submit"
-				class="ham-btn-icon"
-				[disabled]="!layoutStyleData?.status || !layoutStyleData?.button"
-				[class.ham-simple]="!layoutStyleData?.button">
-				<ng-container *ngIf="layoutStyleData?.button">
-					<fa-icon *ngIf="layoutStyleData?.icon" [icon]="layoutStyleData.icon"></fa-icon>
-				</ng-container>
-				<ng-container *ngIf="!layoutStyleData?.button">
-					<p>{{layoutStyleData.title}}</p>
-				</ng-container>
-			</button>
-		</div>
+	<div class="app-input-wrapper"
+		 [class.app-invalid]="control.invalid && control.touched"
+		 [class.app-focused]="inputFocused">
 
 		<!-- Input -->
-		<div class="ham-input" *ngIf="!typeTextArea">
-			<input
-				matInput
-				[formControl]="control"
-				[id]="inputId"
-				[name]="inputName"
-				[type]="hidePassword ? 'password' : inputType"
-				[value]="control.value"
-				[placeholder]="inputPlaceHolder"
-				[autocomplete]="autocomplete"
-				[class.ham-space]="control.value"
-				[class.ham-time]="inputType === 'time'"
-				(focus)="inputFocused=true"
-				(focusout)="inputFocused=false">
+		<div class="app-input" *ngIf="!typeTextArea">
+			<input matInput
+				   [formControl]="control"
+				   [id]="inputId"
+				   [name]="inputName"
+				   [type]="hidePassword ? 'password' : inputType"
+				   [value]="control.value"
+				   [placeholder]="inputPlaceHolder"
+				   [autocomplete]="autocomplete"
+				   [class.app-space]="control.value"
+				   [class.app-time]="inputType === 'time'"
+				   (focus)="inputFocused=true"
+				   (focusout)="inputFocused=false">
 
 			<!-- Close Icon -->
 			<mat-icon
-				*ngIf="control.value && !control.disabled"
-				class="ham-icon ham-close"
-				(click)="control.setValue('')">
+					*ngIf="control.value && !control.disabled"
+					class="app-icon app-close"
+					(click)="control.setValue('')">
 				close
 			</mat-icon>
 
 			<!-- Password Icon -->
-			<mat-icon
-				*ngIf="showHidePassword && control.value"
-				class="ham-icon ham-eye"
-				matSuffix
-				(click)="hidePassword = !hidePassword">
+			<mat-icon *ngIf="showHidePassword && control.value"
+					  class="app-icon app-eye"
+					  matSuffix
+					  (click)="hidePassword = !hidePassword">
 				{{hidePassword ? 'visibility_off' : 'visibility'}}
 			</mat-icon>
 		</div>
 
 		<!-- Text Area -->
-		<div class="ham-textarea" *ngIf="typeTextArea">
+		<div class="app-textarea" *ngIf="typeTextArea">
 			<!-- Simple -->
-			<textarea
-				matInput
-				cdkTextareaAutosize
-				*ngIf="!richEditor"
-				[formControl]="control"
-				[id]="inputId"
-				[name]="inputName"
-				[type]="hidePassword ? 'password' : inputType"
-				[value]="control.value"
-				[placeholder]="inputPlaceHolder"
-				[cdkAutosizeMinRows]="textareaMinRows"
-				[cdkAutosizeMaxRows]="textareaMaxRows"
-				[class.ham-space]="control.value"
-				(focus)="inputFocused=true"
-				(focusout)="inputFocused=false">
+			<textarea matInput
+					  cdkTextareaAutosize
+					  [formControl]="control"
+					  [id]="inputId"
+					  [name]="inputName"
+					  [type]="hidePassword ? 'password' : inputType"
+					  [value]="control.value"
+					  [placeholder]="inputPlaceHolder"
+					  [cdkAutosizeMinRows]="textareaMinRows"
+					  [cdkAutosizeMaxRows]="textareaMaxRows"
+					  [class.app-space]="control.value"
+					  (focus)="inputFocused=true"
+					  (focusout)="inputFocused=false">
 			</textarea>
 
-			<!-- Rich -->
-			<ckeditor
-				*ngIf="richEditor && editor"
-				class="ham-editor"
-				[formControl]="control"
-				[config]="{
-					toolbar: [ 'Bold', 'Italic', 'BlockQuote', 'bulletedList', '|', 'Link', '|', 'Undo', 'Redo' ]
-				}"
-				[editor]="editor">
-			</ckeditor>
-
 			<!-- Close Icon -->
-			<mat-icon
-				*ngIf="control.value"
-				class="ham-icon ham-close"
-				[class.ham-textarea]="typeTextArea"
-				(click)="control.setValue('')">
+			<mat-icon *ngIf="control.value"
+					  class="app-icon app-close"
+					  [class.app-textarea]="typeTextArea"
+					  (click)="control.setValue('')">
 				close
 			</mat-icon>
 		</div>
@@ -114,37 +79,8 @@
 			<p *ngSwitchCase="'maxlength'" i18n="@@Fields_Input_Error_MaxLength">
 				It must have at most {{control.errors.maxlength.requiredLength}} characters long
 			</p>
-			<p *ngSwitchCase="'username'" i18n="@@Fields_Input_Error_Username">
-				<ng-container *ngIf="control.errors.usernameMinLength">
-					It must have at least {{control.errors.usernameRequiredLength}} characters long
-				</ng-container>
-				<ng-container *ngIf="!control.errors.usernameMinLength">
-					It must have at most {{control.errors.usernameRequiredLength}} characters long
-				</ng-container>
-			</p>
-			<p *ngSwitchCase="'text'" i18n="@@Fields_Input_Error_Text">
-				Only alphabetic characters are allowed!
-			</p>
-			<p *ngSwitchCase="'password'" i18n="@@Fields_Input_Error_Password">
-				Password min. 8 characters required!
-			</p>
-			<p *ngSwitchCase="'passwordStrength'" i18n="@@Fields_Input_Error_Password_Strength">
-				Password is too weak!
-			</p>
 			<p *ngSwitchCase="'email'" i18n="@@Fields_Input_Error_Email">
 				Please enter a valid email address
-			</p>
-			<p *ngSwitchCase="'confirmPassword'" i18n="@@Fields_Input_Error_Password_Mismatch">
-				The two passwords are not identical.
-			</p>
-			<p *ngSwitchCase="'invalidUrl'">
-				Invalid Link!
-			</p>
-			<p *ngSwitchCase="'invalidTime'" i18n="@@Fields_Datepicker_Error_Invalid_Time">
-				Invalid Time!
-			</p>
-			<p *ngSwitchCase="'invalidVersion'" i18n="@@Fields_Datepicker_Error_Invalid_Version">
-				Only numeric and dot(s) are allowed!
 			</p>
 			<p *ngSwitchCase="'backendError'">
 				Invalid Field!

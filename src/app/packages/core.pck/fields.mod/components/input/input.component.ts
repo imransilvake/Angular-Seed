@@ -1,11 +1,6 @@
 // angular
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-
-// app
-import { InputStyleEnum } from '../../enums/input-style.enum';
-import { InputStyleInterface } from '../../interfaces/input-style.interface';
 
 @Component({
 	selector: 'app-input',
@@ -14,20 +9,14 @@ import { InputStyleInterface } from '../../interfaces/input-style.interface';
 })
 
 export class InputComponent implements OnInit {
-	public editor = ClassicEditor;
-
-	@Input() richEditor = false;
 	@Input() typeTextArea = false;
-
-	@Input() layoutStyleType: InputStyleEnum = InputStyleEnum.DEFAULT;
-	@Input() layoutStyleData: InputStyleInterface;
 
 	@Input() control = new FormControl();
 
 	@Input() showLabel = false;
 	@Input() labelName;
 
-	@Input() inputId = 'ham-input';
+	@Input() inputId = 'app-input';
 	@Input() inputName;
 	@Input() inputType = 'text';
 	@Input() inputPlaceHolder;

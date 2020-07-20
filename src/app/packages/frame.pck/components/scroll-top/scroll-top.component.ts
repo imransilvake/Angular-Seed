@@ -1,10 +1,11 @@
 // angular
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { debounceTime, map, takeUntil } from 'rxjs/operators';
 
 // app
-import { ScrollTopService } from '../../../utilities.pck/accessories.mod/services/scroll-top.service';
+import { faArrowAltCircleUp } from '@fortawesome/free-solid-svg-icons';
+import { HelperService } from '../../../utilities.pck/accessories.mod/services/helper.service';
 
 @Component({
 	selector: 'app-scroll-top',
@@ -13,27 +14,34 @@ import { ScrollTopService } from '../../../utilities.pck/accessories.mod/service
 })
 
 export class ScrollTopComponent implements OnInit, OnDestroy {
+	public faIcon = faArrowAltCircleUp;
 	public showScroll = false;
 	public scrollDuration = 300;
 
-	private _ngUnSubscribe: Subject<void> = new Subject<void>();
-
-	constructor(private _scrollService: ScrollTopService) {
-	}
+	private unSubscribe = new Subject();
 
 	ngOnInit() {
-		// listen: scroll event
-		this._scrollService.scrollEvent
-			.pipe(takeUntil(this._ngUnSubscribe))
-			.subscribe((status) => {
-				this.showScroll = status === true;
+		// listen: scroll to top
+		HelperService.detectScroll()
+			.pipe(
+				// we are only interested in the scrollY value of these events
+				// let's create a stream with only these values
+				map(() => window.scrollY),
+
+				// only when the user stops scrolling for 200ms, we can continue
+				// so let's debounce this stream for 200ms
+				debounceTime(200)
+			)
+			.pipe(takeUntil(this.unSubscribe))
+			.subscribe((scrollValue) => {
+				this.showScroll = scrollValue > 200;
 			});
 	}
 
 	ngOnDestroy() {
 		// remove subscriptions
-		this._ngUnSubscribe.next();
-		this._ngUnSubscribe.complete();
+		this.unSubscribe.next();
+		this.unSubscribe.complete();
 	}
 
 	/**

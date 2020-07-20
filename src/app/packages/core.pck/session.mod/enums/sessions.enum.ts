@@ -1,3 +1,0 @@
-export enum SessionsEnum {
-	SESSION_AUTHENTICATION = 'AUTHENTICATION'
-}
