@@ -17,7 +17,8 @@
         "lint:scss": "stylelint \"src/**/*.scss\" --syntax scss",
         "translate": "ng xi18n --output-path locale --out-file translation-temp.xlf",
         "translate:ts": "ngx-extractor --input=src/**/*.ts --format=xlf --out-file=src/locale/translation-temp.xlf",
-        "test": "ng test",
+        "test:run": "cypress run",
+        "test:open": "cypress open",
         "e2e": "ng e2e"
     },
     "author": "Imran Khan",
@@ -56,6 +57,7 @@
         "codelyzer": "^6.0.0",
         "ts-node": "~8.10.2",
         "tslint": "~6.1.2",
-        "typescript": "~3.9.7"
+        "typescript": "~3.9.7",
+		"cypress": "^4.10.0"
     }
 }
