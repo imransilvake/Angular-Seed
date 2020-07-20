@@ -18,6 +18,7 @@ Angular Seed is using Angular CLI, and it incorporates many best practices typic
 - [X] Linting: `scss, ts`
 - [X] Build Environments: `dev, next, prod`
 - [X] Translation (i18n)
+- [X] Cypress
 
 
 ## Libraries and Frameworks
@@ -32,6 +33,7 @@ Angular Seed is using Angular CLI, and it incorporates many best practices typic
 - [X] [HammerJS](https://hammerjs.github.io/)
 - [X] [Moment](https://momentjs.com/)
 - [X] [FontAwesome](https://fontawesome.com/)
+- [X] [Cypress](https://www.cypress.io/)
 
 
 ## Environments
