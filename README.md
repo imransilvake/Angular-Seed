@@ -1,18 +1,15 @@
-# Angular CLI
-Angular CLI based seed application incorporating many best practices typically needed in Enterprise apps.
+# Angular Seed
+Angular Seed is using Angular CLI, and it incorporates many best practices typically needed in large apps.
 
-- Custom Modules:
-	- Loading Animation
-	- Notification: `success, error, info, warning`
+- Features:
 	- Dialog: `confirmation, notice`
-	- Error Handler: `common, system`
 	- Storage: `local, session, memory`
 	- Proxy: `getAPI, postAPI`
 		- Ensure secure HTTPs calls
 		- HTTP Caching
 		- HTTP Error Handling
 - Custom Pipes
-- Usage of Angular Material Framework: `input`, `select`, `dialog`, `tree`, `sidenav`
+- Usage of Angular Material Framework: `input`, `select`, `dialog`
 - Icons support from Material and Fontawesome
 
 
