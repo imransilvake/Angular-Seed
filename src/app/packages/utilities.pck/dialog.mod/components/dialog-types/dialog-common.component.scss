@@ -20,9 +20,9 @@
 		padding: 20px 40px 30px;
 
 		button {
-			// background-color: cd-palette($cd-background, 2003);
+			background-color: var(--c5);
 			border-radius: 3px;
-			// color: cd-palette($cd-color, 1001);
+			color: var(--c5);
 			margin: 0 15px;
 			width: 25%;
 		}
@@ -36,7 +36,7 @@
 			}
 
 			h4 {
-				// font-size: cd-fontSize(s19);
+				font-size: cd-fontSize(s19);
 			}
 		}
 

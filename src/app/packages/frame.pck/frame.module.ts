@@ -6,9 +6,7 @@ import { SharedModule } from '../../shared.module';
 import { ScrollTopComponent } from './components/scroll-top/scroll-top.component';
 
 @NgModule({
-	imports: [
-		SharedModule
-	],
+	imports: [SharedModule],
 	declarations: [ScrollTopComponent],
 	exports: [ScrollTopComponent]
 })

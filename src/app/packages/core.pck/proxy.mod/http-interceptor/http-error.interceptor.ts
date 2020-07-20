@@ -15,7 +15,6 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 
 	/**
 	 * http error handling interceptor
-	 *
 	 * @param req
 	 * @param next
 	 */

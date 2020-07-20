@@ -48,7 +48,8 @@ export class ScrollTopComponent implements OnInit, OnDestroy {
 	 * move to top of the page
 	 */
 	public onClickScrollToTop() {
-		const scrollStep = -window.scrollY / (this.scrollDuration / 15),
+		const scrollDuration = this.scrollDuration / 15;
+		const scrollStep = -window.scrollY / scrollDuration,
 			scrollInterval = setInterval(() => {
 				if (window.scrollY !== 0) {
 					window.scrollBy(0, scrollStep);

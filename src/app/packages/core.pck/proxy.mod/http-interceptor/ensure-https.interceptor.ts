@@ -7,10 +7,8 @@ import { Observable } from 'rxjs';
 export class HttpSecureInterceptorService implements HttpInterceptor {
 	/**
 	 * ensure https interceptor
-	 *
-	 * @param {HttpRequest<any>} req
-	 * @param {HttpHandler} next
-	 * @returns {Observable<HttpEvent<any>>}
+	 * @param req
+	 * @param next
 	 */
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 		// clone request and replace 'http://' with 'https://' at the same time.

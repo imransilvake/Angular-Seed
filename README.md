@@ -1,14 +1,14 @@
 # Angular Seed
 Angular Seed is using Angular CLI, and it incorporates many best practices typically needed in large apps.
 
-- Features:
+- Core:
 	- Dialog: `confirmation, notice`
 	- Storage: `local, session, memory`
 	- Proxy: `getAPI, postAPI`
 		- Ensure secure HTTPs calls
 		- HTTP Caching
 		- HTTP Error Handling
-- Custom Pipes
+- Lazy-loading Modules
 - Usage of Angular Material Framework: `input`, `select`, `dialog`
 - Icons support from Material and Fontawesome
 
