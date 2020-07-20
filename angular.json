@@ -15,16 +15,16 @@
 					"skipTests": true
 				},
 				"@schematics/angular:module": {
-					"skipTests": false
+					"skipTests": true
 				},
 				"@schematics/angular:service": {
-					"skipTests": false
+					"skipTests": true
 				},
 				"@schematics/angular:pipe": {
-					"skipTests": false
+					"skipTests": true
 				},
 				"@schematics/angular:directive": {
-					"skipTests": false
+					"skipTests": true
 				}
 			},
 			"architect": {
