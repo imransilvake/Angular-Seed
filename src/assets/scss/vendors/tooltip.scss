@@ -1,12 +1,12 @@
 .cd-tooltip {
 	span {
-		background-color: var(--tc5);
-		color: var(--tc2);
+		background-color: var(--c1);
+		color: var(--c2);
 
 		&.cd-right {
 			&.cd-arrow {
 				&::after {
-					border-right-color: var(--tc5);
+					border-right-color: var(--c1);
 				}
 			}
 		}
@@ -14,7 +14,7 @@
 		&.cd-bottom {
 			&.cd-arrow {
 				&::after {
-					border-bottom-color: var(--tc5);
+					border-bottom-color: var(--c1);
 				}
 			}
 		}

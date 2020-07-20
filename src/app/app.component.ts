@@ -6,6 +6,9 @@ import { Component } from '@angular/core';
 	template: `
 		<!-- Router Outlet -->
 		<router-outlet></router-outlet>
+		
+		<!-- Scroll Top -->
+		<app-scroll-top></app-scroll-top>
 	`,
 })
 

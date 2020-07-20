@@ -2,67 +2,26 @@
 
 .app-input-field {
 	label {
-		color: var(--c5);
+		color: var(--c1);
 		display: block;
 		font-size: cd-fontSize(s13);
 		margin-bottom: 5px;
 	}
 
 	.app-input-wrapper {
-		border: 1px solid var(--c5);
+		border: 1px solid var(--c1);
 
 		&.app-invalid {
-			border: 1px solid var(--c5);
+			border: 1px solid var(--c7);
 		}
 
-		&.app-layout-flex {
-			align-items: center;
-			display: flex;
-
-			&.app-direction {
-				direction: rtl;
-			}
-
-			.app-info {
-				display: block;
-
-				button {
-					background-color: var(--c5);
-					border-radius: 0;
-					height: 41px;
-					margin-left: 0;
-					margin-top: 0;
-
-					&:disabled {
-						background-color: var(--c5);
-					}
-
-					&:not(.app-simple) {
-						min-width: 38px;
-						padding: 0;
-						width: 38px;
-					}
-
-					&.app-simple {
-						min-width: auto;
-						padding: 0 8px;
-						width: auto;
-					}
-
-					fa-icon {
-						color: var(--c5);
-						font-size: cd-fontSize(s14);
-					}
-
-					p {
-						color: var(--c5);
-					}
-				}
+		&.app-focused {
+			&:not(.app-invalid):not(.app-disabled) {
+				border: 1px solid var(--c8);
 			}
 		}
 
 		.app-input, .app-textarea {
-			direction: ltr;
 			position: relative;
 			width: 100%;
 
@@ -70,7 +29,7 @@
 				background-color: transparent;
 				border: none;
 				box-shadow: none;
-				color: var(--c5);
+				color: var(--c1);
 				cursor: pointer;
 				font-size: cd-fontSize(s14);
 				margin: 0;
@@ -78,21 +37,13 @@
 				padding: 12px;
 				width: 100%;
 
-				&.app-time {
-					padding: 10px;
-				}
-
-				&.app-space {
-					padding-right: 32px;
-				}
-
 				&:disabled {
 					cursor: default;
 					opacity: .5;
 				}
 
 				&::placeholder {
-					color: var(--c5);
+					color: var(--c4);
 					opacity: 1;
 				}
 
@@ -104,25 +55,29 @@
 					animation: autofill 0s forwards;
 					background-color: transparent;
 					box-shadow: none;
-					color: var(--c5);
+					color: var(--c1);
 					transition: background-color 5000s ease-in-out 0s;
 				}
 
 				@keyframes autofill {
 					100% {
 						background-color: transparent;
-						color: var(--c5);
+						color: var(--c1);
 					}
 				}
 
 				&::-webkit-clear-button {
 					display: none;
 				}
+
+				&.app-right-space {
+					padding-right: 32px;
+				}
 			}
 
 			// icon: password show
 			.app-icon {
-				color: var(--c5);
+				color: var(--c1);
 				cursor: pointer;
 				position: absolute;
 				right: 6px;
@@ -146,20 +101,13 @@
 				}
 			}
 		}
-
-		// focused
-		&.app-focused {
-			&:not(.app-invalid) {
-				border: 1px solid var(--c5);
-			}
-		}
 	}
 
 	// error
 	.mat-error {
 		p {
-			background-color: var(--c5);
-			color: var(--c5);
+			background-color: var(--c7);
+			color: var(--c1);
 			font-size: cd-fontSize(s12);
 			margin-top: 0;
 			padding: 2px 6px;
@@ -168,7 +116,7 @@
 
 	// hint
 	.mat-hint {
-		color: var(--c5);
+		color: var(--c9);
 		display: block;
 		font-size: cd-fontSize(s12);
 		margin-top: 4px;

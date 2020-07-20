@@ -1,12 +1,20 @@
 <section class="app-dialog-common" *ngIf="data && data.payload">
+	<!-- Header -->
 	<header class="app-header">
-		<img class="modal-icon" [src]="'assets/svg/utilities/' + data.payload.icon + '.svg'" alt="icon">
+		<img class="modal-icon"
+			 *ngIf="data.payload.icon"
+			 [src]="'assets/svg/utilities/' + data.payload.icon + '.svg'"
+			 alt="icon">
 		<h4>{{ data.payload.title }}</h4>
 	</header>
+
+	<!-- Content -->
 	<div class="app-content">
 		<p>{{ data.payload.message }}</p>
 	</div>
-	<footer class="app-footer">
-		<button mat-button (click)="onClickCloseDialog()">{{ data.payload.buttonTexts[0] }}</button>
+
+	<!-- Footer -->
+	<footer class="app-footer" *ngIf="data.payload['buttonTexts']">
+		<button mat-button (click)="onClickCloseDialog()">{{ data.payload['buttonTexts'][0] }}</button>
 	</footer>
 </section>

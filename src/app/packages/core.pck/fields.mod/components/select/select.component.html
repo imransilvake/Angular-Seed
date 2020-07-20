@@ -8,13 +8,14 @@
 		 [class.app-focused]="selectFocused"
 		 [class.app-disabled]="control.disabled">
 		<div class="app-select">
-			<mat-select [formControl]="control"
+			<mat-select [multiple]="multipleSelection"
+						[formControl]="control"
 						[class.app-selected]="control.valid"
 						[panelClass]="selectClassPanel"
 						[id]="selectId"
 						[placeholder]="selectPlaceHolder"
 						(focus)="selectFocused=true"
-						(focusout)="selectFocused=false" [multiple]="multipleSelection">
+						(focusout)="selectFocused=false">
 				<!-- Default -->
 				<ng-container *ngIf="selectType === 0">
 					<mat-option *ngFor="let item of dataDefault" [value]="item" [disabled]="item.disabled">

@@ -16,6 +16,9 @@ import { DialogNoticeComponent } from './components/dialog-types/dialog-notice/d
 		DialogConfirmationComponent,
 		DialogNoticeComponent
 	],
+	exports: [
+		DialogComponent
+	],
 	entryComponents: [
 		DialogComponent
 	]

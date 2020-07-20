@@ -2,17 +2,23 @@
 
 .app-select-field {
 	label {
-		color: var(--c5);
+		color: var(--c1);
 		display: block;
 		font-size: cd-fontSize(s13);
 		margin-bottom: 5px;
 	}
 
 	.app-select-wrapper {
-		border: 1px solid var(--c5);
+		border: 1px solid var(--c1);
 
 		&.app-invalid {
-			border: 1px solid var(--c5);
+			border: 1px solid var(--c7);
+		}
+
+		&.app-focused {
+			&:not(.app-invalid):not(.app-disabled) {
+				border: 1px solid var(--c8);
+			}
 		}
 
 		&.app-disabled {
@@ -21,17 +27,7 @@
 			}
 		}
 
-		&.app-layout-flex {
-			align-items: center;
-			display: flex;
-
-			&.app-direction {
-				direction: rtl;
-			}
-		}
-
 		.app-select {
-			direction: ltr;
 			position: relative;
 			width: 100%;
 
@@ -40,6 +36,7 @@
 				font-size: cd-fontSize(s13);
 				outline: 0;
 				width: 100%;
+				padding: 8px;
 
 				&.mat-select-disabled {
 					cursor: default;
@@ -47,20 +44,13 @@
 				}
 			}
 		}
-
-		// focused
-		&.app-focused {
-			&:not(.app-invalid):not(.app-disabled) {
-				border: 1px solid var(--c5);
-			}
-		}
 	}
 
 	// error
 	.mat-error {
 		p {
-			background-color: var(--c5);
-			color: var(--c5);
+			background-color: var(--c7);
+			color: var(--c1);
 			font-size: cd-fontSize(s12);
 			margin-top: 0;
 			padding: 2px 6px;
@@ -69,7 +59,7 @@
 
 	// hint
 	.mat-hint {
-		color: var(--c5);
+		color: var(--c9);
 		display: block;
 		font-size: cd-fontSize(s12);
 		margin-top: 3px;

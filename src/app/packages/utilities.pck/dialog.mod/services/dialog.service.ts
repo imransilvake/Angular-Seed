@@ -19,6 +19,7 @@ export class DialogService {
 	public showDialog(data: DialogInterface) {
 		const dialogRef = this._dialog.open(DialogComponent, {
 			disableClose: true,
+			panelClass: 'app-mat-wrapper',
 			width: '500px',
 			data: data
 		});
