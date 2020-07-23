@@ -32,7 +32,7 @@ export class HttpOptionsService {
 	}
 
 	/**
-	 * adds query parameter to the given url
+	 * adds query parameter(s) to the given url
 	 * example: http://www.example.com/example-page?field1=value1&field2=value2&field3=value3
 	 *
 	 * @param url
@@ -104,8 +104,7 @@ export class HttpOptionsService {
 	}
 
 	/**
-	 * adds path params
-	 * example: path parameters are part of the endpoint itself and are not optional
+	 * adds path params to the given url
 	 * example: /customer/profile/reservation/:reservationId
 	 * example: {reservationId} is a required path parameter
 	 *
